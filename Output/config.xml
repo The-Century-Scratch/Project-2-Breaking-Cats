@@ -1,0 +1,63 @@
+<config>
+  <app>
+    <title>Game Development Testbed</title>
+    <organization>UPC</organization>
+  </app>
+
+  <renderer>
+    <vsync value="false"/>
+  </renderer>
+
+  <window>
+    <resolution width="1280" height="720" scale="1"/>
+    <fullscreen value="false"/>
+    <borderless value="false"/>
+    <resizable value="false"/>
+    <fullscreen_window value="false"/>
+  </window>
+
+  <scene>
+    <general assetpath="Assets/"/>
+
+    <map_info>
+      <map id="0" name="Base"/>
+      <map id="1" name="Test"/>
+    </map_info>
+
+    <scene_info>
+      <scene name="Title">
+        <window name="MainMenu"/>
+      </scene>
+    </scene_info>
+
+    <window_info>
+      <window name="MainMenu" class="List" type="Base" x="50" y="50" width="200" height="100">
+        <button x="508" y="400" width="214" height="64" text="New Game" function="NewGame" segmentwidth="214" segmentheight="64">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+        </button>
+        <button x="508" y="500" width="214" height="64" text="Continue" function="ContinueGame" segmentwidth="214" segmentheight="64">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+        </button>
+        <button x="508" y="600" width="214" height="64" text="Options" function="OptionsWindow" segmentwidth="214" segmentheight="64">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+        </button>
+      </window>
+    </window_info>
+
+  </scene>
+  <fonts>
+    <property path="Assets/Textures/Fonts/" />
+  </fonts>
+</config>
