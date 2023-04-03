@@ -81,10 +81,26 @@ bool SceneManager::Update(float dt)
 
 	if (currentScene->Update() == 1 || app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
 	{
-		if (CurrentlyMainMenu)
+		//if (CurrentlyMainMenu)
+	    //    nextScene = std::make_unique<Scene_Map>();
+        //else
+		//    nextScene = std::make_unique<Scene_Title>();
+
+		using enum SceneType;
+
+		switch (actualScene)
+		{
+		case TITLESCENE:
 			nextScene = std::make_unique<Scene_Map>();
-		else
+			break;
+		case MAP1:
 			nextScene = std::make_unique<Scene_Title>();
+			break;
+		case UNKNOWN:
+			break;
+		default:
+			break;
+		}
 	}
 	
 	return true;
@@ -95,12 +111,37 @@ bool SceneManager::PostUpdate()
 {
 	if (nextScene && nextScene->isReady())
 	{
-		if(CurrentlyMainMenu)
+		/*if(CurrentlyMainMenu)
 			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
 		else
 			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);
 
-		CurrentlyMainMenu = !CurrentlyMainMenu;
+		CurrentlyMainMenu = !CurrentlyMainMenu;*/
+		using enum SceneType; using enum KeyState;
+
+		switch (actualScene)
+		{
+		case TITLESCENE:
+			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
+			actualScene = MAP1;
+			if (app->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT)
+			{
+
+			}
+			break;
+		case MAP1:
+			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);
+			actualScene = TITLESCENE;
+			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT)
+			{
+
+			}
+			break;
+		case UNKNOWN:
+			break;
+		default:
+			break;
+		}
 
 		currentScene = std::move(nextScene);
 	}

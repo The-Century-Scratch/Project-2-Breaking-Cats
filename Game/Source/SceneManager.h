@@ -11,6 +11,13 @@
 
 class Window_Base;
 
+enum class SceneType
+{
+	TITLESCENE,
+	MAP1,
+	UNKNOWN
+};
+
 class SceneManager : public Module
 {
 public:
@@ -53,6 +60,7 @@ public:
 	LookUpXMLNodeFromString mapInfo;
 
 	bool CurrentlyMainMenu = true;
+	SceneType actualScene = SceneType::TITLESCENE;
 };
 
 #endif // __SCENE_H__
