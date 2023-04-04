@@ -79,14 +79,17 @@ bool SceneManager::Update(float dt)
 
 	currentScene->Draw();
 
-	if (currentScene->Update() == 1 || app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
-	{
-		//if (CurrentlyMainMenu)
-	    //    nextScene = std::make_unique<Scene_Map>();
-        //else
-		//    nextScene = std::make_unique<Scene_Title>();
 
-		using enum SceneType;
+
+	// STATE MACHINE DE LA FUNCIONALIDAD DE LOS BOTONES
+	using enum SceneType;
+	switch (currentScene->Update())
+	{
+	case 1:
+		//if (CurrentlyMainMenu)
+		//    nextScene = std::make_unique<Scene_Map>();
+		//else
+		//    nextScene = std::make_unique<Scene_Title>();
 
 		switch (actualScene)
 		{
@@ -101,6 +104,16 @@ bool SceneManager::Update(float dt)
 		default:
 			break;
 		}
+
+		break;
+	case 2:
+		break;
+	case 3:
+		return false;
+		break;
+
+	default:
+		break;
 	}
 	
 	return true;

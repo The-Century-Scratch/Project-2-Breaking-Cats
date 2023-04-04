@@ -44,9 +44,13 @@ int Scene_Map::Update()
 			player.StartAction(playerAction);
 		}
 	}
-
+	
 	player.Update();
 
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
+	{
+		return 1;
+	}
 	return 0;
 }
 
