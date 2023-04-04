@@ -12,10 +12,10 @@
                 3
             ],
             "scale": 1,
-            "selectedLayer": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 191.5,
-                "y": 192
+                "x": 151.5,
+                "y": 151.5
             }
         },
         "Props.tsx": {
@@ -51,8 +51,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 274,
-                "y": 160
+                "x": 240.5,
+                "y": 160.5
             }
         }
     },
@@ -70,11 +70,11 @@
     "project": "project-II.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "Slime.tsx",
         "test.tmx",
         "Tiles.tsx",
         "Props.tsx",
         "Base.tmx",
+        "Slime.tsx",
         "player.tsx",
         "Test2.tmx"
     ],

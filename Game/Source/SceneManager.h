@@ -13,6 +13,10 @@ class Window_Base;
 
 enum class SceneType
 {
+	NOTHING,
+	NEWGAME,
+	CONTINUE,
+	EXIT,
 	TITLESCENE,
 	MAP1,
 	UNKNOWN

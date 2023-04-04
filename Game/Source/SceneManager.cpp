@@ -83,33 +83,20 @@ bool SceneManager::Update(float dt)
 
 	// STATE MACHINE DE LA FUNCIONALIDAD DE LOS BOTONES
 	using enum SceneType;
-	switch (currentScene->Update())
+	switch (static_cast<SceneType>(currentScene->Update()))
 	{
-	case 1:
-		//if (CurrentlyMainMenu)
-		//    nextScene = std::make_unique<Scene_Map>();
-		//else
-		//    nextScene = std::make_unique<Scene_Title>();
-
-		switch (actualScene)
-		{
-		case TITLESCENE:
-			nextScene = std::make_unique<Scene_Map>();
-			break;
-		case MAP1:
-			nextScene = std::make_unique<Scene_Title>();
-			break;
-		case UNKNOWN:
-			break;
-		default:
-			break;
-		}
-
+	case NEWGAME:
+		nextScene = std::make_unique<Scene_Map>();
+		actualScene = NEWGAME;
 		break;
-	case 2:
+	case CONTINUE:
 		break;
-	case 3:
+	case EXIT:
 		return false;
+		break;
+	case TITLESCENE:
+		nextScene = std::make_unique<Scene_Title>();
+		actualScene = TITLESCENE;
 		break;
 
 	default:
@@ -122,33 +109,17 @@ bool SceneManager::Update(float dt)
 // Called each loop iteration
 bool SceneManager::PostUpdate()
 {
+	using enum SceneType; using enum KeyState;
+
 	if (nextScene && nextScene->isReady())
 	{
-		/*if(CurrentlyMainMenu)
-			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
-		else
-			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);
-
-		CurrentlyMainMenu = !CurrentlyMainMenu;*/
-		using enum SceneType; using enum KeyState;
-
 		switch (actualScene)
 		{
-		case TITLESCENE:
+		case NEWGAME:
 			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
-			actualScene = MAP1;
-			if (app->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT)
-			{
-
-			}
 			break;
-		case MAP1:
+		case TITLESCENE:
 			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);
-			actualScene = TITLESCENE;
-			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT)
-			{
-
-			}
 			break;
 		case UNKNOWN:
 			break;
