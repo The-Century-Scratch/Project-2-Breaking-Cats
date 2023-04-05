@@ -6,6 +6,7 @@
 
 #include <memory>
 #include <vector>
+#include <string>
 
 struct TileInfo;
 
@@ -26,12 +27,17 @@ public:
 
 	int GetEventLayerSize() const;
 
+	iPoint GetEventVector();
+
 	// Returns Gid, position, keepDrawing ? true : false;
 	std::tuple<int, iPoint, bool> GetDrawEventInfo(int index = 0);
 private:
 	std::vector<std::unique_ptr<Event_Base>> events;
+	std::vector<std::unique_ptr<Event_Base>> enemies;
+
 
 	std::vector<std::unique_ptr<Event_Base>>::const_iterator drawIterator;
+	std::vector<std::unique_ptr<Event_Base>>::const_iterator enemyReturnIterator;
 };
 
 

@@ -157,6 +157,7 @@ public:
 	virtual ~Event_Base() = default;
 	virtual void parseXMLProperties(pugi::xml_node const& node) = 0;
 	virtual void Create(pugi::xml_node const &node) = 0;
+	virtual int ReturnType() = 0;
 
 	void Initialize(pugi::xml_node const &node)
 	{

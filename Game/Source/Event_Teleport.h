@@ -13,6 +13,7 @@ public:
 	void parseXMLProperties(pugi::xml_node const& node) override;
 	void Create(pugi::xml_node const& node) override;
 	// No longer inherited
+	int ReturnType() override;
 
 private:
 	EventProperties::DestinationProperty destination;

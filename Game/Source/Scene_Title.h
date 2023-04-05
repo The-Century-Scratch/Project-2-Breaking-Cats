@@ -12,7 +12,8 @@ public:
     void Load(
         std::string const& path,
         LookUpXMLNodeFromString const& info,
-        Window_Factory const& windowFactory
+        Window_Factory const& windowFactory,
+        std::string const fileToLoad = ""
     ) override;
     void Start() override;
     void Draw() override;

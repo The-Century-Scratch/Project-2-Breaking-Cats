@@ -12,12 +12,14 @@ public:
     void Load(
         std::string const& path,
         LookUpXMLNodeFromString const& info,
-        Window_Factory const& windowFactory
+        Window_Factory const& windowFactory,
+        std::string const fileToLoad = "Base"
     ) override;
     void Start() override;
     void Draw() override;
     int Update() override;
     int CheckNextScene() override;
+    int Test();
 
 private:
     std::string currentMap = "";

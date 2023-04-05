@@ -8,7 +8,7 @@ bool Scene_Title::isReady()
 	return true;
 }
 
-void Scene_Title::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const &windowFactory)
+void Scene_Title::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const &windowFactory, std::string const fileToLoad)
 {
 	auto sceneHash = info.find("Title");
 	if (sceneHash == info.end())

@@ -5,6 +5,11 @@
 #include <format>
 #include <string>
 
+int Event_Chest::ReturnType()
+{
+	return 0;
+}
+
 void Event_Chest::parseXMLProperties(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children())

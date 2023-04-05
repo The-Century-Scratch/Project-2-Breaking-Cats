@@ -23,6 +23,7 @@ GuiButton::GuiButton(uPoint pos, uPoint size, std::string const &str, std::funct
 	Initialize(funcPtr, pos, size);
 
 	int textureID = app->tex->Load("Assets/UI/ButtonState9.png");
+	//int textureID2 = app->tex->Load("Assets/UI/ButtonState2.png");
 
 	for (int i = 0; auto const& elem : buttonStates)
 	{

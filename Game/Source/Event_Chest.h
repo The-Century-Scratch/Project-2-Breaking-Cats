@@ -15,6 +15,7 @@ public:
 	// No longer inherited
 
 	void Create(pugi::xml_node const& node) override;
+	int ReturnType() override;
 
 private:
 	std::vector<std::unique_ptr<EventProperties::LootProperty>> loot;

@@ -79,6 +79,12 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>Scene_Map Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Combat.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Event_SpawnEnemy.cpp">
+      <Filter>Scene_Map Components\Source\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -185,6 +191,12 @@
     </ClInclude>
     <ClInclude Include="Source\Transform_Movable.h">
       <Filter>Scene_Map Components\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Combat.h">
+      <Filter>Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Event_SpawnEnemy.h">
+      <Filter>Scene_Map Components\Headers\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

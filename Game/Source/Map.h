@@ -65,11 +65,14 @@ public:
 
 	bool IsWalkable(iPoint pos) const;
 
+	EventManager eventManager;  // TODO change back to private.
+	//std::vector<ObjectLayer> objectLayers; // TODO change back to private
+
 private:
 	std::vector<TileSet> tilesets;
 	std::vector<MapLayer> tileLayers;
 	std::vector<ObjectLayer> objectLayers;
-	EventManager eventManager;
+	
 
 	std::vector<std::pair<LayerType, int>> drawOrder;
 

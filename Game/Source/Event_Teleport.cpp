@@ -3,6 +3,11 @@
 #include <format>
 #include <string>
 
+int Event_Teleport::ReturnType()
+{
+	return 0;
+}
+
 void Event_Teleport::parseXMLProperties(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children())

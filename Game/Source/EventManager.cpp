@@ -3,6 +3,7 @@
 
 #include "Event_Chest.h"
 #include "Event_Teleport.h"
+#include "Event_SpawnEnemy.h"
 
 #include "Sprite.h"
 
@@ -19,11 +20,131 @@ void EventManager::Initialize()
 		drawIterator = events.begin();
 }
 
+iPoint EventManager::GetEventVector()
+{
+	if (events[0] != nullptr)
+	{
+		events[0]->name;
+		events.begin()->get();
+		std::string hello = "hello";
+
+
+
+		if (enemies.size())
+		{
+			auto sth = enemies.size();
+
+			iPoint ReturnPos = dynamic_cast<Transform*>(enemies[enemies.size() - 1].get())->GetPosition();
+
+			LOG("it is %i", enemies[enemies.size() - 1].get()->ReturnType());
+
+			enemies.pop_back();
+
+			return ReturnPos;
+			//enemyReturnIterator->get()->
+
+			LOG(" %i", sth);
+		}
+
+		//iPoint pos = dynamic_cast<Transform*>(drawIterator->get())->GetPosition();
+		//LOG("this is the position %i, %i", pos.x, pos.y);
+
+
+		enemyReturnIterator = events.begin();
+
+		const char* hi = hello.c_str();  // learn what this function does
+
+		int i = 0;
+
+		while (enemyReturnIterator->get() != nullptr)
+		{
+			//if (enemyReturnIterator->get()->name.compare("10 Gold"))
+			//if (enemyReturnIterator->get()->common.isActivee)
+			{
+				//LOG("I give up");
+			}
+			//if (enemyReturnIterator->get()->name == "10 Gold")
+			//if (StrEquals(enemyReturnIterator->get()->name, "10 Gold"))
+			{
+				
+				//drawIterator = events.begin();
+				//
+				//drawIterator = events.begin();
+//				hello = enemyReturnIterator->get()->name;
+//				hi = hello.c_str();
+//				LOG("%s, %i", hi, i);
+				
+				//return std::make_tuple(gid, pos, false);
+			}
+
+		//	hello = enemyReturnIterator->get()->name;
+		//	hi = hello.c_str();
+			//LOG("%s, %i", hi, i);
+			++i;
+
+			++enemyReturnIterator;
+		} 
+
+
+		//	events[0]->name;
+//	events.begin()->get();
+//	std::string hello = "hello";
+//
+//	enemyReturnIterator = events.begin();
+//
+//	const char* hi = hello.c_str();  // learn what this function does
+//
+//	int i = 0;
+//
+//	while (enemyReturnIterator->get() != nullptr)
+//	{
+//
+//		if (enemyReturnIterator->get()->name == "Unlock Chest")
+//		{
+//			//drawIterator = events.begin();
+//			//
+//			//drawIterator = events.begin();
+//
+//			//return std::make_tuple(gid, pos, false);
+//		}
+//
+//		hello = enemyReturnIterator->get()->name;
+//		hi = hello.c_str();
+//		LOG("%s, %i", hi, i);
+//		++i;
+//
+//		++enemyReturnIterator;
+//	}
+
+		
+		//drawIterator = events.begin();
+		//hello = drawIterator->get()->name;
+		//hi = hello.c_str();
+		//LOG("%s", hi);
+
+
+
+
+
+
+		//iPoint pos = dynamic_cast<Transform*>(drawIterator->get())->GetPosition();
+		//LOG("this is the position %i, %i", pos.x, pos.y);
+
+		//return events[0]->name;
+	}
+	return {-1,-1};
+	
+}
+
 bool EventManager::CreateEvent(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children("object"))
 	{
+		
+
+
 		std::unique_ptr<Event_Base> event = nullptr;
+		std::unique_ptr<Event_Base> enemy = nullptr;
 
 		if (StrEquals("Event Chest", child.attribute("type").as_string()))
 		{
@@ -32,6 +153,14 @@ bool EventManager::CreateEvent(pugi::xml_node const& node)
 		else if (StrEquals("Event Teleport", child.attribute("type").as_string()))
 		{
 			event = std::make_unique<Event_Teleport>();
+		}
+		else if (StrEquals("Event SpawnEnemy", child.attribute("type").as_string()))
+		{
+			enemy = std::make_unique<Event_SpawnEnemy>();  // It coould be something like an ordered map used to store them in order depending on their speed, or soomething like that
+			//enemy.get()->
+			LOG("it is indeed detecting it, now the only problem is spawning it");
+			enemy->Create(child);
+			enemies.push_back(std::move(enemy));
 		}
 
 		if (!event)

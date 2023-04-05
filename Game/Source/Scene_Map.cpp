@@ -6,8 +6,13 @@ bool Scene_Map::isReady()
 {
 	return true;
 }
+int Scene_Map::Test()
+{
+	LOG("the test is working");
+	return 0;
+}
 
-void Scene_Map::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory)
+void Scene_Map::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
 	// Load map
 	currentMap = "Base";
@@ -17,6 +22,7 @@ void Scene_Map::Load(std::string const& path, LookUpXMLNodeFromString const& inf
 	{
 		LOG("Map %s couldn't be loaded.", mapToLoad);
 	}
+	Test();
 
 	player.Create();
 }
@@ -46,6 +52,13 @@ int Scene_Map::Update()
 	}
 
 	player.Update();
+
+	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
+	//std::string vec = map.eventManager.GetEventVector();
+	
+	//LOG("this is the name of the event: %s", vec);
+	
+	
 
 	return 0;
 }

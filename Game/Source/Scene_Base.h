@@ -18,7 +18,8 @@ public:
 	virtual void Load(
 		std::string const& path,
 		LookUpXMLNodeFromString const &info,
-		Window_Factory const &windowFactory
+		Window_Factory const &windowFactory,
+		std::string const fileToLoad = "Base"
 	) = 0;
 	virtual void Start() = 0;
 	virtual int Update() = 0;

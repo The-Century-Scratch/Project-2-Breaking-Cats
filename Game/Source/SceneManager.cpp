@@ -3,6 +3,7 @@
 #include "Input.h"
 
 #include "Scene_Map.h"
+#include "Scene_Combat.h"
 #include "Scene_Title.h"
 
 #include "Defs.h"
@@ -91,7 +92,7 @@ bool SceneManager::Update(float dt)
 		switch (actualScene)
 		{
 		case TITLESCENE:
-			nextScene = std::make_unique<Scene_Map>();
+			nextScene = std::make_unique<Scene_Combat>();
 			break;
 		case MAP1:
 			nextScene = std::make_unique<Scene_Title>();
@@ -122,7 +123,7 @@ bool SceneManager::PostUpdate()
 		switch (actualScene)
 		{
 		case TITLESCENE:
-			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
+			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Map2");
 			actualScene = MAP1;
 			if (app->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT)
 			{

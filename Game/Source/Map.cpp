@@ -2,6 +2,7 @@
 #include "App.h"
 #include "Render.h"
 #include "TextManager.h"
+#include "Scene_Combat.h"
 
 #include "Log.h"
 
@@ -73,8 +74,13 @@ bool Map::Load(const std::string& directory, const std::string& level)
 			// the EventManager to create and store them
 			if (StrEquals("Layer of Events", child.attribute("class").as_string()))
 			{
+				LOG("%s", child.attribute("class").as_string());
 				drawOrder.emplace_back(LayerType::EVENT_LAYER, eventManager.GetEventLayerSize());
 				eventManager.CreateEvent(child);
+			}
+			else if (StrEquals("Layer of Enemies", child.attribute("class").as_string()))
+			{
+				LOG("this is not working right now, but the map does detect the layer of enemies");
 			}
 			else 
 			{
