@@ -13,6 +13,7 @@ void Event_SpawnEnemy::Test()
 int Event_SpawnEnemy::ReturnType()
 {
 	return isOpen;
+	
 }
 
 void Event_SpawnEnemy::parseXMLProperties(pugi::xml_node const& node)

@@ -22,6 +22,23 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 	LoadEnemies(path, fileToLoad);
 
 	player.Create();
+
+
+	iPoint vec;
+	while (vec.x >= 0)
+	{
+		vec = map.eventManager.GetEventVector();
+
+		if (vec.x > 0)
+		{
+			Unit unit;
+			unit.Create(vec);
+			units.push_back(unit);
+			LOG("this is the position of the event: %i, %i", vec.x, vec.y);
+		}
+	}
+
+	
 }
 
 void Scene_Combat::CreateUnit()
@@ -69,30 +86,60 @@ void Scene_Combat::Draw()
 {
 	map.Draw();
 	player.Draw();
+
+	for (auto i : units)
+	{
+		i.Draw();
+	}
 }
 
 int Scene_Combat::Update()
 {
 	auto playerAction = player.HandleInput();
+	
 
 	using PA = Player::PlayerAction::Action;
+	using UA = Unit::PlayerAction::Action;
 
 	if ((playerAction.action & PA::MOVE) == PA::MOVE)
 	{
 		if (map.IsWalkable(playerAction.destinationTile))
 		{
 			player.StartAction(playerAction);
+			
 		}
+		
 	}
+
+	for (auto i : units)
+	{
+		
+		auto unitAction = i.HandleInput();
+
+		if ((unitAction.action & UA::MOVE) == UA::MOVE)
+		{
+			
+			if (map.IsWalkable(unitAction.destinationTile))
+			{
+				
+				{
+					i.StartAction(unitAction);
+				}
+			}
+		}
+		i.Update();
+	}
+
+	
 
 	player.Update();
-	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
-	iPoint vec = map.eventManager.GetEventVector();
-
-	if (vec.x > 0)
+	for (auto i : units)
 	{
-		LOG("this is the position of the event: %i, %i", vec.x, vec.y);
+		
+		
 	}
+	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
+	
 	
 	
 	

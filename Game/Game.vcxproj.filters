@@ -85,6 +85,9 @@
     <ClCompile Include="Source\Event_SpawnEnemy.cpp">
       <Filter>Scene_Map Components\Source\Events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Unit.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -197,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="Source\Event_SpawnEnemy.h">
       <Filter>Scene_Map Components\Headers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Unit.h">
+      <Filter>Scene_Map Components\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,5 @@
 {
-    "activeFile": "TheGuardian.tsx",
+    "activeFile": "Map2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -14,8 +14,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 229.25,
-                "y": 196.5
+                "x": 191.75,
+                "y": 191.75
             }
         },
         "Map2.tmx": {
@@ -27,7 +27,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 204.25,
-                "y": 186
+                "y": 185.5
             }
         },
         "Props.tsx": {
@@ -67,8 +67,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 272.5,
-                "y": 156
+                "x": 240,
+                "y": 160.5
             }
         }
     },
@@ -92,8 +92,8 @@
         "Props.tsx",
         "Tiles.tsx",
         "test.tmx",
-        "Map2.tmx",
         "TheGuardian.tsx",
+        "Map2.tmx",
         "Slime.tsx",
         "player.tsx",
         "Test2.tmx"

@@ -2,6 +2,7 @@
 #include "Player.h"
 
 #include "Map.h"
+#include "Log.h"
 
 #include "Input.h"
 #include "Render.h"
@@ -80,6 +81,7 @@ void Player::StartAction(PlayerAction playerAction)
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 		StartMovement();
+		//LOG("it does enter this scope");
 	}
 }
 
@@ -114,6 +116,7 @@ void Player::Update()
 	{
 		//AnimateMove();
 		SmoothMove();
+		//LOG("it does enter this scope");
 	}
 }
 

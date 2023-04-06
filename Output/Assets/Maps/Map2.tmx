@@ -285,7 +285,7 @@
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="26" name="guardian" type="Event SpawnEnemy" gid="1347" x="316" y="77" width="32" height="32">
+  <object id="26" name="guardian" type="Event SpawnEnemy" gid="1347" x="320" y="80" width="32" height="32">
    <properties>
     <property name="Base" type="class" propertytype="Base Event">
      <properties>

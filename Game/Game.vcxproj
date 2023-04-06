@@ -108,6 +108,7 @@
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\Scene_Map.cpp" />
     <ClCompile Include="Source\Scene_Title.cpp" />
+    <ClCompile Include="Source\Unit.cpp" />
     <ClCompile Include="Source\Window_Base.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Source\Scene_Title.h" />
     <ClInclude Include="Source\Transform.h" />
     <ClInclude Include="Source\Transform_Movable.h" />
+    <ClInclude Include="Source\Unit.h" />
     <ClInclude Include="Source\Window_Base.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\MapLayer.h" />

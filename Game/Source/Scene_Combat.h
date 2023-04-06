@@ -3,6 +3,7 @@
 
 #include "Scene_Base.h"
 #include "Player.h"
+#include "Unit.h"
 #include "Map.h"
 
 class Scene_Combat : public Scene_Base
@@ -29,8 +30,10 @@ private:
 
     Map map;
     Player player;
+    
 
-    std::vector<Player> Units;
+    std::vector<Unit> units;
+
 };
 
 
