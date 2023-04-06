@@ -111,7 +111,7 @@ int Scene_Combat::Update()
 		
 	}
 
-	for (auto i : units)
+	for (auto& i : units)
 	{
 		
 		auto unitAction = i.HandleInput();
@@ -133,11 +133,7 @@ int Scene_Combat::Update()
 	
 
 	player.Update();
-	for (auto i : units)
-	{
-		
-		
-	}
+
 	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
 	
 	

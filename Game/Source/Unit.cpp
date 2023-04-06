@@ -106,19 +106,20 @@ void Unit::StartMovement()
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		moveVector.x = 1;
-		LOG("it does enter this scope %i", moveVector.x);
+		//LOG("it does enter this scope %i", moveVector.x);
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
 }
 
 void Unit::Update()
 {
+	//LOG("the move vector x is %i" moveVector.x);
 	
 	if (!moveVector.IsZero())
 	{
 		//AnimateMove();
 		SmoothMove();
-		LOG("it does enter this scope");
+		
 	}
 }
 
@@ -141,6 +142,8 @@ void Unit::AnimateMove()
 
 void Unit::SmoothMove()
 {
+	//LOG("it does enter this scope %i", moveTimer);
+
 	if (moveTimer == timeForATile)
 	{
 		moveTimer = 0;

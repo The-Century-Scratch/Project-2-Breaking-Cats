@@ -139,6 +139,8 @@ void Player::AnimateMove()
 
 void Player::SmoothMove()
 {
+	//LOG("it does enter this scope %i", moveTimer);
+
 	if (moveTimer == timeForATile)
 	{
 		moveTimer = 0;
