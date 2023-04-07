@@ -50,15 +50,18 @@ int Scene_Map::Update()
 			player.StartAction(playerAction);
 		}
 	}
-
+	
 	player.Update();
 
 	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
 	//std::string vec = map.eventManager.GetEventVector();
 	
 	//LOG("this is the name of the event: %s", vec);
-	
-	
+
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
+	{
+		return 4;
+	}
 
 	return 0;
 }

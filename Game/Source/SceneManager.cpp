@@ -80,28 +80,27 @@ bool SceneManager::Update(float dt)
 
 	currentScene->Draw();
 
-	if (currentScene->Update() == 1 || app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
+
+
+	// STATE MACHINE DE LA FUNCIONALIDAD DE LOS BOTONES
+	using enum SceneType;
+	switch (static_cast<SceneType>(currentScene->Update()))
 	{
-		//if (CurrentlyMainMenu)
-	    //    nextScene = std::make_unique<Scene_Map>();
-        //else
-		//    nextScene = std::make_unique<Scene_Title>();
-
-		using enum SceneType;
-
-		switch (actualScene)
-		{
-		case TITLESCENE:
-			nextScene = std::make_unique<Scene_Combat>();
-			break;
-		case MAP1:
-			nextScene = std::make_unique<Scene_Title>();
-			break;
-		case UNKNOWN:
-			break;
-		default:
-			break;
-		}
+	case NEWGAME:
+		nextScene = std::make_unique<Scene_Map>();
+		actualScene = NEWGAME;
+		break;
+	case CONTINUE:
+		break;
+	case EXIT:
+		return false;
+		break;
+	case TITLESCENE:
+		nextScene = std::make_unique<Scene_Title>();
+		actualScene = TITLESCENE;
+		break;
+	default:
+		break;
 	}
 	
 	return true;
@@ -110,33 +109,17 @@ bool SceneManager::Update(float dt)
 // Called each loop iteration
 bool SceneManager::PostUpdate()
 {
+	using enum SceneType; using enum KeyState;
+
 	if (nextScene && nextScene->isReady())
 	{
-		/*if(CurrentlyMainMenu)
-			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
-		else
-			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);
-
-		CurrentlyMainMenu = !CurrentlyMainMenu;*/
-		using enum SceneType; using enum KeyState;
-
 		switch (actualScene)
 		{
-		case TITLESCENE:
-			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Map2");
-			actualScene = MAP1;
-			if (app->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT)
-			{
-
-			}
+		case NEWGAME:
+			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
 			break;
-		case MAP1:
+		case TITLESCENE:
 			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);
-			actualScene = TITLESCENE;
-			if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT)
-			{
-
-			}
 			break;
 		case UNKNOWN:
 			break;

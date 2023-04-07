@@ -27,6 +27,11 @@
                     "name": "isActive",
                     "type": "bool",
                     "value": true
+                },
+                {
+                    "name": "isEnemy",
+                    "type": "bool",
+                    "value": false
                 }
             ],
             "name": "Base Event",

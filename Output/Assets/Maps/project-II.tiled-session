@@ -1,106 +1,12 @@
 {
-    "activeFile": "Map2.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
-        "."
     ],
     "fileStates": {
-        "": {
-            "scaleInDock": 1
-        },
-        "Base.tmx": {
-            "expandedObjectLayers": [
-                3
-            ],
-            "scale": 2,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 191.75,
-                "y": 191.75
-            }
-        },
-        "Map2.tmx": {
-            "expandedObjectLayers": [
-                6,
-                3
-            ],
-            "scale": 2,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 204.25,
-                "y": 185.5
-            }
-        },
-        "Props.tsx": {
-            "dynamicWrapping": false,
-            "scaleInDock": 1.5,
-            "scaleInEditor": 2
-        },
-        "Slime.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
-        },
-        "Test2.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 70,
-                "y": 272
-            }
-        },
-        "TheGuardian.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
-        },
-        "Tiles.tsx": {
-            "dynamicWrapping": false,
-            "scaleInDock": 2,
-            "scaleInEditor": 2
-        },
-        "player.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 3
-        },
-        "test.tmx": {
-            "expandedObjectLayers": [
-                2
-            ],
-            "scale": 1,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 240,
-                "y": 160.5
-            }
-        }
     },
-    "last.imagePath": "C:/Users/oriol/Documents/GitHub/Project-2/Output/Assets/Maps",
-    "last.worldFilePath": "C:/Users/oriol/Documents/GitHub/Project-2/Output/Assets/Maps",
-    "loadedWorlds": [
-        "C:/Users/oriol/Documents/GitHub/Project-2/Output/Assets/Maps/world.world"
-    ],
     "openFiles": [
-        "Base.tmx",
-        "Props.tsx",
-        "Tiles.tsx",
-        "test.tmx",
-        "Map2.tmx",
-        "TheGuardian.tsx"
     ],
-    "project": "project-II.tiled-project",
-    "property.type": "Helper Direction",
+    "project": "",
     "recentFiles": [
-        "Base.tmx",
-        "Props.tsx",
-        "Tiles.tsx",
-        "test.tmx",
-        "TheGuardian.tsx",
-        "Map2.tmx",
-        "Slime.tsx",
-        "player.tsx",
-        "Test2.tmx"
-    ],
-    "tileset.lastUsedFormat": "tsx",
-    "tileset.tileSize": {
-        "height": 32,
-        "width": 32
-    }
+    ]
 }
