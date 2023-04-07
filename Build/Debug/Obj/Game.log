@@ -1,8 +1,0 @@
-﻿  Map.cpp
-  SceneManager.cpp
-  Scene_Combat.cpp
-C:\Users\Usuario\Documents\GitHub\Project-2-Breaking-Cats\Game\Source\Scene_Combat.cpp(209,23): warning C4018: '<': signed/unsigned mismatch
-  Unit.cpp
-  Generating Code...
-  Game.vcxproj -> C:\Users\Usuario\Documents\GitHub\Project-2-Breaking-Cats\Build\Debug\Game.exe
-          1 archivo(s) copiado(s).
