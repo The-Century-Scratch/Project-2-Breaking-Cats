@@ -30,10 +30,12 @@ private:
 
     Map map;
     Player player;
-    
+
 
     std::vector<Unit> units;
 
+    int turn = 0;
+    int numberFinished = 0;
 };
 
 

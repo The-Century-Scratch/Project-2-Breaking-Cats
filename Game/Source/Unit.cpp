@@ -25,6 +25,28 @@ void Unit::Draw() const
 	app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 }
 
+bool Unit::GetIsMyTurn()
+{
+	return isMyTurn;
+}
+
+bool Unit::GetHasFinishedTurn()
+{
+	return hasFinishedTurn;
+}
+
+void Unit::SetIsMyTurn(bool value)
+{
+	isMyTurn = value;
+	//return isMyTurn;
+}
+
+void Unit::SetHasFinishedTurn(bool value)
+{
+	hasFinishedTurn = value;
+	//return hasFinishedTurn;
+}
+
 void Unit::Create(iPoint pos)
 {
 	/*Sprite::Initialize("Assets/Maps/Slime.png", 4);
@@ -52,22 +74,22 @@ Unit::PlayerAction Unit::HandleInput() const
 	if (!moveVector.IsZero())
 		return returnAction;
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.y -= tileSize;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.x -= tileSize;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.y += tileSize;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.x += tileSize;
@@ -80,7 +102,7 @@ void Unit::StartAction(PlayerAction playerAction)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
-		
+
 		StartMovement();
 	}
 }
@@ -88,22 +110,22 @@ void Unit::StartAction(PlayerAction playerAction)
 void Unit::StartMovement()
 {
 	using enum KeyState;
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		moveVector.y = -1;
 		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
 		moveVector.x = -1;
 		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
 		moveVector.y = 1;
 		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		moveVector.x = 1;
 		//LOG("it does enter this scope %i", moveVector.x);
@@ -114,13 +136,16 @@ void Unit::StartMovement()
 void Unit::Update()
 {
 	//LOG("the move vector x is %i" moveVector.x);
-	
+
 	if (!moveVector.IsZero())
 	{
 		//AnimateMove();
 		SmoothMove();
-		
+
 	}
+
+
+	//moveTimer = 2;
 }
 
 void Unit::AnimateMove()
@@ -142,19 +167,23 @@ void Unit::AnimateMove()
 
 void Unit::SmoothMove()
 {
-	//LOG("it does enter this scope %i", moveTimer);
+
 
 	if (moveTimer == timeForATile)
 	{
+
+
 		moveTimer = 0;
 		position += (moveVector * speed);
 		if (position.x % tileSize == 0 && position.y % tileSize == 0)
 		{
 			moveVector.SetToZero();
+			hasFinishedTurn = true;
 		}
 	}
 	else
 	{
 		moveTimer++;
 	}
+	LOG("it does enter this scope %i", moveTimer);
 }

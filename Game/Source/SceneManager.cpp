@@ -87,7 +87,7 @@ bool SceneManager::Update(float dt)
 	switch (static_cast<SceneType>(currentScene->Update()))
 	{
 	case NEWGAME:
-		nextScene = std::make_unique<Scene_Map>();
+		nextScene = std::make_unique<Scene_Combat>();
 		actualScene = NEWGAME;
 		break;
 	case CONTINUE:
@@ -116,7 +116,7 @@ bool SceneManager::PostUpdate()
 		switch (actualScene)
 		{
 		case NEWGAME:
-			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
+			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Map2");
 			break;
 		case TITLESCENE:
 			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);

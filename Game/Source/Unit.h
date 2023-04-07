@@ -34,7 +34,7 @@ public:
 			return static_cast<Action>(static_cast<unsigned int>(a) | static_cast<unsigned int>(b));
 		}
 
-		friend Action &operator|=(Action& a, Action b)
+		friend Action& operator|=(Action& a, Action b)
 		{
 			return a = a | b;
 		}
@@ -54,7 +54,13 @@ public:
 
 	PlayerAction HandleInput() const;
 	virtual void StartAction(PlayerAction playerAction);
-	
+
+	bool GetHasFinishedTurn();
+	bool GetIsMyTurn();
+
+	void SetHasFinishedTurn(bool value);
+	void SetIsMyTurn(bool value);
+
 	void Update();
 
 private:
@@ -71,8 +77,10 @@ private:
 	int animTimer = 0;
 	int texture;
 
+	bool isMyTurn = false;
+	bool hasFinishedTurn = false;
+
 	SDL_Rect currentSpriteSlice{ 0 };
 };
 
 #endif //__PLAYER_H__
-

@@ -38,7 +38,7 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 		}
 	}
 
-	
+
 }
 
 void Scene_Combat::CreateUnit()
@@ -74,8 +74,8 @@ void Scene_Combat::LoadEnemies(const std::string& directory, const std::string& 
 		}
 	}
 
-	
-	
+
+
 }
 
 void Scene_Combat::Start()
@@ -96,7 +96,7 @@ void Scene_Combat::Draw()
 int Scene_Combat::Update()
 {
 	auto playerAction = player.HandleInput();
-	
+
 
 	using PA = Player::PlayerAction::Action;
 	using UA = Unit::PlayerAction::Action;
@@ -106,39 +106,139 @@ int Scene_Combat::Update()
 		if (map.IsWalkable(playerAction.destinationTile))
 		{
 			player.StartAction(playerAction);
-			
+
 		}
-		
+
 	}
+
+	//for (auto& i : units)
+	//{
+	//	
+	//	auto unitAction = i.HandleInput();
+	//
+	//	if ((unitAction.action & UA::MOVE) == UA::MOVE)
+	//	{
+	//		
+	//		if (map.IsWalkable(unitAction.destinationTile))
+	//		{
+	//			
+	//			{
+	//				i.StartAction(unitAction);
+	//			}
+	//		}
+	//	}
+	//	i.Update();
+	//}
+
+
+	//bool hasTurnEnded = false;                  // if done with a vector
+	//auto unitAction = units[turn].HandleInput();
+	//if ((unitAction.action & UA::MOVE) == UA::MOVE)
+	//{
+	//	if (map.IsWalkable(unitAction.destinationTile))
+	//	{
+	//		LOG("the turn is: %i", turn);
+	//		units[turn].StartAction(unitAction);
+	//		hasTurnEnded = true;
+	//	}
+	//}
+	////LOG("the update is is: %i", turn);
+	//units[turn].Update();
+	//
+	//if (hasTurnEnded)
+	//	turn++;
+	//if (turn >= units.size())
+	//{
+	//	turn = 0;
+	//}
+
+
+	//bool hasTurnEnded = false;
+	//auto unitAction = units.begin()->HandleInput();      // if done with a list
+	//if ((unitAction.action & UA::MOVE) == UA::MOVE)
+	//{
+	//	if (map.IsWalkable(unitAction.destinationTile))
+	//	{
+	//		LOG("the turn is: %i", turn);
+	//		units.begin()->StartAction(unitAction);
+	//		hasTurnEnded = true;
+	//	}
+	//}
+	//units.begin()->Update();
+	////units.front();
+	////units.
+	////Unit helper = units[units.size() - 1];
+	//if (hasTurnEnded)
+	//{
+	//	units.push_back(units.front());
+	//	units.pop_front();
+	//}
+
+
+	bool noUnitHasActed = true;
 
 	for (auto& i : units)
 	{
-		
-		auto unitAction = i.HandleInput();
 
-		if ((unitAction.action & UA::MOVE) == UA::MOVE)
+		if (i.GetIsMyTurn() && !i.GetHasFinishedTurn())
 		{
-			
-			if (map.IsWalkable(unitAction.destinationTile))
+			noUnitHasActed = false;
+
+			auto unitAction = i.HandleInput();
+
+			if ((unitAction.action & UA::MOVE) == UA::MOVE)
 			{
-				
+
+				if (map.IsWalkable(unitAction.destinationTile))
 				{
-					i.StartAction(unitAction);
+
+					{
+						i.StartAction(unitAction);
+					}
 				}
 			}
+
 		}
 		i.Update();
+
+		if (i.GetHasFinishedTurn() && i.GetIsMyTurn())
+		{
+			i.SetIsMyTurn(false);
+			numberFinished++; // that is a variable    // all of this check first if this variable is bigger thatn the allowed number for the vector
+
+			if (numberFinished < units.size())
+			{
+				units[numberFinished].SetIsMyTurn(true);
+			}
+
+
+			//noUnitHasActed = false;
+		}
+
 	}
 
-	
+	if (noUnitHasActed)
+	{
+		units[0].SetIsMyTurn(true);
+		for (auto& i : units)
+		{
+			i.SetHasFinishedTurn(false);
+		}
+		numberFinished = 0;
+	}
+
+
+
 
 	player.Update();
 
 	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
-	
-	
-	
-	
+
+
+
+
+
+
 
 	return 0;
 }
