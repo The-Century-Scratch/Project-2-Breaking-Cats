@@ -60,7 +60,7 @@ int Scene_Map::Update()
 
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
 	{
-		return 4;
+		return 5;
 	}
 
 	return 0;

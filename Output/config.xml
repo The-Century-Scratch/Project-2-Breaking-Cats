@@ -39,6 +39,13 @@
           <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
           <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
         </button>
+        <button x="808" y="350" width="214" height="64" text="Combat" function="CombatGame" segmentwidth="214" segmentheight="64">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
+        </button>
         <button x="508" y="450" width="214" height="64" text="Continue" function="ContinueGame" segmentwidth="214" segmentheight="64">
           <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>
           <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png"/>

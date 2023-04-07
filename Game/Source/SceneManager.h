@@ -17,8 +17,8 @@ enum class SceneType
 	NEWGAME,
 	CONTINUE,
 	EXIT,
+	COMBAT,
 	TITLESCENE,
-	MAP1,
 	UNKNOWN
 };
 
