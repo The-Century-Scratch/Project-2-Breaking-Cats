@@ -15,6 +15,7 @@ private:
 	int ContinueGame();
 	int ExitGame();
 	int CombatGame();
+	int VerticalGame();
 };
 
 #endif __WINDOW_LIST_H__

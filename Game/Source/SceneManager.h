@@ -18,6 +18,7 @@ enum class SceneType
 	CONTINUE,
 	EXIT,
 	COMBAT,
+	VERTICAL,
 	TITLESCENE,
 	UNKNOWN
 };

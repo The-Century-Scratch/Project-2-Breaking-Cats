@@ -5,6 +5,7 @@
 #include "Scene_Map.h"
 #include "Scene_Combat.h"
 #include "Scene_Title.h"
+#include "Scene_Vertical.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -99,6 +100,10 @@ bool SceneManager::Update(float dt)
 		nextScene = std::make_unique<Scene_Combat>();
 		actualScene = COMBAT;
 		break;
+	case VERTICAL:
+		nextScene = std::make_unique<Scene_Vertical>();
+		actualScene = VERTICAL;
+		break;
 	case TITLESCENE:
 		nextScene = std::make_unique<Scene_Title>();
 		actualScene = TITLESCENE;
@@ -124,6 +129,9 @@ bool SceneManager::PostUpdate()
 			break;
 		case COMBAT:
 			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Map2");
+			break;
+		case VERTICAL:
+			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Vertical");
 			break;
 		case TITLESCENE:
 			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);

@@ -240,7 +240,7 @@ int Scene_Combat::Update()
 
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
 	{
-		return 5;
+		return 6;
 	}
 
 	return 0;

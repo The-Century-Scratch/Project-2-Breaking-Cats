@@ -88,6 +88,9 @@
     <ClCompile Include="Source\Unit.cpp">
       <Filter>Scene_Map Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Vertical.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -203,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="Source\Unit.h">
       <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Vertical.h">
+      <Filter>Scenes\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

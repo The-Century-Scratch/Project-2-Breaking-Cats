@@ -104,6 +104,7 @@
     <ClCompile Include="Source\GuiPanelSegmented.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Scene_Combat.cpp" />
+    <ClCompile Include="Source\Scene_Vertical.cpp" />
     <ClCompile Include="Source\TextManager.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\Scene_Map.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Source\GuiPanelSegmented.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Scene_Combat.h" />
+    <ClInclude Include="Source\Scene_Vertical.h" />
     <ClInclude Include="Source\Sprite.h" />
     <ClInclude Include="Source\TextManager.h" />
     <ClInclude Include="Source\GuiButton.h" />

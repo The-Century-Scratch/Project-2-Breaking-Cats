@@ -3,10 +3,26 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "Base.tmx": {
+            "scale": 2.09296875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 192.31056364315046,
+                "y": 192.31056364315043
+            }
+        },
+        "Vertical_Slice_Map.tmx": {
+            "scale": 2.09296875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 192.31056364315046,
+                "y": 71.90742814483016
+            }
+        }
     },
     "openFiles": [
     ],
-    "project": "",
+    "project": "project-II.tiled-project",
     "recentFiles": [
     ]
 }
