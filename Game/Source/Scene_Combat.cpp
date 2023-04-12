@@ -24,17 +24,52 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 	player.Create();
 
 
-	iPoint vec;
-	while (vec.x >= 0)
+	std::tuple<iPoint, int> vec;
+	
+	while (std::get<0>(vec).x >= 0)
 	{
-		vec = map.eventManager.GetEventVector();
+		using enum UnitType;
 
-		if (vec.x > 0)
+		vec = map.eventManager.GetEnemyInfo();
+
+		UnitType type = static_cast<UnitType>(std::get<1>(vec));
+
+		if (std::get<0>(vec).x > 0)
 		{
-			Unit unit;
-			unit.Create(vec);
-			units.push_back(unit);
-			LOG("this is the position of the event: %i, %i", vec.x, vec.y);
+			switch (type)
+			{
+			case GUARDIAN:
+			{
+				Unit unit;
+				unit.Create(std::get<0>(vec));
+				units.push_back(unit);
+				break;
+			}
+				
+
+			case STRAW:
+			{
+				Straw unit;
+				unit.Create(std::get<0>(vec));
+				units.push_back(unit);
+				break;
+			}
+				
+
+			default:
+			{
+				Unit unit;
+
+				unit.Create(std::get<0>(vec));
+				units.push_back(unit);
+				break;
+			}
+				
+			}
+
+			
+			
+			//LOG("this is the position of the event: %i, %i", vec.x, vec.y);
 		}
 	}
 

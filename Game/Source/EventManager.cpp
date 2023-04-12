@@ -20,119 +20,128 @@ void EventManager::Initialize()
 		drawIterator = events.begin();
 }
 
-iPoint EventManager::GetEventVector()
+std::tuple<iPoint, int> EventManager::GetEnemyInfo()
 {
-	if (events[0] != nullptr)
+	//if (events.size())
+	//{
+	//	events[0]->name;
+	//	events.begin()->get();
+	//	std::string hello = "hello";
+	//
+	//
+	//
+	//	
+	//
+	//	//iPoint pos = dynamic_cast<Transform*>(drawIterator->get())->GetPosition();
+	//	//LOG("this is the position %i, %i", pos.x, pos.y);
+	//
+	//
+	//	enemyReturnIterator = events.begin();
+	//
+	//	const char* hi = hello.c_str();  // learn what this function does
+	//
+	//	int i = 0;
+	//
+	//	//while (enemyReturnIterator->get() != nullptr)
+	//	//{
+	//	//	//if (enemyReturnIterator->get()->name.compare("10 Gold"))
+	//	//	//if (enemyReturnIterator->get()->common.isActivee)
+	//	//	{
+	//	//		//LOG("I give up");
+	//	//	}
+	//	//	//if (enemyReturnIterator->get()->name == "10 Gold")
+	//	//	//if (StrEquals(enemyReturnIterator->get()->name, "10 Gold"))
+	//	//	{
+	//	//		
+	//	//		//drawIterator = events.begin();
+	//	//		//
+	//	//		//drawIterator = events.begin();
+//	//	//		hello = enemyReturnIterator->get()->name;
+//	//	//		hi = hello.c_str();
+//	//	//		LOG("%s, %i", hi, i);
+	//	//		
+	//	//		//return std::make_tuple(gid, pos, false);
+	//	//	}
+	//	//
+	//	////	hello = enemyReturnIterator->get()->name;
+	//	////	hi = hello.c_str();
+	//	//	//LOG("%s, %i", hi, i);
+	//	//	++i;
+	//	//
+	//	//	++enemyReturnIterator;
+	//	//} 
+	//
+	//
+	//	//	events[0]->name;
+//	//events.begin()->get();
+//	//std::string hello = "hello";
+//	//
+//	//enemyReturnIterator = events.begin();
+//	//
+//	//const char* hi = hello.c_str();  // learn what this function does
+//	//
+//	//int i = 0;
+//	//
+//	//while (enemyReturnIterator->get() != nullptr)
+//	//{
+//	//
+//	//	if (enemyReturnIterator->get()->name == "Unlock Chest")
+//	//	{
+//	//		//drawIterator = events.begin();
+//	//		//
+//	//		//drawIterator = events.begin();
+//	//
+//	//		//return std::make_tuple(gid, pos, false);
+//	//	}
+//	//
+//	//	hello = enemyReturnIterator->get()->name;
+//	//	hi = hello.c_str();
+//	//	LOG("%s, %i", hi, i);
+//	//	++i;
+//	//
+//	//	++enemyReturnIterator;
+//	//}
+	//
+	//	
+	//	//drawIterator = events.begin();
+	//	//hello = drawIterator->get()->name;
+	//	//hi = hello.c_str();
+	//	//LOG("%s", hi);
+	//
+	//
+	//
+	//
+	//
+	//
+	//	//iPoint pos = dynamic_cast<Transform*>(drawIterator->get())->GetPosition();
+	//	//LOG("this is the position %i, %i", pos.x, pos.y);
+	//
+	//	//return events[0]->name;
+	//}
+
+
+	if (enemies.size())
 	{
-		events[0]->name;
-		events.begin()->get();
-		std::string hello = "hello";
+		auto sth = enemies.size();
 
+		iPoint returnPos = dynamic_cast<Transform*>(enemies[enemies.size() - 1].get())->GetPosition();
+		int returnType = enemies[enemies.size() - 1].get()->ReturnType();
 
+		//enemies[enemies.size() - 1].get()
 
-		if (enemies.size())
-		{
-			auto sth = enemies.size();
+		LOG("it is %i", enemies[enemies.size() - 1].get()->ReturnType());
 
-			iPoint ReturnPos = dynamic_cast<Transform*>(enemies[enemies.size() - 1].get())->GetPosition();
-
-			LOG("it is %i", enemies[enemies.size() - 1].get()->ReturnType());
-
-			enemies.pop_back();
-
-			return ReturnPos;
-			//enemyReturnIterator->get()->
-
-			LOG(" %i", sth);
-		}
-
-		//iPoint pos = dynamic_cast<Transform*>(drawIterator->get())->GetPosition();
-		//LOG("this is the position %i, %i", pos.x, pos.y);
-
-
-		enemyReturnIterator = events.begin();
-
-		const char* hi = hello.c_str();  // learn what this function does
-
-		int i = 0;
-
-		while (enemyReturnIterator->get() != nullptr)
-		{
-			//if (enemyReturnIterator->get()->name.compare("10 Gold"))
-			//if (enemyReturnIterator->get()->common.isActivee)
-			{
-				//LOG("I give up");
-			}
-			//if (enemyReturnIterator->get()->name == "10 Gold")
-			//if (StrEquals(enemyReturnIterator->get()->name, "10 Gold"))
-			{
-				
-				//drawIterator = events.begin();
-				//
-				//drawIterator = events.begin();
-//				hello = enemyReturnIterator->get()->name;
-//				hi = hello.c_str();
-//				LOG("%s, %i", hi, i);
-				
-				//return std::make_tuple(gid, pos, false);
-			}
-
-		//	hello = enemyReturnIterator->get()->name;
-		//	hi = hello.c_str();
-			//LOG("%s, %i", hi, i);
-			++i;
-
-			++enemyReturnIterator;
-		} 
-
-
-		//	events[0]->name;
-//	events.begin()->get();
-//	std::string hello = "hello";
-//
-//	enemyReturnIterator = events.begin();
-//
-//	const char* hi = hello.c_str();  // learn what this function does
-//
-//	int i = 0;
-//
-//	while (enemyReturnIterator->get() != nullptr)
-//	{
-//
-//		if (enemyReturnIterator->get()->name == "Unlock Chest")
-//		{
-//			//drawIterator = events.begin();
-//			//
-//			//drawIterator = events.begin();
-//
-//			//return std::make_tuple(gid, pos, false);
-//		}
-//
-//		hello = enemyReturnIterator->get()->name;
-//		hi = hello.c_str();
-//		LOG("%s, %i", hi, i);
-//		++i;
-//
-//		++enemyReturnIterator;
-//	}
-
+		enemies.pop_back();
 		
-		//drawIterator = events.begin();
-		//hello = drawIterator->get()->name;
-		//hi = hello.c_str();
-		//LOG("%s", hi);
 
+		return std::make_tuple(returnPos, returnType);
+		//enemyReturnIterator->get()->
 
-
-
-
-
-		//iPoint pos = dynamic_cast<Transform*>(drawIterator->get())->GetPosition();
-		//LOG("this is the position %i, %i", pos.x, pos.y);
-
-		//return events[0]->name;
+		LOG(" %i", sth);
 	}
-	return {-1,-1};
+	iPoint pos = { -1,-1 };
+
+	return std::make_tuple(pos, 0);
 	
 }
 

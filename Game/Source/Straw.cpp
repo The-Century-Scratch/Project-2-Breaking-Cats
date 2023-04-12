@@ -1,5 +1,5 @@
 #include "App.h"
-#include "Unit.h"
+#include "Straw.h"
 
 #include "Map.h"
 #include "Log.h"
@@ -7,60 +7,60 @@
 #include "Input.h"
 #include "Render.h"
 
-Unit::Unit() = default;
+Straw::Straw() = default;
 
-Unit::~Unit() = default;
+Straw::~Straw() = default;
 
 
-void Unit::DebugDraw() const
+void Straw::DebugDraw() const
 {
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(0, 255, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 255, 0, 255));
 	}
 	else
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 255, 255));
 	}
 	
 }
 
-void Unit::Draw() const
+void Straw::Draw() const
 {
 	iPoint Displacement = { 8,24 };
 	DebugDraw();
 	app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 }
 
-bool Unit::GetIsMyTurn()
+bool Straw::GetIsMyTurn()
 {
 	return isMyTurn;
 }
 
-bool Unit::GetHasFinishedTurn()
+bool Straw::GetHasFinishedTurn()
 {
 	return hasFinishedTurn;
 }
 
-void Unit::SetIsMyTurn(bool value)
+void Straw::SetIsMyTurn(bool value)
 {
 	isMyTurn = value;
 	//return isMyTurn;
 }
 
-void Unit::SetHasFinishedTurn(bool value)
+void Straw::SetHasFinishedTurn(bool value)
 {
 	hasFinishedTurn = value;
 	//return hasFinishedTurn;
 }
 
-void Unit::Create(iPoint pos)
+void Straw::Create(iPoint pos)
 {
 	/*Sprite::Initialize("Assets/Maps/Slime.png", 4);
 	position = { 48, 272 };
 	size = { 48, 48 };*/
-	texture = app->tex->Load("Assets/Maps/TheGuardian.png");
+	texture = app->tex->Load("Assets/Maps/StrawDall.png");
 	//Sprite::Initialize("Assets/Maps/GatsIdle.png", 4);
 	position = pos;
 	size = { 16, 16 };
@@ -72,10 +72,10 @@ void Unit::Create(iPoint pos)
 	};*/
 }
 
-Unit::PlayerAction Unit::HandleInput() const
+Straw::PlayerAction Straw::HandleInput() const
 {
 	using enum KeyState;
-	using enum Unit::PlayerAction::Action;
+	using enum Straw::PlayerAction::Action;
 
 	PlayerAction returnAction = { position, NONE };
 
@@ -106,7 +106,7 @@ Unit::PlayerAction Unit::HandleInput() const
 	return returnAction;
 }
 
-void Unit::StartAction(PlayerAction playerAction)
+void Straw::StartAction(PlayerAction playerAction)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
@@ -115,7 +115,7 @@ void Unit::StartAction(PlayerAction playerAction)
 	}
 }
 
-void Unit::StartMovement()
+void Straw::StartMovement()
 {
 	using enum KeyState;
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -141,7 +141,7 @@ void Unit::StartMovement()
 	}
 }
 
-void Unit::Update()
+void Straw::Update()
 {
 	//LOG("the move vector x is %i" moveVector.x);
 
@@ -156,7 +156,7 @@ void Unit::Update()
 	//moveTimer = 2;
 }
 
-void Unit::AnimateMove()
+void Straw::AnimateMove()
 {
 	if (animTimer == 8)
 	{
@@ -173,7 +173,7 @@ void Unit::AnimateMove()
 	}
 }
 
-void Unit::SmoothMove()
+void Straw::SmoothMove()
 {
 
 

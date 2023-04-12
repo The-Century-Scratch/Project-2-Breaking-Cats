@@ -27,7 +27,7 @@ public:
 
 	int GetEventLayerSize() const;
 
-	iPoint GetEventVector();
+	std::tuple<iPoint, int> GetEnemyInfo();
 
 	bool isEvent(iPoint pos) const;
 

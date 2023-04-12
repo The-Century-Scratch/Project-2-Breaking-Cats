@@ -329,6 +329,18 @@
             "useAs": [
                 "layer"
             ]
+        },
+        {
+            "id": 20,
+            "name": "Unit Type",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Guardian",
+                "Straw",
+                "Gats"
+            ],
+            "valuesAsFlags": false
         }
     ]
 }
