@@ -7,6 +7,12 @@
 
 #include <memory>
 
+enum class EnemyType
+{
+	GUARDIAN,
+	STRAW
+};
+
 class Event_SpawnEnemy : public Event_Base, public Sprite, public Transform
 {
 public:

@@ -282,6 +282,7 @@
       <property name="Trigger" type="int" propertytype="Helper Trigger" value="4"/>
      </properties>
     </property>
+    <property name="Type" type="int" propertytype="Enemy Type" value="1"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
@@ -293,6 +294,7 @@
       <property name="Trigger" type="int" propertytype="Helper Trigger" value="4"/>
      </properties>
     </property>
+    <property name="Type" type="int" propertytype="Enemy Type" value="0"/>
     <property name="isOpen" type="bool" value="false"/>
    </properties>
   </object>

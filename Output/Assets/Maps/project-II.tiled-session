@@ -2,6 +2,7 @@
     "activeFile": "",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "Base.tmx": {
             "scale": 2.09296875,
@@ -23,6 +24,7 @@
     "openFiles": [
     ],
     "project": "project-II.tiled-project",
+    "property.type": "Enemy Type",
     "recentFiles": [
     ]
 }

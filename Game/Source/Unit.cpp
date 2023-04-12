@@ -15,7 +15,15 @@ Unit::~Unit() = default;
 void Unit::DebugDraw() const
 {
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
-	app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 0, 255));
+	if (isMyTurn)
+	{
+		app->render->DrawShape(debugPosition, false, SDL_Color(0, 255, 0, 255));
+	}
+	else
+	{
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 0, 255));
+	}
+	
 }
 
 void Unit::Draw() const

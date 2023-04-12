@@ -46,6 +46,19 @@ void Event_SpawnEnemy::parseXMLProperties(pugi::xml_node const& node)
 			globalSwitch.emplace_back(std::make_unique<EventProperties::GlobalSwitchProperty>());
 			globalSwitch.back()->ReadProperty(child);
 		}
+		else if (StrEquals("Type", attributeName))
+		{
+			
+			static_cast<EnemyType>(child.attribute("value").as_int());
+			int test = child.attribute("value").as_int();
+			LOG("this is the value that the enemy recieves from tiled: %i", static_cast<EnemyType>(child.attribute("value").as_int()) );
+			if (EnemyType::STRAW == static_cast<EnemyType>(child.attribute("value").as_int()))
+			{
+				LOG("dafkjl\nfsdakflma\n\n\n\n\nfadsjlfiaiujin\n\n\n");
+			}
+
+			//isOpen = child.attribute("value").as_bool();
+		}
 		else
 		{
 			LOG("Chest property %s not implemented.", attributeName);
