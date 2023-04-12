@@ -6,6 +6,7 @@
 #include "MapLayer.h"
 #include "ObjectLayer.h"
 #include "EventManager.h"
+#include "Player.h"
 
 #include "Defs.h"
 
@@ -64,6 +65,7 @@ public:
 	int GetTileSetSize() const;
 
 	bool IsWalkable(iPoint pos) const;
+	bool IsEvent(iPoint pos, Direction dir) const;
 
 	EventManager eventManager;  // TODO change back to private.
 	//std::vector<ObjectLayer> objectLayers; // TODO change back to private

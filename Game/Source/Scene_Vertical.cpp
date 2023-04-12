@@ -1,4 +1,5 @@
 #include "Scene_Vertical.h"
+#include "Event_Base.h"
 
 #include "Log.h"
 
@@ -45,8 +46,18 @@ int Scene_Vertical::Update()
 
 	if ((playerAction.action & PA::MOVE) == PA::MOVE)
 	{
+		player.FaceTo(playerAction.willFace);
 		if (map.IsWalkable(playerAction.destinationTile))
 		{
+			player.StartAction(playerAction);
+		}
+	}
+
+	if ((playerAction.action & PA::INTERACT) == PA::INTERACT)
+	{
+		if (map.IsEvent(playerAction.destinationTile, player.facing))
+		{
+			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
 			player.StartAction(playerAction);
 		}
 	}

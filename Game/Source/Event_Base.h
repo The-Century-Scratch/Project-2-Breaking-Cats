@@ -7,6 +7,14 @@
 #include "PugiXml/src/pugixml.hpp"
 #include <SDL/include/SDL_pixels.h>
 
+
+enum class EventType
+{
+	CHEST,
+	TELEPORT
+};
+
+
 namespace EventProperties
 {
 	struct Property
@@ -29,6 +37,7 @@ namespace EventProperties
 		std::string sfxPath = "";
 		EventTriggerOn trigger = EventTriggerOn::ACTION_BUTTON;
 		bool isActive = true;
+		EventType type;
 
 		void ReadProperty(pugi::xml_node const& node) override
 		{
@@ -44,6 +53,10 @@ namespace EventProperties
 				else if (StrEquals("Trigger", attributeName))
 				{
 					trigger = static_cast<EventTriggerOn>(child.attribute("value").as_int());
+				}
+				else if (StrEquals("Type", attributeName))
+				{
+					type = static_cast<EventType>(child.attribute("value").as_int());
 				}
 				else if (StrEquals("isActive", attributeName))
 				{

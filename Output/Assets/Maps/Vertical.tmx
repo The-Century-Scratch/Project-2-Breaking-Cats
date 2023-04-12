@@ -122,6 +122,7 @@
      <properties>
       <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
       <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="1"/>
       <property name="isActive" type="bool" value="true"/>
      </properties>
     </property>

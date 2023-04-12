@@ -4,7 +4,17 @@
 #include "Sprite.h"
 #include "Transform.h"
 #include "Point.h"
+#include "Event_Base.h"
 
+
+enum class Direction
+{
+	DOWN,
+	UP,
+	RIGHT,
+	LEFT
+
+};
 
 class Player : public Sprite, public Transform
 {
@@ -42,6 +52,8 @@ public:
 		iPoint destinationTile = { 0, 0 };
 
 		Action action = Player::PlayerAction::Action::NONE;
+
+		Direction willFace;
 	};
 
 	Player();
@@ -52,9 +64,13 @@ public:
 	void DebugDraw() const;
 
 	PlayerAction HandleInput() const;
-	void StartAction(PlayerAction playerAction);
+	void StartAction(PlayerAction playerAction, EventType type = EventType::CHEST);
 	
 	void Update();
+
+	void FaceTo(Direction dir);
+
+	Direction facing;
 
 private:
 	void AnimateMove();

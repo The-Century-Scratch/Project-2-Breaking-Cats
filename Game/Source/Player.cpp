@@ -32,7 +32,7 @@ void Player::Create()
 	size = { 48, 48 };*/
 	texture = app->tex->Load("Assets/Maps/GatsIdle.png");
 	//Sprite::Initialize("Assets/Maps/GatsIdle.png", 4);
-	position = { 48, 272 };
+	position = { 208, 192 };
 	size = { 16, 16 };
 	/*currentSpriteSlice = {
 		(GetTextureIndex().x + 1) * size.x,
@@ -46,8 +46,14 @@ Player::PlayerAction Player::HandleInput() const
 {
 	using enum KeyState;
 	using enum Player::PlayerAction::Action;
+	using enum Direction;
 
-	PlayerAction returnAction = { position, NONE };
+	PlayerAction returnAction = { position, NONE , facing};
+
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		returnAction.action |= INTERACT;
+	}
 
 	if (!moveVector.IsZero())
 		return returnAction;
@@ -56,32 +62,48 @@ Player::PlayerAction Player::HandleInput() const
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.y -= tileSize;
+		returnAction.willFace = UP;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.x -= tileSize;
+		returnAction.willFace = LEFT;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.y += tileSize;
+		returnAction.willFace = DOWN;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		returnAction.action |= MOVE;
 		returnAction.destinationTile.x += tileSize;
+		returnAction.willFace = RIGHT;
 	}
 
 	return returnAction;
 }
 
-void Player::StartAction(PlayerAction playerAction)
+void Player::StartAction(PlayerAction playerAction, EventType type)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 		StartMovement();
 		//LOG("it does enter this scope");
+	}
+	else if (playerAction.action == PlayerAction::Action::INTERACT)
+	{
+		switch (type)
+		{
+		case EventType::CHEST:
+			break;
+		case EventType::TELEPORT:
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -117,6 +139,28 @@ void Player::Update()
 		//AnimateMove();
 		SmoothMove();
 		//LOG("it does enter this scope");
+	}
+}
+
+void Player::FaceTo(Direction dir)
+{
+	using enum Direction;
+	switch (dir)
+	{
+	case DOWN:
+		facing = DOWN;
+		break;
+	case UP:
+		facing = UP;
+		break;
+	case RIGHT:
+		facing = RIGHT;
+		break;
+	case LEFT:
+		facing = LEFT;
+		break;
+	default:
+		break;
 	}
 }
 

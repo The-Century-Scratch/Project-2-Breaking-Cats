@@ -29,6 +29,10 @@ public:
 
 	iPoint GetEventVector();
 
+	bool isEvent(iPoint pos) const;
+
+	//EventType getEventType()
+
 	// Returns Gid, position, keepDrawing ? true : false;
 	std::tuple<int, iPoint, bool> GetDrawEventInfo(int index = 0);
 private:

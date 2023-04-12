@@ -136,6 +136,16 @@ iPoint EventManager::GetEventVector()
 	
 }
 
+bool EventManager::isEvent(iPoint pos) const
+{
+	for (auto& e : events)
+	{
+		iPoint eventPos = dynamic_cast<Transform*>(e.get())->GetPosition();
+		if (eventPos == pos) return true;
+	}
+	return false;
+}
+
 bool EventManager::CreateEvent(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children("object"))
