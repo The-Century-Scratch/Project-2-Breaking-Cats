@@ -12,7 +12,7 @@ void Event_SpawnEnemy::Test()
 
 int Event_SpawnEnemy::ReturnType()
 {
-	return isOpen;
+	return static_cast<int>(typeOfUnit);
 	
 }
 
@@ -49,13 +49,14 @@ void Event_SpawnEnemy::parseXMLProperties(pugi::xml_node const& node)
 		else if (StrEquals("Type", attributeName))
 		{
 			
-			static_cast<EnemyType>(child.attribute("value").as_int());
+			static_cast<UnitType>(child.attribute("value").as_int());
 			int test = child.attribute("value").as_int();
-			LOG("this is the value that the enemy recieves from tiled: %i", static_cast<EnemyType>(child.attribute("value").as_int()) );
-			if (EnemyType::STRAW == static_cast<EnemyType>(child.attribute("value").as_int()))
+			LOG("this is the value that the enemy recieves from tiled: %i", static_cast<UnitType>(child.attribute("value").as_int()) );
+			if (UnitType::STRAW == static_cast<UnitType>(child.attribute("value").as_int()))
 			{
 				LOG("dafkjl\nfsdakflma\n\n\n\n\nfadsjlfiaiujin\n\n\n");
 			}
+			typeOfUnit = static_cast<UnitType>(child.attribute("value").as_int());
 
 			//isOpen = child.attribute("value").as_bool();
 		}

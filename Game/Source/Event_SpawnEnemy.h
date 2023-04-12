@@ -7,10 +7,11 @@
 
 #include <memory>
 
-enum class EnemyType
+enum class UnitType
 {
 	GUARDIAN,
-	STRAW
+	STRAW,
+	GATS
 };
 
 class Event_SpawnEnemy : public Event_Base, public Sprite, public Transform
@@ -30,6 +31,8 @@ private:
 
 	bool isLocked = false;
 	bool isOpen = false;
+
+	UnitType typeOfUnit;
 };
 
 #endif __EVENT_SPAWNENEMY_H__

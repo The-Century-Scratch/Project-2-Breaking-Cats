@@ -41,17 +41,6 @@
             ]
         },
         {
-            "id": 20,
-            "name": "Enemy Type",
-            "storageType": "int",
-            "type": "enum",
-            "values": [
-                "Guardian",
-                "Straw"
-            ],
-            "valuesAsFlags": false
-        },
-        {
             "color": "#ff694828",
             "drawFill": true,
             "id": 13,
@@ -340,6 +329,18 @@
             "useAs": [
                 "layer"
             ]
+        },
+        {
+            "id": 20,
+            "name": "Unit Type",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Guardian",
+                "Straw",
+                "Gats"
+            ],
+            "valuesAsFlags": false
         }
     ]
 }

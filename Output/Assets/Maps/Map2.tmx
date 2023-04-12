@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="27">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="28">
  <tileset firstgid="1" source="Tiles.tsx"/>
  <tileset firstgid="626" source="Props.tsx"/>
  <tileset firstgid="1251" source="Slime.tsx"/>
  <tileset firstgid="1347" source="TheGuardian.tsx"/>
+ <tileset firstgid="1348" source="StrawDall.tsx"/>
  <layer id="2" name="Floor" width="24" height="24">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -274,7 +275,7 @@
    </properties>
   </object>
   <object id="22" gid="1252" x="48" y="272" width="48" height="48"/>
-  <object id="25" name="guardian" type="Event SpawnEnemy" gid="1347" x="128" y="256" width="32" height="32">
+  <object id="25" name="guardian" type="Event SpawnEnemy" gid="1347" x="256" y="256" width="32" height="32">
    <properties>
     <property name="Base" type="class" propertytype="Base Event">
      <properties>
@@ -282,7 +283,7 @@
       <property name="Trigger" type="int" propertytype="Helper Trigger" value="4"/>
      </properties>
     </property>
-    <property name="Type" type="int" propertytype="Enemy Type" value="1"/>
+    <property name="Type" type="int" propertytype="Unit Type" value="0"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
@@ -294,8 +295,13 @@
       <property name="Trigger" type="int" propertytype="Helper Trigger" value="4"/>
      </properties>
     </property>
-    <property name="Type" type="int" propertytype="Enemy Type" value="0"/>
+    <property name="Type" type="int" propertytype="Unit Type" value="0"/>
     <property name="isOpen" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="27" name="straw" type="Event SpawnEnemy" gid="1348" x="128" y="256" width="32" height="32">
+   <properties>
+    <property name="Type" type="int" propertytype="Unit Type" value="1"/>
    </properties>
   </object>
  </objectgroup>

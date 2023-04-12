@@ -27,7 +27,7 @@ public:
 
 	int GetEventLayerSize() const;
 
-	iPoint GetEventVector();
+	std::tuple<iPoint, int> GetEnemyInfo();
 
 	// Returns Gid, position, keepDrawing ? true : false;
 	std::tuple<int, iPoint, bool> GetDrawEventInfo(int index = 0);

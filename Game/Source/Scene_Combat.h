@@ -4,7 +4,15 @@
 #include "Scene_Base.h"
 #include "Player.h"
 #include "Unit.h"
+#include "Straw.h"
 #include "Map.h"
+
+enum class UnitType
+{
+    GUARDIAN,
+    STRAW,
+    GATS
+};
 
 class Scene_Combat : public Scene_Base
 {

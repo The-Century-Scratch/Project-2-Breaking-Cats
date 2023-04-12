@@ -24,7 +24,8 @@
     "openFiles": [
     ],
     "project": "project-II.tiled-project",
-    "property.type": "Enemy Type",
+    "property.type": "Unit Type",
     "recentFiles": [
-    ]
+    ],
+    "tileset.lastUsedFormat": "tsx"
 }
