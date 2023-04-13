@@ -144,6 +144,7 @@ void Straw::StartMovement()
 void Straw::Update()
 {
 	//LOG("the move vector x is %i" moveVector.x);
+	LOG("This is definitely completely a different update funnction to the other update functions that you have seen so far, so trust me, it is good");
 
 	if (!moveVector.IsZero())
 	{

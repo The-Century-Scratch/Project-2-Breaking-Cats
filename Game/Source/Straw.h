@@ -5,7 +5,7 @@
 #include "Transform.h"
 #include "Point.h"
 #include "Unit.h"
-#include "Player.h"
+
 
 
 class Straw : public Unit
@@ -48,10 +48,10 @@ public:
 
 	Straw();
 	~Straw();
-	void Create(iPoint pos);
+	void Create(iPoint pos) override;
 
-	void Draw() const;
-	void DebugDraw() const;
+	void Draw() const override;
+	void DebugDraw() const override;
 
 	PlayerAction HandleInput() const;
 	virtual void StartAction(PlayerAction playerAction);

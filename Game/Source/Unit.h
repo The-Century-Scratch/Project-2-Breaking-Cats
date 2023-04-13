@@ -47,10 +47,10 @@ public:
 
 	Unit();
 	~Unit();
-	void Create(iPoint pos);
+	virtual void Create(iPoint pos);
 
-	void Draw() const;
-	void DebugDraw() const;
+	virtual void Draw() const;
+	virtual void DebugDraw() const;
 
 	PlayerAction HandleInput() const;
 	virtual void StartAction(PlayerAction playerAction);
