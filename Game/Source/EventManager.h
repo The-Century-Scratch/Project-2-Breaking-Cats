@@ -31,6 +31,12 @@ public:
 
 	bool isEvent(iPoint pos) const;
 
+	EventType getEventType(iPoint pos) const;
+
+	EventData getEventData(int id) const;
+	
+	int getEventId(iPoint pos) const;
+
 	//EventType getEventType()
 
 	// Returns Gid, position, keepDrawing ? true : false;

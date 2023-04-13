@@ -24,6 +24,12 @@
                     "value": 0
                 },
                 {
+                    "name": "Type",
+                    "propertyType": "EventType",
+                    "type": "int",
+                    "value": 0
+                },
+                {
                     "name": "isActive",
                     "type": "bool",
                     "value": true
@@ -149,6 +155,18 @@
                 "property",
                 "object"
             ]
+        },
+        {
+            "id": 21,
+            "name": "EventType",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "None",
+                "Chest",
+                "Teleport"
+            ],
+            "valuesAsFlags": false
         },
         {
             "color": "#ffa0a0a4",

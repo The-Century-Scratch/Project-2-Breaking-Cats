@@ -8,6 +8,11 @@ int Event_Teleport::ReturnType()
 	return 0;
 }
 
+EventProperties::DestinationProperty Event_Teleport::getDestinationProperties()
+{
+	return destination;
+}
+
 void Event_Teleport::parseXMLProperties(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children())

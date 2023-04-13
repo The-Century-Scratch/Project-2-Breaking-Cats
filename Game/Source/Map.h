@@ -66,6 +66,7 @@ public:
 
 	bool IsWalkable(iPoint pos) const;
 	bool IsEvent(iPoint pos, Direction dir) const;
+	EventData getEvent(iPoint pos, Direction dir) const;
 
 	EventManager eventManager;  // TODO change back to private.
 	//std::vector<ObjectLayer> objectLayers; // TODO change back to private

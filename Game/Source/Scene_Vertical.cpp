@@ -58,7 +58,7 @@ int Scene_Vertical::Update()
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
 			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
-			player.StartAction(playerAction);
+			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 		}
 	}
 	

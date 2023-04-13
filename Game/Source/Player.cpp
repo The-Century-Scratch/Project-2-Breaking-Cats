@@ -86,7 +86,7 @@ Player::PlayerAction Player::HandleInput() const
 	return returnAction;
 }
 
-void Player::StartAction(PlayerAction playerAction, EventType type)
+void Player::StartAction(PlayerAction playerAction, EventData data)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
@@ -95,11 +95,13 @@ void Player::StartAction(PlayerAction playerAction, EventType type)
 	}
 	else if (playerAction.action == PlayerAction::Action::INTERACT)
 	{
-		switch (type)
+		switch (data.commonData.type)
 		{
 		case EventType::CHEST:
+			LOG("EventData funciona :) (CHEST)");
 			break;
 		case EventType::TELEPORT:
+			LOG("EventData funciona :) (TP) %i", data.destinationData.destination.x);
 			break;
 		default:
 			break;

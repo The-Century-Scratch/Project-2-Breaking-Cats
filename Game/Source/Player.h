@@ -64,7 +64,7 @@ public:
 	void DebugDraw() const;
 
 	PlayerAction HandleInput() const;
-	void StartAction(PlayerAction playerAction, EventType type = EventType::CHEST);
+	void StartAction(PlayerAction playerAction, EventData data = EventData());
 	
 	void Update();
 

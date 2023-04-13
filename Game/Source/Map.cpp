@@ -237,6 +237,28 @@ bool Map::IsEvent(iPoint pos, Direction dir) const
 	return eventManager.isEvent(pos);
 }
 
+EventData Map::getEvent(iPoint pos, Direction dir) const
+{
+	switch (dir)
+	{
+	case Direction::DOWN:
+		pos.y += tileSize.y;
+		break;
+	case Direction::UP:
+		pos.y -= tileSize.y;
+		break;
+	case Direction::RIGHT:
+		pos.x += tileSize.x;
+		break;
+	case Direction::LEFT:
+		pos.x -= tileSize.x;
+		break;
+	default:
+		break;
+	}
+	return eventManager.getEventData(eventManager.getEventId(pos));
+}
+
 int Map::GetWidth() const { return size.x; }
 int Map::GetHeight() const { return size.y; }
 int Map::GetTileWidth() const { return tileSize.x; }

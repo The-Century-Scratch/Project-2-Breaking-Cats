@@ -10,9 +10,11 @@
 
 enum class EventType
 {
+	NONE,
 	CHEST,
 	TELEPORT
 };
+
 
 
 namespace EventProperties
@@ -64,7 +66,8 @@ namespace EventProperties
 				}
 			}
 		}
-	};
+	}; 
+	
 
 	struct LootProperty : public Property
 	{
@@ -163,6 +166,13 @@ namespace EventProperties
 
 }
 
+struct EventData
+{
+	EventProperties::CommonProperties commonData;
+	EventProperties::LootProperty lootData;
+	EventProperties::DestinationProperty destinationData;
+};
+
 class Event_Base
 {
 public:
@@ -171,6 +181,14 @@ public:
 	virtual void parseXMLProperties(pugi::xml_node const& node) = 0;
 	virtual void Create(pugi::xml_node const &node) = 0;
 	virtual int ReturnType() = 0;
+	virtual EventProperties::LootProperty getLootProperties() const
+	{
+		return EventProperties::LootProperty();
+	}
+	virtual EventProperties::DestinationProperty getDestinationProperties() const
+	{
+		return EventProperties::DestinationProperty();
+	}
 
 	void Initialize(pugi::xml_node const &node)
 	{
