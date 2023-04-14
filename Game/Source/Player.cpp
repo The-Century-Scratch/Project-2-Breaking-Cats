@@ -98,10 +98,12 @@ void Player::StartAction(PlayerAction playerAction, EventData data)
 		switch (data.commonData.type)
 		{
 		case EventType::CHEST:
-			LOG("EventData funciona :) (CHEST)");
+			LOG("(CHEST)");
 			break;
 		case EventType::TELEPORT:
-			LOG("EventData funciona :) (TP) %i", data.destinationData.destination.x);
+			LOG("(TP)");
+			position.x = data.destinationData.destination.x;
+			position.y = data.destinationData.destination.y;
 			break;
 		default:
 			break;

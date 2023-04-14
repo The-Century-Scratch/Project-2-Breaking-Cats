@@ -184,6 +184,34 @@ EventData EventManager::getEventData(int id) const
 	return data;
 }
 
+EventData EventManager::getEventDataFromPos(iPoint pos) const
+{
+	using enum EventType;
+	EventData data;
+
+	for (auto& e : events)
+	{
+		iPoint eventPos = dynamic_cast<Transform*>(e.get())->GetPosition();
+		if (eventPos == pos)
+		{
+			data.commonData = e.get()->common;
+			switch (data.commonData.type)
+			{
+			case CHEST:
+				data.lootData = e.get()->getLootProperties();
+				break;
+			case TELEPORT:
+				data.destinationData = e.get()->getDestinationProperties();
+				break;
+			default:
+				break;
+			}
+			return data;
+		}
+	}
+	return data;
+}
+
 int EventManager::getEventId(iPoint pos) const
 {
 	int i = 0;

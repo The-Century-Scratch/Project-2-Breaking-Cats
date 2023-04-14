@@ -14,7 +14,7 @@ public:
 	void Create(pugi::xml_node const& node) override;
 	// No longer inherited
 	int ReturnType() override;
-	EventProperties::DestinationProperty getDestinationProperties();
+	EventProperties::DestinationProperty getDestinationProperties() const;
 
 private:
 	EventProperties::DestinationProperty destination;

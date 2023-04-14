@@ -16,7 +16,7 @@ public:
 
 	void Create(pugi::xml_node const& node) override;
 	int ReturnType() override;
-	EventProperties::LootProperty getLootProperties();
+	EventProperties::LootProperty getLootProperties() const;
 
 private:
 	std::vector<std::unique_ptr<EventProperties::LootProperty>> loot;

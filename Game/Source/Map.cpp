@@ -239,6 +239,7 @@ bool Map::IsEvent(iPoint pos, Direction dir) const
 
 EventData Map::getEvent(iPoint pos, Direction dir) const
 {
+	int id;
 	switch (dir)
 	{
 	case Direction::DOWN:
@@ -256,7 +257,13 @@ EventData Map::getEvent(iPoint pos, Direction dir) const
 	default:
 		break;
 	}
-	return eventManager.getEventData(eventManager.getEventId(pos));
+
+	/*id = eventManager.getEventId(pos);
+	if (id == -1)
+	{
+		LOG("Algo esta mal uwu");
+	}*/
+	return eventManager.getEventDataFromPos(pos);
 }
 
 int Map::GetWidth() const { return size.x; }

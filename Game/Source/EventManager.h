@@ -34,6 +34,8 @@ public:
 	EventType getEventType(iPoint pos) const;
 
 	EventData getEventData(int id) const;
+
+	EventData getEventDataFromPos(iPoint pos) const;
 	
 	int getEventId(iPoint pos) const;
 

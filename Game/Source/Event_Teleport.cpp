@@ -8,7 +8,7 @@ int Event_Teleport::ReturnType()
 	return 0;
 }
 
-EventProperties::DestinationProperty Event_Teleport::getDestinationProperties()
+EventProperties::DestinationProperty Event_Teleport::getDestinationProperties() const
 {
 	return destination;
 }
@@ -38,5 +38,6 @@ void Event_Teleport::parseXMLProperties(pugi::xml_node const& node)
 
 void Event_Teleport::Create(pugi::xml_node const &node)
 {
+	Transform::Initialize(node);
 	Event_Base::Initialize(node);
 }
