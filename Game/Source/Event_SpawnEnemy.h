@@ -24,6 +24,8 @@ public:
 	void Create(pugi::xml_node const& node) override;
 	void Test();
 	int ReturnType() override;
+	int ReturnVelocity() const override;
+
 
 private:
 	std::vector<std::unique_ptr<EventProperties::LootProperty>> loot;
@@ -33,6 +35,7 @@ private:
 	bool isOpen = false;
 
 	UnitType typeOfUnit;
+	int velocity;
 };
 
 #endif __EVENT_SPAWNENEMY_H__
