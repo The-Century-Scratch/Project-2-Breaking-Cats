@@ -15,6 +15,10 @@ int Event_SpawnEnemy::ReturnType()
 	return static_cast<int>(typeOfUnit);
 	
 }
+int Event_SpawnEnemy::ReturnVelocity() const
+{
+	return velocity;
+}
 
 void Event_SpawnEnemy::parseXMLProperties(pugi::xml_node const& node)
 {
@@ -49,20 +53,23 @@ void Event_SpawnEnemy::parseXMLProperties(pugi::xml_node const& node)
 		else if (StrEquals("Type", attributeName))
 		{
 			
-			static_cast<UnitType>(child.attribute("value").as_int());
-			int test = child.attribute("value").as_int();
-			LOG("this is the value that the enemy recieves from tiled: %i", static_cast<UnitType>(child.attribute("value").as_int()) );
-			if (UnitType::STRAW == static_cast<UnitType>(child.attribute("value").as_int()))
-			{
-				LOG("dafkjl\nfsdakflma\n\n\n\n\nfadsjlfiaiujin\n\n\n");
-			}
+			
 			typeOfUnit = static_cast<UnitType>(child.attribute("value").as_int());
 
-			//isOpen = child.attribute("value").as_bool();
+			
+		}
+		else if (StrEquals("Velocity", attributeName))
+		{
+
+
+			velocity = child.attribute("value").as_int();
+			LOG("fjalkjfoiuahfiuoarhfjuiahrjufieojfdeiauhfjiusnjvciuadohgioadfjiusejucimioaugnvirojfiuj %i", velocity);
+
+
 		}
 		else
 		{
-			LOG("Chest property %s not implemented.", attributeName);
+			LOG("Enemy property %s not implemented.", attributeName);
 		}
 	}
 }

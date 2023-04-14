@@ -17,8 +17,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 185.75,
-                "y": 187.5
+                "x": 185.25,
+                "y": 187
             }
         },
         "Props.tsx": {
@@ -36,6 +36,17 @@
         "Tiles.tsx": {
             "scaleInDock": 1
         },
+        "Vertical.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 2.206770833333333,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 188.51073873023367,
+                "y": 188.51073873023367
+            }
+        },
         "Vertical_Slice_Map.tmx": {
             "scale": 2.09296875,
             "selectedLayer": 0,
@@ -49,7 +60,7 @@
         "Map2.tmx"
     ],
     "project": "project-II.tiled-project",
-    "property.type": "Event Teleport",
+    "property.type": "int",
     "recentFiles": [
         "Map2.tmx"
     ],

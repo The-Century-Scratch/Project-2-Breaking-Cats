@@ -190,6 +190,11 @@ public:
 		return EventProperties::DestinationProperty();
 	}
 
+	virtual int ReturnVelocity() const
+	{
+		return 0;
+	}
+
 	void Initialize(pugi::xml_node const &node)
 	{
 		name = node.attribute("name").as_string();
