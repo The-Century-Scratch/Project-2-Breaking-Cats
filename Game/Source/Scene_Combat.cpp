@@ -40,28 +40,38 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 			{
 			case GUARDIAN:
 			{
-				Unit unit;
-				unit.Create(std::get<0>(vec));
-				units.push_back(unit);
+				//std::unique_ptr<Input> input;
+				//input = std::make_unique<Input>();
+				std::unique_ptr<Unit> unit;
+				unit = std::make_unique<Unit>();
+				unit->Create(std::get<0>(vec));
+				units.push_back(std::move(unit));
 				break;
 			}
 				
 
 			case STRAW:
 			{
-				Straw unit;
-				unit.Create(std::get<0>(vec));
-				units.push_back(unit);
+				std::unique_ptr<Unit> straw;
+				straw = std::make_unique<Straw>();
+				//straw.Create(std::get<0>(vec));
+				straw->Create(std::get<0>(vec));
+				units.push_back(std::move(straw));
+
+				//std::unique_ptr<Unit> unit;
+				//unit = std::make_unique<Unit>();
+				//unit->Create(std::get<0>(vec));
+				////units.push_back(unit);
 				break;
 			}
 				
 
 			default:
 			{
-				Unit unit;
-
-				unit.Create(std::get<0>(vec));
-				units.push_back(unit);
+				std::unique_ptr<Unit> unit;
+				unit = std::make_unique<Unit>();
+				unit->Create(std::get<0>(vec));
+				units.push_back(std::move(unit));
 				break;
 			}
 				
@@ -122,9 +132,9 @@ void Scene_Combat::Draw()
 	map.Draw();
 	player.Draw();
 
-	for (auto i : units)
+	for (auto& i : units)
 	{
-		i.Draw();
+		i->Draw();
 	}
 }
 
@@ -214,12 +224,12 @@ int Scene_Combat::Update()
 
 	for (auto& i : units)
 	{
-
-		if (i.GetIsMyTurn() && !i.GetHasFinishedTurn())
+		
+		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn())
 		{
 			noUnitHasActed = false;
 
-			auto unitAction = i.HandleInput();
+			auto unitAction = i->HandleInput();
 
 			if ((unitAction.action & UA::MOVE) == UA::MOVE)
 			{
@@ -228,22 +238,22 @@ int Scene_Combat::Update()
 				{
 
 					{
-						i.StartAction(unitAction);
+						i->StartAction(unitAction);
 					}
 				}
 			}
 
 		}
-		i.Update();
+		i->Update();
 
-		if (i.GetHasFinishedTurn() && i.GetIsMyTurn())
+		if (i->GetHasFinishedTurn() && i->GetIsMyTurn())
 		{
-			i.SetIsMyTurn(false);
+			i->SetIsMyTurn(false);
 			numberFinished++; // that is a variable    // all of this check first if this variable is bigger thatn the allowed number for the vector
 
 			if (numberFinished < units.size())
 			{
-				units[numberFinished].SetIsMyTurn(true);
+				units[numberFinished]->SetIsMyTurn(true);
 			}
 
 
@@ -254,10 +264,10 @@ int Scene_Combat::Update()
 
 	if (noUnitHasActed)
 	{
-		units[0].SetIsMyTurn(true);
+		units[0]->SetIsMyTurn(true);
 		for (auto& i : units)
 		{
-			i.SetHasFinishedTurn(false);
+			i->SetHasFinishedTurn(false);
 		}
 		numberFinished = 0;
 	}

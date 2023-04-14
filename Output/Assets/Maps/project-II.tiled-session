@@ -1,6 +1,7 @@
 {
-    "activeFile": "",
+    "activeFile": "Map2.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -12,6 +13,29 @@
                 "y": 192.31056364315043
             }
         },
+        "Map2.tmx": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 185.75,
+                "y": 187.5
+            }
+        },
+        "Props.tsx": {
+            "scaleInDock": 1
+        },
+        "Slime.tsx": {
+            "scaleInDock": 1
+        },
+        "StrawDall.tsx": {
+            "scaleInDock": 1
+        },
+        "TheGuardian.tsx": {
+            "scaleInDock": 1
+        },
+        "Tiles.tsx": {
+            "scaleInDock": 1
+        },
         "Vertical_Slice_Map.tmx": {
             "scale": 2.09296875,
             "selectedLayer": 0,
@@ -22,10 +46,12 @@
         }
     },
     "openFiles": [
+        "Map2.tmx"
     ],
     "project": "project-II.tiled-project",
     "property.type": "Event Teleport",
     "recentFiles": [
+        "Map2.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

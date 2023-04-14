@@ -40,7 +40,7 @@ private:
     Player player;
 
 
-    std::vector<Unit> units;
+    std::vector<std::unique_ptr<Unit>> units;
 
     int turn = 0;
     int numberFinished = 0;
