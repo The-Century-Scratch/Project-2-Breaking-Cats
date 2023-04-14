@@ -65,7 +65,7 @@
   <object id="25" name="guardian" type="Event SpawnEnemy" gid="1347" x="256" y="256" width="32" height="32">
    <properties>
     <property name="Base" value=""/>
-    <property name="Type" type="int" propertytype="Unit Type" value="1"/>
+    <property name="Type" type="int" propertytype="Unit Type" value="0"/>
     <property name="Velocity" type="int" value="2"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
@@ -80,7 +80,7 @@
   </object>
   <object id="27" name="straw" type="Event SpawnEnemy" gid="1348" x="208" y="240" width="32" height="32">
    <properties>
-    <property name="Type" type="int" propertytype="Unit Type" value="0"/>
+    <property name="Type" type="int" propertytype="Unit Type" value="1"/>
     <property name="Velocity" type="int" value="0"/>
    </properties>
   </object>

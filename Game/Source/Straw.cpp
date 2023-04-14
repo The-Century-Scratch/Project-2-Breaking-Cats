@@ -153,7 +153,8 @@ void Straw::Update()
 
 	}
 
-	isMyTurn = false;
+	//isMyTurn = false;
+	hasFinishedTurn = true;
 	//moveTimer = 2;
 }
 
