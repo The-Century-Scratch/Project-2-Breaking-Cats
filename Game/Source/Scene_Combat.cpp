@@ -236,10 +236,7 @@ int Scene_Combat::Update()
 
 				if (map.IsWalkable(unitAction.destinationTile))
 				{
-
-					{
-						i->StartAction(unitAction);
-					}
+					i->StartAction(unitAction);
 				}
 			}
 
