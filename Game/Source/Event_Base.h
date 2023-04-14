@@ -7,6 +7,16 @@
 #include "PugiXml/src/pugixml.hpp"
 #include <SDL/include/SDL_pixels.h>
 
+
+enum class EventType
+{
+	NONE,
+	CHEST,
+	TELEPORT
+};
+
+
+
 namespace EventProperties
 {
 	struct Property
@@ -29,6 +39,7 @@ namespace EventProperties
 		std::string sfxPath = "";
 		EventTriggerOn trigger = EventTriggerOn::ACTION_BUTTON;
 		bool isActive = true;
+		EventType type;
 
 		void ReadProperty(pugi::xml_node const& node) override
 		{
@@ -45,13 +56,18 @@ namespace EventProperties
 				{
 					trigger = static_cast<EventTriggerOn>(child.attribute("value").as_int());
 				}
+				else if (StrEquals("Type", attributeName))
+				{
+					type = static_cast<EventType>(child.attribute("value").as_int());
+				}
 				else if (StrEquals("isActive", attributeName))
 				{
 					isActive = child.attribute("value").as_bool();
 				}
 			}
 		}
-	};
+	}; 
+	
 
 	struct LootProperty : public Property
 	{
@@ -150,6 +166,13 @@ namespace EventProperties
 
 }
 
+struct EventData
+{
+	EventProperties::CommonProperties commonData;
+	EventProperties::LootProperty lootData;
+	EventProperties::DestinationProperty destinationData;
+};
+
 class Event_Base
 {
 public:
@@ -158,6 +181,14 @@ public:
 	virtual void parseXMLProperties(pugi::xml_node const& node) = 0;
 	virtual void Create(pugi::xml_node const &node) = 0;
 	virtual int ReturnType() = 0;
+	virtual EventProperties::LootProperty getLootProperties() const
+	{
+		return EventProperties::LootProperty();
+	}
+	virtual EventProperties::DestinationProperty getDestinationProperties() const
+	{
+		return EventProperties::DestinationProperty();
+	}
 
 	void Initialize(pugi::xml_node const &node)
 	{

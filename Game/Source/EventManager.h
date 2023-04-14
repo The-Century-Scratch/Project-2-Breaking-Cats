@@ -29,6 +29,18 @@ public:
 
 	std::tuple<iPoint, int> GetEnemyInfo();
 
+	bool isEvent(iPoint pos) const;
+
+	EventType getEventType(iPoint pos) const;
+
+	EventData getEventData(int id) const;
+
+	EventData getEventDataFromPos(iPoint pos) const;
+	
+	int getEventId(iPoint pos) const;
+
+	//EventType getEventType()
+
 	// Returns Gid, position, keepDrawing ? true : false;
 	std::tuple<int, iPoint, bool> GetDrawEventInfo(int index = 0);
 private:

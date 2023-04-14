@@ -145,6 +145,85 @@ std::tuple<iPoint, int> EventManager::GetEnemyInfo()
 	
 }
 
+bool EventManager::isEvent(iPoint pos) const
+{
+	for (auto& e : events)
+	{
+		iPoint eventPos = dynamic_cast<Transform*>(e.get())->GetPosition();
+		if (eventPos == pos) return true;
+	}
+	return false;
+}
+
+EventType EventManager::getEventType(iPoint pos) const
+{
+	for (auto& e : events)
+	{
+		iPoint eventPos = dynamic_cast<Transform*>(e.get())->GetPosition();
+		if (eventPos == pos) return e.get()->common.type;
+	}
+	return EventType();
+}
+
+EventData EventManager::getEventData(int id) const
+{
+	using enum EventType;
+	EventData data;
+	data.commonData = events[id].get()->common;
+	switch (data.commonData.type)
+	{
+	case CHEST:
+		data.lootData = events[id].get()->getLootProperties();
+		break;
+	case TELEPORT:
+		data.destinationData = events[id].get()->getDestinationProperties();
+		break;
+	default:
+		break;
+	}
+	return data;
+}
+
+EventData EventManager::getEventDataFromPos(iPoint pos) const
+{
+	using enum EventType;
+	EventData data;
+
+	for (auto& e : events)
+	{
+		iPoint eventPos = dynamic_cast<Transform*>(e.get())->GetPosition();
+		if (eventPos == pos)
+		{
+			data.commonData = e.get()->common;
+			switch (data.commonData.type)
+			{
+			case CHEST:
+				data.lootData = e.get()->getLootProperties();
+				break;
+			case TELEPORT:
+				data.destinationData = e.get()->getDestinationProperties();
+				break;
+			default:
+				break;
+			}
+			return data;
+		}
+	}
+	return data;
+}
+
+int EventManager::getEventId(iPoint pos) const
+{
+	int i = 0;
+	for (auto& e : events)
+	{
+		i++;
+		iPoint eventPos = dynamic_cast<Transform*>(e.get())->GetPosition();
+		if (eventPos == pos) return i;
+	}
+	return -1;
+}
+
 bool EventManager::CreateEvent(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children("object"))

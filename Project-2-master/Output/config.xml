@@ -1,0 +1,59 @@
+<config>
+  <app>
+    <title>Game Development Testbed</title>
+    <organization>UPC</organization>
+  </app>
+
+  <renderer>
+    <vsync value="false"/>
+  </renderer>
+
+  <window>
+    <resolution width="1280" height="720" scale="1"/>
+    <fullscreen value="false"/>
+    <borderless value="false"/>
+    <resizable value="false"/>
+    <fullscreen_window value="false"/>
+  </window>
+
+  <scene>
+    <general assetpath="Assets/"/>
+
+    <map_info>
+      <map id="0" name="Base"/>
+      <map id="1" name="Test"/>
+    </map_info>
+
+    <scene_info>
+      <scene name="Title">
+        <window name="MainMenu"/>
+      </scene>
+    </scene_info>
+
+    <window_info>
+      <window name="MainMenu" class="List" type="Base" x="50" y="50" width="534" height="170">
+        <button x="350" y="25" width="534" height="170" text="New Game" function="NewGame" segmentwidth="170" segmentheight="170">
+          <state_texture state="0" x="0" y="0" horizontalsegments="3" verticalsegments="30" advance="1" path="Assets/UI/Buttons.png"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="3" verticalsegments="30" advance="2" path="Assets/UI/Buttons.png"/>
+          <state_texture state="2" x="0" y="340" horizontalsegments="3" verticalsegments="40" advance="2" path="Assets/UI/Buttons.png"/>
+          <state_texture state="3" x="0" y="170" horizontalsegments="3" verticalsegments="30" advance="2" path="Assets/UI/Buttons.png"/>
+          <state_texture state="4" x="0" y="340" horizontalsegments="3" verticalsegments="30" advance="2" path="Assets/UI/Buttons.png"/>
+        </button>
+        <button x="350" y="175" width="200" height="100" text="Continue" function="ContinueGame" segmentwidth="32" segmentheight="32">
+          <state_texture x="0" y="0"/>
+          <state_texture x="0" y="0"/>
+          <state_texture x="0" y="0"/>
+        </button>
+        <button x="25" y="325" width="200" height="100" text="Options" function="OptionsWindow" segmentwidth="32" segmentheight="32">
+          <state_texture x="0" y="0"/>
+          <state_texture x="0" y="0"/>
+          <state_texture x="0" y="0"/>
+        </button>
+      </window>
+    </window_info>
+
+  </scene>
+  <fonts>
+    <property path="Assets/Textures/Fonts/" />
+  </fonts>
+</config>

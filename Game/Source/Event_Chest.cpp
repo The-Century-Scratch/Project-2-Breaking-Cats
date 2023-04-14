@@ -10,6 +10,12 @@ int Event_Chest::ReturnType()
 	return 0;
 }
 
+EventProperties::LootProperty Event_Chest::getLootProperties() const
+{
+	EventProperties::LootProperty data; //TODO
+	return data;
+}
+
 void Event_Chest::parseXMLProperties(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children())
