@@ -11,41 +11,6 @@
 class Straw : public Unit
 {
 public:
-	struct PlayerAction
-	{
-		enum class Action
-		{
-			NONE = 0x0000,
-			MOVE = 0x0001,
-			INTERACT = 0x0002
-		};
-
-		friend Action operator&(Action a, Action b)
-		{
-			return static_cast<Action>(static_cast<unsigned int>(a) & static_cast<unsigned int>(b));
-		}
-
-		friend Action operator&=(Action& a, Action b)
-		{
-			return a = a & b;
-		}
-
-		friend Action operator|(Action a, Action b)
-		{
-			return static_cast<Action>(static_cast<unsigned int>(a) | static_cast<unsigned int>(b));
-		}
-
-		friend Action& operator|=(Action& a, Action b)
-		{
-			return a = a | b;
-		}
-
-
-		iPoint destinationTile = { 0, 0 };
-
-		Action action = Straw::PlayerAction::Action::NONE;
-	};
-
 	Straw();
 	~Straw();
 	void Create(iPoint pos) override;
@@ -54,7 +19,7 @@ public:
 	void DebugDraw() const override;
 
 	PlayerAction HandleInput() const;
-	virtual void StartAction(PlayerAction playerAction);
+	void StartAction(PlayerAction playerAction) override;
 
 	bool GetHasFinishedTurn() override;
 	bool GetIsMyTurn() override;
