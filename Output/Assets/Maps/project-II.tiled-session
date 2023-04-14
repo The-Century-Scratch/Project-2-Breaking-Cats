@@ -14,11 +14,14 @@
             }
         },
         "Map2.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 185.25,
-                "y": 187
+                "y": 186.5
             }
         },
         "Props.tsx": {
@@ -57,11 +60,13 @@
         }
     },
     "openFiles": [
-        "Map2.tmx"
+        "Map2.tmx",
+        "Vertical.tmx"
     ],
     "project": "project-II.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "Vertical.tmx",
         "Map2.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"

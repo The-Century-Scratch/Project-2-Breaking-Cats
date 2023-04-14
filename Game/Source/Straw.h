@@ -56,13 +56,13 @@ public:
 	PlayerAction HandleInput() const;
 	virtual void StartAction(PlayerAction playerAction);
 
-	bool GetHasFinishedTurn();
-	bool GetIsMyTurn();
+	bool GetHasFinishedTurn() override;
+	bool GetIsMyTurn() override;
 
-	void SetHasFinishedTurn(bool value);
-	void SetIsMyTurn(bool value);
+	void SetHasFinishedTurn(bool value) override;
+	void SetIsMyTurn(bool value) override;
 
-	void Update();
+	void Update() override;
 
 private:
 	void AnimateMove();

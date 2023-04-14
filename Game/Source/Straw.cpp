@@ -14,6 +14,7 @@ Straw::~Straw() = default;
 
 void Straw::DebugDraw() const
 {
+	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{

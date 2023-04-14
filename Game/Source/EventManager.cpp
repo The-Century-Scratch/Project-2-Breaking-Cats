@@ -248,6 +248,7 @@ bool EventManager::CreateEvent(pugi::xml_node const& node)
 			//enemy.get()->
 			LOG("it is indeed detecting it, now the only problem is spawning it");
 			enemy->Create(child);
+			
 			enemies.push_back(std::move(enemy));
 		}
 
