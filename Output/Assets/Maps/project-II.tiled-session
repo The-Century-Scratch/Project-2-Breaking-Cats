@@ -17,8 +17,8 @@
             "scale": 0.9717708333333334,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 472.3335834494587,
-                "y": 311.8019080287276
+                "x": 939.5219208918427,
+                "y": 434.25876299710575
             }
         },
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx#Cortao": {
@@ -49,6 +49,7 @@
             "scaleInDock": 1
         },
         "GatsWalk.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1,
             "scaleInEditor": 3
         },
@@ -59,13 +60,14 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 126,
-                "y": 189
+                "x": 192,
+                "y": 191.75
             }
         },
         "Plaza.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.75,
-            "scaleInEditor": 3
+            "scaleInEditor": 1.5
         },
         "Props.tsx": {
             "scaleInDock": 1
@@ -89,11 +91,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 181.33333333333337,
-                "y": 458.66666666666674
+                "x": 413,
+                "y": 395
             }
         },
         "Vertical.tmx#TheGuardian": {
@@ -108,7 +110,8 @@
             }
         }
     },
-    "last.imagePath": "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Pixel/Definitivos/CharactersDesign",
+    "last.externalTilesetPath": "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Pixel/Animations",
+    "last.imagePath": "C:/Users/Aussar/Documents/GitHub/Project-2-Breaking-Cats/Output/Assets/Maps",
     "openFiles": [
         "Map2.tmx",
         "Vertical.tmx",
@@ -119,15 +122,15 @@
     "project": "project-II.tiled-project",
     "property.type": "Unit Type",
     "recentFiles": [
+        "Plaza.tsx",
         "Map2.tmx",
         "Vertical.tmx",
         "GatsWalk.tsx",
-        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
-        "Plaza.tsx"
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 32,
-        "width": 32
+        "height": 16,
+        "width": 16
     }
 }
