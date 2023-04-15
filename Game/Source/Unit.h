@@ -63,6 +63,8 @@ public:
 
 	virtual void Update();
 
+	int velocity = 0;
+
 private:
 	void AnimateMove();
 	void SmoothMove();
