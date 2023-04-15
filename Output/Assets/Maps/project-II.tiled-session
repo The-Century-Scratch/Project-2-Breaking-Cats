@@ -1,5 +1,5 @@
 {
-    "activeFile": "Plaza.tsx",
+    "activeFile": "Vertical.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -66,7 +66,7 @@
         },
         "Plaza.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.75,
+            "scaleInDock": 1,
             "scaleInEditor": 1.5
         },
         "Props.tsx": {
@@ -94,8 +94,8 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 413,
-                "y": 395
+                "x": 426,
+                "y": 424
             }
         },
         "Vertical.tmx#TheGuardian": {
@@ -115,18 +115,17 @@
     "openFiles": [
         "Map2.tmx",
         "Vertical.tmx",
-        "Plaza.tsx",
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
-        "GatsWalk.tsx"
+        "Plaza.tsx"
     ],
     "project": "project-II.tiled-project",
     "property.type": "Unit Type",
     "recentFiles": [
-        "Plaza.tsx",
         "Map2.tmx",
+        "Plaza.tsx",
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
         "Vertical.tmx",
-        "GatsWalk.tsx",
-        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx"
+        "GatsWalk.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
