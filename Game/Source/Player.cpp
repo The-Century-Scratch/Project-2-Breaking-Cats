@@ -105,25 +105,25 @@ void Player::StartAction(PlayerAction playerAction, EventData data)
 			position.x = data.destinationData.destination.x;
 			position.y = data.destinationData.destination.y;
 
-			int ret = 0;
+			//int ret = 0;
 			using enum SceneType;
 			switch (data.destinationData.destinationMap)
 			{
 			case NEWGAME:
-				ret = 1;
+				//ret = 1;
 				break;
 			case CONTINUE:
 				break;
 			case EXIT:
 				break;
 			case COMBAT:
-				ret = 4;
+				//ret = 4;
 				break;
 			case VERTICAL:
-				ret = 5;
+				//ret = 5;
 				break;
 			case TITLESCENE:
-				ret = 6;
+				//ret = 6;
 				break;
 			default:
 				break;
