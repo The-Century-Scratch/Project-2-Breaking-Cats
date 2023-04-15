@@ -104,6 +104,30 @@ void Player::StartAction(PlayerAction playerAction, EventData data)
 			LOG("(TP)");
 			position.x = data.destinationData.destination.x;
 			position.y = data.destinationData.destination.y;
+
+			int ret = 0;
+			using enum SceneType;
+			switch (data.destinationData.destinationMap)
+			{
+			case NEWGAME:
+				ret = 1;
+				break;
+			case CONTINUE:
+				break;
+			case EXIT:
+				break;
+			case COMBAT:
+				ret = 4;
+				break;
+			case VERTICAL:
+				ret = 5;
+				break;
+			case TITLESCENE:
+				ret = 6;
+				break;
+			default:
+				break;
+			}
 			break;
 		default:
 			break;

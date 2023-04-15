@@ -58,6 +58,7 @@ int Scene_Vertical::Update()
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
 			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
+			int ret = 0;
 			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 		}
 	}
@@ -68,16 +69,17 @@ int Scene_Vertical::Update()
 	//std::string vec = map.eventManager.GetEventVector();
 	
 	//LOG("this is the name of the event: %s", vec);
-
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
-	{
-		return 6;
-	}
-
-	return 0;
+	return CheckNextScene();
 }
 
 int Scene_Vertical::CheckNextScene()
 {
+	using enum SceneType;
+	using enum KeyState;
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		return static_cast<int>(SceneType::TITLESCENE);
+	}
+
 	return 0;
 }

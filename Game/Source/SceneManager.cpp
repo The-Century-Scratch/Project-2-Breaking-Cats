@@ -79,8 +79,6 @@ bool SceneManager::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KeyState::KEY_DOWN)
 		app->LoadGameRequest();
 
-	currentScene->Draw();
-
 
 
 	// STATE MACHINE DE LA FUNCIONALIDAD DE LOS BOTONES
@@ -111,6 +109,9 @@ bool SceneManager::Update(float dt)
 	default:
 		break;
 	}
+
+
+	currentScene->Draw();
 	
 	return true;
 }
