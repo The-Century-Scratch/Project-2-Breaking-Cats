@@ -103,6 +103,9 @@
     <ClCompile Include="Source\LongRange.cpp">
       <Filter>Scene_Map Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Guardian.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -232,6 +235,9 @@
       <Filter>Scene_Map Components\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Source\LongRange.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Guardian.h">
       <Filter>Scene_Map Components\Headers</Filter>
     </ClInclude>
   </ItemGroup>

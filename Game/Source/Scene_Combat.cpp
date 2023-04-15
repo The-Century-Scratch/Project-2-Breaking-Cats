@@ -44,7 +44,7 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 				//std::unique_ptr<Input> input;
 				//input = std::make_unique<Input>();
 				std::unique_ptr<Unit> unit;
-				unit = std::make_unique<Unit>();
+				unit = std::make_unique<Guardian>();
 				unit->Create(std::get<0>(vec));
 				unit.get()->velocity = std::get<2>(vec);
 				units.push_back(std::move(unit));

@@ -8,6 +8,7 @@
 #include "Gats.h"
 #include "Catska.h"
 #include "LongRange.h"
+#include "Guardian.h"
 #include "Map.h"
 
 enum class UnitType
