@@ -3,12 +3,15 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Vertical.tmx",
+    "activeFile": "Shop.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
         "#Plaza": {
             "scaleInDock": 1
         },
@@ -123,28 +126,39 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 32,
+            "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 272.234375,
-                "y": 242.046875
+                "x": 195.25,
+                "y": 175.25
             }
         },
         "Plaza.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 0.5,
             "scaleInEditor": 1.5
         },
         "Props.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "Resistance.tmx": {
+            "scale": 1.0266927083333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 383.7564996829423,
+                "y": 383.7564996829423
+            }
+        },
+        "Resistance.tmx#TheGuardian": {
+            "scaleInDock": 1
+        },
         "Shop.tmx": {
             "scale": 3,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 63.66666666666666,
-                "y": 117.99999999999999
+                "x": 65.66666666666666,
+                "y": 55.66666666666666
             }
         },
         "Shop.tmx#Alfombra": {
@@ -168,6 +182,9 @@
         "Shop.tmx#Flowers": {
             "scaleInDock": 1
         },
+        "Shop.tmx#MaiceyIdle": {
+            "scaleInDock": 1
+        },
         "Shop.tmx#Micey": {
             "scaleInDock": 1
         },
@@ -175,7 +192,10 @@
             "scaleInDock": 1
         },
         "Shop.tmx#Props": {
-            "scaleInDock": 0.75
+            "scaleInDock": 1.5
+        },
+        "Shop.tmx#TheGuardian": {
+            "scaleInDock": 1
         },
         "Shop.tmx#Tiles": {
             "scaleInDock": 1
@@ -192,6 +212,59 @@
         "Shop.tmx#WallInclined1": {
             "scaleInDock": 1
         },
+        "ShopMal.tmx": {
+            "scale": 3,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 74,
+                "y": 92.66666666666669
+            }
+        },
+        "ShopMal.tmx#Alfombra": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Barra": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Borders": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Cuadro": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#FloorTypes": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#FloorWood": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Flowers": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Micey": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#MoneyIcon": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Props": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Tree": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#WallInclined": {
+            "scaleInDock": 1
+        },
+        "ShopMal.tmx#WallInclined1": {
+            "scaleInDock": 1
+        },
         "Slime.tsx": {
             "scaleInDock": 1
         },
@@ -199,11 +272,11 @@
             "scaleInDock": 1
         },
         "Tavern.tmx": {
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 235.75,
-                "y": 200.75
+                "x": 312,
+                "y": 173
             }
         },
         "Tavern.tmx#Plaza": {
@@ -212,14 +285,34 @@
         "Tavern.tmx#Props": {
             "scaleInDock": 1
         },
+        "Tavern.tmx#TheGuardian": {
+            "scaleInDock": 1
+        },
         "Tavern.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "TavernMal.tmx": {
+            "scale": 1.23203125,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 317.3620798985416,
+                "y": 141.23018389346862
+            }
+        },
+        "TavernMal.tmx#Plaza": {
+            "scaleInDock": 1
+        },
+        "TavernMal.tmx#Props": {
+            "scaleInDock": 1
+        },
+        "TavernMal.tmx#Tiles": {
             "scaleInDock": 1
         },
         "TheGuardian.tsx": {
             "scaleInDock": 1
         },
         "Tiles.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 1.5,
             "scaleInEditor": 2
         },
         "Vertical.tmx": {
@@ -229,11 +322,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 2,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 388.75,
-                "y": 345.25
+                "x": 465.3333333333333,
+                "y": 361.33333333333326
             }
         },
         "Vertical.tmx#TheGuardian": {
@@ -257,28 +350,35 @@
         }
     },
     "last.externalTilesetPath": "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Pixel/Animations",
-    "last.imagePath": "C:/Users/Aussar/Documents/GitHub/Project-2-Breaking-Cats/Output/Assets/Maps",
+    "last.imagePath": "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Pixel/Definitivos/Animations",
     "map.height": 15,
     "map.lastUsedFormat": "tmx",
     "map.width": 20,
     "openFiles": [
         "Map2.tmx",
         "Vertical.tmx",
-        "Plaza.tsx"
+        "Tavern.tmx",
+        "Shop.tmx",
+        "Plaza.tsx",
+        "TavernMal.tmx",
+        "ShopMal.tmx",
+        "Resistance.tmx"
     ],
     "project": "project-II.tiled-project",
     "property.type": "bool",
     "recentFiles": [
         "Map2.tmx",
-        "Plaza.tsx",
         "Vertical.tmx",
+        "Tavern.tmx",
+        "Resistance.tmx",
+        "ShopMal.tmx",
+        "TavernMal.tmx",
+        "Plaza.tsx",
+        "Shop.tmx",
         "Base.tmx",
         "test.tmx",
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx",
-        "Props.tsx",
-        "Tiles.tsx",
-        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
-        "GatsWalk.tsx"
+        "Props.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",

@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="5" height="6" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="1">
- <tileset firstgid="1" name="MoneyIcon" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/MoneyIcon.png" width="32" height="32"/>
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="63">
+ <tileset firstgid="1" source="Tiles.tsx"/>
+ <tileset firstgid="2501" source="Props.tsx"/>
+ <tileset firstgid="5001" source="Slime.tsx"/>
+ <tileset firstgid="5097" source="Plaza.tsx"/>
+ <tileset firstgid="7041" name="TheGuardian" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="TheGuardian.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="isWalkable" type="bool" value="false"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="2" name="Cuadro" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/Cuadro.png" width="32" height="32"/>
+ <tileset firstgid="7042" name="Props" tilewidth="16" tileheight="16" tilecount="2500" columns="25">
+  <image source="Props.png" width="400" height="400"/>
  </tileset>
- <tileset firstgid="3" name="Wall" tilewidth="32" tileheight="32" tilecount="2" columns="1">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/Wall.png" width="32" height="64"/>
- </tileset>
- <tileset firstgid="5" name="Barra" tilewidth="32" tileheight="32" tilecount="6" columns="3">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/Bar.png" width="96" height="64"/>
- </tileset>
- <tileset firstgid="11" name="Micey" tilewidth="32" tileheight="32" tilecount="7" columns="7">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Animations/MaiceyAnim.png" width="224" height="32"/>
+ <tileset firstgid="9542" name="MaiceyIdle" tilewidth="32" tileheight="32" tilecount="7" columns="7">
+  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Definitivos/Animations/MaiceyIdle.png" width="224" height="32"/>
   <tile id="0">
    <animation>
     <frame tileid="0" duration="100"/>
@@ -26,84 +29,89 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="18" name="Alfombra" tilewidth="32" tileheight="32" tilecount="4" columns="2">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/Alfombra.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="22" name="WallInclined1" tilewidth="32" tileheight="32" tilecount="4" columns="1">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/WallInclined1.png" width="32" height="128"/>
- </tileset>
- <tileset firstgid="26" name="FloorTypes" tilewidth="32" tileheight="32" tilecount="4" columns="2">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/FloorTypes.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="30" name="Tree" tilewidth="32" tileheight="32" tilecount="2" columns="1">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/Tree.png" width="32" height="64"/>
- </tileset>
- <tileset firstgid="32" name="WallInclined" tilewidth="32" tileheight="32" tilecount="4" columns="1">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/WallInclined.png" width="32" height="128"/>
- </tileset>
- <tileset firstgid="36" name="FloorWood" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/FloorWood.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="37" name="Flowers" tilewidth="32" tileheight="32" tilecount="8" columns="4">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Tiled/Flowers.png" width="128" height="64"/>
- </tileset>
- <tileset firstgid="45" name="Borders" tilewidth="32" tileheight="32" tilecount="4" columns="2">
-  <image source="../../../../../../OneDrive/Escritorio/Proyecto2/Pixel/Tileset/Shop/Borders.png" width="64" height="64"/>
- </tileset>
- <tileset firstgid="49" name="Tiles" tilewidth="32" tileheight="32" tilecount="625" columns="25">
-  <image source="Tiles.png" width="800" height="800"/>
- </tileset>
- <tileset firstgid="674" name="Props" tilewidth="32" tileheight="32" tilecount="625" columns="25">
-  <image source="Props.png" width="800" height="800"/>
- </tileset>
- <layer id="3" name="Floor" width="5" height="6">
+ <layer id="8" name="Floor2" width="8" height="8">
   <data encoding="csv">
-89,89,89,89,89,
-89,89,89,89,89,
-89,89,89,89,89,
-89,89,89,89,89,
-89,89,89,89,89,
-89,89,89,89,89
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="2" name="Walls" width="5" height="6">
+ <layer id="2" name="Floor" width="8" height="8">
   <data encoding="csv">
-66,67,67,67,68,
-91,0,0,0,93,
-91,0,0,0,93,
-91,0,0,0,93,
-91,0,0,0,93,
-116,117,92,117,118
+80,130,130,80,80,80,0,0,
+80,180,130,80,80,80,80,0,
+80,230,130,80,80,80,80,0,
+130,230,130,80,80,80,80,0,
+180,80,130,80,80,80,80,0,
+230,130,130,80,80,80,80,0,
+130,80,80,80,80,80,80,0,
+130,80,80,80,80,80,0,0
 </data>
  </layer>
- <layer id="4" name="Micey" width="5" height="6">
+ <layer id="9" name="Floor3" width="8" height="8">
   <data encoding="csv">
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,11,0,0,
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,0,0,0
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="5" name="Escaparate" width="5" height="6">
+ <layer id="11" name="Micey" width="8" height="8">
   <data encoding="csv">
-0,0,0,0,0,
-0,0,0,0,0,
-0,680,681,682,0,
-0,705,706,707,0,
-0,0,0,0,0,
-0,0,0,0,0
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,9542,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="6" name="Details" width="5" height="6">
+ <layer id="1" name="Walls" width="8" height="8">
   <data encoding="csv">
-0,0,980,981,0,
-0,0,1005,1006,0,
-0,1011,0,1024,0,
-0,0,0,0,0,
-0,0,0,0,0,
-0,0,20,21,0
+35,36,36,37,38,37,38,40,
+85,0,0,0,0,0,0,90,
+135,0,0,0,0,0,0,140,
+185,0,7179,7180,7180,7181,0,90,
+235,0,7204,7205,7205,7206,0,140,
+235,0,0,0,0,0,0,190,
+235,0,0,0,0,0,0,240,
+285,287,289,0,0,289,289,290
+</data>
+ </layer>
+ <layer id="10" name="Details" width="8" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,7354,0,0,
+0,0,7392,0,0,7379,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,612,613,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Events" class="Layer of Events" visible="0"/>
+ <layer id="4" name="Props" width="8" height="8">
+  <data encoding="csv">
+0,7043,0,7348,7349,0,7043,0,
+0,7068,0,7373,7374,0,7068,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0
 </data>
  </layer>
 </map>
