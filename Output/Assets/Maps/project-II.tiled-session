@@ -1,24 +1,37 @@
 {
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
     "activeFile": "Vertical.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "#Plaza": {
+            "scaleInDock": 1
+        },
+        "#Props": {
+            "scaleInDock": 1
+        },
+        "#Tiles": {
+            "scaleInDock": 1
+        },
         "Base.tmx": {
             "scale": 2.09296875,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 192.31056364315046,
-                "y": 192.31056364315043
+                "x": 154.80403135498324,
+                "y": 191.5938783128033
             }
         },
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx": {
             "scale": 0.9717708333333334,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 939.5219208918427,
-                "y": 434.25876299710575
+                "x": 456.8978454282345,
+                "y": 265.49469396505515
             }
         },
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx#Cortao": {
@@ -48,6 +61,59 @@
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx#Tienda": {
             "scaleInDock": 1
         },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 372,
+                "y": 576.5
+            }
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Alfombra": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Barra": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Borders": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Cuadro": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#FloorTypes": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#FloorWood": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Flowers": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#GatsAnim": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#GatsIdle": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Micey": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#MoneyIcon": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Tree": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#WallInclined": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx#WallInclined1": {
+            "scaleInDock": 1
+        },
         "GatsWalk.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
@@ -60,8 +126,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 192,
-                "y": 191.75
+                "x": 191,
+                "y": 191
             }
         },
         "Plaza.tsx": {
@@ -70,6 +136,18 @@
             "scaleInEditor": 1.5
         },
         "Props.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Shop.tmx": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 65.33333333333333,
+                "y": 116.66666666666669
+            }
+        },
+        "Shop.tmx#Tiles": {
             "scaleInDock": 1
         },
         "Slime.tsx": {
@@ -78,11 +156,29 @@
         "StrawDall.tsx": {
             "scaleInDock": 1
         },
+        "Tavern.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 252,
+                "y": 231
+            }
+        },
+        "Tavern.tmx#Plaza": {
+            "scaleInDock": 1
+        },
+        "Tavern.tmx#Props": {
+            "scaleInDock": 1
+        },
+        "Tavern.tmx#Tiles": {
+            "scaleInDock": 1
+        },
         "TheGuardian.tsx": {
             "scaleInDock": 1
         },
         "Tiles.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 2
         },
         "Vertical.tmx": {
             "expandedGroupLayers": [
@@ -91,11 +187,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1,
-            "selectedLayer": 4,
+            "scale": 0.75,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 426,
-                "y": 424
+                "x": 381.3333333333333,
+                "y": 459.99999999999994
             }
         },
         "Vertical.tmx#TheGuardian": {
@@ -108,10 +204,21 @@
                 "x": 192.31056364315046,
                 "y": 71.90742814483016
             }
+        },
+        "test.tmx": {
+            "scale": 1.9435416666666667,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 200.66459427591383,
+                "y": 159.50262621931608
+            }
         }
     },
     "last.externalTilesetPath": "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Pixel/Animations",
     "last.imagePath": "C:/Users/Aussar/Documents/GitHub/Project-2-Breaking-Cats/Output/Assets/Maps",
+    "map.height": 15,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 20,
     "openFiles": [
         "Map2.tmx",
         "Vertical.tmx",
@@ -121,15 +228,19 @@
     "project": "project-II.tiled-project",
     "property.type": "Unit Type",
     "recentFiles": [
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx",
+        "Props.tsx",
+        "Tiles.tsx",
+        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
         "Map2.tmx",
         "Plaza.tsx",
-        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
         "Vertical.tmx",
         "GatsWalk.tsx"
     ],
+    "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 16,
-        "width": 16
+        "height": 32,
+        "width": 32
     }
 }
