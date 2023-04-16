@@ -15,8 +15,27 @@ int Scene_Vertical::Test()
 
 void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
+	// Load Interface
+	auto sceneHash = info.find("Vertical");
+	if (sceneHash == info.end())
+	{
+		LOG("Title scene not found in XML.");
+		return;
+	}
+
+	auto scene = sceneHash->second;
+
+	for (auto const& window : scene.children("window"))
+	{
+		if (auto result = windowFactory.CreateWindow(window.attribute("name").as_string());
+			result != nullptr)
+		{
+			windows.push_back(std::move(result));
+		}
+	}
+
 	// Load map
-	currentMap = "Vertical";
+	currentMap = fileToLoad;
 
 	if (std::string mapToLoad = currentMap + ".tmx";
 		!map.Load(path, mapToLoad))
@@ -36,10 +55,25 @@ void Scene_Vertical::Draw()
 {
 	map.Draw();
 	player.Draw();
+
+	for (auto const& elem : windows)
+	{
+		elem->Draw();
+	}
 }
 
 int Scene_Vertical::Update()
 {
+	// Interface Logic
+	for (auto const& elem : windows)
+	{
+		if (auto result = elem->Update();
+			result != 0)
+			return result;
+	}
+
+
+	// Player 
 	auto playerAction = player.HandleInput();
 
 	using PA = Player::PlayerAction::Action;

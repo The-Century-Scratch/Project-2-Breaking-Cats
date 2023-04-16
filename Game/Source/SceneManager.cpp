@@ -132,7 +132,7 @@ bool SceneManager::PostUpdate()
 			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Map2");
 			break;
 		case VERTICAL:
-			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Vertical");
+			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Vertical");
 			break;
 		case TITLESCENE:
 			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);

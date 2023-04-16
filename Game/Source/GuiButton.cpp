@@ -16,18 +16,17 @@ GuiButton::~GuiButton()
 	}
 }
 
-GuiButton::GuiButton(uPoint pos, uPoint size, std::string const &str, std::function<int()> const& funcPtr, std::vector<SDL_Rect> const &buttonStates) :
+GuiButton::GuiButton(uPoint pos, uPoint size, uint separation, std::string const &str, std::function<int()> const& funcPtr, std::vector<SDL_Rect> const &buttonStates, std::string const& path) :
 	text(str),
 	currentState(ButtonState::NORMAL)
 {
 	Initialize(funcPtr, pos, size);
 
-	int textureID = app->tex->Load("Assets/UI/ButtonState9.png");
-	//int textureID2 = app->tex->Load("Assets/UI/ButtonState2.png");
+	int textureID = app->tex->Load(path);
 
 	for (int i = 0; auto const& elem : buttonStates)
 	{
-		panels.try_emplace(i, elem, 0, textureID, iPoint(3, 3));
+		panels.try_emplace(i, elem, separation, textureID, iPoint(3, 3));
 		i++;
 	}
 }
@@ -71,7 +70,7 @@ bool GuiButton::Draw() const
 		result->second.Draw(centerPoint, iPoint(GetSize().x, GetSize().y));
 	}
 
-	centerPoint += iPoint((GetSize().x/2) + 20, (GetSize().y/2) - 15);
+	centerPoint += iPoint((GetSize().x/2) /*+ 20*/, (GetSize().y/2) /*- 15*/);
 
 	TextParameters params(0, DrawParameters(0, centerPoint));
 	params.align = AlignTo::ALIGN_CENTER;

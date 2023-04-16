@@ -1,5 +1,5 @@
 {
-    "activeFile": "Map2.tmx",
+    "activeFile": "Vertical.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -61,13 +61,15 @@
     },
     "openFiles": [
         "Map2.tmx",
-        "Vertical.tmx"
+        "Vertical.tmx",
+        "Base.tmx"
     ],
     "project": "project-II.tiled-project",
     "property.type": "Unit Type",
     "recentFiles": [
-        "Vertical.tmx",
-        "Map2.tmx"
+        "Map2.tmx",
+        "Base.tmx",
+        "Vertical.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }
