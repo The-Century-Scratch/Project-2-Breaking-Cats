@@ -1,4 +1,6 @@
 #include "App.h"
+#include <stdlib.h>
+#include <time.h>
 
 #include "Defs.h"
 #include "Log.h"
@@ -27,6 +29,7 @@ std::unique_ptr<App> app = nullptr;
 
 int main(int argc, char* args[])
 {
+	srand(time(NULL));
 	using enum MainState;
 	LOG("Engine starting ...");
 

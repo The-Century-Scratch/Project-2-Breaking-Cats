@@ -18,7 +18,7 @@ public:
 	void Draw() const override;
 	void DebugDraw() const override;
 
-	PlayerAction HandleInput() const;
+	PlayerAction HandleInput() const override;
 	void StartAction(PlayerAction playerAction) override;
 
 	bool GetHasFinishedTurn() override;
@@ -26,6 +26,9 @@ public:
 
 	void SetHasFinishedTurn(bool value) override;
 	void SetIsMyTurn(bool value) override;
+
+	int GetHealthPoints() override;
+	void DealDamage(int amount) override;
 
 	void Update() override;
 
@@ -42,9 +45,11 @@ private:
 
 	int animTimer = 0;
 	int texture;
+	int goingTo;
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
+	int healthPoints = 20;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

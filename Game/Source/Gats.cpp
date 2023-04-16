@@ -83,6 +83,11 @@ Gats::PlayerAction Gats::HandleInput() const
 	if (!moveVector.IsZero())
 		return returnAction;
 
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		returnAction.action = ATTACK;
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		returnAction.action |= MOVE;
@@ -111,8 +116,12 @@ void Gats::StartAction(PlayerAction playerAction)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
-
+		//LOG("according to the software the character is moving right now......");
 		StartMovement();
+	}
+	else if (playerAction.action == PlayerAction::Action::ATTACK)
+	{
+		
 	}
 }
 
@@ -137,7 +146,7 @@ void Gats::StartMovement()
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		moveVector.x = 1;
-		//LOG("it does enter this scope %i", moveVector.x);
+		
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
 }
@@ -152,7 +161,7 @@ void Gats::Update()
 		SmoothMove();
 
 	}
-
+	//hasFinishedTurn = true;
 
 	//moveTimer = 2;
 }
@@ -194,5 +203,20 @@ void Gats::SmoothMove()
 	{
 		moveTimer++;
 	}
-	LOG("it does enter this scope %i", moveTimer);
+	
+}
+
+bool Gats::GetIsAlly()
+{
+	return true;
+}
+
+void Gats::DealDamage(int amount)
+{
+	healthPoints -= amount;
+}
+
+int Gats::GetHealthPoints()
+{
+	return healthPoints;
 }

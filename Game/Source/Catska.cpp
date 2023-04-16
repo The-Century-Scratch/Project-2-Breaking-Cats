@@ -137,7 +137,7 @@ void Catska::StartMovement()
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		moveVector.x = 1;
-		//LOG("it does enter this scope %i", moveVector.x);
+		
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
 }
@@ -153,7 +153,7 @@ void Catska::Update()
 
 	}
 
-
+	//hasFinishedTurn = true;
 	//moveTimer = 2;
 }
 
@@ -194,5 +194,15 @@ void Catska::SmoothMove()
 	{
 		moveTimer++;
 	}
-	LOG("it does enter this scope %i", moveTimer);
+	
+}
+
+void Catska::DealDamage(int amount)
+{
+	healthPoints -= amount;
+}
+
+int Catska::GetHealthPoints()
+{
+	return healthPoints;
 }

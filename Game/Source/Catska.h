@@ -27,6 +27,9 @@ public:
 	void SetHasFinishedTurn(bool value) override;
 	void SetIsMyTurn(bool value) override;
 
+	int GetHealthPoints() override;
+	void DealDamage(int amount) override;
+
 	void Update() override;
 
 private:
@@ -45,6 +48,7 @@ private:
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
+	int healthPoints = 40;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

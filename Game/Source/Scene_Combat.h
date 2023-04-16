@@ -17,7 +17,7 @@ enum class UnitType
     STRAW,
     GATS,
     CATSKA,
-    LONGRANGE,
+    LONG_RANGE,
     NONE
 };
 

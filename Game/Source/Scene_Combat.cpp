@@ -21,7 +21,7 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 
 	LoadEnemies(path, fileToLoad);
 
-	player.Create();
+	//player.Create();
 
 
 	std::tuple<iPoint, int, int> vec;
@@ -87,7 +87,7 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 				units.push_back(std::move(catska));
 				break;
 			}
-			case LONGRANGE:
+			case LONG_RANGE:
 			{
 
 				std::unique_ptr<Unit> longRange;
@@ -178,31 +178,36 @@ void Scene_Combat::Start()
 void Scene_Combat::Draw()
 {
 	map.Draw();
-	player.Draw();
+	//player.Draw();
 
 	for (auto& i : units)
 	{
-		i->Draw();
+		if (i->GetHealthPoints() > 0)
+		{
+			i->Draw();
+		}
+		
 	}
 }
 
 int Scene_Combat::Update()
 {
-	auto playerAction = player.HandleInput();
-
-
-	using PA = Player::PlayerAction::Action;
+	//auto playerAction = player.HandleInput();
+	//
+	//
+	//using PA = Player::PlayerAction::Action;
 	using UA = Unit::PlayerAction::Action;
-
-	if ((playerAction.action & PA::MOVE) == PA::MOVE)
-	{
-		if (map.IsWalkable(playerAction.destinationTile))
-		{
-			player.StartAction(playerAction);
-
-		}
-
-	}
+	//
+	//if ((playerAction.action & PA::MOVE) == PA::MOVE)
+	//{
+	//	if (map.IsWalkable(playerAction.destinationTile))
+	//	{
+	//		player.StartAction(playerAction);
+	//
+	//	}
+	//
+	//}
+	
 
 	//for (auto& i : units)
 	//{
@@ -273,20 +278,38 @@ int Scene_Combat::Update()
 	for (auto& i : units)
 	{
 		
-		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn())
+		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
 		{
 			noUnitHasActed = false;
 
 			auto unitAction = i->HandleInput();
 
-			if ((unitAction.action & UA::MOVE) == UA::MOVE)
+			if ((unitAction.action) == UA::MOVE)
 			{
-
+				
 				if (map.IsWalkable(unitAction.destinationTile))
 				{
 					i->StartAction(unitAction);
 				}
 			}
+			if ((unitAction.action & UA::ATTACK) == UA::ATTACK)
+			{
+				for (auto& unit : units)
+				{
+					if (!unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.DistanceTo(unitPos) < 18)
+						{
+							unit->DealDamage(10);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+				
+			}
+
 
 		}
 		i->Update();
@@ -306,6 +329,7 @@ int Scene_Combat::Update()
 		}
 
 	}
+	
 
 	if (noUnitHasActed)
 	{
@@ -320,7 +344,7 @@ int Scene_Combat::Update()
 
 
 
-	player.Update();
+	//player.Update();
 
 	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
 

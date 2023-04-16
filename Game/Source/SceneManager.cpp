@@ -37,7 +37,7 @@ bool SceneManager::Awake(pugi::xml_node& config)
 	{
 		mapInfo[node.attribute("name").as_string()] = node;
 	}
-
+	
 	currentScene = std::make_unique<Scene_Title>();
 	return true;
 }

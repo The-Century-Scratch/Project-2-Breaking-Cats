@@ -82,6 +82,7 @@ Guardian::PlayerAction Guardian::HandleInput() const
 
 	if (!moveVector.IsZero())
 		return returnAction;
+	int direction = rand() % 4;
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
@@ -104,6 +105,38 @@ Guardian::PlayerAction Guardian::HandleInput() const
 		returnAction.destinationTile.x += tileSize;
 	}
 
+	if (direction == 0)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.y -= tileSize;
+		
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+	else if (direction == 1)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.x -= tileSize;
+
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+	else if (direction == 2)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.y += tileSize;
+
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+	else if (direction == 3)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.x += tileSize;
+
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+
+	
+
+
 	return returnAction;
 }
 
@@ -112,6 +145,23 @@ void Guardian::StartAction(PlayerAction playerAction)
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 
+		
+		if (playerAction.destinationTile.y < position.y)
+		{
+			moveVector.y = -1;
+		}
+		else if (playerAction.destinationTile.x < position.x)
+		{
+			moveVector.x = -1;
+		}
+		else if (playerAction.destinationTile.y > position.y)
+		{
+			moveVector.y = 1;
+		}
+		else if (playerAction.destinationTile.x > position.x)
+		{
+			moveVector.x = 1;
+		}
 		StartMovement();
 	}
 }
@@ -137,9 +187,10 @@ void Guardian::StartMovement()
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		moveVector.x = 1;
-		//LOG("it does enter this scope %i", moveVector.x);
+		
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
+	//moveVector.y = -1;  // CHANGED
 }
 
 void Guardian::Update()
@@ -154,7 +205,7 @@ void Guardian::Update()
 	}
 
 	//isMyTurn = false;
-	hasFinishedTurn = true;
+	//hasFinishedTurn = true;
 	//moveTimer = 2;
 }
 
@@ -195,5 +246,15 @@ void Guardian::SmoothMove()
 	{
 		moveTimer++;
 	}
-	LOG("it does enter this scope %i", moveTimer);
+	
+}
+
+void Guardian::DealDamage(int amount)
+{
+	healthPoints -= amount;
+}
+
+int Guardian::GetHealthPoints()
+{
+	return healthPoints;
 }

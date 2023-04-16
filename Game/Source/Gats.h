@@ -18,14 +18,19 @@ public:
 	void Draw() const override;
 	void DebugDraw() const override;
 
-	PlayerAction HandleInput() const;
+	PlayerAction HandleInput() const override;
 	void StartAction(PlayerAction playerAction) override;
 
 	bool GetHasFinishedTurn() override;
 	bool GetIsMyTurn() override;
 
+	bool GetIsAlly() override;
+
 	void SetHasFinishedTurn(bool value) override;
 	void SetIsMyTurn(bool value) override;
+
+	int GetHealthPoints() override;
+	void DealDamage(int amount) override;
 
 	void Update() override;
 
@@ -45,6 +50,8 @@ private:
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
+
+	int healthPoints = 50;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };
