@@ -154,11 +154,11 @@
             "scaleInDock": 1
         },
         "Shop.tmx": {
-            "scale": 3,
-            "selectedLayer": 3,
+            "scale": 5.5,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 65.66666666666666,
-                "y": 55.66666666666666
+                "x": 85.27272727272728,
+                "y": 47.090909090909086
             }
         },
         "Shop.tmx#Alfombra": {
@@ -183,7 +183,8 @@
             "scaleInDock": 1
         },
         "Shop.tmx#MaiceyIdle": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1.5
         },
         "Shop.tmx#Micey": {
             "scaleInDock": 1
@@ -242,7 +243,8 @@
             "scaleInDock": 1
         },
         "ShopMal.tmx#Micey": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1.5
         },
         "ShopMal.tmx#MoneyIcon": {
             "scaleInDock": 1
@@ -272,11 +274,11 @@
             "scaleInDock": 1
         },
         "Tavern.tmx": {
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 312,
-                "y": 173
+                "x": 55.66666666666666,
+                "y": 77.33333333333331
             }
         },
         "Tavern.tmx#Plaza": {
@@ -295,8 +297,8 @@
             "scale": 1.23203125,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 317.3620798985416,
-                "y": 141.23018389346862
+                "x": 316.5504121750159,
+                "y": 140.41851616994296
             }
         },
         "TavernMal.tmx#Plaza": {
