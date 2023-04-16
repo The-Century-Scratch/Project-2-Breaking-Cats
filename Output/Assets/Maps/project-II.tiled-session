@@ -123,11 +123,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 2,
-            "selectedLayer": 2,
+            "scale": 32,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 191,
-                "y": 191
+                "x": 272.375,
+                "y": 242.1875
             }
         },
         "Plaza.tsx": {
@@ -141,13 +141,55 @@
         },
         "Shop.tmx": {
             "scale": 3,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 65.33333333333333,
-                "y": 116.66666666666669
+                "x": 63.66666666666666,
+                "y": 117.99999999999999
             }
         },
+        "Shop.tmx#Alfombra": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Barra": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Borders": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Cuadro": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#FloorTypes": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#FloorWood": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Flowers": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Micey": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#MoneyIcon": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Props": {
+            "scaleInDock": 0.75
+        },
         "Shop.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Tree": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Wall": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#WallInclined": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#WallInclined1": {
             "scaleInDock": 1
         },
         "Slime.tsx": {
@@ -160,8 +202,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 252,
-                "y": 231
+                "x": 251,
+                "y": 230
             }
         },
         "Tavern.tmx#Plaza": {
@@ -187,11 +229,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 381.3333333333333,
-                "y": 459.99999999999994
+                "x": 456,
+                "y": 396
             }
         },
         "Vertical.tmx#TheGuardian": {
@@ -228,6 +270,8 @@
     "project": "project-II.tiled-project",
     "property.type": "Unit Type",
     "recentFiles": [
+        "Base.tmx",
+        "test.tmx",
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx",
         "Props.tsx",
         "Tiles.tsx",
