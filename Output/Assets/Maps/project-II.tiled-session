@@ -126,8 +126,8 @@
             "scale": 32,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 272.375,
-                "y": 242.1875
+                "x": 272.234375,
+                "y": 242.046875
             }
         },
         "Plaza.tsx": {
@@ -199,11 +199,11 @@
             "scaleInDock": 1
         },
         "Tavern.tmx": {
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 251,
-                "y": 230
+                "x": 235.75,
+                "y": 200.75
             }
         },
         "Tavern.tmx#Plaza": {
@@ -229,11 +229,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1,
-            "selectedLayer": 6,
+            "scale": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 456,
-                "y": 396
+                "x": 388.75,
+                "y": 345.25
             }
         },
         "Vertical.tmx#TheGuardian": {
@@ -264,21 +264,20 @@
     "openFiles": [
         "Map2.tmx",
         "Vertical.tmx",
-        "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
         "Plaza.tsx"
     ],
     "project": "project-II.tiled-project",
-    "property.type": "Unit Type",
+    "property.type": "bool",
     "recentFiles": [
+        "Map2.tmx",
+        "Plaza.tsx",
+        "Vertical.tmx",
         "Base.tmx",
         "test.tmx",
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Shop.tmx",
         "Props.tsx",
         "Tiles.tsx",
         "C:/Users/Aussar/OneDrive/Escritorio/Proyecto2/Tiled/Map.tmx",
-        "Map2.tmx",
-        "Plaza.tsx",
-        "Vertical.tmx",
         "GatsWalk.tsx"
     ],
     "tileset.embedInMap": true,
