@@ -29,6 +29,11 @@ GuiButton::GuiButton(uPoint pos, uPoint size, uint separation, std::string const
 		panels.try_emplace(i, elem, separation, textureID, iPoint(3, 3));
 		i++;
 	}
+
+	if (StrEquals(path, "Assets/UI/ButtonState9.png"))
+	{
+		type = { 7 , 15 };
+	}
 }
 
 int GuiButton::Update()
@@ -70,7 +75,7 @@ bool GuiButton::Draw() const
 		result->second.Draw(centerPoint, iPoint(GetSize().x, GetSize().y));
 	}
 
-	centerPoint += iPoint((GetSize().x/2) /*+ 20*/, (GetSize().y/2) /*- 15*/);
+	centerPoint += iPoint((GetSize().x/2) - type.x, (GetSize().y/2) - type.y);
 
 	TextParameters params(0, DrawParameters(0, centerPoint));
 	params.align = AlignTo::ALIGN_CENTER;

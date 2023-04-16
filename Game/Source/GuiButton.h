@@ -44,6 +44,7 @@ public:
 
 private:
     std::string text = "";
+	iPoint type = {0,0};
 	int font = 0;
 
 	std::map<int, GuiPanelSegmented> panels;
