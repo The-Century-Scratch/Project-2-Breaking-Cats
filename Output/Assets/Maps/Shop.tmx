@@ -4,17 +4,6 @@
  <tileset firstgid="626" source="Props.tsx"/>
  <tileset firstgid="1251" source="Slime.tsx"/>
  <tileset firstgid="1347" source="PlazaVertical.tsx"/>
- <tileset firstgid="3291" name="TheGuardian" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="TheGuardian.png" width="32" height="32"/>
-  <tile id="0">
-   <properties>
-    <property name="isWalkable" type="bool" value="false"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="3292" name="Props" tilewidth="16" tileheight="16" tilecount="625" columns="25">
-  <image source="Props.png" width="400" height="400"/>
- </tileset>
  <layer id="2" name="Floor" width="24" height="24">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

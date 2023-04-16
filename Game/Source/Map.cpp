@@ -90,10 +90,12 @@ bool Map::Load(const std::string& directory, const std::string& level)
 		}
 		else
 		{
-			LOG("Error parsing xml file: '%s' tag not implemented.", child.name());
+			LOG("Error parsing xml file: '%s' tag not implemented.", child.name());   //ERROR
 			continue;
 		}
 	}
+
+	LOG("this is for testing");
 
 	eventManager.Initialize();
 
