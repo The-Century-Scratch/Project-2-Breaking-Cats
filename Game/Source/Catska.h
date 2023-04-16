@@ -24,6 +24,8 @@ public:
 	bool GetHasFinishedTurn() override;
 	bool GetIsMyTurn() override;
 
+	bool GetIsAlly() override;
+
 	void SetHasFinishedTurn(bool value) override;
 	void SetIsMyTurn(bool value) override;
 

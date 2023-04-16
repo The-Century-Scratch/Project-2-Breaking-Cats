@@ -1,18 +1,10 @@
 {
-    "activeFile": "Vertical.tmx",
+    "activeFile": "Map2.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "Base.tmx": {
-            "scale": 2.09296875,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 192.31056364315046,
-                "y": 191.83277342291902
-            }
-        },
         "Catska.tsx": {
             "scaleInDock": 1
         },
@@ -23,14 +15,11 @@
             "scaleInDock": 1
         },
         "Map2.tmx": {
-            "expandedObjectLayers": [
-                3
-            ],
             "scale": 2,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 191.75,
-                "y": 191.75
+                "x": 191,
+                "y": 191
             }
         },
         "Props.tsx": {
@@ -46,49 +35,14 @@
             "scaleInDock": 1
         },
         "Tiles.tsx": {
-            "scaleInDock": 2,
-            "scaleInEditor": 1
-        },
-        "Vertical.tmx": {
-            "expandedObjectLayers": [
-                3
-            ],
-            "scale": 2,
-            "selectedLayer": 2,
-            "viewCenter": {
-                "x": 205,
-                "y": 197
-            }
-        },
-        "Vertical_Slice_Map.tmx": {
-            "scale": 2.09296875,
-            "selectedLayer": 0,
-            "viewCenter": {
-                "x": 192.31056364315046,
-                "y": 71.90742814483016
-            }
+            "scaleInDock": 1
         }
     },
     "openFiles": [
-        "Map2.tmx",
-        "Vertical.tmx",
-        "Tiles.tsx"
-        "Vertical.tmx",
-        "Base.tmx"
+        "Map2.tmx"
     ],
     "project": "project-II.tiled-project",
-    "property.type": "int",
     "recentFiles": [
-        "Map2.tmx",
-        "Tiles.tsx",
-        "Vertical.tmx"
-        "Map2.tmx",
-        "Base.tmx",
-        "Vertical.tmx"
-    ],
-    "tileset.lastUsedFormat": "tsx",
-    "tileset.tileSize": {
-        "height": 32,
-        "width": 32
-    }
+        "Map2.tmx"
+    ]
 }
