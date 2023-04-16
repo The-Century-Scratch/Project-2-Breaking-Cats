@@ -78,3 +78,4 @@ packages/
 Output/Assets/Maps/project-II.tiled-session
 Output/Assets/Maps/project-II.tiled-project
 *.tiled-session
+*.lock
