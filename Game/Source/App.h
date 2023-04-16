@@ -23,6 +23,7 @@ class Render;
 class TextureManager;
 class Audio;
 class SceneManager;
+class DialogueManager;
 class TextManager;
 
 template <typename... Args>
@@ -94,6 +95,7 @@ public:
 	std::unique_ptr<TextureManager> tex;
 	std::unique_ptr<Audio> audio;
 	std::unique_ptr<SceneManager> scene;
+	std::unique_ptr<DialogueManager> Dialogue;
 	std::unique_ptr<TextManager> fonts;
 
 private:

@@ -94,6 +94,9 @@
     <ClCompile Include="Source\Straw.cpp">
       <Filter>Scene_Map Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DialogueManager.cpp">
+      <Filter>Dialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -216,6 +219,9 @@
     <ClInclude Include="Source\Straw.h">
       <Filter>Scene_Map Components\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Source\DialogueManager.h">
+      <Filter>Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -295,6 +301,9 @@
     </Filter>
     <Filter Include="Scene_Map Components\Components">
       <UniqueIdentifier>{91c6f8a8-4cb2-44a6-863d-0730c930582c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog">
+      <UniqueIdentifier>{61188182-769a-47fd-b658-989746116ab1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

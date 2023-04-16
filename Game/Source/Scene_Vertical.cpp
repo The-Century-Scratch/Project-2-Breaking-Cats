@@ -1,5 +1,6 @@
 #include "Scene_Vertical.h"
 #include "Event_Base.h"
+#include "DialogueManager.h"
 
 #include "Log.h"
 
@@ -72,6 +73,11 @@ int Scene_Vertical::Update()
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
 	{
 		return 6;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_UP)
+	{
+		app->Dialogue.get()->dialogueEnabled = true;
 	}
 
 	return 0;
