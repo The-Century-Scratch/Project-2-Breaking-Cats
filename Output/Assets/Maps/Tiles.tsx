@@ -1279,12 +1279,12 @@
  </tile>
  <tile id="255">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="256">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="257">
@@ -1404,12 +1404,12 @@
  </tile>
  <tile id="280">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="281">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="282">
@@ -1529,12 +1529,12 @@
  </tile>
  <tile id="305">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="306">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="307">
@@ -1654,12 +1654,12 @@
  </tile>
  <tile id="330">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="331">
   <properties>
-   <property name="isWalkable" type="bool" value="false"/>
+   <property name="isWalkable" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="332">

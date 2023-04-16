@@ -109,6 +109,9 @@
     <ClCompile Include="Source\GuiImage.cpp">
       <Filter>GUI\Widgets\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Shop.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -245,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="Source\GuiImage.h">
       <Filter>GUI\Widgets\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Shop.h">
+      <Filter>Scenes\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
