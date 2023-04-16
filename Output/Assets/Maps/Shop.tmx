@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="65">
+ <tileset firstgid="1" source="Tiles.tsx"/>
+ <tileset firstgid="626" source="Props.tsx"/>
+ <tileset firstgid="1251" source="Slime.tsx"/>
+ <tileset firstgid="1347" source="PlazaVertical.tsx"/>
+ <tileset firstgid="3291" name="TheGuardian" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="TheGuardian.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="isWalkable" type="bool" value="false"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="3292" name="Props" tilewidth="16" tileheight="16" tilecount="625" columns="25">
+  <image source="Props.png" width="400" height="400"/>
+ </tileset>
+ <tileset firstgid="3917" source="Tiles2.tsx"/>
+ <layer id="2" name="Floor" width="8" height="8">
+  <data encoding="csv">
+3934,3935,3935,3935,3935,3935,3935,3936,
+3959,3957,3957,3957,3957,3957,3957,3961,
+3959,3957,3957,3957,3957,3957,3957,3961,
+3959,3957,3957,3960,3960,3960,3957,3961,
+3959,3957,3957,3957,3957,3957,3957,3961,
+3959,3957,3957,3957,3957,3957,3957,3961,
+3959,3957,3957,3957,3957,3957,3957,3961,
+3984,3985,3985,3957,3957,3985,3985,3986
+</data>
+ </layer>
+ <layer id="1" name="Walls" width="8" height="8">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,763,764,764,765,0,0,
+0,0,788,789,789,790,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,287,289,0,0,289,289,290
+</data>
+ </layer>
+ <objectgroup id="3" name="Events" class="Layer of Events" offsetx="6.0366" offsety="-3.38049">
+  <object id="63" type="Event Chest" gid="3642" x="27.9781" y="61.8464" width="16" height="16"/>
+  <object id="64" type="Event Chest" gid="3629" x="72.4075" y="61.605" width="16" height="16"/>
+ </objectgroup>
+ <layer id="4" name="Props" width="8" height="8">
+  <data encoding="csv">
+0,3293,0,3598,3599,0,3293,0,
+0,3318,0,3623,3624,0,3318,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,306,307,0,0,0
+</data>
+ </layer>
+</map>
