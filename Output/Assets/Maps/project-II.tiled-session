@@ -10,7 +10,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 192.31056364315046,
-                "y": 192.31056364315043
+                "y": 191.83277342291902
             }
         },
         "Catska.tsx": {
@@ -73,12 +73,17 @@
         "Map2.tmx",
         "Vertical.tmx",
         "Tiles.tsx"
+        "Vertical.tmx",
+        "Base.tmx"
     ],
     "project": "project-II.tiled-project",
     "property.type": "int",
     "recentFiles": [
         "Map2.tmx",
         "Tiles.tsx",
+        "Vertical.tmx"
+        "Map2.tmx",
+        "Base.tmx",
         "Vertical.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",

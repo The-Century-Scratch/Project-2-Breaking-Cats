@@ -15,8 +15,27 @@ int Scene_Vertical::Test()
 
 void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
+	// Load Interface
+	auto sceneHash = info.find("Vertical");
+	if (sceneHash == info.end())
+	{
+		LOG("Title scene not found in XML.");
+		return;
+	}
+
+	auto scene = sceneHash->second;
+
+	for (auto const& window : scene.children("window"))
+	{
+		if (auto result = windowFactory.CreateWindow(window.attribute("name").as_string());
+			result != nullptr)
+		{
+			windows.push_back(std::move(result));
+		}
+	}
+
 	// Load map
-	currentMap = "Vertical";
+	currentMap = fileToLoad;
 
 	if (std::string mapToLoad = currentMap + ".tmx";
 		!map.Load(path, mapToLoad))
@@ -36,10 +55,25 @@ void Scene_Vertical::Draw()
 {
 	map.Draw();
 	player.Draw();
+
+	for (auto const& elem : windows)
+	{
+		elem->Draw();
+	}
 }
 
 int Scene_Vertical::Update()
 {
+	// Interface Logic
+	for (auto const& elem : windows)
+	{
+		if (auto result = elem->Update();
+			result != 0)
+			return result;
+	}
+
+
+	// Player 
 	auto playerAction = player.HandleInput();
 
 	using PA = Player::PlayerAction::Action;
@@ -59,6 +93,7 @@ int Scene_Vertical::Update()
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
 			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
+			int ret = 0;
 			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 		}
 	}
@@ -69,16 +104,17 @@ int Scene_Vertical::Update()
 	//std::string vec = map.eventManager.GetEventVector();
 	
 	//LOG("this is the name of the event: %s", vec);
-
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
-	{
-		return 6;
-	}
-
-	return 0;
+	return CheckNextScene();
 }
 
 int Scene_Vertical::CheckNextScene()
 {
+	using enum SceneType;
+	using enum KeyState;
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		return static_cast<int>(SceneType::TITLESCENE);
+	}
+
 	return 0;
 }

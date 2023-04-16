@@ -86,8 +86,9 @@ Player::PlayerAction Player::HandleInput() const
 	return returnAction;
 }
 
-void Player::StartAction(PlayerAction playerAction, EventData data)
+int Player::StartAction(PlayerAction playerAction, EventData data)
 {
+	int ret = 0;
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 		StartMovement();
@@ -104,11 +105,36 @@ void Player::StartAction(PlayerAction playerAction, EventData data)
 			LOG("(TP)");
 			position.x = data.destinationData.destination.x;
 			position.y = data.destinationData.destination.y;
+
+			
+			using enum SceneType;
+			switch (data.destinationData.destinationMap)
+			{
+			case NEWGAME:
+				ret = 1;
+				break;
+			case CONTINUE:
+				break;
+			case EXIT:
+				break;
+			case COMBAT:
+				ret = 4;
+				break;
+			case VERTICAL:
+				ret = 5;
+				break;
+			case TITLESCENE:
+				ret = 6;
+				break;
+			default:
+				break;
+			}
 			break;
 		default:
 			break;
 		}
 	}
+	return ret;
 }
 
 void Player::StartMovement()

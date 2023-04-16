@@ -4,6 +4,7 @@
 #include "Scene_Base.h"
 #include "Player.h"
 #include "Map.h"
+#include "TextureManager.h"
 
 class Scene_Vertical : public Scene_Base
 {

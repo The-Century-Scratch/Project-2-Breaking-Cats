@@ -64,7 +64,6 @@ public:
 	LookUpXMLNodeFromString sceneInfo;
 	LookUpXMLNodeFromString mapInfo;
 
-	bool CurrentlyMainMenu = true;
 	SceneType actualScene = SceneType::TITLESCENE;
 };
 

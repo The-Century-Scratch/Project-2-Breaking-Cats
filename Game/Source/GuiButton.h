@@ -27,9 +27,11 @@ public:
 	explicit GuiButton(
 		uPoint pos,
 		uPoint size,
+		uint separation,
 		std::string const &str,
 		std::function<int()> const& funcPtr,
-		std::vector<SDL_Rect> const& buttonStates
+		std::vector<SDL_Rect> const& buttonStates,
+		std::string const& path
 	);
 
 	int Update() override;
@@ -42,6 +44,7 @@ public:
 
 private:
     std::string text = "";
+	iPoint type = {0,0};
 	int font = 0;
 
 	std::map<int, GuiPanelSegmented> panels;
