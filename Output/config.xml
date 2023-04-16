@@ -93,12 +93,12 @@
           <state_texture state="3" x="0" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
           <state_texture state="4" x="0" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
         </button>
-      <button x="25" y="25" separation="0" width="16" height="16" text="" function="" segmentwidth="16" segmentheight="16" path="Assets/UI/GUI_4x_sliced.png">
-          <state_texture state="0" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="0"/>
-          <state_texture state="1" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="0"/>
-          <state_texture state="2" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="0"/>
-          <state_texture state="3" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="0"/>
-          <state_texture state="4" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="0"/>
+      <button x="25" y="25" separation="0" width="32" height="32" text="" function="" segmentwidth="32" segmentheight="32" path="Assets/UI/GUI_4x_sliced.png">
+          <state_texture state="0" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="1" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="2" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="3" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="4" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
         </button>
       </window>
     </window_info>
