@@ -11,7 +11,10 @@ enum class UnitType
 {
 	GUARDIAN,
 	STRAW,
-	GATS
+	GATS,
+	CATSKA,
+	LONG_RANGE,
+	NONE
 };
 
 class Event_SpawnEnemy : public Event_Base, public Sprite, public Transform

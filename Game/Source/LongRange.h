@@ -1,5 +1,5 @@
-#ifndef __STRAW_H__
-#define __STRAW_H__
+#ifndef __LONGRANGE_H__
+#define __LONGRANGE_H__
 
 #include "Sprite.h"
 #include "Transform.h"
@@ -8,11 +8,11 @@
 
 
 
-class Straw : public Unit
+class LongRange : public Unit
 {
 public:
-	Straw();
-	~Straw();
+	LongRange();
+	~LongRange();
 	void Create(iPoint pos) override;
 
 	void Draw() const override;
@@ -48,7 +48,7 @@ private:
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
-	int healthPoints = 30;
+	int healthPoints = 15;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

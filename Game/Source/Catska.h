@@ -1,5 +1,5 @@
-#ifndef __STRAW_H__
-#define __STRAW_H__
+#ifndef __CATSKA_H__
+#define __CATSKA_H__
 
 #include "Sprite.h"
 #include "Transform.h"
@@ -8,11 +8,11 @@
 
 
 
-class Straw : public Unit
+class Catska : public Unit
 {
 public:
-	Straw();
-	~Straw();
+	Catska();
+	~Catska();
 	void Create(iPoint pos) override;
 
 	void Draw() const override;
@@ -48,7 +48,7 @@ private:
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
-	int healthPoints = 30;
+	int healthPoints = 40;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

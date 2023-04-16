@@ -5,13 +5,20 @@
 #include "Player.h"
 #include "Unit.h"
 #include "Straw.h"
+#include "Gats.h"
+#include "Catska.h"
+#include "LongRange.h"
+#include "Guardian.h"
 #include "Map.h"
 
 enum class UnitType
 {
     GUARDIAN,
     STRAW,
-    GATS
+    GATS,
+    CATSKA,
+    LONG_RANGE,
+    NONE
 };
 
 class Scene_Combat : public Scene_Base

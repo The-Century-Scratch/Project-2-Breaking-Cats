@@ -97,11 +97,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Catska.cpp" />
     <ClCompile Include="Source\EventManager.cpp" />
     <ClCompile Include="Source\Event_Chest.cpp" />
     <ClCompile Include="Source\Event_SpawnEnemy.cpp" />
     <ClCompile Include="Source\Event_Teleport.cpp" />
+    <ClCompile Include="Source\Gats.cpp" />
+    <ClCompile Include="Source\Guardian.cpp" />
     <ClCompile Include="Source\GuiPanelSegmented.cpp" />
+    <ClCompile Include="Source\LongRange.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Scene_Combat.cpp" />
     <ClCompile Include="Source\Scene_Vertical.cpp" />
@@ -126,12 +130,16 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\Window_Factory.cpp" />
     <ClCompile Include="Source\Window_List.cpp" />
+    <ClInclude Include="Source\Catska.h" />
     <ClInclude Include="Source\Event_Base.h" />
     <ClInclude Include="Source\EventManager.h" />
     <ClInclude Include="Source\Event_Chest.h" />
     <ClInclude Include="Source\Event_SpawnEnemy.h" />
     <ClInclude Include="Source\Event_Teleport.h" />
+    <ClInclude Include="Source\Gats.h" />
+    <ClInclude Include="Source\Guardian.h" />
     <ClInclude Include="Source\GuiPanelSegmented.h" />
+    <ClInclude Include="Source\LongRange.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Scene_Combat.h" />
     <ClInclude Include="Source\Scene_Vertical.h" />

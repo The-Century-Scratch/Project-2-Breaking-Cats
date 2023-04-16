@@ -1,5 +1,5 @@
-#ifndef __STRAW_H__
-#define __STRAW_H__
+#ifndef __GATS_H__
+#define __GATS_H__
 
 #include "Sprite.h"
 #include "Transform.h"
@@ -8,21 +8,23 @@
 
 
 
-class Straw : public Unit
+class Gats : public Unit
 {
 public:
-	Straw();
-	~Straw();
+	Gats();
+	~Gats();
 	void Create(iPoint pos) override;
 
 	void Draw() const override;
 	void DebugDraw() const override;
 
-	PlayerAction HandleInput() const;
+	PlayerAction HandleInput() const override;
 	void StartAction(PlayerAction playerAction) override;
 
 	bool GetHasFinishedTurn() override;
 	bool GetIsMyTurn() override;
+
+	bool GetIsAlly() override;
 
 	void SetHasFinishedTurn(bool value) override;
 	void SetIsMyTurn(bool value) override;
@@ -48,7 +50,8 @@ private:
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
-	int healthPoints = 30;
+
+	int healthPoints = 50;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

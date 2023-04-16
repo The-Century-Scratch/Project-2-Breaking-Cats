@@ -1,5 +1,5 @@
 #include "App.h"
-#include "Unit.h"
+#include "Guardian.h"
 
 #include "Map.h"
 #include "Log.h"
@@ -7,55 +7,56 @@
 #include "Input.h"
 #include "Render.h"
 
-Unit::Unit() = default;
+Guardian::Guardian() = default;
 
-Unit::~Unit() = default;
+Guardian::~Guardian() = default;
 
 
-void Unit::DebugDraw() const
+void Guardian::DebugDraw() const
 {
+	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(0, 255, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 255, 0, 255));
 	}
 	else
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 255, 255));
 	}
 	
 }
 
-void Unit::Draw() const
+void Guardian::Draw() const
 {
 	iPoint Displacement = { 8,24 };
 	DebugDraw();
 	app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 }
 
-bool Unit::GetIsMyTurn()
+bool Guardian::GetIsMyTurn()
 {
 	return isMyTurn;
 }
 
-bool Unit::GetHasFinishedTurn()
+bool Guardian::GetHasFinishedTurn()
 {
 	return hasFinishedTurn;
 }
 
-void Unit::SetIsMyTurn(bool value)
+void Guardian::SetIsMyTurn(bool value)
 {
 	isMyTurn = value;
 	//return isMyTurn;
 }
 
-void Unit::SetHasFinishedTurn(bool value)
+void Guardian::SetHasFinishedTurn(bool value)
 {
 	hasFinishedTurn = value;
 	//return hasFinishedTurn;
 }
 
-void Unit::Create(iPoint pos)
+void Guardian::Create(iPoint pos)
 {
 	/*Sprite::Initialize("Assets/Maps/Slime.png", 4);
 	position = { 48, 272 };
@@ -72,15 +73,16 @@ void Unit::Create(iPoint pos)
 	};*/
 }
 
-Unit::PlayerAction Unit::HandleInput() const
+Guardian::PlayerAction Guardian::HandleInput() const
 {
 	using enum KeyState;
-	using enum Unit::PlayerAction::Action;
+	using enum Guardian::PlayerAction::Action;
 
 	PlayerAction returnAction = { position, NONE };
 
 	if (!moveVector.IsZero())
 		return returnAction;
+	int direction = rand() % 4;
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
@@ -103,19 +105,68 @@ Unit::PlayerAction Unit::HandleInput() const
 		returnAction.destinationTile.x += tileSize;
 	}
 
+	if (direction == 0)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.y -= tileSize;
+		
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+	else if (direction == 1)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.x -= tileSize;
+
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+	else if (direction == 2)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.y += tileSize;
+
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+	else if (direction == 3)
+	{
+		returnAction.action |= MOVE;          // CHANGED
+		returnAction.destinationTile.x += tileSize;
+
+		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+
+	
+
+
 	return returnAction;
 }
 
-void Unit::StartAction(PlayerAction playerAction)
+void Guardian::StartAction(PlayerAction playerAction)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 
+		
+		if (playerAction.destinationTile.y < position.y)
+		{
+			moveVector.y = -1;
+		}
+		else if (playerAction.destinationTile.x < position.x)
+		{
+			moveVector.x = -1;
+		}
+		else if (playerAction.destinationTile.y > position.y)
+		{
+			moveVector.y = 1;
+		}
+		else if (playerAction.destinationTile.x > position.x)
+		{
+			moveVector.x = 1;
+		}
 		StartMovement();
 	}
 }
 
-void Unit::StartMovement()
+void Guardian::StartMovement()
 {
 	using enum KeyState;
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -139,13 +190,10 @@ void Unit::StartMovement()
 		
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
-}
-bool Unit::GetIsAlly()
-{
-	return false;
+	//moveVector.y = -1;  // CHANGED
 }
 
-void Unit::Update()
+void Guardian::Update()
 {
 	//LOG("the move vector x is %i" moveVector.x);
 
@@ -156,11 +204,12 @@ void Unit::Update()
 
 	}
 
-
+	//isMyTurn = false;
+	//hasFinishedTurn = true;
 	//moveTimer = 2;
 }
 
-void Unit::AnimateMove()
+void Guardian::AnimateMove()
 {
 	if (animTimer == 8)
 	{
@@ -177,7 +226,7 @@ void Unit::AnimateMove()
 	}
 }
 
-void Unit::SmoothMove()
+void Guardian::SmoothMove()
 {
 
 
@@ -200,12 +249,12 @@ void Unit::SmoothMove()
 	
 }
 
-void Unit::DealDamage(int amount)
+void Guardian::DealDamage(int amount)
 {
 	healthPoints -= amount;
 }
 
-int Unit::GetHealthPoints()
+int Guardian::GetHealthPoints()
 {
 	return healthPoints;
 }

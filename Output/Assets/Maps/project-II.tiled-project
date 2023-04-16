@@ -361,7 +361,9 @@
             "values": [
                 "Guardian",
                 "Straw",
-                "Gats"
+                "Gats",
+                "Catska",
+                "LongRange"
             ],
             "valuesAsFlags": false
         }

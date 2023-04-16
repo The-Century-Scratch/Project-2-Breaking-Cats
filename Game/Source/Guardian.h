@@ -1,5 +1,5 @@
-#ifndef __STRAW_H__
-#define __STRAW_H__
+#ifndef __GUARDIAN_H__
+#define __GUARDIAN_H__
 
 #include "Sprite.h"
 #include "Transform.h"
@@ -8,17 +8,17 @@
 
 
 
-class Straw : public Unit
+class Guardian : public Unit
 {
 public:
-	Straw();
-	~Straw();
+	Guardian();
+	~Guardian();
 	void Create(iPoint pos) override;
 
 	void Draw() const override;
 	void DebugDraw() const override;
 
-	PlayerAction HandleInput() const;
+	PlayerAction HandleInput() const override;
 	void StartAction(PlayerAction playerAction) override;
 
 	bool GetHasFinishedTurn() override;
@@ -45,10 +45,11 @@ private:
 
 	int animTimer = 0;
 	int texture;
+	int goingTo;
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
-	int healthPoints = 30;
+	int healthPoints = 20;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

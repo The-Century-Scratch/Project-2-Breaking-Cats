@@ -80,6 +80,7 @@ int Scene_Vertical::Update()
 
 	if ((playerAction.action & PA::MOVE) == PA::MOVE)
 	{
+		LOG("it is attacking right in this very moment in which you have pressed the key of your keyboard with the symbol E");
 		player.FaceTo(playerAction.willFace);
 		if (map.IsWalkable(playerAction.destinationTile))
 		{

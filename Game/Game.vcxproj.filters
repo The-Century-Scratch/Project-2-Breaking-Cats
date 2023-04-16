@@ -94,6 +94,18 @@
     <ClCompile Include="Source\Straw.cpp">
       <Filter>Scene_Map Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Gats.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Catska.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LongRange.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Guardian.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -214,6 +226,18 @@
       <Filter>Scenes\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Source\Straw.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gats.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Catska.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LongRange.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Guardian.h">
       <Filter>Scene_Map Components\Headers</Filter>
     </ClInclude>
   </ItemGroup>

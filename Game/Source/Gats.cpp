@@ -1,5 +1,5 @@
 #include "App.h"
-#include "Unit.h"
+#include "Gats.h"
 
 #include "Map.h"
 #include "Log.h"
@@ -7,60 +7,61 @@
 #include "Input.h"
 #include "Render.h"
 
-Unit::Unit() = default;
+Gats::Gats() = default;
 
-Unit::~Unit() = default;
+Gats::~Gats() = default;
 
 
-void Unit::DebugDraw() const
+void Gats::DebugDraw() const
 {
+	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(0, 255, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 255, 0, 255));
 	}
 	else
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 255, 255));
 	}
 	
 }
 
-void Unit::Draw() const
+void Gats::Draw() const
 {
 	iPoint Displacement = { 8,24 };
 	DebugDraw();
 	app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 }
 
-bool Unit::GetIsMyTurn()
+bool Gats::GetIsMyTurn()
 {
 	return isMyTurn;
 }
 
-bool Unit::GetHasFinishedTurn()
+bool Gats::GetHasFinishedTurn()
 {
 	return hasFinishedTurn;
 }
 
-void Unit::SetIsMyTurn(bool value)
+void Gats::SetIsMyTurn(bool value)
 {
 	isMyTurn = value;
 	//return isMyTurn;
 }
 
-void Unit::SetHasFinishedTurn(bool value)
+void Gats::SetHasFinishedTurn(bool value)
 {
 	hasFinishedTurn = value;
 	//return hasFinishedTurn;
 }
 
-void Unit::Create(iPoint pos)
+void Gats::Create(iPoint pos)
 {
 	/*Sprite::Initialize("Assets/Maps/Slime.png", 4);
 	position = { 48, 272 };
 	size = { 48, 48 };*/
-	texture = app->tex->Load("Assets/Maps/TheGuardian.png");
+	texture = app->tex->Load("Assets/Maps/GatsIdle.png");
 	//Sprite::Initialize("Assets/Maps/GatsIdle.png", 4);
 	position = pos;
 	size = { 16, 16 };
@@ -72,15 +73,20 @@ void Unit::Create(iPoint pos)
 	};*/
 }
 
-Unit::PlayerAction Unit::HandleInput() const
+Gats::PlayerAction Gats::HandleInput() const
 {
 	using enum KeyState;
-	using enum Unit::PlayerAction::Action;
+	using enum Gats::PlayerAction::Action;
 
 	PlayerAction returnAction = { position, NONE };
 
 	if (!moveVector.IsZero())
 		return returnAction;
+
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		returnAction.action = ATTACK;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
@@ -106,16 +112,20 @@ Unit::PlayerAction Unit::HandleInput() const
 	return returnAction;
 }
 
-void Unit::StartAction(PlayerAction playerAction)
+void Gats::StartAction(PlayerAction playerAction)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
-
+		//LOG("according to the software the character is moving right now......");
 		StartMovement();
+	}
+	else if (playerAction.action == PlayerAction::Action::ATTACK)
+	{
+		
 	}
 }
 
-void Unit::StartMovement()
+void Gats::StartMovement()
 {
 	using enum KeyState;
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -140,12 +150,8 @@ void Unit::StartMovement()
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
 }
-bool Unit::GetIsAlly()
-{
-	return false;
-}
 
-void Unit::Update()
+void Gats::Update()
 {
 	//LOG("the move vector x is %i" moveVector.x);
 
@@ -155,12 +161,12 @@ void Unit::Update()
 		SmoothMove();
 
 	}
-
+	//hasFinishedTurn = true;
 
 	//moveTimer = 2;
 }
 
-void Unit::AnimateMove()
+void Gats::AnimateMove()
 {
 	if (animTimer == 8)
 	{
@@ -177,7 +183,7 @@ void Unit::AnimateMove()
 	}
 }
 
-void Unit::SmoothMove()
+void Gats::SmoothMove()
 {
 
 
@@ -200,12 +206,17 @@ void Unit::SmoothMove()
 	
 }
 
-void Unit::DealDamage(int amount)
+bool Gats::GetIsAlly()
+{
+	return true;
+}
+
+void Gats::DealDamage(int amount)
 {
 	healthPoints -= amount;
 }
 
-int Unit::GetHealthPoints()
+int Gats::GetHealthPoints()
 {
 	return healthPoints;
 }

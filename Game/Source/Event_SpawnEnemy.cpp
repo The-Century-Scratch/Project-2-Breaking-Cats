@@ -55,6 +55,7 @@ void Event_SpawnEnemy::parseXMLProperties(pugi::xml_node const& node)
 			
 			
 			typeOfUnit = static_cast<UnitType>(child.attribute("value").as_int());
+			LOG("the unit that has been detected in tiled right now, unlike in any other time is: %i", child.attribute("value").as_int());
 
 			
 		}
@@ -63,7 +64,7 @@ void Event_SpawnEnemy::parseXMLProperties(pugi::xml_node const& node)
 
 
 			velocity = child.attribute("value").as_int();
-			LOG("fjalkjfoiuahfiuoarhfjuiahrjufieojfdeiauhfjiusnjvciuadohgioadfjiusejucimioaugnvirojfiuj %i", velocity);
+			
 
 
 		}

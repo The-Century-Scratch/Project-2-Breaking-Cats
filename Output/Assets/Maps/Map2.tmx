@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="28">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="39">
  <tileset firstgid="1" source="Tiles.tsx"/>
  <tileset firstgid="626" source="Props.tsx"/>
  <tileset firstgid="1251" source="Slime.tsx"/>
  <tileset firstgid="1347" source="TheGuardian.tsx"/>
  <tileset firstgid="1348" source="StrawDall.tsx"/>
+ <tileset firstgid="1349" source="GatsIdle.tsx"/>
+ <tileset firstgid="1350" source="Catska.tsx"/>
+ <tileset firstgid="1351" source="LargeRangeEnemy.tsx"/>
  <layer id="2" name="Floor" width="24" height="24">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -65,8 +68,8 @@
   <object id="25" name="guardian" type="Event SpawnEnemy" gid="1347" x="256" y="256" width="32" height="32">
    <properties>
     <property name="Base" value=""/>
-    <property name="Type" type="int" propertytype="Unit Type" value="1"/>
-    <property name="Velocity" type="int" value="2"/>
+    <property name="Type" type="int" propertytype="Unit Type" value="0"/>
+    <property name="Velocity" type="int" value="3"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
@@ -80,8 +83,26 @@
   </object>
   <object id="27" name="straw" type="Event SpawnEnemy" gid="1348" x="208" y="240" width="32" height="32">
    <properties>
-    <property name="Type" type="int" propertytype="Unit Type" value="0"/>
+    <property name="Type" type="int" propertytype="Unit Type" value="1"/>
     <property name="Velocity" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="28" name="gats" type="Event SpawnEnemy" gid="1349" x="144" y="256" width="32" height="32">
+   <properties>
+    <property name="Type" type="int" propertytype="Unit Type" value="2"/>
+    <property name="Velocity" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="33" name="catska" type="Event SpawnEnemy" gid="1350" x="192" y="160" width="32" height="32">
+   <properties>
+    <property name="Type" type="int" propertytype="Unit Type" value="3"/>
+    <property name="Velocity" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="38" name="long range" type="Event SpawnEnemy" gid="1351" x="160" y="208" width="32" height="32">
+   <properties>
+    <property name="Type" type="int" propertytype="Unit Type" value="4"/>
+    <property name="Velocity" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

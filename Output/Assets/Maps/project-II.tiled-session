@@ -13,15 +13,24 @@
                 "y": 191.83277342291902
             }
         },
+        "Catska.tsx": {
+            "scaleInDock": 1
+        },
+        "GatsIdle.tsx": {
+            "scaleInDock": 1
+        },
+        "LargeRangeEnemy.tsx": {
+            "scaleInDock": 1
+        },
         "Map2.tmx": {
             "expandedObjectLayers": [
                 3
             ],
             "scale": 2,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 191.25,
-                "y": 190.75
+                "x": 191.75,
+                "y": 191.75
             }
         },
         "Props.tsx": {
@@ -37,17 +46,18 @@
             "scaleInDock": 1
         },
         "Tiles.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 2,
+            "scaleInEditor": 1
         },
         "Vertical.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 2.206770833333333,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 190.54991739438285,
-                "y": 304.74392258673595
+                "x": 205,
+                "y": 197
             }
         },
         "Vertical_Slice_Map.tmx": {
@@ -62,14 +72,23 @@
     "openFiles": [
         "Map2.tmx",
         "Vertical.tmx",
+        "Tiles.tsx"
+        "Vertical.tmx",
         "Base.tmx"
     ],
     "project": "project-II.tiled-project",
-    "property.type": "Unit Type",
+    "property.type": "int",
     "recentFiles": [
+        "Map2.tmx",
+        "Tiles.tsx",
+        "Vertical.tmx"
         "Map2.tmx",
         "Base.tmx",
         "Vertical.tmx"
     ],
-    "tileset.lastUsedFormat": "tsx"
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 32,
+        "width": 32
+    }
 }

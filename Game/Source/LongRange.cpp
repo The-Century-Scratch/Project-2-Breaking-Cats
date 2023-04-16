@@ -1,5 +1,5 @@
 #include "App.h"
-#include "Unit.h"
+#include "LongRange.h"
 
 #include "Map.h"
 #include "Log.h"
@@ -7,60 +7,61 @@
 #include "Input.h"
 #include "Render.h"
 
-Unit::Unit() = default;
+LongRange::LongRange() = default;
 
-Unit::~Unit() = default;
+LongRange::~LongRange() = default;
 
 
-void Unit::DebugDraw() const
+void LongRange::DebugDraw() const
 {
+	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(0, 255, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 255, 0, 255));
 	}
 	else
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 255, 255));
 	}
 	
 }
 
-void Unit::Draw() const
+void LongRange::Draw() const
 {
 	iPoint Displacement = { 8,24 };
 	DebugDraw();
 	app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 }
 
-bool Unit::GetIsMyTurn()
+bool LongRange::GetIsMyTurn()
 {
 	return isMyTurn;
 }
 
-bool Unit::GetHasFinishedTurn()
+bool LongRange::GetHasFinishedTurn()
 {
 	return hasFinishedTurn;
 }
 
-void Unit::SetIsMyTurn(bool value)
+void LongRange::SetIsMyTurn(bool value)
 {
 	isMyTurn = value;
 	//return isMyTurn;
 }
 
-void Unit::SetHasFinishedTurn(bool value)
+void LongRange::SetHasFinishedTurn(bool value)
 {
 	hasFinishedTurn = value;
 	//return hasFinishedTurn;
 }
 
-void Unit::Create(iPoint pos)
+void LongRange::Create(iPoint pos)
 {
 	/*Sprite::Initialize("Assets/Maps/Slime.png", 4);
 	position = { 48, 272 };
 	size = { 48, 48 };*/
-	texture = app->tex->Load("Assets/Maps/TheGuardian.png");
+	texture = app->tex->Load("Assets/Maps/LargeRangeEnemy.png");
 	//Sprite::Initialize("Assets/Maps/GatsIdle.png", 4);
 	position = pos;
 	size = { 16, 16 };
@@ -72,10 +73,10 @@ void Unit::Create(iPoint pos)
 	};*/
 }
 
-Unit::PlayerAction Unit::HandleInput() const
+LongRange::PlayerAction LongRange::HandleInput() const
 {
 	using enum KeyState;
-	using enum Unit::PlayerAction::Action;
+	using enum LongRange::PlayerAction::Action;
 
 	PlayerAction returnAction = { position, NONE };
 
@@ -106,7 +107,7 @@ Unit::PlayerAction Unit::HandleInput() const
 	return returnAction;
 }
 
-void Unit::StartAction(PlayerAction playerAction)
+void LongRange::StartAction(PlayerAction playerAction)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
@@ -115,7 +116,7 @@ void Unit::StartAction(PlayerAction playerAction)
 	}
 }
 
-void Unit::StartMovement()
+void LongRange::StartMovement()
 {
 	using enum KeyState;
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -140,12 +141,8 @@ void Unit::StartMovement()
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
 }
-bool Unit::GetIsAlly()
-{
-	return false;
-}
 
-void Unit::Update()
+void LongRange::Update()
 {
 	//LOG("the move vector x is %i" moveVector.x);
 
@@ -156,11 +153,12 @@ void Unit::Update()
 
 	}
 
-
+	//isMyTurn = false;
+	hasFinishedTurn = true;
 	//moveTimer = 2;
 }
 
-void Unit::AnimateMove()
+void LongRange::AnimateMove()
 {
 	if (animTimer == 8)
 	{
@@ -177,7 +175,7 @@ void Unit::AnimateMove()
 	}
 }
 
-void Unit::SmoothMove()
+void LongRange::SmoothMove()
 {
 
 
@@ -200,12 +198,12 @@ void Unit::SmoothMove()
 	
 }
 
-void Unit::DealDamage(int amount)
+void LongRange::DealDamage(int amount)
 {
 	healthPoints -= amount;
 }
 
-int Unit::GetHealthPoints()
+int LongRange::GetHealthPoints()
 {
 	return healthPoints;
 }
