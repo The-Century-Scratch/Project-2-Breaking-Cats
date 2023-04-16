@@ -37,17 +37,27 @@ public:
 
 };
 
-enum DialogueProgress {
-
-	GREETING,
-	QUESTION,
-	ANSWERA,
-	ANSWERB,
-	GREETINGA,
-	GREETINGB
-
+enum MICEY {
+	M_GREETING,
+	M_ANSWER,
+	M_REPLICATION1,
+	M_REPLICATION2,
+	M_END
 };
 
+enum  CONTRABANDIST {
+	C_GREETING,
+	C_ANSWER,
+	C_REPLICATION1,
+	C_REPLICATION2,
+	C_RETURNAL1,
+	C_RETURNAL2,
+};
+
+enum WARD {
+	W_CONVERSATION,
+	W_RETURNAL
+};
 class DialogueManager : public Module
 {
 public:
@@ -95,21 +105,43 @@ public:
 	//dialogue things
 
 	bool dialogueEnabled;
+	bool questionEnabled;
+	bool miceyDialog, contrabandistDialog, wardDialog, signDialog;
+
 	std::list<std::string>* sentenceQueue;
-	//std::_List_iterator<std::string>* sentenceQueue;
-	std::string playerName;
+	//std::string playerName;
 	uint rows = 3;
 	SDL_Rect textbox;
-	int fontId;
-	DialogueProgress progress;
-	int questionEnabled;
 
-	Dialogue firstQuestion;
-	Dialogue firstOption;
-	Dialogue answerA;
-	Dialogue answerB;
-	Dialogue firstQuestionA;
-	Dialogue firstQuestionB;
+	MICEY micey;
+	CONTRABANDIST contrabandist;
+	WARD ward;
+
+	//MICEY
+	Dialogue M_greeting;
+	Dialogue M_answer;
+	Dialogue M_replicationA;
+	Dialogue M_replicationB;
+	Dialogue M_returnalA;
+	Dialogue M_returnalB;
+	
+	//WARD
+	Dialogue W_conversation;
+	Dialogue W_returnal;
+	//SIGN
+	Dialogue S_text;
+
+	//CONTRABANDIST
+	Dialogue C_greeting;
+	Dialogue C_answer;
+	Dialogue C_replicationA;
+	Dialogue C_replicationB;
+	Dialogue C_returnalA;
+	Dialogue C_returnalB;
+
+
+
+
 };
 
 #endif // __DialogueManager_H__

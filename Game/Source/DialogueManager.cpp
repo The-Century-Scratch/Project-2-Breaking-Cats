@@ -35,33 +35,50 @@ bool DialogueManager::Start()
 	int x = w;
 	int y = h;
 	textbox = { x / 2 - 450, y / 2, 900, 200 };
-	progress = GREETING;
+	//progress = GREETING;
 
-	playerName = "CORNELLIUS";
+	//INTERESTING IF WE WANT TO PUT NAME ON THE PLAYER
+	
+	//playerName = "CORNELLIUS";
+	//firstQuestion.sentenceList->push_front((std::string)"GREETINGS, " + playerName + "! I SEE YOU ARE VERY TIRED FROM YOUR ADVENTURES.");
+
+
 
 	//NOTE: Given the size of the font and dialogue box, the maximum length of a sentence is 54 (MAX_CHARACTERS_IN_LINE)
 
-	//TODO 5: Substitute "Traveler" by "playerName"
-	firstQuestion.sentenceList->push_front((std::string)"GREETINGS, " + playerName + "! I SEE YOU ARE VERY TIRED FROM YOUR ADVENTURES.");
-	//
-	firstQuestion.sentenceList->push_front("MAY I INTEREST YOU IN A GLASS OF MILK, COOKIES AND A BALL OF YOUR FAVORITE ICE CREAM FLAVOR? OR PERHAPS YOU WOULD RATHER GO TO BED ALREADY, SIR?");
+	//MICEY
+	M_greeting.sentenceList->push_back("Hello fellow traveller, i see you have entered a store do you wanna buy something?");
+	M_answer.sentenceList->push_back("Yes");
+	M_answer.sentenceList->push_back("No");
+	M_replicationA.sentenceList->push_back("JAJAJA you thought this is only a vetical slice i don't have anything to sell maybe go ask the contrabandist");
+	M_replicationB.sentenceList->push_back("Then you are losing your time here");
+	
+	//CONTRABANDIST
+	C_greeting.sentenceList->push_back("Hey you, yes you, do you want some misterious shit?");
+	C_answer.sentenceList->push_back("Yes");
+	C_answer.sentenceList->push_back("No");
+	C_replicationA.sentenceList->push_back("Nah I'm kidding i got nothing this damn devs still haven't gotten me anything. I WANNA SELL ILLEGAL SHIT. Anyway maybe the vendor, Micey has something for you");
+	C_replicationB.sentenceList->push_back("Then get the fuck outta here you are acting suspicious");
+	C_returnalA.sentenceList->push_back("Already told you I have nothing go ask Micey");
+	C_returnalB.sentenceList->push_back("GET OUT!");
 
-	firstOption.sentenceList->push_front("/PRESS 1/ FOOD");
-	firstOption.sentenceList->push_front("/PRESS 2/ BED");
+	//WARD
+	W_conversation.sentenceList->push_back("Hello traveller, what do you want");
+	W_conversation.sentenceList->push_back("Hello, why can't I go through that way");
+	W_conversation.sentenceList->push_back("Sorry this is only a vertical slice you would fall in an eternal hole so you just can't go");
+	W_returnal.sentenceList->push_back("Dude already told you that you can't cross, so annoying this kid");
 
-	answerA.sentenceList->push_front("PERFECT! I WILL PREPARE YOUR FOOD RIGHT AWAY, SIR.");
+	//SIGN
+	S_text.sentenceList->push_back("IDK WHAT ELSE TO PUT HERE");
 
-	answerB.sentenceList->push_front("GREAT! LET ME GET THE KEY TO YOUR ROOM AND YOU WILL BE ALL SET, SIR.");
+	micey = M_GREETING;
+	contrabandist = C_GREETING;
+	ward = W_CONVERSATION;
 
-	firstQuestionA.sentenceList->push_front(playerName + ", SIR, PLEASE ALLOW ME	SOME TIME TO PREPARE THE DISHES!");
-	firstQuestionA.sentenceList->push_front("THERE IS A STOOL OVER THERER FOR YOU TO WAIT ON.");
+	
 
-	firstQuestionB.sentenceList->push_front("IN A MINUTE, SIR!");
-	firstQuestionB.sentenceList->push_front("THE PREVIOUS HOST LEFT RATHER QUICKLY, I DO NOT KNOW WHERE THE MAN LEFT THOSE DARN KEYS!");
-
-	//fontId = app->fonts->Load("Assets/Fonts/defaultfont.png", "!,_./0123456789;?ABCDEFGHIJKLMNOPQRSTUVWXYZ ", 1);
-
-	sentenceQueue = firstQuestion.sentenceList;
+	//importnat to start any dialog
+	//sentenceQueue = firstQuestion.sentenceList;
 
 	return true;
 }
@@ -97,24 +114,36 @@ bool DialogueManager::Update(float dt)
 
 	if (questionEnabled) {
 		//TODO 2: Draw the Text of option 1 and 2
-		auto second_elem = firstOption.sentenceList->begin();
+		
+		auto second_elem = M_answer.sentenceList->begin();
 		std::advance(second_elem, 1);
 
-		DrawDialogText(firstOption.sentenceList->front(), 80);
+		DrawDialogText(M_answer.sentenceList->front(), 80);
 		DrawDialogText(*second_elem, 100);
-		//
 
 		//TODO 3: Detect if 1 or 2 are being pressed, and for each case, set the progress stage we are in and update the dialogue
-		if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN) {
-			progress = ANSWERA;
+		if (app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_DOWN) {
+			if (miceyDialog) {
+				micey = M_REPLICATION1;
+			}
+			else {
+				contrabandist = C_REPLICATION1;
+			}
+
 			UpdateDialogue();
+			questionEnabled = false;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN) {
-			progress = ANSWERB;
+		if (app->input->GetKey(SDL_SCANCODE_X) == KeyState::KEY_DOWN) {
+			if (miceyDialog) {
+				micey = M_REPLICATION2;
+			}
+			else {
+				contrabandist = C_REPLICATION2;
+			}
 			UpdateDialogue();
+			questionEnabled = false;
 		}
-		//
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN && dialogueEnabled) {
 		UpdateDialogue();
@@ -126,9 +155,6 @@ bool DialogueManager::Update(float dt)
 // Called each loop iteration
 bool DialogueManager::PostUpdate()
 {
-
-
-
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KeyState::KEY_DOWN)
 		return false;
 
@@ -162,9 +188,6 @@ bool DialogueManager::DrawDialogText(std::string s, uint yoffset) {
 				s1.c_str(),
 				params
 			);
-			
-
-			
 		}
 		else {
 			//app->fonts->BlitText(textbox.x + 20, textbox.y + 20 + 20 * (i / MAX_CHARACTERS_IN_LINE) + yoffset, fontId, s.c_str(), false);
@@ -189,37 +212,87 @@ bool DialogueManager::SetDialogue(Dialogue dialogue) {
 }
 
 bool DialogueManager::UpdateDialogue() {
-	switch (progress) {
-		//TODO 4: Write each case 
-	case GREETING:
-		questionEnabled = true;
-		break;
-	case ANSWERA:
-		SetDialogue(answerA);
-		questionEnabled = false;
-		progress = GREETINGA;
-		break;
-	case ANSWERB:
-		SetDialogue(answerB);
-		questionEnabled = false;
-		progress = GREETINGB;
-		break;
-	case GREETINGA:
-		SetDialogue(firstQuestionA);
+	if (miceyDialog == true) {
+		switch (micey) {
+		case M_GREETING:
+			SetDialogue(M_greeting);
+			questionEnabled = true;
+			break;
+		case M_REPLICATION1:
+			SetDialogue(M_replicationA);
+			questionEnabled = false;
+			micey = M_END;
+			break;
+		case M_REPLICATION2:
+			SetDialogue(M_replicationB);
+			questionEnabled = false;
+			micey = M_END;
+			break;
+		case M_END:
+			dialogueEnabled = false;
+			miceyDialog = false;
+			break;
+		}
+	}
+
+	if (contrabandistDialog == true) {
+		switch (contrabandist) {
+		case C_GREETING:
+			SetDialogue(C_greeting);
+			questionEnabled = true;
+			break;
+		case C_REPLICATION1:
+			SetDialogue(C_replicationA);
+			questionEnabled = false;
+			contrabandist = C_RETURNAL1;
+			break;
+		case C_REPLICATION2:
+			SetDialogue(C_replicationB);
+			questionEnabled = false;
+			contrabandist = C_RETURNAL2;
+			break;
+		case C_RETURNAL1:
+			SetDialogue(C_returnalA);
+			dialogueEnabled = false;
+			break;
+		case C_RETURNAL2:
+			SetDialogue(C_returnalB);
+			dialogueEnabled = false;
+			break;
+		}
+	}
+	
+	if (wardDialog == true) {
+		switch (ward) {
+		case W_CONVERSATION:
+			SetDialogue(W_conversation);
+			sentenceQueue->pop_front();
+			questionEnabled = false;
+			if (sentenceQueue->size() == 1) {
+				ward = W_RETURNAL;
+			}
+			break;
+		case W_RETURNAL:
+			SetDialogue(W_returnal);
+			dialogueEnabled = false;
+			break;
+		}
+	}
+
+	if (signDialog == true) {
+		SetDialogue(S_text);
 		dialogueEnabled = false;
-		break;
-	case GREETINGB:
-		SetDialogue(firstQuestionB);
-		dialogueEnabled = false;
-		break;		
 	}
 
 	return true;
 }
 
 bool DialogueManager::ResetDialogue() {
-	progress = GREETING;
-	sentenceQueue = firstQuestion.sentenceList;
+	micey = M_GREETING;
+	contrabandist = C_GREETING;
+	ward = W_CONVERSATION;
+
+	//sentenceQueue = firstQuestion.sentenceList;
 	questionEnabled = false;
 	dialogueEnabled = false;
 

@@ -75,9 +75,40 @@ int Scene_Vertical::Update()
 		return 6;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_E) == KeyState::KEY_UP)
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_UP)
 	{
 		app->Dialogue.get()->dialogueEnabled = true;
+		app->Dialogue.get()->miceyDialog = true;
+		app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->M_greeting.sentenceList;
+		app->Dialogue.get()->micey = M_GREETING;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_UP)
+	{
+		app->Dialogue.get()->dialogueEnabled = true;
+		app->Dialogue.get()->contrabandistDialog = true;
+		if (app->Dialogue.get()->contrabandist == C_GREETING) {
+			app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->C_greeting.sentenceList;
+		}
+
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_UP)
+	{
+		app->Dialogue.get()->dialogueEnabled = true;
+		app->Dialogue.get()->wardDialog = true;
+		if (app->Dialogue.get()->ward == W_CONVERSATION) {
+			app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->W_conversation.sentenceList;
+		}
+		
+
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_UP)
+	{
+		app->Dialogue.get()->dialogueEnabled = true;
+		app->Dialogue.get()->signDialog = true;
+		app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->S_text.sentenceList;
 	}
 
 	return 0;
