@@ -69,7 +69,7 @@ bool DialogueManager::Start()
 	W_returnal.sentenceList->push_back("Dude already told you that you can't cross, so annoying this kid");
 
 	//SIGN
-	S_text.sentenceList->push_back("IDK WHAT ELSE TO PUT HERE");
+	S_text.sentenceList->push_back("This is Kiko's chest, it is empty");
 
 	micey = M_GREETING;
 	contrabandist = C_GREETING;
