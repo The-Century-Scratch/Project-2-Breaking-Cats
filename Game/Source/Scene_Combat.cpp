@@ -131,6 +131,7 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 			}
 		}
 	}
+	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 
 }
 
@@ -370,4 +371,9 @@ int Scene_Combat::CheckNextScene(int ret)
 	}
 
 	return ret;
+}
+
+void Scene_Combat::DrawPause()
+{
+	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

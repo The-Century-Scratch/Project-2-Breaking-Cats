@@ -20,6 +20,7 @@ public:
     void Draw() override;
     int Update() override;
     int CheckNextScene(int ret) override;
+    void DrawPause() override;
     int Test();
 
 private:
@@ -27,6 +28,7 @@ private:
 
     Map map;
     Player player;
+    int pauseMenu;
 };
 
 

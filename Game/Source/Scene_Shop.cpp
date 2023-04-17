@@ -45,6 +45,7 @@ void Scene_Shop::Load(std::string const& path, LookUpXMLNodeFromString const& in
 	Test();
 
 	player.Create();
+	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 }
 
 void Scene_Shop::Start()
@@ -117,4 +118,9 @@ int Scene_Shop::CheckNextScene(int ret)
 	}
 
 	return ret;
+}
+
+void Scene_Shop::DrawPause()
+{
+	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

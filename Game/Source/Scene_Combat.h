@@ -35,6 +35,7 @@ public:
     void Draw() override;
     int Update() override;
     int CheckNextScene(int ret) override;
+    void DrawPause() override;
 
     void CreateUnit();
 
@@ -51,6 +52,7 @@ private:
 
     int turn = 0;
     int numberFinished = 0;
+    int pauseMenu;
 };
 
 

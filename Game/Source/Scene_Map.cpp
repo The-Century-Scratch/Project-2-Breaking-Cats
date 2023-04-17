@@ -25,6 +25,7 @@ void Scene_Map::Load(std::string const& path, LookUpXMLNodeFromString const& inf
 	Test();
 
 	player.Create();
+	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 }
 
 void Scene_Map::Start()
@@ -76,4 +77,9 @@ int Scene_Map::CheckNextScene(int ret)
 	}
 
 	return ret;
+}
+
+void Scene_Map::DrawPause()
+{
+	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

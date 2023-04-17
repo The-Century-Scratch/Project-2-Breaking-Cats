@@ -137,7 +137,7 @@ void Map::DrawTileLayer(const MapLayer& layer) const
 	camera.y *= -1;
 
 	iPoint cameraPosition = { camera.x, camera.y };
-	cameraPosition = WorldToMap(cameraPosition - tileSize);
+	cameraPosition = WorldToMap((cameraPosition)-tileSize);
 
 	iPoint cameraSize = { camera.w, camera.h };
 	cameraSize = WorldToMap(cameraSize);
@@ -149,16 +149,17 @@ void Map::DrawTileLayer(const MapLayer& layer) const
 
 	renderView.w = cameraPosition.x + cameraSize.x + tileSize.x;
 	if (renderView.w > layer.GetSize().x) renderView.w = layer.GetSize().x;
-	
+
 	renderView.y = cameraPosition.y;
 	if (renderView.y < 0) renderView.y = 0;
 
 	renderView.h = cameraPosition.y + cameraSize.y + tileSize.y;
 	if (renderView.h > layer.GetSize().y) renderView.h = layer.GetSize().y;
 
-	for (int x = renderView.x; x < renderView.x + renderView.w; x++)
+
+	for (int x = renderView.x; x < renderView.w; x++)
 	{
-		for (int y = renderView.y; y < renderView.y + renderView.h; y++)
+		for (int y = renderView.y; y < renderView.h; y++)
 		{
 			int gid = layer.GetTileGid(x, y);
 

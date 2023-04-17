@@ -329,6 +329,7 @@ bool App::DoPaused()
 	scene->Pause(phase);
 
 	// PostUpdate
+	scene->currentScene->DrawPause();
 	phase++;
 	render->Pause(phase);
 
