@@ -17,7 +17,10 @@ public:
 			NONE = 0x0000,
 			MOVE = 0x0001,
 			INTERACT = 0x0002,
-			ATTACK = 0x0003
+			ATTACK = 0x0003,
+			ATTACK_LONG_RANGE = 0x0004,
+			ATTACK_TO_PLAYER = 0x0005,
+			ATTACK_TO_PLAYER_LONG_RANGE = 0x0006
 		};
 
 		friend Action operator&(Action a, Action b)

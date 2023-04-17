@@ -282,7 +282,7 @@ int Scene_Combat::Update()
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
 		{
 			noUnitHasActed = false;
-
+			
 			auto unitAction = i->HandleInput();
 
 			if ((unitAction.action) == UA::MOVE)
@@ -293,7 +293,8 @@ int Scene_Combat::Update()
 					i->StartAction(unitAction);
 				}
 			}
-			if ((unitAction.action & UA::ATTACK) == UA::ATTACK)
+			// TODO: make this a switch
+			if ((unitAction.action) == UA::ATTACK)
 			{
 				for (auto& unit : units)
 				{
@@ -303,13 +304,71 @@ int Scene_Combat::Update()
 						if (i->position.DistanceTo(unitPos) < 18)
 						{
 							unit->DealDamage(10);
+							i->StartAction(unitAction);
 							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
 							i->SetHasFinishedTurn(true);
+							
 						}
 					}
 				}
 				
 			}
+			if ((unitAction.action) == UA::ATTACK_LONG_RANGE)
+			{
+				for (auto& unit : units)
+				{
+					if (!unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+							
+						}
+					}
+				}
+
+			}
+			if ((unitAction.action) == UA::ATTACK_TO_PLAYER)
+			{
+				for (auto& unit : units)
+				{
+					if (unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.DistanceTo(unitPos) < 18)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+
+			}
+			if ((unitAction.action) == UA::ATTACK_TO_PLAYER_LONG_RANGE)
+			{
+				for (auto& unit : units)
+				{
+					if (unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+
+			}
+			
 
 
 		}
@@ -328,13 +387,27 @@ int Scene_Combat::Update()
 
 			//noUnitHasActed = false;
 		}
+		if (!i->GetHealthPoints() > 0)
+		{
+			i->SetHasFinishedTurn(true);
+			
+		}
 
 	}
 	
 
 	if (noUnitHasActed)
 	{
-		units[0]->SetIsMyTurn(true);
+		for (auto& i : units)
+		{
+			if (i->GetHealthPoints() > 0)
+			{
+				i->SetIsMyTurn(true);
+				break;
+			}
+			
+		}
+		
 		for (auto& i : units)
 		{
 			i->SetHasFinishedTurn(false);

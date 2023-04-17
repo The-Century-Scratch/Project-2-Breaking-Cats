@@ -15,15 +15,23 @@ Catska::~Catska() = default;
 void Catska::DebugDraw() const
 {
 	
+	int intensity = 255.0f * (static_cast<float>(healthPoints) / 40);
+	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 255, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(intensity, intensity, 0, 255));
 	}
 	else
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 255, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(intensity, 0, intensity, 255));
 	}
+	debugPosition.y += 13;
+	debugPosition.h /= 3;
+	debugPosition.w = intensity / 12;
+
+
+	app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	
 }
 
@@ -83,6 +91,11 @@ Catska::PlayerAction Catska::HandleInput() const
 	if (!moveVector.IsZero())
 		return returnAction;
 
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
+	{
+		returnAction.action = ATTACK_LONG_RANGE;
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		returnAction.action |= MOVE;
@@ -114,6 +127,7 @@ void Catska::StartAction(PlayerAction playerAction)
 
 		StartMovement();
 	}
+	LOG("it does enter this scope right now, so be careful");
 }
 
 void Catska::StartMovement()
@@ -172,6 +186,11 @@ void Catska::AnimateMove()
 	{
 		animTimer++;
 	}
+}
+
+bool Catska::GetIsAlly()
+{
+	return true;
 }
 
 void Catska::SmoothMove()

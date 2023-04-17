@@ -15,15 +15,23 @@ Guardian::~Guardian() = default;
 void Guardian::DebugDraw() const
 {
 	
+	int intensity = 255.0f * (static_cast<float>(healthPoints) / 20);
+	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 255, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(intensity, intensity, 0, 255));
 	}
 	else
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 255, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(intensity, 0, intensity, 255));
 	}
+	debugPosition.y += 13;
+	debugPosition.h /= 3;
+	debugPosition.w = intensity / 12;
+
+
+	app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	
 }
 
@@ -56,12 +64,17 @@ void Guardian::SetHasFinishedTurn(bool value)
 	//return hasFinishedTurn;
 }
 
+bool Guardian::GetIsAlly()
+{
+	return false;
+}
+
 void Guardian::Create(iPoint pos)
 {
 	/*Sprite::Initialize("Assets/Maps/Slime.png", 4);
 	position = { 48, 272 };
 	size = { 48, 48 };*/
-	texture = app->tex->Load("Assets/Maps/TheGuardian.png");
+	texture = app->tex->Load("Assets/Maps/TankEnemy.png");
 	//Sprite::Initialize("Assets/Maps/GatsIdle.png", 4);
 	position = pos;
 	size = { 16, 16 };
@@ -82,28 +95,28 @@ Guardian::PlayerAction Guardian::HandleInput() const
 
 	if (!moveVector.IsZero())
 		return returnAction;
-	int direction = rand() % 4;
+	int direction = rand() % 19;
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.y -= tileSize;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.x -= tileSize;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.y += tileSize;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.x += tileSize;
-	}
+	//if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	//{
+	//	returnAction.action |= MOVE;
+	//	returnAction.destinationTile.y -= tileSize;
+	//}
+	//else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+	//{
+	//	returnAction.action |= MOVE;
+	//	returnAction.destinationTile.x -= tileSize;
+	//}
+	//else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+	//{
+	//	returnAction.action |= MOVE;
+	//	returnAction.destinationTile.y += tileSize;
+	//}
+	//else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+	//{
+	//	returnAction.action |= MOVE;
+	//	returnAction.destinationTile.x += tileSize;
+	//}
 
 	if (direction == 0)
 	{
@@ -132,6 +145,10 @@ Guardian::PlayerAction Guardian::HandleInput() const
 		returnAction.destinationTile.x += tileSize;
 
 		//LOG("this scope is definitely entered by the movement action inside of this uncooperative template %i", returnAction.destinationTile.y);
+	}
+	else
+	{
+		returnAction.action |= ATTACK_TO_PLAYER;
 	}
 
 	

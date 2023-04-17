@@ -14,16 +14,23 @@ Straw::~Straw() = default;
 
 void Straw::DebugDraw() const
 {
+	int intensity = 255.0f * (static_cast<float>(healthPoints) / 30);
 	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 255, 0, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(intensity, intensity, 0, 255));
 	}
 	else
 	{
-		app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 255, 255));
+		app->render->DrawShape(debugPosition, false, SDL_Color(intensity, 0, intensity, 255));
 	}
+	debugPosition.y += 13;
+	debugPosition.h /= 3;
+	debugPosition.w = intensity / 12;
+
+
+	app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	
 }
 

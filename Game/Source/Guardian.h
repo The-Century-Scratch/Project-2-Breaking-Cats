@@ -27,6 +27,8 @@ public:
 	void SetHasFinishedTurn(bool value) override;
 	void SetIsMyTurn(bool value) override;
 
+	bool GetIsAlly() override;
+
 	int GetHealthPoints() override;
 	void DealDamage(int amount) override;
 
