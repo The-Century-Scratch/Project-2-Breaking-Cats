@@ -97,6 +97,9 @@
     <ClCompile Include="Source\DialogueManager.cpp">
       <Filter>Dialog</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Event_Dialogue.cpp">
+      <Filter>Scene_Map Components\Source\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="Source\DialogueManager.h">
       <Filter>Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Event_Dialogue.h">
+      <Filter>Scene_Map Components\Headers\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

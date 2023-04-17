@@ -100,6 +100,7 @@
     <ClCompile Include="Source\DialogueManager.cpp" />
     <ClCompile Include="Source\EventManager.cpp" />
     <ClCompile Include="Source\Event_Chest.cpp" />
+    <ClCompile Include="Source\Event_Dialogue.cpp" />
     <ClCompile Include="Source\Event_SpawnEnemy.cpp" />
     <ClCompile Include="Source\Event_Teleport.cpp" />
     <ClCompile Include="Source\GuiPanelSegmented.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Source\Event_Base.h" />
     <ClInclude Include="Source\EventManager.h" />
     <ClInclude Include="Source\Event_Chest.h" />
+    <ClInclude Include="Source\Event_Dialogue.h" />
     <ClInclude Include="Source\Event_SpawnEnemy.h" />
     <ClInclude Include="Source\Event_Teleport.h" />
     <ClInclude Include="Source\GuiPanelSegmented.h" />

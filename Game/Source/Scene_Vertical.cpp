@@ -31,6 +31,7 @@ void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const
 
 void Scene_Vertical::Start()
 {
+
 }
 
 void Scene_Vertical::Draw()
@@ -60,6 +61,14 @@ int Scene_Vertical::Update()
 		{
 			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
 			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
+
+			if (map.getEvent(playerAction.destinationTile, player.facing).commonData.type == EventType::CHEST) {
+				LOG("npc dialogue started");
+				app->Dialogue.get()->dialogueEnabled = true;
+				app->Dialogue.get()->miceyDialog = true;
+				app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->M_greeting.sentenceList;
+				app->Dialogue.get()->micey = M_GREETING;
+			}
 		}
 	}
 	
@@ -77,10 +86,7 @@ int Scene_Vertical::Update()
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_UP)
 	{
-		app->Dialogue.get()->dialogueEnabled = true;
-		app->Dialogue.get()->miceyDialog = true;
-		app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->M_greeting.sentenceList;
-		app->Dialogue.get()->micey = M_GREETING;
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_UP)

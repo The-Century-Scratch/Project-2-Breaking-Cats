@@ -1,5 +1,5 @@
 {
-    "activeFile": "Map2.tmx",
+    "activeFile": "Vertical.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -20,8 +20,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 311.5,
-                "y": 261
+                "x": 192,
+                "y": 192
             }
         },
         "Props.tsx": {
@@ -66,8 +66,8 @@
     "project": "project-II.tiled-project",
     "property.type": "Unit Type",
     "recentFiles": [
-        "Vertical.tmx",
-        "Map2.tmx"
+        "Map2.tmx",
+        "Vertical.tmx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }
