@@ -1,6 +1,7 @@
 #include "Scene_Shop.h"
 #include "Event_Base.h"
 #include "DialogueManager.h"
+#include "Audio.h"
 
 #include "Log.h"
 
@@ -47,6 +48,8 @@ void Scene_Shop::Load(std::string const& path, LookUpXMLNodeFromString const& in
 
 	player.Create();
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
+
+	music = app->audio->PlayMusic("Assets/Audio/Music/ShopTheme.ogg");
 }
 
 void Scene_Shop::Start()

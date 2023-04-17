@@ -77,6 +77,8 @@ private:
 	void SmoothMove();
 	void StartMovement();
 
+
+
 	int moveTimer = 0;
 	iPoint moveVector{ 0 };
 	int speed = 4;

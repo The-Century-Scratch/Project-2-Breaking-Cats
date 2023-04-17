@@ -47,6 +47,7 @@ private:
     Map map;
     Player player;
 
+    int music;
 
     std::vector<std::unique_ptr<Unit>> units;
 

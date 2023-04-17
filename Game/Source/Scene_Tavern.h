@@ -26,6 +26,8 @@ public:
 private:
     std::string currentMap = "";
 
+    int music;
+
     Map map;
     Player player;
     int pauseMenu;

@@ -6,6 +6,7 @@
 
 #include "Input.h"
 #include "Render.h"
+#include "Audio.h"
 
 Player::Player() = default;
 
@@ -40,6 +41,7 @@ void Player::Create()
 		size.x,
 		size.y
 	};*/
+
 }
 
 Player::PlayerAction Player::HandleInput() const
@@ -53,6 +55,7 @@ Player::PlayerAction Player::HandleInput() const
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
 		returnAction.action |= INTERACT;
+		
 	}
 
 	if (!moveVector.IsZero())

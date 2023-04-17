@@ -1,6 +1,7 @@
 #include "Scene_Tavern.h"
 #include "Event_Base.h"
 #include "DialogueManager.h"
+#include "Audio.h"
 
 #include "Log.h"
 
@@ -46,6 +47,8 @@ void Scene_Tavern::Load(std::string const& path, LookUpXMLNodeFromString const& 
 
 	player.Create();
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
+
+	music = app->audio->PlayMusic("Assets/Audio/Music/Combat.ogg");
 }
 
 void Scene_Tavern::Start()

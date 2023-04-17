@@ -1,6 +1,7 @@
 #include "Scene_Resistance.h"
 #include "Event_Base.h"
 #include "DialogueManager.h"
+#include "Audio.h"
 
 #include "Log.h"
 
@@ -46,6 +47,8 @@ void Scene_Resistance::Load(std::string const& path, LookUpXMLNodeFromString con
 
 	player.Create();
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
+
+	music = app->audio->PlayMusic("Assets/Audio/Music/Combat.ogg");
 }
 
 void Scene_Resistance::Start()
