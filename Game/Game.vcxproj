@@ -98,8 +98,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Catska.cpp" />
+    <ClCompile Include="Source\DialogueManager.cpp" />
     <ClCompile Include="Source\EventManager.cpp" />
     <ClCompile Include="Source\Event_Chest.cpp" />
+    <ClCompile Include="Source\Event_Dialogue.cpp" />
     <ClCompile Include="Source\Event_SpawnEnemy.cpp" />
     <ClCompile Include="Source\Event_Teleport.cpp" />
     <ClCompile Include="Source\Gats.cpp" />
@@ -136,9 +138,11 @@
     <ClCompile Include="Source\Window_Factory.cpp" />
     <ClCompile Include="Source\Window_List.cpp" />
     <ClInclude Include="Source\Catska.h" />
+    <ClInclude Include="Source\DialogueManager.h" />
     <ClInclude Include="Source\Event_Base.h" />
     <ClInclude Include="Source\EventManager.h" />
     <ClInclude Include="Source\Event_Chest.h" />
+    <ClInclude Include="Source\Event_Dialogue.h" />
     <ClInclude Include="Source\Event_SpawnEnemy.h" />
     <ClInclude Include="Source\Event_Teleport.h" />
     <ClInclude Include="Source\Gats.h" />

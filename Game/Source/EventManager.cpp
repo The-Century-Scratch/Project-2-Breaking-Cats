@@ -4,6 +4,7 @@
 #include "Event_Chest.h"
 #include "Event_Teleport.h"
 #include "Event_SpawnEnemy.h"
+#include "Event_Dialogue.h"
 
 #include "Sprite.h"
 
@@ -204,6 +205,9 @@ EventData EventManager::getEventDataFromPos(iPoint pos) const
 			case TELEPORT:
 				data.destinationData = e.get()->getDestinationProperties();
 				break;
+			case DIALOGUE:
+				data.dialogueData = e.get()->getDialogueProperties();
+				break;
 			default:
 				break;
 			}
@@ -229,7 +233,7 @@ bool EventManager::CreateEvent(pugi::xml_node const& node)
 {
 	for (auto const& child : node.children("object"))
 	{
-		
+
 
 
 		std::unique_ptr<Event_Base> event = nullptr;
@@ -249,8 +253,11 @@ bool EventManager::CreateEvent(pugi::xml_node const& node)
 			//enemy.get()->
 			LOG("it is indeed detecting it, now the only problem is spawning it");
 			enemy->Create(child);
-			
+
 			enemies.push_back(std::move(enemy));
+		}
+		else if (StrEquals("Event Dialogue", child.attribute("type").as_string())) {
+			event = std::make_unique<Event_Dialogue>();
 		}
 
 		if (!event)

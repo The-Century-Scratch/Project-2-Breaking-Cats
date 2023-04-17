@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include "Audio.h"
 #include "SceneManager.h"
+#include "DialogueManager.h"
 #include "Map.h"
 #include "TextManager.h"
 
@@ -26,6 +27,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = std::make_unique<Audio>();
 	fonts = std::make_unique<TextManager>();
 	scene = std::make_unique<SceneManager>();
+	Dialogue = std::make_unique<DialogueManager>();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -35,6 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio.get());
 	AddModule(fonts.get());
 	AddModule(scene.get());
+	AddModule(Dialogue.get());
 
 	// Render last to swap buffer
 	AddModule(render.get());
@@ -50,7 +53,7 @@ void App::AddModule(Module* mod)
 }
 
 // Called before render is available
-bool App::Awake()
+bool App::Awake()  
 {
 	if(!LoadConfig()) return false;
 

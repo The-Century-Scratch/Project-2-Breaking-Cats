@@ -1,5 +1,6 @@
 #include "Scene_Vertical.h"
 #include "Event_Base.h"
+#include "DialogueManager.h"
 
 #include "Log.h"
 
@@ -49,6 +50,7 @@ void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const
 
 void Scene_Vertical::Start()
 {
+
 }
 
 void Scene_Vertical::Draw()
@@ -94,7 +96,48 @@ int Scene_Vertical::Update()
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
 			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
-			ret = player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
+			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
+
+			
+
+
+			if (map.getEvent(playerAction.destinationTile, player.facing).commonData.type == EventType::DIALOGUE)
+			{
+				LOG("npc dialogue started %i", map.getEvent(playerAction.destinationTile, player.facing).dialogueData.script);
+				switch (map.getEvent(playerAction.destinationTile, player.facing).dialogueData.script)
+				{
+				case 1:
+
+					app->Dialogue.get()->dialogueEnabled = true;
+					app->Dialogue.get()->miceyDialog = true;
+					app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->M_greeting.sentenceList;
+					app->Dialogue.get()->micey = M_GREETING;
+					break;
+				case 2:
+					app->Dialogue.get()->dialogueEnabled = true;
+					app->Dialogue.get()->contrabandistDialog = true;
+					if (app->Dialogue.get()->contrabandist == C_GREETING)
+					{
+						app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->C_greeting.sentenceList;
+					}
+					break;
+				case 3:
+					app->Dialogue.get()->dialogueEnabled = true;
+					app->Dialogue.get()->wardDialog = true;
+					if (app->Dialogue.get()->ward == W_CONVERSATION)
+					{
+						app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->W_conversation.sentenceList;
+					}
+					break;
+				case 4:
+					app->Dialogue.get()->dialogueEnabled = true;
+					app->Dialogue.get()->signDialog = true;
+					app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->S_text.sentenceList;
+					break;
+				default:
+					break;
+				}
+			}
 		}
 	}
 	
@@ -116,6 +159,40 @@ int Scene_Vertical::CheckNextScene(int ret)
 		return static_cast<int>(SceneType::TITLESCENE);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_UP)
+	{
+		
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_UP)
+	{
+		app->Dialogue.get()->dialogueEnabled = true;
+		app->Dialogue.get()->contrabandistDialog = true;
+		if (app->Dialogue.get()->contrabandist == C_GREETING) 
+		{
+			app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->C_greeting.sentenceList;
+		}
+
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_UP)
+	{
+		app->Dialogue.get()->dialogueEnabled = true;
+		app->Dialogue.get()->wardDialog = true;
+		if (app->Dialogue.get()->ward == W_CONVERSATION) 
+		{
+			app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->W_conversation.sentenceList;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_UP)
+	{
+		app->Dialogue.get()->dialogueEnabled = true;
+		app->Dialogue.get()->signDialog = true;
+		app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->S_text.sentenceList;
+	}
+
+	return 0;
 	return ret;
 }
 

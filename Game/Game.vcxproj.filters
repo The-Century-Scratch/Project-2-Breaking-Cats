@@ -121,6 +121,12 @@
     <ClCompile Include="Source\Scene_Resistance.cpp">
       <Filter>Scenes\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DialogueManager.cpp">
+      <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Event_Dialogue.cpp">
+      <Filter>Scene_Map Components\Source\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -270,6 +276,12 @@
     <ClInclude Include="Source\Scene_Resistance.h">
       <Filter>Scenes\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Source\DialogueManager.h">
+      <Filter>Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Event_Dialogue.h">
+      <Filter>Scene_Map Components\Headers\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -349,6 +361,9 @@
     </Filter>
     <Filter Include="Scene_Map Components\Components">
       <UniqueIdentifier>{91c6f8a8-4cb2-44a6-863d-0730c930582c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog">
+      <UniqueIdentifier>{61188182-769a-47fd-b658-989746116ab1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
