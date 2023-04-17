@@ -18,12 +18,15 @@ public:
 	int ReturnType() override;
 	EventProperties::LootProperty getLootProperties() const;
 
+	EventProperties::DialogueProperty getDialogueProperties() const;
+
 private:
-	/*std::vector<std::unique_ptr<EventProperties::LootProperty>> loot;
+	std::vector<std::unique_ptr<EventProperties::LootProperty>> loot;
 	std::vector<std::unique_ptr<EventProperties::GlobalSwitchProperty>> globalSwitch;
+	EventProperties::DialogueProperty dialogue;
 
 	bool isLocked = false;
-	bool isOpen = false;*/
+	bool isOpen = false;
 };
 
 #endif __EVENT_DIALOGUE_H__

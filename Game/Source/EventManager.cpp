@@ -204,6 +204,9 @@ EventData EventManager::getEventDataFromPos(iPoint pos) const
 			case TELEPORT:
 				data.destinationData = e.get()->getDestinationProperties();
 				break;
+			case DIALOGUE:
+				data.dialogueData = e.get()->getDialogueProperties();
+				break;
 			default:
 				break;
 			}

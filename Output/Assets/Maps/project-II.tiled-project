@@ -164,7 +164,8 @@
             "values": [
                 "None",
                 "Chest",
-                "Teleport"
+                "Teleport",
+                "Dialogue"
             ],
             "valuesAsFlags": false
         },
@@ -346,6 +347,30 @@
             "type": "class",
             "useAs": [
                 "layer"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 22,
+            "members": [
+                {
+                    "name": "Script",
+                    "type": "int",
+                    "value": 0
+                }
+            ],
+            "name": "Scripts of Dialogues",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
             ]
         },
         {

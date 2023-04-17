@@ -21,7 +21,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 192,
-                "y": 192
+                "y": 191.75
             }
         },
         "Props.tsx": {
@@ -64,7 +64,7 @@
         "Vertical.tmx"
     ],
     "project": "project-II.tiled-project",
-    "property.type": "Unit Type",
+    "property.type": "Scripts of Dialogues",
     "recentFiles": [
         "Map2.tmx",
         "Vertical.tmx"

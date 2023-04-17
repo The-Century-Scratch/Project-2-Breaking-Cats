@@ -6,13 +6,15 @@
 #include "Defs.h"
 #include "PugiXml/src/pugixml.hpp"
 #include <SDL/include/SDL_pixels.h>
+#include "Log.h"
 
 
 enum class EventType
 {
 	NONE,
 	CHEST,
-	TELEPORT
+	TELEPORT,
+	DIALOGUE
 };
 
 
@@ -159,6 +161,35 @@ namespace EventProperties
 		}
 	};
 
+	struct DialogueProperty : public Property
+	{
+		int script;
+
+		void ReadProperty(pugi::xml_node const& node) override
+		{
+			auto propertiesNode = node.child("properties");
+
+			for (auto const& child : propertiesNode.children("property"))
+			{
+				auto attributeName = child.attribute("name").as_string();
+				if (StrEquals("Script", attributeName))
+				{
+					
+					script = child.attribute("value").as_int();
+					LOG("the number that I have just read from tiled with the name script is: %i", script);
+				}
+				else if (StrEquals("Destination X", attributeName))
+				{
+					
+				}
+				else if (StrEquals("Destination Y", attributeName))
+				{
+					
+				}
+			}
+		}
+	};
+
 	struct FadeProperty
 	{
 		SDL_Color fadeColor = { 0, 0, 0, 255 };
@@ -171,6 +202,10 @@ struct EventData
 	EventProperties::CommonProperties commonData;
 	EventProperties::LootProperty lootData;
 	EventProperties::DestinationProperty destinationData;
+
+	EventProperties::DialogueProperty dialogueData;
+
+
 };
 
 class Event_Base
@@ -188,6 +223,10 @@ public:
 	virtual EventProperties::DestinationProperty getDestinationProperties() const
 	{
 		return EventProperties::DestinationProperty();
+	}
+	virtual EventProperties::DialogueProperty getDialogueProperties() const
+	{
+		return EventProperties::DialogueProperty();
 	}
 
 	virtual int ReturnVelocity() const
