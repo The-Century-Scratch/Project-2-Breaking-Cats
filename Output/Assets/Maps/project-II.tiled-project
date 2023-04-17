@@ -311,7 +311,8 @@
                 "Vertical",
                 "Title",
                 "Shop",
-                "Tavern"
+                "Tavern",
+                "Resistance"
             ],
             "valuesAsFlags": false
         },

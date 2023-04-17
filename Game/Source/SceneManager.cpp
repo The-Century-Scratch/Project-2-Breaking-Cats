@@ -8,6 +8,7 @@
 #include "Scene_Vertical.h"
 #include "Scene_Shop.h"
 #include "Scene_Tavern.h"
+#include "Scene_Resistance.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -116,6 +117,10 @@ bool SceneManager::Update(float dt)
 		nextScene = std::make_unique<Scene_Tavern>();
 		actualScene = TAVERN;
 		break;
+	case RESISTANCE:
+		nextScene = std::make_unique<Scene_Resistance>();
+		actualScene = RESISTANCE;
+		break;
 	default:
 		break;
 	}
@@ -152,6 +157,9 @@ bool SceneManager::PostUpdate()
 			break;
 		case TAVERN:
 			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Tavern");
+			break;
+		case RESISTANCE:
+			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Resistance");
 			break;
 		case UNKNOWN:
 			break;

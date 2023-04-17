@@ -115,6 +115,12 @@
     <ClCompile Include="Source\Scene_Tavern.cpp">
       <Filter>Scenes\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene_Logo.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Resistance.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -256,6 +262,12 @@
       <Filter>Scenes\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene_Tavern.h">
+      <Filter>Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Logo.h">
+      <Filter>Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Resistance.h">
       <Filter>Scenes\Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,6 +22,7 @@ enum class SceneType
 	TITLESCENE,
 	SHOP,
 	TAVERN,
+	RESISTANCE,
 	UNKNOWN
 };
 

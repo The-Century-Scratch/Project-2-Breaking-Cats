@@ -109,6 +109,8 @@
     <ClCompile Include="Source\LongRange.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Scene_Combat.cpp" />
+    <ClCompile Include="Source\Scene_Logo.cpp" />
+    <ClCompile Include="Source\Scene_Resistance.cpp" />
     <ClCompile Include="Source\Scene_Shop.cpp" />
     <ClCompile Include="Source\Scene_Tavern.cpp" />
     <ClCompile Include="Source\Scene_Vertical.cpp" />
@@ -146,6 +148,8 @@
     <ClInclude Include="Source\LongRange.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Scene_Combat.h" />
+    <ClInclude Include="Source\Scene_Logo.h" />
+    <ClInclude Include="Source\Scene_Resistance.h" />
     <ClInclude Include="Source\Scene_Shop.h" />
     <ClInclude Include="Source\Scene_Tavern.h" />
     <ClInclude Include="Source\Scene_Vertical.h" />

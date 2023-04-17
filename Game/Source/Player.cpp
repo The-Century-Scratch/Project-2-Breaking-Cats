@@ -132,6 +132,9 @@ int Player::StartAction(PlayerAction const& playerAction, EventData const& data)
 			case TAVERN:
 				ret = 8;
 				break;
+			case RESISTANCE:
+				ret = 9;
+				break;
 			default:
 				break;
 			}
