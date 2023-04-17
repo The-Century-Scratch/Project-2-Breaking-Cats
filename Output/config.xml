@@ -108,4 +108,7 @@
   <fonts>
     <property path="Assets/Textures/Fonts/" />
   </fonts>
+  <render>
+    <vsync value="true" />
+  </render>
 </config>

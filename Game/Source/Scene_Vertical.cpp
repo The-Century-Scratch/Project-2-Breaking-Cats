@@ -83,7 +83,6 @@ int Scene_Vertical::Update()
 
 	if ((playerAction.action & PA::MOVE) == PA::MOVE)
 	{
-		LOG("it is attacking right in this very moment in which you have pressed the key of your keyboard with the symbol E");
 		player.FaceTo(playerAction.willFace);
 		if (map.IsWalkable(playerAction.destinationTile))
 		{
@@ -95,8 +94,7 @@ int Scene_Vertical::Update()
 	{
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
-			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
-			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
+			ret = player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 
 			
 
@@ -192,7 +190,6 @@ int Scene_Vertical::CheckNextScene(int ret)
 		app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->S_text.sentenceList;
 	}
 
-	return 0;
 	return ret;
 }
 
