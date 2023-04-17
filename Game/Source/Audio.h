@@ -5,6 +5,8 @@
 #include <memory>
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
+#define DEFAULT_VOLUME_MUSIC 100
+#define LOWERED_VOLUME_MUSIC 30
 
 struct _Mix_Music;
 struct Mix_Chunk;
@@ -32,6 +34,12 @@ public:
 
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
+
+	// Set music volume to any value
+	bool SetVolumeMusic(int newVolume = DEFAULT_VOLUME_MUSIC);
+
+	// Pause/resume music
+	bool PauseMusic(bool pause = true);
 
 private:
 

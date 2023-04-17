@@ -64,7 +64,7 @@ public:
 	void DebugDraw() const;
 
 	PlayerAction HandleInput() const;
-	void StartAction(PlayerAction playerAction, EventData data = EventData());
+	int StartAction(PlayerAction const& playerAction, EventData const& data = EventData());
 	
 	void Update();
 

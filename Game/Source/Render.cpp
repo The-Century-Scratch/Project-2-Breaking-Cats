@@ -261,7 +261,7 @@ bool Render::DrawTexture(DrawParameters const &params) const
 
 	if (SDL_RenderCopyEx(renderer.get(), texture, params.section, &rect, params.rotationAngle, center, params.flip))
 	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		//LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		return false;
 	}
 

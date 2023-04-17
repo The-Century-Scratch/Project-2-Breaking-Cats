@@ -2,6 +2,8 @@
 #define __SCENE_BASE_H__
 
 #include "Window_Factory.h"
+#include "App.h"
+#include "Render.h"
 
 #include "Log.h"
 
@@ -24,7 +26,8 @@ public:
 	virtual void Start() = 0;
 	virtual int Update() = 0;
 	virtual void Draw() = 0;
-	virtual int CheckNextScene() = 0;
+	virtual int CheckNextScene(int ret) = 0;
+	virtual void DrawPause() = 0;
 
 	bool bActive = false;
 	// TODO Fade-in/Fade-out variables (colour, duration)

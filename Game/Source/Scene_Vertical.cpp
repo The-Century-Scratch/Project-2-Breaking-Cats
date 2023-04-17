@@ -16,10 +16,28 @@ int Scene_Vertical::Test()
 
 void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
-	// Load map
-	currentMap = "Vertical";
+	// Load Interface
+	auto sceneHash = info.find("Vertical");
+	if (sceneHash == info.end())
+	{
+		LOG("Title scene not found in XML.");
+		return;
+	}
 
-	if (std::string mapToLoad = currentMap + ".tmx";
+	auto scene = sceneHash->second;
+
+	for (auto const& window : scene.children("window"))
+	{
+		if (auto result = windowFactory.CreateWindow(window.attribute("name").as_string());
+			result != nullptr)
+		{
+			windows.push_back(std::move(result));
+		}
+	}
+
+	// Load map
+
+	if (std::string mapToLoad = fileToLoad + ".tmx";
 		!map.Load(path, mapToLoad))
 	{
 		LOG("Map %s couldn't be loaded.", mapToLoad);
@@ -27,6 +45,7 @@ void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const
 	Test();
 
 	player.Create();
+	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 }
 
 void Scene_Vertical::Start()
@@ -38,10 +57,26 @@ void Scene_Vertical::Draw()
 {
 	map.Draw();
 	player.Draw();
+
+	for (auto const& elem : windows)
+	{
+		elem->Draw();
+	}
 }
 
 int Scene_Vertical::Update()
 {
+	int ret = 0;
+	// Interface Logic
+	for (auto const& elem : windows)
+	{
+		if (auto result = elem->Update();
+			result != 0)
+			return result;
+	}
+
+
+	// Player 
 	auto playerAction = player.HandleInput();
 
 	using PA = Player::PlayerAction::Action;
@@ -59,8 +94,7 @@ int Scene_Vertical::Update()
 	{
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
-			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
-			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
+			ret = player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 
 			
 
@@ -111,10 +145,16 @@ int Scene_Vertical::Update()
 	//std::string vec = map.eventManager.GetEventVector();
 	
 	//LOG("this is the name of the event: %s", vec);
+	return CheckNextScene(ret);
+}
 
-	if (app->input->GetKey(SDL_SCANCODE_Q) == KeyState::KEY_UP)
+int Scene_Vertical::CheckNextScene(int ret)
+{
+	using enum SceneType;
+	using enum KeyState;
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
 	{
-		return 6;
+		return static_cast<int>(SceneType::TITLESCENE);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_UP)
@@ -150,10 +190,10 @@ int Scene_Vertical::Update()
 		app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->S_text.sentenceList;
 	}
 
-	return 0;
+	return ret;
 }
 
-int Scene_Vertical::CheckNextScene()
+void Scene_Vertical::DrawPause()
 {
-	return 0;
+	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

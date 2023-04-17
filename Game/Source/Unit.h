@@ -16,7 +16,11 @@ public:
 		{
 			NONE = 0x0000,
 			MOVE = 0x0001,
-			INTERACT = 0x0002
+			INTERACT = 0x0002,
+			ATTACK = 0x0003,
+			ATTACK_LONG_RANGE = 0x0004,
+			ATTACK_TO_PLAYER = 0x0005,
+			ATTACK_TO_PLAYER_LONG_RANGE = 0x0006
 		};
 
 		friend Action operator&(Action a, Action b)
@@ -52,7 +56,7 @@ public:
 	virtual void Draw() const;
 	virtual void DebugDraw() const;
 
-	PlayerAction HandleInput() const;
+	virtual PlayerAction HandleInput() const;
 	virtual void StartAction(PlayerAction playerAction);
 
 	virtual bool GetHasFinishedTurn();
@@ -61,7 +65,14 @@ public:
 	virtual void SetHasFinishedTurn(bool value);
 	virtual void SetIsMyTurn(bool value);
 
+	virtual void DealDamage(int amount);
+	virtual int GetHealthPoints();
+
 	virtual void Update();
+
+	int velocity = 0;
+	
+	virtual bool GetIsAlly();
 
 private:
 	void AnimateMove();
@@ -79,6 +90,7 @@ private:
 
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
+	int healthPoints = 1;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

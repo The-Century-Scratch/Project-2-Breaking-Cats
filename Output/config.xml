@@ -1,81 +1,114 @@
 <?xml version="1.0"?>
 <config>
-	<app>
-		<title>Game Development Testbed</title>
-		<organization>UPC</organization>
-	</app>
-	<renderer>
-		<vsync value="false" />
-	</renderer>
-	<window>
-		<resolution width="1280" height="720" scale="1" />
-		<fullscreen value="false" />
-		<borderless value="false" />
-		<resizable value="false" />
-		<fullscreen_window value="false" />
-	</window>
-	<scene>
-		<general assetpath="Assets/" />
-		<map_info>
-			<map id="0" name="Base" />
-			<map id="1" name="Test" />
-		</map_info>
-		<scene_info>
-			<scene name="Title">
-				<window name="MainMenu" />
-			</scene>
-		</scene_info>
-		<window_info>
-			<window name="MainMenu" class="List" type="Base" x="50" y="50" width="200" height="100">
-				<button x="508" y="350" width="214" height="64" text="New Game" function="NewGame" segmentwidth="214" segmentheight="64">
-					<state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-				</button>
-				<button x="308" y="350" width="214" height="64" text="Vertical" function="VerticalGame" segmentwidth="214" segmentheight="64">
-					<state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-				</button>
-				<button x="808" y="350" width="214" height="64" text="Combat" function="CombatGame" segmentwidth="214" segmentheight="64">
-					<state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-				</button>
-				<button x="508" y="450" width="214" height="64" text="Continue" function="ContinueGame" segmentwidth="214" segmentheight="64">
-					<state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-				</button>
-				<button x="508" y="550" width="214" height="64" text="Options" function="OptionsWindow" segmentwidth="214" segmentheight="64">
-					<state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-				</button>
-				<button x="508" y="650" width="214" height="64" text="Exit" function="ExitGame" segmentwidth="214" segmentheight="64">
-					<state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-					<state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0" path="Assets/UI/ButtonState9.png" />
-				</button>
-			</window>
-		</window_info>
-	</scene>
-	<fonts>
-		<property path="Assets/Textures/Fonts/" />
-	</fonts>
-	<render>
-		<vsync value="true" />
-	</render>
+  <app>
+    <title>Game Development Testbed</title>
+    <organization>UPC</organization>
+  </app>
+
+  <renderer>
+    <vsync value="false"/>
+  </renderer>
+
+  <window>
+    <resolution width="1280" height="720" scale="1"/>
+    <fullscreen value="false"/>
+    <borderless value="false"/>
+    <resizable value="false"/>
+    <fullscreen_window value="false"/>
+  </window>
+
+  <scene>
+    <general assetpath="Assets/"/>
+
+    <map_info>
+      <map id="0" name="Base"/>
+      <map id="1" name="Test"/>
+    </map_info>
+
+    <scene_info>
+      <scene name="Title">
+        <window name="MainMenu"/>
+      </scene>
+      <scene name="Vertical">
+        <window name="OverWorld"/>
+      </scene>
+    </scene_info>
+
+    <window_info>
+      <window name="MainMenu" class="List" type="Base" x="50" y="50" width="200" height="100">
+        <button x="516" y="350" separation="0" width="267" height="64" text="New Game" function="NewGame" segmentwidth="267" segmentheight="64" path="Assets/UI/ButtonState9.png">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+        </button>
+        <button x="316" y="350" separation="0" width="267" height="64" text="Vertical" function="VerticalGame" segmentwidth="267" segmentheight="64" path="Assets/UI/ButtonState9.png">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+        </button>
+        <button x="816" y="350" separation="0" width="267" height="64" text="Combat" function="CombatGame" segmentwidth="267" segmentheight="64" path="Assets/UI/ButtonState9.png">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+        </button>
+        <button x="516" y="450" separation="0" width="267" height="64" text="Continue" function="ContinueGame" segmentwidth="267" segmentheight="64" path="Assets/UI/ButtonState9.png">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+        </button>
+        <button x="516" y="550" separation="0" width="267" height="64" text="Options" function="OptionsWindow" segmentwidth="267" segmentheight="64" path="Assets/UI/ButtonState9.png">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+        </button>
+        <button x="516" y="650" separation="0" width="267" height="64" text="Exit" function="ExitGame" segmentwidth="267" segmentheight="64" path="Assets/UI/ButtonState9.png">
+          <state_texture state="0" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="2" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="3" x="0" y="64" horizontalsegments="1" verticalsegments="1" advance="0"/>
+          <state_texture state="4" x="0" y="128" horizontalsegments="1" verticalsegments="1" advance="0"/>
+        </button>
+      </window>
+      <window name="OverWorld" class="List" type="Base" x="50" y="50" width="200" height="100">
+        <button x="425" y="525" separation="4" width="64" height="96" text="New Game" function="ContinueGame" segmentwidth="32" segmentheight="32" path="Assets/UI/GUI_4x_sliced.png">
+          <state_texture state="0" x="108" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="1" x="108" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="2" x="212" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="3" x="320" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="4" x="212" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+        </button>
+        <button x="125" y="525" separation="4" width="200" height="100" text="Interface test" function="" segmentwidth="32" segmentheight="32" path="Assets/UI/GUI_4x_sliced.png">
+          <state_texture state="0" x="0" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="1" x="0" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="2" x="0" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="3" x="0" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+          <state_texture state="4" x="0" y="0" horizontalsegments="3" verticalsegments="3" advance="4"/>
+        </button>
+      <button x="25" y="25" separation="0" width="32" height="32" text="" function="" segmentwidth="32" segmentheight="32" path="Assets/UI/GUI_4x_sliced.png">
+          <state_texture state="0" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="1" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="2" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="3" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+          <state_texture state="4" x="0" y="544" horizontalsegments="1" verticalsegments="1" advance="1"/>
+        </button>
+      </window>
+    </window_info>
+
+  </scene>
+  <fonts>
+    <property path="Assets/Textures/Fonts/" />
+  </fonts>
+  <render>
+    <vsync value="true" />
+  </render>
 </config>
