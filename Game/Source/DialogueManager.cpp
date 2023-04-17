@@ -254,10 +254,12 @@ bool DialogueManager::UpdateDialogue() {
 		case C_RETURNAL1:
 			SetDialogue(C_returnalA);
 			dialogueEnabled = false;
+			contrabandistDialog = false;
 			break;
 		case C_RETURNAL2:
 			SetDialogue(C_returnalB);
 			dialogueEnabled = false;
+			contrabandistDialog = false;
 			break;
 		}
 	}
@@ -275,6 +277,7 @@ bool DialogueManager::UpdateDialogue() {
 		case W_RETURNAL:
 			SetDialogue(W_returnal);
 			dialogueEnabled = false;
+			wardDialog = false;
 			break;
 		}
 	}
@@ -282,6 +285,7 @@ bool DialogueManager::UpdateDialogue() {
 	if (signDialog == true) {
 		SetDialogue(S_text);
 		dialogueEnabled = false;
+		signDialog = false;
 	}
 
 	return true;

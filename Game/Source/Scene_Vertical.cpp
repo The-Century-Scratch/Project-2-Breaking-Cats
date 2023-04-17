@@ -100,8 +100,6 @@ int Scene_Vertical::Update()
 		if (app->Dialogue.get()->ward == W_CONVERSATION) {
 			app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->W_conversation.sentenceList;
 		}
-		
-
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_UP)
