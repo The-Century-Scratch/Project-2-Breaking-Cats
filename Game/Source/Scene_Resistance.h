@@ -1,27 +1,12 @@
-#ifndef __SCENE_COMBAT_H__
-#define __SCENE_COMBAT_H__
+#ifndef __SCENE_RESISTANCE_H__
+#define __SCENE_RESISTANCE_H__
 
 #include "Scene_Base.h"
 #include "Player.h"
-#include "Unit.h"
-#include "Straw.h"
-#include "Gats.h"
-#include "Catska.h"
-#include "LongRange.h"
-#include "Guardian.h"
 #include "Map.h"
+#include "TextureManager.h"
 
-enum class UnitType
-{
-    GUARDIAN,
-    STRAW,
-    GATS,
-    CATSKA,
-    LONG_RANGE,
-    NONE
-};
-
-class Scene_Combat : public Scene_Base
+class Scene_Resistance : public Scene_Base
 {
 public:
     bool isReady() override;
@@ -36,24 +21,15 @@ public:
     int Update() override;
     int CheckNextScene(int ret) override;
     void DrawPause() override;
-
-    void CreateUnit();
-
-    void LoadEnemies(const std::string& directory, const std::string& level);
+    int Test();
 
 private:
     std::string currentMap = "";
 
     Map map;
     Player player;
-
-
-    std::vector<std::unique_ptr<Unit>> units;
-
-    int turn = 0;
-    int numberFinished = 0;
     int pauseMenu;
 };
 
 
-#endif __SCENE_COMBAT_H__
+#endif __SCENE_RESISTANCE_H__

@@ -15,7 +15,7 @@ int Scene_Map::Test()
 void Scene_Map::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
 	// Load map
-	currentMap = "Base";
+	currentMap = fileToLoad;
 
 	if (std::string mapToLoad = currentMap + ".tmx";
 		!map.Load(path, mapToLoad))
@@ -25,6 +25,7 @@ void Scene_Map::Load(std::string const& path, LookUpXMLNodeFromString const& inf
 	Test();
 
 	player.Create();
+	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 }
 
 void Scene_Map::Start()
@@ -66,7 +67,19 @@ int Scene_Map::Update()
 	return 0;
 }
 
-int Scene_Map::CheckNextScene()
+int Scene_Map::CheckNextScene(int ret)
 {
-	return 0;
+	using enum SceneType;
+	using enum KeyState;
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		return static_cast<int>(SceneType::TITLESCENE);
+	}
+
+	return ret;
+}
+
+void Scene_Map::DrawPause()
+{
+	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

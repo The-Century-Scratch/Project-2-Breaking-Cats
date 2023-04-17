@@ -309,7 +309,10 @@
                 "a",
                 "Combat",
                 "Vertical",
-                "c"
+                "Title",
+                "Shop",
+                "Tavern",
+                "Resistance"
             ],
             "valuesAsFlags": false
         },

@@ -1,19 +1,19 @@
-#include "Scene_Vertical.h"
+#include "Scene_Resistance.h"
 #include "Event_Base.h"
 
 #include "Log.h"
 
-bool Scene_Vertical::isReady()
+bool Scene_Resistance::isReady()
 {
 	return true;
 }
-int Scene_Vertical::Test()
+int Scene_Resistance::Test()
 {
 	LOG("the test is working");
 	return 0;
 }
 
-void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
+void Scene_Resistance::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
 	// Load Interface
 	auto sceneHash = info.find("Vertical");
@@ -47,11 +47,11 @@ void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 }
 
-void Scene_Vertical::Start()
+void Scene_Resistance::Start()
 {
 }
 
-void Scene_Vertical::Draw()
+void Scene_Resistance::Draw()
 {
 	map.Draw();
 	player.Draw();
@@ -62,7 +62,7 @@ void Scene_Vertical::Draw()
 	}
 }
 
-int Scene_Vertical::Update()
+int Scene_Resistance::Update()
 {
 	int ret = 0;
 	// Interface Logic
@@ -93,7 +93,7 @@ int Scene_Vertical::Update()
 	{
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
-			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
+			LOG("Is event funciona :)");
 			ret = player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 		}
 	}
@@ -107,7 +107,7 @@ int Scene_Vertical::Update()
 	return CheckNextScene(ret);
 }
 
-int Scene_Vertical::CheckNextScene(int ret)
+int Scene_Resistance::CheckNextScene(int ret)
 {
 	using enum SceneType;
 	using enum KeyState;
@@ -119,7 +119,7 @@ int Scene_Vertical::CheckNextScene(int ret)
 	return ret;
 }
 
-void Scene_Vertical::DrawPause()
+void Scene_Resistance::DrawPause()
 {
 	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

@@ -1,19 +1,19 @@
-#include "Scene_Vertical.h"
+#include "Scene_Shop.h"
 #include "Event_Base.h"
 
 #include "Log.h"
 
-bool Scene_Vertical::isReady()
+bool Scene_Shop::isReady()
 {
 	return true;
 }
-int Scene_Vertical::Test()
+int Scene_Shop::Test()
 {
 	LOG("the test is working");
 	return 0;
 }
 
-void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
+void Scene_Shop::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
 	// Load Interface
 	auto sceneHash = info.find("Vertical");
@@ -35,8 +35,9 @@ void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const
 	}
 
 	// Load map
+	currentMap = fileToLoad;
 
-	if (std::string mapToLoad = fileToLoad + ".tmx";
+	if (std::string mapToLoad = currentMap + ".tmx";
 		!map.Load(path, mapToLoad))
 	{
 		LOG("Map %s couldn't be loaded.", mapToLoad);
@@ -47,11 +48,11 @@ void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 }
 
-void Scene_Vertical::Start()
+void Scene_Shop::Start()
 {
 }
 
-void Scene_Vertical::Draw()
+void Scene_Shop::Draw()
 {
 	map.Draw();
 	player.Draw();
@@ -62,7 +63,7 @@ void Scene_Vertical::Draw()
 	}
 }
 
-int Scene_Vertical::Update()
+int Scene_Shop::Update()
 {
 	int ret = 0;
 	// Interface Logic
@@ -107,7 +108,7 @@ int Scene_Vertical::Update()
 	return CheckNextScene(ret);
 }
 
-int Scene_Vertical::CheckNextScene(int ret)
+int Scene_Shop::CheckNextScene(int ret)
 {
 	using enum SceneType;
 	using enum KeyState;
@@ -119,7 +120,7 @@ int Scene_Vertical::CheckNextScene(int ret)
 	return ret;
 }
 
-void Scene_Vertical::DrawPause()
+void Scene_Shop::DrawPause()
 {
 	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

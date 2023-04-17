@@ -1,15 +1,15 @@
-#include "Scene_Title.h"
+#include "Scene_Logo.h"
 #include "Event_Base.h"
 
 #include "Log.h"
 #include "Render.h"
 
-bool Scene_Title::isReady()
+bool Scene_Logo::isReady()
 {
 	return true;
 }
 
-void Scene_Title::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const &windowFactory, std::string const fileToLoad)
+void Scene_Logo::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const &windowFactory, std::string const fileToLoad)
 {
 	auto sceneHash = info.find("Title");
 	if (sceneHash == info.end())
@@ -28,24 +28,21 @@ void Scene_Title::Load(std::string const& path, LookUpXMLNodeFromString const& i
 			windows.push_back(std::move(result));
 		}
 	}
-
-	backgroundTexture = app->tex->Load("Assets/Textures/TitleScreen2.png");
 }
 
-void Scene_Title::Start()
+void Scene_Logo::Start()
 {
 }
 
-void Scene_Title::Draw()
+void Scene_Logo::Draw()
 {
-	app->render->DrawTexture(DrawParameters(backgroundTexture, { 0,0 }));
 	for (auto const& elem : windows)
 	{
 		elem->Draw();
 	}
 }
 
-int Scene_Title::Update()
+int Scene_Logo::Update()
 {
 	for (auto const& elem : windows)
 	{
@@ -56,7 +53,7 @@ int Scene_Title::Update()
 	return 0;
 }
 
-int Scene_Title::CheckNextScene(int ret)
+int Scene_Logo::CheckNextScene(int ret)
 {
 	using enum SceneType;
 	using enum KeyState;
@@ -72,6 +69,6 @@ int Scene_Title::CheckNextScene(int ret)
 	return ret;
 }
 
-void Scene_Title::DrawPause()
+void Scene_Logo::DrawPause()
 {
 }

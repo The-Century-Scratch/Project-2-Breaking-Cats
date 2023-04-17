@@ -28,5 +28,6 @@ iPoint MapLayer::GetSize() const
 
 int MapLayer::GetTileGid(int x, int y) const
 {
+	if (x >= tiles.size()) return 0;
 	return tiles[(y * size.x) + x].gid;
 }

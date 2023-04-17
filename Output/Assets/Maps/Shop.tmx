@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="71">
+ <tileset firstgid="1" source="Tiles.tsx"/>
+ <tileset firstgid="626" source="Props.tsx"/>
+ <tileset firstgid="1251" source="Slime.tsx"/>
+ <tileset firstgid="1347" source="PlazaVertical.tsx"/>
+ <layer id="2" name="Floor" width="24" height="24">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,18,19,19,19,19,19,19,20,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,43,41,41,41,41,41,41,45,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,43,41,41,41,41,41,41,45,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,43,41,41,41,41,41,41,45,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,43,41,41,41,41,41,41,45,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,43,41,41,41,41,41,41,45,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,43,41,41,41,41,41,41,45,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,68,69,69,41,41,69,69,70,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="1" name="Walls" width="24" height="24">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,104,1,2,4,1,3,4,2,3,105,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,26,27,29,208,209,29,27,28,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,51,52,54,233,234,54,52,53,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,0,79,0,0,79,0,0,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,0,0,0,0,0,0,0,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,0,0,0,0,0,0,0,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,0,763,764,764,765,0,0,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,0,788,789,789,790,0,0,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,0,0,0,0,0,0,0,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,0,0,0,0,0,0,0,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,129,0,287,289,0,0,289,289,290,130,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,154,77,77,77,77,77,77,77,77,155,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Events" class="Layer of Events">
+  <object id="69" name="Boss Room" type="Event Teleport" x="176" y="240" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="5"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="70" name="Boss Room" type="Event Teleport" x="192" y="240" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="5"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="4" name="Props" width="24" height="24">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,627,0,932,933,0,627,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,652,0,957,958,0,652,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,306,307,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
