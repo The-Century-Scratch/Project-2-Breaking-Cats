@@ -26,6 +26,12 @@ void Guardian::DebugDraw() const
 	{
 		app->render->DrawShape(debugPosition, false, SDL_Color(intensity, 0, intensity, 255));
 	}
+	debugPosition.y += 13;
+	debugPosition.h /= 3;
+	debugPosition.w = intensity / 12;
+
+
+	app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	
 }
 
