@@ -52,8 +52,10 @@ void Window_Base::CreateButtons(pugi::xml_node const& node)
 	{
 		uPoint pos = { child.attribute("x").as_uint(), child.attribute("y").as_uint() };
 		uPoint s = { child.attribute("width").as_uint(), child.attribute("height").as_uint() };
+		uint separation = child.attribute("separation").as_uint();
 		const std::string name = child.attribute("text").as_string();
 		const std::string fun = child.attribute("function").as_string();
+		const std::string pathButton = child.attribute("path").as_string();
 
 		auto result = strToFuncPtr.find(fun);
 
@@ -75,7 +77,7 @@ void Window_Base::CreateButtons(pugi::xml_node const& node)
 			);
 		}
 
-		widgets.emplace_back(std::make_unique<GuiButton>(pos, s, name, result->second, buttonStateTexture));
+		widgets.emplace_back(std::make_unique<GuiButton>(pos, s, separation, name, result->second, buttonStateTexture, pathButton));
 	}
 }
 

@@ -90,10 +90,12 @@ bool Map::Load(const std::string& directory, const std::string& level)
 		}
 		else
 		{
-			LOG("Error parsing xml file: '%s' tag not implemented.", child.name());
+			LOG("Error parsing xml file: '%s' tag not implemented.", child.name());   //ERROR
 			continue;
 		}
 	}
+
+	LOG("this is for testing");
 
 	eventManager.Initialize();
 
@@ -130,9 +132,34 @@ bool Map::DrawObjectLayer(int index)
 
 void Map::DrawTileLayer(const MapLayer& layer) const
 {
-	for (int x = 0; x < layer.GetSize().x; x++)
+	auto camera = app->render->GetCamera();
+	camera.x *= -1;
+	camera.y *= -1;
+
+	iPoint cameraPosition = { camera.x, camera.y };
+	cameraPosition = WorldToMap((cameraPosition)-tileSize);
+
+	iPoint cameraSize = { camera.w, camera.h };
+	cameraSize = WorldToMap(cameraSize);
+
+	SDL_Rect renderView{};
+
+	renderView.x = cameraPosition.x;
+	if (renderView.x < 0) renderView.x = 0;
+
+	renderView.w = cameraPosition.x + cameraSize.x + tileSize.x;
+	if (renderView.w > layer.GetSize().x) renderView.w = layer.GetSize().x;
+
+	renderView.y = cameraPosition.y;
+	if (renderView.y < 0) renderView.y = 0;
+
+	renderView.h = cameraPosition.y + cameraSize.y + tileSize.y;
+	if (renderView.h > layer.GetSize().y) renderView.h = layer.GetSize().y;
+
+
+	for (int x = renderView.x; x < renderView.w; x++)
 	{
-		for (int y = 0; y < layer.GetSize().y; y++)
+		for (int y = renderView.y; y < renderView.h; y++)
 		{
 			int gid = layer.GetTileGid(x, y);
 

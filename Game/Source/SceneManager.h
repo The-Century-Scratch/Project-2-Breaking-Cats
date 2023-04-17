@@ -20,6 +20,9 @@ enum class SceneType
 	COMBAT,
 	VERTICAL,
 	TITLESCENE,
+	SHOP,
+	TAVERN,
+	RESISTANCE,
 	UNKNOWN
 };
 
@@ -64,7 +67,6 @@ public:
 	LookUpXMLNodeFromString sceneInfo;
 	LookUpXMLNodeFromString mapInfo;
 
-	bool CurrentlyMainMenu = true;
 	SceneType actualScene = SceneType::TITLESCENE;
 };
 

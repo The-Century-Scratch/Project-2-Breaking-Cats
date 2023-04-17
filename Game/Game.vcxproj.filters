@@ -94,6 +94,33 @@
     <ClCompile Include="Source\Straw.cpp">
       <Filter>Scene_Map Components\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Gats.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Catska.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LongRange.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Guardian.cpp">
+      <Filter>Scene_Map Components\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiImage.cpp">
+      <Filter>GUI\Widgets\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Shop.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Tavern.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Logo.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene_Resistance.cpp">
+      <Filter>Scenes\Source</Filter>
+    </ClCompile>
     <ClCompile Include="Source\DialogueManager.cpp">
       <Filter>Dialog</Filter>
     </ClCompile>
@@ -221,6 +248,33 @@
     </ClInclude>
     <ClInclude Include="Source\Straw.h">
       <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gats.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Catska.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LongRange.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Guardian.h">
+      <Filter>Scene_Map Components\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiImage.h">
+      <Filter>GUI\Widgets\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Shop.h">
+      <Filter>Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Tavern.h">
+      <Filter>Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Logo.h">
+      <Filter>Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene_Resistance.h">
+      <Filter>Scenes\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Source\DialogueManager.h">
       <Filter>Dialog</Filter>

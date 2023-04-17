@@ -4,6 +4,7 @@
 #include "Scene_Base.h"
 #include "Player.h"
 #include "Map.h"
+#include "TextureManager.h"
 
 class Scene_Vertical : public Scene_Base
 {
@@ -18,7 +19,8 @@ public:
     void Start() override;
     void Draw() override;
     int Update() override;
-    int CheckNextScene() override;
+    int CheckNextScene(int ret) override;
+    void DrawPause() override;
     int Test();
 
 private:
@@ -26,6 +28,7 @@ private:
 
     Map map;
     Player player;
+    int pauseMenu;
 };
 
 

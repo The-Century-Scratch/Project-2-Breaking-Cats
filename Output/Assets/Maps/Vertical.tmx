@@ -12,7 +12,7 @@
 0,55,56,56,56,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,
 0,0,0,0,0,30,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,
 0,0,0,0,0,30,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,
-0,0,0,0,0,30,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,
+0,0,0,0,0,30,31,31,31,31,31,31,31,31,31,31,31,31,31,44,31,31,31,0,
 0,0,0,0,0,30,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,
 0,0,0,0,0,30,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,
 0,0,5,6,6,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,0,
@@ -72,7 +72,7 @@
     </property>
     <property name="Destination" type="class" propertytype="Helper Destination">
      <properties>
-      <property name="Destination Map" propertytype="Helper Maps" value="test"/>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
       <property name="Destination X" type="int" value="144"/>
       <property name="Destination Y" type="int" value="144"/>
      </properties>
@@ -336,7 +336,7 @@
     </property>
     <property name="Destination" type="class" propertytype="Helper Destination">
      <properties>
-      <property name="Destination Map" propertytype="Helper Maps" value="test"/>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
       <property name="Destination X" type="int" value="144"/>
       <property name="Destination Y" type="int" value="144"/>
      </properties>

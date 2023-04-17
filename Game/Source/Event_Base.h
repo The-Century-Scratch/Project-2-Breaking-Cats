@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "Defs.h"
 #include "PugiXml/src/pugixml.hpp"
+#include "SceneManager.h"
 #include <SDL/include/SDL_pixels.h>
 #include "Log.h"
 
@@ -135,7 +136,7 @@ namespace EventProperties
 
 	struct DestinationProperty : public Property
 	{
-		std::string destinationMap = "";
+		SceneType destinationMap;
 		uPoint destination{ 0, 0 };
 
 		void ReadProperty(pugi::xml_node const& node) override
@@ -147,7 +148,7 @@ namespace EventProperties
 				auto attributeName = child.attribute("name").as_string();
 				if (StrEquals("Destination Map", attributeName))
 				{
-					destinationMap = child.attribute("value").as_string();
+					destinationMap = static_cast<SceneType>(child.attribute("value").as_int());
 				}
 				else if (StrEquals("Destination X", attributeName))
 				{

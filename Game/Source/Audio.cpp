@@ -147,3 +147,20 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	return true;
 }
+
+// Set music volume
+bool Audio::SetVolumeMusic(int newVolume)
+{
+	if (!active) return 0;
+	Mix_VolumeMusic(newVolume);
+	return true;
+}
+
+// Pause/resume music
+bool Audio::PauseMusic(bool pause)
+{
+	if (!active) return 0;
+	if (pause) Mix_PauseMusic();
+	if (!pause) Mix_ResumeMusic();
+	return true;
+}

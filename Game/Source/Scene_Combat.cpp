@@ -21,10 +21,10 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 
 	LoadEnemies(path, fileToLoad);
 
-	player.Create();
+	//player.Create();
 
 
-	std::tuple<iPoint, int> vec;
+	std::tuple<iPoint, int, int> vec;
 	
 	while (std::get<0>(vec).x >= 0)
 	{
@@ -36,6 +36,7 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 
 		if (std::get<0>(vec).x > 0)
 		{
+			LOG("this is the dam amount of cats with giant swords that have been loaded from the tiled map edditor");
 			switch (type)
 			{
 			case GUARDIAN:
@@ -43,8 +44,9 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 				//std::unique_ptr<Input> input;
 				//input = std::make_unique<Input>();
 				std::unique_ptr<Unit> unit;
-				unit = std::make_unique<Unit>();
+				unit = std::make_unique<Guardian>();
 				unit->Create(std::get<0>(vec));
+				unit.get()->velocity = std::get<2>(vec);
 				units.push_back(std::move(unit));
 				break;
 			}
@@ -56,6 +58,7 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 				straw = std::make_unique<Straw>();
 				//straw.Create(std::get<0>(vec));
 				straw->Create(std::get<0>(vec));
+				straw.get()->velocity = std::get<2>(vec);
 				units.push_back(std::move(straw));
 
 				//std::unique_ptr<Unit> unit;
@@ -64,14 +67,48 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 				////units.push_back(unit);
 				break;
 			}
+			case GATS:
+			{
+				
+				std::unique_ptr<Unit> gats;
+				gats = std::make_unique<Gats>();
+				gats->Create(std::get<0>(vec));
+				gats.get()->velocity = std::get<2>(vec);
+				units.push_back(std::move(gats));
+				break;
+			}
+			case CATSKA:
+			{
+				
+				std::unique_ptr<Unit> catska;
+				catska = std::make_unique<Catska>();
+				catska->Create(std::get<0>(vec));
+				catska.get()->velocity = std::get<2>(vec);
+				units.push_back(std::move(catska));
+				break;
+			}
+			case LONG_RANGE:
+			{
+
+				std::unique_ptr<Unit> longRange;
+				longRange = std::make_unique<LongRange>();
+				longRange->Create(std::get<0>(vec));
+				longRange.get()->velocity = std::get<2>(vec);
+				units.push_back(std::move(longRange));
+				break;
+			}
+
+			case NONE:
+
+				break;
 				
 
 			default:
 			{
-				std::unique_ptr<Unit> unit;
-				unit = std::make_unique<Unit>();
-				unit->Create(std::get<0>(vec));
-				units.push_back(std::move(unit));
+				//std::unique_ptr<Unit> unit;
+				//unit = std::make_unique<Unit>();
+				//unit->Create(std::get<0>(vec));
+				//units.push_back(std::move(unit));
 				break;
 			}
 				
@@ -82,7 +119,19 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 			//LOG("this is the position of the event: %i, %i", vec.x, vec.y);
 		}
 	}
-
+	//units[0].swap()
+	//units[0].get().
+	for (int i = 0; i < units.size(); ++i)
+	{
+		for (int j = 0; j < units.size() - 1 - i; ++j)
+		{
+			if (units[j].get()->velocity < units[j + 1].get()->velocity)
+			{
+				units[j].swap(units[j + 1]);
+			}
+		}
+	}
+	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
 
 }
 
@@ -130,31 +179,36 @@ void Scene_Combat::Start()
 void Scene_Combat::Draw()
 {
 	map.Draw();
-	player.Draw();
+	//player.Draw();
 
 	for (auto& i : units)
 	{
-		i->Draw();
+		if (i->GetHealthPoints() > 0)
+		{
+			i->Draw();
+		}
+		
 	}
 }
 
 int Scene_Combat::Update()
 {
-	auto playerAction = player.HandleInput();
-
-
-	using PA = Player::PlayerAction::Action;
+	//auto playerAction = player.HandleInput();
+	//
+	//
+	//using PA = Player::PlayerAction::Action;
 	using UA = Unit::PlayerAction::Action;
-
-	if ((playerAction.action & PA::MOVE) == PA::MOVE)
-	{
-		if (map.IsWalkable(playerAction.destinationTile))
-		{
-			player.StartAction(playerAction);
-
-		}
-
-	}
+	//
+	//if ((playerAction.action & PA::MOVE) == PA::MOVE)
+	//{
+	//	if (map.IsWalkable(playerAction.destinationTile))
+	//	{
+	//		player.StartAction(playerAction);
+	//
+	//	}
+	//
+	//}
+	
 
 	//for (auto& i : units)
 	//{
@@ -225,20 +279,97 @@ int Scene_Combat::Update()
 	for (auto& i : units)
 	{
 		
-		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn())
+		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
 		{
 			noUnitHasActed = false;
-
+			
 			auto unitAction = i->HandleInput();
 
-			if ((unitAction.action & UA::MOVE) == UA::MOVE)
+			if ((unitAction.action) == UA::MOVE)
 			{
-
+				
 				if (map.IsWalkable(unitAction.destinationTile))
 				{
 					i->StartAction(unitAction);
 				}
 			}
+			// TODO: make this a switch
+			if ((unitAction.action) == UA::ATTACK)
+			{
+				for (auto& unit : units)
+				{
+					if (!unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.DistanceTo(unitPos) < 18)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+							
+						}
+					}
+				}
+				
+			}
+			if ((unitAction.action) == UA::ATTACK_LONG_RANGE)
+			{
+				for (auto& unit : units)
+				{
+					if (!unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+							
+						}
+					}
+				}
+
+			}
+			if ((unitAction.action) == UA::ATTACK_TO_PLAYER)
+			{
+				for (auto& unit : units)
+				{
+					if (unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.DistanceTo(unitPos) < 18)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+
+			}
+			if ((unitAction.action) == UA::ATTACK_TO_PLAYER_LONG_RANGE)
+			{
+				for (auto& unit : units)
+				{
+					if (unit.get()->GetIsAlly())
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+
+			}
+			
+
 
 		}
 		i->Update();
@@ -256,12 +387,27 @@ int Scene_Combat::Update()
 
 			//noUnitHasActed = false;
 		}
+		if (!i->GetHealthPoints() > 0)
+		{
+			i->SetHasFinishedTurn(true);
+			
+		}
 
 	}
+	
 
 	if (noUnitHasActed)
 	{
-		units[0]->SetIsMyTurn(true);
+		for (auto& i : units)
+		{
+			if (i->GetHealthPoints() > 0)
+			{
+				i->SetIsMyTurn(true);
+				break;
+			}
+			
+		}
+		
 		for (auto& i : units)
 		{
 			i->SetHasFinishedTurn(false);
@@ -272,7 +418,7 @@ int Scene_Combat::Update()
 
 
 
-	player.Update();
+	//player.Update();
 
 	//std::vector<Event_Base> vec = map.eventManager.GetEventVector();
 
@@ -288,7 +434,19 @@ int Scene_Combat::Update()
 	return 0;
 }
 
-int Scene_Combat::CheckNextScene()
+int Scene_Combat::CheckNextScene(int ret)
 {
-	return 0;
+	using enum SceneType;
+	using enum KeyState;
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		return static_cast<int>(SceneType::TITLESCENE);
+	}
+
+	return ret;
+}
+
+void Scene_Combat::DrawPause()
+{
+	app->render->DrawTexture(DrawParameters(pauseMenu, { 100, 100 }));
 }

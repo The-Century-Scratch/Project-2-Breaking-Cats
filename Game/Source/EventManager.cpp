@@ -21,7 +21,7 @@ void EventManager::Initialize()
 		drawIterator = events.begin();
 }
 
-std::tuple<iPoint, int> EventManager::GetEnemyInfo()
+std::tuple<iPoint, int, int> EventManager::GetEnemyInfo()
 {
 	//if (events.size())
 	//{
@@ -127,6 +127,7 @@ std::tuple<iPoint, int> EventManager::GetEnemyInfo()
 
 		iPoint returnPos = dynamic_cast<Transform*>(enemies[enemies.size() - 1].get())->GetPosition();
 		int returnType = enemies[enemies.size() - 1].get()->ReturnType();
+		int returnVelocity = enemies[enemies.size() - 1].get()->ReturnVelocity();
 
 		//enemies[enemies.size() - 1].get()
 
@@ -135,14 +136,14 @@ std::tuple<iPoint, int> EventManager::GetEnemyInfo()
 		enemies.pop_back();
 		
 
-		return std::make_tuple(returnPos, returnType);
+		return std::make_tuple(returnPos, returnType, returnVelocity);
 		//enemyReturnIterator->get()->
 
 		LOG(" %i", sth);
 	}
 	iPoint pos = { -1,-1 };
 
-	return std::make_tuple(pos, 0);
+	return std::make_tuple(pos, 0, 0);
 	
 }
 

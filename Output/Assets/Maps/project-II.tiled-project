@@ -205,8 +205,8 @@
                 {
                     "name": "Destination Map",
                     "propertyType": "Helper Maps",
-                    "type": "string",
-                    "value": "Base"
+                    "type": "int",
+                    "value": 0
                 },
                 {
                     "name": "Destination X",
@@ -301,11 +301,19 @@
         {
             "id": 4,
             "name": "Helper Maps",
-            "storageType": "string",
+            "storageType": "int",
             "type": "enum",
             "values": [
+                "None",
                 "Base",
-                "test"
+                "b",
+                "a",
+                "Combat",
+                "Vertical",
+                "Title",
+                "Shop",
+                "Tavern",
+                "Resistance"
             ],
             "valuesAsFlags": false
         },
@@ -381,7 +389,9 @@
             "values": [
                 "Guardian",
                 "Straw",
-                "Gats"
+                "Gats",
+                "Catska",
+                "LongRange"
             ],
             "valuesAsFlags": false
         }

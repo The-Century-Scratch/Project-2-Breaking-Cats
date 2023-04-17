@@ -136,9 +136,13 @@ void Unit::StartMovement()
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		moveVector.x = 1;
-		//LOG("it does enter this scope %i", moveVector.x);
+		
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
+}
+bool Unit::GetIsAlly()
+{
+	return false;
 }
 
 void Unit::Update()
@@ -193,5 +197,15 @@ void Unit::SmoothMove()
 	{
 		moveTimer++;
 	}
-	LOG("it does enter this scope %i", moveTimer);
+	
+}
+
+void Unit::DealDamage(int amount)
+{
+	healthPoints -= amount;
+}
+
+int Unit::GetHealthPoints()
+{
+	return healthPoints;
 }
