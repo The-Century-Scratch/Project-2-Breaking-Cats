@@ -15,7 +15,7 @@ Straw::~Straw() = default;
 void Straw::DebugDraw() const
 {
 	int intensity = 255.0f * (static_cast<float>(healthPoints) / 30);
-	LOG("the intensity of the number of the colour being rendered in this very moment is %i", intensity);
+	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
 	{
