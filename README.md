@@ -8,6 +8,7 @@ Breaking Cats is a rpg made by "The Century Scratch", a groups of students of Vi
 - C - Instant leave
 - E - Interact/attack
 - Mouse - To click the buttons
+- if you are within a dialogue z to say yes, x to say no and space to continue
 
 ## Key features
 This is a vertical slice with 3 locations, 3 NPCs, 4 dialogues, a combat, 3 locations, and a map. This is the beginning of a much more thrilling and exciting project that will be launched soon. In this world yoiu will take the reins of Gats who is fighting with the cat resistance against the dogs. In this world full of animals you will find different objects, powerups, great lore and obviously combats, a lot of combat.
