@@ -110,6 +110,7 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Scene_Combat.cpp" />
     <ClCompile Include="Source\Scene_Shop.cpp" />
+    <ClCompile Include="Source\Scene_Tavern.cpp" />
     <ClCompile Include="Source\Scene_Vertical.cpp" />
     <ClCompile Include="Source\Straw.cpp" />
     <ClCompile Include="Source\TextManager.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Scene_Combat.h" />
     <ClInclude Include="Source\Scene_Shop.h" />
+    <ClInclude Include="Source\Scene_Tavern.h" />
     <ClInclude Include="Source\Scene_Vertical.h" />
     <ClInclude Include="Source\Sprite.h" />
     <ClInclude Include="Source\Straw.h" />

@@ -4,7 +4,7 @@
  <tileset firstgid="626" source="Props.tsx"/>
  <tileset firstgid="1251" source="Slime.tsx"/>
  <tileset firstgid="1347" source="PlazaVertical.tsx"/>
- <layer id="2" name="Floor" width="48" height="48" visible="0">
+ <layer id="2" name="Floor" width="48" height="48">
   <data encoding="csv">
 1402,1403,1404,1460,1471,1529,1473,1421,1420,1528,1581,1583,1582,1418,1581,1581,1580,1472,1528,1419,1420,1476,3193,3194,3194,3141,3195,3142,1525,1526,1526,1526,1473,1583,1528,1529,1582,1421,1418,1473,1583,1472,1582,1421,1581,1420,1529,1472,
 1402,1403,1404,1460,1579,1474,1418,1526,1580,1475,1421,1418,1475,1421,1418,1421,1421,1527,1472,1582,1582,1422,3193,3141,3195,3195,3195,3142,1579,1529,1529,1421,1527,1473,1582,1420,1582,1583,1527,1475,1582,1529,1528,1419,1473,1582,1583,1583,
@@ -108,7 +108,7 @@
 2464,2465,2466,2467,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2431,2432
 </data>
  </layer>
- <objectgroup id="3" name="Events" class="Layer of Events" visible="0">
+ <objectgroup id="3" name="Events" class="Layer of Events">
   <object id="15" name="Boss Room" type="Event Teleport" x="32" y="144" width="16" height="16">
    <properties>
     <property name="Base" type="class" propertytype="Base Event">
@@ -355,7 +355,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer id="4" name="Props" width="48" height="48" visible="0">
+ <layer id="4" name="Props" width="48" height="48">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,3043,3044,0,0,0,0,0,0,3043,3044,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,2433,2434,0,0,0,2437,2438,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

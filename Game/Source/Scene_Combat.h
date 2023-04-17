@@ -34,7 +34,7 @@ public:
     void Start() override;
     void Draw() override;
     int Update() override;
-    int CheckNextScene() override;
+    int CheckNextScene(int ret) override;
 
     void CreateUnit();
 

@@ -360,7 +360,14 @@ int Scene_Combat::Update()
 	return 0;
 }
 
-int Scene_Combat::CheckNextScene()
+int Scene_Combat::CheckNextScene(int ret)
 {
-	return 0;
+	using enum SceneType;
+	using enum KeyState;
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		return static_cast<int>(SceneType::TITLESCENE);
+	}
+
+	return ret;
 }

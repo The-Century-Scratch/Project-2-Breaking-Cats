@@ -6,6 +6,8 @@
 #include "Scene_Combat.h"
 #include "Scene_Title.h"
 #include "Scene_Vertical.h"
+#include "Scene_Shop.h"
+#include "Scene_Tavern.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -106,6 +108,14 @@ bool SceneManager::Update(float dt)
 		nextScene = std::make_unique<Scene_Title>();
 		actualScene = TITLESCENE;
 		break;
+	case SHOP:
+		nextScene = std::make_unique<Scene_Shop>();
+		actualScene = SHOP;
+		break;
+	case TAVERN:
+		nextScene = std::make_unique<Scene_Tavern>();
+		actualScene = TAVERN;
+		break;
 	default:
 		break;
 	}
@@ -132,10 +142,16 @@ bool SceneManager::PostUpdate()
 			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Map2");
 			break;
 		case VERTICAL:
-			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Vertical2_1");
+			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Vertical");
 			break;
 		case TITLESCENE:
 			nextScene.get()->Load(assetPath + "UI/", sceneInfo, *windowFactory);
+			break;
+		case SHOP:
+			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Shop");
+			break;
+		case TAVERN:
+			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Tavern");
 			break;
 		case UNKNOWN:
 			break;

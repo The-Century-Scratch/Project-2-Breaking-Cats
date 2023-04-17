@@ -66,7 +66,14 @@ int Scene_Map::Update()
 	return 0;
 }
 
-int Scene_Map::CheckNextScene()
+int Scene_Map::CheckNextScene(int ret)
 {
-	return 0;
+	using enum SceneType;
+	using enum KeyState;
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+	{
+		return static_cast<int>(SceneType::TITLESCENE);
+	}
+
+	return ret;
 }

@@ -1,19 +1,19 @@
-#include "Scene_Shop.h"
+#include "Scene_Tavern.h"
 #include "Event_Base.h"
 
 #include "Log.h"
 
-bool Scene_Shop::isReady()
+bool Scene_Tavern::isReady()
 {
 	return true;
 }
-int Scene_Shop::Test()
+int Scene_Tavern::Test()
 {
 	LOG("the test is working");
 	return 0;
 }
 
-void Scene_Shop::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
+void Scene_Tavern::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
 	// Load Interface
 	auto sceneHash = info.find("Vertical");
@@ -35,9 +35,8 @@ void Scene_Shop::Load(std::string const& path, LookUpXMLNodeFromString const& in
 	}
 
 	// Load map
-	currentMap = fileToLoad;
 
-	if (std::string mapToLoad = currentMap + ".tmx";
+	if (std::string mapToLoad = fileToLoad + ".tmx";
 		!map.Load(path, mapToLoad))
 	{
 		LOG("Map %s couldn't be loaded.", mapToLoad);
@@ -47,11 +46,11 @@ void Scene_Shop::Load(std::string const& path, LookUpXMLNodeFromString const& in
 	player.Create();
 }
 
-void Scene_Shop::Start()
+void Scene_Tavern::Start()
 {
 }
 
-void Scene_Shop::Draw()
+void Scene_Tavern::Draw()
 {
 	map.Draw();
 	player.Draw();
@@ -62,7 +61,7 @@ void Scene_Shop::Draw()
 	}
 }
 
-int Scene_Shop::Update()
+int Scene_Tavern::Update()
 {
 	int ret = 0;
 	// Interface Logic
@@ -93,7 +92,7 @@ int Scene_Shop::Update()
 	{
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
-			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
+			LOG("Is event funciona :)");
 			ret = player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 		}
 	}
@@ -107,7 +106,7 @@ int Scene_Shop::Update()
 	return CheckNextScene(ret);
 }
 
-int Scene_Shop::CheckNextScene(int ret)
+int Scene_Tavern::CheckNextScene(int ret)
 {
 	using enum SceneType;
 	using enum KeyState;

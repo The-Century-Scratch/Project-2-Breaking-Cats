@@ -20,6 +20,8 @@ enum class SceneType
 	COMBAT,
 	VERTICAL,
 	TITLESCENE,
+	SHOP,
+	TAVERN,
 	UNKNOWN
 };
 

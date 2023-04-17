@@ -315,7 +315,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer id="4" name="Props" width="24" height="24" visible="0">
+ <layer id="4" name="Props" width="24" height="24">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,2433,2434,0,0,0,2437,2438,0,0,0,0,0,0,0,0,0,0,

@@ -101,7 +101,7 @@
     </property>
     <property name="Destination" type="class" propertytype="Helper Destination">
      <properties>
-      <property name="Destination Map" propertytype="Helper Maps" value="test"/>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="5"/>
       <property name="Destination X" type="int" value="144"/>
       <property name="Destination Y" type="int" value="144"/>
      </properties>
@@ -172,7 +172,7 @@
     </property>
     <property name="Destination" type="class" propertytype="Helper Destination">
      <properties>
-      <property name="Destination Map" propertytype="Helper Maps" value="test"/>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="5"/>
       <property name="Destination X" type="int" value="144"/>
       <property name="Destination Y" type="int" value="144"/>
      </properties>

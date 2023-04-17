@@ -86,7 +86,7 @@ Player::PlayerAction Player::HandleInput() const
 	return returnAction;
 }
 
-int Player::StartAction(PlayerAction playerAction, EventData data)
+int Player::StartAction(PlayerAction const& playerAction, EventData const& data)
 {
 	int ret = 0;
 	if (playerAction.action == PlayerAction::Action::MOVE)
@@ -125,6 +125,12 @@ int Player::StartAction(PlayerAction playerAction, EventData data)
 				break;
 			case TITLESCENE:
 				ret = 6;
+				break;
+			case SHOP:
+				ret = 7;
+				break;
+			case TAVERN:
+				ret = 8;
 				break;
 			default:
 				break;

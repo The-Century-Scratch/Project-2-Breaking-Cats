@@ -63,6 +63,7 @@ void Scene_Vertical::Draw()
 
 int Scene_Vertical::Update()
 {
+	int ret = 0;
 	// Interface Logic
 	for (auto const& elem : windows)
 	{
@@ -92,8 +93,7 @@ int Scene_Vertical::Update()
 		if (map.IsEvent(playerAction.destinationTile, player.facing))
 		{
 			LOG("Is event funciona :)"); //TODO el event tp no lo pilla
-			int ret = 0;
-			player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
+			ret = player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
 		}
 	}
 	
@@ -103,10 +103,10 @@ int Scene_Vertical::Update()
 	//std::string vec = map.eventManager.GetEventVector();
 	
 	//LOG("this is the name of the event: %s", vec);
-	return CheckNextScene();
+	return CheckNextScene(ret);
 }
 
-int Scene_Vertical::CheckNextScene()
+int Scene_Vertical::CheckNextScene(int ret)
 {
 	using enum SceneType;
 	using enum KeyState;
@@ -115,5 +115,5 @@ int Scene_Vertical::CheckNextScene()
 		return static_cast<int>(SceneType::TITLESCENE);
 	}
 
-	return 0;
+	return ret;
 }

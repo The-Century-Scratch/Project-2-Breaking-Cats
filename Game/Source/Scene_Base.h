@@ -24,7 +24,7 @@ public:
 	virtual void Start() = 0;
 	virtual int Update() = 0;
 	virtual void Draw() = 0;
-	virtual int CheckNextScene() = 0;
+	virtual int CheckNextScene(int ret) = 0;
 
 	bool bActive = false;
 	// TODO Fade-in/Fade-out variables (colour, duration)

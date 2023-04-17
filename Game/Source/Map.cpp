@@ -149,7 +149,7 @@ void Map::DrawTileLayer(const MapLayer& layer) const
 
 	renderView.w = cameraPosition.x + cameraSize.x + tileSize.x;
 	if (renderView.w > layer.GetSize().x) renderView.w = layer.GetSize().x;
-
+	
 	renderView.y = cameraPosition.y;
 	if (renderView.y < 0) renderView.y = 0;
 

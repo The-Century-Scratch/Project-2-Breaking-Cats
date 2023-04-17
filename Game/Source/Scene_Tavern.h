@@ -1,12 +1,12 @@
-#ifndef __SCENE_VERTICAL_H__
-#define __SCENE_VERTICAL_H__
+#ifndef __SCENE_TAVERN_H__
+#define __SCENE_TAVERN_H__
 
 #include "Scene_Base.h"
 #include "Player.h"
 #include "Map.h"
 #include "TextureManager.h"
 
-class Scene_Vertical : public Scene_Base
+class Scene_Tavern : public Scene_Base
 {
 public:
     bool isReady() override;
@@ -30,4 +30,4 @@ private:
 };
 
 
-#endif __SCENE_VERTICAL_H__
+#endif __SCENE_TAVERN_H__
