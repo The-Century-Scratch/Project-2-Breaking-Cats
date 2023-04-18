@@ -145,7 +145,7 @@ bool SceneManager::PostUpdate()
 			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory);
 			break;
 		case COMBAT:
-			nextScene.get()->Load(assetPath + "Maps/", mapInfo, *windowFactory, "Map2");
+			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Map2");
 			break;
 		case VERTICAL:
 			nextScene.get()->Load(assetPath + "Maps/", sceneInfo, *windowFactory, "Vertical2");

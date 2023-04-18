@@ -346,6 +346,7 @@ bool App::DoPaused()
 bool App::PauseGame()
 {
 	using enum KeyState;
+	audio->SetVolumeMusic(30);
 	while (input->GetKey(SDL_SCANCODE_P) == KEY_DOWN || input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT)
 	{
 		DoPaused();
@@ -356,6 +357,7 @@ bool App::PauseGame()
 		DoPaused();
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) return false;
 	}
+	audio->SetVolumeMusic(100);
 
 	return true;
 }

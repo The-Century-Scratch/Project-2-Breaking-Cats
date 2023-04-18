@@ -10,6 +10,25 @@ bool Scene_Combat::isReady()
 
 void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& info, Window_Factory const& windowFactory, std::string const fileToLoad)
 {
+	// Load Interface
+	auto sceneHash = info.find("Combat");
+	if (sceneHash == info.end())
+	{
+		LOG("Title scene not found in XML.");
+		return;
+	}
+
+	auto scene = sceneHash->second;
+
+	for (auto const& window : scene.children("window"))
+	{
+		if (auto result = windowFactory.CreateWindow(window.attribute("name").as_string());
+			result != nullptr)
+		{
+			windows.push_back(std::move(result));
+		}
+	}
+
 	// Load map
 	currentMap = "Map2";
 	currentMap = fileToLoad;
@@ -192,10 +211,23 @@ void Scene_Combat::Draw()
 		}
 		
 	}
+
+	for (auto const& elem : windows)
+	{
+		elem->Draw();
+	}
 }
 
 int Scene_Combat::Update()
 {
+	// Interface Logic
+	for (auto const& elem : windows)
+	{
+		if (auto result = elem->Update();
+			result != 0)
+			return result;
+	}
+
 	//auto playerAction = player.HandleInput();
 	//
 	//
