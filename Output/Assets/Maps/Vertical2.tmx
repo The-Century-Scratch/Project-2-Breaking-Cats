@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="91">
+ <tileset firstgid="1" source="Tiles.tsx"/>
+ <tileset firstgid="626" source="Props.tsx"/>
+ <tileset firstgid="1251" source="Slime.tsx"/>
+ <tileset firstgid="1347" source="PlazaVertical.tsx"/>
+ <layer id="2" name="Floor" width="48" height="48">
+  <data encoding="csv">
+1402,1403,1404,1460,1471,1529,1473,1421,1420,1528,1581,1583,1582,1418,1581,1581,1580,1472,1528,1419,1420,1476,3193,3194,3194,3141,3195,3142,1525,1526,1526,1526,1473,1583,1528,1529,1582,1421,1418,1473,1583,1472,1582,1421,1581,1420,1529,1472,
+1402,1403,1404,1460,1579,1474,1418,1526,1580,1475,1421,1418,1475,1421,1418,1421,1421,1527,1472,1582,1582,1422,3193,3141,3195,3195,3195,3142,1579,1529,1529,1421,1527,1473,1582,1420,1582,1583,1527,1475,1582,1529,1528,1419,1473,1582,1583,1583,
+1402,1403,1404,1460,1579,1580,1472,1420,1528,1583,1420,1526,1582,1527,1582,1528,1528,1473,1420,1472,1420,1584,3193,3194,3141,3195,3141,3142,1579,1474,1582,1582,1421,1527,1528,1582,1472,1527,1581,1418,1526,1475,1527,1583,1529,1419,1580,1475,
+1402,1403,1404,1460,1525,1581,1472,1418,1529,1582,1472,1474,1527,1580,1528,1527,1529,1475,1419,1473,1527,1422,3193,3195,3195,3141,3140,3196,1579,1474,1473,1420,1473,1421,1526,1529,1419,1418,1421,1527,1418,1472,1418,1472,1475,1418,1580,1418,
+1402,1403,1404,1460,1525,1472,1475,1421,1583,1419,1527,1581,1473,1421,1475,1526,1420,1473,1582,1583,1418,1584,3193,3194,3140,3140,3195,3142,1525,1473,1580,1419,1580,1581,1472,1420,1420,1528,1583,1473,1580,1418,1582,1529,1475,1580,1527,1474,
+1402,1403,1404,1460,1579,1474,1418,1582,1528,1526,1473,1583,1529,1474,1475,1526,1581,1418,1583,1526,1529,1476,3193,3195,3140,3140,3140,3142,1579,1475,1419,1581,1582,1582,1475,1474,1418,1474,1580,1419,1580,1582,1527,1421,1419,1582,1473,1580,
+1402,1403,1404,1460,1417,1580,1527,1526,1473,1583,1420,1474,1473,1474,1420,1581,1581,1473,1475,1418,1529,1476,3193,3141,3140,3195,3141,3142,1525,1474,1582,1581,1421,1419,1527,1580,1421,1421,1582,1526,1526,1581,1580,1421,1529,1526,1419,1580,
+1402,1403,1404,1460,1417,1527,1582,1527,1421,1581,1418,1583,1473,1529,1418,1529,1583,1580,1528,1528,1474,1476,3139,3194,3194,3194,3195,3142,1525,1582,1474,1527,1475,1472,1419,1475,1475,1419,1474,1473,1473,1583,1528,1582,1582,1582,1418,1527,
+1402,1403,1404,1460,1417,1527,1418,1583,1528,1474,1418,1528,1581,1581,1583,1474,1527,1583,1582,1418,1527,1530,3139,3195,3194,3140,3195,3196,1471,1420,1528,1473,1473,1581,1583,1474,1580,1529,1472,1474,1419,1581,1475,1420,1420,1527,1526,1421,
+1402,1403,1404,1460,1579,1526,1419,1580,1580,1418,1582,1526,1475,1421,1583,1418,1473,1528,1473,1582,1472,1476,3193,3194,3195,3140,3194,3142,1471,1526,1472,1527,1582,1527,1473,1529,1529,1421,1528,1528,1421,1527,1529,1580,1580,1581,1528,1418,
+1402,1403,1404,1460,1471,1418,1581,1581,1580,1420,1527,1583,1581,1526,1420,1528,1421,1581,1528,1528,1421,1476,3193,3140,3195,3195,3195,3142,1525,1475,1528,1527,1472,1526,1421,1580,1421,1581,1580,1582,1528,1580,1474,1472,1418,1581,1580,1581,
+1402,1403,1404,1460,1471,1529,1474,1529,1581,1581,1583,1474,1580,1529,1580,1526,1527,1582,1582,1526,1527,1476,3193,3195,3141,3194,3141,3142,1579,1475,1474,1474,1472,1528,1420,1583,1473,1583,1582,1474,1474,1529,1418,1527,1420,1527,1528,1528,
+1402,1403,1404,1460,1417,1582,1474,1474,1420,1528,1418,1474,1582,1581,1475,1473,1582,1581,1526,1583,1475,1530,3139,3140,3194,3140,3140,3142,1525,1527,1582,1583,1418,1526,1474,1472,1526,1582,1581,1529,1526,1581,1419,1582,1475,1583,1473,1419,
+1402,1403,1404,1460,1579,1473,1582,1474,1421,1580,1527,1583,1528,1473,1529,1529,1474,1424,1637,1635,1634,1638,3139,3194,3194,3141,3195,3142,1633,1636,1634,1635,1425,1418,1583,1420,1529,1526,1526,1529,1527,1472,1474,1527,1529,1421,1583,1474,
+1402,1403,1404,1460,1417,1527,1583,1420,1581,1583,1473,1419,1473,1472,1581,1472,1424,1638,3085,3086,3087,3086,3199,3195,3141,3194,3194,3198,3086,3087,3087,3088,1633,1425,1528,1580,1421,1418,1526,1528,1526,1581,1583,1421,1582,1421,1529,1528,
+1402,1403,1404,1460,1417,1475,1582,1528,1472,1475,1581,1472,1529,1528,1474,1424,1638,3085,3199,3194,3141,3195,3194,3194,3140,3140,3194,3194,3141,3195,3141,3198,3088,1633,1425,1473,1474,1418,1528,1527,1473,1419,1473,1527,1583,1581,1473,1473,
+1402,1403,1404,1460,1579,1526,1527,1473,1418,1419,1420,1581,1528,1582,1424,1638,3085,3199,3195,3140,3141,3140,3144,3249,3249,3248,3248,3145,3194,3141,3195,3140,3198,3088,1633,1425,1420,1473,1419,1581,1472,1526,1419,1420,1474,1526,1582,1474,
+1402,1403,1404,1460,1471,1582,1419,1581,1580,1421,1420,1581,1582,1424,1638,3085,3199,3140,3195,3140,3144,3248,3250,1402,1402,1403,1404,3247,3249,3145,3141,3195,3140,3198,3088,1633,1425,1472,1526,1527,1472,1528,1529,1527,1582,1581,1418,1472,
+1402,1403,1404,1460,1417,1420,1418,1421,1583,1580,1528,1475,1418,1530,3085,3199,3140,3195,3144,3248,3250,1402,1403,1404,1456,1457,1402,1403,1404,3247,3248,3145,3194,3141,3198,3088,1579,1421,1420,1529,1580,1581,1528,1581,1419,1526,1528,1421,
+1402,1403,1404,1460,1525,1581,1473,1418,1472,1475,1419,1582,1529,1422,3139,3194,3141,3141,3196,1402,1403,1456,1402,1403,1402,1402,1403,1404,1402,1403,1404,3193,3195,3195,3140,3196,1417,1474,1527,1475,1580,1528,1420,1418,1527,1526,1419,1472,
+1402,1403,1404,1460,1471,1472,1419,1420,1421,1474,1475,1473,1581,1422,3193,3194,3195,3144,3250,1456,1457,1402,1403,1402,1456,1456,1402,1403,1404,1403,1404,3139,3141,3194,3140,3142,1471,1475,1527,1473,1581,1474,1421,1472,1475,1420,1475,1475,
+1402,1403,1460,1460,1579,1474,1583,1421,1473,1528,1527,1418,1473,1584,3139,3141,3195,3142,1402,1510,1402,1403,1402,1456,1510,1510,1402,1403,1404,1403,1404,3247,3145,3194,3194,3142,1633,1635,1636,1636,1635,1635,1636,1635,1636,1634,1636,1637,
+1402,1403,1460,1460,1525,1583,1583,1474,1472,1527,1418,1419,1473,1476,3193,3194,3144,3250,1456,1402,1403,1404,1456,1510,1510,1511,1402,1402,1403,1404,1403,1404,3247,3145,3195,3198,3087,3086,3086,3086,3087,3086,3086,3086,3086,3087,3087,3087,
+1402,1403,1460,1460,1525,1473,1526,1472,1474,1474,1528,1472,1472,1584,3193,3194,3142,1402,1510,1402,1403,1402,1510,1510,1402,1403,1404,1402,1403,1404,1402,1403,1404,3193,3141,3194,3195,3194,3195,3141,3140,3194,3195,3141,3195,3140,3194,3140,
+1402,1403,1404,1460,1471,1580,1421,1528,1420,1583,1421,1472,1583,1476,3193,3141,3142,1456,1457,1402,1403,1456,1510,1402,1403,1404,1404,1404,1403,1404,1402,1403,1404,3139,3141,3195,3195,3140,3195,3141,3140,3141,3140,3140,3194,3194,3141,3195,
+1402,1403,1404,1460,1525,1528,1580,1583,1421,1529,1580,1529,1474,1584,3139,3194,3142,1510,1511,1402,1402,1510,1402,1403,1404,1404,1458,1458,1404,1404,1456,1457,1458,3139,3141,3141,3195,3141,3141,3140,3194,3195,3140,3141,3194,3194,3140,3195,
+1402,1403,1404,1460,1525,1583,1580,1580,1529,1418,1527,1581,1472,1422,3193,3194,3196,1510,1511,1456,1456,1402,1403,1404,1404,1458,1512,1512,1458,1458,1403,1404,1512,3193,3195,3195,3195,3140,3141,3141,3140,3195,3195,3195,3195,3140,3194,3140,
+1402,1403,1404,1460,1525,1419,1472,1475,1581,1420,1475,1472,1582,1584,3193,3140,3198,3088,1456,1510,1510,1402,1403,1404,1458,1512,1511,1512,1512,1512,1457,1458,3085,3199,3140,3144,3248,3248,3249,3249,3248,3249,3248,3248,3249,3249,3248,3249,
+1402,1403,1404,1460,1579,1472,1528,1472,1528,1528,1529,1580,1419,1584,3139,3194,3194,3196,1510,1511,1512,1456,1457,1458,1512,1510,1510,1511,1512,1403,1404,1512,3139,3195,3141,3142,1363,1367,1366,1364,1364,1367,1366,1365,1364,1367,1364,1366,
+1402,1403,1404,1460,1579,1475,1474,1528,1583,1526,1475,1475,1526,1584,3193,3141,3140,3198,3088,1510,1511,1510,1511,1512,1510,1510,1511,1512,1404,1457,1458,3085,3199,3194,3140,3142,1417,1420,1475,1581,1529,1583,1419,1528,1475,1418,1475,1418,
+1402,1403,1404,1460,1579,1418,1473,1580,1420,1475,1528,1474,1526,1530,3139,3195,3194,3141,3198,3088,1510,1511,1512,1458,1403,1404,1404,1457,1458,1511,1512,3193,3195,3195,3194,3142,1525,1474,1472,1583,1528,1527,1473,1580,1583,1526,1526,1526,
+1402,1403,1404,1460,1525,1473,1580,1475,1529,1529,1419,1528,1421,1530,3247,3145,3194,3195,3140,3198,3088,1510,1511,1512,1457,1458,1458,1511,1512,3085,3087,3199,3141,3141,3144,3250,1579,1527,1421,1421,1527,1582,1582,1581,1526,1472,1475,1418,
+1402,1403,1404,1460,1525,1529,1418,1421,1583,1475,1472,1580,1529,1478,1368,3247,3145,3140,3195,3195,3198,3087,3088,1510,1511,1512,1512,3085,3086,3199,3140,3194,3141,3144,3250,1363,1479,1473,1421,1421,1421,1419,1472,1472,1583,1580,1583,1529,
+1402,1403,1404,1460,1525,1527,1526,1473,1473,1419,1528,1421,1475,1583,1478,1368,3247,3145,3140,3140,3194,3194,3198,3087,3086,3086,3086,3199,3195,3140,3195,3195,3144,3250,1363,1479,1472,1580,1418,1473,1582,1528,1419,1527,1527,1472,1418,1581,
+1402,1403,1404,1460,1579,1528,1529,1418,1583,1420,1529,1529,1580,1583,1582,1478,1368,3247,3145,3141,3194,3141,3194,3194,3195,3140,3195,3140,3194,3194,3194,3144,3250,1363,1479,1529,1529,1528,1526,1419,1527,1580,1473,1527,1472,1529,1472,1474,
+1402,1403,1404,1460,1417,1474,1528,1581,1474,1526,1473,1581,1580,1474,1475,1419,1478,1368,3247,3249,3249,3248,3145,3194,3195,3140,3195,3144,3249,3248,3249,3250,1363,1479,1583,1526,1581,1420,1472,1527,1580,1581,1526,1419,1473,1526,1581,1420,
+1402,1403,1404,1460,1417,1421,1526,1583,1580,1419,1529,1419,1528,1420,1528,1420,1582,1478,1364,1367,1364,1368,3139,3194,3141,3194,3195,3196,1363,1367,1366,1364,1479,1475,1420,1472,1581,1473,1421,1582,1475,1473,1527,1418,1580,1580,1580,1582,
+1402,1403,1404,1460,1525,1473,1526,1473,1529,1475,1526,1420,1419,1526,1527,1419,1419,1473,1420,1474,1420,1476,3139,3194,3141,3140,3140,3196,1579,1419,1475,1475,1420,1421,1419,1583,1419,1528,1473,1527,1582,1581,1418,1528,1475,1472,1583,1475,
+1402,1403,1404,1460,1525,1418,1473,1473,1420,1581,1582,1418,1475,1583,1420,1582,1421,1582,1475,1526,1475,1476,3139,3141,3140,3194,3141,3142,1579,1583,1419,1474,1420,1527,1472,1418,1474,1582,1528,1580,1421,1420,1581,1472,1583,1474,1526,1472,
+1403,1404,1404,1460,1471,1583,1473,1420,1582,1582,1582,1420,1581,1526,1472,1583,1528,1581,1419,1529,1419,1530,3139,3195,3194,3140,3141,3142,1417,1419,1421,1420,1528,1583,1473,1526,1473,1528,1529,1526,1420,1420,1527,1583,1527,1583,1474,1583,
+1403,1404,1458,1460,1525,1418,1527,1528,1473,1528,1472,1529,1475,1526,1473,1420,1473,1526,1421,1528,1526,1584,3193,3140,3140,3140,3195,3196,1525,1472,1526,1583,1420,1418,1582,1580,1529,1527,1418,1418,1420,1580,1583,1527,1474,1527,1583,1526,
+1402,1403,1404,1460,1579,1418,1581,1421,1419,1529,1421,1475,1472,1472,1473,1472,1473,1475,1583,1529,1527,1422,3139,3140,3140,3195,3141,3196,1471,1526,1421,1583,1582,1583,1582,1581,1581,1526,1526,1419,1528,1473,1581,1583,1474,1529,1583,1420,
+1402,1403,1404,1460,1417,1582,1418,1418,1529,1581,1580,1580,1420,1474,1472,1419,1526,1420,1529,1474,1526,1584,3193,3194,3140,3141,3194,3142,1417,1474,1528,1581,1418,1526,1474,1526,1580,1526,1472,1581,1472,1420,1419,1582,1420,1529,1526,1418,
+1402,1403,1404,1460,1417,1474,1420,1475,1527,1421,1581,1581,1472,1527,1472,1583,1419,1420,1421,1527,1472,1422,3193,3195,3195,3140,3140,3142,1525,1582,1583,1526,1527,1474,1580,1580,1472,1475,1419,1527,1418,1527,1529,1419,1581,1475,1581,1529,
+1402,1403,1404,1460,1579,1475,1475,1583,1419,1580,1583,1582,1473,1580,1475,1581,1420,1526,1475,1529,1475,1584,3193,3141,3195,3140,3140,3142,1417,1474,1474,1421,1581,1475,1581,1527,1418,1473,1582,1582,1475,1529,1474,1580,1581,1472,1421,1472,
+1402,1403,1404,1460,1471,1474,1472,1474,1421,1419,1421,1583,1421,1528,1472,1419,1473,1475,1527,1474,1420,1530,3193,3194,3141,3194,3141,3196,1525,1582,1475,1583,1580,1472,1421,1580,1529,1528,1527,1583,1421,1421,1529,1419,1581,1421,1582,1473,
+1402,1403,1404,1460,1525,1529,1581,1473,1473,1583,1418,1580,1527,1582,1472,1474,1527,1529,1527,1528,1472,1584,3139,3194,3141,3195,3195,3196,1417,1472,1474,1526,1527,1582,1472,1529,1580,1418,1582,1529,1583,1583,1472,1419,1472,1473,1527,1420,
+1456,1457,1458,1460,1525,1526,1418,1527,1475,1474,1418,1473,1421,1474,1528,1583,1473,1420,1475,1421,1582,1476,3139,3140,3140,3141,3195,3142,1525,1581,1472,1472,1581,1582,1583,1527,1529,1582,1419,1472,1419,1583,1419,1583,1475,1420,1583,1421
+</data>
+ </layer>
+ <layer id="1" name="Walls" width="48" height="48">
+  <data encoding="csv">
+2302,2303,2304,2305,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3063,3064,0,0,0,0,0,0,0,1649,1650,1495,1496,1497,1498,1499,1500,1649,1650,0,0,0,2385,2386,0,2485,2486,
+2356,2357,2358,2359,0,0,0,1687,1688,1687,1688,1689,1689,1690,1688,1689,1690,1691,1692,0,0,3163,3164,0,0,0,0,0,0,0,1703,1704,1387,1388,1389,1390,1391,1392,1703,1704,0,0,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,1903,1904,1903,1904,1743,1743,1744,1742,1743,1744,1745,1746,0,0,3217,3218,0,0,0,0,0,0,0,1671,1672,1673,1674,1675,1674,1675,1674,1675,1676,1895,1896,1897,1898,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,1957,1958,1903,1904,1743,1743,1744,1742,1743,1744,1745,1746,0,0,3271,3272,0,0,0,0,0,0,0,1833,1781,1782,1783,1783,1783,1783,1732,1733,1730,1890,1891,1891,1892,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,1811,1812,1903,1904,1905,1905,1906,1907,1905,1906,1907,1908,0,0,0,0,0,0,0,0,0,0,0,1887,1835,1836,1837,1837,1837,1837,1786,1787,1784,1944,1945,1945,1946,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,1865,1866,1957,1958,1959,1959,1960,1961,1959,1960,1961,1962,0,0,0,0,0,0,0,0,0,0,0,1941,1942,1943,1944,1942,1943,1944,1945,1945,1946,1607,1608,1649,1650,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,1919,1920,1811,1812,1981,1984,1984,1985,1984,1986,1811,1812,2863,2864,0,0,0,0,0,0,0,0,0,1379,1380,1549,1550,1551,1552,1553,1554,1379,1380,1661,1662,1703,1704,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,2189,2190,1865,1866,2035,2038,2038,2039,2038,2040,1865,1866,2917,2918,0,0,0,0,0,0,0,0,0,1433,1434,1603,1604,1605,1606,1607,1608,1433,1434,1715,1716,1703,1704,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,1919,1920,2089,2092,2090,2091,2092,2094,1919,1920,0,0,0,0,0,0,0,0,0,0,0,1649,1650,1657,1658,1659,1660,1661,1662,1649,1650,1769,1770,1757,1758,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,1919,1920,2089,2092,2090,2091,2092,2094,1919,1920,0,0,0,0,0,0,0,0,0,0,0,1703,1704,1711,1712,1713,1714,1715,1716,1703,1704,0,0,0,2535,2536,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,2189,2190,2191,2192,2193,2194,2195,2196,2189,2190,0,0,0,0,0,0,0,0,0,0,0,1757,1758,1765,1766,1767,1768,1769,1770,1757,1758,2331,2332,0,2589,2590,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2535,2536,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2385,2386,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2589,2590,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2535,2536,0,0,0,0,0,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,0,0,0,0,0,0,0,2950,2951,2952,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2589,2590,0,0,0,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,2535,2536,0,0,0,0,0,3003,3004,3005,3006,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,2589,2590,0,0,0,0,0,3057,3058,3059,3060,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2535,2536,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,1687,1688,1689,1689,1690,1691,1690,1691,1692,0,0,0,0,0,0,0,0,0,0,2243,2244,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2589,2590,0,2331,2332,0,2485,2486,
+2356,2357,2358,2359,0,1795,1748,1749,1796,1796,1796,1797,1798,1800,0,0,0,0,0,0,0,0,0,0,2297,2298,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2385,2386,0,2223,2224,
+2410,2411,2412,2413,0,1849,1802,1803,1797,1798,1850,1748,1749,1854,0,0,0,0,0,0,0,0,0,0,2459,2460,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2277,2278,
+2356,2357,2358,2359,0,1903,1904,1905,1851,1852,1905,1802,1803,1908,0,0,0,0,0,0,0,0,0,0,2513,2514,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2535,2536,0,0,2555,2556,
+2410,2411,2412,2413,0,1957,1958,1959,1960,1958,1959,1960,1961,1962,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2943,2944,2945,0,0,2589,2590,0,0,2609,2610,
+2356,2357,2358,2359,0,1811,1812,1819,1820,1821,1822,1824,1811,1812,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2997,2998,2999,3000,0,0,0,0,0,2555,2556,
+2410,2411,2412,2413,0,1865,1866,1873,1874,1875,1876,1878,1865,1866,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3051,3052,3053,3054,0,0,0,0,0,2609,2610,
+2356,2357,2358,2359,0,1919,1920,1873,1874,1875,1876,1878,1919,1920,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2555,2556,
+2410,2411,2412,2413,0,1973,1974,1927,1928,1929,1930,1932,1973,1974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2609,2610,
+2356,2357,2358,2359,0,2027,2028,1981,1982,1983,1984,1986,2027,2028,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2555,2556,
+2410,2411,2412,2413,0,2081,2082,2089,2090,2091,2093,2094,2081,2082,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2609,2610,
+2356,2357,2358,2359,0,2135,2136,2143,2559,2560,2147,2148,2135,2136,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2555,2556,
+2410,2411,2412,2413,0,2189,2190,2197,2613,2614,2201,2202,2189,2190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2609,2610,
+2356,2357,2358,2359,0,2223,2224,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2535,2536,0,0,0,2223,2224,
+2410,2411,2412,2413,0,2277,2278,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2589,2590,0,0,0,2277,2278,
+2356,2357,2358,2359,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2221,2222,0,0,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2275,2276,0,0,0,0,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,0,0,2223,2224,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2535,2536,0,2431,2432,
+2410,2411,2412,2413,0,0,0,2535,2536,0,0,2277,2278,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1687,1688,1689,1690,1691,1690,1691,1692,0,0,0,2589,2590,0,2485,2486,
+2356,2357,2358,2359,0,0,0,2589,2590,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1741,1742,1743,1744,1745,1744,1745,1746,0,0,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1903,1904,1905,1906,1907,1906,1907,1908,0,0,0,0,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1957,1958,1959,1960,1961,1960,1961,1962,0,2535,2536,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,0,1671,1672,1673,1674,1675,1674,1675,1674,1675,1676,0,0,0,0,0,0,0,0,0,0,0,0,1811,1812,1981,1983,1984,1986,1811,1812,0,2589,2590,2221,2222,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,0,1833,1781,1782,1783,1783,1783,1783,1732,1733,1730,0,0,0,0,0,0,0,0,0,0,0,0,2081,2082,2089,2145,2146,2094,2081,2082,0,0,0,2275,2276,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,0,1887,1835,1836,1837,1837,1837,1837,1786,1787,1784,0,0,0,0,0,0,0,0,0,0,0,0,2135,2136,2143,2145,2146,2148,2135,2136,0,0,0,0,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,0,1941,1942,1943,1944,1942,1943,1944,1945,1945,1946,0,0,0,0,0,0,0,0,0,0,0,0,2189,2190,2197,2198,2201,2202,2189,2190,0,0,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,0,1379,1380,1549,1550,1551,1552,1553,1554,1379,1380,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2331,2332,0,0,0,0,0,0,0,0,0,2485,2486,
+2356,2357,2358,2359,0,0,0,0,0,0,1433,1434,1603,1604,1605,1606,1607,1608,1433,1434,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2385,2386,0,0,0,0,0,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,0,0,0,0,1649,1650,1657,1658,1659,1660,1661,1662,1649,1650,0,0,0,0,0,0,0,0,0,0,0,0,2535,2536,0,0,0,0,0,0,0,0,0,0,0,0,2485,2486,
+2356,2357,2358,2359,0,0,2535,2536,0,0,1703,1704,1711,1712,1713,1714,1715,1716,1703,1704,0,0,0,0,0,0,0,0,0,0,0,0,2589,2590,0,0,0,0,0,0,0,0,0,0,0,0,2431,2432,
+2410,2411,2412,2413,0,0,2589,2590,0,0,1757,1758,1765,1766,1767,1768,1769,1770,1757,1758,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2485,2486,
+2464,2465,2466,2467,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2431,2432
+</data>
+ </layer>
+ <objectgroup id="3" name="Events" class="Layer of Events">
+  <object id="15" name="Tavern" type="Event Teleport" x="304" y="112" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="8"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="63" name="Tavern" type="Event Teleport" x="304" y="96" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="8"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="64" name="Tavern" type="Event Teleport" x="320" y="96" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="8"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="65" name="Tavern" type="Event Teleport" x="320" y="112" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="8"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="66" name="Tavern" type="Event Teleport" x="288" y="112" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="8"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="67" name="Tavern" type="Event Teleport" x="288" y="96" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="8"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="68" name="Shop" type="Event Teleport" x="560" y="656" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="7"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="69" name="Shop" type="Event Teleport" x="576" y="656" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="7"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="70" name="Shop" type="Event Teleport" x="96" y="192" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="7"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="71" name="Shop" type="Event Teleport" x="576" y="672" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="7"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="72" name="Combat" type="Event Teleport" x="560" y="160" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="74" name="Combat" type="Event Teleport" x="544" y="160" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="75" name="Combat" type="Event Teleport" x="544" y="176" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="76" name="Combat" type="Event Teleport" x="560" y="176" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="77" name="Resistance" type="Event Teleport" x="128" y="448" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="9"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="78" name="Resistance" type="Event Teleport" x="144" y="448" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="9"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="79" name="Resistance" type="Event Teleport" x="144" y="464" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="9"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="80" name="Resistance" type="Event Teleport" x="128" y="464" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="9"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="82" name="Shop" type="Event Teleport" x="558.667" y="671.333" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="7"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="83" name="Combat" type="Event Teleport" x="256" y="224" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="84" name="Combat" type="Event Teleport" x="272" y="224" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="85" name="Combat" type="Event Teleport" x="256" y="240" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="86" name="Combat" type="Event Teleport" x="272" y="240" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="87" name="Combat" type="Event Teleport" x="288" y="240" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="88" name="Combat" type="Event Teleport" x="288" y="224" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="89" name="Combat" type="Event Teleport" x="240" y="240" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="90" name="Combat" type="Event Teleport" x="240" y="224" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Destination" type="class" propertytype="Helper Destination">
+     <properties>
+      <property name="Destination Map" type="int" propertytype="Helper Maps" value="4"/>
+      <property name="Destination X" type="int" value="144"/>
+      <property name="Destination Y" type="int" value="144"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="4" name="Props" width="48" height="48">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,3043,3044,0,0,0,0,0,0,3043,3044,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,2433,2434,0,0,0,2437,2438,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,2487,2488,0,0,0,2491,2492,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,2437,2438,0,0,0,0,2661,2662,0,0,0,0,0,0,3189,3190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2543,2544,0,0,0,2491,2492,0,0,0,0,2715,2716,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2597,2598,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2543,2544,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2597,2598,0,0,0,0,2665,2666,2773,2774,2665,2666,0,0,0,0,0,0,0,3243,3244,0,0,0,0,2665,2666,2775,2776,0,0,2775,2776,2665,2666,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2719,2720,2827,2828,2719,2720,0,0,0,0,0,0,0,0,0,0,0,0,0,2719,2720,2829,2830,0,0,2829,2830,2719,2720,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2009,2010,0,0,0,0,0,0,2881,2882,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,2665,2666,0,0,2345,2346,0,0,2665,2666,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2063,2064,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,2719,2720,0,0,2399,2400,0,0,2719,2720,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2117,2118,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2447,2448,0,0,0,0,0,0,0,0,0,0,0,0,0,2009,2010,0,0,0,
+0,0,0,0,0,2171,2172,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,2501,2502,0,0,0,0,0,0,0,0,0,0,0,0,0,2063,2064,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2117,2118,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2865,2866,0,0,0,0,2171,2172,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2919,2920,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2009,2010,0,0,0,0,0,0,2009,2010,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2063,2064,0,0,0,0,0,0,2063,2064,0,0,0,0,0,0,0,2447,2448,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2117,2118,0,0,0,0,0,0,2117,2118,0,0,0,0,0,0,0,2501,2502,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2171,2172,0,0,0,0,0,0,2171,2172,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,2883,2884,0,2883,2884,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,2937,2938,0,2937,2938,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2665,2666,0,0,0,0,0,2665,2666,0,0,0,0,0,0,0,0,0,0,2551,2552,0,0,0,0,0,0,0,0,0,0,3077,3078,0,3077,3078,0,3077,3078,0,0,2609,0,
+0,0,0,0,0,2719,2720,0,0,0,2773,2774,2719,2720,0,0,0,0,0,0,0,0,0,0,2605,2606,0,0,0,0,0,0,0,0,0,0,3131,3132,0,3131,3132,0,3131,3132,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,2827,2828,0,0,0,0,0,0,0,0,2009,2010,0,0,0,0,0,0,2009,2010,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,2881,2882,0,0,0,0,0,0,2447,2448,2063,2064,0,0,0,0,0,0,2063,2064,2447,2448,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2501,2502,2117,2118,0,0,2243,2244,0,0,2117,2118,2501,2502,0,0,0,0,2447,2448,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2171,2172,0,0,2297,2298,0,0,2171,2172,0,0,0,0,0,0,2501,2502,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,2543,2544,0,0,0,0,0,0,0,0,0,0,0,0,2351,2352,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,2597,2598,0,0,0,0,0,0,0,0,0,0,0,0,2515,2516,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,2543,2544,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,2597,2598,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2757,2758,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,2811,2812,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,2009,2010,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,2063,2064,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2501,2502,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,2117,2118,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,0,0,2665,2666,0,0,0,0,2665,2666,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,2171,2172,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,2719,2720,0,2343,2344,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2397,2398,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2009,2010,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,0,0,0,0,0,0,2649,2650,0,0,0,2063,2064,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2703,2704,0,0,0,2117,2118,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3189,3190,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2171,2172,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3243,3244,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
