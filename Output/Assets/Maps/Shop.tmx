@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="71">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="77">
  <tileset firstgid="1" source="Tiles.tsx"/>
  <tileset firstgid="626" source="Props.tsx"/>
- <tileset firstgid="1251" source="Slime.tsx"/>
- <tileset firstgid="1347" source="PlazaVertical.tsx"/>
+ <tileset firstgid="1251" source="PlazaVertical.tsx"/>
+ <tileset firstgid="3195" source="Maicey.tsx"/>
  <layer id="2" name="Floor" width="24" height="24">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -113,6 +113,150 @@
     </property>
    </properties>
   </object>
+  <object id="71" name="maicey" type="Event Dialogue" x="192" y="160" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="1"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="72" name="maicey" type="Event Dialogue" x="176" y="176" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="1"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="73" name="maicey" type="Event Dialogue" x="176" y="160" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="1"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="74" name="maicey" type="Event Dialogue" x="192" y="176" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="1"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="75" name="maicey" type="Event Dialogue" x="176" y="192" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="1"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="76" name="maicey" type="Event Dialogue" x="191.547" y="192" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="1"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="4" name="Props" width="24" height="24">
   <data encoding="csv">
@@ -126,7 +270,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,627,0,932,933,0,627,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,652,0,957,958,0,652,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,3195,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

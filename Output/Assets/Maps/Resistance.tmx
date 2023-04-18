@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="26">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="32">
  <tileset firstgid="1" source="Tiles.tsx"/>
  <tileset firstgid="626" source="Props.tsx"/>
  <tileset firstgid="1251" source="Slime.tsx"/>
+ <tileset firstgid="1347" source="TheGuardian.tsx"/>
  <layer id="2" name="Floor" width="24" height="24">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -110,6 +111,7 @@
      <properties>
       <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
       <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
       <property name="isActive" type="bool" value="true"/>
      </properties>
     </property>
@@ -217,49 +219,21 @@
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="19" name="10 Gold" type="Event Chest" gid="955" x="144" y="304" width="16" height="16">
+  <object id="19" name="kiko" type="Event Dialogue" gid="955" x="160" y="320" width="16" height="16">
    <properties>
     <property name="Base" type="class" propertytype="Base Event">
      <properties>
       <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
       <property name="Trigger" type="int" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
       <property name="isActive" type="bool" value="true"/>
      </properties>
     </property>
-    <property name="GlobalSwitch1" type="class" propertytype="Global Switch">
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
      <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="3"/>
-      <property name="ID" type="int" value="2"/>
-      <property name="SwitchName" value="Potato"/>
+      <property name="Script" type="int" value="4"/>
      </properties>
     </property>
-    <property name="GlobalSwitch2" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="4"/>
-      <property name="ID" type="int" value="4"/>
-      <property name="SwitchName" value="Apple"/>
-     </properties>
-    </property>
-    <property name="Loot1" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Coins"/>
-      <property name="Quantity" type="int" value="19"/>
-     </properties>
-    </property>
-    <property name="Loot2" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="HP Potion"/>
-      <property name="Quantity" type="int" value="4"/>
-     </properties>
-    </property>
-    <property name="Loot3" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Revive"/>
-      <property name="Quantity" type="int" value="52"/>
-     </properties>
-    </property>
-    <property name="isLocked" type="bool" value="false"/>
-    <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
   <object id="24" name="Vertical" type="Event Teleport" x="176" y="352" width="16" height="16">
@@ -268,6 +242,7 @@
      <properties>
       <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
       <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
       <property name="isActive" type="bool" value="true"/>
      </properties>
     </property>
@@ -293,6 +268,7 @@
      <properties>
       <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
       <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="2"/>
       <property name="isActive" type="bool" value="true"/>
      </properties>
     </property>
@@ -312,6 +288,150 @@
     </property>
    </properties>
   </object>
+  <object id="26" name="ward" type="Event Dialogue" x="176" y="208" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="3"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="27" name="ward" type="Event Dialogue" x="160" y="208" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="3"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="28" name="ward" type="Event Dialogue" x="176" y="192" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="3"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="29" name="ward" type="Event Dialogue" x="160" y="192" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="3"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="30" name="ward" type="Event Dialogue" x="176" y="176" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="3"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="31" name="ward" type="Event Dialogue" x="160" y="176" width="16" height="16">
+   <properties>
+    <property name="Base" type="class" propertytype="Base Event">
+     <properties>
+      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
+      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
+      <property name="Type" type="int" propertytype="EventType" value="3"/>
+      <property name="isActive" type="bool" value="true"/>
+     </properties>
+    </property>
+    <property name="Direction" propertytype="Helper Direction" value="Up"/>
+    <property name="Fade" type="class" propertytype="Helper Fade">
+     <properties>
+      <property name="Active" type="bool" value="false"/>
+      <property name="Fade Color" type="color" value="#7affffff"/>
+     </properties>
+    </property>
+    <property name="Scripts" type="class" propertytype="Scripts of Dialogues">
+     <properties>
+      <property name="Script" type="int" value="3"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="4" name="Props" width="24" height="24">
   <data encoding="csv">
@@ -327,7 +447,7 @@
 0,0,0,0,129,0,0,0,0,0,0,0,0,0,0,0,0,0,130,0,0,0,0,0,
 0,0,0,0,129,0,0,963,0,0,0,0,0,0,0,0,0,0,130,0,0,0,0,0,
 0,0,0,0,129,0,0,680,681,0,0,0,0,0,0,0,0,0,130,0,0,0,0,0,
-0,0,0,0,129,0,0,705,706,0,0,0,0,0,0,0,0,0,130,0,0,0,0,0,
+0,0,0,0,129,0,0,705,706,0,1347,0,0,0,0,0,0,0,130,0,0,0,0,0,
 0,0,0,0,129,0,0,730,731,0,0,0,0,0,0,0,0,0,130,0,0,0,0,0,
 0,0,0,0,129,0,0,0,0,0,0,0,0,0,0,0,0,0,130,0,0,0,0,0,
 0,0,0,0,129,0,0,0,0,0,0,0,0,0,0,0,0,0,130,0,0,0,0,0,

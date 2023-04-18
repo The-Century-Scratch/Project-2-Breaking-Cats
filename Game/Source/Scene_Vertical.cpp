@@ -1,6 +1,7 @@
 #include "Scene_Vertical.h"
 #include "Event_Base.h"
 #include "DialogueManager.h"
+#include "Audio.h"
 
 #include "Log.h"
 
@@ -46,6 +47,8 @@ void Scene_Vertical::Load(std::string const& path, LookUpXMLNodeFromString const
 
 	player.Create();
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
+
+	music = app->audio->PlayMusic("Assets/Audio/Music/Map.ogg");
 }
 
 void Scene_Vertical::Start()

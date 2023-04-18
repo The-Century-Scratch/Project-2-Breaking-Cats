@@ -1,6 +1,7 @@
 #include "Scene_Combat.h"
 
 #include "Log.h"
+#include "Audio.h"
 
 bool Scene_Combat::isReady()
 {
@@ -132,6 +133,8 @@ void Scene_Combat::Load(std::string const& path, LookUpXMLNodeFromString const& 
 		}
 	}
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
+
+	music = app->audio->PlayMusic("Assets/Audio/Music/Combat.ogg");
 
 }
 
@@ -413,6 +416,21 @@ int Scene_Combat::Update()
 			i->SetHasFinishedTurn(false);
 		}
 		numberFinished = 0;
+
+		bool enemiesAlive = false;
+		for (auto& i : units)
+		{
+			if (!i->GetIsAlly() && i->GetHealthPoints() > 0)
+			{
+				enemiesAlive = true;
+			}
+			
+		}
+		if (!enemiesAlive)
+		{
+			return 5;
+		}
+		
 	}
 
 

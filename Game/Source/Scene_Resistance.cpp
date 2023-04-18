@@ -1,5 +1,7 @@
 #include "Scene_Resistance.h"
 #include "Event_Base.h"
+#include "DialogueManager.h"
+#include "Audio.h"
 
 #include "Log.h"
 
@@ -45,6 +47,8 @@ void Scene_Resistance::Load(std::string const& path, LookUpXMLNodeFromString con
 
 	player.Create();
 	pauseMenu = app->tex->Load("Assets/UI/pixel-simplicity-gui.png");
+
+	music = app->audio->PlayMusic("Assets/Audio/Music/Combat.ogg");
 }
 
 void Scene_Resistance::Start()
@@ -94,6 +98,44 @@ int Scene_Resistance::Update()
 		{
 			LOG("Is event funciona :)");
 			ret = player.StartAction(playerAction, map.getEvent(playerAction.destinationTile, player.facing));
+		}
+
+		if (map.getEvent(playerAction.destinationTile, player.facing).commonData.type == EventType::DIALOGUE)
+		{
+			LOG("npc dialogue started %i", map.getEvent(playerAction.destinationTile, player.facing).dialogueData.script);
+			switch (map.getEvent(playerAction.destinationTile, player.facing).dialogueData.script)
+			{
+			case 1:
+
+				app->Dialogue.get()->dialogueEnabled = true;
+				app->Dialogue.get()->miceyDialog = true;
+				app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->M_greeting.sentenceList;
+				app->Dialogue.get()->micey = M_GREETING;
+				break;
+			case 2:
+				app->Dialogue.get()->dialogueEnabled = true;
+				app->Dialogue.get()->contrabandistDialog = true;
+				if (app->Dialogue.get()->contrabandist == C_GREETING)
+				{
+					app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->C_greeting.sentenceList;
+				}
+				break;
+			case 3:
+				app->Dialogue.get()->dialogueEnabled = true;
+				app->Dialogue.get()->wardDialog = true;
+				if (app->Dialogue.get()->ward == W_CONVERSATION)
+				{
+					app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->W_conversation.sentenceList;
+				}
+				break;
+			case 4:
+				app->Dialogue.get()->dialogueEnabled = true;
+				app->Dialogue.get()->signDialog = true;
+				app->Dialogue.get()->sentenceQueue = app->Dialogue.get()->S_text.sentenceList;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	

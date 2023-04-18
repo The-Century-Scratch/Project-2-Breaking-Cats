@@ -4,6 +4,7 @@
 #include "Scene_Base.h"
 #include "TextureManager.h"
 #include "Log.h"
+#include "Audio.h"
 
 class Scene_Title : public Scene_Base
 {
@@ -23,6 +24,7 @@ public:
 
 private:
     int backgroundTexture;
+    int music;
 };
 
 #endif __SCENE_TITLE_H__
