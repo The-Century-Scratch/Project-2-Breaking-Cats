@@ -333,7 +333,7 @@ int Scene_Combat::Update()
 			{
 				for (auto& unit : units)
 				{
-					if (!unit.get()->GetIsAlly())
+					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 					{
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.DistanceTo(unitPos) < 18)
@@ -352,7 +352,7 @@ int Scene_Combat::Update()
 			{
 				for (auto& unit : units)
 				{
-					if (!unit.get()->GetIsAlly())
+					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 					{
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
@@ -371,7 +371,7 @@ int Scene_Combat::Update()
 			{
 				for (auto& unit : units)
 				{
-					if (unit.get()->GetIsAlly())
+					if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 					{
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.DistanceTo(unitPos) < 18)
@@ -389,7 +389,7 @@ int Scene_Combat::Update()
 			{
 				for (auto& unit : units)
 				{
-					if (unit.get()->GetIsAlly())
+					if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 					{
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
@@ -426,6 +426,10 @@ int Scene_Combat::Update()
 		{
 			i->SetHasFinishedTurn(true);
 			
+		}
+		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() <= 0)
+		{
+			i->SetHasFinishedTurn(true);
 		}
 
 	}
