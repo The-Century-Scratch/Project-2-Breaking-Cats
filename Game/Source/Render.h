@@ -87,7 +87,7 @@ public:
 	// Called before quitting
 	bool CleanUp() final;
 
-	bool DrawTexture(DrawParameters const& params) const;
+	bool DrawTexture(DrawParameters const& params, bool scaleLogo = false) const;
 
 	bool DrawShape(
 		const SDL_Rect &rect,

@@ -22,6 +22,8 @@ public:
     void DrawPause() override;
 
 private:
+    int logo;
+    int timer;
 };
 
 #endif __SCENE_LOGO_H__

@@ -207,13 +207,24 @@ void Render::ResetViewPort() const
 	SDL_RenderSetViewport(renderer.get(), &viewport);
 }
 
-bool Render::DrawTexture(DrawParameters const &params) const
+bool Render::DrawTexture(DrawParameters const &params, bool scaleLogo) const
 {
 	auto texture = app->GetTexture(params.textureID);
 
-	fPoint scale = (params.scale.IsZero())
-		? fPoint(app->win->GetScale(), app->win->GetScale())
-		: params.scale;
+	fPoint scale;
+
+	if (!scaleLogo)
+	{
+		scale = (params.scale.IsZero())
+			? fPoint(app->win->GetScale(), app->win->GetScale())
+			: params.scale;
+	}
+	else
+	{
+		scale = (params.scale.IsZero())
+			? fPoint(7.0f, 7.0f)
+			: params.scale;
+	}
 
 	SDL_Rect rect{ 0 };
 	// (camera * parallaxSpeed) + position

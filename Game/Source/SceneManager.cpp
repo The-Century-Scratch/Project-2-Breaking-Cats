@@ -9,6 +9,7 @@
 #include "Scene_Shop.h"
 #include "Scene_Tavern.h"
 #include "Scene_Resistance.h"
+#include "Scene_Logo.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -41,7 +42,7 @@ bool SceneManager::Awake(pugi::xml_node& config)
 		mapInfo[node.attribute("name").as_string()] = node;
 	}
 	
-	currentScene = std::make_unique<Scene_Title>();
+	currentScene = std::make_unique<Scene_Logo>();
 	return true;
 }
 
