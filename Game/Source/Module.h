@@ -1,27 +1,27 @@
 #ifndef __MODULE_H__
 #define __MODULE_H__
 
-#include <string>
+#include "SString.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
 class App;
-class PhysBody;
+class GuiControl;
 
 class Module
 {
 public:
 
-	Module() = default;
-	
-	virtual ~Module() = default;
+	Module(bool startEnabled = false) : state(startEnabled)
+	{}
 
-	void Init()
+	bool Init()
 	{
-		active = true;
+		return true;
 	}
 
 	// Called before render is available
+	// Sending config file to all modules
 	virtual bool Awake(pugi::xml_node&)
 	{
 		return true;
@@ -51,40 +51,48 @@ public:
 		return true;
 	}
 
-	// Called when game is paused
-	virtual bool Pause(int phase)
-	{
-		return true;
-	}
-
 	// Called before quitting
 	virtual bool CleanUp()
 	{
 		return true;
 	}
-	
-	virtual bool LoadState(pugi::xml_node const &)
+
+	virtual bool LoadState(pugi::xml_node&)
 	{
 		return true;
 	}
 
-	virtual pugi::xml_node SaveState(pugi::xml_node const &)  const
+	virtual bool SaveState(pugi::xml_node&)
 	{
-		return pugi::xml_node();
+		return true;
 	}
 
-	virtual void OnCollisionStart(PhysBody* bodyA, PhysBody* bodyB)
+	virtual bool OnGuiMouseClickEvent(GuiControl* control)
 	{
-		// To Override
+		return true;
 	}
 
-	virtual bool HasSaveData() const
-	{
-		return false;
+	void Enable() {
+		if (!state) {
+			state = true;
+			Start();
+		}
 	}
 
-	std::string name;
-	bool active = false;
+	void Disable() {
+		if (state) {
+			state = false;
+			CleanUp();
+		}
+	}
+
+	inline bool IsEnabled() const { return state; }
+
+public:
+
+	SString name;
+	bool state;
+
 };
 
 #endif // __MODULE_H__

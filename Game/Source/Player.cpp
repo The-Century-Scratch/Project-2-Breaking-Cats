@@ -1,243 +1,101 @@
-#include "App.h"
 #include "Player.h"
-
-#include "Map.h"
-#include "Log.h"
-
+#include "App.h"
+#include "Textures.h"
+#include "Audio.h"
 #include "Input.h"
 #include "Render.h"
-#include "Audio.h"
+#include "Log.h"
+#include "Point.h"
+#include "Scene.h"
 
-Player::Player() = default;
+#define FACING_LEFT false
+#define FACING_RIGHT true
+#define IDLE_STATIC 1
+#define IDLE 2
+#define RUNNING 3
+#define JUMPING 4
+#define FALLING 5
+#define CHARGING 6
+#define DYING 7
+#define INITCHARGING 8
+#define ENDCHARGING 9
+#define WINING 10
+#define ATTACKING 11
+#define SPECIAL 12
 
-Player::~Player() = default;
 
-
-void Player::DebugDraw() const
+Player::Player() : Entity(EntityType::PLAYER)
 {
-	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
-	app->render->DrawShape(debugPosition, false, SDL_Color(255, 0, 0, 255));
-}
+	name.Create("Player");
 
-void Player::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-}
-
-void Player::Create()
-{
-	/*Sprite::Initialize("Assets/Maps/Slime.png", 4);
-	position = { 48, 272 };
-	size = { 48, 48 };*/
-	texture = app->tex->Load("Assets/Maps/GatsIdle.png");
-	//Sprite::Initialize("Assets/Maps/GatsIdle.png", 4);
-	position = { 208, 192 };
-	size = { 16, 16 };
-	/*currentSpriteSlice = {
-		(GetTextureIndex().x + 1) * size.x,
-		GetTextureIndex().y * size.y,
-		size.x,
-		size.y
-	};*/
+	// idle player
+	idleanim.PushBack({ 0, 0, 32, 32 });
+	idleanim.loop = false;
+	idleanim.speed = 0.0f;
 
 }
 
-Player::PlayerAction Player::HandleInput() const
-{
-	using enum KeyState;
-	using enum Player::PlayerAction::Action;
-	using enum Direction;
+Player::~Player() {
 
-	PlayerAction returnAction = { position, NONE , facing};
-
-	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-	{
-		returnAction.action |= INTERACT;
-		
-	}
-
-	if (!moveVector.IsZero())
-		return returnAction;
-
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.y -= tileSize;
-		returnAction.willFace = UP;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.x -= tileSize;
-		returnAction.willFace = LEFT;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.y += tileSize;
-		returnAction.willFace = DOWN;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-		returnAction.action |= MOVE;
-		returnAction.destinationTile.x += tileSize;
-		returnAction.willFace = RIGHT;
-	}
-
-	return returnAction;
 }
 
-int Player::StartAction(PlayerAction const& playerAction, EventData const& data)
-{
-	int ret = 0;
-	if (playerAction.action == PlayerAction::Action::MOVE)
-	{
-		StartMovement();
-		//LOG("it does enter this scope");
-	}
-	else if (playerAction.action == PlayerAction::Action::INTERACT)
-	{
-		switch (data.commonData.type)
-		{
-		case EventType::CHEST:
-			LOG("(CHEST)");
-			break;
-		case EventType::TELEPORT:
-			LOG("(TP)");
-			position.x = data.destinationData.destination.x;
-			position.y = data.destinationData.destination.y;
+bool Player::Awake() {
+	// Get Player parameters from XML
+	tile.x = parameters.attribute("x").as_int();
+	tile.y = parameters.attribute("y").as_int();
+	texturePath = parameters.attribute("texturepath").as_string();
 
-			
-			using enum SceneType;
-			switch (data.destinationData.destinationMap)
-			{
-			case NEWGAME:
-				ret = 1;
-				break;
-			case CONTINUE:
-				break;
-			case EXIT:
-				break;
-			case COMBAT:
-				ret = 4;
-				break;
-			case VERTICAL:
-				ret = 5;
-				break;
-			case TITLESCENE:
-				ret = 6;
-				break;
-			case SHOP:
-				ret = 7;
-				break;
-			case TAVERN:
-				ret = 8;
-				break;
-			case RESISTANCE:
-				ret = 9;
-				break;
-			default:
-				break;
-			}
-			break;
-		default:
-			break;
-		}
-	}
-	return ret;
+	return true;
 }
 
-void Player::StartMovement()
-{
-	using enum KeyState;
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
-	{
-		moveVector.y = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		moveVector.x = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-	{
-		moveVector.y = 1;
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
-	{
-		moveVector.x = 1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
-	}
+bool Player::Start() {
+
+	// initilize textures
+	texture = app->tex->Load(texturePath);
+
+	currentAnim = &idleanim;
+
+	return true;
 }
 
-void Player::Update()
+bool Player::Update()
 {
-	if (!moveVector.IsZero())
+	//PLAYER MOVEMENT
+	if (app->scene->questMenu) {}
+	else if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)) && tile.y > 0)
 	{
-		//AnimateMove();
-		SmoothMove();
-		//LOG("it does enter this scope");
+		tile.y --;
 	}
+	else if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)) && tile.y < 21)
+	{
+		tile.y ++;
+	}
+	else if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)) && tile.x > 0)
+	{
+		tile.x --;
+	}
+	else if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)) && tile.x < 37)
+	{
+		tile.x ++;
+	}
+	
+	//WINNING SEQUENCE
+	
+	//ANIMATION STATE MACHINE
+
+	SDL_Rect rect = currentAnim->GetCurrentFrame();
+	app->render->DrawTexture(texture, tile.x * 32, tile.y * 32, &rect);
+	currentAnim->Update();
+
+	return true;
 }
 
-void Player::FaceTo(Direction dir)
-{
-	using enum Direction;
-	switch (dir)
-	{
-	case DOWN:
-		facing = DOWN;
-		break;
-	case UP:
-		facing = UP;
-		break;
-	case RIGHT:
-		facing = RIGHT;
-		break;
-	case LEFT:
-		facing = LEFT;
-		break;
-	default:
-		break;
-	}
+bool Player::PostUpdate() {
+
+	return true;
 }
 
-void Player::AnimateMove()
+bool Player::CleanUp()
 {
-	if (animTimer == 8)
-	{
-		currentSpriteSlice.x += size.x;
-		if (currentSpriteSlice.x == size.x * (GetTextureIndex().x + 3))
-		{
-			currentSpriteSlice.x = GetTextureIndex().x * size.x;
-		}
-		animTimer = 0;
-	}
-	else
-	{
-		animTimer++;
-	}
-}
-
-void Player::SmoothMove()
-{
-	//LOG("it does enter this scope %i", moveTimer);
-
-	if (moveTimer == timeForATile)
-	{
-		moveTimer = 0;
-		position += (moveVector * speed);
-		if (position.x % tileSize == 0 && position.y % tileSize == 0)
-		{
-			moveVector.SetToZero();
-		}
-	}
-	else
-	{
-		moveTimer++;
-	}
+	return true;
 }

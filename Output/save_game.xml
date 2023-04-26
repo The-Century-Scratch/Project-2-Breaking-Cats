@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
-<save_state>
+<!-- L02: TODO 4: Create a simulation xml file to read -->
+<game_state>
+	<input />
+	<window />
+	<textures />
+	<audio />
 	<scene />
 	<renderer>
-		<camera x="-19" y="-20" />
-		<graphics vsync="false" targetfps="60" />
+		<camera x="0" y="0" />
 	</renderer>
-</save_state>
+</game_state>

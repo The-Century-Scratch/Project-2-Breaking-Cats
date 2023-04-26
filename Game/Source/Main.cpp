@@ -1,6 +1,4 @@
 #include "App.h"
-#include <stdlib.h>
-#include <time.h>
 
 #include "Defs.h"
 #include "Log.h"
@@ -14,7 +12,7 @@
 
 #include <stdlib.h>
 
-enum class MainState
+enum MainState
 {
 	CREATE = 1,
 	AWAKE,
@@ -25,12 +23,10 @@ enum class MainState
 	EXIT
 };
 
-std::unique_ptr<App> app = nullptr;
+App* app = NULL;
 
 int main(int argc, char* args[])
 {
-	srand(time(NULL));
-	using enum MainState;
 	LOG("Engine starting ...");
 
 	MainState state = CREATE;
@@ -42,59 +38,76 @@ int main(int argc, char* args[])
 		{
 			// Allocate the engine --------------------------------------------
 			case CREATE:
-				LOG("CREATION PHASE ===============================");
+			LOG("CREATION PHASE ===============================");
 
-				app = std::make_unique<App>(argc, args);
+			app = new App(argc, args);
 
-				state = app ? AWAKE : FAIL;
-				break;
+			if(app != NULL)
+				state = AWAKE;
+			else
+				state = FAIL;
+
+			break;
 
 			// Awake all modules -----------------------------------------------
 			case AWAKE:
-				LOG("AWAKE PHASE ===============================");
-				state = app->Awake() ? START : FAIL;
+			LOG("AWAKE PHASE ===============================");
+			if(app->Awake() == true)
+				state = START;
+			else
+			{
+				LOG("ERROR: Awake failed");
+				state = FAIL;
+			}
 
-				break;
+			break;
 
 			// Call all modules before first frame  ----------------------------
 			case START:
-				LOG("START PHASE ===============================");
-				state = app->Start() ? LOOP : FAIL;
-
+			LOG("START PHASE ===============================");
+			if(app->Start() == true)
+			{
+				state = LOOP;
 				LOG("UPDATE PHASE ===============================");
-				break;
+			}
+			else
+			{
+				state = FAIL;
+				LOG("ERROR: Start failed");
+			}
+			break;
 
 			// Loop all modules until we are asked to leave ---------------------
 			case LOOP:
-				if(!app->Update()) state = CLEAN;
-				break;
+			if(app->Update() == false)
+				state = CLEAN;
+			break;
 
 			// Cleanup allocated memory -----------------------------------------
 			case CLEAN:
-				LOG("CLEANUP PHASE ===============================");
-				if(app->CleanUp() == true)
-				{
-					result = EXIT_SUCCESS;
-					state = EXIT;
-				}
-				else state = FAIL;
+			LOG("CLEANUP PHASE ===============================");
+			if(app->CleanUp() == true)
+			{
+				RELEASE(app);
+				result = EXIT_SUCCESS;
+				state = EXIT;
+			}
+			else
+				state = FAIL;
 
-				break;
+			break;
 
 			// Exit with errors and shame ---------------------------------------
 			case FAIL:
-				LOG("Exiting with errors :(");
-				result = EXIT_FAILURE;
-				state = EXIT;
-				break;
-			
-			// Just so compiler stops screaming there's a case missing ----------
-			case EXIT:
-				break;
+			LOG("Exiting with errors :(");
+			result = EXIT_FAILURE;
+			state = EXIT;
+			break;
 		}
 	}
 
 	LOG("... Bye! :)\n");
 
+	// Dump memory leaks
 	return result;
 }

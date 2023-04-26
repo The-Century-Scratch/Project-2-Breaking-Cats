@@ -4,79 +4,66 @@
 #include "Defs.h"
 #include "Log.h"
 
-#include <string>
-#include <memory>
-#include <functional>
-
 #include "SDL/include/SDL.h"
 
 
-Window::Window() : Module()
+Window::Window(bool startEnabled) : Module(startEnabled)
 {
-	name = "window";
+	window = NULL;
+	screenSurface = NULL;
+	name.Create("window");
 }
 
 // Destructor
-Window::~Window() = default;
+Window::~Window()
+{
+}
 
 // Called before render is available
 bool Window::Awake(pugi::xml_node& config)
 {
 	LOG("Init SDL window & surface");
+	bool ret = true;
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
-		return false;
+		ret = false;
 	}
-
-	// Read config.xml
-	width = config.child("resolution").attribute("width").as_int();
-	height = config.child("resolution").attribute("height").as_int();
-	scale = config.child("resolution").attribute("scale").as_float(); 
-
-	bool fullscreen = config.child("fullscreen").attribute("value").as_bool();
-	bool borderless = config.child("bordeless").attribute("value").as_bool();
-	bool resizable = config.child("resizable").attribute("value").as_bool();
-	bool fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool();
-		
-	// Set Window flags
-	Uint32 flags = SDL_WINDOW_SHOWN;
-	if (fullscreen) flags |= SDL_WINDOW_FULLSCREEN;
-	if (borderless) flags |= SDL_WINDOW_BORDERLESS;
-	if (resizable) flags |= SDL_WINDOW_RESIZABLE;
-	if (fullscreen_window) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
-
-	// Create Window
-	std::unique_ptr<SDL_Window, std::function<void(SDL_Window *)>>windowPtr(
-		SDL_CreateWindow(
-			app->GetTitle().c_str(),
-			SDL_WINDOWPOS_UNDEFINED,
-			SDL_WINDOWPOS_UNDEFINED,
-			width,
-			height,
-			flags
-		),
-		[](SDL_Window *win) { if(win) SDL_DestroyWindow(win); }
-	);
-
-	window = std::move(windowPtr);
-	
-	if (!window)
+	else
 	{
-		LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-		return false;
+		// Create window
+		// Load all required configurations from config.xml
+		Uint32 flags = SDL_WINDOW_SHOWN;
+		bool fullscreen = config.child("fullscreen").attribute("value").as_bool(false);
+		bool borderless = config.child("borderless").attribute("value").as_bool(false);
+		bool resizable = config.child("resizable").attribute("value").as_bool(false);
+		bool fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
+
+		width = config.child("resolution").attribute("width").as_int(640);
+		height = config.child("resolution").attribute("height").as_int(480);
+		scale = config.child("resolution").attribute("scale").as_int(1);
+
+		if(fullscreen == true) flags |= SDL_WINDOW_FULLSCREEN;
+		if(borderless == true) flags |= SDL_WINDOW_BORDERLESS;
+		if(resizable == true) flags |= SDL_WINDOW_RESIZABLE;
+		if(fullscreen_window == true) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+
+		window = SDL_CreateWindow(app->GetTitle(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+
+		if(window == NULL)
+		{
+			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			ret = false;
+		}
+		else
+		{
+			// Get window surface
+			screenSurface = SDL_GetWindowSurface(window);
+		}
 	}
-	
-	// Get window surface
-	std::unique_ptr<SDL_Surface, std::function<void(SDL_Surface *)>>surfacePtr(
-		SDL_GetWindowSurface(window.get()),
-		[](SDL_Surface *surface) { if(surface) SDL_FreeSurface(surface);  }
-	);
 
-	screenSurface = std::move(surfacePtr);
-
-	return true;
+	return ret;
 }
 
 // Called before quitting
@@ -84,49 +71,31 @@ bool Window::CleanUp()
 {
 	LOG("Destroying SDL window and quitting all SDL systems");
 
+	// Destroy window
+	if(window != NULL)
+	{
+		SDL_DestroyWindow(window);
+	}
+
 	// Quit SDL subsystems
 	SDL_Quit();
 	return true;
 }
 
 // Set new window title
-void Window::SetTitle(std::string const &newTitle)
+void Window::SetTitle(const char* new_title)
 {
-	SDL_SetWindowTitle(window.get(), newTitle.c_str());
+	//title.create(new_title);
+	SDL_SetWindowTitle(window, new_title);
 }
 
-SDL_Window *Window::GetWindow() const
+void Window::GetWindowSize(uint& width, uint& height) const
 {
-	return window.get();
+	width = this->width;
+	height = this->height;
 }
 
-SDL_Surface *Window::GetSurface() const
-{
-	return screenSurface.get();
-}
-
-void Window::GetWindowSize(uint &w, uint &h) const
-{
-	w = width;
-	h = height;
-}
-
-iPoint Window::GetWindowSize() const
-{
-	return iPoint(width, height);
-}
-
-float Window::GetScale() const
+uint Window::GetScale() const
 {
 	return scale;
-}
-
-int Window::GetHeight() const
-{
-	return height;
-}
-
-int Window::GetWidth() const
-{
-	return width;
 }

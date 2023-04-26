@@ -1,95 +1,47 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
-#include "Sprite.h"
-#include "Transform.h"
+#include "Entity.h"
 #include "Point.h"
-#include "Event_Base.h"
+#include "Animation.h"
+#include "SDL/include/SDL.h"
+#include "List.h"
 
+struct SDL_Texture;
 
-enum class Direction
-{
-	DOWN,
-	UP,
-	RIGHT,
-	LEFT
-
-};
-
-class Player : public Sprite, public Transform
+class Player : public Entity
 {
 public:
-	struct PlayerAction
-	{
-		enum class Action
-		{
-			NONE = 0x0000,
-			MOVE = 0x0001,
-			INTERACT = 0x0002
-		};
-
-		friend Action operator&(Action a, Action b)
-		{
-			return static_cast<Action>(static_cast<unsigned int>(a) & static_cast<unsigned int>(b));
-		}
-
-		friend Action operator&=(Action& a, Action b)
-		{
-			return a = a & b;
-		}
-
-		friend Action operator|(Action a, Action b)
-		{
-			return static_cast<Action>(static_cast<unsigned int>(a) | static_cast<unsigned int>(b));
-		}
-
-		friend Action &operator|=(Action& a, Action b)
-		{
-			return a = a | b;
-		}
-
-
-		iPoint destinationTile = { 0, 0 };
-
-		Action action = Player::PlayerAction::Action::NONE;
-
-		Direction willFace;
-	};
 
 	Player();
-	~Player();
-	void Create();
-
-	void Draw() const;
-	void DebugDraw() const;
-
-	PlayerAction HandleInput() const;
-	int StartAction(PlayerAction const& playerAction, EventData const& data = EventData());
 	
-	void Update();
+	virtual ~Player();
 
-	void FaceTo(Direction dir);
+	bool Awake();
 
-	Direction facing;
+	bool Start();
+
+	bool Update();
+
+	bool PostUpdate();
+
+	bool CleanUp();
+
+
+public:
+
+	Animation* currentAnim = nullptr;
+
+	Animation idleanim;
+
+	bool godMode = false;
 
 private:
-	void AnimateMove();
-	void SmoothMove();
-	void StartMovement();
 
+	// Declare player parameters
+	SDL_Texture* texture;
+	const char* texturePath;
 
-
-	int moveTimer = 0;
-	iPoint moveVector{ 0 };
-	int speed = 4;
-	const int timeForATile = 2;
-	const int tileSize = 16;
-
-	int animTimer = 0;
-	int texture;
-
-	SDL_Rect currentSpriteSlice{ 0 };
 };
 
-#endif //__PLAYER_H__
-
+#endif // __PLAYER_H__

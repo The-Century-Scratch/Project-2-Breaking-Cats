@@ -2,11 +2,6 @@
 #define __WINDOW_H__
 
 #include "Module.h"
-#include "Defs.h"
-#include "Point.h"
-
-#include <memory>
-#include <functional>
 
 struct SDL_Window;
 struct SDL_Surface;
@@ -15,43 +10,38 @@ class Window : public Module
 {
 public:
 
-	Window();
+	Window(bool startEnabled);
 
 	// Destructor
-	~Window() final;
+	virtual ~Window();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&) final;
+	bool Awake(pugi::xml_node&);
 
 	// Called before quitting
-	bool CleanUp() final;
+	bool CleanUp();
 
-	// Change title
-	void SetTitle(std::string const &title);
+	// Changae title
+	void SetTitle(const char* title);
 
-	SDL_Window *GetWindow() const;
+	// Retrive window size
+	void GetWindowSize(uint& width, uint& height) const;
 
-	SDL_Surface *GetSurface() const;
-
-	// Retrieve window size
-	void GetWindowSize(uint &w, uint &h) const;
-	iPoint GetWindowSize() const;
 	// Retrieve window scale
-	float GetScale() const;
-	int GetHeight() const; 
-	int GetWidth() const; 
+	uint GetScale() const;
 
-private:
+public:
 	// The window we'll be rendering to
-	std::unique_ptr<SDL_Window, std::function<void(SDL_Window *)>> window;
+	SDL_Window* window;
 
 	// The surface contained by the window
-	std::unique_ptr<SDL_Surface, std::function<void(SDL_Surface *)>> screenSurface;
+	SDL_Surface* screenSurface;
 
-	std::string title = "";
+private:
+	SString title;
 	uint width;
 	uint height;
-	float scale;
+	uint scale;
 };
 
 #endif // __WINDOW_H__

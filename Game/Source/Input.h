@@ -2,27 +2,22 @@
 #define __INPUT_H__
 
 #include "Module.h"
-#include "Point.h"
-
-#include <array>
 
 //#define NUM_KEYS 352
-constexpr auto NUM_MOUSE_BUTTONS = 5;
-constexpr auto NUM_EVENT_WINDOW = 4;
-constexpr auto MAX_KEYS = 300;
+#define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
 struct SDL_Rect;
 
-enum class EventWindow : uint
+enum EventWindow
 {
 	WE_QUIT = 0,
 	WE_HIDE = 1,
 	WE_SHOW = 2,
-	WE_COUNT = 3
+	WE_COUNT
 };
 
-enum class KeyState : uint
+enum KeyState
 {
 	KEY_IDLE = 0,
 	KEY_DOWN,
@@ -35,32 +30,30 @@ class Input : public Module
 
 public:
 
-	Input();
+	Input(bool startEnabled);
 
 	// Destructor
-	~Input() final;
+	virtual ~Input();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&) final;
+	bool Awake(pugi::xml_node&);
 
 	// Called before the first frame
-	bool Start() final;
+	bool Start();
 
 	// Called each loop iteration
-	bool PreUpdate() final;
-
-	bool Pause(int phase) final;
+	bool PreUpdate();
 
 	// Called before quitting
-	bool CleanUp() final;
+	bool CleanUp();
 
 	// Check key states (includes mouse and joy buttons)
-	KeyState GetKey(uint id) const
+	KeyState GetKey(int id) const
 	{
 		return keyboard[id];
 	}
 
-	KeyState GetMouseButtonDown(uint id) const
+	KeyState GetMouseButtonDown(int id) const
 	{
 		return mouseButtons[id - 1];
 	}
@@ -68,19 +61,28 @@ public:
 	// Check if a certain window event happened
 	bool GetWindowEvent(EventWindow ev);
 
-
 	// Get mouse / axis position
-	iPoint GetMousePosition() const;
-	uPoint GetUnsignedMousePosition() const;
-	void GetMousePosition(int &x, int &y) const;
-	void GetMouseMotion(int& x, int& y) const;
+	void GetMousePosition(int &x, int &y);
+	void GetMouseMotion(int& x, int& y);
+
+	int GetMouseX() const
+	{
+		return mouseX;
+	}
+
+	int GetMouseY() const
+	{
+		return mouseY;
+	}
 
 private:
-	std::array<bool, NUM_EVENT_WINDOW> windowEvents{};
-	std::array<KeyState, MAX_KEYS> keyboard{};
-	std::array<KeyState, NUM_MOUSE_BUTTONS> mouseButtons{};
-	iPoint mouseMotion;
-	iPoint mousePosition;
+	bool windowEvents[WE_COUNT];
+	KeyState*	keyboard;
+	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
+	int	mouseMotionX;
+	int mouseMotionY;
+	int mouseX;
+	int mouseY;
 };
 
 #endif // __INPUT_H__
