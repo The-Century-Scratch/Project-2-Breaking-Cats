@@ -1,64 +1,72 @@
 #ifndef __SCENE_H__
 #define __SCENE_H__
 
-#include "Module.h"
-#include "Player.h"
-#include "Point.h"
-#include "NPC.h"
-#include "Item.h"
+#include "TransitionsManager.h"
 
-struct SDL_Texture;
+#include "Log.h"
 
-class Scene : public Module
+enum class SceneType
+{
+	LOGO,
+	MENU,
+	TITLE,
+	GAMEPLAY,
+	ENDING
+};
+
+enum class TransitionType;
+
+class Scene
 {
 public:
 
-	Scene(bool startEnabled);
+	Scene() : active(false), transitionRequired(false), win(false), showColliders(false) {}
 
 	// Destructor
-	virtual ~Scene();
+	virtual ~Scene() {}
 
 	// Called before render is available
-	bool Awake();
+	bool Awake() { return true; }
 
 	// Called before the first frame
-	bool Start();
-
-	// Called before all Updates
-	bool PreUpdate();
+	virtual bool Load() { return true; }
 
 	// Called each loop iteration
-	bool Update(float dt);
+	virtual bool Update(float dt) { return true; }
 
 	// Called before all Updates
-	bool PostUpdate();
+	virtual void Draw() {}
 
 	// Called before quitting
-	bool CleanUp();
+	virtual bool UnLoad() { return true; }
+
+	virtual bool LoadState(pugi::xml_node&) { return true; }
+
+	virtual bool SaveState(pugi::xml_node&) const { return true; }
+
+
+	void TransitionToScene(SceneType scene, TransitionType type, bool w = false)
+	{
+		LOG("Changing Scene");
+		transitionRequired = true;
+		nextScene = scene;
+		win = w;
+		//transitionType = type;
+		TransitionsManager::GetInstance()->SetType(type);
+	}
 
 public:
+	SString name;
+	bool active;
+	
+	bool transitionRequired;
+	SceneType nextScene;
+	bool isTown;
+	bool isDungeon;
+	bool showColliders;
 
-	Player* player;
-	//List<Chest*> rings;
-
-	const char* musicPath;
-
-	Animation animation;
-
-	bool debug;
-
-	bool questMenu;
-
-	List<NPC*>npcs;
-	List<Item*>items;
-
-	int points;
-
-private:
-	SDL_Texture* img;
-
-	int font_text;
-	char pointsText[6] = { "\0" };
+	int channel;
+	bool win;
 };
 
 #endif // __SCENE_H__

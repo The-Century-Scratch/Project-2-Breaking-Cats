@@ -5,10 +5,7 @@
       <Filter>Source\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp">
-      <Filter>Source\External\PugiXml</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene.cpp">
-      <Filter>Source\Application\Game\Scenes</Filter>
+      <Filter>Source\Application\Headers\External\PugiXml</Filter>
     </ClCompile>
     <ClCompile Include="Source\EntityManager.cpp">
       <Filter>Source\Application\Game\Entities</Filter>
@@ -58,6 +55,12 @@
     <ClCompile Include="Source\CollectQuest.cpp">
       <Filter>Source\Application\Game\Quests</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneManager.cpp">
+      <Filter>Source\Application\BaseModules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TransitionsManager.cpp">
+      <Filter>Source\Application\Transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -79,10 +82,10 @@
       <Filter>Source\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp">
-      <Filter>Source\External\PugiXml</Filter>
+      <Filter>Source\Application\Headers\External\PugiXml</Filter>
     </ClInclude>
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp">
-      <Filter>Source\External\PugiXml</Filter>
+      <Filter>Source\Application\Headers\External\PugiXml</Filter>
     </ClInclude>
     <ClInclude Include="Source\Queue.h">
       <Filter>Source\Utils</Filter>
@@ -150,6 +153,12 @@
     <ClInclude Include="Source\CollectQuest.h">
       <Filter>Source\Application\Game\Quests</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SceneManager.h">
+      <Filter>Source\Application\BaseModules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TransitionsManager.h">
+      <Filter>Source\Application\Transitions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -157,12 +166,6 @@
     </Filter>
     <Filter Include="Source\Utils">
       <UniqueIdentifier>{2cad778a-d356-48b0-9fee-587f1bbb187e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\External">
-      <UniqueIdentifier>{83a966c7-b4bb-4eff-9c2c-3ff3c7b55a60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\External\PugiXml">
-      <UniqueIdentifier>{2855ff7f-53a1-413d-a75b-18b4ade921dd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\Application">
       <UniqueIdentifier>{251e0f97-84b3-4346-aaa1-051abe3d9b2c}</UniqueIdentifier>
@@ -194,18 +197,27 @@
     <Filter Include="Source\Application\Game\Quests">
       <UniqueIdentifier>{2d3d1773-f211-4479-a679-637153b29087}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\External\PugiElements">
+    <Filter Include="Source\Application\Headers\External">
+      <UniqueIdentifier>{83a966c7-b4bb-4eff-9c2c-3ff3c7b55a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\Headers\External\PugiXml">
+      <UniqueIdentifier>{2855ff7f-53a1-413d-a75b-18b4ade921dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\Headers\External\PugiElements">
       <UniqueIdentifier>{7493acbe-730d-4d20-89b1-3713f00ed976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\Transitions">
+      <UniqueIdentifier>{65f8fb6a-2648-4fb1-8082-2cac29632852}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml">
-      <Filter>Source\External\PugiElements</Filter>
+      <Filter>Source\Application\Headers\External\PugiElements</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Output\Assets\Maps\LostChests.tmx">
-      <Filter>Source\External\PugiElements</Filter>
+      <Filter>Source\Application\Headers\External\PugiElements</Filter>
     </None>
   </ItemGroup>
 </Project>

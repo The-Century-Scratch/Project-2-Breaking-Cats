@@ -12,7 +12,7 @@ class Input;
 class Render;
 class Textures;
 class Audio;
-class Scene;
+class SceneManager;
 class Map;
 class Fonts;
 class EntityManager;
@@ -80,7 +80,7 @@ public:
 	Render* render;
 	Textures* tex;
 	Audio* audio;
-	Scene* scene;
+	SceneManager* sceneManager;
 	Map* map;
 	Fonts* fonts;
 	EntityManager* entityManager;

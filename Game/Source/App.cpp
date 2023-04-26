@@ -4,7 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
-#include "Scene.h"
+#include "SceneManager.h"
 #include "Map.h"
 #include "Fonts.h"
 #include "EntityManager.h"
@@ -26,7 +26,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render(true);
 	tex = new Textures(true);
 	audio = new Audio(true);
-	scene = new Scene(true);
+	sceneManager = new SceneManager(true);
 	map = new Map(true);
 	fonts = new Fonts(true);
 	entityManager = new EntityManager(false);
@@ -39,7 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(fonts);
-	AddModule(scene);
+	AddModule(sceneManager);
 	AddModule(entityManager);
 	AddModule(questManager);
 	AddModule(map);
