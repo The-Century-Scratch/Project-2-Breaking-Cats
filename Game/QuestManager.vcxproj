@@ -97,6 +97,11 @@
   <ItemGroup>
     <ClCompile Include="Source\CollectQuest.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp" />
+    <ClCompile Include="Source\GUICheckBox.cpp" />
+    <ClCompile Include="Source\GuiManager.cpp" />
+    <ClCompile Include="Source\GUISlider.cpp" />
+    <ClCompile Include="Source\Hud.cpp" />
     <ClCompile Include="Source\QuestManager.cpp" />
     <ClCompile Include="Source\Chest.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
@@ -117,6 +122,12 @@
     <ClInclude Include="Source\CollectQuest.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\GuiButton.h" />
+    <ClInclude Include="Source\GUICheckBox.h" />
+    <ClInclude Include="Source\GuiControl.h" />
+    <ClInclude Include="Source\GuiManager.h" />
+    <ClInclude Include="Source\GUISlider.h" />
+    <ClInclude Include="Source\Hud.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Quest.h" />
     <ClInclude Include="Source\QuestManager.h" />

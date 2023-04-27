@@ -20,6 +20,8 @@ class Map;
 class Fonts;
 class EntityManager;
 class QuestManager;
+class GuiManager;
+class Hud;
 
 class App
 {
@@ -96,6 +98,8 @@ public:
 	Fonts* fonts;
 	EntityManager* entityManager;
 	QuestManager* questManager;
+	GuiManager* guiManager;
+	Hud* hud;
 
 private:
 

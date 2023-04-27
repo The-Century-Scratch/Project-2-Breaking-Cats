@@ -61,6 +61,21 @@
     <ClCompile Include="Source\TransitionsManager.cpp">
       <Filter>Source\Application\Transitions</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Hud.cpp">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiButton.cpp">
+      <Filter>Source\Application\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUICheckBox.cpp">
+      <Filter>Source\Application\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>Source\Application\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUISlider.cpp">
+      <Filter>Source\Application\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -159,6 +174,24 @@
     <ClInclude Include="Source\TransitionsManager.h">
       <Filter>Source\Application\Transitions</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Hud.h">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiButton.h">
+      <Filter>Source\Application\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUICheckBox.h">
+      <Filter>Source\Application\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>Source\Application\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>Source\Application\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUISlider.h">
+      <Filter>Source\Application\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -208,6 +241,9 @@
     </Filter>
     <Filter Include="Source\Application\Transitions">
       <UniqueIdentifier>{65f8fb6a-2648-4fb1-8082-2cac29632852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\GUI">
+      <UniqueIdentifier>{6669f865-68e7-4c7a-a0c3-faafafdc62c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

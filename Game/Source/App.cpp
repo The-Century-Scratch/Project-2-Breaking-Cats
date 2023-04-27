@@ -9,6 +9,8 @@
 #include "Fonts.h"
 #include "EntityManager.h"
 #include "QuestManager.h"
+#include "GuiManager.h"
+#include "Hud.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -37,6 +39,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fonts = new Fonts(true);
 	entityManager = new EntityManager(false);
 	questManager = new QuestManager(true);
+	guiManager = new GuiManager(true);
+	hud = new Hud(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -46,6 +50,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(fonts);
 	AddModule(sceneManager);
+	AddModule(hud);
+	AddModule(guiManager);
 	AddModule(entityManager);
 	AddModule(questManager);
 	AddModule(map);
