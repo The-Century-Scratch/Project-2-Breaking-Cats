@@ -71,11 +71,9 @@ bool Audio::CleanUp()
 		Mix_FreeMusic(music);
 	}
 
-	ListItem<Mix_Chunk*>* item;
-	for (item = fx.start; item != NULL; item = item->next)
-		Mix_FreeChunk(item->data);
-
-	fx.Clear();
+	UnLoadFxs();
+	Mix_AllocateChannels(0);
+	//channels.Clear();
 
 	Mix_CloseAudio();
 	Mix_Quit();
@@ -154,8 +152,8 @@ unsigned int Audio::LoadFx(const char* path)
 	}
 	else
 	{
-		fx.Add(chunk);
-		ret = fx.Count();
+		fx.push_back(chunk);
+		ret = fx.size();
 	}
 
 	return ret;
@@ -169,9 +167,82 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 	if (!state)
 		return false;
 
-	if (id > 0 && id <= fx.Count())
+	if (id > 0 && id <= fx.size())
 	{
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
+	}
+
+	return ret;
+}
+
+bool Audio::UnLoadFx(int index)
+{
+	if (index > 0 && index <= fx.size())
+	{
+		Mix_FreeChunk(fx.at(index - 1));
+		eastl::erase(fx, fx.at(index - 1));
+	}
+
+	return true;
+}
+
+void Audio::SetDistanceFx(int channel, int angle, uint distance, uint maxDistance)
+{
+	distance = distance * 255 / maxDistance;
+	if (distance > 255) distance = 255;
+	Mix_SetPosition(channel, angle, distance);
+}
+
+void Audio::Reset()
+{
+	Mix_FreeMusic(music);
+	fx.clear();
+}
+
+void Audio::SetMusicVolume(int index)
+{
+	musicVolume = index;
+	Mix_VolumeMusic(musicVolume);
+}
+
+void Audio::SetFxVolume(int index)
+{
+	fxVolume = index;
+}
+
+int Audio::GetMusicVolume()
+{
+	return musicVolume;
+}
+
+int Audio::GetFxVolume()
+{
+	return fxVolume;
+}
+
+void Audio::UnLoadFxs()
+{
+	eastl::deque<Mix_Chunk*>::iterator item;
+	eastl::deque<Mix_Chunk*>::iterator itEnd = fx.end();
+	for (item = fx.begin(); item != itEnd; ++item)
+		Mix_FreeChunk(*item);
+
+	fx.clear();
+}
+
+int Audio::SetChannel()
+{
+	int ret = -1;
+	++numChannels;
+	if (numChannels < maxChannels)
+	{
+		return numChannels;
+	}
+	else
+	{
+		maxChannels += 10;
+		Mix_AllocateChannels(maxChannels);
+		return numChannels;
 	}
 
 	return ret;

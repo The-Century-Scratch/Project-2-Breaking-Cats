@@ -16,6 +16,12 @@
 #include <iostream>
 #include <sstream>
 
+//EASTL SETUP
+void* __cdecl operator new[](size_t size, const char* name, int flags, unsigned debugFlags, const char* file, int line)
+{
+	return new uint8_t[size];
+}
+
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {

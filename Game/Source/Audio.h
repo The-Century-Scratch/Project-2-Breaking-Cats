@@ -2,6 +2,7 @@
 #define __AUDIO_H__
 
 #include "Module.h"
+#include "EASTL/deque.h"
 
 #define DEFAULT_MUSIC_FADE_TIME 2.0f
 
@@ -32,10 +33,42 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
+
+	bool UnLoadFx(int index);
+
+	void SetDistanceFx(int channel, int angle, uint distance, uint maxDistance);
+	void Reset();
+
+	void SetMusicVolume(int index);
+
+	void SetFxVolume(int index);
+
+	int GetMusicVolume();
+
+	int GetFxVolume();
+
+	inline bool FadeOutCompleted() { return fadeOut; }
+
+	int SetChannel();
+
+	void UnLoadFxs();
+
 private:
 
 	_Mix_Music* music;
-	List<Mix_Chunk*>	fx;
+	eastl::deque<Mix_Chunk*> fx;
+	List<int> channels;
+
+	float musicVolume;
+	int fxVolume;
+
+	const char* nextMusic;
+	float auxMusic;
+	bool transition;
+	bool fadeOut;
+
+	int maxChannels;
+	int numChannels;
 };
 
 #endif // __AUDIO_H__

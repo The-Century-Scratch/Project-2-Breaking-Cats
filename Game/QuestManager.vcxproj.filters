@@ -220,4 +220,7 @@
       <Filter>Source\Application\Headers\External\PugiElements</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="Source\External\EASTL-3.17.06\doc\EASTL.natvis" />
+  </ItemGroup>
 </Project>
