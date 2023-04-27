@@ -297,3 +297,82 @@ pugi::xml_node App::LoadConfigFileToVar()
 
 	return ret;
 }
+
+
+
+// Load / Save
+void App::LoadGameRequest()
+{
+	loadGameRequested = true;
+}
+
+// ---------------------------------------
+void App::SaveGameRequest() const
+{
+	saveGameRequested = true;
+}
+
+bool App::LoadGame()
+{
+	loadGameRequested = false;
+	bool ret = true;
+
+	pugi::xml_parse_result resul = saveLoadFile.load_file("save_game.xml");
+
+	if (resul == NULL)
+	{
+		LOG("Could not load save and load xml file. pugi error: %s", resul.description());
+		return false;
+	}
+	else
+	{
+		saveState = saveLoadFile.child("save_status");
+
+		//eastl::list<Module*>::iterator item = modules.begin();
+		//List<Module*>* item;
+		//item = modules.start;
+
+		ListItem<Module*>* item;
+		item = modules.start;
+
+		while (item != modules.end && ret)
+		{
+			ret = item->data->LoadState(saveState.child(item->data->name.GetString()));
+			++item;
+		}
+
+		LOG("File loaded successfully!");
+	}
+
+	return ret;
+}
+
+bool App::SaveGame() const
+{
+	LOG("Saving Results!!");
+	saveGameRequested = false;
+	bool ret = true;
+
+	//eastl::list<Module*>::iterator item = modules.begin().mpNode;
+
+	ListItem<Module*>* item = modules.start;
+
+	pugi::xml_document file;
+
+	auto root = file.append_child("save_status");
+
+	while (item != modules.end)
+	{
+		root.append_child(item->data->name.GetString());
+		ret = item->data->SaveState(root.child(item->data->name.GetString()));
+		++item;
+	}
+
+	bool saveSucceed = file.save_file("save_game.xml", PUGIXML_TEXT("  "));
+	if (saveSucceed == false)
+	{
+		LOG("Couldn't save the file. pugi error: %s", pugi::status_internal_error);
+	}
+
+	return ret;
+}

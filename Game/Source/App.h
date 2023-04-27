@@ -6,6 +6,9 @@
 
 #include "PugiXml/src/pugixml.hpp"
 
+#define CONFIG_FILENAME		"config.xml"
+#define SAVE_STATE_FILENAME "save_game.xml"
+
 // Modules
 class Window;
 class Input;
@@ -49,6 +52,10 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
+	// Methods to request Load / Save
+	void LoadGameRequest();
+	void SaveGameRequest() const;
+
 	// Load config file to var
 	pugi::xml_node LoadConfigFileToVar();
 
@@ -72,6 +79,10 @@ private:
 	// Call modules after each loop iteration
 	bool PostUpdate();
 
+
+	// Load / Save
+	bool LoadGame();
+	bool SaveGame() const;
 public:
 
 	// Modules
@@ -98,6 +109,13 @@ private:
 	// xml_document to store the config file and xml_node(s) to read specific branches of the xml
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
+
+	// Save file
+	pugi::xml_document saveLoadFile;
+	pugi::xml_node saveState;
+
+	mutable bool saveGameRequested;
+	bool loadGameRequested;
 
 	uint frames;
 	float dt;
