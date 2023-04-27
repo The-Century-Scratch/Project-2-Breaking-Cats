@@ -59,13 +59,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ShowIncludes>false</ShowIncludes>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAThread/include);$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EATest/include);$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAStdC/include);$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAMain/include);$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EABase/include/Common;$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAAssert/include;$(ProjectDir)Source\External\EASTL-3.17.06\include;$(ProjectDir)Source\External</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAThread/include;$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EATest/include;$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAStdC/include;$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAMain/include;$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EABase/include/Common;$(ProjectDir)Source\External\EASTL-3.17.06/test/packages/EAAssert/include;$(ProjectDir)Source\External\EASTL-3.17.06\include;$(ProjectDir)Source\External</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;EASTL.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>${EASTL_ROOT_DIR}/build/$(Configuration);$(ProjectDir)Source\External\SDL\libx86;$(ProjectDir)Source\External\SDL_image\libx86;$(ProjectDir)Source\External\SDL_mixer\libx86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>EASTL.lib;SDL2.lib;SDL2_ttf.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Source\External\SDL\libx86;$(ProjectDir)Source\External\SDL_image\libx86;$(ProjectDir)Source\External\SDL_mixer\libx86;$(ProjectDir)Source\External\EASTL-3.17.06\lib\Debug;$(ProjectDir)Source\External\SDL_ttf\libx86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)Build\$(Configuration)\$(ProjectName).exe" "$(SolutionDir)Output\$(ProjectName).exe"</Command>
@@ -113,7 +113,12 @@
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\SceneBattle.cpp" />
+    <ClCompile Include="Source\SceneEnding.cpp" />
+    <ClCompile Include="Source\SceneGameplay.cpp" />
+    <ClCompile Include="Source\SceneLogo.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
+    <ClCompile Include="Source\SceneTitle.cpp" />
     <ClCompile Include="Source\TalkQuest.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\TransitionsManager.cpp" />
@@ -143,7 +148,12 @@
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
+    <ClInclude Include="Source\SceneBattle.h" />
+    <ClInclude Include="Source\SceneEnding.h" />
+    <ClInclude Include="Source\SceneGameplay.h" />
+    <ClInclude Include="Source\SceneLogo.h" />
     <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\SceneTitle.h" />
     <ClInclude Include="Source\TalkQuest.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\TransitionsManager.h" />

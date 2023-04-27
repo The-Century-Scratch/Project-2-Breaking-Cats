@@ -76,6 +76,21 @@
     <ClCompile Include="Source\GUISlider.cpp">
       <Filter>Source\Application\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneBattle.cpp">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneEnding.cpp">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneGameplay.cpp">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneLogo.cpp">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneTitle.cpp">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -191,6 +206,21 @@
     </ClInclude>
     <ClInclude Include="Source\GUISlider.h">
       <Filter>Source\Application\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneBattle.h">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneEnding.h">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneGameplay.h">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneLogo.h">
+      <Filter>Source\Application\Game\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneTitle.h">
+      <Filter>Source\Application\Game\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,10 +7,10 @@
 
 #include "SceneManager.h"
 #include "Scene.h"
-////#include "SceneLogo.h"
-//#include "SceneTitle.h"
-//#include "SceneGameplay.h"
-//#include "SceneEnding.h"
+#include "SceneLogo.h"
+#include "SceneTitle.h"
+#include "SceneGameplay.h"
+#include "SceneEnding.h"
 
 #include "TransitionsManager.h"
 

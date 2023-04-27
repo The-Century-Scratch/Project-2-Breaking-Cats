@@ -18,11 +18,23 @@
 #include <iostream>
 #include <sstream>
 
-//EASTL SETUP
-void* __cdecl operator new[](size_t size, const char* name, int flags, unsigned debugFlags, const char* file, int line)
+////EASTL SETUP
+//void* __cdecl operator new[](size_t size, const char* name, int flags, unsigned debugFlags, const char* file, int line)
+//{
+//	return new uint8_t[size];
+//}
+
+// EASTL library
+void* operator new[](size_t size, const char* pName, int flags, unsigned	 debugFlags, const char* file, int line)
 {
-	return new uint8_t[size];
+	return malloc(size);
 }
+
+void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName, int flags, unsigned debugFlags, const char* file, int line)
+{
+	return malloc(size);
+}
+
 
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
