@@ -123,6 +123,7 @@
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\TransitionsManager.cpp" />
     <ClCompile Include="Source\Window.cpp" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\CollectQuest.h" />
     <ClInclude Include="Source\Entity.h" />
@@ -177,6 +178,12 @@
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Source\External\EASTL-3.17.06\doc\EASTL.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BreakingCats.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Output\Assets\Textures\ICON.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

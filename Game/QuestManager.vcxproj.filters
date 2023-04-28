@@ -222,6 +222,7 @@
     <ClInclude Include="Source\SceneTitle.h">
       <Filter>Source\Application\Game\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -288,5 +289,11 @@
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Source\External\EASTL-3.17.06\doc\EASTL.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BreakingCats.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Output\Assets\Textures\ICON.ico" />
   </ItemGroup>
 </Project>
