@@ -10,7 +10,8 @@ enum class EntityType
 {
 	PLAYER,
 	NPC,
-	ITEM,
+	ITEM,//CHEST?
+	ENEMY,
 	UNKNOWN
 };
 
@@ -43,6 +44,16 @@ public:
 	virtual bool CleanUp()
 	{
 		return true;
+	}
+
+	virtual void OnCollision(Collider* c1, Collider* c2)
+	{
+
+	}
+
+	const Collider* GetCollider() const
+	{
+		return eCollider;
 	}
 
 	virtual bool LoadState(pugi::xml_node&)
@@ -80,9 +91,12 @@ public:
 	bool active = true;
 	pugi::xml_node parameters;
 
+	Collider* eCollider;
+
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
-	iPoint tile;       
+	iPoint position;
+	int w, h;
 	bool renderable = true;
 };
 

@@ -16,6 +16,7 @@ class Render;
 class Textures;
 class Audio;
 class SceneManager;
+class ModuleCollisions;
 class Map;
 class Fonts;
 class EntityManager;
@@ -94,6 +95,7 @@ public:
 	Textures* tex;
 	Audio* audio;
 	SceneManager* sceneManager;
+	ModuleCollisions* moduleCollisions;
 	Map* map;
 	Fonts* fonts;
 	EntityManager* entityManager;

@@ -19,5 +19,5 @@ bool Chest::Update() {
 }
 
 void Chest::Draw() {
-	app->render->DrawTexture(texture, tile.x * 32, tile.y * 32);
+	//app->render->DrawTexture(texture, position.x, positoin.y);
 }

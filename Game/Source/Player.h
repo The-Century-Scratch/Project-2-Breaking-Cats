@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "Animation.h"
+#include "Colliders.h"
 #include "SDL/include/SDL.h"
 #include "List.h"
 
@@ -27,6 +28,7 @@ public:
 
 	bool CleanUp();
 
+	void OnCollision(Collider* c1, Collider* c2) override;
 
 public:
 

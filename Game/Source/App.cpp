@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "SceneManager.h"
+#include "ModuleCollisions.h"
 #include "Map.h"
 #include "Fonts.h"
 #include "EntityManager.h"
@@ -47,6 +48,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures(true);
 	audio = new Audio(true);
 	sceneManager = new SceneManager(true);
+	moduleCollisions = new ModuleCollisions(true);
 	map = new Map(true);
 	fonts = new Fonts(true);
 	entityManager = new EntityManager(false);
@@ -62,6 +64,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(fonts);
 	AddModule(sceneManager);
+	AddModule(moduleCollisions);
 	AddModule(hud);
 	AddModule(guiManager);
 	AddModule(entityManager);

@@ -91,6 +91,12 @@
     <ClCompile Include="Source\SceneTitle.cpp">
       <Filter>Source\Application\Game\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Colliders.cpp">
+      <Filter>Source\Application\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModuleCollisions.cpp">
+      <Filter>Source\Application\Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -223,6 +229,12 @@
       <Filter>Source\Application\Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\Colliders.h">
+      <Filter>Source\Application\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModuleCollisions.h">
+      <Filter>Source\Application\Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -275,6 +287,9 @@
     </Filter>
     <Filter Include="Source\Application\GUI">
       <UniqueIdentifier>{6669f865-68e7-4c7a-a0c3-faafafdc62c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\Collisions">
+      <UniqueIdentifier>{ea6f721c-9f04-4a99-aa47-aaa315791845}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

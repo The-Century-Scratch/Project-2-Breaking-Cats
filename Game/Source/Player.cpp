@@ -7,22 +7,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Scene.h"
-
-#define FACING_LEFT false
-#define FACING_RIGHT true
-#define IDLE_STATIC 1
-#define IDLE 2
-#define RUNNING 3
-#define JUMPING 4
-#define FALLING 5
-#define CHARGING 6
-#define DYING 7
-#define INITCHARGING 8
-#define ENDCHARGING 9
-#define WINING 10
-#define ATTACKING 11
-#define SPECIAL 12
-
+#include "ModuleCollisions.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -41,8 +26,8 @@ Player::~Player() {
 
 bool Player::Awake() {
 	// Get Player parameters from XML
-	tile.x = parameters.attribute("x").as_int();
-	tile.y = parameters.attribute("y").as_int();
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	return true;
@@ -84,7 +69,7 @@ bool Player::Update()
 	//ANIMATION STATE MACHINE
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	app->render->DrawTexture(texture, tile.x * 32, tile.y * 32, &rect);
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	currentAnim->Update();
 
 	return true;
@@ -99,3 +84,46 @@ bool Player::CleanUp()
 {
 	return true;
 }
+
+void Player::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c1->type == Collider::Type::PLAYER)
+	{
+		switch (c2->type)
+		{
+		case Collider::Type::NONE:
+			break;
+		case Collider::Type::WALL:
+			//FUNCION TO NOT TRASPASS
+			app->moduleCollisions->collision_solver(c1->listener, c1->listener);
+			break;
+		case Collider::Type::ENEMY:
+			//FUNCION TO START BATTLE
+			break;
+		case Collider::Type::NPC:
+			//FUNCTION TO NOT TRASPASS
+			app->moduleCollisions->collision_solver(c1->listener, c1->listener);
+			break;
+		case Collider::Type::NPCINTERACTION:
+			//DIALOG FUNCTION + QUEST?
+			break;
+		case Collider::Type::CAMLIMIT:
+			//FUNCTION TO MAKE CAMERA FOLLOW PLAYER
+			break;
+		case Collider::Type::CHEAST:
+			//FUNCTION TO NOT TRASPASS
+			app->moduleCollisions->collision_solver(c1->listener, c1->listener);
+			break;
+		case Collider::Type::CHEASTINTERACTION:
+			//FUNCTION TO OPEN CHEAST
+			break;
+		case Collider::Type::CHANGESCENE:
+			//FUNCTION TO CHANGE SCENE LOL
+			break;
+		default:
+			break;
+		}
+	}
+
+}
+

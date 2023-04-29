@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Log.h"
 #include "Point.h"
+#include "ModuleCollisions.h"
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -16,8 +17,8 @@ NPC::~NPC() {}
 
 bool NPC::Awake() {
 
-	tile.x = parameters.attribute("x").as_int();
-	tile.y = parameters.attribute("y").as_int();
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	npcid = parameters.attribute("id").as_int();
 	int character = parameters.attribute("character").as_int();
@@ -26,7 +27,11 @@ bool NPC::Awake() {
 	NPCAnim.loop = false;
 	NPCAnim.speed = 0.0f;
 
-	boundaries = { (tile.x * 32) - 32,(tile.y * 32) - 32,96,96 };
+	cRect = { position.x - 6,position.y - 6,32 + 12,30 + 12 };
+	boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+	cRect = { position.x,position.y,32,32 };
+	cNpc = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+
 
 	return true;
 }
@@ -42,7 +47,7 @@ bool NPC::Start() {
 bool NPC::Update()
 {
 	SDL_Rect rect = NPCAnim.GetCurrentFrame();
-	app->render->DrawTexture(texture, tile.x * 32, tile.y *32, &rect);
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	NPCAnim.Update();
 
 	return true;
@@ -51,4 +56,12 @@ bool NPC::Update()
 bool NPC::CleanUp()
 {
 	return true;
+}
+
+void NPC::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c1->type == Collider::Type::NPC)
+	{
+		
+	}
 }

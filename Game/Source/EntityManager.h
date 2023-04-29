@@ -5,6 +5,9 @@
 #include "Entity.h"
 #include "List.h"
 
+
+#define MAX_NPC 5
+
 class EntityManager : public Module
 {
 public:

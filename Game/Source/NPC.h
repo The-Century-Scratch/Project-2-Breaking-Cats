@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "Animation.h"
+#include "Colliders.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
@@ -23,7 +24,11 @@ public:
 
 	bool CleanUp();
 
-	SDL_Rect boundaries;
+	void OnCollision(Collider* c1, Collider* c2) override;
+
+	SDL_Rect cRect;
+	Collider* cNpc;
+	Collider* boundaries;
 
 	int npcid;
 

@@ -8,6 +8,8 @@
 class App;
 class GuiControl;
 
+struct Collider;
+
 class Module
 {
 public:
@@ -55,6 +57,11 @@ public:
 	virtual bool CleanUp()
 	{
 		return true;
+	}
+
+	virtual void Module::OnCollision(Collider* c1, Collider* c2)
+	{
+
 	}
 
 	virtual bool LoadState(pugi::xml_node&)

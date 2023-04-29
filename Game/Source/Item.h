@@ -21,8 +21,8 @@ public:
 
 	Item() {};
 	Item(int tileX, int tileY, const char* textPath, EntityType entityType = EntityType::ITEM) : Entity(entityType) {
-		tile.x = tileX;
-		tile.y = tileY;
+		position.x = tileX;
+		position.y = tileY;
 		isPicked = false;
 		texturePath = textPath;
 	}
