@@ -9,6 +9,7 @@
 #include "Map.h"
 #include "Fonts.h"
 #include "EntityManager.h"
+#include "ParticleSystemManager.h"
 #include "QuestManager.h"
 #include "GuiManager.h"
 #include "Hud.h"
@@ -52,6 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(true);
 	fonts = new Fonts(true);
 	entityManager = new EntityManager(false);
+	particleSystemManager = new ParticleSystemManager(false);
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
 	hud = new Hud(true);
@@ -68,6 +70,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(hud);
 	AddModule(guiManager);
 	AddModule(entityManager);
+	AddModule(particleSystemManager);
 	AddModule(questManager);
 	AddModule(map);
 

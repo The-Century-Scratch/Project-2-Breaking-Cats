@@ -20,6 +20,7 @@ class ModuleCollisions;
 class Map;
 class Fonts;
 class EntityManager;
+class ParticleSystemManager;
 class QuestManager;
 class GuiManager;
 class Hud;
@@ -99,6 +100,7 @@ public:
 	Map* map;
 	Fonts* fonts;
 	EntityManager* entityManager;
+	ParticleSystemManager* particleSystemManager;
 	QuestManager* questManager;
 	GuiManager* guiManager;
 	Hud* hud;
