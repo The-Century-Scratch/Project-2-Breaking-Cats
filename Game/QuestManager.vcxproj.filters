@@ -97,6 +97,15 @@
     <ClCompile Include="Source\ModuleCollisions.cpp">
       <Filter>Source\Application\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Particle.cpp">
+      <Filter>Source\Application\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleSystem.cpp">
+      <Filter>Source\Application\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleSystemManager.cpp">
+      <Filter>Source\Application\Particles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -235,6 +244,15 @@
     <ClInclude Include="Source\ModuleCollisions.h">
       <Filter>Source\Application\Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Particle.h">
+      <Filter>Source\Application\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleSystem.h">
+      <Filter>Source\Application\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleSystemManager.h">
+      <Filter>Source\Application\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -290,6 +308,9 @@
     </Filter>
     <Filter Include="Source\Application\Collisions">
       <UniqueIdentifier>{ea6f721c-9f04-4a99-aa47-aaa315791845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application\Particles">
+      <UniqueIdentifier>{91b8bb75-a202-4470-9f44-66b637c45096}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
