@@ -159,6 +159,19 @@ bool SceneGameplay::Load()
 	LOG("Loading Scene Gameplay");
 	bool ret = true;
 
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	currentPlayer = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
+	currentPlayer->parameters = config.child("player");
+	//map = new Map(true);
+	//app->map->Load("city_square.tmx");
+	isTown = app->map->Load(name.GetString());
+
+
+
+
+
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
 	//guiTex = app->tex->Load("Textures/UI/gui_gameplay_textures.png");
 	//guiPad = app->tex->Load("Textures/UI/gui_pad_buttons.png");
@@ -519,6 +532,9 @@ bool SceneGameplay::Update(float dt)
 
 void SceneGameplay::Draw()
 {
+
+	app->map->Draw();
+
 	//SDL_Rect r = { 110,0,100,100 };
 
 	//switch (gameState)

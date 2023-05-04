@@ -11,12 +11,12 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("Player");
+	name.Create("player");
 
 	// idle player
-	idleanim.PushBack({ 0, 0, 32, 32 });
-	idleanim.loop = false;
-	idleanim.speed = 0.0f;
+	//idleanim.PushBack({ 0, 0, 32, 32 });
+	//idleanim.loop = false;
+	//idleanim.speed = 0.0f;
 
 }
 
@@ -29,7 +29,7 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-
+	w = h = 16;
 	return true;
 }
 
@@ -37,7 +37,7 @@ bool Player::Start() {
 
 	// initilize textures
 	texture = app->tex->Load(texturePath);
-
+	eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::PLAYER, (Entity*)this);
 	currentAnim = &idleanim;
 
 	return true;
@@ -45,6 +45,29 @@ bool Player::Start() {
 
 bool Player::Update()
 {
+	int speed = 1;
+
+
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+	{
+		position.y -= speed;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	{
+		position.y += speed;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+	{
+		position.x -= speed;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+	{
+		position.x += speed;
+	}
+
+	//also move collider
+	eCollider->SetPos(position.x, position.y);
+
 	//PLAYER MOVEMENT
 	//if (app->scene->questMenu) {}
 	//else if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN || (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)) && tile.y > 0)
@@ -68,20 +91,21 @@ bool Player::Update()
 	
 	//ANIMATION STATE MACHINE
 
-	SDL_Rect rect = currentAnim->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x, position.y, &rect);
-	currentAnim->Update();
+	//SDL_Rect rect = currentAnim->GetCurrentFrame();
+	//currentAnim->Update();
 
 	return true;
 }
 
 bool Player::PostUpdate() {
 
+	app->render->DrawTexture(texture, position.x, position.y);
 	return true;
 }
 
 bool Player::CleanUp()
 {
+	app->tex->Unload(texture);
 	return true;
 }
 
@@ -95,14 +119,14 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::WALL:
 			//FUNCION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c1->listener);
+			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
 			break;
 		case Collider::Type::ENEMY:
 			//FUNCION TO START BATTLE
 			break;
 		case Collider::Type::NPC:
 			//FUNCTION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c1->listener);
+			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
 			break;
 		case Collider::Type::NPCINTERACTION:
 			//DIALOG FUNCTION + QUEST?
@@ -112,7 +136,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHEAST:
 			//FUNCTION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c1->listener);
+			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
 			break;
 		case Collider::Type::CHEASTINTERACTION:
 			//FUNCTION TO OPEN CHEAST

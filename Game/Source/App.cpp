@@ -52,7 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	moduleCollisions = new ModuleCollisions(true);
 	map = new Map(true);
 	fonts = new Fonts(true);
-	entityManager = new EntityManager(false);
+	entityManager = new EntityManager(true);
 	particleSystemManager = new ParticleSystemManager(false);
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);

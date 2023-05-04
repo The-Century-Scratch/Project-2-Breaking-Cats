@@ -34,6 +34,9 @@ public:
 
 	bool SaveState(pugi::xml_node&) const;
 
+	//int important to know what MAP TO LOAD FROM TILED
+	//can also used to know in what scene you are
+	int currentScene;
 	
 private:
 	Scene* current;

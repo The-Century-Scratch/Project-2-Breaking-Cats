@@ -3,6 +3,8 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
+#include "ModuleCollisions.h"
+#include "SceneManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -266,8 +268,12 @@ bool Map::CleanUp()
         RELEASE(ObjectGroupItem->data);
         ObjectGroupItem = ObjectGroupItem->next;
     }
-
     mapData.mapObjectGroups.Clear();
+
+    //REMOVE ALL COLLIDERS
+    //app->moduleCollisions->CleanUp();
+
+
 
     return true;
 }
@@ -282,11 +288,22 @@ bool Map::Load(const char* scene)
     pugi::xml_node configNode = app->LoadConfigFileToVar();
     pugi::xml_node config = configNode.child(scene).child(name.GetString());
 
-    mapFileName = config.child("mapfile").attribute("path").as_string();
+    //mapFileName = config.child("mapfile").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
 
+    for (pugi::xml_node nodeMapPath = config.child("mapfile");
+        nodeMapPath; nodeMapPath = nodeMapPath.next_sibling("mapfile"))
+    {
+        mapFileName.Add(nodeMapPath.attribute("path").as_string());
+    }
+    for (size_t i = 0; i < mapFileName.Count(); i++)
+    {
+        LOG("String of Path saved: %s", mapFileName[i].GetString());
+    }
+
     pugi::xml_document mapFileXML;
-    pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
+    pugi::xml_parse_result result = mapFileXML.load_file(mapFileName[app->sceneManager->currentScene].GetString());
+
 
     if(result == NULL)
     {
@@ -315,13 +332,13 @@ bool Map::Load(const char* scene)
     }
     
     // Create colliders
-    CreateColliders();
+    CreateColliders(mapFileXML);
 
     if(ret == true)
     {
         // LOG all the data loaded iterate all tilesets and LOG everything
        
-        LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
+        LOG("Successfully parsed map XML file :%s", mapFileName[app->sceneManager->currentScene].GetString());
         LOG("width : %d height : %d",mapData.width,mapData.height);
         LOG("tile_width : %d tile_height : %d",mapData.tileWidth, mapData.tileHeight);
         
@@ -621,11 +638,50 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     return ret;
 }
 
-bool Map::CreateColliders()
+bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions lol omg xd
 {
     bool ret = true;
 
     //CREATE TILE COLLIDERS
+    pugi::xml_node objectGroupNode = mapFile.child("map").child("objectgroup");
+
+    SDL_Rect rect;
+
+    while (objectGroupNode != NULL)
+    {
+        pugi::xml_node objectNode = objectGroupNode.child("object");
+
+        if (objectGroupNode.attribute("id").as_int() == 4  /*!strcmp(objectGroupNode.attribute("name").as_string(), "Wall")*/)
+        {
+            while (objectNode != NULL)
+            {
+                rect = {    objectNode.attribute("x").as_int(),
+                            objectNode.attribute("y").as_int(),
+                            objectNode.attribute("width").as_int(),
+                            objectNode.attribute("height").as_int() };
+
+                Collider* c1 = app->moduleCollisions->AddCollider(rect,Collider::Type::WALL);
+
+                objectNode = objectNode.next_sibling("object");
+            }
+        }
+        else if (objectGroupNode.attribute("id").as_int() == 5   /*!strcmp(objectGroupNode.attribute("name").as_string(), "ChangeScene")*/)
+        {
+            while (objectNode != NULL)
+            {
+                rect = {    objectNode.attribute("x").as_int(),
+                            objectNode.attribute("y").as_int(),
+                            objectNode.attribute("width").as_int(),
+                            objectNode.attribute("height").as_int() };
+
+                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE);
+
+                objectNode = objectNode.next_sibling("object");
+            }
+        }
+        objectGroupNode = objectGroupNode.next_sibling("objectgroup");
+    }
+
     
     
     return ret;

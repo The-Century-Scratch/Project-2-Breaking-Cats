@@ -1,7 +1,7 @@
 #ifndef __MODULE_COLLISIONS_H__
 #define __MODULE_COLLISIONS_H__
 
-#define MAX_COLLIDERS 50
+#define MAX_COLLIDERS 100
 
 #include "Module.h"
 #include "Colliders.h"
@@ -40,7 +40,7 @@ public:
 	void DebugDraw();
 
 	//solves collisions lol
-	void collision_solver(Entity* element, Entity* element_to_check);
+	void collision_solver(Entity* element, SDL_Rect element_to_check);
 
 private:
 	// All existing colliders in the scene
@@ -51,7 +51,7 @@ private:
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];
 
 	// Simple debugging flag to draw all colliders
-	bool debug = false;
+	bool debug = true;
 };
 
 

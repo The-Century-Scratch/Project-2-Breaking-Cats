@@ -167,7 +167,7 @@ public:
 	// L12: Create walkability map for pathfinding
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
-	bool CreateColliders();
+	bool CreateColliders(pugi::xml_node mapFile);
 
 private:
 
@@ -199,7 +199,7 @@ public:
 
 private:
 
-    SString mapFileName;
+	List<SString> mapFileName;
 	SString mapFolder;
     bool mapLoaded;
 };

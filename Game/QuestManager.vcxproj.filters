@@ -141,9 +141,6 @@
     <ClInclude Include="Source\Module.h">
       <Filter>Source\Application\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entity.h">
-      <Filter>Source\Application\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EntityManager.h">
       <Filter>Source\Application\Game\Entities</Filter>
     </ClInclude>
@@ -252,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="Source\ParticleSystemManager.h">
       <Filter>Source\Application\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Source\Application\Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -251,6 +251,7 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Enti
 		if (colliders[i] == nullptr)
 		{
 			ret = colliders[i] = new Collider(rect, type, listener);
+			LOG("Collider number %d created", i);
 			break;
 		}
 		else if (i == MAX_COLLIDERS - 1)
@@ -263,30 +264,38 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Enti
 }
 
 
-void ModuleCollisions::collision_solver(Entity* element, Entity* element_to_check)
+void ModuleCollisions::collision_solver(Entity* element, SDL_Rect element_to_check)
 {
-	if (((element_to_check->position.y + (element_to_check->h / 2)) < (element->position.y + (element->h / 2))) && ((abs((element->position.x) - ((element_to_check->position.x) + ((element_to_check->w) / 2))) < ((element_to_check->w) / 2)) && (abs(((element->position.x) + (element->w)) - ((element_to_check->position.x) + ((element_to_check->w) / 2))) < ((element_to_check->w) / 2)))) {
-		// TP element to ground surface
-		element->position.y = element_to_check->position.y + element_to_check->h;
+
+	// Calculate the minimum and maximum x and y values for the two rectangles
+	int element_left = element->position.x;
+	int element_right = element->position.x + element->w;
+	int element_top = element->position.y;
+	int element_bottom = element->position.y + element->h;
+
+	int check_left = element_to_check.x;
+	int check_right = element_to_check.x + element_to_check.w;
+	int check_top = element_to_check.y;
+	int check_bottom = element_to_check.y + element_to_check.h;
+
+	int left_distance = check_right - element_left;
+	int right_distance = check_left - element_right;
+	int top_distance = check_bottom - element_top;
+	int bottom_distance = check_top - element_bottom;
+
+	// Find the smallest absolute distance and move the element in that direction
+	int min_distance = std::min(std::abs(left_distance), std::min(std::abs(right_distance),
+		std::min(std::abs(top_distance), std::abs(bottom_distance))));
+	if (min_distance == std::abs(left_distance)) {
+		element->position.x += left_distance;
 	}
-	else if (((element_to_check->position.y + (element_to_check->h / 2)) >= (element->position.y + (element->h / 2))) && ((abs((element->position.x) - ((element_to_check->position.x) + ((element_to_check->w) / 2))) < ((element_to_check->w) / 2)) && (abs(((element->position.x) + (element->w)) - ((element_to_check->position.x) + ((element_to_check->w) / 2))) < ((element_to_check->w) / 2)))) {
-		// TP element to ground bottom
-		element->position.y = element_to_check->position.y - element->h;
+	else if (min_distance == std::abs(right_distance)) {
+		element->position.x += right_distance;
 	}
-	else if (((element_to_check->position.x + (element_to_check->w / 2)) < (element->position.x + (element->w / 2))) && ((abs((element->position.y) - ((element_to_check->position.y) + ((element_to_check->h) / 2))) < ((element_to_check->h) / 2)) && (abs(((element->position.y) + (element->h)) - ((element_to_check->position.y) + ((element_to_check->h) / 2))) < ((element_to_check->h) / 2)))) {
-		// TP element to ground left
-		element->position.x = element_to_check->position.x + element_to_check->w;
+	else if (min_distance == std::abs(top_distance)) {
+		element->position.y += top_distance;
 	}
-	else if (((element_to_check->position.x + (element_to_check->w / 2)) >= (element->position.x + (element->w / 2))) && ((abs((element->position.y) - ((element_to_check->position.y) + ((element_to_check->h) / 2))) < ((element_to_check->h) / 2)) && (abs(((element->position.y) + (element->h)) - ((element_to_check->position.y) + ((element_to_check->h) / 2))) < ((element_to_check->h) / 2)))) {
-		// TP element to ground right
-		element->position.x = element_to_check->position.x - element->w;
-	}
-	else if ((element_to_check->position.y + (element_to_check->h / 2)) < (element->position.y + (element->h / 2))) {
-		// TP element to ground surface
-		element->position.y = element_to_check->position.y + element_to_check->h;
-	}
-	else if ((element_to_check->position.y + (element_to_check->h / 2)) >= (element->position.y + (element->h / 2))) {
-		// TP element to ground bottom
-		element->position.y = element_to_check->position.y - element->h;
+	else {
+		element->position.y += bottom_distance;
 	}
 }
