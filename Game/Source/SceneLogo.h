@@ -2,6 +2,7 @@
 #define __SCENELOGO_H__
 
 #include "Scene.h"
+#include "Animation.h"
 
 class Easing;
 
@@ -27,10 +28,16 @@ private:
 	float logoPositionX;
 	float logoPositionX2;
 	
+	Animation logoAnimation;
+
+	Animation* currentAnimation;
+
 	int state;
 	float timeCounter;
 	float logoAlpha;
 	int logoFx;
+
+	int timer;
 
 	float drawCounter;
 };
