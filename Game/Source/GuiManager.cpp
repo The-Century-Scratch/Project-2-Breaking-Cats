@@ -30,7 +30,7 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
-		guiControl = new GuiButton(id, bounds, text);
+		guiControl = new GuiButton(id, bounds, text, nullptr);
 		break;
 	/*
 	case GuiControlType::TOGGLE:

@@ -6,10 +6,11 @@
 #include "Hud.h"
 #include "Window.h"
 
-GuiButton::GuiButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
+GuiButton::GuiButton(uint32 id, SDL_Rect bounds, const char* text, Font* font) : GuiControl(GuiControlType::BUTTON, id)
 {
 	this->bounds = bounds;
 	this->text = text;
+	this->font = font;
 
 	canClick = true;
 	drawBasic = false;

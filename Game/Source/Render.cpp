@@ -2,6 +2,8 @@
 #include "Window.h"
 #include "Render.h"
 
+#include "Fonts.h"
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -248,6 +250,195 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Co
 
 	return true;
 }
+
+bool Render::DrawText(Font* font, const char* text, int x, int y, int size, int spacing, SDL_Color tint, int maxX) const
+{
+	bool ret = true;
+
+	bool noMoreJumps = false;
+
+	int length = strlen(text);
+	int posX = x;
+
+	float scale = (float)size / font->GetCharRec(32).h;
+
+	SDL_SetTextureColorMod(font->GetTextureAtlas(), tint.r, tint.g, tint.b);
+
+	eastl::string tmp;
+	int tmpLen = 0;
+	int firstTmpLetterPosition = 0;
+	for (int i = 0; i < length + 1; i++)
+	{
+		SDL_Rect recGlyph = font->GetCharRec(text[i]);
+		SDL_Rect recDest = { posX, y, (scale * recGlyph.w), size };
+
+		if (text[i] != ' ' && text[i] != '\0')
+		{
+			tmp.push_back(text[i]);
+			++tmpLen;
+
+			if (tmpLen == 1 && maxX > 0) firstTmpLetterPosition = posX; /*+ recGlyph.w;*/
+
+			if (text[i + 1] == ' ')
+			{
+				tmp.push_back(text[i + 1]);
+				++tmpLen;
+			}
+
+			if (maxX > 0)
+			{
+				if ((tmpLen * (recDest.w + spacing)) + firstTmpLetterPosition >= maxX && noMoreJumps == false)
+				{
+					noMoreJumps = true;
+					y += size + 5;
+					posX = x;
+				}
+			}
+		}
+		else // Print the text
+		{
+			for (int j = 0; j < tmp.length(); ++j)
+			{
+				recGlyph = font->GetCharRec(tmp[j]);
+				recDest.x = posX;
+				recDest.w = scale * recGlyph.w;
+				SDL_RenderCopyEx(renderer, font->GetTextureAtlas(), &recGlyph, &recDest, 0.0, { 0 }, SDL_RendererFlip::SDL_FLIP_NONE);
+				posX += ((float)recGlyph.w * scale + spacing);
+			}
+			firstTmpLetterPosition = posX;
+			tmp.clear();
+			tmpLen = 0;
+			noMoreJumps = false;
+		}
+	}
+
+	return ret;
+}
+
+bool Render::DrawText(Font* font, const char* text, SDL_Rect bounds, int size, int spacing, SDL_Color tint, int maxX) const
+{
+	bool ret = true;
+
+	bool noMoreJumps = false;
+
+	int length = strlen(text);
+	int posX = bounds.x;
+
+	float scale = (float)size / font->GetCharRec(32).h;
+
+	SDL_SetTextureColorMod(font->GetTextureAtlas(), tint.r, tint.g, tint.b);
+	SDL_SetTextureAlphaMod(font->GetTextureAtlas(), tint.a);
+	//SDL_SetRenderDrawColor(renderer, tint.r, tint.g, tint.b, tint.a);
+
+	eastl::string tmp;
+	int tmpLen = 0;
+	int firstTmpLetterPosition = 0;
+	for (int i = 0; i < length + 1; i++)
+	{
+		SDL_Rect recGlyph = font->GetCharRec(text[i]);
+		SDL_Rect recDest = { posX, bounds.y, (scale * recGlyph.w), size };
+
+		if (text[i] != ' ' && text[i] != '\0')
+		{
+			tmp.push_back(text[i]);
+			++tmpLen;
+
+			if (tmpLen == 1 && maxX > 0) firstTmpLetterPosition = posX; /*+ recGlyph.w;*/
+
+			if (text[i + 1] == ' ')
+			{
+				tmp.push_back(text[i + 1]);
+				++tmpLen;
+			}
+
+			if (maxX > 0)
+			{
+				if ((tmpLen * (recDest.w + spacing)) + firstTmpLetterPosition >= maxX && noMoreJumps == false)
+				{
+					noMoreJumps = true;
+					bounds.y += size + 5;
+					posX = bounds.x;
+					//bounds.h += size + 5;
+				}
+			}
+		}
+		else // Print the text
+		{
+			for (int j = 0; j < tmp.length(); ++j)
+			{
+				recGlyph = font->GetCharRec(tmp[j]);
+				recDest.x = posX;
+				recDest.w = scale * recGlyph.w;
+				SDL_RenderCopyEx(renderer, font->GetTextureAtlas(), &recGlyph, &recDest, 0.0, { 0 }, SDL_RendererFlip::SDL_FLIP_NONE);
+				posX += ((float)recGlyph.w * scale + spacing);
+			}
+			firstTmpLetterPosition = posX;
+			tmp.clear();
+			tmpLen = 0;
+			noMoreJumps = false;
+		}
+	}
+
+	return ret;
+}
+
+bool Render::DrawCenterText(Font* font, const char* text, SDL_Rect bounds, int size, int spacing, SDL_Color tint, int maxDistance) const
+{
+	bool ret = true;
+
+	int length = strlen(text);
+	int posX = bounds.x;
+	int posY = bounds.y;
+
+	float scale = (float)size / font->GetCharRec(32).h;
+
+	SDL_SetTextureColorMod(font->GetTextureAtlas(), tint.r, tint.g, tint.b);
+	int textW = 0;
+	for (int i = 0; i < length; ++i)
+	{
+		textW += ((float)font->GetCharRec(text[i]).w * scale + spacing);
+	}
+
+	if (bounds.w != 0)
+	{
+		int a = (bounds.w - (textW - spacing)) / 2;
+		posX = bounds.x + a;
+	}
+	if (bounds.h != 0)
+	{
+		int b = (bounds.h - size) / 2;
+		posY = bounds.y + b;
+	}
+
+	if (size == 64)
+		posY += 7;
+	else if (size == 36)
+		posY += 4;
+
+	int a = (bounds.w - (textW - spacing)) / 2;
+	for (int i = 0; i < length; ++i)
+	{
+		SDL_Rect recGlyph = font->GetCharRec(text[i]);
+		SDL_Rect recDest = { posX, posY, (scale * recGlyph.w), size };
+
+		SDL_RenderCopyEx(renderer, font->GetTextureAtlas(), &recGlyph, &recDest, 0.0, { 0 }, SDL_RendererFlip::SDL_FLIP_NONE);
+
+		if (maxDistance > -1)
+		{
+			if (recDest.x + recDest.w >= maxDistance)
+			{
+				posY += recDest.h;
+				posX = bounds.x + a;
+			}
+		}
+
+		posX += ((float)recGlyph.w * scale + spacing);
+
+	}
+
+	return ret;
+}
+
 
 // L03: DONE 6: Implement a method to load the state
 // for now load camera's x and y
