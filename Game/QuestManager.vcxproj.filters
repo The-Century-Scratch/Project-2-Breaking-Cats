@@ -97,6 +97,18 @@
     <ClCompile Include="Source\ModuleCollisions.cpp">
       <Filter>Source\Application\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Dialogue.cpp">
+      <Filter>Source\Dialogues</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DialogueManager.cpp">
+      <Filter>Source\Dialogues</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\easings.cpp">
+      <Filter>Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AssetsManager.cpp">
+      <Filter>Source\Application\BaseModules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -235,6 +247,18 @@
     <ClInclude Include="Source\ModuleCollisions.h">
       <Filter>Source\Application\Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Dialogue.h">
+      <Filter>Source\Dialogues</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DialogueManager.h">
+      <Filter>Source\Dialogues</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\easings.h">
+      <Filter>Source\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AssetsManager.h">
+      <Filter>Source\Application\BaseModules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -290,6 +314,9 @@
     </Filter>
     <Filter Include="Source\Application\Collisions">
       <UniqueIdentifier>{ea6f721c-9f04-4a99-aa47-aaa315791845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Dialogues">
+      <UniqueIdentifier>{651672c3-98f4-4541-af35-4ef5f413675a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

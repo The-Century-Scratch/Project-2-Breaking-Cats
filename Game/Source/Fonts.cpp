@@ -1,117 +1,77 @@
-#include "App.h"
-#include "Textures.h"
-#include "Render.h"
 #include "Fonts.h"
-
-#include "Defs.h"
+#include "Textures.h"
+#include "AssetsManager.h"
 #include "Log.h"
 
-#include<string.h>
+#include "PugiXml/src/pugixml.hpp"
 
-Fonts::Fonts(bool start_enabled) : Module(start_enabled)
+Font::Font(App* App, const char* rtpFontFile, Textures* Tex)
 {
-	name.Create("fonts");
-}
+	fontLoaded = false;
 
-Fonts::~Fonts()
-{
+	pugi::xml_document xmlDocFontAtlas;
+	pugi::xml_node xmlNodeAtlas;
+	pugi::xml_node xmlNodeGlyph;
 
-}
+	int size = App->assetsManager->MakeLoad(rtpFontFile);
+	pugi::xml_parse_result result = xmlDocFontAtlas.load_buffer(App->assetsManager->GetLastBuffer(), size);
+	App->assetsManager->DeleteBuffer();
 
-// Load new texture from file path
-int Fonts::Load(const char* texture_path, const char* characters, uint rows)
-{
-	int id = -1;
+	if (result == NULL) LOG("Could not load xml file: %s. pugi error: %s", rtpFontFile, result.description());
+	else xmlNodeAtlas = xmlDocFontAtlas.child("AtlasTexture");
 
-	if(texture_path == nullptr || characters == nullptr || rows == 0)
+	if (xmlNodeAtlas.empty() == false)
 	{
-		LOG("Could not load font");
-		return id;
-	}
+		const pugi::char_t* path = xmlNodeAtlas.attribute("imagePath").as_string();
+		//int atlasWidth = xmlNodeAtlas.attribute("width").as_int();
+		//int atlasHeight = xmlNodeAtlas.attribute("height").as_int();
 
-	SDL_Texture* tex = app->tex->Load(texture_path);
+		texture = Tex->Load(PATH("Font/", path));
 
-	if(tex == nullptr || strlen(characters) >= MAX_FONT_CHARS)
-	{
-		LOG("Could not load font at %s with characters '%s'", texture_path, characters);
-		return id;
-	}
+		charsCount = xmlNodeAtlas.attribute("spriteCount").as_int();
+		baseSize = xmlNodeAtlas.attribute("fontSize").as_int();
 
-	id = 0;
-	for(; id < MAX_FONTS; ++id)
-		if(fonts[id].texture == nullptr)
-			break;
+		xmlNodeGlyph = xmlNodeAtlas.child("Sprite");
 
-	if(id == MAX_FONTS)
-	{
-		LOG("Cannot load font %s. Array is full (max %d).", texture_path, MAX_FONTS);
-		return id;
-	}
-
-	Font& font = fonts[id];
-
-	font.texture = tex;
-	font.rows = rows;
-
-	strcpy_s(fonts[id].table, MAX_FONT_CHARS, characters);
-	font.totalLength = strlen(characters);
-	font.columns = fonts[id].totalLength / rows;
-
-	uint tex_w, tex_h;
-	app->tex->GetSize(tex, tex_w, tex_h);
-	font.char_w = tex_w / font.columns;
-	font.char_h = tex_h / font.rows;
-
-	LOG("Successfully loaded BMP font from %s", texture_path);
-
-	return id;
-}
-
-void Fonts::UnLoad(int font_id)
-{
-	if(font_id >= 0 && font_id < MAX_FONTS && fonts[font_id].texture != nullptr)
-	{
-		app->tex->Unload(fonts[font_id].texture);
-		fonts[font_id].texture = nullptr;
-		LOG("Successfully Unloaded BMP font_id %d", font_id);
-	}
-}
-
-void Fonts::BlitText(int x, int y, int font_id, const char* text, bool useCamera) const
-{
-	if(text == nullptr || font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].texture == nullptr)
-	{
-		LOG("Unable to render text with bmp font id %d", font_id);
-		return;
-	}
-
-	const Font* font = &fonts[font_id];
-	SDL_Rect spriteRect;
-	uint len = strlen(text);
-
-	spriteRect.w = font->char_w;
-	spriteRect.h = font->char_h;
-
-	for(int i = len-1; i >= 0; --i)
-	{
-		uint charIndex = 0;
-
-		// Find the location of the current character in the lookup table
-		for (uint j = 0; j < font->totalLength; ++j)
+		for (int index = 0; xmlNodeGlyph; xmlNodeGlyph = xmlNodeGlyph.next_sibling("Sprite"))
 		{
-			if (font->table[j] == text[i])
-			{
-				charIndex = j;
-				break;
-			}
+			index = xmlNodeGlyph.attribute("charValue").as_int();
+			charsRecs[index].x = xmlNodeGlyph.attribute("positionX").as_int();
+			charsRecs[index].y = xmlNodeGlyph.attribute("positionY").as_int();
+			charsRecs[index].w = xmlNodeGlyph.attribute("sourceSizeWidth").as_int();
+			charsRecs[index].h = baseSize;
 		}
 
-		// Retrieve the position of the current character in the sprite
-		spriteRect.x = spriteRect.w * (charIndex % font->columns);
-		spriteRect.y = spriteRect.h * (charIndex / font->columns);
-
-		app->render->DrawTexture(font->texture, x, y, &spriteRect,useCamera);
-		// Advance the position where we blit the next character
-		x -= spriteRect.w;
+		fontLoaded = true;
 	}
+}
+
+Font::~Font()
+{
+
+}
+
+SDL_Texture* Font::GetTextureAtlas()
+{
+	return texture;
+}
+
+SDL_Rect Font::GetCharRec(int value)
+{
+	SDL_Rect rec = { 0 };
+
+	// Get character rectangle corresponding to introduced value
+	// NOTE: In our current implementation rectangles are ordered following
+	// the character codepoint value but improved implementation would require
+	// a for() loop to look for the corresponding value on a hashmap table
+	rec = charsRecs[value];
+
+	return rec;
+}
+
+bool Font::UnLoad(Textures* tex)
+{   
+	tex->Unload(texture);
+
+	return true;
 }

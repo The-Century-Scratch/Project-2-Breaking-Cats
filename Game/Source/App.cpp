@@ -7,9 +7,9 @@
 #include "SceneManager.h"
 #include "ModuleCollisions.h"
 #include "Map.h"
-#include "Fonts.h"
 #include "EntityManager.h"
 #include "QuestManager.h"
+#include "AssetsManager.h"
 #include "GuiManager.h"
 #include "Hud.h"
 
@@ -50,7 +50,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneManager = new SceneManager(true);
 	moduleCollisions = new ModuleCollisions(true);
 	map = new Map(true);
-	fonts = new Fonts(true);
 	entityManager = new EntityManager(false);
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
@@ -62,7 +61,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(fonts);
 	AddModule(sceneManager);
 	AddModule(moduleCollisions);
 	AddModule(hud);
