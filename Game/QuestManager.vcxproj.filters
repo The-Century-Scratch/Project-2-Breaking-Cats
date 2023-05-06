@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Source\Log.cpp">
@@ -108,6 +108,14 @@
     </ClCompile>
     <ClCompile Include="Source\AssetsManager.cpp">
       <Filter>Source\Application\BaseModules</Filter>
+    <ClCompile Include="Source\Particle.cpp">
+      <Filter>Source\Application\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleSystem.cpp">
+      <Filter>Source\Application\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ParticleSystemManager.cpp">
+      <Filter>Source\Application\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,9 +150,6 @@
       <Filter>Source\Application\Game\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Module.h">
-      <Filter>Source\Application\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity.h">
       <Filter>Source\Application\Headers</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntityManager.h">
@@ -258,6 +263,17 @@
     </ClInclude>
     <ClInclude Include="Source\AssetsManager.h">
       <Filter>Source\Application\BaseModules</Filter>
+    <ClInclude Include="Source\Particle.h">
+      <Filter>Source\Application\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleSystem.h">
+      <Filter>Source\Application\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ParticleSystemManager.h">
+      <Filter>Source\Application\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Source\Application\Game\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -317,6 +333,8 @@
     </Filter>
     <Filter Include="Source\Dialogues">
       <UniqueIdentifier>{651672c3-98f4-4541-af35-4ef5f413675a}</UniqueIdentifier>
+    <Filter Include="Source\Application\Particles">
+      <UniqueIdentifier>{91b8bb75-a202-4470-9f44-66b637c45096}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

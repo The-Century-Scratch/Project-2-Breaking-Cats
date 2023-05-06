@@ -9,7 +9,7 @@
 	</renderer>
 	
 	<window>
-		<resolution width="1280" height="720" scale="1"/>
+		<resolution width="1280" height="720" scale="3"/>
 		<fullscreen value="false"/>
 		<borderless value="false"/>
 		<resizable value="false"/>
@@ -28,7 +28,9 @@
 		<clickfx path="Assets/Audio/Fx/clickfx.wav"/>
 		<mousebyfx path="Assets/Audio/Fx/mousebyfx.wav"/>
 	</Hud>
-	<scene>
+	<scenegameplay>
+		<player x="368" y="64" texturepath="Assets/Textures/testPlayer.png">
+		</player>
 		<music path="Assets/Audio/Music/1_Astrub.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
@@ -39,9 +41,10 @@
 		<npc x="10" y="6" texturepath="Assets/Textures/NPCs.png" id="4" character="5"/>
 		<map>
 			<mapfolder path="Assets/Maps/"/>
+			<mapfile path="Assets/Maps/city_square.tmx"/>
 			<mapfile path="Assets/Maps/LostChests.tmx"/>
 		</map>
-	</scene>
+	</scenegameplay>
 	<questmanager>
 		<activequests>
 			<quest id="1"></quest>

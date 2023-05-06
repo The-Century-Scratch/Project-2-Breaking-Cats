@@ -21,6 +21,7 @@ class TextureManager;
 class ModuleCollisions;
 class Map;
 class EntityManager;
+class ParticleSystemManager;
 class QuestManager;
 class GuiManager;
 class Hud;
@@ -100,6 +101,7 @@ public:
 	ModuleCollisions* moduleCollisions;
 	Map* map;
 	EntityManager* entityManager;
+	ParticleSystemManager* particleSystemManager;
 	QuestManager* questManager;
 	GuiManager* guiManager;
 	Hud* hud;

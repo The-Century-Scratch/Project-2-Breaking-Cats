@@ -8,6 +8,7 @@
 #include "ModuleCollisions.h"
 #include "Map.h"
 #include "EntityManager.h"
+#include "ParticleSystemManager.h"
 #include "QuestManager.h"
 #include "AssetsManager.h"
 #include "GuiManager.h"
@@ -50,7 +51,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneManager = new SceneManager(true);
 	moduleCollisions = new ModuleCollisions(true);
 	map = new Map(true);
-	entityManager = new EntityManager(false);
+	entityManager = new EntityManager(true);
+	particleSystemManager = new ParticleSystemManager(false);
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
 	hud = new Hud(true);
@@ -66,6 +68,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(hud);
 	AddModule(guiManager);
 	AddModule(entityManager);
+	AddModule(particleSystemManager);
 	AddModule(questManager);
 	AddModule(map);
 

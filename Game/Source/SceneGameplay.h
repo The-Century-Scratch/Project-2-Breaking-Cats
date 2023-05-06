@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "Point.h"
+#include "Player.h"
 //#include "ParticlesManager.h"
 
 //#include "Font.h"
@@ -100,7 +101,7 @@ private:
 	GameplayMenuState menuState;
 	GameplayState gameState;
 
-	//EntityManager* entityManager;
+	EntityManager* entityManager;
 
 	//ParticlesManager* particles;
 
