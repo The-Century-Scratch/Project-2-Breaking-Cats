@@ -32,6 +32,12 @@ public:
 	bool UnLoad() override;
 
 private:
+	SDL_Texture* img;
+	SDL_Texture* berry;
+	SDL_Texture* creditsTex;
+
+	SDL_Rect imgRect;
+
 	SDL_Texture* bg;
 	SDL_Texture* bgText;
 	

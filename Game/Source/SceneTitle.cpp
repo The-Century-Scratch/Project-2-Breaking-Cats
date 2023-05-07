@@ -73,6 +73,17 @@ bool SceneTitle::Load()
 	//if (app->render->camera.x != 0) app->render->camera.x = 0;
 	//if (app->render->camera.y != 0) app->render->camera.y = 0;
 
+	img = app->tex->Load(app->LoadConfigFileToVar().child("sceneTitle").child("img").attribute("texturepath").as_string());
+	imgRect.x = app->LoadConfigFileToVar().child("sceneTitle").child("imgRect").attribute("x").as_int();
+	imgRect.y = app->LoadConfigFileToVar().child("sceneTitle").child("imgRect").attribute("y").as_int();
+	imgRect.w = app->LoadConfigFileToVar().child("sceneTitle").child("imgRect").attribute("w").as_int();
+	imgRect.h = app->LoadConfigFileToVar().child("sceneTitle").child("imgRect").attribute("h").as_int();
+
+	berry = app->tex->Load(app->LoadConfigFileToVar().child("sceneTitle").child("berry").attribute("texturepath").as_string());
+	creditsTex = app->tex->Load(app->LoadConfigFileToVar().child("sceneTitle").child("credits").attribute("texturepath").as_string());
+
+
+
 	return ret;
 }
 
@@ -267,6 +278,8 @@ void SceneTitle::Draw()
 	//	app->render->DrawRectangle({ 0,0,1280,720 }, 0, 0, 0, 255 * titleAlpha);
 	//	break;
 	//}
+	
+	app->render->DrawTexture(img, 0,0 )
 }
 
 bool SceneTitle::UnLoad()

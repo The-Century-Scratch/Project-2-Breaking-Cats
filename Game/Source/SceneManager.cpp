@@ -47,7 +47,8 @@ bool SceneManager::Start()
 
 	currentScene = 0;
 	//current = new SceneLogo();
-	current = new SceneGameplay();
+	current = new SceneTitle();
+	//current = new SceneGameplay();
 	current->Load();
 
 	next = nullptr;

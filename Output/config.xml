@@ -19,6 +19,12 @@
 		<music volume="128"/>
 		<fx volume="128"/>
 	</audio>
+  <sceneTitle>
+    <img texturepath="Assets/Textures/TitleScreen2.png"/>
+    <imgRect x="0" y="0" w="1280" h="720"/>
+    <berry texturepath="Assets/Textures/TitleScreen2.png"/>
+    <credits texturepath="Assets/Textures/TitleScreen2.png"/>
+  </sceneTitle>
 	<Hud>
 		<hudbackground texturepath="Assets/Textures/GUI/guibackground.png"/>
 		<hudbuttonsconfig texturepath="Assets/Textures/GUI/guibuttons_config.png"/>
