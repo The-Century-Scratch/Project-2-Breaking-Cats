@@ -67,14 +67,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(sceneManager);
 	AddModule(moduleCollisions);
-	AddModule(hud);
 	AddModule(guiManager);
 	AddModule(entityManager);
 	AddModule(particleSystemManager);
 	AddModule(questManager);
 	AddModule(map);
+	AddModule(hud);
 	AddModule(debug);
-
 	// Render last to swap buffer
 	AddModule(render);
 }

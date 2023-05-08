@@ -42,6 +42,12 @@ public:
 	//solves collisions lol
 	void collision_solver(Entity* element, SDL_Rect element_to_check);
 
+	//camera keeps track of player if it tries to leave camera zone
+	void camera_follow(Collider* camera, SDL_Rect player);
+
+	// Simple debugging flag to draw all colliders
+	bool debug = true;
+
 private:
 	// All existing colliders in the scene
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };
@@ -50,8 +56,6 @@ private:
 	// If set two false, collider 1 will ignore collider 2
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];
 
-	// Simple debugging flag to draw all colliders
-	bool debug = true;
 };
 
 

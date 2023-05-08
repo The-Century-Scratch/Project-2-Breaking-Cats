@@ -1,6 +1,7 @@
 #ifndef __COLLIDER_H__
 #define __COLLIDER_H__
 
+#include "List.h"
 #include "SDL/include/SDL_Rect.h"
 
 class Module;
@@ -46,6 +47,8 @@ struct Collider
 	bool pendingToDelete = false;
 	Type type;
 	Entity* listener = nullptr;
+
+	List<Collider*> onCollision;
 };
 
 

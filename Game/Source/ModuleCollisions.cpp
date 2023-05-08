@@ -149,11 +149,25 @@ bool ModuleCollisions::PreUpdate()
 
 			if (c1->Intersects(c2->rect))
 			{
+				c1->onCollision.Add(c2);
 				if (matrix[c1->type][c2->type] && c1->listener)
 					c1->listener->OnCollision(c1, c2);
 
 				if (matrix[c2->type][c1->type] && c2->listener)
-					c2->listener->OnCollision(c2, c1);
+					c2->listener->OnCollision(c2, c1);				
+			}
+			ListItem<Collider*>* colliderItem = c1->onCollision.start;
+			while (colliderItem != NULL)
+			{
+				if (!c1->Intersects(c2->rect))
+				{
+					if (matrix[c1->type][c2->type] && c1->listener)
+						c1->listener->EndCollision(c1, c2);
+
+					if (matrix[c2->type][c1->type] && c2->listener)
+						c2->listener->EndCollision(c2, c1);
+				}
+				colliderItem = colliderItem->next;
 			}
 		}
 	}
@@ -299,5 +313,25 @@ void ModuleCollisions::collision_solver(Entity* element, SDL_Rect element_to_che
 	}
 	else {
 		element->mPosition.y += METERS_TO_PIXELS((float)bottom_distance);
+	}
+}
+
+void ModuleCollisions::camera_follow(Collider* camera, SDL_Rect player)
+{
+	if (player.x < camera->rect.x) {
+		// El jugador se ha movido a la izquierda de la cámara
+		camera->UpdatePos(-1, 0);
+	}
+	else if (player.x + player.w > camera->rect.x + camera->rect.w) {
+		// El jugador se ha movido a la derecha de la cámara
+		camera->UpdatePos(1, 0);
+	}
+	if (player.y < camera->rect.y) {
+		// El jugador se ha movido arriba de la cámara
+		camera->UpdatePos(0, -1);
+	}
+	else if (player.y + player.h > camera->rect.y + camera->rect.h) {
+		// El jugador se ha movido abajo de la cámara
+		camera->UpdatePos(0, 1);
 	}
 }

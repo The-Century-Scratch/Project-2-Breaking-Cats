@@ -74,7 +74,7 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
 void Map::Draw()
 {
-    if(mapLoaded == false)
+    if (mapLoaded == false)
         return;
 
     // Prepare the loop to draw all tiles in a layer + DrawTexture()
@@ -99,53 +99,65 @@ void Map::Draw()
 
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
-                    if (mapLayerItem->data->id == 5)
+
+                    if (mapLayerItem->data->id == 3)
                     {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x - ((app->render->camera.x)*(0.2)),
-                            pos.y,
-                            &r);
+                        continue;
                     }
-                    else if (mapLayerItem->data->id == 6)
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x - ((app->render->camera.x) * (0.3)),
-                            pos.y,
-                            &r);
-                    }
-                    else if (mapLayerItem->data->id == 7)
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x - ((app->render->camera.x) * (0.4)),
-                            pos.y,
-                            &r);
-                    }
-                    else if (mapLayerItem->data->id == 18)
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x - ((app->render->camera.x) * (0.1)),
-                            pos.y,
-                            &r);
-                    }
-                    else if (mapLayerItem->data->id == 17)
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x + ((app->render->camera.x) * (0.1)),
-                            pos.y,
-                            &r);
-                    }
-                    else
-                    {
-                        app->render->DrawTexture(tileset->texture,
-                            pos.x,
-                            pos.y,
-                            &r);
-                    }
+
+                    app->render->DrawTexture(tileset->texture,
+                        pos.x,
+                        pos.y,
+                        &r);
+
                 }
             }
         }
         mapLayerItem = mapLayerItem->next;
 
+    }
+}
+
+void Map::DrawAfterPlayer()
+{
+    if (mapLoaded == false)
+        return;
+
+    // Prepare the loop to draw all tiles in a layer + DrawTexture()
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+
+    while (mapLayerItem != NULL) {
+
+        // use GetProperty method to ask each layer if your “Draw” property is true.
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    // Complete the draw function
+                    int gid = mapLayerItem->data->Get(x, y);
+
+                    // Obtain the tile set using GetTilesetFromTileId
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x, y);
+
+                    if (mapLayerItem->data->id == 3)
+                    {
+                        app->render->DrawTexture(tileset->texture,
+                            pos.x,
+                            pos.y,
+                            &r);
+                        continue;
+                    }
+                }
+            }
+        }
+        mapLayerItem = mapLayerItem->next;
     }
 }
 

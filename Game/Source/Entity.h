@@ -58,6 +58,11 @@ public:
 
 	}
 
+	virtual void EndCollision(Collider* c1, Collider* c2)
+	{
+
+	}
+
 	const Collider* GetCollider() const
 	{
 		return eCollider;

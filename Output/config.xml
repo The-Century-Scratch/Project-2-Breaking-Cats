@@ -43,7 +43,7 @@
 		<music path="Assets/Audio/Music/1_Astrub.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
-		<player x="33" y="3" texturepath="Assets/Textures/NPCs.png"/>
+		<!--<player x="33" y="3" texturepath="Assets/Textures/NPCs.png"/>-->
 		<npc x="32" y="15" texturepath="Assets/Textures/NPCs.png" id="1" character="3"/>
 		<npc x="26" y="9" texturepath="Assets/Textures/NPCs.png" id="2" character="2"/>
 		<npc x="9" y="6" texturepath="Assets/Textures/NPCs.png" id="3" character="4"/>

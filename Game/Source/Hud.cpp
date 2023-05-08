@@ -8,7 +8,9 @@
 #include "Hud.h"
 #include "GuiManager.h"
 #include "Scene.h"
-//#include "SceneIntro.h"
+#include "SceneGameplay.h"
+#include "ModuleCollisions.h"
+#include "SceneManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -258,9 +260,12 @@ bool Hud::PostUpdate()
 {
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	app->hud->debug = app->moduleCollisions->debug;
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
-		app->hud->debug = !app->hud->debug;
+		app->hud->hudstate = hudSTATE::PAUSESCREEN;
+		app->sceneManager->Pause = true;
 	}
 
 	ret = !exit;
@@ -278,13 +283,15 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 	{
 	case 1:
 		LOG("Button 1 click");
-		//app->fade->FadeToBlack((Module*)app->sceneIntro, (Module*)app->scene);
 		app->hud->prevstate = app->hud->hudstate;
+		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
+		//app->fade->FadeToBlack((Module*)app->sceneIntro, (Module*)app->scene);
 		//app->scene->firstRun = true;
 		//app->scene->checkpointReached = false;
 		//app->sceneIntro->currentLevel = 0;
 		//app->sceneIntro->nextLevel = 1;
-		//app->hud->hudstate = hudSTATE::CLOSED;
+		app->sceneManager->currentScene = 0;
+		app->hud->hudstate = hudSTATE::CLOSED;
 		break;
 	case 2:
 		LOG("Button 2 click");
@@ -310,7 +317,7 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 6:
 		LOG("Button 6 click");
-		//app->physics->Pause();
+		app->sceneManager->Pause = false;
 		app->hud->prevstate = app->hud->hudstate;
 		hudstate = hudSTATE::CLOSED;
 		break;
@@ -323,8 +330,10 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button 8 click");
 		//app->sceneIntro->beforePlay = true;
 		//app->fade->FadeToBlack((Module*)app->scene, (Module*)app->sceneIntro);
+		//app->sceneManager.
+		app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
 		app->hud->prevstate = app->hud->hudstate;
-		//app->hud->hudstate = hudSTATE::TITLESCREEN;
+		app->hud->hudstate = hudSTATE::TITLESCREEN;
 		break;
 	case 9:
 		LOG("Button 9 click");
