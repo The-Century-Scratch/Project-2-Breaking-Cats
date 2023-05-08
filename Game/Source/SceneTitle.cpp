@@ -279,7 +279,7 @@ void SceneTitle::Draw()
 	//	break;
 	//}
 	
-	app->render->DrawTexture(img, 0,0 )
+	app->render->DrawTexture(img, 0, 0, &imgRect, 1, 0, 0, true, 1);
 }
 
 bool SceneTitle::UnLoad()
