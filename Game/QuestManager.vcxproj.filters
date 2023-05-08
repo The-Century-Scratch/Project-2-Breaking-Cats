@@ -118,6 +118,9 @@
     <ClCompile Include="Source\Hud.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Debug.cpp">
+      <Filter>Source\Application\BaseModules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Dialogue.h">
@@ -278,6 +281,9 @@
     </ClInclude>
     <ClInclude Include="Source\Hud.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Debug.h">
+      <Filter>Source\Application\BaseModules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

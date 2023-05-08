@@ -1,6 +1,7 @@
 #include "ModuleCollisions.h"
 
 #include "App.h"
+#include "Debug.h"
 
 #include "Log.h"
 
@@ -165,6 +166,7 @@ bool ModuleCollisions::Update()
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		debug = !debug;
+		//app->debug->Enable();
 	}
 	return true;
 }
