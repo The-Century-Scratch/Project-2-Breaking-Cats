@@ -118,7 +118,9 @@ TransitionStep TransitionsManager::EnteringTransition(float dt)
 			else bars[i].w -= 1000 * dt;
 		}
 
-		if (bars[MAX_BARS_SIZE - 1].w < -(int)w) step = TransitionStep::CHANGING;
+		if (bars[MAX_BARS_SIZE - 1].w < -(int)w) {
+			step = TransitionStep::CHANGING;
+		}
 	}
 	else if (type == TransitionType::HALF_HEIGHT_RECTANGLES)
 	{

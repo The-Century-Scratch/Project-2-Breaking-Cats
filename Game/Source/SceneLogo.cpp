@@ -4,7 +4,8 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Animation.h"
-//#include "Easings.h"
+#include "Easings.h"
+#include "SceneManager.h"
 
 #include "SceneLogo.h"
 
@@ -68,7 +69,8 @@ bool SceneLogo::Load()
 	logoAnimation.PushBack(s10);
 	logoAnimation.PushBack(s11);
 	logoAnimation.PushBack(s12);
-	logoAnimation.speed = 0.001f;
+	logoAnimation.speed = 0.005f;
+	logoAnimation.loop = false;
 
 	currentAnimation = &logoAnimation;
 
@@ -146,9 +148,13 @@ bool SceneLogo::Update(float dt)
 	//	}
 	//	break;
 	//}
-
+	if (currentAnimation->HasFinished() == true) {
+		TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+	}
 	Draw();
 	currentAnimation->Update();
+
+	
 
 
 	return ret;
@@ -179,7 +185,7 @@ bool SceneLogo::UnLoad()
 	LOG("Unloading Scene Logo");
 	bool ret = true;
 
-	//app->tex->UnLoad(logo);
+	app->tex->Unload(logo);
 	//RELEASE(easing1);
 	//RELEASE(easing2);
 
