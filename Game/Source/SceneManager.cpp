@@ -46,10 +46,10 @@ bool SceneManager::Start()
 	LOG("Scene Manager Start");
 	bool ret = true;
 
-	currentScene = 0;
-	current = new SceneLogo();
+	currentScene = 3;
+	//current = new SceneLogo();
 	//current = new SceneTitle();
-	//current = new SceneGameplay();
+	current = new SceneGameplay();
 
 	//smart pointers
 	//std::unique_ptr<Scene> name;// = std::make_unique<SceneGameplay()>();

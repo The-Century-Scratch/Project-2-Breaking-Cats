@@ -39,7 +39,8 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 	eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::PLAYER, (Entity*)this);
 	currentAnim = &idleanim;
-
+	mPosition.x = METERS_TO_PIXELS((float)position.x);
+	mPosition.y = METERS_TO_PIXELS((float)position.y);
 	return true;
 }
 
@@ -50,22 +51,25 @@ bool Player::Update()
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		position.y -= speed;
+		mPosition.y -= speed;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		position.y += speed;
+		mPosition.y += speed;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		position.x -= speed;
+		mPosition.x -= speed;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		position.x += speed;
+		mPosition.x += speed;
 	}
 
 	//also move collider
+
+	position.x = PIXEL_TO_METERS((int)mPosition.x);
+	position.y = PIXEL_TO_METERS((int)mPosition.y);
 	eCollider->SetPos(position.x, position.y);
 
 	//PLAYER MOVEMENT
