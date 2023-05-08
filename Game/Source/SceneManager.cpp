@@ -13,6 +13,7 @@
 #include "SceneEnding.h"
 
 #include "TransitionsManager.h"
+#include <memory>
 
 #include "Defs.h"
 #include "Log.h"
@@ -49,6 +50,10 @@ bool SceneManager::Start()
 	//current = new SceneLogo();
 	//current = new SceneTitle();
 	current = new SceneGameplay();
+
+	//smart pointers
+	//std::unique_ptr<Scene> name;// = std::make_unique<SceneGameplay()>();
+	//name = std::make_unique<SceneGameplay>();
 	current->Load();
 
 	next = nullptr;

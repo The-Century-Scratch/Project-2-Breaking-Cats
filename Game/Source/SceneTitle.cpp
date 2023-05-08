@@ -3,6 +3,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "Hud.h"
 
 #include "SceneTitle.h"
 //#include "Easings.h"
@@ -49,6 +50,9 @@ bool SceneTitle::Load()
 	LOG("Loading Scene Title");
 	bool ret = true;
 	
+	app->hud->prevstate = app->hud->hudstate;
+	app->hud->hudstate = hudSTATE::TITLESCREEN;
+
 	//// Logo texture loading
 	//bgText = app->tex->Load("Textures/Scenes/battle_bg2.png");
 	//bg = app->tex->Load("Textures/Scenes/game_title.png");

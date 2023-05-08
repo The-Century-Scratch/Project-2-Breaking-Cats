@@ -70,7 +70,8 @@ bool Hud::Start()
 	button17 = (GuiCheckBox*)app->guiManager->CreateGuiControl(	GuiControlType::CHECKBOX, 17, ""			,{ (int)(w / 2 - 50),	(int)(h / 2 + 60	), 46,47},	this);
 
 
-	hudstate = hudSTATE::TITLESCREEN;
+	hudstate = hudSTATE::CLOSED;
+	//hudstate = hudSTATE::TITLESCREEN;
 	exit = false;
 	return true;
 }
