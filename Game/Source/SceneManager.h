@@ -38,6 +38,8 @@ public:
 	//can also used to know in what scene you are
 	int currentScene;
 	
+	bool Pause = false;
+
 private:
 	Scene* current;
 	Scene* next;
