@@ -6987,8 +6987,8 @@
   <object id="45" x="432" y="320" width="32" height="32"/>
   <object id="46" x="352" y="320" width="32" height="32"/>
   <object id="47" x="96" y="128" width="32" height="32"/>
-  <object id="48" x="64" y="768" width="288" height="1"/>
-  <object id="49" x="448" y="768" width="288" height="1"/>
+  <object id="48" x="64" y="767" width="288" height="1"/>
+  <object id="49" x="448" y="767" width="288" height="1"/>
   <object id="50" x="448" y="0" width="288" height="1"/>
   <object id="51" x="64" y="0" width="288" height="1"/>
   <object id="52" x="640" y="32" width="48" height="96"/>
@@ -6996,7 +6996,7 @@
  </objectgroup>
  <objectgroup id="5" name="ChangeScene">
   <object id="54" x="352" y="0" width="96" height="1"/>
-  <object id="55" x="352" y="768" width="96" height="1"/>
+  <object id="55" x="352" y="767" width="96" height="1"/>
   <object id="56" x="552" y="159" width="17" height="3"/>
   <object id="57" x="569" y="703" width="14" height="3"/>
   <object id="58" x="134" y="431" width="22" height="3"/>
