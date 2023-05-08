@@ -13,6 +13,7 @@
 #include "AssetsManager.h"
 #include "GuiManager.h"
 #include "Hud.h"
+#include "Debug.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -56,6 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
 	hud = new Hud(true);
+	debug = new Debug(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -71,7 +73,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(questManager);
 	AddModule(map);
 	AddModule(hud);
-
+	AddModule(debug);
 	// Render last to swap buffer
 	AddModule(render);
 }
