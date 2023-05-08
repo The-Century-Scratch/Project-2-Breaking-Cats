@@ -11,6 +11,7 @@
 #include "SceneTitle.h"
 #include "SceneGameplay.h"
 #include "SceneEnding.h"
+#include "EntityManager.h"
 
 #include "TransitionsManager.h"
 #include <memory>
@@ -46,10 +47,11 @@ bool SceneManager::Start()
 	LOG("Scene Manager Start");
 	bool ret = true;
 
-	currentScene = 3;
-	//current = new SceneLogo();
+	currentScene = -1;
+
+	current = new SceneLogo();
 	//current = new SceneTitle();
-	current = new SceneGameplay();
+	//current = new SceneGameplay();
 
 	//smart pointers
 	//std::unique_ptr<Scene> name;// = std::make_unique<SceneGameplay()>();
@@ -59,6 +61,36 @@ bool SceneManager::Start()
 	next = nullptr;
 
 	transitionStep = TransitionStep::NONE;
+
+	switch (currentScene)
+	{
+	case -1:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		break;
+	case 0:
+		app->render->camera.x = -597;
+		app->render->camera.y = 0;
+		app->sceneManager->current->canMoveCam = true;
+		break;
+	case 1:
+		app->render->camera.x = 283;
+		app->render->camera.y = -433;
+		app->sceneManager->current->canMoveCam = true;
+		break;
+	case 2:
+		app->render->camera.x = 375;
+		app->render->camera.y = 43;
+		app->sceneManager->current->canMoveCam = false;
+		break;
+	case 3:
+		app->render->camera.x = 102;
+		app->render->camera.y = 18;
+		app->sceneManager->current->canMoveCam = false;
+		break;		
+	default:
+		break;
+	}
 
 	return ret;
 }
@@ -73,7 +105,10 @@ bool SceneManager::Update(float dt)
 
 	if (transitionStep == TransitionStep::NONE)
 	{
-		ret = current->Update(dt);
+		if (!Pause)
+		{
+			ret = current->Update(dt);
+		}
 	}
 	else
 	{

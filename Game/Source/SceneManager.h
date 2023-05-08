@@ -40,11 +40,10 @@ public:
 	
 	bool Pause = false;
 
-private:
 	Scene* current;
 	Scene* next;
-
 	TransitionStep transitionStep;
+private:
 	// Transitions rects
 };
 

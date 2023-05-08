@@ -59,6 +59,8 @@ public:
 	SString name;
 	bool active;
 	
+	bool canMoveCam;
+
 	bool transitionRequired;
 	SceneType nextScene;
 	bool isTown;

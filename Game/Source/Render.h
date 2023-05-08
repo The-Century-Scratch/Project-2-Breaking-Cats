@@ -53,7 +53,6 @@ public:
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 
-
 	bool LoadState(pugi::xml_node&);
 	bool SaveState(pugi::xml_node&);
 

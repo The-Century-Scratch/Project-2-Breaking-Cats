@@ -8,6 +8,9 @@
 #include "Point.h"
 #include "Scene.h"
 #include "ModuleCollisions.h"
+#include "SceneManager.h"
+#include "window.h"
+#include "Map.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -39,6 +42,30 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 	eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::PLAYER, (Entity*)this);
 	currentAnim = &idleanim;
+
+
+	switch (app->sceneManager->currentScene)
+	{
+	case 0:
+		break;
+	case 1:
+		position.x = 113;
+		position.y = 366;
+		break;
+	case 2:
+		position.x = 71;
+		position.y = 173;
+		break;
+	case 3:
+		position.x = 334;
+		position.y = 106;
+		break;
+	default:
+		break;
+	}
+
+
+
 	mPosition.x = METERS_TO_PIXELS((float)position.x);
 	mPosition.y = METERS_TO_PIXELS((float)position.y);
 	return true;
@@ -46,8 +73,7 @@ bool Player::Start() {
 
 bool Player::Update()
 {
-	int speed = 1;
-
+	int speed = 10;
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
@@ -104,6 +130,9 @@ bool Player::Update()
 bool Player::PostUpdate() {
 
 	app->render->DrawTexture(texture, position.x, position.y);
+
+	//draw map that must be drawed after the player
+	app->map->DrawAfterPlayer();
 	return true;
 }
 
@@ -155,3 +184,33 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 }
 
+void Player::EndCollision(Collider* c1, Collider* c2)
+{
+	if (c1->type == Collider::Type::PLAYER)
+	{
+		switch (c2->type)
+		{
+		case Collider::Type::NONE:
+			break;
+		case Collider::Type::WALL:
+			break;
+		case Collider::Type::ENEMY:
+			break;
+		case Collider::Type::NPC:
+			break;
+		case Collider::Type::NPCINTERACTION:
+			break;
+		case Collider::Type::CAMLIMIT:
+			break;
+		case Collider::Type::CHEAST:
+			break;
+		case Collider::Type::CHEASTINTERACTION:
+			break;
+		case Collider::Type::CHANGESCENE:
+			break;
+		default:
+			break;
+		}
+	}
+
+}

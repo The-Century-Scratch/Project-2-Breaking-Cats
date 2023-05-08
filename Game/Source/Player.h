@@ -30,6 +30,8 @@ public:
 
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	void EndCollision(Collider* c1, Collider* c2) override;
+
 public:
 
 	Animation* currentAnim = nullptr;

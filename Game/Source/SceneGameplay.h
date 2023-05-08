@@ -163,6 +163,7 @@ private:
 	bool firstQuestAdded;
 
 	int lastUserInput;
+
 };
 
 #endif //__SCENEGAMEPLAY_H__

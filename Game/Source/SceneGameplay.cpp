@@ -5,7 +5,11 @@
 #include "Audio.h"
 //#include "Font.h"
 
+#include "ModuleCollisions.h"
+#include "Hud.h"
+#include "Window.h"
 #include "SceneGameplay.h"
+#include "SceneManager.h"
 #include "SceneBattle.h"
 //#include "AssetsManager.h"
 #include "EntityManager.h"
@@ -169,9 +173,6 @@ bool SceneGameplay::Load()
 	isTown = app->map->Load(name.GetString());
 
 
-
-
-
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
 	//guiTex = app->tex->Load("Textures/UI/gui_gameplay_textures.png");
 	//guiPad = app->tex->Load("Textures/UI/gui_pad_buttons.png");
@@ -229,6 +230,91 @@ bool SceneGameplay::Update(float dt)
 	//UpdatingButtons(app->input);
 
 	bool ret = true;
+	//canMoveCam = true;
+	int cameraSpeed = 1;
+	if (canMoveCam)
+	{
+		if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			app->render->camera.y += cameraSpeed;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			app->render->camera.y -= cameraSpeed;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			app->render->camera.x += cameraSpeed;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			app->render->camera.x -= cameraSpeed;
+		}
+	}
+
+	if (canMoveCam)
+	{
+		if (app->sceneManager->currentScene == 1)
+		{
+			//camera fix to player in y axis
+			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
+			{
+				app->render->camera.y = -1 * app->win->scale * (currentPlayer->position.y - 300 / app->win->scale);
+			}
+			else if (currentPlayer->position.y <= 300 / app->win->scale || currentPlayer->position.y < 0)
+			{
+				app->render->camera.y = 0;
+			}
+			else if (currentPlayer->position.y >= (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
+			{
+				//app->render->camera.y = (1 - app->win->scale) * app->win->height;
+				app->render->camera.y = -1 * app->win->scale * ((app->map->mapData.tileHeight * app->map->mapData.height) - 720 / app->win->scale);
+			}
+		}
+		else
+		{
+			//camera fix to player in x axis
+			if (currentPlayer->position.x > 300 / app->win->scale && currentPlayer->position.x < (app->map->mapData.tileWidth * app->map->mapData.width) - 980 / app->win->scale)
+			{
+				app->render->camera.x = -1 * app->win->scale * (currentPlayer->position.x - 300 / app->win->scale);
+			}
+			else if (currentPlayer->position.x <= 300 / app->win->scale)
+			{
+				app->render->camera.x = 0;
+			}
+			else if (currentPlayer->position.x >= (app->map->mapData.tileWidth * app->map->mapData.width) - 980 / app->win->scale)
+			{
+				app->render->camera.x = -1 * app->win->scale * ((app->map->mapData.tileWidth * app->map->mapData.width) - 1280 / app->win->scale);
+			}
+			//camera fix to player in y axis
+			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
+			{
+				app->render->camera.y = -1 * app->win->scale * (currentPlayer->position.y - 300 / app->win->scale);
+			}
+			else if (currentPlayer->position.y <= 300 / app->win->scale || currentPlayer->position.y < 0)
+			{
+				app->render->camera.y = 0;
+			}
+			else if (currentPlayer->position.y >= (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
+			{
+				//app->render->camera.y = (1 - app->win->scale) * app->win->height;
+				app->render->camera.y = -1 * app->win->scale * ((app->map->mapData.tileHeight * app->map->mapData.height) - 720 / app->win->scale);
+			}
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		app->moduleCollisions->debug = !app->moduleCollisions->debug;
+		if (app->moduleCollisions->debug)
+		{
+			//CODE OF DEBUG MODE
+		}
+	}
+
+
+	
+
 	//switch (gameState)
 	//{
 	//case GameplayState::ROAMING:

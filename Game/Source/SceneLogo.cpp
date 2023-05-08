@@ -6,7 +6,7 @@
 #include "Animation.h"
 #include "Easings.h"
 #include "SceneManager.h"
-
+#include "Hud.h"
 #include "SceneLogo.h"
 
 #include "Log.h"
@@ -150,9 +150,16 @@ bool SceneLogo::Update(float dt)
 	//}
 	if (currentAnimation->HasFinished() == true) {
 		TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+		app->hud->hudstate = hudSTATE::TITLESCREEN;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+		app->hud->hudstate = hudSTATE::TITLESCREEN;
 	}
 	Draw();
 	currentAnimation->Update();
+
 
 	
 
