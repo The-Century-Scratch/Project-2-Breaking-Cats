@@ -39,7 +39,9 @@ bool SceneLogo::Load()
 	LOG("Loading Scene Logo");
 	bool ret = true;
 	//logoFx = app->audio->LoadFx("Audio/Fx/logo_intro.wav");
-	logo = app->tex->Load("Assets/Textures/TheCenturyScratchTitleAnimated12frames.png");
+
+	logo = app->tex->Load(app->LoadConfigFileToVar().child("sceneLogo").child("img").attribute("texturepath").as_string());
+	
 
 	SDL_Rect s1 = { 0, 0, 184, 98 };
 	SDL_Rect s2 = { 184 * 1, 0, 184, 98 };
