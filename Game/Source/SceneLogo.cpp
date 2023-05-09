@@ -69,7 +69,7 @@ bool SceneLogo::Load()
 	logoAnimation.PushBack(s10);
 	logoAnimation.PushBack(s11);
 	logoAnimation.PushBack(s12);
-	logoAnimation.speed = 0.005f;
+	logoAnimation.speed = 0.002f;
 	logoAnimation.loop = false;
 
 	currentAnimation = &logoAnimation;
@@ -149,7 +149,7 @@ bool SceneLogo::Update(float dt)
 	//	break;
 	//}
 	if (currentAnimation->HasFinished() == true) {
-		TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+		TransitionToScene(SceneType::TITLE, TransitionType::FADE_TO_BLACK);
 		app->hud->hudstate = hudSTATE::TITLESCREEN;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
