@@ -98,6 +98,7 @@
     <ClCompile Include="Source\AssetsManager.cpp" />
     <ClCompile Include="Source\CollectQuest.cpp" />
     <ClCompile Include="Source\Colliders.cpp" />
+    <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\Dialogue.cpp" />
     <ClCompile Include="Source\DialogueManager.cpp" />
     <ClCompile Include="Source\easings.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Source\AssetsManager.h" />
     <ClInclude Include="Source\CollectQuest.h" />
     <ClInclude Include="Source\Colliders.h" />
+    <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Dialogue.h" />
     <ClInclude Include="Source\DialogueManager.h" />
     <ClInclude Include="Source\easings.h" />

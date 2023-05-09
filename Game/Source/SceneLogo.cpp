@@ -43,7 +43,6 @@ bool SceneLogo::Load()
 
 	logo = app->tex->Load(app->LoadConfigFileToVar().child("sceneLogo").child("img").attribute("texturepath").as_string());
 	
-
 	//SDL_Rect s1 =	{ 184 * 0, 0, 184, 98 } ;
 	//SDL_Rect s2 =	{ 184 * 1, 0, 184, 98 } ;
 	//SDL_Rect s3 =	{ 184 * 2, 0, 184, 98 } ;
@@ -70,6 +69,7 @@ bool SceneLogo::Load()
 	logoAnimation.PushBack({ 184 * 10, 0, 184, 98 });
 	logoAnimation.PushBack({ 184 * 11, 0, 184, 98 });
 	logoAnimation.speed = 0.5f;
+
 	logoAnimation.loop = false;
 
 	currentAnimation = &logoAnimation;
@@ -151,12 +151,13 @@ bool SceneLogo::Update(float dt)
 	if (currentAnimation->HasFinished() == true) {
 		TransitionToScene(SceneType::TITLE, TransitionType::FADE_TO_BLACK);
 		//app->hud->hudstate = hudSTATE::TITLESCREEN;
-	}
+
 
 	currentAnimation->Update();
 
 
-	
+	SDL_Color white = { 0,0,0,0 };
+	app->render->DrawText("pau Mongolooooooooo", 100, 100, 500, 200, white);
 
 
 	return ret;

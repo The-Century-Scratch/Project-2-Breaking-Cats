@@ -27,6 +27,7 @@ class ParticleSystemManager;
 class QuestManager;
 class GuiManager;
 class Hud;
+class Debug;
 
 class App
 {
@@ -107,6 +108,7 @@ public:
 	QuestManager* questManager;
 	GuiManager* guiManager;
 	Hud* hud;
+	Debug* debug;
 
 	bool frcap = true;
 

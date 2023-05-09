@@ -123,6 +123,8 @@
     </ClCompile>
     <ClCompile Include="Source\Timer.cpp">
       <Filter>Source\Utils</Filter>
+    <ClCompile Include="Source\Debug.cpp">
+      <Filter>Source\Application\BaseModules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +292,8 @@
     </ClInclude>
     <ClInclude Include="Source\Timer.h">
       <Filter>Source\Utils</Filter>
+    <ClInclude Include="Source\Debug.h">
+      <Filter>Source\Application\BaseModules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "ModuleCollisions.h"
 
 #include "App.h"
+#include "Debug.h"
 
 #include "Log.h"
 
@@ -180,6 +181,16 @@ bool ModuleCollisions::Update()
 	{
 		debug = !debug;
 	}
+
+	if(debug)
+	{
+		app->debug->Enable();
+	}
+	else
+	{
+		app->debug->Disable();
+	}
+
 	return true;
 }
 
