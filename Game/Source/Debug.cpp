@@ -17,7 +17,12 @@
 
 #include <string>
 
-Debug::Debug(bool startEnabled) : Module(startEnabled) { debug = false; }
+Debug::Debug(bool startEnabled) : Module(startEnabled) 
+{
+	debug = false;
+	name.Create("debug");
+}
+
 Debug::~Debug() {}
 
 bool Debug::Start()
@@ -25,17 +30,17 @@ bool Debug::Start()
 	debug = false;
 	desiredFPS = 60;
 
-	font = new Font(app, "Font/font3.xml", app->tex);
+	//font = new Font(app, "Font/font3.xml", app->tex);
 
 	return true;
 }
 
 bool Debug::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
-		debug = !debug;
+	/*if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
+		debug = !debug;*/
 
-	if (debug)
+	/*if (debug)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
 			variables = !variables;
@@ -49,7 +54,7 @@ bool Debug::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 			freeCam = !freeCam;
 
-	}
+	}*/
 
 	//// F1/F2: Start from the first/second level
 	//if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
@@ -105,21 +110,22 @@ bool Debug::Update(float dt)
 
 bool Debug::PostUpdate()
 {
-	/*if (debug)
-		DrawDebug();
+	//SDL_Color white = { 0,0,0,0 };
+	//app->render->DrawText("pau Mongolooooooooo", 100, 100, 100, 20, white);
+	//DrawDebug();
 
-	if (drawColliders && app->physics->active)
-		DrawColliders();*/
+	SDL_Color white = { 0,0,0,0 };
+	app->render->DrawText("pau Mongolooooooooo", 0, 0, 500, 200, white);
 
 	return true;
 }
 
 void Debug::DrawDebug()
 {
-	int scale = app->win->GetScale();
+	/*int scale = app->win->GetScale();
 
 	int debugX = app->render->camera.w / scale * 0.7;
-	int debugY = app->render->camera.h / scale * 0.1;
+	int debugY = app->render->camera.h / scale * 0.1;*/
 
 	//app->fonts->BlitText(debugX, debugY, 0, "variables (v)");
 
@@ -132,7 +138,7 @@ void Debug::DrawDebug()
 	
 
 	SDL_Color white = {0,0,0,0};
-	app->render->DrawText("pau Mongolooooooooo", 100, 100, 100, 20, white);
+	app->render->DrawText("pau Mongolooooooooo", 50, 50, 100, 20, white);
 
 	////Variables
 	//if (variables)
