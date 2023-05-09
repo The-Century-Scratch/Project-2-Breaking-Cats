@@ -151,17 +151,11 @@ bool SceneLogo::Update(float dt)
 	if (currentAnimation->HasFinished() == true) {
 		TransitionToScene(SceneType::TITLE, TransitionType::FADE_TO_BLACK);
 		//app->hud->hudstate = hudSTATE::TITLESCREEN;
-
-
+	}
 	currentAnimation->Update();
-
-
-	SDL_Color white = { 0,0,0,0 };
-	app->render->DrawText("pau Mongolooooooooo", 100, 100, 500, 200, white);
-
-
 	return ret;
 }
+
 
 void SceneLogo::Draw()
 {

@@ -28,15 +28,15 @@ Player::~Player() {
 }
 
 bool Player::Awake() {
+	return true;
+}
+
+bool Player::Start() {
 	// Get Player parameters from XML
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	w = h = 16;
-	return true;
-}
-
-bool Player::Start() {
 
 	// initilize textures
 	texture = app->tex->Load(texturePath);
@@ -66,36 +66,36 @@ bool Player::Start() {
 
 
 
-	mPosition.x = METERS_TO_PIXELS((float)position.x);
-	mPosition.y = METERS_TO_PIXELS((float)position.y);
+	//mPosition.x = METERS_TO_PIXELS((float)position.x);
+	//mPosition.y = METERS_TO_PIXELS((float)position.y);
 	return true;
 }
 
 bool Player::Update()
 {
-	int speed = 10;
+	int speed = 1;
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
-		mPosition.y -= speed;
+		position.y -= speed;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
-		mPosition.y += speed;
+		position.y += speed;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		mPosition.x -= speed;
+		position.x -= speed;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		mPosition.x += speed;
+		position.x += speed;
 	}
 
 	//also move collider
 
-	position.x = PIXEL_TO_METERS((int)mPosition.x);
-	position.y = PIXEL_TO_METERS((int)mPosition.y);
+	//position.x = PIXEL_TO_METERS((int)mPosition.x);
+	//position.y = PIXEL_TO_METERS((int)mPosition.y);
 	eCollider->SetPos(position.x, position.y);
 
 	//PLAYER MOVEMENT

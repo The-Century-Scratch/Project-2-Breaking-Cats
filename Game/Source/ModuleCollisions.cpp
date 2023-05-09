@@ -312,16 +312,16 @@ void ModuleCollisions::collision_solver(Entity* element, SDL_Rect element_to_che
 	int min_distance = std::min(std::abs(left_distance), std::min(std::abs(right_distance),
 		std::min(std::abs(top_distance), std::abs(bottom_distance))));
 	if (min_distance == std::abs(left_distance)) {
-		element->mPosition.x += METERS_TO_PIXELS((float)left_distance);
+		element->position.x += left_distance;
 	}
 	else if (min_distance == std::abs(right_distance)) {
-		element->mPosition.x += METERS_TO_PIXELS((float)right_distance);
+		element->position.x += right_distance;
 	}
 	else if (min_distance == std::abs(top_distance)) {
-		element->mPosition.y += METERS_TO_PIXELS((float)top_distance);
+		element->position.y += top_distance;
 	}
 	else {
-		element->mPosition.y += METERS_TO_PIXELS((float)bottom_distance);
+		element->position.y += bottom_distance;
 	}
 }
 

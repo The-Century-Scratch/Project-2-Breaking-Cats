@@ -168,6 +168,7 @@ bool SceneGameplay::Load()
 
 	currentPlayer = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	currentPlayer->parameters = config.child("player");
+	currentPlayer->Start();
 	//map = new Map(true);
 	//app->map->Load("city_square.tmx");
 	isTown = app->map->Load(name.GetString());
