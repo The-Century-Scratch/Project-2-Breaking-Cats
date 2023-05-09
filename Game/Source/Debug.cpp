@@ -11,6 +11,7 @@
 #include "Scene.h"
 #include "GuiManager.h"
 #include "GuiControl.h"
+#include "DialogueManager.h"
 #include "Defs.h"
 #include "Log.h"
 
@@ -23,6 +24,9 @@ bool Debug::Start()
 {
 	debug = false;
 	desiredFPS = 60;
+
+	font = new Font(app, "Font/font3.xml", app->tex);
+
 	return true;
 }
 
@@ -117,14 +121,18 @@ void Debug::DrawDebug()
 	int debugX = app->render->camera.w / scale * 0.7;
 	int debugY = app->render->camera.h / scale * 0.1;
 
-	app->fonts->BlitText(debugX, debugY, 0, "variables (v)");
+	//app->fonts->BlitText(debugX, debugY, 0, "variables (v)");
 
-	//Camera Limits
-	if (camLimits)
-		app->fonts->BlitText(debugX, debugY + 10, 0, "camera limits (c)  on");
-	else
-		app->fonts->BlitText(debugX, debugY + 10, 0, "camera limits (c)  off");
+	////Camera Limits
+	//if (camLimits)
+	//	app->fonts->BlitText(debugX, debugY + 10, 0, "camera limits (c)  on");
+	//else
+	//	app->fonts->BlitText(debugX, debugY + 10, 0, "camera limits (c)  off");
+
 	
+
+	SDL_Color white = {0,0,0,0};
+	app->render->DrawText("pau Mongolooooooooo", 100, 100, 100, 20, white);
 
 	////Variables
 	//if (variables)

@@ -6,7 +6,7 @@
 using namespace std::chrono;
 
 #define DEBUG_BOX 225
-
+class Font;
 class Debug : public Module
 {
 public:
@@ -41,7 +41,7 @@ public:
 	int desiredFPS;
   
 private:
-
+	Font* font;
 	
 };
 

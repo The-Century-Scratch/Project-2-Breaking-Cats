@@ -180,8 +180,17 @@ bool ModuleCollisions::Update()
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		debug = !debug;
-		//app->debug->Enable();
 	}
+
+	if(debug)
+	{
+		app->debug->Enable();
+	}
+	else
+	{
+		app->debug->Disable();
+	}
+
 	return true;
 }
 
