@@ -72,7 +72,7 @@ public:
 	
 	bool CollisionMapEntity(SDL_Rect rect, EntityType type);
 
-	void ChangeMap(const char* mapName, iPoint newPos, int newScene = 1);
+	void ChangeMap(iPoint newPos, int newScene = 1);
 private:
 	void HandleInput(Input* input, float dt);
 	

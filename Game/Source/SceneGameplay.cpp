@@ -349,7 +349,7 @@ bool SceneGameplay::Update(float dt)
 
 	if (app->sceneManager->changeMap)
 	{
-		ChangeMap("test", {71, 173}, 3);
+		ChangeMap({71, 173}, 3);
 	}
 	
 
@@ -1814,7 +1814,7 @@ void SceneGameplay::SetCameraMovement(int target_x, int target_y, float dt)
 	if (app->render->camera.y < target_y) app->render->camera.y += 700 * dt;
 }
 
-void SceneGameplay::ChangeMap(const char* mapName, iPoint newPos, int newScene)
+void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 {
 	currentPlayer->position = newPos;
 	app->map->CleanUp();
