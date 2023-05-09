@@ -1,6 +1,7 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "SceneManager.h"
 
 #include "TransitionsManager.h"
 
@@ -103,6 +104,9 @@ TransitionStep TransitionsManager::EnteringTransition(float dt)
 {
 	uint w, h;
 	app->win->GetWindowSize(w, h);
+	//pause all gameplay
+	app->sceneManager->Pause = true;
+
 
 	if (type == TransitionType::WIPE)
 	{
@@ -160,7 +164,12 @@ TransitionStep TransitionsManager::ExitingTransition(float dt)
 	{
 		rectWipe.w -= 1000 * dt;
 
-		if (rectWipe.w < 0) step = TransitionStep::NONE;
+		if (rectWipe.w < 0)
+		{
+			step = TransitionStep::NONE;
+			//unpause all gameplay
+			app->sceneManager->Pause = false;
+		}
 	}
 	else if (type == TransitionType::ALTERNATING_BARS)
 	{
@@ -171,7 +180,11 @@ TransitionStep TransitionsManager::ExitingTransition(float dt)
 		}
 
 		if (bars[MAX_BARS_SIZE - 1].w > 0) 
+		{
 			step = TransitionStep::NONE;
+			//unpause all gameplay
+			app->sceneManager->Pause = false;
+		}
 	}
 	else if (type == TransitionType::HALF_HEIGHT_RECTANGLES)
 	{
@@ -181,6 +194,8 @@ TransitionStep TransitionsManager::ExitingTransition(float dt)
 		{
 			rectUpper.w -= 1000 * dt;
 			if (rectUpper.w <= 0) step = TransitionStep::NONE;
+			//unpause all gameplay
+			app->sceneManager->Pause = false;
 		}
 	}
 	else if (type == TransitionType::FADE_TO_BLACK)
@@ -189,6 +204,8 @@ TransitionStep TransitionsManager::ExitingTransition(float dt)
 		if (transitionAlpha < -0.01f)
 		{
 			step = TransitionStep::NONE;
+			//unpause all gameplay
+			app->sceneManager->Pause = false;
 			transitionAlpha = 0.0f;
 		}
 	}
@@ -199,9 +216,13 @@ TransitionStep TransitionsManager::ExitingTransition(float dt)
 		{
 			rectUpper2.h -= 500 * dt;
 			rectLower2.h += 500 * dt;
-			if (rectLower2.h >= 0) step = TransitionStep::NONE;
+			if (rectLower2.h >= 0)
+			{
+				step = TransitionStep::NONE;
+				//unpause all gameplay
+				app->sceneManager->Pause = false;
+			}
 		}
 	}
-
 	return step;
 }

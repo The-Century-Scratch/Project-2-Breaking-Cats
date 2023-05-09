@@ -236,7 +236,8 @@ void App::FinishUpdate()
 			//LOG("No wait");
 		}
 	}
-	dt = 0.016f;
+	if (framesPerSecond != 0) dt = (float)(1 / (float)framesPerSecond);
+
 	// Shows the time measurements in the window title
 	static char title[256];
 	sprintf_s(title, 256, "Breaking Cats Alpha | FPS: %i, Av.FPS: %.2f, Last-frame MS (dt): %.3f, vsync: %s",

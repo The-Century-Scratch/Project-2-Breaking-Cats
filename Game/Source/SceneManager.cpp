@@ -62,35 +62,7 @@ bool SceneManager::Start()
 
 	transitionStep = TransitionStep::NONE;
 
-	switch (currentScene)
-	{
-	case -1:
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		break;
-	case 0:
-		app->render->camera.x = -597;
-		app->render->camera.y = 0;
-		app->sceneManager->current->canMoveCam = true;
-		break;
-	case 1:
-		app->render->camera.x = 283;
-		app->render->camera.y = -433;
-		app->sceneManager->current->canMoveCam = true;
-		break;
-	case 2:
-		app->render->camera.x = 375;
-		app->render->camera.y = 43;
-		app->sceneManager->current->canMoveCam = false;
-		break;
-	case 3:
-		app->render->camera.x = 102;
-		app->render->camera.y = 18;
-		app->sceneManager->current->canMoveCam = false;
-		break;		
-	default:
-		break;
-	}
+
 
 	return ret;
 }
@@ -105,10 +77,10 @@ bool SceneManager::Update(float dt)
 
 	if (transitionStep == TransitionStep::NONE)
 	{
-		if (!Pause)
-		{
+		//if (!Pause)
+		//{
 			ret = current->Update(dt);
-		}
+		//}
 	}
 	else
 	{

@@ -166,12 +166,44 @@ bool SceneGameplay::Load()
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
+
 	currentPlayer = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	currentPlayer->parameters = config.child("player");
 	currentPlayer->Start();
 	//map = new Map(true);
 	//app->map->Load("city_square.tmx");
 	isTown = app->map->Load(name.GetString());
+
+	switch (app->sceneManager->currentScene)
+	{
+	case -1:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = false;
+		break;
+	case 0:
+		app->render->camera.x = -597;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+		break;
+	case 1:
+		app->render->camera.x = 283;
+		app->render->camera.y = -433;
+		canMoveCam = true;
+		break;
+	case 2:
+		app->render->camera.x = 375;
+		app->render->camera.y = 43;
+		canMoveCam = false;
+		break;
+	case 3:
+		app->render->camera.x = 102;
+		app->render->camera.y = 18;
+		canMoveCam = false;
+		break;
+	default:
+		break;
+	}
 
 
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
@@ -275,34 +307,36 @@ bool SceneGameplay::Update(float dt)
 		else
 		{
 			//camera fix to player in x axis
-			if (currentPlayer->position.x > 300 / app->win->scale && currentPlayer->position.x < (app->map->mapData.tileWidth * app->map->mapData.width) - 980 / app->win->scale)
+			if (currentPlayer->position.x > (app->win->width / 2) / app->win->scale && currentPlayer->position.x < (app->map->mapData.tileWidth * app->map->mapData.width) - (app->win->width / 2) / app->win->scale)
 			{
-				app->render->camera.x = -1 * app->win->scale * (currentPlayer->position.x - 300 / app->win->scale);
+				app->render->camera.x = -1 * app->win->scale * (currentPlayer->position.x - (app->win->width / 2) / app->win->scale);
 			}
-			else if (currentPlayer->position.x <= 300 / app->win->scale)
+			else if (currentPlayer->position.x <= (app->win->width / 2) / app->win->scale)
 			{
 				app->render->camera.x = 0;
 			}
-			else if (currentPlayer->position.x >= (app->map->mapData.tileWidth * app->map->mapData.width) - 980 / app->win->scale)
+			else if (currentPlayer->position.x >= (app->map->mapData.tileWidth * app->map->mapData.width) - (app->win->width / 2) / app->win->scale)
 			{
 				app->render->camera.x = -1 * app->win->scale * ((app->map->mapData.tileWidth * app->map->mapData.width) - 1280 / app->win->scale);
 			}
 			//camera fix to player in y axis
-			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
+			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - (app->win->height / 2) / app->win->scale)
 			{
-				app->render->camera.y = -1 * app->win->scale * (currentPlayer->position.y - 300 / app->win->scale);
+				app->render->camera.y = -1 * app->win->scale * (currentPlayer->position.y - (app->win->height / 2) / app->win->scale);
 			}
-			else if (currentPlayer->position.y <= 300 / app->win->scale || currentPlayer->position.y < 0)
+			else if (currentPlayer->position.y <= (app->win->height / 2) / app->win->scale || currentPlayer->position.y < 0)
 			{
 				app->render->camera.y = 0;
 			}
-			else if (currentPlayer->position.y >= (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
+			else if (currentPlayer->position.y >= (app->map->mapData.tileHeight * app->map->mapData.height) - (app->win->height / 2) / app->win->scale)
 			{
 				//app->render->camera.y = (1 - app->win->scale) * app->win->height;
 				app->render->camera.y = -1 * app->win->scale * ((app->map->mapData.tileHeight * app->map->mapData.height) - 720 / app->win->scale);
 			}
 		}
 	}
+
+	
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
