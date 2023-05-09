@@ -2,6 +2,7 @@
 	<app>
 		<title>Breaking Cats Alpha</title>
 		<organization>UPC</organization>
+	<frcap value = "16"/>
 	</app>
 	
 	<renderer>

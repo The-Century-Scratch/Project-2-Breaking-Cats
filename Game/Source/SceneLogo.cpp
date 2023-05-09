@@ -44,32 +44,32 @@ bool SceneLogo::Load()
 	logo = app->tex->Load(app->LoadConfigFileToVar().child("sceneLogo").child("img").attribute("texturepath").as_string());
 	
 
-	SDL_Rect s1 = { 0, 0, 184, 98 };
-	SDL_Rect s2 = { 184 * 1, 0, 184, 98 };
-	SDL_Rect s3 = { 184 * 2, 0, 184, 98 };
-	SDL_Rect s4 = { 184 * 3, 0, 184, 98 };
-	SDL_Rect s5 = { 184 * 4, 0, 184, 98 };
-	SDL_Rect s6 = { 184 * 5, 0, 184, 98 };
-	SDL_Rect s7 = { 184 * 6, 0, 184, 98 };
-	SDL_Rect s8 = { 184 * 7, 0, 184, 98 };
-	SDL_Rect s9 = { 184 * 8, 0, 184, 98 };
-	SDL_Rect s10 = { 184 * 9, 0, 184, 98 };
-	SDL_Rect s11 = { 184 * 10, 0, 184, 98 };
-	SDL_Rect s12 = { 184 * 11, 0, 184, 98 };
+	//SDL_Rect s1 =	{ 184 * 0, 0, 184, 98 } ;
+	//SDL_Rect s2 =	{ 184 * 1, 0, 184, 98 } ;
+	//SDL_Rect s3 =	{ 184 * 2, 0, 184, 98 } ;
+	//SDL_Rect s4 =	{ 184 * 3, 0, 184, 98 } ;
+	//SDL_Rect s5 =	{ 184 * 4, 0, 184, 98 } ;
+	//SDL_Rect s6 =	{ 184 * 5, 0, 184, 98 } ;
+	//SDL_Rect s7 =	{ 184 * 6, 0, 184, 98 } ;
+	//SDL_Rect s8 =	{ 184 * 7, 0, 184, 98 } ;
+	//SDL_Rect s9 =	{ 184 * 8, 0, 184, 98 } ;
+	//SDL_Rect s10 =	{ 184 * 9, 0, 184, 98 } ;
+	//SDL_Rect s11 =	{ 184 * 10, 0, 184, 98} ;
+	//SDL_Rect s12 =	{ 184 * 11, 0, 184, 98} ;
 
-	logoAnimation.PushBack(s1);
-	logoAnimation.PushBack(s2);
-	logoAnimation.PushBack(s3);
-	logoAnimation.PushBack(s4);
-	logoAnimation.PushBack(s5);
-	logoAnimation.PushBack(s6);
-	logoAnimation.PushBack(s7);
-	logoAnimation.PushBack(s8);
-	logoAnimation.PushBack(s9);
-	logoAnimation.PushBack(s10);
-	logoAnimation.PushBack(s11);
-	logoAnimation.PushBack(s12);
-	logoAnimation.speed = 0.005f;
+	logoAnimation.PushBack({ 184 * 0, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 1, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 2, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 3, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 4, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 5, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 6, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 7, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 8, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 9, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 10, 0, 184, 98 });
+	logoAnimation.PushBack({ 184 * 11, 0, 184, 98 });
+	logoAnimation.speed = 0.5f;
 	logoAnimation.loop = false;
 
 	currentAnimation = &logoAnimation;
@@ -149,15 +149,10 @@ bool SceneLogo::Update(float dt)
 	//	break;
 	//}
 	if (currentAnimation->HasFinished() == true) {
-		TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
-		app->hud->hudstate = hudSTATE::TITLESCREEN;
+		TransitionToScene(SceneType::TITLE, TransitionType::FADE_TO_BLACK);
+		//app->hud->hudstate = hudSTATE::TITLESCREEN;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
-		app->hud->hudstate = hudSTATE::TITLESCREEN;
-	}
-	Draw();
+
 	currentAnimation->Update();
 
 

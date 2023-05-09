@@ -118,6 +118,12 @@
     <ClCompile Include="Source\Hud.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PerfTimer.cpp">
+      <Filter>Source\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>Source\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Dialogue.h">
@@ -278,6 +284,12 @@
     </ClInclude>
     <ClInclude Include="Source\Hud.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PerfTimer.h">
+      <Filter>Source\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>Source\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

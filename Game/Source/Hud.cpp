@@ -165,12 +165,11 @@ bool Hud::Update(float dt)
 	{
 		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
+			prevstate = hudstate;
 			hudstate = hudSTATE::CLOSED;
 		}
-		//if (!app->physics->pause)
-		//{
-		//	app->physics->Pause();
-		//}
+		app->sceneManager->Pause = false;
+
 		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
 
 		while (control != nullptr)
@@ -261,12 +260,6 @@ bool Hud::PostUpdate()
 	bool ret = true;
 
 	app->hud->debug = app->moduleCollisions->debug;
-
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{
-		app->hud->hudstate = hudSTATE::PAUSESCREEN;
-		app->sceneManager->Pause = true;
-	}
 
 	ret = !exit;
 	app->guiManager->Draw();
