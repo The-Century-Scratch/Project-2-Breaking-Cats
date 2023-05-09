@@ -161,7 +161,8 @@ bool SceneLogo::Update(float dt)
 	currentAnimation->Update();
 
 
-	
+	SDL_Color white = { 0,0,0,0 };
+	app->render->DrawText("pau Mongolooooooooo", 100, 100, 500, 200, white);
 
 
 	return ret;
