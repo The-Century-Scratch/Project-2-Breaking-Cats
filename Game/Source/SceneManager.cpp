@@ -77,10 +77,10 @@ bool SceneManager::Update(float dt)
 
 	if (transitionStep == TransitionStep::NONE)
 	{
-		//if (!Pause)
-		//{
+		if (!Pause)
+		{
 			ret = current->Update(dt);
-		//}
+		}
 	}
 	else
 	{

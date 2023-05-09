@@ -283,7 +283,7 @@ bool Map::CleanUp()
     mapData.mapObjectGroups.Clear();
 
     //REMOVE ALL COLLIDERS
-    //app->moduleCollisions->CleanUp();
+    app->moduleCollisions->CleanUp(true);
 
 
 
@@ -672,7 +672,7 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                             objectNode.attribute("width").as_int(),
                             objectNode.attribute("height").as_int() };
 
-                Collider* c1 = app->moduleCollisions->AddCollider(rect,Collider::Type::WALL);
+                Collider* c1 = app->moduleCollisions->AddCollider(rect,Collider::Type::WALL, nullptr, true);
 
                 objectNode = objectNode.next_sibling("object");
             }
@@ -686,7 +686,7 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                             objectNode.attribute("width").as_int(),
                             objectNode.attribute("height").as_int() };
 
-                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE);
+                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE, nullptr, true);
 
                 objectNode = objectNode.next_sibling("object");
             }

@@ -176,6 +176,10 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHANGESCENE:
 			//FUNCTION TO CHANGE SCENE LOL
+			//app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::FADE_TO_BLACK);
+			app->sceneManager->changeMap = true;
+
+			//app->sceneManager->currentScene = 1;
 			break;
 		default:
 			break;

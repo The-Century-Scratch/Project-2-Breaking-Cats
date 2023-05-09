@@ -48,6 +48,8 @@ struct Collider
 	Type type;
 	Entity* listener = nullptr;
 
+	bool mapCollider = false;
+
 	List<Collider*> onCollision;
 };
 

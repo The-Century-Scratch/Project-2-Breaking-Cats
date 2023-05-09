@@ -191,7 +191,6 @@ private:
 
 	// Load a group of properties 
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
-
 	
 
 public: 
@@ -199,6 +198,7 @@ public:
 	// Declare a variable data of the struct MapData
 	MapData mapData;
 
+	//List<Collider*> mapColliders;
 
 private:
 

@@ -4,7 +4,7 @@
 #include "Debug.h"
 
 #include "Log.h"
-
+#include "Map.h"
 #include "Render.h"
 #include "Input.h"
 #include "SDL/include/SDL_Scancode.h"
@@ -250,38 +250,58 @@ void ModuleCollisions::DebugDraw()
 }
 
 // Called before quitting
-bool ModuleCollisions::CleanUp()
+bool ModuleCollisions::CleanUp(bool mapColliderOnly)
 {
 	LOG("Freeing all colliders");
-
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
-		if (colliders[i] != nullptr)
+		if (mapColliderOnly)
 		{
-			delete colliders[i];
-			colliders[i] = nullptr;
+			if (colliders[i] != nullptr)
+			{
+				if (colliders[i]->mapCollider)
+				{
+					delete colliders[i];
+					colliders[i] = nullptr;
+				}
+			}
+		}
+		else
+		{
+			if (colliders[i] != nullptr)
+			{
+				delete colliders[i];
+				colliders[i] = nullptr;
+			}
 		}
 	}
 
 	return true;
 }
 
-Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Entity* listener)
+Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Entity* listener, bool mapCollider)
 {
 	Collider* ret = nullptr;
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
+
 		if (colliders[i] == nullptr)
 		{
 			ret = colliders[i] = new Collider(rect, type, listener);
 			LOG("Collider number %d created", i);
+			if (mapCollider)
+			{
+				ret->mapCollider = true;
+			}
+
 			break;
 		}
 		else if (i == MAX_COLLIDERS - 1)
 		{
 			LOG("Max Colliders, coultn't be possible to create more *INCREASE MAX_COLLIDERS VALUE TO AVOID THIS ERROR*");
 		}
+
 	}
 
 	return ret;

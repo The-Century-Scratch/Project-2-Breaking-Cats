@@ -39,6 +39,7 @@ public:
 	int currentScene;
 	
 	bool Pause = false;
+	bool changeMap = false;
 
 	Scene* current;
 	Scene* next;

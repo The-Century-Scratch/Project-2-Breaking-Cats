@@ -72,6 +72,7 @@ public:
 	
 	bool CollisionMapEntity(SDL_Rect rect, EntityType type);
 
+	void ChangeMap(const char* mapName, iPoint newPos, int newScene = 1);
 private:
 	void HandleInput(Input* input, float dt);
 	
@@ -82,7 +83,6 @@ private:
 	void ChangeBlockBounds(int bounds_x, int bounds_y);
 	void SetCameraMovement(int target_x, int target_y, float dt);
 
-	void ChangeMap(const char* mapName, iPoint newPos, int doorFx = -1);
 
 	void LoadNpc(SString mapName);
 	void LoadItems(pugi::xml_node& n);
