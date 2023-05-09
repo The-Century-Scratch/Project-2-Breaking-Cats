@@ -65,7 +65,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(sceneManager);
 	AddModule(moduleCollisions);
 	AddModule(guiManager);
 	AddModule(entityManager);
@@ -73,6 +72,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(questManager);
 	AddModule(map);
 	AddModule(hud);
+	AddModule(sceneManager);
 	AddModule(debug);
 	// Render last to swap buffer
 	AddModule(render);
@@ -102,6 +102,7 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
+	timer = Timer();
 	//Load config from XML
 	bool ret = LoadConfig();
 
@@ -109,6 +110,7 @@ bool App::Awake()
 	{
 		//Read the title from the config file
 		title = configNode.child("app").child("title").child_value();
+		maxFrameDuration = configNode.child("app").child("frcap").attribute("value").as_int();
 
 		ListItem<Module*>* item;
 		item = modules.start;
@@ -124,6 +126,7 @@ bool App::Awake()
 			item = item->next;
 		}
 	}
+	LOG("---------------- Time Awake: %f/n", timer.ReadMSec());
 
 	return ret;
 }
@@ -131,6 +134,10 @@ bool App::Awake()
 // Called before the first frame
 bool App::Start()
 {
+	timer.Start();
+	startupTime.Start();
+	lastSecFrameTime.Start();
+
 	bool ret = true;
 	ListItem<Module*>* item;
 	item = modules.start;
@@ -140,6 +147,7 @@ bool App::Start()
 		if (item->data->IsEnabled()) { ret = item->data->Start(); }
 		item = item->next;
 	}
+	LOG("----------------- Time Start(): %f", timer.ReadMSec());
 
 	return ret;
 }
@@ -189,12 +197,53 @@ bool App::LoadConfig()
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	frameTime.Start();
 }
 
 // ---------------------------------------------
 void App::FinishUpdate()
 {
 	// This is a good place to call Load / Save functions
+	if (loadGameRequested == true) LoadGame();
+	if (saveGameRequested == true) SaveGame();
+
+	frameCount++;
+	secondsSinceStartup = startupTime.ReadSec();
+	//dt = frameTime.ReadMSec();
+	dt = frameTime.ReadSec();
+	lastSecFrameCount++;
+	if (lastSecFrameTime.ReadMSec() > 1000) {
+		lastSecFrameTime.Start();
+		framesPerSecond = lastSecFrameCount;
+		lastSecFrameCount = 0;
+		// Average FPS for the whole game life
+		averageFps = (averageFps + framesPerSecond) / 2;
+	}
+
+
+	if (frcap)
+	{
+		float delay = float(maxFrameDuration) - dt;
+
+		PerfTimer delayTimer = PerfTimer();
+		delayTimer.Start();
+		if (maxFrameDuration > 0 && delay > 0) {
+			SDL_Delay(delay);
+			//LOG("We waited for %f milliseconds and the real delay is % f", delay, delayTimer.ReadMs());
+			//dt = maxFrameDuration;
+		}
+		else {
+			//LOG("No wait");
+		}
+	}
+	dt = 0.016f;
+	// Shows the time measurements in the window title
+	static char title[256];
+	sprintf_s(title, 256, "Breaking Cats Alpha | FPS: %i, Av.FPS: %.2f, Last-frame MS (dt): %.3f, vsync: %s",
+		framesPerSecond, averageFps, dt, frcap ? "on" : "off");
+
+
+	app->win->SetTitle(title);
 }
 
 // Call modules before each loop iteration
@@ -351,10 +400,6 @@ bool App::LoadGame()
 	else
 	{
 		saveState = saveLoadFile.child("save_status");
-
-		//eastl::list<Module*>::iterator item = modules.begin();
-		//List<Module*>* item;
-		//item = modules.start;
 
 		ListItem<Module*>* item;
 		item = modules.start;

@@ -112,6 +112,7 @@
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\ParticleSystemManager.cpp" />
+    <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\QuestManager.cpp" />
     <ClCompile Include="Source\Chest.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="Source\SceneTitle.cpp" />
     <ClCompile Include="Source\TalkQuest.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\TransitionsManager.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="resource.h" />
@@ -155,6 +157,7 @@
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\ParticleSystemManager.h" />
+    <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Quest.h" />
     <ClInclude Include="Source\QuestManager.h" />
     <ClInclude Include="Source\Chest.h" />
@@ -177,6 +180,7 @@
     <ClInclude Include="Source\SceneTitle.h" />
     <ClInclude Include="Source\TalkQuest.h" />
     <ClInclude Include="Source\Textures.h" />
+    <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\TransitionsManager.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />

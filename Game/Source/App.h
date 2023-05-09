@@ -3,6 +3,8 @@
 
 #include "Module.h"
 #include "List.h"
+#include "PerfTimer.h"
+#include "Timer.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
@@ -61,7 +63,9 @@ public:
 	// Methods to request Load / Save
 	void LoadGameRequest();
 	void SaveGameRequest() const;
-
+	// Load / Save
+	bool LoadGame();
+	bool SaveGame() const;
 	// Load config file to var
 	pugi::xml_node LoadConfigFileToVar();
 
@@ -86,9 +90,7 @@ private:
 	bool PostUpdate();
 
 
-	// Load / Save
-	bool LoadGame();
-	bool SaveGame() const;
+
 public:
 
 	// Modules
@@ -107,6 +109,8 @@ public:
 	GuiManager* guiManager;
 	Hud* hud;
 	Debug* debug;
+
+	bool frcap = true;
 
 private:
 
@@ -130,6 +134,22 @@ private:
 
 	uint frames;
 	float dt;
+
+	Timer timer;
+	PerfTimer ptimer;
+
+	Timer startupTime;
+	Timer frameTime;
+	Timer lastSecFrameTime;
+
+	uint64 frameCount = 0;
+	uint32 framesPerSecond = 0;
+	uint32 lastSecFrameCount = 0;
+
+	float averageFps = 0.0f;
+	float secondsSinceStartup = 0.0f;
+
+	uint32 maxFrameDuration = 0;
 };
 
 extern App* app;
