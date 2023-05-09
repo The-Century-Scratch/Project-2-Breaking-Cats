@@ -11,9 +11,9 @@
 #include "Scene.h"
 #include "GuiManager.h"
 #include "GuiControl.h"
-#include "DialogueManager.h"
 #include "Defs.h"
 #include "Log.h"
+#include "SceneGameplay.h"
 
 #include <string>
 
@@ -29,8 +29,7 @@ bool Debug::Start()
 {
 	debug = false;
 	desiredFPS = 60;
-
-	//font = new Font(app, "Font/font3.xml", app->tex);
+	//font = new Font(app, "Font/CleanCraters.xml", app->tex);
 
 	return true;
 }
@@ -105,6 +104,7 @@ bool Debug::Update(float dt)
 	//	controlFPS = !controlFPS;
 	//}
 
+
 	return true;
 }
 
@@ -114,18 +114,17 @@ bool Debug::PostUpdate()
 	//app->render->DrawText("pau Mongolooooooooo", 100, 100, 100, 20, white);
 	//DrawDebug();
 
-	SDL_Color white = { 0,0,0,0 };
-	app->render->DrawText("pau Mongolooooooooo", 0, 0, 500, 200, white);
+	DrawDebug();
 
 	return true;
 }
 
 void Debug::DrawDebug()
 {
-	/*int scale = app->win->GetScale();
+	int scale = app->win->GetScale();
 
 	int debugX = app->render->camera.w / scale * 0.7;
-	int debugY = app->render->camera.h / scale * 0.1;*/
+	int debugY = app->render->camera.h / scale * 0.1;
 
 	//app->fonts->BlitText(debugX, debugY, 0, "variables (v)");
 
@@ -136,9 +135,13 @@ void Debug::DrawDebug()
 	//	app->fonts->BlitText(debugX, debugY + 10, 0, "camera limits (c)  off");
 
 	
-
-	SDL_Color white = {0,0,0,0};
-	app->render->DrawText("pau Mongolooooooooo", 50, 50, 100, 20, white);
+	SDL_Rect rect = { debugX, debugY, 200, 25 };
+	//app->render->DrawRectangle(rect, 255, 0, 0, 255, true, true);
+	SDL_Color color = {255,255,255,255};
+	//Font* font, const char* text, int x, int y, int size, int spacing, SDL_Color tint, int maxX
+	//app->render->DrawText(font, "pau mongolooooooo", debugX, debugY, 100, 10, color);
+	//app->render->DrawText("pau Mongolooooooooo", debugX+2, debugY+2, 100, 20, color);
+	
 
 	////Variables
 	//if (variables)

@@ -182,22 +182,21 @@ bool ModuleCollisions::Update()
 		debug = !debug;
 	}
 
-	if(debug)
-	{
-		app->debug->Enable();
-	}
-	else
-	{
-		app->debug->Disable();
-	}
 
 	return true;
 }
 
 bool ModuleCollisions::PostUpdate()
 {
-	if (debug)
+	if(debug)
+	{
 		DebugDraw();
+		app->debug->Enable();
+	}
+	else
+	{
+		app->debug->Disable();
+	}
 
 	return true;
 }

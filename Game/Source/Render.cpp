@@ -7,6 +7,9 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "SDL/include/SDL.h"
+#include "SDL_ttf/include/SDL_ttf.h"
+
 #define VSYNC true
 
 Render::Render(bool startEnabled) : Module(startEnabled)
@@ -51,6 +54,10 @@ bool Render::Awake(pugi::xml_node& config)
 		camera.y = 0;
 	}
 
+	TTF_Init();
+
+	font = TTF_OpenFont("Assets/Fonts/ARCADECLASSIC.ttf", 25);
+
 	return ret;
 }
 
@@ -60,6 +67,7 @@ bool Render::Start()
 	LOG("render start");
 	// back background
 	SDL_RenderGetViewport(renderer, &viewport);
+
 	return true;
 }
 
@@ -86,6 +94,10 @@ bool Render::PostUpdate()
 bool Render::CleanUp()
 {
 	LOG("Destroying SDL render");
+
+	TTF_CloseFont(font);
+	TTF_Quit();
+
 	SDL_DestroyRenderer(renderer);
 	return true;
 }
