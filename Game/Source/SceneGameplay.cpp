@@ -320,7 +320,7 @@ bool SceneGameplay::Update(float dt)
 				app->render->camera.x = -1 * app->win->scale * ((app->map->mapData.tileWidth * app->map->mapData.width) - 1280 / app->win->scale);
 			}
 			//camera fix to player in y axis
-			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - (app->win->height / 2) / app->win->scale)
+			if (currentPlayer->position.y > (app->win->height / 2) / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - (app->win->height / 2) / app->win->scale)
 			{
 				app->render->camera.y = -1 * app->win->scale * (currentPlayer->position.y - (app->win->height / 2) / app->win->scale);
 			}
@@ -347,7 +347,10 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-
+	if (app->sceneManager->changeMap)
+	{
+		ChangeMap("test", {71, 173}, 3);
+	}
 	
 
 	//switch (gameState)
@@ -1811,8 +1814,69 @@ void SceneGameplay::SetCameraMovement(int target_x, int target_y, float dt)
 	if (app->render->camera.y < target_y) app->render->camera.y += 700 * dt;
 }
 
-void SceneGameplay::ChangeMap(const char* mapName, iPoint newPos, int doorFx)
+void SceneGameplay::ChangeMap(const char* mapName, iPoint newPos, int newScene)
 {
+	currentPlayer->position = newPos;
+	app->map->CleanUp();
+	app->moduleCollisions->CleanUp(true);
+	app->sceneManager->currentScene = newScene;
+	//set camera according new scene
+	switch (app->sceneManager->currentScene)
+	{
+	case -1:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = false;
+		break;
+	case 0:
+		app->render->camera.x = -597;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+		break;
+	case 1:
+		app->render->camera.x = 283;
+		app->render->camera.y = -433;
+		canMoveCam = true;
+		break;
+	case 2:
+		app->render->camera.x = 375;
+		app->render->camera.y = 43;
+		canMoveCam = false;
+		break;
+	case 3:
+		app->render->camera.x = 102;
+		app->render->camera.y = 18;
+		canMoveCam = false;
+		break;
+	default:
+		break;
+	}
+
+	switch (app->sceneManager->currentScene)
+	{
+	case 0:
+		break;
+	case 1:
+		currentPlayer->position.x = 113;
+		currentPlayer->position.y = 366;
+		break;
+	case 2:
+		currentPlayer->position.x = 71;
+		currentPlayer->position.y = 173;
+		break;
+	case 3:
+		currentPlayer->position.x = 334;
+		currentPlayer->position.y = 106;
+		break;
+	default:
+		break;
+	}
+
+	app->map->Load(name.GetString());
+	app->sceneManager->changeMap = false;
+
+
+
 	//entityManager->DeleteAllNpcActive();
 	//app->audio->PlayFx(channel, doorFx);
 
