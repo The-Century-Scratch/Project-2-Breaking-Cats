@@ -26,14 +26,22 @@ class Shop;
 
 class Font;
 
-#define LEAVETABERNX 552
-#define LEAVETABERNY 170
 
-#define LEAVESTOREX 568
-#define LEAVESTOREY 714
 
-#define LEAVEBASEX 136
-#define LEAVEBASEY 440
+#define LEAVETABERN iPoint(552,170)
+
+#define LEAVESTORE iPoint(568,714)
+
+#define LEAVEBASE iPoint(136,440)
+
+#define IDSCENESTORE 2
+#define IDSCENEBASE 1
+#define IDSCENETABERN 3
+#define IDSCENEMAP 0
+
+#define INIT_POS_TABERN iPoint(334,106)
+#define INIT_POS_BASE iPoint(113,366)
+#define INIT_POS_STORE iPoint(71,173)
 
 
 enum class PlayerType;

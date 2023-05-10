@@ -351,30 +351,31 @@ bool SceneGameplay::Update(float dt)
 	// check in which door is entering
 	if (app->sceneManager->changeMap)
 	{
+
 		if (app->sceneManager->currentScene == 1) {
-			ChangeMap({ LEAVEBASEX, LEAVEBASEY }, 0);
+			ChangeMap(LEAVEBASE, 0);
 		}
 		else if (app->sceneManager->currentScene == 2) {
-			ChangeMap({ LEAVESTOREX, LEAVESTOREY }, 0);
+			ChangeMap(LEAVESTORE, 0);
 		}
 		else if (app->sceneManager->currentScene == 3) {
-			ChangeMap({ LEAVETABERNX, LEAVETABERNY }, 0);
+			ChangeMap(LEAVETABERN, 0);
 		}
 
+		//ENTER DIFFERENT INTERIORS
 		if (app->sceneManager->store) {
-			ChangeMap({ 71, 173 }, 2);
+			ChangeMap(INIT_POS_STORE, IDSCENESTORE);
 			app->sceneManager->store = false;
 
 		}
 		else if (app->sceneManager->tabern) {
-			ChangeMap({ 71, 173 }, 3);
+			ChangeMap(INIT_POS_TABERN,IDSCENETABERN);
 			app->sceneManager->tabern = false;
 		}
 		else if (app->sceneManager->resistance_base) {
-			ChangeMap({ 71, 173 }, 1);
+			ChangeMap(INIT_POS_BASE, IDSCENEBASE);
 			app->sceneManager->resistance_base = false;
 		}
-		app->sceneManager->changeMap = false;
 	}
 	
 
@@ -1849,8 +1850,7 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 	app->map->CleanUp();
 	app->moduleCollisions->CleanUp(true);
 	app->sceneManager->currentScene = newScene;
-
-	
+	currentPlayer->position = newPos;
 
 	//set camera according new scene
 	switch (app->sceneManager->currentScene)
@@ -1884,31 +1884,8 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 		break;
 	}
 
-	switch (app->sceneManager->currentScene)
-	{
-	case 0:
-		currentPlayer->position = newPos;
-		break;
-	case 1:
-		currentPlayer->position.x = 113;
-		currentPlayer->position.y = 366;
-		break;
-	case 2:
-		currentPlayer->position.x = 71;
-		currentPlayer->position.y = 173;
-		break;
-	case 3:
-		currentPlayer->position.x = 334;
-		currentPlayer->position.y = 106;
-		break;
-	default:
-		break;
-	}
-
 	app->map->Load(name.GetString());
 	app->sceneManager->changeMap = false;
-
-
 
 	//entityManager->DeleteAllNpcActive();
 	//app->audio->PlayFx(channel, doorFx);
