@@ -47,6 +47,7 @@ struct Collider
 	bool pendingToDelete = false;
 	Type type;
 	Entity* listener = nullptr;
+	int scene;
 
 	bool mapCollider = false;
 

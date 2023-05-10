@@ -653,7 +653,8 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions lol omg xd
 {
     bool ret = true;
-
+    int id;
+    int newscene = 1;
     //CREATE TILE COLLIDERS
     pugi::xml_node objectGroupNode = mapFile.child("map").child("objectgroup");
 
@@ -686,7 +687,32 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                             objectNode.attribute("width").as_int(),
                             objectNode.attribute("height").as_int() };
 
-                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE, nullptr, true);
+                id = objectNode.attribute("id").as_int();
+                if (app->sceneManager->currentScene == 0)
+                {
+                    switch (id)
+                    {
+                    case 54:
+                        newscene = 0;//to change
+                        break;
+                    case 55:
+                        newscene = 0;//to change
+                        break;
+                    case 56:
+                        newscene = 3;
+                        break;
+                    case 57:
+                        newscene = 2;
+                        break;
+                    case 58:
+                        newscene = 1;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+
+                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE, nullptr, true, newscene);
 
                 objectNode = objectNode.next_sibling("object");
             }
