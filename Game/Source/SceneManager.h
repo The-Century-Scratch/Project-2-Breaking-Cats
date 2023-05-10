@@ -39,6 +39,8 @@ public:
 	int currentScene;
 	
 	bool Pause = false;
+	//variable to check which interior to enter
+	bool tabern = false, store = false, resistance_base = false;
 	bool changeMap = false;
 
 	Scene* current;

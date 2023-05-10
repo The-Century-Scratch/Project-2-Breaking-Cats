@@ -10,6 +10,10 @@
 
 struct SDL_Texture;
 
+#define ENTERTABERN 257
+#define ENTERSTORE 160
+#define ENTERRESISTANCEBASE 165
+
 class Player : public Entity
 {
 public:

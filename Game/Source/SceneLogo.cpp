@@ -149,7 +149,7 @@ bool SceneLogo::Update(float dt)
 	//	break;
 	//}
 	if (currentAnimation->HasFinished() == true) {
-		TransitionToScene(SceneType::TITLE, TransitionType::FADE_TO_BLACK);
+		TransitionToScene(SceneType::TITLE, TransitionType::WIPE);
 		//app->hud->hudstate = hudSTATE::TITLESCREEN;
 	}
 	currentAnimation->Update();

@@ -178,7 +178,18 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			//FUNCTION TO CHANGE SCENE LOL
 			//app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::FADE_TO_BLACK);
 			app->sceneManager->changeMap = true;
-
+			if (app->sceneManager->currentScene != 0) {
+				break;
+			}
+			if (position.y < ENTERTABERN) {
+				app->sceneManager->tabern = true;
+			}
+			else if (position.x < ENTERRESISTANCEBASE) {
+				app->sceneManager->resistance_base = true;
+			}
+			else if (position.x > ENTERSTORE) {
+				app->sceneManager->store = true;
+			}
 			//app->sceneManager->currentScene = 1;
 			break;
 		default:

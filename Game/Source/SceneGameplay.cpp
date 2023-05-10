@@ -347,9 +347,33 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
+	// check in which door is entering
 	if (app->sceneManager->changeMap)
 	{
-		ChangeMap({71, 173}, 3);
+		if (app->sceneManager->currentScene == 1) {
+			ChangeMap({ LEAVEBASEX, LEAVEBASEY }, 0);
+		}
+		else if (app->sceneManager->currentScene == 2) {
+			ChangeMap({ LEAVESTOREX, LEAVESTOREY }, 0);
+		}
+		else if (app->sceneManager->currentScene == 3) {
+			ChangeMap({ LEAVETABERNX, LEAVETABERNY }, 0);
+		}
+
+		if (app->sceneManager->store) {
+			ChangeMap({ 71, 173 }, 2);
+			app->sceneManager->store = false;
+
+		}
+		else if (app->sceneManager->tabern) {
+			ChangeMap({ 71, 173 }, 3);
+			app->sceneManager->tabern = false;
+		}
+		else if (app->sceneManager->resistance_base) {
+			ChangeMap({ 71, 173 }, 1);
+			app->sceneManager->resistance_base = false;
+		}
+		app->sceneManager->changeMap = false;
 	}
 	
 
@@ -1816,10 +1840,12 @@ void SceneGameplay::SetCameraMovement(int target_x, int target_y, float dt)
 
 void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 {
-	currentPlayer->position = newPos;
 	app->map->CleanUp();
 	app->moduleCollisions->CleanUp(true);
 	app->sceneManager->currentScene = newScene;
+
+	
+
 	//set camera according new scene
 	switch (app->sceneManager->currentScene)
 	{
@@ -1855,6 +1881,7 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 	switch (app->sceneManager->currentScene)
 	{
 	case 0:
+		currentPlayer->position = newPos;
 		break;
 	case 1:
 		currentPlayer->position.x = 113;

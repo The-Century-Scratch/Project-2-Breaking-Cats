@@ -26,6 +26,16 @@ class Shop;
 
 class Font;
 
+#define LEAVETABERNX 552
+#define LEAVETABERNY 170
+
+#define LEAVESTOREX 568
+#define LEAVESTOREY 714
+
+#define LEAVEBASEX 136
+#define LEAVEBASEY 440
+
+
 enum class PlayerType;
 enum class EntityType;
 
@@ -163,6 +173,8 @@ private:
 	bool firstQuestAdded;
 
 	int lastUserInput;
+
+
 
 };
 
