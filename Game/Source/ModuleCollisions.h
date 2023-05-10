@@ -34,7 +34,7 @@ public:
 	bool CleanUp(bool mapColliderOnly = false);
 
 	// Adds a new collider to the list
-	Collider* AddCollider(SDL_Rect rect, Collider::Type type, Entity* listener = nullptr, bool mapCollider = false);
+	Collider* AddCollider(SDL_Rect rect, Collider::Type type, Entity* listener = nullptr, bool mapCollider = false, int newscene = 0);
 
 	// Draws all existing colliders with some transparency
 	void DebugDraw();

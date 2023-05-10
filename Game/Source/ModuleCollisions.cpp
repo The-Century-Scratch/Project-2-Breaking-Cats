@@ -274,7 +274,7 @@ bool ModuleCollisions::CleanUp(bool mapColliderOnly)
 	return true;
 }
 
-Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Entity* listener, bool mapCollider)
+Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Entity* listener, bool mapCollider, int newscene)
 {
 	Collider* ret = nullptr;
 
@@ -285,6 +285,7 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Enti
 		{
 			ret = colliders[i] = new Collider(rect, type, listener);
 			LOG("Collider number %d created", i);
+			ret->scene = newscene;
 			if (mapCollider)
 			{
 				ret->mapCollider = true;
