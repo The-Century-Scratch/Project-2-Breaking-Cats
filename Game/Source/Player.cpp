@@ -181,15 +181,34 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			if (app->sceneManager->currentScene != 0) {
 				break;
 			}
-			if (position.y < ENTERTABERN) {
-				app->sceneManager->tabern = true;
-			}
-			else if (position.x < ENTERRESISTANCEBASE) {
+			switch (c2->scene)
+			{
+			case 0:
+				break;
+			case 1:
 				app->sceneManager->resistance_base = true;
-			}
-			else if (position.x > ENTERSTORE) {
+				break;
+			case 2:
 				app->sceneManager->store = true;
+				break;
+			case 3:
+				app->sceneManager->tabern = true;
+				break;
+			default:
+				break;
 			}
+
+
+
+			//if (position.y < ENTERTABERN) {
+			//	app->sceneManager->tabern = true;
+			//}
+			//else if (position.x < ENTERRESISTANCEBASE) {
+			//	app->sceneManager->resistance_base = true;
+			//}
+			//else if (position.x > ENTERSTORE) {
+			//	app->sceneManager->store = true;
+			//}
 			//app->sceneManager->currentScene = 1;
 			break;
 		default:
