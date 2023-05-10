@@ -29,6 +29,7 @@ bool Debug::Start()
 {
 	debug = false;
 	desiredFPS = 60;
+	debugColor = { 0, 0, 0, 0 };
 	//font = new Font(app, "Font/CleanCraters.xml", app->tex);
 
 	return true;
@@ -104,6 +105,30 @@ bool Debug::Update(float dt)
 	//	controlFPS = !controlFPS;
 	//}
 
+	int scale = app->win->GetScale();
+
+	debugX = (app->render->camera.w / scale)-380;
+	debugY = (app->render->camera.h / scale)-200;
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		debug = !debug;
+	}
+
+	if (debug)
+	{
+		godMode = true;
+		drawColliders = true;
+		drawHugBounds = true;
+		drawVariables = true;
+	}
+	else
+	{
+		godMode = false;
+		drawColliders = false;
+		drawHugBounds = false;
+		drawVariables = false;
+	}
 
 	return true;
 }
@@ -114,8 +139,6 @@ bool Debug::PostUpdate()
 	//app->render->DrawText("pau Mongolooooooooo", 100, 100, 100, 20, white);
 	//DrawDebug();
 
-	DrawDebug();
-
 	return true;
 }
 
@@ -123,8 +146,8 @@ void Debug::DrawDebug()
 {
 	int scale = app->win->GetScale();
 
-	int debugX = app->render->camera.w / scale * 0.7;
-	int debugY = app->render->camera.h / scale * 0.1;
+	debugX = app->render->camera.w / scale * 0.7;
+	debugY = app->render->camera.h / scale * 0.1;
 
 	//app->fonts->BlitText(debugX, debugY, 0, "variables (v)");
 

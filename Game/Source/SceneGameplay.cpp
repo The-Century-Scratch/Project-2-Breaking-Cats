@@ -5,6 +5,7 @@
 #include "Audio.h"
 //#include "Font.h"
 
+#include "Debug.h"
 #include "ModuleCollisions.h"
 #include "Hud.h"
 #include "Window.h"
@@ -682,6 +683,11 @@ void SceneGameplay::Draw()
 {
 
 	app->map->Draw();
+
+	if (app->debug->drawVariables)
+	{
+		DrawDebugVariable();
+	}
 
 	//SDL_Rect r = { 110,0,100,100 };
 
@@ -1931,4 +1937,14 @@ void SceneGameplay::UpdatingButtons(Input* input)
 	{
 		lastUserInput = 0;
 	}
+}
+
+void SceneGameplay::DrawDebugVariable()
+{
+	//const char* text, int posX, int posY, int w, int h, SDL_Color color
+	//to pass to string use ---> std::to_string(currentPlayer->position.x).c_str()
+	app->render->DrawText("Player X  ", app->debug->debugX, app->debug->debugY, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(currentPlayer->position.x).c_str(), app->debug->debugX + 110, app->debug->debugY, 50, 20, app->debug->debugColor);
+	app->render->DrawText("Player Y  ", app->debug->debugX, app->debug->debugY + 30, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(currentPlayer->position.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 30, 50, 20, app->debug->debugColor);
 }

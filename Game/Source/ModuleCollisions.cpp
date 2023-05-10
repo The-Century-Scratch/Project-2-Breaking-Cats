@@ -188,14 +188,9 @@ bool ModuleCollisions::Update()
 
 bool ModuleCollisions::PostUpdate()
 {
-	if(debug)
+	if(app->debug->drawColliders)
 	{
 		DebugDraw();
-		app->debug->Enable();
-	}
-	else
-	{
-		app->debug->Disable();
 	}
 
 	return true;

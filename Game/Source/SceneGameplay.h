@@ -92,6 +92,7 @@ private:
 	void Transitioning(float dt);
 	void ChangeBlockBounds(int bounds_x, int bounds_y);
 	void SetCameraMovement(int target_x, int target_y, float dt);
+	void DrawDebugVariable();
 
 
 	void LoadNpc(SString mapName);

@@ -5,6 +5,8 @@
 #include "Log.h"
 #include "Hud.h"
 #include "Window.h"
+#include "Debug.h"
+
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -123,14 +125,14 @@ bool GuiSlider::Draw(Render* render)
 		//slider
 		section = { 0,0,293,31 };
 		render->DrawTexture(app->hud->guiButtonsConfig, sliderbounds.x - app->render->camera.x, sliderbounds.y - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (sliderbounds.x - app->render->camera.x) / scale,(sliderbounds.y - app->render->camera.y) / scale,sliderbounds.w / scale,sliderbounds.h / scale }, 0, 255, 0, 255, false);
 		}
 		//slided
 		section = { 0,31,47,47 };
 		render->DrawTexture(app->hud->guiButtonsConfig, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 0, 255, 0, 255, false);
 		}
@@ -139,14 +141,14 @@ bool GuiSlider::Draw(Render* render)
 		//slider
 		section = { 0,0,293,31 };
 		render->DrawTexture(app->hud->guiButtonsConfig, sliderbounds.x - app->render->camera.x, sliderbounds.y - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (sliderbounds.x - app->render->camera.x) / scale,(sliderbounds.y - app->render->camera.y) / scale,sliderbounds.w / scale,sliderbounds.h / scale }, 255, 102, 0, 255, false);
 		}
 		//slided
 		section = { 0,31,47,47 };
 		render->DrawTexture(app->hud->guiButtonsConfig, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 102, 0, 255, false);
 		}
@@ -155,14 +157,14 @@ bool GuiSlider::Draw(Render* render)
 		//slider
 		section = { 0,0,293,31 };
 		render->DrawTexture(app->hud->guiButtonsConfig, sliderbounds.x - app->render->camera.x, sliderbounds.y - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (sliderbounds.x - app->render->camera.x) / scale,(sliderbounds.y - app->render->camera.y) / scale,sliderbounds.w / scale,sliderbounds.h / scale }, 255, 0, 0, 255, false);
 		}
 		//slided
 		section = { 47,31,47,47 };
 		render->DrawTexture(app->hud->guiButtonsConfig, bounds.x - app->render->camera.x, bounds.y - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 0, 0, 255, false);
 		}

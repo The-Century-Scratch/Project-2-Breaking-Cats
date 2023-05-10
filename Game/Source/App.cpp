@@ -57,7 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
 	hud = new Hud(true);
-	debug = new Debug(false);
+	debug = new Debug(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp

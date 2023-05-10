@@ -5,6 +5,7 @@
 #include "Log.h"
 #include "Hud.h"
 #include "Window.h"
+#include "Debug.h"
 
 GuiButton::GuiButton(uint32 id, SDL_Rect bounds, const char* text, Font* font) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -85,7 +86,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::DISABLED:
 			rect = { 0,139,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ bounds.x/scale,bounds.y/scale,bounds.w/scale,bounds.h/scale }, 130, 130, 130, 255, false);
 			}
@@ -93,7 +94,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::NORMAL:
 			rect = { 0,0,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ bounds.x / scale,bounds.y / scale,bounds.w / scale,bounds.h / scale }, 0, 255, 0, 255, false);
 			}
@@ -101,7 +102,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::FOCUSED:
 			rect = { 0,46,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ bounds.x / scale,bounds.y / scale,bounds.w / scale,bounds.h / scale }, 255, 102, 0, 255, false);
 			}
@@ -109,7 +110,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::PRESSED:
 			rect = { 0,92,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ bounds.x / scale,bounds.y / scale,bounds.w / scale,bounds.h / scale }, 255, 0, 0, 255, false);
 			}
@@ -143,7 +144,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::DISABLED:
 			rect = { 120 * spriteMult,120 * 3,120,120 };
 			render->DrawTexture(app->hud->guiButtonsInGame, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 130, 130, 130, 255, false);
 			}
@@ -151,7 +152,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::NORMAL:
 			rect = { 120 * spriteMult,120 * 0,120,120 };
 			render->DrawTexture(app->hud->guiButtonsInGame, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 0, 255, 0, 255, false);
 			}
@@ -159,7 +160,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::FOCUSED:
 			rect = { 120 * spriteMult,120 * 1,120,120 };
 			render->DrawTexture(app->hud->guiButtonsInGame, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 102, 0, 255, false);
 			}
@@ -167,7 +168,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::PRESSED:
 			rect = { 120 * spriteMult,120 * 2,120,120 };
 			render->DrawTexture(app->hud->guiButtonsInGame, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 0, 0, 255, false);
 			}
@@ -182,7 +183,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::DISABLED:
 			rect = { 0,139,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 130, 130, 130, 255, false);
 			}
@@ -190,7 +191,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::NORMAL:
 			rect = { 0,0,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 0, 255, 0, 255, false);
 			}
@@ -198,7 +199,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::FOCUSED:
 			rect = { 0,46,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 102, 0, 255, false);
 			}
@@ -206,7 +207,7 @@ bool GuiButton::Draw(Render* render)
 		case GuiControlState::PRESSED:
 			rect = { 0,92,197,45 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
-			if (app->hud->debug)
+			if (app->debug->drawHugBounds)
 			{
 				app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 0, 0, 255, false);
 			}

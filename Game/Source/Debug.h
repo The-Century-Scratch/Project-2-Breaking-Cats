@@ -24,15 +24,21 @@ public:
 public:
 	//flags
 	bool debug;
-	bool variables = false;
-	bool camLimits = false;
 	bool godMode = false;
+	bool drawColliders = false;
+	bool drawHugBounds = false;
+	bool drawVariables = false;
+
+	bool camLimits = false;
 	bool freeCam = false;
 	bool teleport = false;
 	bool moveRight = false;
-	bool drawColliders = false;
 	bool controlFPS = false;
 	bool colourblind = false;
+
+	SDL_Color debugColor;
+	int debugX;
+	int debugY;
 
 	// FPS
 	microseconds timePerCycle;

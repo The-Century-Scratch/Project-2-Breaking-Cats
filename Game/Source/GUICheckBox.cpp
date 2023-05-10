@@ -5,6 +5,7 @@
 #include "Log.h"
 #include "Hud.h"
 #include "Window.h"
+#include "Debug.h"
 
 GuiCheckBox::GuiCheckBox(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::CHECKBOX, id)
 {
@@ -108,7 +109,7 @@ bool GuiCheckBox::Draw(Render* render)
 	case GuiControlState::DISABLED:
 		section = { 94,31,47,46 };
 		render->DrawTexture(app->hud->guiButtonsConfig, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 130, 130, 130, 255, false);
 		}
@@ -121,7 +122,7 @@ bool GuiCheckBox::Draw(Render* render)
 			section = { 94,31,47,46 };
 		}
 		render->DrawTexture(app->hud->guiButtonsConfig, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 0, 255, 0, 255, false);
 		}
@@ -134,7 +135,7 @@ bool GuiCheckBox::Draw(Render* render)
 			section = { 94 + 47 * 1,31,47,46 };
 		}
 		render->DrawTexture(app->hud->guiButtonsConfig, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 102, 0, 255, false);
 		}
@@ -147,7 +148,7 @@ bool GuiCheckBox::Draw(Render* render)
 			section = { 94 + 47 * 3,31,47,46 };
 		}
 		render->DrawTexture(app->hud->guiButtonsConfig, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
-		if (app->hud->debug)
+		if (app->debug->drawHugBounds)
 		{
 			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 0, 0, 255, false);
 		}
