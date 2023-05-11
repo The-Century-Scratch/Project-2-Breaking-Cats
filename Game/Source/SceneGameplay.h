@@ -4,6 +4,8 @@
 #include "Scene.h"
 #include "Point.h"
 #include "Player.h"
+#include "NPC.h"
+#include "List.h"
 //#include "ParticlesManager.h"
 
 //#include "Font.h"
@@ -103,13 +105,15 @@ private:
 	void DrawDebugVariable();
 
 
-	void LoadNpc(SString mapName);
+	void LoadNpc();
 	void LoadItems(pugi::xml_node& n);
 
 	void UpdatingButtons(Input* input);
 
 private:
 	Player* currentPlayer;
+	List<NPC*> npcs;
+
 	DialogueManager* dialogueManager;
 	SDL_Texture* goldTexture;
 	eastl::list<Player*> playerList;

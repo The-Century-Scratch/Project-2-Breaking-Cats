@@ -9,6 +9,13 @@
 
 struct SDL_Texture;
 
+enum class NPCTYPE
+{
+	NORMAL,
+	QUEST,
+	SHOP,
+};
+
 class NPC : public Entity
 {
 public:
@@ -27,10 +34,12 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	SDL_Rect cRect;
-	Collider* cNpc;
+
 	Collider* boundaries;
 
 	int npcid;
+
+	NPCTYPE npctype;
 
 private:
 

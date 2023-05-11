@@ -163,6 +163,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::NPCINTERACTION:
 			//DIALOG FUNCTION + QUEST?
+			npcRange = true;
 			break;
 		case Collider::Type::CAMLIMIT:
 			//FUNCTION TO MAKE CAMERA FOLLOW PLAYER
@@ -173,6 +174,7 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHEASTINTERACTION:
 			//FUNCTION TO OPEN CHEAST
+			cheastRange = true;
 			break;
 		case Collider::Type::CHANGESCENE:
 			//FUNCTION TO CHANGE SCENE LOL
@@ -219,12 +221,14 @@ void Player::EndCollision(Collider* c1, Collider* c2)
 		case Collider::Type::NPC:
 			break;
 		case Collider::Type::NPCINTERACTION:
+			npcRange = false;
 			break;
 		case Collider::Type::CAMLIMIT:
 			break;
 		case Collider::Type::CHEAST:
 			break;
 		case Collider::Type::CHEASTINTERACTION:
+			cheastRange = false;
 			break;
 		case Collider::Type::CHANGESCENE:
 			break;

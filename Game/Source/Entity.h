@@ -101,6 +101,7 @@ public:
 	SString name;
 	EntityType type;
 	bool active = true;
+	bool toDelete = false;
 	pugi::xml_node parameters;
 
 	Collider* eCollider;

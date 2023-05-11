@@ -40,6 +40,9 @@ public:
 
 	bool godMode = false;
 
+	bool npcRange = false;
+	bool cheastRange = false;
+
 private:
 
 	// Declare player parameters

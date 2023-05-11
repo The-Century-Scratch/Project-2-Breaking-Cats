@@ -116,6 +116,19 @@ bool EntityManager::Update(float dt)
 	//if (app->pauseMenus->isPaused()) { return true; } //This is to use in the case a "game pause" is implemented for skiping entities update
 
 	bool ret = true;
+
+	ListItem<Entity*>* entityItem = entities.start;
+	while (entityItem != NULL && ret)
+	{
+		if (entityItem->data->toDelete)
+		{
+			entityItem->data->CleanUp();
+			DestroyEntity(entityItem->data);
+		}
+		entityItem = entityItem->next;
+	}
+
+
 	if (app->sceneManager->Pause)
 	{
 		return ret;

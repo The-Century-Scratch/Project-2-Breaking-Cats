@@ -4,7 +4,8 @@
 #include "Module.h"
 #include "Entity.h"
 #include "List.h"
-
+#include "List.h"
+#include "NPC.h"
 
 #define MAX_NPC 5
 

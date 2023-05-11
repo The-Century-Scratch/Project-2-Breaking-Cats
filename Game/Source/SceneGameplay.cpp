@@ -167,6 +167,7 @@ bool SceneGameplay::Load()
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
+	if (app->entityManager->state == false) { app->entityManager->Enable(); }
 
 	currentPlayer = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	currentPlayer->parameters = config.child("player");
@@ -174,6 +175,17 @@ bool SceneGameplay::Load()
 	//map = new Map(true);
 	//app->map->Load("city_square.tmx");
 	isTown = app->map->Load(name.GetString());
+
+	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
+	{
+		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+			npc->parameters = npcNode;
+			npcs.Add(npc);
+			npc->Start();
+		}
+	}
 
 	switch (app->sceneManager->currentScene)
 	{
@@ -802,6 +814,8 @@ bool SceneGameplay::UnLoad()
 {
 	LOG("Unloading Scene Gameplay");
 	bool ret = true;
+
+	if (app->entityManager->state) { app->entityManager->Disable(); }
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -1719,8 +1733,34 @@ void SceneGameplay::ChangeBlockBounds(int bounds_x, int bounds_y)
 	//}
 }
 
-void SceneGameplay::LoadNpc(SString mapName)
+void SceneGameplay::LoadNpc()
 {
+	ListItem<NPC*>* npcItem = npcs.start;
+	while (npcItem != NULL)
+	{
+		npcItem->data->toDelete = true;
+		npcItem = npcItem->next;
+	}
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
+	{
+		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
+			npc->parameters = npcNode;
+			npcs.Add(npc);
+			npc->Start();
+		}
+	}
+
+
+
+
+
+
 	//pugi::xml_document animations;
 	//pugi::xml_node anims;
 	//int size = app->assetsManager->MakeLoad("Xml/animations.xml");
@@ -1848,9 +1888,14 @@ void SceneGameplay::SetCameraMovement(int target_x, int target_y, float dt)
 void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 {
 	app->map->CleanUp();
-	app->moduleCollisions->CleanUp(true);
+	//CORE VARIABLE TO CHANGE SCENE
 	app->sceneManager->currentScene = newScene;
+
+	//set new position to player
 	currentPlayer->position = newPos;
+
+	//load again new npcs
+	LoadNpc();
 
 	//set camera according new scene
 	switch (app->sceneManager->currentScene)
