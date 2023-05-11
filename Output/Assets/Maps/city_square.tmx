@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
  <tileset firstgid="1" name="Plaza" tilewidth="16" tileheight="16" tilecount="1944" columns="54">
   <image source="BasicTopDown/Plaza.png" width="864" height="576"/>
  </tileset>
@@ -5051,8 +5051,8 @@
    <tile gid="1320"/>
    <tile/>
    <tile/>
-   <tile gid="997"/>
-   <tile gid="998"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="1319"/>
@@ -5099,8 +5099,8 @@
    <tile gid="1374"/>
    <tile/>
    <tile/>
-   <tile gid="1051"/>
-   <tile gid="1052"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile gid="1373"/>
@@ -6946,7 +6946,7 @@
   <object id="4" x="84" y="60" width="24" height="20"/>
   <object id="5" x="128" y="31" width="32" height="97"/>
   <object id="6" x="160" y="31" width="128" height="145"/>
-  <object id="7" x="287.681" y="128.071" width="26.3125" height="1.38611"/>
+  <object id="7" x="288" y="128" width="26" height="1"/>
   <object id="8" x="304" y="200" width="32" height="22"/>
   <object id="9" x="472" y="198" width="16" height="22"/>
   <object id="10" x="576" y="200" width="32" height="24"/>
@@ -6993,16 +6993,16 @@
   <object id="51" x="64" y="0" width="288" height="1"/>
   <object id="52" x="640" y="31" width="48" height="97"/>
   <object id="53" x="480" y="31" width="160" height="129"/>
-  <object id="75" x="287.863" y="94.4639" width="6.12361" height="1.54167"/>
-  <object id="76" x="294.031" y="96.7292" width="3.9375" height="1.20833"/>
-  <object id="77" x="297.995" y="98.9819" width="4" height="1.00833"/>
-  <object id="78" x="301.978" y="100.956" width="4" height="1.03056"/>
-  <object id="80" x="306.026" y="103.018" width="4" height="0.963889"/>
+  <object id="75" x="288" y="95" width="6" height="1"/>
+  <object id="76" x="294" y="97" width="4" height="1"/>
+  <object id="77" x="298" y="99" width="4" height="1"/>
+  <object id="78" x="302" y="101" width="4" height="1"/>
+  <object id="80" x="306" y="103" width="4" height="1"/>
  </objectgroup>
  <objectgroup id="5" name="ChangeScene">
   <object id="54" x="352" y="0" width="96" height="1"/>
   <object id="55" x="352" y="767" width="96" height="1"/>
-  <object id="56" x="288.098" y="96.285" width="5.28232" height="31.4432"/>
+  <object id="56" x="288" y="96" width="5" height="31"/>
   <object id="57" x="569" y="703" width="14" height="3"/>
   <object id="58" x="134" y="431" width="22" height="3"/>
  </objectgroup>
