@@ -28,7 +28,7 @@ class Font;
 
 
 
-#define LEAVETABERN iPoint(552,170)
+#define LEAVETABERN iPoint(298,104)
 
 #define LEAVESTORE iPoint(568,714)
 
