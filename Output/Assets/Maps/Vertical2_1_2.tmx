@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="24">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="24">
  <tileset firstgid="1" source="Tiles.tsx"/>
  <tileset firstgid="626" source="Props.tsx"/>
  <tileset firstgid="1251" source="Slime.tsx"/>
  <tileset firstgid="1347" source="PlazaVertical.tsx"/>
  <layer id="2" name="Floor" width="24" height="24">
   <data encoding="csv">
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1422,3139,3140,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1422,3139,3194,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1422,3139,3140,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1474,1472,1472,1472,1472,1422,3139,3194,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1474,1472,1472,1472,1472,1422,3139,3090,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1472,1474,1474,1474,1422,3139,3092,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1422,3139,3146,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3200,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3254,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3092,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3146,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3200,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3254,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1424,1637,1637,1637,1638,3139,3093,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1424,1638,3085,3086,3087,3087,3199,3093,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1424,1638,3085,3199,3146,3146,3146,3146,3093,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1474,1424,1638,3085,3199,3146,3146,3146,3146,3144,3248,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1424,1638,3085,3199,3146,3146,3146,3144,3248,3250,1457,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1530,3085,3199,3146,3146,3144,3248,3250,1457,1457,1457,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1530,3139,3146,3146,3146,3142,1457,1457,1457,1457,1457,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1530,3193,3146,3146,3144,3250,1457,1457,1457,1457,1457,
-1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1530,3139,3146,3146,3142,1457,1457,1457,1457,1457,1457,
-1456,1457,1458,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1530,3193,3146,3144,3250,1457,1457,1457,1457,1457,1457,
-1510,1511,1512,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1530,3139,3146,3142,1457,1457,1457,1457,1457,1457,1457
+1402,1403,1404,1460,1471,1472,1475,1472,1472,1474,1581,1419,1472,1472,1474,1472,1472,1475,1472,1472,1472,1422,3139,3140,
+1402,1403,1404,1460,1471,1474,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1527,1472,1422,3139,3194,
+1402,1403,1404,1460,1471,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1475,1422,3139,3140,
+1402,1403,1404,1460,1471,1472,1418,1472,1472,1472,1472,1472,1472,1472,1472,1472,1474,1472,1472,1472,1474,1422,3139,3194,
+1402,1403,1404,1460,1471,1474,1472,1472,1472,1472,1472,1472,1472,1472,1472,1472,1474,1472,1472,1581,1472,1422,3139,3090,
+1402,1403,1404,1460,1471,1418,1472,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1472,1474,1474,1474,1422,3139,3092,
+1402,1403,1404,1460,1471,1472,1474,1472,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1526,1474,1422,3139,3146,
+1402,1403,1404,1460,1471,1474,1474,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3200,
+1402,1403,1404,1460,1471,1418,1474,1474,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3254,
+1402,1403,1404,1460,1471,1472,1474,1474,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1475,1422,3139,3092,
+1402,1403,1404,1460,1471,1472,1528,1472,1472,1472,1472,1472,1472,1474,1474,1474,1474,1474,1474,1474,1474,1422,3139,3146,
+1402,1403,1404,1460,1471,1472,1528,1528,1418,1474,1474,1472,1472,1474,1474,1474,1474,1474,1581,1474,1474,1422,3139,3200,
+1402,1403,1404,1460,1471,1472,1528,1475,1474,1474,1474,1474,1527,1474,1474,1581,1474,1474,1474,1474,1475,1422,3139,3254,
+1402,1403,1404,1460,1471,1528,1418,1474,1526,1474,1526,1527,1582,1474,1474,1474,1474,1581,1637,1637,1637,1638,3139,3093,
+1402,1403,1404,1460,1471,1527,1527,1526,1474,1528,1528,1529,1527,1526,1526,1474,1424,1638,3085,3086,3087,3087,3199,3093,
+1402,1403,1404,1460,1471,1472,1527,1474,1474,1472,1528,1472,1472,1474,1474,1424,1638,3085,3199,3146,3146,3146,3146,3093,
+1402,1403,1404,1460,1471,1474,1474,1526,1474,1472,1528,1528,1527,1474,1424,1638,3085,3199,3146,3146,3146,3146,3144,3248,
+1402,1403,1404,1460,1471,1474,1474,1474,1474,1474,1474,1474,1472,1424,1638,3085,3199,3146,3146,3146,3144,3248,3250,1457,
+1402,1403,1404,1460,1471,1472,1474,1474,1474,1474,1474,1474,1581,1530,3085,3199,3146,3146,3144,3248,3250,1457,1457,1457,
+1402,1403,1404,1460,1471,1528,1528,1474,1474,1474,1474,1526,1472,1530,3139,3146,3146,3146,3142,1457,1457,1457,1457,1457,
+1402,1403,1404,1460,1471,1528,1582,1527,1474,1580,1474,1528,1527,1530,3193,3146,3146,3144,3250,1457,1457,1457,1457,1457,
+1402,1403,1404,1460,1471,1472,1528,1527,1527,1527,1580,1528,1527,1530,3139,3146,3146,3142,1457,1457,1457,1457,1457,1457,
+1456,1457,1458,1460,1471,1527,1527,1526,1527,1474,1472,1472,1472,1530,3193,3146,3144,3250,1457,1457,1457,1457,1457,1457,
+1510,1511,1512,1460,1471,1472,1526,1472,1472,1474,1472,1474,1472,1530,3139,3146,3142,1457,1457,1457,1457,1457,1457,1457
 </data>
  </layer>
  <layer id="1" name="Walls" width="24" height="24">
@@ -61,216 +61,64 @@
 </data>
  </layer>
  <objectgroup id="3" name="Events" class="Layer of Events" visible="0">
-  <object id="1" name="10 Gold" type="Event Chest" gid="955" x="224" y="176" width="16" height="16">
+  <object id="1" name="10 Gold" class="Event Chest" gid="955" x="224" y="176" width="16" height="16">
    <properties>
-    <property name="Base" type="class" propertytype="Base Event">
-     <properties>
-      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
-      <property name="Trigger" type="int" propertytype="Helper Trigger" value="1"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch1" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="3"/>
-      <property name="ID" type="int" value="2"/>
-      <property name="SwitchName" value="Potato"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch2" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="4"/>
-      <property name="ID" type="int" value="4"/>
-      <property name="SwitchName" value="Apple"/>
-     </properties>
-    </property>
-    <property name="Loot1" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Coins"/>
-      <property name="Quantity" type="int" value="19"/>
-     </properties>
-    </property>
-    <property name="Loot2" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="HP Potion"/>
-      <property name="Quantity" type="int" value="4"/>
-     </properties>
-    </property>
-    <property name="Loot3" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Revive"/>
-      <property name="Quantity" type="int" value="52"/>
-     </properties>
-    </property>
+    <property name="Base" type="class"/>
+    <property name="GlobalSwitch1" type="class"/>
+    <property name="GlobalSwitch2" type="class"/>
+    <property name="Loot1" type="class"/>
+    <property name="Loot2" type="class"/>
+    <property name="Loot3" type="class"/>
     <property name="isLocked" type="bool" value="false"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="2" name="Unlock Chest" type="Event Lever" gid="781" x="336" y="192" width="16" height="16">
+  <object id="2" name="Unlock Chest" class="Event Lever" gid="781" x="336" y="192" width="16" height="16">
    <properties>
-    <property name="Global Switch" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="1"/>
-      <property name="ID" type="int" value="1"/>
-      <property name="Name" value="DungeonChest"/>
-     </properties>
-    </property>
+    <property name="Global Switch" type="class"/>
     <property name="isWalkable" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="15" name="Boss Room" type="Event Teleport" x="29" y="144" width="35" height="16">
+  <object id="15" name="Boss Room" class="Event Teleport" x="29" y="144" width="35" height="16">
    <properties>
-    <property name="Base" type="class" propertytype="Base Event">
-     <properties>
-      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
-      <property name="Trigger" type="qlonglong" propertytype="Helper Trigger" value="1"/>
-      <property name="isActive" type="bool" value="true"/>
-     </properties>
-    </property>
-    <property name="Destination" type="class" propertytype="Helper Destination">
-     <properties>
-      <property name="Destination Map" propertytype="Helper Maps" value="test"/>
-      <property name="Destination X" type="int" value="12"/>
-      <property name="Destination Y" type="int" value="11"/>
-     </properties>
-    </property>
-    <property name="Direction" propertytype="Helper Direction" value="Up"/>
-    <property name="Fade" type="class" propertytype="Helper Fade">
-     <properties>
-      <property name="Active" type="bool" value="false"/>
-      <property name="Fade Color" type="color" value="#7affffff"/>
-     </properties>
-    </property>
+    <property name="Base" type="class"/>
+    <property name="Destination" type="class"/>
+    <property name="Direction" value="Up"/>
+    <property name="Fade" type="class"/>
    </properties>
   </object>
-  <object id="17" name="10 Gold" type="Event Chest" gid="955" x="112" y="224" width="16" height="16">
+  <object id="17" name="10 Gold" class="Event Chest" gid="955" x="112" y="224" width="16" height="16">
    <properties>
-    <property name="Base" type="class" propertytype="Base Event">
-     <properties>
-      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
-      <property name="Trigger" type="int" propertytype="Helper Trigger" value="1"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch1" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="3"/>
-      <property name="ID" type="int" value="2"/>
-      <property name="SwitchName" value="Potato"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch2" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="4"/>
-      <property name="ID" type="int" value="4"/>
-      <property name="SwitchName" value="Apple"/>
-     </properties>
-    </property>
-    <property name="Loot1" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Coins"/>
-      <property name="Quantity" type="int" value="19"/>
-     </properties>
-    </property>
-    <property name="Loot2" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="HP Potion"/>
-      <property name="Quantity" type="int" value="4"/>
-     </properties>
-    </property>
-    <property name="Loot3" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Revive"/>
-      <property name="Quantity" type="int" value="52"/>
-     </properties>
-    </property>
+    <property name="Base" type="class"/>
+    <property name="GlobalSwitch1" type="class"/>
+    <property name="GlobalSwitch2" type="class"/>
+    <property name="Loot1" type="class"/>
+    <property name="Loot2" type="class"/>
+    <property name="Loot3" type="class"/>
     <property name="isLocked" type="bool" value="false"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="18" name="10 Gold" type="Event Chest" gid="955" x="144" y="144" width="16" height="16">
+  <object id="18" name="10 Gold" class="Event Chest" gid="955" x="144" y="144" width="16" height="16">
    <properties>
-    <property name="Base" type="class" propertytype="Base Event">
-     <properties>
-      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
-      <property name="Trigger" type="int" propertytype="Helper Trigger" value="1"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch1" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="3"/>
-      <property name="ID" type="int" value="2"/>
-      <property name="SwitchName" value="Potato"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch2" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="4"/>
-      <property name="ID" type="int" value="4"/>
-      <property name="SwitchName" value="Apple"/>
-     </properties>
-    </property>
-    <property name="Loot1" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Coins"/>
-      <property name="Quantity" type="int" value="19"/>
-     </properties>
-    </property>
-    <property name="Loot2" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="HP Potion"/>
-      <property name="Quantity" type="int" value="4"/>
-     </properties>
-    </property>
-    <property name="Loot3" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Revive"/>
-      <property name="Quantity" type="int" value="52"/>
-     </properties>
-    </property>
+    <property name="Base" type="class"/>
+    <property name="GlobalSwitch1" type="class"/>
+    <property name="GlobalSwitch2" type="class"/>
+    <property name="Loot1" type="class"/>
+    <property name="Loot2" type="class"/>
+    <property name="Loot3" type="class"/>
     <property name="isLocked" type="bool" value="false"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="19" name="10 Gold" type="Event Chest" gid="955" x="144" y="304" width="16" height="16">
+  <object id="19" name="10 Gold" class="Event Chest" gid="955" x="144" y="304" width="16" height="16">
    <properties>
-    <property name="Base" type="class" propertytype="Base Event">
-     <properties>
-      <property name="SFX" type="file" value="../Audio/Fx/hello_man.wav"/>
-      <property name="Trigger" type="int" propertytype="Helper Trigger" value="1"/>
-      <property name="isActive" type="bool" value="true"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch1" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="3"/>
-      <property name="ID" type="int" value="2"/>
-      <property name="SwitchName" value="Potato"/>
-     </properties>
-    </property>
-    <property name="GlobalSwitch2" type="class" propertytype="Global Switch">
-     <properties>
-      <property name="Function" type="int" propertytype="Helper Switch Function" value="4"/>
-      <property name="ID" type="int" value="4"/>
-      <property name="SwitchName" value="Apple"/>
-     </properties>
-    </property>
-    <property name="Loot1" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Coins"/>
-      <property name="Quantity" type="int" value="19"/>
-     </properties>
-    </property>
-    <property name="Loot2" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="HP Potion"/>
-      <property name="Quantity" type="int" value="4"/>
-     </properties>
-    </property>
-    <property name="Loot3" type="class" propertytype="Helper Loot">
-     <properties>
-      <property name="Item" propertytype="Helper Items" value="Revive"/>
-      <property name="Quantity" type="int" value="52"/>
-     </properties>
-    </property>
+    <property name="Base" type="class"/>
+    <property name="GlobalSwitch1" type="class"/>
+    <property name="GlobalSwitch2" type="class"/>
+    <property name="Loot1" type="class"/>
+    <property name="Loot2" type="class"/>
+    <property name="Loot3" type="class"/>
     <property name="isLocked" type="bool" value="false"/>
     <property name="isOpen" type="bool" value="true"/>
    </properties>
