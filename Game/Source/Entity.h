@@ -98,6 +98,8 @@ public:
 
 public:
 
+	virtual void Draw() {}
+
 	SString name;
 	EntityType type;
 	bool active = true;

@@ -7,17 +7,17 @@
 #include "Log.h"
 #include "Point.h"
 
-Chest::Chest(int posX, int posY, const char* textPath) : Item(posX, posY, textPath)
-{
-	itemType = ItemType::RING;
-}
-
-Chest::~Chest() {}
-
-bool Chest::Update() {
-	return true;
-}
-
-void Chest::Draw() {
-	//app->render->DrawTexture(texture, position.x, positoin.y);
-}
+//Chest::Chest(int posX, int posY, const char* textPath)// : Item(posX, posY, textPath)
+//{
+//	//itemType = ItemType::RING;
+//}
+//
+//Chest::~Chest() {}
+//
+//bool Chest::Update() {
+//	return true;
+//}
+//
+//void Chest::Draw() {
+//	//app->render->DrawTexture(texture, position.x, positoin.y);
+//}

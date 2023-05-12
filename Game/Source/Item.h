@@ -12,7 +12,12 @@ struct SDL_Texture;
 enum class ItemType
 {
 	NONE,
-	RING,
+	FIRE_PAWS,
+	DRAGON_SLAYER,
+	GRAPPLING_HOOK,
+	DIGGER_SNIPER,
+	MYSTICAL_ENERGIE,
+	ARCANE_SPIRIT
 };
 
 class Item : public Entity
@@ -20,11 +25,10 @@ class Item : public Entity
 public:
 
 	Item() {};
-	Item(int tileX, int tileY, const char* textPath, EntityType entityType = EntityType::ITEM) : Entity(entityType) {
-		position.x = tileX;
-		position.y = tileY;
-		isPicked = false;
-		texturePath = textPath;
+	Item(iPoint pos, SDL_Texture* itemText_, EntityType entityType = EntityType::ITEM) : Entity(entityType), texture(itemText_) {
+		position.x = pos.x;
+		position.y = pos.y;
+		equiped = false;
 	}
 
 	virtual ~Item() {};
@@ -36,11 +40,14 @@ public:
 	ItemType itemType;
 
 	SDL_Texture* texture;
+	SDL_Rect itemTextSection;
 	const char* texturePath;
 
-	bool isPicked;
+	bool equiped;
 
 	int itemid;
+
+	eastl::string mapName;
 };
 
 #endif // __ITEM_H__

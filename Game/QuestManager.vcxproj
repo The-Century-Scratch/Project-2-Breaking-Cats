@@ -113,6 +113,7 @@
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\ParticleSystemManager.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
+    <ClCompile Include="Source\FirePaws.cpp" />
     <ClCompile Include="Source\QuestManager.cpp" />
     <ClCompile Include="Source\Chest.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\ParticleSystemManager.h" />
     <ClInclude Include="Source\PerfTimer.h" />
+    <ClInclude Include="Source\FirePaws.h" />
     <ClInclude Include="Source\Quest.h" />
     <ClInclude Include="Source\QuestManager.h" />
     <ClInclude Include="Source\Chest.h" />

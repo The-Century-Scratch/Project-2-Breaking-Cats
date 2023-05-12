@@ -9,7 +9,7 @@ public:
 	virtual ~FirePaws();
 
 	bool Start() override;
-	bool Update() override;
+	bool Update() override; 
 	bool PostUpdate() override;
 	void Draw();
 	bool CleanUp() override;
@@ -19,6 +19,8 @@ public:
 	void UseItem(Player* player) override;
 
 public:
+
+	Collider* boundaries;
 
 	int healAmount;
 };

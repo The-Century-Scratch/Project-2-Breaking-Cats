@@ -23,13 +23,8 @@
 //#include "Bat.h"
 //#include "Skull.h"
 
-//#include "FairyTear.h"
-//#include "OmniPotion.h"
-//#include "UltraPotion.h"
-//#include "Potion.h"
-//#include "Orb.h"
-//#include "OrbFragment.h"
-//#include "InterruptorBlock.h"
+//Items
+#include "FirePaws.h"
 
 //#include "KnightHelmet.h"
 //#include "KnightChest.h"
@@ -157,6 +152,14 @@ SceneGameplay::SceneGameplay()
 	//sceneBattle = nullptr;
 
 	//lastUserInput = 0;
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	pugi::xml_node itemNode = config.child("item");
+	itemText = app->tex->Load(itemNode.child("texturepath").attribute("texturepath").as_string());
+
+	//inventory = new Inventory(playerList, atlas, this);
+
 }
 
 bool SceneGameplay::Load()
@@ -184,6 +187,17 @@ bool SceneGameplay::Load()
 			npc->parameters = npcNode;
 			npcs.Add(npc);
 			npc->Start();
+		}
+	}
+
+	Item* item = nullptr;
+	pugi::xml_node itemNode = config.child("item");
+	{
+		if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+			items.push_back(item);
+			item->Start();
 		}
 	}
 
@@ -694,8 +708,13 @@ bool SceneGameplay::Update(float dt)
 
 void SceneGameplay::Draw()
 {
-
 	app->map->Draw();
+
+	eastl::list<Item*>::iterator it = items.begin();
+	for (; it != items.end(); ++it)
+	{
+		(*it)->Draw();
+	}
 
 	if (app->debug->drawVariables)
 	{

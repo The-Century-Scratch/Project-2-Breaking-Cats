@@ -19,8 +19,7 @@ FirePaws::~FirePaws()
 
 bool FirePaws::Start()
 {
-	healAmount = 500;
-	eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::PLAYER, (Entity*)this);
+	eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
 
 	return true;
