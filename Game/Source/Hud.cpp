@@ -11,6 +11,7 @@
 #include "SceneGameplay.h"
 #include "ModuleCollisions.h"
 #include "SceneManager.h"
+#include "TransitionsManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -261,8 +262,12 @@ bool Hud::PostUpdate()
 
 	app->hud->debug = app->moduleCollisions->debug;
 
+
 	ret = !exit;
 	app->guiManager->Draw();
+
+	// Draw the current transition in front of everything
+	app->sceneManager->DrawTransition();
 
 	return ret;
 }

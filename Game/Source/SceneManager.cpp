@@ -116,11 +116,7 @@ bool SceneManager::Update(float dt)
 	// Draw current scene
 	current->Draw();
 
-	// Draw the current transition in front of everything
-	if(transitionStep != TransitionStep::NONE)
-	{
-		TransitionsManager::GetInstance()->Draw();
-	}
+
 
 	if (current->transitionRequired)
 	{
@@ -168,4 +164,12 @@ bool SceneManager::SaveState(pugi::xml_node& save) const
 	current->SaveState(save.append_child(current->name.GetString()));
 
 	return ret;
+}
+
+void SceneManager::DrawTransition()
+{
+	if (transitionStep != TransitionStep::NONE)
+	{
+		TransitionsManager::GetInstance()->Draw();
+	}
 }

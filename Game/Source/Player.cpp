@@ -73,7 +73,7 @@ bool Player::Start() {
 
 bool Player::Update()
 {
-	int speed = 1;
+	int speed = 3;
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{

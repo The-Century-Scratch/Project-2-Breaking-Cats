@@ -36,6 +36,7 @@ bool NPC::Start() {
 	NPCAnim.PushBack({ ((int)npctype) * 16,0 * 16,16,16 });
 	NPCAnim.loop = false;
 	NPCAnim.speed = 0.0f;
+	w = h = 16;
 
 	cRect = { position.x - 6,position.y - 6,16 + 12,16 + 12 };
 
