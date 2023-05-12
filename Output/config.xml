@@ -37,7 +37,7 @@
 		<mousebyfx path="Assets/Audio/Fx/mousebyfx.wav"/>
 	</Hud>
 	<scenegameplay>
-		<player x="368" y="64" texturepath="Assets/Textures/testPlayer.png">
+		<player x="368" y="64" texturepath="Assets/Textures/Gats.png">
 		</player>
 		<music path="Assets/Audio/Music/1_Astrub.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>

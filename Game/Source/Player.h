@@ -32,11 +32,17 @@ public:
 
 	void EndCollision(Collider* c1, Collider* c2) override;
 
+	Animation AnimationState();
+
 public:
 
 	Animation* currentAnim = nullptr;
 
-	Animation idleanim;
+	Animation idleAnim;
+	Animation walkForwardAnim;
+	Animation walkFLeftAnim;
+	Animation walkRightAnim;
+	Animation walkBackAnim;
 
 	bool godMode = false;
 
