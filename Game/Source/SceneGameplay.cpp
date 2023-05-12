@@ -232,7 +232,6 @@ bool SceneGameplay::Load()
 		break;
 	}
 
-
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
 	//guiTex = app->tex->Load("Textures/UI/gui_gameplay_textures.png");
 	//guiPad = app->tex->Load("Textures/UI/gui_pad_buttons.png");
@@ -721,6 +720,7 @@ void SceneGameplay::Draw()
 		DrawDebugVariable();
 	}
 
+
 	//SDL_Rect r = { 110,0,100,100 };
 
 	//switch (gameState)
@@ -835,6 +835,8 @@ bool SceneGameplay::UnLoad()
 	bool ret = true;
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
+
+
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -1753,14 +1755,13 @@ void SceneGameplay::ChangeBlockBounds(int bounds_x, int bounds_y)
 }
 
 void SceneGameplay::LoadNpc()
-{
-	ListItem<NPC*>* npcItem = npcs.start;
+{	ListItem<NPC*>* npcItem = npcs.start;
 	while (npcItem != NULL)
 	{
 		npcItem->data->toDelete = true;
 		npcItem = npcItem->next;
 	}
-
+	npcs.Clear();
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
@@ -1770,15 +1771,10 @@ void SceneGameplay::LoadNpc()
 		{
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
 			npc->parameters = npcNode;
-			npcs.Add(npc);
+			npcs.Add(npc); 
 			npc->Start();
 		}
 	}
-
-
-
-
-
 
 	//pugi::xml_document animations;
 	//pugi::xml_node anims;

@@ -10,10 +10,8 @@
 
 #include "Log.h"
 
-DialogueManager::DialogueManager(QuestManager* quests, SceneGameplay* s)
+DialogueManager::DialogueManager()
 {
-	questManager = quests;
-	scene = s;
 }
 
 DialogueManager::~DialogueManager()
@@ -26,10 +24,11 @@ bool DialogueManager::Start()
 	//in future here uncomment and load dialogues form xml file that will be in the zip file
 
 
-	/*int size = app->assetsManager->MakeLoad("Xml/dialogues.xml");
+	int size = app->assetsManager->MakeLoad("Xml/dialogues.xml");
 	pugi::xml_parse_result result = file.load_buffer(app->assetsManager->GetLastBuffer(), size);
-	app->assetsManager->DeleteBuffer();*/
-	pugi::xml_parse_result result = file.load_file("");
+	app->assetsManager->DeleteBuffer();
+
+	//pugi::xml_parse_result result = file.load_file("dialogues.xml");
 
 	if (result == NULL)
 	{
@@ -38,8 +37,8 @@ bool DialogueManager::Start()
 	else
 	{
 		root = file.child("dialogues");
-		font = new Font(app, "Font/font3.xml", app->tex);
-		texture = app->tex->Load("Textures/UI/gui_dialogue_textures.png");
+		font = new Font(app, "Font/CleanCraters.xml");
+		texture = app->tex->Load("Assets/Textures/TitleScreen.png");
 
 		letterCount = 0;
 		isDialogueActive = false;
@@ -222,8 +221,8 @@ bool DialogueManager::UnLoad()
 {
 	app->tex->Unload(texture);
 
-	font->UnLoad(app->tex);
-	RELEASE(font);
+	//font->UnLoad(app->tex);
+	//RELEASE(font);
 
 	if (current != nullptr)
 	{

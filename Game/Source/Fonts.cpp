@@ -5,7 +5,7 @@
 
 #include "PugiXml/src/pugixml.hpp"
 
-Font::Font(App* App, const char* rtpFontFile, Textures* Tex)
+Font::Font(App* App, const char* rtpFontFile)
 {
 	fontLoaded = false;
 
@@ -26,7 +26,7 @@ Font::Font(App* App, const char* rtpFontFile, Textures* Tex)
 		//int atlasWidth = xmlNodeAtlas.attribute("width").as_int();
 		//int atlasHeight = xmlNodeAtlas.attribute("height").as_int();
 
-		texture = Tex->Load(PATH("Font/", path));
+		texture = app->tex->Load(PATH("Font/", path));
 
 		charsCount = xmlNodeAtlas.attribute("spriteCount").as_int();
 		baseSize = xmlNodeAtlas.attribute("fontSize").as_int();

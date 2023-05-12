@@ -12,7 +12,7 @@ class SceneGameplay;
 class DialogueManager
 {
 public:
-	DialogueManager(QuestManager* quest, SceneGameplay* s);
+	DialogueManager();
 	virtual ~DialogueManager();
 
 	bool Start();
@@ -29,7 +29,6 @@ public:
 	Dialogue* current;
 	bool printText;
 	bool isDialogueActive;
-
 private:
 	SDL_Texture* texture;
 	QuestManager* questManager;

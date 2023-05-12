@@ -62,7 +62,9 @@ bool SceneManager::Start()
 
 	transitionStep = TransitionStep::NONE;
 
-
+	//load the dialogue manager
+	dialogueManager = new DialogueManager();
+	dialogueManager->Start();
 
 	return ret;
 }
@@ -115,6 +117,11 @@ bool SceneManager::Update(float dt)
 
 	// Draw current scene
 	current->Draw();
+	//draw dialogues
+	if (dialogueManager->isDialogueActive == true) {
+		dialogueManager->Draw();
+	}
+
 
 
 
@@ -141,6 +148,9 @@ bool SceneManager::CleanUp()
 {
 	LOG("Freeing Scene Manager");
 	bool ret = true;
+	dialogueManager->UnLoad();
+	RELEASE(dialogueManager);
+
 
 	return ret;
 }

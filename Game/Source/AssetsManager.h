@@ -8,7 +8,7 @@
 class AssetsManager : public Module
 {
 public:
-	AssetsManager();
+	AssetsManager(bool startEnabled);
 
 	~AssetsManager();
 

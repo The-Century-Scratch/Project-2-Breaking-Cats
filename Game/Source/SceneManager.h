@@ -7,7 +7,9 @@
 
 struct SDL_Texture;
 
+
 enum class TransitionStep;
+class DialogueManager;
 
 class SceneManager : public Module
 {
@@ -48,8 +50,10 @@ public:
 	Scene* current;
 	Scene* next;
 	TransitionStep transitionStep;
+	DialogueManager* dialogueManager;
 private:
 	// Transitions rects
+
 };
 
 #endif // __SCENE_H__

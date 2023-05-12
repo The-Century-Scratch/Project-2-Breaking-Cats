@@ -2,7 +2,7 @@
 
 #include "External/PhysFS/include/physfs.h"
 
-AssetsManager::AssetsManager() :Module()
+AssetsManager::AssetsManager(bool active) : Module(active)
 {
 	name.Create("AssetsManager");
 	//TODO 1: initialize the library (1 line)

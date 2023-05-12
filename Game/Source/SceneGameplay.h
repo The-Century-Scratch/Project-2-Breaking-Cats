@@ -17,7 +17,6 @@ class CharacterManager;
 class SceneBattle;
 class EntityManager;
 class Map;
-class DialogueManager;
 class PauseMenu;
 class Render;
 class Item;
@@ -114,7 +113,6 @@ private:
 	Player* currentPlayer;
 	List<NPC*> npcs;
 
-	DialogueManager* dialogueManager;
 	SDL_Texture* goldTexture;
 	eastl::list<Player*> playerList;
 

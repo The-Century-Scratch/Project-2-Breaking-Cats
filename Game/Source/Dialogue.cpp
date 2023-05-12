@@ -62,7 +62,8 @@ void Dialogue::Draw(int& count, Font* font)
 		}
 	}
 
-	app->render->DrawText(font, textToPrint.c_str(), 70, 115, 40, 5, { 0,0,0,255 }, 630);
+	//app->render->DrawText(font, textToPrint.c_str(), 70, 115, 40, 5, { 0,0,0,255 }, 630);
+	app->render->DrawText(textToPrint.c_str(), 70, 115, 40, 5, { 0,0,0,255 });
 
 	if (currentNode->dialogFinished)
 	{
@@ -81,10 +82,11 @@ void Dialogue::Draw(int& count, Font* font)
 					SDL_Rect tmp = r;
 					tmp.x += 10;
 					app->render->DrawText(font, (*optionsIterator)->text.c_str(), tmp, 30, 5, { 200,50,50,255 }, 1210);
+					
 				}
 				else
 					app->render->DrawText(font, (*optionsIterator)->text.c_str(), r, 30, 5, { 20,20,20,255 }, 1210);
-
+					
 				offsetY += 90;
 			}
 		}
@@ -100,9 +102,13 @@ void Dialogue::Draw(int& count, Font* font)
 				SDL_Rect tmp = (*optionsIterator)->bounds;
 				tmp.x += 10;
 				app->render->DrawText(font, (*optionsIterator)->text.c_str(), tmp, 30, 5, { 200,50,50,255 }, 1210);
+				
+
+
 			}
 			else
 				app->render->DrawText(font, (*optionsIterator)->text.c_str(), (*optionsIterator)->bounds, 30, 5, { 20,20,20,255 }, 1210);
+
 
 		}
 
