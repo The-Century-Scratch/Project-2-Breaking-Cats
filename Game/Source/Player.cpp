@@ -60,6 +60,18 @@ bool Player::Start() {
 		position.x = 334;
 		position.y = 106;
 		break;
+	case 4:
+		position.x = 334;
+		position.y = 106;
+		break;
+	case 5:
+		position.x = 334;
+		position.y = 106;
+		break;
+	case 6:
+		position.x = 136;
+		position.y = 23;
+		break;
 	default:
 		break;
 	}
@@ -179,28 +191,57 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		case Collider::Type::CHANGESCENE:
 			//FUNCTION TO CHANGE SCENE LOL
 			app->sceneManager->changeMap = true;
-			if (app->sceneManager->currentScene != 0) {
-				break;
+			if (app->sceneManager->currentScene == 0) {
+				switch (c2->scene)
+				{
+				case 0:
+					break;
+				case 1:
+					app->sceneManager->resistance_base = true;
+					break;
+				case 2:
+					app->sceneManager->store = true;
+					break;
+				case 3:
+					app->sceneManager->tabern = true;
+					break;
+				default:
+				case 5:
+					app->sceneManager->downAfterLabrinth = true;
+					break;
+				}
 			}
-			switch (c2->scene)
+			if (app->sceneManager->currentScene == 4)
 			{
-			case 0:
-				break;
-			case 1:
-				app->sceneManager->resistance_base = true;
-				break;
-			case 2:
-				app->sceneManager->store = true;
-				break;
-			case 3:
-				app->sceneManager->tabern = true;
-				break;
-			default:
-				break;
+				switch (c2->scene)
+				{
+				case 5:
+					app->sceneManager->leftAfterLabrinth = true;
+					break;
+				case 6:
+					app->sceneManager->village = true;
+					break;
+				default:
+					break;
+				}
+			}
+			if (app->sceneManager->currentScene == 5)
+			{
+				switch (c2->scene)
+				{
+				case 0:
+					app->sceneManager->nordCity = true;
+					break;
+				case 4:
+					app->sceneManager->rightLabrinth = true;
+					break;
+				default:
+					break;
+				}
 			}
 			break;
-		case Collider::Type::ITEM:
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+		//case Collider::Type::ITEM:
+		//	app->moduleCollisions->collision_solver(c1->listener, c2->rect);
 		default:
 			break;
 		}
@@ -234,8 +275,8 @@ void Player::EndCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHANGESCENE:
 			break;
-		case Collider::Type::ITEM:
-			break;
+		//case Collider::Type::ITEM:
+		//	break;
 		default:
 			break;
 		}

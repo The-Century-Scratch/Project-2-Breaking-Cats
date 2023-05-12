@@ -116,7 +116,4 @@
   <ItemGroup>
     <Image Include="..\Output\Assets\Textures\ICON.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Output\Assets\Maps\LostChests.tmx" />
-  </ItemGroup>
 </Project>

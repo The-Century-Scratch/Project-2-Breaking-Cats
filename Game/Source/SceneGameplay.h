@@ -29,17 +29,30 @@ class Shop;
 class Font;
 
 
-
+//TO CITY
 #define LEAVETABERN iPoint(298,104)
-
 #define LEAVESTORE iPoint(568,714)
-
 #define LEAVEBASE iPoint(136,440)
+#define LEAVEAFTERLABRINTHDOWN iPoint(389, 8)
+
+//TO LABRINTH
+#define LEAVEVILLAGE iPoint(6, 150)
+#define LEAVEAFTERLABRINTHLEFT iPoint(462, 150)
+
+//TO VILLAGE
+#define LEAVELABRINTHLEFT iPoint(620, 125)
+
+//TO AFTERLABRINTH
+#define LEAVELABRINTHRIGHT iPoint(5, 159)
+#define LEAVECITYTOP iPoint(243, 297)
 
 #define IDSCENESTORE 2
 #define IDSCENEBASE 1
 #define IDSCENETABERN 3
 #define IDSCENEMAP 0
+#define IDVILLAGE 6
+#define IDLABRINTH 4
+#define IDAFTERLABRINTH 5
 
 #define INIT_POS_TABERN iPoint(334,106)
 #define INIT_POS_BASE iPoint(113,366)

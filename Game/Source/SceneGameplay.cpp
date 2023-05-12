@@ -228,6 +228,18 @@ bool SceneGameplay::Load()
 		app->render->camera.y = 18;
 		canMoveCam = false;
 		break;
+	case 4:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 5:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 6:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
 	default:
 		break;
 	}
@@ -378,29 +390,73 @@ bool SceneGameplay::Update(float dt)
 	if (app->sceneManager->changeMap)
 	{
 
-		if (app->sceneManager->currentScene == 1) {
-			ChangeMap(LEAVEBASE, 0);
+		if (app->sceneManager->currentScene == IDSCENEBASE) {
+			ChangeMap(LEAVEBASE, IDSCENEMAP);
 		}
-		else if (app->sceneManager->currentScene == 2) {
-			ChangeMap(LEAVESTORE, 0);
+		else if (app->sceneManager->currentScene == IDSCENESTORE) {
+			ChangeMap(LEAVESTORE, IDSCENEMAP);
 		}
-		else if (app->sceneManager->currentScene == 3) {
-			ChangeMap(LEAVETABERN, 0);
+		else if (app->sceneManager->currentScene == IDSCENETABERN) {
+			ChangeMap(LEAVETABERN, IDSCENEMAP);
 		}
 
-		//ENTER DIFFERENT INTERIORS
-		if (app->sceneManager->store) {
-			ChangeMap(INIT_POS_STORE, IDSCENESTORE);
-			app->sceneManager->store = false;
 
+		//leaving village map
+		if (app->sceneManager->currentScene == IDVILLAGE)
+		{
+			ChangeMap(LEAVEVILLAGE, 4);
 		}
-		else if (app->sceneManager->tabern) {
-			ChangeMap(INIT_POS_TABERN,IDSCENETABERN);
-			app->sceneManager->tabern = false;
+
+		//leaving labrinth map
+		if (app->sceneManager->currentScene == IDLABRINTH)
+		{
+			if (app->sceneManager->village)
+			{
+				ChangeMap(LEAVELABRINTHLEFT, IDVILLAGE);
+				app->sceneManager->village = false;
+			}
+			if (app->sceneManager->leftAfterLabrinth)
+			{
+				ChangeMap(LEAVELABRINTHRIGHT, IDAFTERLABRINTH);
+				app->sceneManager->leftAfterLabrinth = false;
+			}
 		}
-		else if (app->sceneManager->resistance_base) {
-			ChangeMap(INIT_POS_BASE, IDSCENEBASE);
-			app->sceneManager->resistance_base = false;
+		//leaving afterlabrinth map
+		if (app->sceneManager->currentScene == IDAFTERLABRINTH)
+		{
+			if (app->sceneManager->rightLabrinth)
+			{
+				ChangeMap(LEAVEAFTERLABRINTHLEFT, IDLABRINTH);
+				app->sceneManager->rightLabrinth = false;
+			}
+			if (app->sceneManager->nordCity)
+			{
+				ChangeMap(LEAVEAFTERLABRINTHDOWN, IDSCENEMAP);
+				app->sceneManager->nordCity = false;
+			}
+		}
+
+		if (app->sceneManager->currentScene == IDSCENEMAP)
+		{
+			//LEAVING CITY MAP
+			if (app->sceneManager->store) {
+				ChangeMap(INIT_POS_STORE, IDSCENESTORE);
+				app->sceneManager->store = false;
+
+			}
+			else if (app->sceneManager->tabern) {
+				ChangeMap(INIT_POS_TABERN, IDSCENETABERN);
+				app->sceneManager->tabern = false;
+			}
+			else if (app->sceneManager->resistance_base) {
+				ChangeMap(INIT_POS_BASE, IDSCENEBASE);
+				app->sceneManager->resistance_base = false;
+			}
+			else if (app->sceneManager->downAfterLabrinth)
+			{
+				ChangeMap(LEAVECITYTOP, IDAFTERLABRINTH);
+				app->sceneManager->downAfterLabrinth = false;
+			}
 		}
 	}
 	

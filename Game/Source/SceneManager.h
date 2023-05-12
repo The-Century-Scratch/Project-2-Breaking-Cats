@@ -41,8 +41,13 @@ public:
 	int currentScene;
 	
 	bool Pause = false;
-	//variable to check which interior to enter
-	bool tabern = false, store = false, resistance_base = false;
+	//variable in city
+	bool tabern = false, store = false, resistance_base = false, downAfterLabrinth = false;
+	//variable in labrinth
+	bool village = false, leftAfterLabrinth = false;
+	//variable in after labrinth
+	bool rightLabrinth = false, nordCity = false;
+
 	bool changeMap = false;
 
 	Scene* current;

@@ -29,7 +29,6 @@ struct Collider
 		CHEAST,
 		CHEASTINTERACTION,
 		CHANGESCENE,
-		ITEM,
 
 		MAX
 	};

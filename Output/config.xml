@@ -37,7 +37,7 @@
 		<mousebyfx path="Assets/Audio/Fx/mousebyfx.wav"/>
 	</Hud>
 	<scenegameplay>
-		<player x="368" y="64" texturepath="Assets/Textures/testPlayer.png">
+		<player x="136" y="23" texturepath="Assets/Textures/testPlayer.png">
 		</player>
 		<music path="Assets/Audio/Music/1_Astrub.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
@@ -55,8 +55,11 @@
 			<mapfolder path="Assets/Maps/"/>
 			<mapfile path="Assets/Maps/city_square.tmx"/>	<!--this is 0 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Resistance.tmx"/>	<!--this is 1 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Shop.tmx"/>			<!--this is 2 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Shop.tmx"/>		<!--this is 2 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Taverna.tmx"/>		<!--this is 3 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Labrinth.tmx"/>	<!--this is 4 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>	<!--this is 5 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 	<questmanager>

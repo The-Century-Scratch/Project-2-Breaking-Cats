@@ -20,7 +20,7 @@ public:
 
 public:
 
-	Collider* boundaries;
+	//Collider* boundaries;
 
 	int healAmount;
 };

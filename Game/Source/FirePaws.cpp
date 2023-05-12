@@ -1,7 +1,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Render.h"
-#include "ModuleCollisions.h"
+//#include "ModuleCollisions.h"
 
 #include "Player.h"
 
@@ -9,6 +9,7 @@
 
 FirePaws::FirePaws(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
+
 	itemTextSection = { 0, 0, 16, 16};
 	itemType = ItemType::FIRE_PAWS;
 }
@@ -19,7 +20,7 @@ FirePaws::~FirePaws()
 
 bool FirePaws::Start()
 {
-	eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
+	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
 
 	return true;
@@ -38,7 +39,7 @@ bool FirePaws::PostUpdate()
 
 void FirePaws::Draw()
 {
-	app->render->DrawTexture(texture, position.x, position.y, &itemTextSection);
+	//app->render->DrawTexture(texture, position.x, position.y, &itemTextSection);
 }
 
 bool FirePaws::CleanUp()

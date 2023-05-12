@@ -200,9 +200,6 @@
     <Xml Include="..\Output\config.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Output\Assets\Maps\LostChests.tmx" />
-  </ItemGroup>
-  <ItemGroup>
     <Natvis Include="Source\External\EASTL-3.17.06\doc\EASTL.natvis" />
   </ItemGroup>
   <ItemGroup>

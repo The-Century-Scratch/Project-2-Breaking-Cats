@@ -693,7 +693,7 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                     switch (id)
                     {
                     case 54:
-                        newscene = 0;//to change
+                        newscene = 5;
                         break;
                     case 55:
                         newscene = 0;//to change
@@ -706,6 +706,34 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                         break;
                     case 58:
                         newscene = 1;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                if (app->sceneManager->currentScene == 4)
+                {
+                    switch (id)
+                    {
+                    case 18:
+                        newscene = 6;
+                        break;
+                    case 19:
+                        newscene = 5;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                if (app->sceneManager->currentScene == 5)
+                {
+                    switch (id)
+                    {
+                    case 21:
+                        newscene = 4;
+                        break;
+                    case 22:
+                        newscene = 0;
                         break;
                     default:
                         break;
