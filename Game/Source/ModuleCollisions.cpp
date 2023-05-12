@@ -105,6 +105,18 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::CHEAST] = false;
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::CHEASTINTERACTION] = false;
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::CHANGESCENE] = false;
+
+	matrix[Collider::Type::ITEM][Collider::Type::WALL] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::ITEM][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::NPC] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::NPCINTERACTION] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::CAMLIMIT] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::CHEAST] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::CHEASTINTERACTION] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::CHANGESCENE] = false;
+	matrix[Collider::Type::ITEM][Collider::Type::ITEM] = false;
+
 						  
 	/*debug = true;*/
 }
@@ -235,6 +247,9 @@ void ModuleCollisions::DebugDraw()
 			break;
 		case Collider::Type::CHANGESCENE:
 			app->render->DrawRectangle(colliders[i]->rect, 0, 0, 0, alpha, true);				//black
+			break;
+		case Collider::Type::ITEM:
+			app->render->DrawRectangle(colliders[i]->rect, 184, 71, 255, alpha, true);			//purple
 			break;
 		default:
 			break;

@@ -151,7 +151,7 @@ private:
 	// Interruptor block
 	Item* interruptorBlock;
 
-	SDL_Texture* atlas;
+	SDL_Texture* itemText;
 	SDL_Texture* guiTex;
 	SDL_Texture* guiPad;
 

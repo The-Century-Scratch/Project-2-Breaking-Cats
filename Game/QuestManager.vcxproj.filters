@@ -1,386 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Dialogue.cpp">
-      <Filter>Dialogue</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DialogueManager.cpp">
-      <Filter>Dialogue</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\AssetsManager.cpp">
-      <Filter>Modules\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TransitionsManager.cpp">
-      <Filter>Modules\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneBattle.cpp">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneEnding.cpp">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneGameplay.cpp">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneLogo.cpp">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneManager.cpp">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneTitle.cpp">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Audio.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Render.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Textures.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Window.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Fonts.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\App.cpp">
-      <Filter>Source\Application\BaseModules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Main.cpp">
-      <Filter>Source\Application\BaseModules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EntityManager.cpp">
-      <Filter>Source\Application\Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\NPC.cpp">
-      <Filter>Source\Application\Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player.cpp">
-      <Filter>Source\Application\Game\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map.cpp">
-      <Filter>Source\Application\Game\GameModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Chest.cpp">
-      <Filter>Source\Application\Game\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\QuestManager.cpp">
-      <Filter>Source\Application\Game\Quests</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TalkQuest.cpp">
-      <Filter>Source\Application\Game\Quests</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CollectQuest.cpp">
-      <Filter>Source\Application\Game\Quests</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp">
-      <Filter>Source\External\PugiXml</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\easings.cpp">
-      <Filter>Source\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Log.cpp">
-      <Filter>Source\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Particle.cpp">
-      <Filter>Source\Application\Game\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ParticleSystem.cpp">
-      <Filter>Source\Application\Game\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ParticleSystemManager.cpp">
-      <Filter>Source\Application\Game\Particles</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GuiButton.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GUICheckBox.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GuiManager.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GUISlider.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Colliders.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModuleCollisions.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Hud.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PerfTimer.cpp">
-      <Filter>Source\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Timer.cpp">
-      <Filter>Source\Utils</Filter>
-    <ClCompile Include="Source\Debug.cpp">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClCompile>
+    <Natvis Include="Source\External\EASTL-3.17.06\doc\EASTL.natvis" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Dialogue.h">
-      <Filter>Dialogue</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DialogueManager.h">
-      <Filter>Dialogue</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AssetsManager.h">
-      <Filter>Modules\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TransitionsManager.h">
-      <Filter>Modules\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneBattle.h">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneEnding.h">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneGameplay.h">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneLogo.h">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneManager.h">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneTitle.h">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene.h">
-      <Filter>Source\Application\Game\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Audio.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Render.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Textures.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Window.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Fonts.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\App.h">
-      <Filter>Source\Application\BaseModules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EntityManager.h">
-      <Filter>Source\Application\Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\NPC.h">
-      <Filter>Source\Application\Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Player.h">
-      <Filter>Source\Application\Game\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map.h">
-      <Filter>Source\Application\Game\GameModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Chest.h">
-      <Filter>Source\Application\Game\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\QuestManager.h">
-      <Filter>Source\Application\Game\Quests</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Quest.h">
-      <Filter>Source\Application\Game\Quests</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TalkQuest.h">
-      <Filter>Source\Application\Game\Quests</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CollectQuest.h">
-      <Filter>Source\Application\Game\Quests</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Animation.h">
-      <Filter>Source\Application\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Entity.h">
-      <Filter>Source\Application\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Item.h">
-      <Filter>Source\Application\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Module.h">
-      <Filter>Source\Application\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp">
-      <Filter>Source\External\PugiXml</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp">
-      <Filter>Source\External\PugiXml</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Defs.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DynArray.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\easings.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Log.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Point.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Queue.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SString.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Particle.h">
-      <Filter>Source\Application\Game\Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ParticleSystem.h">
-      <Filter>Source\Application\Game\Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ParticleSystemManager.h">
-      <Filter>Source\Application\Game\Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiButton.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GUICheckBox.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiControl.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GuiManager.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GUISlider.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Colliders.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ModuleCollisions.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\List.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Hud.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PerfTimer.h">
-      <Filter>Source\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Timer.h">
-      <Filter>Source\Utils</Filter>
-    <ClInclude Include="Source\Debug.h">
-      <Filter>Source\Application\BaseModules</Filter>
-    </ClInclude>
+    <ClCompile Include="Source\AssetsManager.cpp" />
+    <ClCompile Include="Source\CollectQuest.cpp" />
+    <ClCompile Include="Source\Colliders.cpp" />
+    <ClCompile Include="Source\Debug.cpp" />
+    <ClCompile Include="Source\Dialogue.cpp" />
+    <ClCompile Include="Source\DialogueManager.cpp" />
+    <ClCompile Include="Source\easings.cpp" />
+    <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\GuiButton.cpp" />
+    <ClCompile Include="Source\GUICheckBox.cpp" />
+    <ClCompile Include="Source\GuiManager.cpp" />
+    <ClCompile Include="Source\GUISlider.cpp" />
+    <ClCompile Include="Source\Hud.cpp" />
+    <ClCompile Include="Source\ModuleCollisions.cpp" />
+    <ClCompile Include="Source\Particle.cpp" />
+    <ClCompile Include="Source\ParticleSystem.cpp" />
+    <ClCompile Include="Source\ParticleSystemManager.cpp" />
+    <ClCompile Include="Source\PerfTimer.cpp" />
+    <ClCompile Include="Source\QuestManager.cpp" />
+    <ClCompile Include="Source\Chest.cpp" />
+    <ClCompile Include="Source\NPC.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\App.cpp" />
+    <ClCompile Include="Source\Audio.cpp" />
+    <ClCompile Include="Source\Input.cpp" />
+    <ClCompile Include="Source\Fonts.cpp" />
+    <ClCompile Include="Source\Map.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\SceneBattle.cpp" />
+    <ClCompile Include="Source\SceneEnding.cpp" />
+    <ClCompile Include="Source\SceneGameplay.cpp" />
+    <ClCompile Include="Source\SceneLogo.cpp" />
+    <ClCompile Include="Source\SceneManager.cpp" />
+    <ClCompile Include="Source\SceneTitle.cpp" />
+    <ClCompile Include="Source\TalkQuest.cpp" />
+    <ClCompile Include="Source\Textures.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\TransitionsManager.cpp" />
+    <ClCompile Include="Source\Window.cpp" />
+    <ClCompile Include="Source\Log.cpp" />
+    <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="Source\FirePaws.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Dialogue">
-      <UniqueIdentifier>{d31319a3-eced-4661-8a55-782c3c7210e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI">
-      <UniqueIdentifier>{19cba893-52fd-448c-a493-07b2c27d85f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules">
-      <UniqueIdentifier>{7fbfef46-5530-4f3f-8c71-56518cafe8f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Source">
-      <UniqueIdentifier>{a4d22394-5d03-4138-b68b-30cdcd7bd0ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source">
-      <UniqueIdentifier>{23b578e9-3fa9-4f29-b9bd-04c3b4a3fb29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application">
-      <UniqueIdentifier>{f2f59780-3c69-4355-afdd-f0c3cffabdcc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\External">
-      <UniqueIdentifier>{0615421b-e410-40e5-a9bc-cd8c1b5db2b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Utils">
-      <UniqueIdentifier>{6eee774a-fdd9-4122-849b-abf142bc8b5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\BaseModules">
-      <UniqueIdentifier>{966fd1fa-7392-4980-b690-e89b67500110}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Game">
-      <UniqueIdentifier>{c0a20049-5788-453f-8236-c71ee376aef4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Game\Entities">
-      <UniqueIdentifier>{b3917d7c-e0e7-445a-9cde-0079638b2bc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Game\GameModules">
-      <UniqueIdentifier>{a4a3be27-e631-45f2-970c-ff3bf18b5019}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Game\Quests">
-      <UniqueIdentifier>{b30d05cb-a3b7-4c6a-9d8d-6eb24658b203}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Game\Items">
-      <UniqueIdentifier>{1f5bcabe-9ea7-4408-b064-b69767b6dc98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Game\Scenes">
-      <UniqueIdentifier>{43a11725-9d1d-43c1-9caf-b8af0c04d344}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Headers">
-      <UniqueIdentifier>{aa0e2f51-df6a-436c-8b2c-6353c3beb233}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\External\PugiElements">
-      <UniqueIdentifier>{8d75410b-84e4-4010-a046-90a5c12c3cf3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\External\PugiXml">
-      <UniqueIdentifier>{b3162240-d22b-4d83-9554-782be4664197}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\Game\Particles">
-      <UniqueIdentifier>{58917bca-7830-4742-9140-0b09edd0083d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Application\BaseModules\Core">
-      <UniqueIdentifier>{4b4a9bc1-03a8-42cb-8d58-0ec6c42816af}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\AssetsManager.h" />
+    <ClInclude Include="Source\CollectQuest.h" />
+    <ClInclude Include="Source\Colliders.h" />
+    <ClInclude Include="Source\Debug.h" />
+    <ClInclude Include="Source\Dialogue.h" />
+    <ClInclude Include="Source\DialogueManager.h" />
+    <ClInclude Include="Source\easings.h" />
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\GuiButton.h" />
+    <ClInclude Include="Source\GUICheckBox.h" />
+    <ClInclude Include="Source\GuiControl.h" />
+    <ClInclude Include="Source\GuiManager.h" />
+    <ClInclude Include="Source\GUISlider.h" />
+    <ClInclude Include="Source\Hud.h" />
+    <ClInclude Include="Source\Item.h" />
+    <ClInclude Include="Source\ModuleCollisions.h" />
+    <ClInclude Include="Source\Particle.h" />
+    <ClInclude Include="Source\ParticleSystem.h" />
+    <ClInclude Include="Source\ParticleSystemManager.h" />
+    <ClInclude Include="Source\PerfTimer.h" />
+    <ClInclude Include="Source\Quest.h" />
+    <ClInclude Include="Source\QuestManager.h" />
+    <ClInclude Include="Source\Chest.h" />
+    <ClInclude Include="Source\NPC.h" />
+    <ClInclude Include="Source\Fonts.h" />
+    <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\Queue.h" />
+    <ClInclude Include="Source\Scene.h" />
+    <ClInclude Include="Source\Audio.h" />
+    <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\App.h" />
+    <ClInclude Include="Source\Module.h" />
+    <ClInclude Include="Source\Render.h" />
+    <ClInclude Include="Source\SceneBattle.h" />
+    <ClInclude Include="Source\SceneEnding.h" />
+    <ClInclude Include="Source\SceneGameplay.h" />
+    <ClInclude Include="Source\SceneLogo.h" />
+    <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\SceneTitle.h" />
+    <ClInclude Include="Source\TalkQuest.h" />
+    <ClInclude Include="Source\Textures.h" />
+    <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\TransitionsManager.h" />
+    <ClInclude Include="Source\Window.h" />
+    <ClInclude Include="Source\Defs.h" />
+    <ClInclude Include="Source\List.h" />
+    <ClInclude Include="Source\Log.h" />
+    <ClInclude Include="Source\Point.h" />
+    <ClInclude Include="Source\SString.h" />
+    <ClInclude Include="Source\DynArray.h" />
+    <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
+    <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
+    <ClInclude Include="Source\FirePaws.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\Output\config.xml">
-      <Filter>Source\External\PugiElements</Filter>
-    </Xml>
+    <ResourceCompile Include="BreakingCats.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Natvis Include="Source\External\EASTL-3.17.06\doc\EASTL.natvis">
-      <Filter>Source\Utils</Filter>
-    </Natvis>
+    <Xml Include="..\Output\config.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="BreakingCats.rc">
-      <Filter>Source\Utils</Filter>
-    </ResourceCompile>
+    <Image Include="..\Output\Assets\Textures\ICON.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Output\Assets\Textures\ICON.ico">
-      <Filter>Source\Utils</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Output\Assets\Maps\LostChests.tmx">
-      <Filter>Source\External\PugiElements</Filter>
-    </None>
+    <None Include="..\Output\Assets\Maps\LostChests.tmx" />
   </ItemGroup>
 </Project>
