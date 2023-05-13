@@ -279,8 +279,8 @@ void Player::EndCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHANGESCENE:
 			break;
-		//case Collider::Type::ITEM:
-		//	break;
+		case Collider::Type::ITEM:
+			break;
 		default:
 			break;
 		}

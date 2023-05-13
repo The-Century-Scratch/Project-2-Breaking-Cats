@@ -176,7 +176,7 @@ private:
 	SDL_Texture* guiTex;
 	SDL_Texture* guiPad;
 
-	eastl::list<Item*> items;
+	List<Item*> items;
 
 	iPoint tmpPosPlayer;
 

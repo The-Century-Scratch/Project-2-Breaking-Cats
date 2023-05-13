@@ -22,6 +22,8 @@ bool FirePaws::Start()
 {
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
+	itemid = 1;
+	itemType = ItemType::FIRE_PAWS;
 
 	return true;
 }
@@ -44,6 +46,7 @@ void FirePaws::Draw()
 
 bool FirePaws::CleanUp()
 {
+	app->tex->Unload(texture);
 	return true;
 }
 

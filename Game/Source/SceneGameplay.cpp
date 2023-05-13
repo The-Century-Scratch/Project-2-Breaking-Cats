@@ -42,7 +42,7 @@
 
 //#include "CharacterManager.h"
 //#include "PauseMenu.h"
-//#include "Inventory.h"
+#include "Inventory.h"
 //#include "QuestMenu.h"
 //#include "Shop.h"
 
@@ -203,6 +203,10 @@ bool SceneGameplay::Load()
 		}
 	}
 
+
+
+
+
 	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
 	{
 		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
@@ -271,6 +275,7 @@ bool SceneGameplay::Load()
 		break;
 	}
 
+	app->inventory->Enable();
 
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
 	//guiTex = app->tex->Load("Textures/UI/gui_gameplay_textures.png");
@@ -402,7 +407,13 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-	
+	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
+	{
+		ListItem<Item*>* it = items.start;
+		it->data->equiped = true;
+		app->inventory->AddItem(it->data);
+
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -792,10 +803,10 @@ void SceneGameplay::Draw()
 {
 	app->map->Draw();
 
-	eastl::list<Item*>::iterator it = items.begin();
-	for (; it != items.end(); ++it)
+	ListItem<Item*>* it = items.start;
+	for (; it != items.end; ++it)
 	{
-		(*it)->Draw();
+		it->data->Draw();
 	}
 
 	if (app->debug->drawVariables)
@@ -917,6 +928,13 @@ bool SceneGameplay::UnLoad()
 	bool ret = true;
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
+
+	ListItem<Item*>* it = items.start;
+	for (; it != items.end; ++it)
+	{
+		it->data->CleanUp();
+	}
+
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -2155,4 +2173,16 @@ void SceneGameplay::DrawDebugVariable()
 	app->render->DrawText(std::to_string(currentPlayer->position.x).c_str(), app->debug->debugX + 110, app->debug->debugY, 50, 20, app->debug->debugColor);
 	app->render->DrawText("Player Y  ", app->debug->debugX, app->debug->debugY + 30, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(currentPlayer->position.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 30, 50, 20, app->debug->debugColor);
+
+	app->render->DrawText("Camara X  ", app->debug->debugX, app->debug->debugY + 80, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->render->camera.x).c_str(), app->debug->debugX + 110, app->debug->debugY + 80, 50, 20, app->debug->debugColor);
+	app->render->DrawText("Camara Y  ", app->debug->debugX, app->debug->debugY + 110, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->render->camera.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 110, 50, 20, app->debug->debugColor);
+
+	int MouseX_, MouseY_;
+	app->input->GetMousePosition(MouseX_, MouseY_);
+	app->render->DrawText("Mouse X  ", app->debug->debugX, app->debug->debugY + 160, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
+	app->render->DrawText("Mouse Y  ", app->debug->debugX, app->debug->debugY + 190, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
 }
