@@ -20,6 +20,8 @@ FirePaws::~FirePaws()
 bool FirePaws::Start()
 {
 	//currentAnim = &idleanim;
+	itemid = 1;
+	itemType = ItemType::FIRE_PAWS;
 
 	return true;
 }

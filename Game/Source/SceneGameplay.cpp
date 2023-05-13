@@ -196,7 +196,7 @@ bool SceneGameplay::Load()
 		if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
 		{
 			item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
-			items.push_back(item);
+			items.Add(item);
 			item->Start();
 		}
 	}
@@ -364,7 +364,13 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-	
+	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
+	{
+		ListItem<Item*>* it = items.start;
+		it->data->equiped = true;
+		app->inventory->AddItem(it->data);
+
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -711,10 +717,10 @@ void SceneGameplay::Draw()
 {
 	app->map->Draw();
 
-	eastl::list<Item*>::iterator it = items.begin();
-	for (; it != items.end(); ++it)
+	ListItem<Item*>* it = items.start;
+	for (; it != items.end; ++it)
 	{
-		(*it)->Draw();
+		it->data->Draw();
 	}
 
 	if (app->debug->drawVariables)
@@ -837,10 +843,10 @@ bool SceneGameplay::UnLoad()
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
 
-	eastl::list<Item*>::iterator it = items.begin();
-	for (; it != items.end(); ++it)
+	ListItem<Item*>* it = items.start;
+	for (; it != items.end; ++it)
 	{
-		(*it)->CleanUp();
+		it->data->CleanUp();
 	}
 
 

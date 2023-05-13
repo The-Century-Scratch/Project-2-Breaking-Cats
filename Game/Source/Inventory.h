@@ -68,9 +68,9 @@ public:
 	virtual ~Inventory();
 
 	bool Start() override;
-	bool Update(float dt);
+	bool Update(float dt) override;
 	void Draw();
-	bool UnLoad();
+	bool CleanUp() override;
 	bool OnGuiMouseClickEvent(GuiControl* control);
 	void UpdatingButtons(Input* input);
 
@@ -120,7 +120,7 @@ public:
 	GuiButton* btnItems;     // Potions etc
 
 private:
-	SDL_Texture* atlasTexture;
+	SDL_Texture* itemTexture;
 	SDL_Texture* invTex;
 	SDL_Texture* slotText;
 	SDL_Texture* buttonTex;
@@ -137,7 +137,7 @@ private:
 	bool inEquipment;
 
 	// There will be 32 slots for items
-	InventorySlot slots[MAX_INVENTORY_SLOTS];
+	//InventorySlot slots[MAX_INVENTORY_SLOTS];
 	int currentSlotId;
 	InventorySlot* originSlot;
 
@@ -156,7 +156,8 @@ private:
 	GuiButton* btnThief;
 	GuiButton* btnWarrior;*/
 
-	List<InventorySlot*> slotList;
+	//List<InventorySlot*> slotList;
+	InventorySlot slotList[MAX_INVENTORY_SLOTS];
 	GuiButton* btnUse;       // Use item
 	GuiButton* btnDelete;	 // Delete an item
 	//GuiButton* btnEquip;	// Equips an armor

@@ -42,12 +42,28 @@ Inventory::~Inventory()
 
 bool Inventory::Start()
 {
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	pugi::xml_node itemNode = config.child("item");
+	itemTexture = app->tex->Load("Assets/Textures/TestItem.png");
 	invTex = app->tex->Load("Assets/Textures/TestInventory.png");
 	slotText = app->tex->Load("Assets/Textures/TestInvSlot.png");
+
 	slotRect = { 0,0,16,16 };
 	slotRectFocus = { 17,0,18,18 };
 
-	InventorySlot* newInvSlot_ = nullptr;
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		slotList[invSlot_].bounds = { 0, 0, 16, 16 };
+		slotList[invSlot_].currentSlot = invSlot_;
+		slotList[invSlot_].itemId = 0;
+		slotList[invSlot_].isfull = false;
+		slotList[invSlot_].state = SlotState::UNSELECTED;
+
+	}
+
+	/*InventorySlot* newInvSlot_ = nullptr;
 	for (size_t maxInvSlots_ = 1; maxInvSlots_ <= MAX_INVENTORY_SLOTS; maxInvSlots_++)
 	{
 		newInvSlot_ = new InventorySlot();
@@ -57,7 +73,7 @@ bool Inventory::Start()
 		newInvSlot_->isfull = false;
 		newInvSlot_->state = SlotState::UNSELECTED;
 		slotList.Add(newInvSlot_);
-	}
+	}*/
 
 	//guiTex = app->tex->Load("Textures/UI/gui_inventory.png");
 	//buttonTex = app->tex->Load("Textures/UI/gui_pad_buttons.png");
@@ -199,7 +215,16 @@ bool Inventory::Update(float dt)
 	invPos.x = (-app->render->camera.x/scale)+150;
 	invPos.y = (-app->render->camera.y/scale)+100;
 	
-	ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
+	iPoint invSpacing = { 0,0 };
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		slotList[invSlot_].bounds.x = invPos.x + invSpacing.x + 2;
+		slotList[invSlot_].bounds.y = invPos.y + invSpacing.y + 2;
+		invSpacing.x += 18;
+		if (invSlot_ == 3) invSpacing = { 0,18 };
+	}
+
+	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
 	iPoint invSpacing = { 0,0 };
 	int slotCounter = 1;
 	while (itemInvSlot_ != NULL)
@@ -210,7 +235,7 @@ bool Inventory::Update(float dt)
 		if (slotCounter == 4) invSpacing = { 0,18 };
 		slotCounter++;
 		itemInvSlot_ = itemInvSlot_->next;
-	}
+	}*/
 
 	HandleSlotState();
 
@@ -388,7 +413,29 @@ void Inventory::Draw()
 	SDL_Rect invRect = { 0,0,74,38 };
 	app->render->DrawTexture(invTex, invPos.x, invPos.y, &invRect);
 
-	ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x, slotList[invSlot_].bounds.y, &slotRect);
+		switch (slotList[invSlot_].state)
+		{
+		case SlotState::UNSELECTED:
+			break;
+		case SlotState::FOCUSED:
+			app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x - 1, slotList[invSlot_].bounds.y - 1, &slotRectFocus);
+			break;
+		case SlotState::SELECTED:
+			break;
+		default:
+			break;
+		}
+
+		if (slotList->itemId != 0)
+		{
+			app->render->DrawTexture(itemTexture, slotList[invSlot_].bounds.x, slotList[invSlot_].bounds.y, &slotList[invSlot_].itemTextureBounds);
+		}
+	}
+
+	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
 	while (itemInvSlot_ != NULL)
 	{
 		app->render->DrawTexture(slotText, itemInvSlot_->data->bounds.x, itemInvSlot_->data->bounds.y, &slotRect);
@@ -405,7 +452,7 @@ void Inventory::Draw()
 			break;
 		}
 		itemInvSlot_ = itemInvSlot_->next;
-	}
+	}*/
 
 	//// Big rectangle in the background
 	//app->render->DrawRectangle({ 0, 0, 1280, 720 }, 0, 0, 0, 150, true, false);
@@ -545,7 +592,7 @@ void Inventory::Draw()
 	////if (displayEquipmentMenu && state != InventoryState::STATS) DisplayMenuEquipment(showColliders);
 }
 
-bool Inventory::UnLoad()
+bool Inventory::CleanUp()
 {
 	//RELEASE(btnEquipment);
 	//RELEASE(btnItems);
@@ -560,8 +607,14 @@ bool Inventory::UnLoad()
 	//RELEASE(btnPrev);
 
 	//RELEASE(easing);
+	app->tex->Unload(invTex);
+	app->tex->Unload(slotText);
 
-	//app->tex->UnLoad(atlasTexture);
+	/*for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		delete(slotList);
+	}*/
+	
 	////RELEASE(atlasTexture);
 	//app->tex->UnLoad(guiTex);
 
@@ -939,6 +992,29 @@ void Inventory::UpdatingButtons(Input* input)
 
 void Inventory::AddItem(Item *it)
 {
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		if (slotList[invSlot_].itemId == 0)
+		{
+			slotList[invSlot_].itemId = it->itemid;
+			slotList[invSlot_].itemTextureBounds = it->itemTextSection;
+			slotList[invSlot_].item = it;
+			break;
+		}
+	}
+
+	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
+
+	for (size_t invSlot_ = 1; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		if (itemInvSlot_->data->itemId == 0)
+		{
+			itemInvSlot_->data->itemId = it->itemid;
+			itemInvSlot_->data->itemTextureBounds = it->itemTextSection;
+			itemInvSlot_->data->item = it;
+			slotlist.
+		}
+	}*/
 	//switch ((*it).objectType)
 	//{
 	//case ObjectType::ARMOR:
@@ -1250,7 +1326,19 @@ void Inventory::DrawObjects(InventorySlot objects[], Font *font, bool showCollid
 
 void Inventory::HandleSlotState()
 {
-	ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		if (IsMouseInside(slotList[invSlot_].bounds))
+		{
+			slotList[invSlot_].state = SlotState::FOCUSED;
+		}
+		else
+		{
+			slotList[invSlot_].state = SlotState::UNSELECTED;
+		}
+	}
+
+	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
 
 	while (itemInvSlot_ != NULL)
 	{
@@ -1263,7 +1351,7 @@ void Inventory::HandleSlotState()
 			itemInvSlot_->data->state = SlotState::UNSELECTED;
 		}
 		itemInvSlot_ = itemInvSlot_->next;
-	}
+	}*/
 
 }
 
@@ -1355,7 +1443,7 @@ void Inventory::UseObject(ItemType itemType)
 int Inventory::ObjectQuantity(ItemType itemType)
 {
 	int counter = 0;
-	for (int i = 0; i < MAX_INVENTORY_SLOTS; ++i)
+	/*for (int i = 0; i < MAX_INVENTORY_SLOTS; ++i)
 	{
 		if (slots[i].item != nullptr && slots[i].item->itemType == itemType)
 		{
@@ -1365,7 +1453,7 @@ int Inventory::ObjectQuantity(ItemType itemType)
 		{
 			++counter;
 		}
-	}
+	}*/
 	return counter;
 }
 
