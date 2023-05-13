@@ -199,8 +199,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				break;
 			}
 			break;
-		case Collider::Type::ITEM:
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
 		default:
 			break;
 		}
@@ -233,8 +231,6 @@ void Player::EndCollision(Collider* c1, Collider* c2)
 			cheastRange = false;
 			break;
 		case Collider::Type::CHANGESCENE:
-			break;
-		case Collider::Type::ITEM:
 			break;
 		default:
 			break;

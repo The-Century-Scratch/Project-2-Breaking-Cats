@@ -40,7 +40,7 @@
 
 //#include "CharacterManager.h"
 //#include "PauseMenu.h"
-//#include "Inventory.h"
+#include "Inventory.h"
 //#include "QuestMenu.h"
 //#include "Shop.h"
 
@@ -232,6 +232,7 @@ bool SceneGameplay::Load()
 		break;
 	}
 
+	app->inventory->Enable();
 
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
 	//guiTex = app->tex->Load("Textures/UI/gui_gameplay_textures.png");
@@ -835,6 +836,13 @@ bool SceneGameplay::UnLoad()
 	bool ret = true;
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
+
+	eastl::list<Item*>::iterator it = items.begin();
+	for (; it != items.end(); ++it)
+	{
+		(*it)->CleanUp();
+	}
+
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -1988,4 +1996,16 @@ void SceneGameplay::DrawDebugVariable()
 	app->render->DrawText(std::to_string(currentPlayer->position.x).c_str(), app->debug->debugX + 110, app->debug->debugY, 50, 20, app->debug->debugColor);
 	app->render->DrawText("Player Y  ", app->debug->debugX, app->debug->debugY + 30, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(currentPlayer->position.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 30, 50, 20, app->debug->debugColor);
+
+	app->render->DrawText("Camara X  ", app->debug->debugX, app->debug->debugY + 80, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->render->camera.x).c_str(), app->debug->debugX + 110, app->debug->debugY + 80, 50, 20, app->debug->debugColor);
+	app->render->DrawText("Camara Y  ", app->debug->debugX, app->debug->debugY + 110, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->render->camera.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 110, 50, 20, app->debug->debugColor);
+
+	int MouseX_, MouseY_;
+	app->input->GetMousePosition(MouseX_, MouseY_);
+	app->render->DrawText("Mouse X  ", app->debug->debugX, app->debug->debugY + 160, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
+	app->render->DrawText("Mouse Y  ", app->debug->debugX, app->debug->debugY + 190, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
 }
