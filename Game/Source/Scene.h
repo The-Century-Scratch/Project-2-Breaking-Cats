@@ -11,7 +11,6 @@ enum class SceneType
 	MENU,
 	TITLE,
 	GAMEPLAY,
-	BATTLE,
 	ENDING
 };
 
