@@ -42,11 +42,13 @@
 		<music path="Assets/Audio/Music/1_Astrub.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
-		<!--<player x="33" y="3" texturepath="Assets/Textures/NPCs.png"/>-->
 		<npc scene="0" x="480" y="160" texturepath="Assets/Textures/NPCs.png" id="1" type="0"/>
 		<npc scene="1" x="86" y="178" texturepath="Assets/Textures/NPCs.png" id="2" type="1"/>
 		<npc scene="2" x="72" y="69" texturepath="Assets/Textures/NPCs.png" id="3" type="2"/>
 		<npc scene="3" x="96" y="112" texturepath="Assets/Textures/NPCs.png" id="4" type="1"/>
+		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>
+		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
+		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
     <item>
       <texturepath texturepath="Assets/Textures/TestItem.png"/>
       <firePaws scene="0" x="384" y="48" id="1"/>

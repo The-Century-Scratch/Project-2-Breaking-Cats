@@ -5,6 +5,9 @@
 #include "Point.h"
 #include "Player.h"
 #include "NPC.h"
+#include "MovableObject.h"
+#include "TriggerableObject.h"
+#include "StaticObject.h"
 #include "List.h"
 //#include "ParticlesManager.h"
 
@@ -117,7 +120,9 @@ private:
 	void SetCameraMovement(int target_x, int target_y, float dt);
 	void DrawDebugVariable();
 
-
+	void LoadMovableObjects();
+	void LoadTriggerableObjects();
+	void LoadStaticObject();
 	void LoadNpc();
 	void LoadItems(pugi::xml_node& n);
 
@@ -126,6 +131,9 @@ private:
 private:
 	Player* currentPlayer;
 	List<NPC*> npcs;
+	List<MovableObject*> movableObjectList;
+	List<TriggerableObject*> triggerableObjectList;
+	List<StaticObject*> staticObjectList;
 
 	DialogueManager* dialogueManager;
 	SDL_Texture* goldTexture;

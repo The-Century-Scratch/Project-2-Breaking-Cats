@@ -30,6 +30,8 @@
 //#include "KnightChest.h"
 
 #include "Npc.h"
+#include "MovableObject.h"
+#include "TriggerableObject.h"
 #include "Map.h"
 //#include "DialogueManager.h"
 
@@ -190,16 +192,41 @@ bool SceneGameplay::Load()
 		}
 	}
 
-	Item* item = nullptr;
-	pugi::xml_node itemNode = config.child("item");
+	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
 	{
-		if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
 		{
-			item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
-			items.push_back(item);
-			item->Start();
+			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT);
+			movableObject->parameters = movableObjectNode;
+			movableObjectList.Add(movableObject);
+			movableObject->Start();
 		}
 	}
+
+	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
+	{
+		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT);
+			triggerableObject->parameters = triggerableObjectNode;
+			triggerableObjectList.Add(triggerableObject);
+			triggerableObject->Start();
+		}
+	}
+
+	//Item* item = nullptr;
+	//pugi::xml_node itemNode = config.child("item");
+	//{
+	//	if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
+	//	{
+	//		item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+	//		items.push_back(item);
+	//		item->Start();
+	//	}
+	//}
+
+
+
 
 	switch (app->sceneManager->currentScene)
 	{
@@ -442,7 +469,6 @@ bool SceneGameplay::Update(float dt)
 			if (app->sceneManager->store) {
 				ChangeMap(INIT_POS_STORE, IDSCENESTORE);
 				app->sceneManager->store = false;
-
 			}
 			else if (app->sceneManager->tabern) {
 				ChangeMap(INIT_POS_TABERN, IDSCENETABERN);
@@ -1808,6 +1834,84 @@ void SceneGameplay::ChangeBlockBounds(int bounds_x, int bounds_y)
 	//}
 }
 
+void SceneGameplay::LoadStaticObject()
+{
+	ListItem<StaticObject*>* staticObjectItem = staticObjectList.start;
+	while (staticObjectItem != NULL)
+	{
+		staticObjectItem->data->toDelete = true;
+		staticObjectItem = staticObjectItem->next;
+	}
+	staticObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node staticObjectNode = config.child("staticObject"); staticObjectNode; staticObjectNode = staticObjectNode.next_sibling("staticObject"))
+	{
+		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			if (app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved)
+			{
+				StaticObject* staticObject = (StaticObject*)app->entityManager->CreateEntity(EntityType::STATICOBJECT);
+				staticObject->parameters = staticObjectNode;
+				staticObjectList.Add(staticObject);
+				staticObject->Start();
+			}
+		}
+	}
+}
+
+void SceneGameplay::LoadMovableObjects()
+{
+	ListItem<MovableObject*>* movableObjectItem = movableObjectList.start;
+	while (movableObjectItem != NULL)
+	{
+		movableObjectItem->data->toDelete = true;
+		movableObjectItem = movableObjectItem->next;
+	}
+	movableObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
+	{
+		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT, app->sceneManager->puzzle1solved);
+			movableObject->parameters = movableObjectNode;
+			movableObjectList.Add(movableObject);
+			movableObject->Start();
+		}
+	}
+}
+
+void SceneGameplay::LoadTriggerableObjects()
+{
+	ListItem<TriggerableObject*>* triggerableObjectItem = triggerableObjectList.start;
+	while (triggerableObjectItem != NULL)
+	{
+		triggerableObjectItem->data->toDelete = true;
+		triggerableObjectItem = triggerableObjectItem->next;
+	}
+	triggerableObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
+	{
+		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT, app->sceneManager->puzzle2solved);
+			triggerableObject->parameters = triggerableObjectNode;
+			triggerableObjectList.Add(triggerableObject);
+			triggerableObject->Start();
+		}
+	}
+}
+
 void SceneGameplay::LoadNpc()
 {
 	ListItem<NPC*>* npcItem = npcs.start;
@@ -1816,6 +1920,7 @@ void SceneGameplay::LoadNpc()
 		npcItem->data->toDelete = true;
 		npcItem = npcItem->next;
 	}
+	npcs.Clear();
 
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
@@ -1971,6 +2076,12 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 
 	//load again new npcs
 	LoadNpc();
+	//load again new movableobjects
+	LoadMovableObjects();
+	//load again new triggerableobjects
+	LoadTriggerableObjects();
+	//load again new staticobjects
+	LoadStaticObject();
 
 	//set camera according new scene
 	switch (app->sceneManager->currentScene)
