@@ -47,6 +47,12 @@
     <ClCompile Include="Source\Log.cpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
     <ClCompile Include="Source\FirePaws.cpp" />
+    <ClCompile Include="Source\Straw.cpp" />
+    <ClCompile Include="Source\Unit.cpp" />
+    <ClCompile Include="Source\Catska.cpp" />
+    <ClCompile Include="Source\Gats.cpp" />
+    <ClCompile Include="Source\Guardian.cpp" />
+    <ClCompile Include="Source\LongRange.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -106,6 +112,12 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Source\FirePaws.h" />
+    <ClInclude Include="Source\Straw.h" />
+    <ClInclude Include="Source\Unit.h" />
+    <ClInclude Include="Source\Catska.h" />
+    <ClInclude Include="Source\Gats.h" />
+    <ClInclude Include="Source\Guardian.h" />
+    <ClInclude Include="Source\LongRange.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />

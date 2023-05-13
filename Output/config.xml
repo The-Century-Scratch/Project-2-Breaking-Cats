@@ -62,6 +62,23 @@
 			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
+
+	<scenebattle>
+		<gats x="32" y="64" velocity="5" texturepath="Assets/Textures/GatsIdle.png"/>
+		<catska x="64" y="32" velocity="4" texturepath="Assets/Textures/Catska.png"/>
+		<guardian x="64" y="96" velocity="4" texturepath="Assets/Textures/TankEnemy.png"/>
+		<longrange x="96" y="112" velocity="4" texturepath="Assets/Textures/LargeRangeEnemy.png"/>
+		<straw x="112" y="112" velocity="4" texturepath="Assets/Textures/StrawDall.png"/>
+
+		<map>
+			<mapfolder path="Assets/Maps/"/>
+
+			<mapfile path="Assets/Maps/combat.tmx"/>
+			<!--this is 0 in the list of strings of maps-->
+
+		</map>
+	</scenebattle>
+	
 	<questmanager>
 		<activequests>
 			<quest id="1"></quest>

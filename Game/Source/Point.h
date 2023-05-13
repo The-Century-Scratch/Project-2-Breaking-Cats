@@ -82,6 +82,16 @@ public:
 		return (x != v.x || y != v.y);
 	}
 
+	Point operator *(TYPE i)
+	{
+		Point r;
+
+		r.x = x * i;
+		r.y = y * i;
+
+		return (r);
+	}
+
 	// Utils ------------------------------------------------
 	bool IsZero() const
 	{
