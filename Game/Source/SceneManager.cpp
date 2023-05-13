@@ -11,7 +11,9 @@
 #include "SceneTitle.h"
 #include "SceneGameplay.h"
 #include "SceneEnding.h"
+#include "SceneBattle.h"
 #include "EntityManager.h"
+
 
 #include "TransitionsManager.h"
 #include <memory>
@@ -96,6 +98,7 @@ bool SceneManager::Update(float dt)
 			if (app->audio->FadeOutCompleted() == false)
 			{
 				//TransitionType tmpEnteringType = current->transitionType;
+				LOG("IOJIOUHUYGYTFTYGHJBNHJNKMKM;KLLOKMKUHNJGBYHTFTYFYFTYRDERCGWSSRFHGVHJBJHGVHYGJBJNHJNKJKNHKMJKMJKNJHBGHBYHJNJHNHJBJHBJH");
 				current->UnLoad();
 				next->Load();
 				if (current->win == true) app->LoadGameRequest();
@@ -127,6 +130,7 @@ bool SceneManager::Update(float dt)
 		case SceneType::LOGO: next = new SceneLogo(); break;
 		case SceneType::TITLE: next = new SceneTitle(); break;
 		case SceneType::GAMEPLAY: next = new SceneGameplay(); break;
+		case SceneType::BATTLE: next = new SceneBattle(); break;
 		case SceneType::ENDING: next = new SceneEnding(current->win); break;
 		default: break;
 		}

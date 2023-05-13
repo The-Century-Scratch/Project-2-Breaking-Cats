@@ -51,6 +51,12 @@
     <ClCompile Include="Source\TriggerableObject.cpp" />
     <ClCompile Include="Source\StaticObject.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\Straw.cpp" />
+    <ClCompile Include="Source\Unit.cpp" />
+    <ClCompile Include="Source\Catska.cpp" />
+    <ClCompile Include="Source\Gats.cpp" />
+    <ClCompile Include="Source\Guardian.cpp" />
+    <ClCompile Include="Source\LongRange.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -114,6 +120,12 @@
     <ClInclude Include="Source\TriggerableObject.h" />
     <ClInclude Include="Source\StaticObject.h" />
     <ClInclude Include="Source\Inventory.h" />
+    <ClInclude Include="Source\Straw.h" />
+    <ClInclude Include="Source\Unit.h" />
+    <ClInclude Include="Source\Catska.h" />
+    <ClInclude Include="Source\Gats.h" />
+    <ClInclude Include="Source\Guardian.h" />
+    <ClInclude Include="Source\LongRange.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />

@@ -3,9 +3,15 @@
 //#include"ParticlesManager.h"
 #include "Textures.h"
 //#include"AssetsManager.h"
+#include "SceneManager.h"
 #include "SceneBattle.h"
 #include "SceneGameplay.h"
 #include "Map.h"
+#include "Catska.h"
+#include "Gats.h"
+#include "Guardian.h"
+#include "LongRange.h"
+#include "Straw.h"
 //#include "BattleMenu.h"
 #include "Player.h"
 //#include "Enemy.h"
@@ -15,9 +21,12 @@
 #include "Audio.h"
 //#include "Inventory.h"
 #include <time.h>
+#include "ModuleCollisions.h"
+#include "Debug.h"
 
-SceneBattle::SceneBattle(eastl::list<Player*> list, Enemy* enemy, SceneGameplay* s, Inventory* inventory) : playerList(list), scene(s)
+SceneBattle::SceneBattle()
 {
+	name.Create("scenebattle");
 	//battleMenu = new BattleMenu(this, inventory);
 	//map = new Map();
 	//
@@ -35,6 +44,100 @@ SceneBattle::~SceneBattle()
 
 bool SceneBattle::Load()
 {
+
+	LOG("Loading Scene Battle");
+	bool ret = true;
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+
+	app->map->Load(name.GetString());
+
+
+
+	for (pugi::xml_node nodeUnit = config.child("gats");
+		nodeUnit; nodeUnit = nodeUnit.next_sibling("gats"))
+	{
+
+		std::unique_ptr<Unit> gats;
+		gats = std::make_unique<Gats>();
+		gats.get()->velocity = nodeUnit.attribute("velocity").as_int();
+		gats.get()->parameters = nodeUnit;
+		gats.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
+		units.push_back(std::move(gats));
+	}
+	for (pugi::xml_node nodeUnit = config.child("catska");
+		nodeUnit; nodeUnit = nodeUnit.next_sibling("catska"))
+	{
+
+		std::unique_ptr<Unit> catska;
+		catska = std::make_unique<Catska>();
+		catska.get()->velocity = nodeUnit.attribute("velocity").as_int();
+		catska.get()->parameters = nodeUnit;
+
+		catska.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
+		units.push_back(std::move(catska));
+	}
+	for (pugi::xml_node nodeUnit = config.child("guardian");
+		nodeUnit; nodeUnit = nodeUnit.next_sibling("guardian"))
+	{
+
+		std::unique_ptr<Unit> unit;
+		unit = std::make_unique<Guardian>();
+		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
+		unit.get()->parameters = nodeUnit;
+
+		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
+		units.push_back(std::move(unit));
+	}
+	for (pugi::xml_node nodeUnit = config.child("longrange");
+		nodeUnit; nodeUnit = nodeUnit.next_sibling("longrange"))
+	{
+
+		std::unique_ptr<Unit> unit;
+		unit = std::make_unique<LongRange>();
+		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
+		unit.get()->parameters = nodeUnit;
+
+		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
+		units.push_back(std::move(unit));
+	}
+	for (pugi::xml_node nodeUnit = config.child("straw");
+		nodeUnit; nodeUnit = nodeUnit.next_sibling("straw"))
+	{
+
+		std::unique_ptr<Unit> unit;
+		unit = std::make_unique<Straw>();
+		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
+		unit.get()->parameters = nodeUnit;
+
+		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
+		units.push_back(std::move(unit));
+	}
+
+
+	for (int i = 0; i < units.size(); ++i)
+	{
+		for (int j = 0; j < units.size() - 1 - i; ++j)
+		{
+
+			if (units[j].get()->velocity < units[j + 1].get()->velocity)
+			{
+				units[j].swap(units[j + 1]);
+			}
+		}
+	}
+
+
+
+
+	//unit.parameters = config.child("gats");
+	//
+	//unit.Create({64,64});
+
+
+
 	//particles = new ParticlesManager();
 	//if (scene->isDungeon == true)
 	//{
@@ -111,6 +214,32 @@ bool SceneBattle::Load()
 bool SceneBattle::Update(float dt)
 {
 	bool ret = true;
+	//LOG("Scene battle is updating");
+
+	using UA = Unit::PlayerAction::Action;
+
+
+
+	//for (auto& i : units)
+	//{
+	//	
+	//	auto unitAction = i->HandleInput();
+	//
+	//	if ((unitAction.action & UA::MOVE) == UA::MOVE)
+	//	{
+	//
+	//		//if (map.IsWalkable(unitAction.destinationTile))
+	//		if (app->moduleCollisions->isWalkable(unitAction.destinationTile))
+	//		{
+	//
+	//			{
+	//				i->StartAction(unitAction);
+	//			}
+	//		}
+	//	}
+	//	i->Update();
+	//}
+
 	//particles->PreUpdate();
 	//eastl::list<Player*>::iterator item = playerList.begin();
 	//for (; item != playerList.end(); ++item)
@@ -128,11 +257,205 @@ bool SceneBattle::Update(float dt)
 	//particles->Update(dt);
 	//if (battleMenu->Update(dt) == false) ret = false;
 
+	bool noUnitHasActed = true;
+
+	for (auto& i : units)
+	{
+
+		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
+		{
+			noUnitHasActed = false;
+
+			auto unitAction = i->HandleInput();
+
+			if ((unitAction.action) == UA::MOVE)
+			{
+
+				if (app->moduleCollisions->isWalkable(unitAction.destinationTile))
+				{
+					i->StartAction(unitAction);
+				}
+			}
+			// TODO: make this a switch
+			if ((unitAction.action) == UA::ATTACK)
+			{
+				for (auto& unit : units)
+				{
+					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.DistanceTo(unitPos) < 18)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+
+						}
+					}
+				}
+
+			}
+			if ((unitAction.action) == UA::ATTACK_LONG_RANGE)
+			{
+				for (auto& unit : units)
+				{
+					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+
+						}
+					}
+				}
+
+			}
+			if ((unitAction.action) == UA::ATTACK_TO_PLAYER)
+			{
+				for (auto& unit : units)
+				{
+					if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.DistanceTo(unitPos) < 18)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+
+			}
+			if ((unitAction.action) == UA::ATTACK_TO_PLAYER_LONG_RANGE)
+			{
+				for (auto& unit : units)
+				{
+					if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
+						{
+							unit->DealDamage(10);
+							i->StartAction(unitAction);
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+
+			}
+
+
+
+		}
+		i->Update();
+
+		if (i->GetHasFinishedTurn() && i->GetIsMyTurn())
+		{
+			i->SetIsMyTurn(false);
+			numberFinished++; // that is a variable    // all of this check first if this variable is bigger thatn the allowed number for the vector
+
+			if (numberFinished < units.size())
+			{
+				units[numberFinished]->SetIsMyTurn(true);
+			}
+
+
+			//noUnitHasActed = false;
+		}
+		if (!i->GetHealthPoints() > 0)
+		{
+			i->SetHasFinishedTurn(true);
+
+		}
+		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() <= 0)
+		{
+			i->SetHasFinishedTurn(true);
+		}
+
+	}
+
+
+	if (noUnitHasActed)
+	{
+		for (auto& i : units)
+		{
+			if (i->GetHealthPoints() > 0)
+			{
+				i->SetIsMyTurn(true);
+				break;
+			}
+
+		}
+
+		for (auto& i : units)
+		{
+			i->SetHasFinishedTurn(false);
+		}
+		numberFinished = 0;
+
+		bool enemiesAlive = false;
+		for (auto& i : units)
+		{
+			if (!i->GetIsAlly() && i->GetHealthPoints() > 0)
+			{
+				enemiesAlive = true;
+			}
+
+		}
+		if (!enemiesAlive)
+		{
+			app->map->ClearFiles();
+			app->map->CleanUp();
+			
+			app->map->Disable();
+			app->sceneManager->currentScene = 0;
+			//app->sceneManager->changeMap = true;
+			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
+			
+			
+			
+		}
+
+	}
+
+
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		app->moduleCollisions->debug = !app->moduleCollisions->debug;
+		if (app->moduleCollisions->debug)
+		{
+			//CODE OF DEBUG MODE
+			LOG("it does enter this scope");
+		}
+	}
+
 	return ret;
 }
 
-void SceneBattle::Draw(bool colliders)
+void SceneBattle::Draw()
 {
+	app->map->Draw();
+
+	for (auto& i : units)
+	{
+		if (i->GetHealthPoints() > 0)
+		{
+			i->Draw();
+		}
+
+	}
+
+	//LOG("Scene battle is drawing");
+
 	////app->render->DrawTexture(backgroundTexture,0,0);
 	//map->Draw(colliders,nullptr, nullptr);
 
