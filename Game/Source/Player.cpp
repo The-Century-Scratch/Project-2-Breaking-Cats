@@ -217,7 +217,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				{
 				case 5:
 					app->sceneManager->leftAfterLabrinth = true;
-					app->sceneManager->puzzle1solved = true;
 					break;
 				case 6:
 					app->sceneManager->village = true;
@@ -232,7 +231,6 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				{
 				case 0:
 					app->sceneManager->nordCity = true;
-					app->sceneManager->puzzle2solved = true;
 					break;
 				case 4:
 					app->sceneManager->rightLabrinth = true;
@@ -242,10 +240,8 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				}
 			}
 			break;
-		case Collider::Type::MOVABLEOBJECT:
-			break;
-		case Collider::Type::TRIGGERABLEOBJECT:
-			break;
+		//case Collider::Type::ITEM:
+		//	app->moduleCollisions->collision_solver(c1->listener, c2->rect);
 		default:
 			break;
 		}
@@ -279,6 +275,8 @@ void Player::EndCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHANGESCENE:
 			break;
+		//case Collider::Type::ITEM:
+		//	break;
 		default:
 			break;
 		}

@@ -33,7 +33,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Entity* CreateEntity(EntityType type, bool solved = false);
+	Entity* CreateEntity(EntityType type);
 
 	void DestroyEntity(Entity* entity);
 

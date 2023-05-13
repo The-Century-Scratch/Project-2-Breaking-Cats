@@ -1,9 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "NPC.h"
-#include "MovableObject.h"
-#include "TriggerableObject.h"
-#include "StaticObject.h"
 #include "App.h"
 #include "Textures.h"
 #include "SceneManager.h"
@@ -73,7 +70,7 @@ bool EntityManager::CleanUp()
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type, bool solved)
+Entity* EntityManager::CreateEntity(EntityType type)
 {
 	Entity* entity = nullptr; 
 
@@ -90,17 +87,6 @@ Entity* EntityManager::CreateEntity(EntityType type, bool solved)
 		entity = new NPC();
 		break;
 
-	case EntityType::MOVABLEOBJECT:
-		entity = new MovableObject(solved);
-		break;
-
-	case EntityType::TRIGGERABLEOBJECT:
-		entity = new TriggerableObject(solved);
-		break;
-
-	case EntityType::STATICOBJECT:
-		entity = new StaticObject();
-		break;
 	default: break;
 	}
 

@@ -48,9 +48,6 @@ public:
 	//variable in after labrinth
 	bool rightLabrinth = false, nordCity = false;
 
-	//variable to see what puzzles has ben solved
-	bool puzzle1solved = false; bool puzzle2solved = false;
-
 	bool changeMap = false;
 
 	Scene* current;

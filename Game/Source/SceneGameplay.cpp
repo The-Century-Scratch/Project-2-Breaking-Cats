@@ -30,8 +30,6 @@
 //#include "KnightChest.h"
 
 #include "Npc.h"
-#include "MovableObject.h"
-#include "TriggerableObject.h"
 #include "Map.h"
 //#include "DialogueManager.h"
 
@@ -42,7 +40,7 @@
 
 //#include "CharacterManager.h"
 //#include "PauseMenu.h"
-#include "Inventory.h"
+//#include "Inventory.h"
 //#include "QuestMenu.h"
 //#include "Shop.h"
 
@@ -194,51 +192,14 @@ bool SceneGameplay::Load()
 
 	Item* item = nullptr;
 	pugi::xml_node itemNode = config.child("item");
-	
-	item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
-	items.Add(item);
-	item->Start();
-
-
-	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
 	{
-		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
 		{
-			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT);
-			movableObject->parameters = movableObjectNode;
-			movableObjectList.Add(movableObject);
-			movableObject->Start();
+			item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+			items.push_back(item);
+			item->Start();
 		}
 	}
-
-
-
-
-
-	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
-	{
-		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
-		{
-			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT);
-			triggerableObject->parameters = triggerableObjectNode;
-			triggerableObjectList.Add(triggerableObject);
-			triggerableObject->Start();
-		}
-	}
-
-	//Item* item = nullptr;
-	//pugi::xml_node itemNode = config.child("item");
-	//{
-	//	if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
-	//	{
-	//		item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
-	//		items.push_back(item);
-	//		item->Start();
-	//	}
-	//}
-
-
-
 
 	switch (app->sceneManager->currentScene)
 	{
@@ -283,7 +244,6 @@ bool SceneGameplay::Load()
 		break;
 	}
 
-	app->inventory->Enable();
 
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
 	//guiTex = app->tex->Load("Textures/UI/gui_gameplay_textures.png");
@@ -415,13 +375,7 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
-	{
-		ListItem<Item*>* it = items.start;
-		it->data->equiped = true;
-		app->inventory->AddItem(it->data);
-
-	}
+	
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -488,6 +442,7 @@ bool SceneGameplay::Update(float dt)
 			if (app->sceneManager->store) {
 				ChangeMap(INIT_POS_STORE, IDSCENESTORE);
 				app->sceneManager->store = false;
+
 			}
 			else if (app->sceneManager->tabern) {
 				ChangeMap(INIT_POS_TABERN, IDSCENETABERN);
@@ -811,10 +766,10 @@ void SceneGameplay::Draw()
 {
 	app->map->Draw();
 
-	ListItem<Item*>* it = items.start;
-	for (; it != items.end; ++it)
+	eastl::list<Item*>::iterator it = items.begin();
+	for (; it != items.end(); ++it)
 	{
-		it->data->Draw();
+		(*it)->Draw();
 	}
 
 	if (app->debug->drawVariables)
@@ -936,13 +891,6 @@ bool SceneGameplay::UnLoad()
 	bool ret = true;
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
-
-	ListItem<Item*>* it = items.start;
-	for (; it != items.end; ++it)
-	{
-		it->data->CleanUp();
-	}
-
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -1860,84 +1808,6 @@ void SceneGameplay::ChangeBlockBounds(int bounds_x, int bounds_y)
 	//}
 }
 
-void SceneGameplay::LoadStaticObject()
-{
-	ListItem<StaticObject*>* staticObjectItem = staticObjectList.start;
-	while (staticObjectItem != NULL)
-	{
-		staticObjectItem->data->toDelete = true;
-		staticObjectItem = staticObjectItem->next;
-	}
-	staticObjectList.Clear();
-
-	pugi::xml_node configNode = app->LoadConfigFileToVar();
-	pugi::xml_node config = configNode.child(name.GetString());
-
-	for (pugi::xml_node staticObjectNode = config.child("staticObject"); staticObjectNode; staticObjectNode = staticObjectNode.next_sibling("staticObject"))
-	{
-		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
-		{
-			if (app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved)
-			{
-				StaticObject* staticObject = (StaticObject*)app->entityManager->CreateEntity(EntityType::STATICOBJECT);
-				staticObject->parameters = staticObjectNode;
-				staticObjectList.Add(staticObject);
-				staticObject->Start();
-			}
-		}
-	}
-}
-
-void SceneGameplay::LoadMovableObjects()
-{
-	ListItem<MovableObject*>* movableObjectItem = movableObjectList.start;
-	while (movableObjectItem != NULL)
-	{
-		movableObjectItem->data->toDelete = true;
-		movableObjectItem = movableObjectItem->next;
-	}
-	movableObjectList.Clear();
-
-	pugi::xml_node configNode = app->LoadConfigFileToVar();
-	pugi::xml_node config = configNode.child(name.GetString());
-
-	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
-	{
-		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
-		{
-			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT, app->sceneManager->puzzle1solved);
-			movableObject->parameters = movableObjectNode;
-			movableObjectList.Add(movableObject);
-			movableObject->Start();
-		}
-	}
-}
-
-void SceneGameplay::LoadTriggerableObjects()
-{
-	ListItem<TriggerableObject*>* triggerableObjectItem = triggerableObjectList.start;
-	while (triggerableObjectItem != NULL)
-	{
-		triggerableObjectItem->data->toDelete = true;
-		triggerableObjectItem = triggerableObjectItem->next;
-	}
-	triggerableObjectList.Clear();
-
-	pugi::xml_node configNode = app->LoadConfigFileToVar();
-	pugi::xml_node config = configNode.child(name.GetString());
-
-	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
-	{
-		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
-		{
-			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT, app->sceneManager->puzzle2solved);
-			triggerableObject->parameters = triggerableObjectNode;
-			triggerableObjectList.Add(triggerableObject);
-			triggerableObject->Start();
-		}
-	}
-}
-
 void SceneGameplay::LoadNpc()
 {
 	ListItem<NPC*>* npcItem = npcs.start;
@@ -1946,7 +1816,6 @@ void SceneGameplay::LoadNpc()
 		npcItem->data->toDelete = true;
 		npcItem = npcItem->next;
 	}
-	npcs.Clear();
 
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
@@ -2102,12 +1971,6 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 
 	//load again new npcs
 	LoadNpc();
-	//load again new movableobjects
-	LoadMovableObjects();
-	//load again new triggerableobjects
-	LoadTriggerableObjects();
-	//load again new staticobjects
-	LoadStaticObject();
 
 	//set camera according new scene
 	switch (app->sceneManager->currentScene)
@@ -2181,16 +2044,4 @@ void SceneGameplay::DrawDebugVariable()
 	app->render->DrawText(std::to_string(currentPlayer->position.x).c_str(), app->debug->debugX + 110, app->debug->debugY, 50, 20, app->debug->debugColor);
 	app->render->DrawText("Player Y  ", app->debug->debugX, app->debug->debugY + 30, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(currentPlayer->position.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 30, 50, 20, app->debug->debugColor);
-
-	app->render->DrawText("Camara X  ", app->debug->debugX, app->debug->debugY + 80, 100, 20, app->debug->debugColor);
-	app->render->DrawText(std::to_string(app->render->camera.x).c_str(), app->debug->debugX + 110, app->debug->debugY + 80, 50, 20, app->debug->debugColor);
-	app->render->DrawText("Camara Y  ", app->debug->debugX, app->debug->debugY + 110, 100, 20, app->debug->debugColor);
-	app->render->DrawText(std::to_string(app->render->camera.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 110, 50, 20, app->debug->debugColor);
-
-	int MouseX_, MouseY_;
-	app->input->GetMousePosition(MouseX_, MouseY_);
-	app->render->DrawText("Mouse X  ", app->debug->debugX, app->debug->debugY + 160, 100, 20, app->debug->debugColor);
-	app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
-	app->render->DrawText("Mouse Y  ", app->debug->debugX, app->debug->debugY + 190, 100, 20, app->debug->debugColor);
-	app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
 }
