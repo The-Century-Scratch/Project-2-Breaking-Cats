@@ -47,6 +47,10 @@
     <ClCompile Include="Source\Log.cpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
     <ClCompile Include="Source\FirePaws.cpp" />
+    <ClCompile Include="Source\MovableObject.cpp" />
+    <ClCompile Include="Source\TriggerableObject.cpp" />
+    <ClCompile Include="Source\StaticObject.cpp" />
+    <ClCompile Include="Source\Inventory.cpp" />
     <ClCompile Include="Source\Straw.cpp" />
     <ClCompile Include="Source\Unit.cpp" />
     <ClCompile Include="Source\Catska.cpp" />
@@ -112,6 +116,10 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Source\FirePaws.h" />
+    <ClInclude Include="Source\MovableObject.h" />
+    <ClInclude Include="Source\TriggerableObject.h" />
+    <ClInclude Include="Source\StaticObject.h" />
+    <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\Straw.h" />
     <ClInclude Include="Source\Unit.h" />
     <ClInclude Include="Source\Catska.h" />
