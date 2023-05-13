@@ -3,6 +3,7 @@
 //#include"ParticlesManager.h"
 #include "Textures.h"
 //#include"AssetsManager.h"
+#include "SceneManager.h"
 #include "SceneBattle.h"
 #include "SceneGameplay.h"
 #include "Map.h"
@@ -411,7 +412,16 @@ bool SceneBattle::Update(float dt)
 		}
 		if (!enemiesAlive)
 		{
-			return 5;
+			app->map->ClearFiles();
+			app->map->CleanUp();
+			
+			app->map->Disable();
+			app->sceneManager->currentScene = 0;
+			//app->sceneManager->changeMap = true;
+			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
+			
+			
+			
 		}
 
 	}

@@ -98,6 +98,7 @@ bool SceneManager::Update(float dt)
 			if (app->audio->FadeOutCompleted() == false)
 			{
 				//TransitionType tmpEnteringType = current->transitionType;
+				LOG("IOJIOUHUYGYTFTYGHJBNHJNKMKM;KLLOKMKUHNJGBYHTFTYFYFTYRDERCGWSSRFHGVHJBJHGVHYGJBJNHJNKJKNHKMJKMJKNJHBGHBYHJNJHNHJBJHBJH");
 				current->UnLoad();
 				next->Load();
 				if (current->win == true) app->LoadGameRequest();
