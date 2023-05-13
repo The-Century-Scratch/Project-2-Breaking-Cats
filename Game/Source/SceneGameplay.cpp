@@ -192,6 +192,14 @@ bool SceneGameplay::Load()
 		}
 	}
 
+	Item* item = nullptr;
+	pugi::xml_node itemNode = config.child("item");
+	
+	item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+	items.Add(item);
+	item->Start();
+
+
 	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
 	{
 		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
