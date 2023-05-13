@@ -292,18 +292,6 @@ void ModuleCollisions::DebugDraw()
 	
 }
 
-bool ModuleCollisions::isWalkable(iPoint pos)
-{
-	for (auto& i : colliders)
-	{
-		//i->rect.x
-		if (i != nullptr && pos.x == i->rect.x && pos.y == i->rect.y)
-			return false;
-	}
-
-	return true;
-}
-
 // Called before quitting
 bool ModuleCollisions::CleanUp(bool mapColliderOnly)
 {

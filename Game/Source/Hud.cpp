@@ -289,12 +289,9 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 	case 2:
 		LOG("Button 2 click");
 		//app->fade->FadeToBlack((Module*)app->sceneIntro, (Module*)app->scene);
-		app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
 		app->hud->prevstate = app->hud->hudstate;
 		//app->hud->hudstate = hudSTATE::CLOSED;
 		//app->scene->checkpointReached = true;
-		app->sceneManager->currentScene = 0;
-		app->hud->hudstate = hudSTATE::CLOSED;
 		break;
 	case 3:
 		LOG("Button 3 click");

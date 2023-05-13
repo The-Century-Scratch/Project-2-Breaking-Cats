@@ -312,7 +312,6 @@ bool Map::Load(const char* scene)
     {
         LOG("String of Path saved: %s", mapFileName[i].GetString());
     }
-    
 
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName[app->sceneManager->currentScene].GetString());
@@ -383,11 +382,6 @@ bool Map::Load(const char* scene)
     mapLoaded = ret;
 
     return ret;
-}
-
-void Map::ClearFiles()
-{
-    mapFileName.Clear();
 }
 
 // Implement LoadMap to load the map properties

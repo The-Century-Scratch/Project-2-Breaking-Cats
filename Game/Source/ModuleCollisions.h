@@ -48,8 +48,6 @@ public:
 	// Simple debugging flag to draw all colliders
 	bool debug = true;
 
-	bool isWalkable(iPoint pos);
-
 private:
 	// All existing colliders in the scene
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };
