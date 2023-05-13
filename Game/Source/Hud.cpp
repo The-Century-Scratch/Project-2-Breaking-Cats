@@ -20,6 +20,14 @@
 Hud::Hud(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("Hud");
+
+	//Easings Initialized
+
+	easingTitle = new Easing(true, 0, -395, 525, 180);
+	easingTitleIn = new Easing(true, 0, 100, 30, 60);
+	easingTitleOut = new Easing(true, 0, 130, -30, 60);
+
+	easingTitleBtns = new Easing(true, 0, 200, 500, 60);
 }
 
 // Destructor
@@ -48,15 +56,16 @@ bool Hud::Start()
 	collectibles = app->tex->Load(config.child("collectibles").attribute("texturepath").as_string());
 	clickfx = app->audio->LoadFx(config.child("clickfx").attribute("path").as_string());
 	mousebyfx = app->audio->LoadFx(config.child("mousebyfx").attribute("path").as_string());
+	titleText = app->tex->Load(config.child("titletext").attribute("texturepath").as_string());
 
 	app->win->GetWindowSize(w,h);
 	scale = app->win->GetScale();
 	//title screen buttons
-	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Play",		{ (int)(w / 2 - 100) ,(int)(h / 2 - 120),197,46}, this);
-	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue",	{ (int)(w / 2 - 100) ,(int)(h / 2 - 60 ),197,46}, this);
-	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Options",	{ (int)(w / 2 - 100) ,(int)(h / 2 + 0  ),197,46}, this);
-	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Credits",	{ (int)(w / 2 - 100) ,(int)(h / 2 + 60 ),197,46}, this);
-	button5 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Exit",		{ (int)(w / 2 - 100) ,(int)(h / 2 + 120),197,46}, this);
+	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Play",		{ (int)(w / 2 - 100) ,(int)(h - 250 * 2),267,64}, this);
+	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue",	{ (int)(w / 2 - 100) ,(int)(h - 300 * 2),267,64}, this);
+	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Options",	{ (int)(w / 2 - 100) ,(int)(h - 350 * 2),267,64}, this);
+	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Credits",	{ (int)(w / 2 - 100) ,(int)(h - 400 * 2),267,64}, this);
+	button5 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Exit",		{ (int)(w / 2 - 100) ,(int)(h - 450 * 2),267,64}, this);
 	//pause game buttons
 	button6 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "",	{ (int)(w	 / 4	),(int)(h		/ 4 + 100),120,120 }, this);
 	button7 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "",	{ (int)(w * 3/ 4-120),(int)(h		/ 4 + 100),120,120 }, this);
@@ -64,18 +73,21 @@ bool Hud::Start()
 	button9 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "",	{ (int)(w * 3/ 4-120),(int)(h * 3	/ 4 - 120),120,120 }, this);
 	//option buttons
 	button10 = (GuiSlider*)app->guiManager->CreateGuiControl(	GuiControlType::SLIDER	, 10, ""			,{ (int)(w / 2 + 50),	(int)(h / 2 - 128	),47,47},	this, { (int)(w / 2 - 50),	(int)(h / 2 - 120),293,47 });
-	button11 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 11, "music volume",{ (int)(w / 2 - 300),	(int)(h / 2 - 120	),197,46},	this);
+	button11 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 11, "music volume",{ (int)(w / 2 - 300),	(int)(h / 2 - 120	),267,64},	this);
 	button12 = (GuiSlider*)app->guiManager->CreateGuiControl(	GuiControlType::SLIDER	, 12, ""			,{ (int)(w / 2 - 50),	(int)(h / 2 - 68	),47,47},	this, { (int)(w / 2 - 50),	(int)(h / 2 - 60),293,47 });
-	button13 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 13, "fx volume"	,{ (int)(w / 2 - 300),	(int)(h / 2 - 60	),197,46},	this);
-	button14 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 14, "fullscreen"	,{ (int)(w / 2 - 300),	(int)(h / 2			),197,46},	this);
+	button13 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 13, "fx volume"	,{ (int)(w / 2 - 300),	(int)(h / 2 - 60	),267,64},	this);
+	button14 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 14, "fullscreen"	,{ (int)(w / 2 - 300),	(int)(h / 2			),267,64},	this);
 	button15 = (GuiCheckBox*)app->guiManager->CreateGuiControl(	GuiControlType::CHECKBOX, 15, ""			,{ (int)(w / 2 - 50),	(int)(h / 2			), 46,47},	this);
-	button16 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 16, "vsync"		,{ (int)(w / 2 - 300),	(int)(h / 2 + 60	),197,46},	this);
+	button16 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 16, "vsync"		,{ (int)(w / 2 - 300),	(int)(h / 2 + 60	),267,64},	this);
 	button17 = (GuiCheckBox*)app->guiManager->CreateGuiControl(	GuiControlType::CHECKBOX, 17, ""			,{ (int)(w / 2 - 50),	(int)(h / 2 + 60	), 46,47},	this);
 
 
 	hudstate = hudSTATE::CLOSED;
 	//hudstate = hudSTATE::TITLESCREEN;
 	exit = false;
+	easingTitleIn->easingsActivated = false;
+	easingTitleOut->easingsActivated = false;
+
 	return true;
 }
 
@@ -120,6 +132,76 @@ bool Hud::Update(float dt)
 				}
 			}
 			control = control->next;
+		}
+
+		if (easingTitleBtns->easingsActivated)
+		{
+			button1->bounds.y = easingTitleBtns->bounceEaseOut(easingTitleBtns->currentIteration, easingTitleBtns->initialPos, easingTitleBtns->deltaPos -395 + 50, easingTitleBtns->totalIterations);
+			button2->bounds.y = easingTitleBtns->bounceEaseOut(easingTitleBtns->currentIteration, easingTitleBtns->initialPos, easingTitleBtns->deltaPos -327 + 50, easingTitleBtns->totalIterations);
+			button3->bounds.y = easingTitleBtns->bounceEaseOut(easingTitleBtns->currentIteration, easingTitleBtns->initialPos, easingTitleBtns->deltaPos -259 + 50, easingTitleBtns->totalIterations);
+			button4->bounds.y = easingTitleBtns->bounceEaseOut(easingTitleBtns->currentIteration, easingTitleBtns->initialPos, easingTitleBtns->deltaPos -191 + 50, easingTitleBtns->totalIterations);
+			button5->bounds.y = easingTitleBtns->bounceEaseOut(easingTitleBtns->currentIteration, easingTitleBtns->initialPos, easingTitleBtns->deltaPos -123 + 50, easingTitleBtns->totalIterations);
+
+			if (easingTitleBtns->currentIteration < easingTitleBtns->totalIterations)
+			{
+				easingTitleBtns->currentIteration++;
+			}
+			else
+			{
+				easingTitleBtns->currentIteration = 0;
+				easingTitleBtns->easingsActivated = false;
+			}
+		}
+
+		if (easingTitle->easingsActivated)
+		{
+
+			titlePos = easingTitle->sineEaseInOut(easingTitle->currentIteration, easingTitle->initialPos, easingTitle->deltaPos, easingTitle->totalIterations);
+
+			if (easingTitle->currentIteration < easingTitle->totalIterations)
+			{
+				easingTitle->currentIteration++;
+			}
+			else
+			{
+				easingTitle->currentIteration = 0;
+				easingTitle->easingsActivated = false;
+				easingTitleOut->easingsActivated = true;
+			}
+		}
+
+		if (easingTitleIn->easingsActivated)
+		{
+
+			titlePos = easingTitleIn->sineEaseInOut(easingTitleIn->currentIteration, easingTitleIn->initialPos, easingTitleIn->deltaPos, easingTitleIn->totalIterations);
+
+			if (easingTitleIn->currentIteration < easingTitleIn->totalIterations)
+			{
+				easingTitleIn->currentIteration++;
+			}
+			else
+			{
+				easingTitleIn->currentIteration = 0;
+				easingTitleIn->easingsActivated = false;
+				easingTitleOut->easingsActivated = true;
+			}
+		}
+
+		if (easingTitleOut->easingsActivated)
+		{
+
+			titlePos = easingTitleOut->sineEaseInOut(easingTitleOut->currentIteration, easingTitleOut->initialPos, easingTitleOut->deltaPos, easingTitleOut->totalIterations);
+
+			if (easingTitleOut->currentIteration < easingTitleOut->totalIterations)
+			{
+				easingTitleOut->currentIteration++;
+			}
+			else
+			{
+				easingTitleOut->currentIteration = 0;
+				easingTitleOut->easingsActivated = false;
+				easingTitleIn->easingsActivated = true;
+			}
 		}
 	}
 	else if (hudstate == hudSTATE::CONFIGSCREEN)
@@ -259,12 +341,24 @@ bool Hud::Update(float dt)
 bool Hud::PostUpdate()
 {
 	bool ret = true;
+	SDL_Rect section = { 0,0,740,200 };
 
 	app->hud->debug = app->moduleCollisions->debug;
 
 
 	ret = !exit;
 	app->guiManager->Draw();
+	if (hudstate == hudSTATE::TITLESCREEN)
+	{
+		if (easingTitleIn->easingsActivated || easingTitleOut->easingsActivated)
+		{
+			app->render->DrawTexture(titleText, 100, titlePos, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
+		}
+		else if(easingTitle->easingsActivated)
+		{
+			app->render->DrawTexture(titleText, 100, titlePos, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
+		}
+	}
 
 	// Draw the current transition in front of everything
 	app->sceneManager->DrawTransition();
@@ -384,7 +478,7 @@ bool Hud::CleanUp()
 	app->tex->Unload(guiButtonsConfig);
 	app->tex->Unload(guiButtonsInGame);
 	app->tex->Unload(guiButtonsTitle);
-	app->tex->Unload(collectibles);
+	app->tex->Unload(titleText);
 
 
 	return true;

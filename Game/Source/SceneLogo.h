@@ -23,8 +23,7 @@ public:
 
 private:
 	SDL_Texture* logo;
-	Easing* easing1;
-	Easing* easing2;
+	Easing* easing;
 	float logoPositionX;
 	float logoPositionX2;
 	
@@ -35,7 +34,6 @@ private:
 	int state;
 	float timeCounter;
 	float logoAlpha;
-	int logoFx;
 
 	int timer;
 

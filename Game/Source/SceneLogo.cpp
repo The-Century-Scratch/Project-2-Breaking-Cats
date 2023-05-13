@@ -68,13 +68,12 @@ bool SceneLogo::Load()
 	logoAnimation.PushBack({ 184 * 9, 0, 184, 98 });
 	logoAnimation.PushBack({ 184 * 10, 0, 184, 98 });
 	logoAnimation.PushBack({ 184 * 11, 0, 184, 98 });
-	logoAnimation.speed = 0.5f;
-
+	logoAnimation.PushBack({ 184 * 0, 0, 184, 98 });
+	logoAnimation.speed = 0.3f;
 	logoAnimation.loop = false;
-
 	currentAnimation = &logoAnimation;
 
-	timer = 30;
+	timer = 0;
 
 	return ret;
 }
@@ -83,6 +82,14 @@ bool SceneLogo::Update(float dt)
 {
 	bool ret = true;
 
+	if (timer == 200)
+	{
+		TransitionToScene(SceneType::TITLE, TransitionType::WIPE);
+	}
+	else if (timer == 0)
+	{
+		app->audio->PlayFx(app->audio->logofx);
+	}
 	//if (easing1->easingsActivated)
 	//{
 	//	logoPositionX = easing1->sineEaseOut(easing1->currentIteration, easing1->initialPos, easing1->deltaPos, easing1->totalIterations);
@@ -148,10 +155,8 @@ bool SceneLogo::Update(float dt)
 	//	}
 	//	break;
 	//}
-	if (currentAnimation->HasFinished() == true) {
-		TransitionToScene(SceneType::TITLE, TransitionType::WIPE);
-		//app->hud->hudstate = hudSTATE::TITLESCREEN;
-	}
+	timer++;
+
 	currentAnimation->Update();
 	return ret;
 }
@@ -173,7 +178,7 @@ void SceneLogo::Draw()
 	//// Fade in Logo
 	//if (state == 1) app->render->DrawRectangle({ 0, 0, 1280, 720 }, 0, 0, 0, 255 * logoAlpha);
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(logo, 720/6, 420/6, &rect);
+	app->render->DrawTexture(logo, 0, 0, &rect, 1.0f, 0.0, 2147483647, 2147483647, true, 7);
 
 }
 
