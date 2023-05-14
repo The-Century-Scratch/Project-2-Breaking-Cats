@@ -82,11 +82,12 @@ bool SceneTitle::Load()
 	imgRect.y = app->LoadConfigFileToVar().child("sceneTitle").child("imgRect").attribute("y").as_int();
 	imgRect.w = app->LoadConfigFileToVar().child("sceneTitle").child("imgRect").attribute("w").as_int();
 	imgRect.h = app->LoadConfigFileToVar().child("sceneTitle").child("imgRect").attribute("h").as_int();
+	musicPath = app->LoadConfigFileToVar().child("sceneTitle").child("music").attribute("path").as_string();
 
 	/*berry = app->tex->Load(app->LoadConfigFileToVar().child("sceneTitle").child("berry").attribute("texturepath").as_string());
 	creditsTex = app->tex->Load(app->LoadConfigFileToVar().child("sceneTitle").child("credits").attribute("texturepath").as_string());*/
 
-
+	app->audio->PlayMusic(musicPath);
 
 	return ret;
 }

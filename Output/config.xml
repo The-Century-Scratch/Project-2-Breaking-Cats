@@ -26,6 +26,7 @@
   <sceneTitle>
     <img texturepath="Assets/Textures/TitleBg.png"/>
     <imgRect x="0" y="0" w="1280" h="720"/>
+    <music path="Assets/Audio/Music/TitleScreen.ogg"/>
   </sceneTitle>
 	<Hud>
 		<hudbackground texturepath="Assets/Textures/GUI/guibackground.png"/>
