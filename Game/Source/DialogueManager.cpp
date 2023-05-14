@@ -38,7 +38,7 @@ bool DialogueManager::Start()
 	{
 		root = file.child("dialogues");
 		font = new Font(app, "Font/CleanCraters.xml");
-		texture = app->tex->Load("Assets/Textures/TitleScreen.png");
+		texture = app->tex->Load("Assets/Textures/textBox.png");
 
 		letterCount = 0;
 		isDialogueActive = false;
