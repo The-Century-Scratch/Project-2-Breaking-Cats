@@ -696,7 +696,7 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                         newscene = 5;
                         break;
                     case 55:
-                        newscene = 0;//to change
+                        newscene = 7;
                         break;
                     case 56:
                         newscene = 3;
@@ -735,6 +735,19 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                     case 22:
                         newscene = 0;
                         break;
+                    default:
+                        break;
+                    }
+                }
+                if (app->sceneManager->currentScene == 7)
+                {
+                    switch (id)
+                    {
+                    case 59:
+                        newscene = 0;
+                        break;
+                    case 60:
+                        newscene = 8;// future lab that is not implemented
                     default:
                         break;
                     }
