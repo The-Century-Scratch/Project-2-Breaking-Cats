@@ -23,23 +23,15 @@ public:
 
 private:
 	SDL_Texture* logo;
-	Easing* easing1;
-	Easing* easing2;
-	float logoPositionX;
-	float logoPositionX2;
+	Easing* easing;
+	float Pos;
 	
 	Animation logoAnimation;
+	Animation logoAnimationStatic;
 
 	Animation* currentAnimation;
 
-	int state;
-	float timeCounter;
-	float logoAlpha;
-	int logoFx;
-
 	int timer;
-
-	float drawCounter;
 };
 
 #endif //__SCENELOGO_H__

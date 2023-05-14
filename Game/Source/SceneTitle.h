@@ -79,6 +79,8 @@ private:
 	SDL_Rect section3;
 
 	Easing* easing;
+
+	const char* musicPath;
 };
 
 #endif //__SCENETITLE_H__

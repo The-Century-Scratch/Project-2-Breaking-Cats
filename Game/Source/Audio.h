@@ -53,6 +53,9 @@ public:
 
 	void UnLoadFxs();
 
+
+	uint logofx;
+
 private:
 
 	_Mix_Music* music;
@@ -69,6 +72,7 @@ private:
 
 	int maxChannels;
 	int numChannels;
+
 };
 
 #endif // __AUDIO_H__

@@ -10,6 +10,17 @@
 
 struct SDL_Texture;
 
+enum class PlayerState
+{
+	IDLE,
+	WUP,
+	WLEFT,
+	WRIGHT,
+	WDOWN,
+	DYING,
+	UNKNOWN
+};
+
 class Player : public Entity
 {
 public:
@@ -32,16 +43,24 @@ public:
 
 	void EndCollision(Collider* c1, Collider* c2) override;
 
+	void AnimationState();
+
 public:
 
 	Animation* currentAnim = nullptr;
 
-	Animation idleanim;
+	Animation idleAnim;
+	Animation walkUpAnim;
+	Animation walkLeftAnim;
+	Animation walkRightAnim;
+	Animation walkDownAnim;
+	Animation dieAnim;
 
 	bool godMode = false;
 
 	bool npcRange = false;
 	bool cheastRange = false;
+	PlayerState state;
 
 private:
 

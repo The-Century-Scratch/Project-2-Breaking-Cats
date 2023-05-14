@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Player.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -16,10 +17,29 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("player");
 
-	// idle player
-	//idleanim.PushBack({ 0, 0, 32, 32 });
-	//idleanim.loop = false;
-	//idleanim.speed = 0.0f;
+	// IDLE
+	idleAnim.AnimateCat32x32x8(0);
+	idleAnim.speed = 0.2f;
+
+	// WALKING UP
+	walkUpAnim.AnimateCat32x32x4(1);
+	walkUpAnim.speed = 0.2f;
+
+	// WALKING LEFT
+	walkLeftAnim.AnimateCat32x32x4(2);
+	walkLeftAnim.speed = 0.2f;
+
+	// WALKING RIGHT
+	walkRightAnim.AnimateCat32x32x4(3);
+	walkRightAnim.speed = 0.2f;
+
+	// WALKING DOWN
+	walkDownAnim.AnimateCat32x32x4(4);
+	walkDownAnim.speed = 0.2f;
+
+	// DYING
+	dieAnim.AnimateCat32x32x4(5);
+	dieAnim.speed = 0.2f;
 
 }
 
@@ -41,7 +61,7 @@ bool Player::Start() {
 	// initilize textures
 	texture = app->tex->Load(texturePath);
 	eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::PLAYER, (Entity*)this);
-	currentAnim = &idleanim;
+	currentAnim = &idleAnim;
 
 
 	switch (app->sceneManager->currentScene)
@@ -86,22 +106,27 @@ bool Player::Start() {
 bool Player::Update()
 {
 	int speed = 3;
+	state = PlayerState::IDLE;
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		position.y -= speed;
+		state = PlayerState::WDOWN;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		position.y += speed;
+		state = PlayerState::WUP;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		position.x -= speed;
+		state = PlayerState::WLEFT;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		position.x += speed;
+		state = PlayerState::WRIGHT;
 	}
 
 	//also move collider
@@ -140,8 +165,9 @@ bool Player::Update()
 }
 
 bool Player::PostUpdate() {
-
-	app->render->DrawTexture(texture, position.x, position.y);
+	iPoint Displacement = { 8, 21};
+	AnimationState();
+	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y, &currentAnim->GetCurrentFrame());
 
 	//draw map that must be drawed after the player
 	app->map->DrawAfterPlayer();
@@ -284,4 +310,34 @@ void Player::EndCollision(Collider* c1, Collider* c2)
 		}
 	}
 
+}
+
+void Player::AnimationState()
+{
+	switch (state)
+	{
+	case PlayerState::IDLE:
+		currentAnim = &idleAnim;
+		break;
+	case PlayerState::WUP:
+		currentAnim = &walkUpAnim;
+		break;
+	case PlayerState::WLEFT:
+		currentAnim = &walkLeftAnim;
+		break;
+	case PlayerState::WRIGHT:
+		currentAnim = &walkRightAnim;
+		break;
+	case PlayerState::WDOWN:
+		currentAnim = &walkDownAnim;
+		break;
+	case PlayerState::DYING:
+		currentAnim = &dieAnim;
+		break;
+	case PlayerState::UNKNOWN:
+		break;
+	default:
+		break;
+	}
+	currentAnim->Update();
 }
