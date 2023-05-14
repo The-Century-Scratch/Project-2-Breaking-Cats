@@ -41,6 +41,7 @@ bool SceneLogo::Load()
 	//logoFx = app->audio->LoadFx("Audio/Fx/logo_intro.wav");
 
 	logo = app->tex->Load(app->LoadConfigFileToVar().child("sceneLogo").child("img").attribute("texturepath").as_string());
+	logofx = app->audio->LoadFx(app->LoadConfigFileToVar().child("sceneLogo").child("logofx").attribute("path").as_string());
 	
 	//SDL_Rect s1 =	{ 184 * 0, 0, 184, 98 } ;
 	//SDL_Rect s2 =	{ 184 * 1, 0, 184, 98 } ;
@@ -93,6 +94,10 @@ bool SceneLogo::Update(float dt)
 	{
 		currentAnimation = &logoAnimation;
 	}
+	else if (timer == 100)
+	{
+		app->audio->PlayFx(logofx);
+	}
 	else if (timer > 0)
 	{
 		if (easing->easingsActivated)
@@ -108,10 +113,6 @@ bool SceneLogo::Update(float dt)
 				easing->easingsActivated = false;
 			}
 		}
-	}
-	else if (timer == 0)
-	{
-		app->audio->PlayFx(app->audio->logofx);
 	}
 
 	//if (easing2->easingsActivated)

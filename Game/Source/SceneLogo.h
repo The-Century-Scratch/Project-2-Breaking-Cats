@@ -32,6 +32,8 @@ private:
 	Animation* currentAnimation;
 
 	int timer;
+
+	uint logofx;
 };
 
 #endif //__SCENELOGO_H__

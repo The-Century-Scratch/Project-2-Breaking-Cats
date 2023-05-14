@@ -55,9 +55,6 @@ bool Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}
 
-
-	logofx = app->audio->LoadFx(config.child("logofx").attribute("path").as_string());
-
 	return ret;
 }
 

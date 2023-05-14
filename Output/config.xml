@@ -22,6 +22,7 @@
 	</audio>
   <sceneLogo>
     <img texturepath ="Assets/Textures/TheCenturyScratchTitleAnimated12frames.png"/>
+    <logofx path="Assets/Audio/Fx/logoFx.wav"/>
   </sceneLogo>
   <sceneTitle>
     <img texturepath="Assets/Textures/TitleBg.png"/>
@@ -37,7 +38,6 @@
 		<titletext texturepath="Assets/Textures/Title.png"/>
 		<clickfx path="Assets/Audio/Fx/clickfx.wav"/>
 		<mousebyfx path="Assets/Audio/Fx/hudfx.wav"/>
-    <logofx path="Assets/Audio/Fx/LogoFx.wav"/>
 	</Hud>
 	<scenegameplay>
 		<player x="136" y="23" texturepath="Assets/Textures/testPlayer.png">

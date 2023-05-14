@@ -61,11 +61,11 @@ bool Hud::Start()
 	app->win->GetWindowSize(w,h);
 	scale = app->win->GetScale();
 	//title screen buttons
-	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Play",		{ (int)(w / 2 - 100) ,(int)(h - 250 * 2),267,64}, this);
-	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue",	{ (int)(w / 2 - 100) ,(int)(h - 300 * 2),267,64}, this);
-	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Options",	{ (int)(w / 2 - 100) ,(int)(h - 350 * 2),267,64}, this);
-	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Credits",	{ (int)(w / 2 - 100) ,(int)(h - 400 * 2),267,64}, this);
-	button5 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Exit",		{ (int)(w / 2 - 100) ,(int)(h - 450 * 2),267,64}, this);
+	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "        Play        ",		{ (int)(w / 2 - 300) ,(int)(h - 250 * 2),267,64}, this);
+	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue",	{ (int)(w / 2 - 300) ,(int)(h - 300 * 2),267,64}, this);
+	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "    Options    ",	{ (int)(w / 2 - 300) ,(int)(h - 350 * 2),267,64}, this);
+	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "  Credits  ",	{ (int)(w / 2 - 300) ,(int)(h - 400 * 2),267,64}, this);
+	button5 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "        Exit        ",		{ (int)(w / 2 - 300) ,(int)(h - 450 * 2),267,64}, this);
 	//pause game buttons
 	button6 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "",	{ (int)(w	 / 4	),(int)(h		/ 4 + 100),120,120 }, this);
 	button7 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "",	{ (int)(w * 3/ 4-120),(int)(h		/ 4 + 100),120,120 }, this);

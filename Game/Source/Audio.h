@@ -53,9 +53,6 @@ public:
 
 	void UnLoadFxs();
 
-
-	uint logofx;
-
 private:
 
 	_Mix_Music* music;
