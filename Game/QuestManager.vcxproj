@@ -103,7 +103,8 @@
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\Dialogue.cpp" />
     <ClCompile Include="Source\DialogueManager.cpp" />
-    <ClCompile Include="Source\DiggerSniper.cpp" />
+    <ClCompile Include="Source\BulletPenetration.cpp" />
+    <ClCompile Include="Source\DragonSlayer.cpp" />
     <ClCompile Include="Source\easings.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Gats.cpp" />
@@ -160,7 +161,8 @@
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Dialogue.h" />
     <ClInclude Include="Source\DialogueManager.h" />
-    <ClInclude Include="Source\DiggerSniper.h" />
+    <ClInclude Include="Source\BulletPenetration.h" />
+    <ClInclude Include="Source\DragonSlayer.h" />
     <ClInclude Include="Source\easings.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />

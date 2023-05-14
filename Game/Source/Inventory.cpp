@@ -50,12 +50,14 @@ bool Inventory::Start()
 	invTex = app->tex->Load("Assets/Textures/TestInventory.png");
 	slotText = app->tex->Load("Assets/Textures/TestInvSlot.png");
 
-	slotRect = { 0,0,20,20 };
-	slotRectFocus = { 21,0,20,20 };
+	isActivated = false;
+
+	slotRect = { 0,0,36,36 };
+	slotRectFocus = { 37,0,36,36 };
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
-		slotList[invSlot_].bounds = { 0, 0, 22, 22 };
+		slotList[invSlot_].bounds = { 0, 0, 36, 36 };
 		slotList[invSlot_].currentSlot = invSlot_;
 		slotList[invSlot_].itemId = 0;
 		slotList[invSlot_].isfull = false;
@@ -208,25 +210,27 @@ bool Inventory::Start()
 
 bool Inventory::Update(float dt)
 {
-	int scale = app->win->GetScale();
-	//invPos.x = -(app->render->camera.x / scale) - 100;
-	//invPos.y = -(app->render->camera.y / scale) - 100;
-
-	invPos.x = (-app->render->camera.x/scale) + 105;
-	invPos.y = (-app->render->camera.y/scale) + 60;
-
-	invPosText.x = (int)(app->render->camera.x + invPos.x * scale);
-	invPosText.y = (int)(app->render->camera.y + invPos.y * scale);
-	
-	iPoint invSpacing = { 0,0 };
-	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	if (isActivated)
 	{
-		slotList[invSlot_].bounds.x = invPos.x + invSpacing.x + 87;
-		slotList[invSlot_].bounds.y = invPos.y + invSpacing.y + 33;
-		invSpacing.x += 22;
-		if (invSlot_ == 3 || invSlot_ == 7 || invSlot_ == 11) invSpacing = { 0, invSpacing.y += 22 };
-	}
+		int scale = app->win->GetScale();
 
+		invPos.x = (-app->render->camera.x / scale) + 25;
+		invPos.y = (-app->render->camera.y / scale);
+
+		invPosText.x = (int)(app->render->camera.x + invPos.x * scale);
+		invPosText.y = (int)(app->render->camera.y + invPos.y * scale);
+
+		iPoint invSpacing = { 0,0 };
+		for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+		{
+			slotList[invSlot_].bounds.x = invPos.x + invSpacing.x + 193;
+			slotList[invSlot_].bounds.y = invPos.y + invSpacing.y + 63;
+			invSpacing.x += 39;
+			if (invSlot_ == 3 || invSlot_ == 7 || invSlot_ == 11) invSpacing = { 0, invSpacing.y += 39 };
+		}
+
+		HandleSlotState();
+	}
 
 	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
 	iPoint invSpacing = { 0,0 };
@@ -240,8 +244,6 @@ bool Inventory::Update(float dt)
 		slotCounter++;
 		itemInvSlot_ = itemInvSlot_->next;
 	}*/
-
-	HandleSlotState();
 	//UpdatingButtons(app->input);
 
 	//int id = -1;
@@ -411,7 +413,10 @@ bool Inventory::Update(float dt)
 
 bool Inventory:: PostUpdate()
 {
-	Draw();
+	if (isActivated)
+	{
+		Draw();
+	}
 
 	return true;
 }
@@ -426,6 +431,11 @@ int Inventory::GetItemEquipped() //Tell me if it works?
 		}
 	}
 	return 0;
+}
+
+Player* Inventory::GetCurrentPlayer(Player* pl_)
+{
+	return currentPlayer;
 }
 
 int Inventory::GetFirePaw() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
@@ -444,10 +454,15 @@ void Inventory::Draw()
 {
 	int scale = app->win->GetScale();
 	SDL_Color white = {255, 255, 255, 255};
-	SDL_Rect invRect = { 0, 0, 186, 130 };
+	SDL_Rect invRect = { 0, 0, 372, 240 };
 	app->render->DrawTexture(invTex, invPos.x, invPos.y, &invRect);
-	app->render->DrawText("INVENTORY",invPosText.x + 105*scale, invPosText.y + 12*scale, 50*scale, 14*scale, white);
-	app->render->DrawText("STATS", invPosText.x + 33 * scale, invPosText.y + 82 * scale, 20 * scale, 7 * scale, white);
+	app->render->DrawText("INVENTORY",invPosText.x + 222 * scale, invPosText.y + 27 * scale, 92 * scale, 24 * scale, white);
+	app->render->DrawText("STATS", invPosText.x + 77 * scale, invPosText.y + 127 * scale, 38 * scale, 11 * scale, white);
+
+	app->render->DrawText("HP ", invPosText.x + 48 * scale, invPosText.y + 156 * scale, 30 * scale, 18 * scale, white);
+	//app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
+	app->render->DrawText("DMG", invPosText.x + 48 * scale, invPosText.y + 186 * scale, 30 * scale, 18 * scale, white);
+	//app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{

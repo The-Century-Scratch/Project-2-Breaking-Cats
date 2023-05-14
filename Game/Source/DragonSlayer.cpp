@@ -5,51 +5,51 @@
 
 #include "Player.h"
 
-#include "DiggerSniper.h"
+#include "DragonSlayer.h"
 
-DiggerSniper::DiggerSniper(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
+DragonSlayer::DragonSlayer(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
 
-	itemTextSection = { 0, 0, 16, 16 };
-	itemType = ItemType::DIGGER_SNIPER;
+	itemTextSection = { 33, 0, 32, 32 };
+	itemType = ItemType::DRAGON_SLAYER;
 }
 
-DiggerSniper::~DiggerSniper()
+DragonSlayer::~DragonSlayer()
 {
 }
 
-bool DiggerSniper::Start()
+bool DragonSlayer::Start()
 {
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
-	itemid = 4;
+	itemid = 2;
 
 	return true;
 }
 
-bool DiggerSniper::Update()
+bool DragonSlayer::Update()
 {
 	return true;
 }
 
-bool DiggerSniper::PostUpdate()
+bool DragonSlayer::PostUpdate()
 {
 	Draw();
 	return true;
 }
 
-void DiggerSniper::Draw()
+void DragonSlayer::Draw()
 {
 	//app->render->DrawTexture(texture, position.x, position.y, &itemTextSection);
 }
 
-bool DiggerSniper::CleanUp()
+bool DragonSlayer::CleanUp()
 {
 	app->tex->Unload(texture);
 	return true;
 }
 
-bool DiggerSniper::SaveState(pugi::xml_node& n)
+bool DragonSlayer::SaveState(pugi::xml_node& n)
 {
 	/*pugi::xml_node node = n.append_child("position");
 	node.append_attribute("x").set_value(bounds.x);
@@ -67,7 +67,7 @@ bool DiggerSniper::SaveState(pugi::xml_node& n)
 	return true;
 }
 
-void DiggerSniper::UseItem(Player* player)
+void DragonSlayer::UseItem(Player* player)
 {
 	//player->GetHealed(healAmount);
 }

@@ -104,6 +104,8 @@ public:
 
 	int GetItemEquipped();
 
+	Player* GetCurrentPlayer(Player* pl_);
+
 private:
 
 	void HandleObjects(InventorySlot objects[]);
@@ -123,6 +125,8 @@ public:
 
 	GuiButton* btnEquipment; // Armors
 	GuiButton* btnItems;     // Potions etc
+
+	bool isActivated;
 
 private:
 	SDL_Texture* itemTexture;

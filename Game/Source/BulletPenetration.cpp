@@ -5,51 +5,51 @@
 
 #include "Player.h"
 
-#include "GrapplingHook.h"
+#include "BulletPenetration.h"
 
-GrapplingHook::GrapplingHook(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
+BulletPenetration::BulletPenetration(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
 
-	itemTextSection = { 65, 0, 32, 32 };
-	itemType = ItemType::GRAPPLING_HOOK;
+	itemTextSection = { 97, 0, 32, 32 };
+	itemType = ItemType::BULLET_PENETRATION;
 }
 
-GrapplingHook::~GrapplingHook()
+BulletPenetration::~BulletPenetration()
 {
 }
 
-bool GrapplingHook::Start()
+bool BulletPenetration::Start()
 {
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
-	itemid = 3;
+	itemid = 4;
 
 	return true;
 }
 
-bool GrapplingHook::Update()
+bool BulletPenetration::Update()
 {
 	return true;
 }
 
-bool GrapplingHook::PostUpdate()
+bool BulletPenetration::PostUpdate()
 {
 	Draw();
 	return true;
 }
 
-void GrapplingHook::Draw()
+void BulletPenetration::Draw()
 {
 	//app->render->DrawTexture(texture, position.x, position.y, &itemTextSection);
 }
 
-bool GrapplingHook::CleanUp()
+bool BulletPenetration::CleanUp()
 {
 	app->tex->Unload(texture);
 	return true;
 }
 
-bool GrapplingHook::SaveState(pugi::xml_node& n)
+bool BulletPenetration::SaveState(pugi::xml_node& n)
 {
 	/*pugi::xml_node node = n.append_child("position");
 	node.append_attribute("x").set_value(bounds.x);
@@ -67,7 +67,7 @@ bool GrapplingHook::SaveState(pugi::xml_node& n)
 	return true;
 }
 
-void GrapplingHook::UseItem(Player* player)
+void BulletPenetration::UseItem(Player* player)
 {
 	//player->GetHealed(healAmount);
 }

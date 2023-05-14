@@ -10,7 +10,7 @@
 FirePaws::FirePaws(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
 
-	itemTextSection = { 0, 0, 16, 16};
+	itemTextSection = { 0, 0, 32, 32};
 	itemType = ItemType::FIRE_PAWS;
 }
 

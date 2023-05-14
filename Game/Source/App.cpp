@@ -58,7 +58,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
 	hud = new Hud(true);
-	inventory = new Inventory(false);
+	inventory = new Inventory(true);
 	debug = new Debug(true);
 
 	// Ordered for awake / Start / Update

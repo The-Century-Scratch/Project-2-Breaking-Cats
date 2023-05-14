@@ -184,6 +184,13 @@ private:
 
 	List<Item*> items;
 
+	Item* firePaw;
+	Item* dragonSlayer;
+	Item* grapplingHook;
+	Item* bulletPenetration;
+	Item* mysticalEnergy;
+	Item* arcaneSpirit;
+
 	iPoint tmpPosPlayer;
 
 	float alpha;

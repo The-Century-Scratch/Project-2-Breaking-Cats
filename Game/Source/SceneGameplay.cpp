@@ -25,6 +25,11 @@
 
 //Items
 #include "FirePaws.h"
+#include "DragonSlayer.h"
+#include "GrapplingHook.h"
+#include "BulletPenetration.h"
+#include "MysticalEnergy.h"
+#include "ArcaneSpirit.h"
 
 //#include "KnightHelmet.h"
 //#include "KnightChest.h"
@@ -195,9 +200,30 @@ bool SceneGameplay::Load()
 	Item* item = nullptr;
 	pugi::xml_node itemNode = config.child("item");
 	
-	item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
-	items.Add(item);
-	item->Start();
+	firePaw = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+	items.Add(firePaw);
+	firePaw->Start();
+
+	dragonSlayer = new DragonSlayer(iPoint(itemNode.child("dragonSlayer").attribute("x").as_int(), itemNode.child("dragonSlayer").attribute("y").as_int()), itemText);
+	items.Add(dragonSlayer);
+	dragonSlayer->Start();
+
+	grapplingHook = new GrapplingHook(iPoint(itemNode.child("grapplingHook").attribute("x").as_int(), itemNode.child("grapplingHook").attribute("y").as_int()), itemText);
+	items.Add(grapplingHook);
+	grapplingHook->Start();
+
+	bulletPenetration = new BulletPenetration(iPoint(itemNode.child("bulletPenetration").attribute("x").as_int(), itemNode.child("bulletPenetration").attribute("y").as_int()), itemText);
+	items.Add(bulletPenetration);
+	bulletPenetration->Start();
+
+	mysticalEnergy = new MysticalEnergy(iPoint(itemNode.child("mysticalEnergy").attribute("x").as_int(), itemNode.child("mysticalEnergy").attribute("y").as_int()), itemText);
+	items.Add(mysticalEnergy);
+	mysticalEnergy->Start();
+
+	mysticalEnergy = new ArcaneSpirit(iPoint(itemNode.child("arcaneSpirit").attribute("x").as_int(), itemNode.child("arcaneSpirit").attribute("y").as_int()), itemText);
+	items.Add(mysticalEnergy);
+	mysticalEnergy->Start();
+
 
 
 	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
@@ -417,11 +443,32 @@ bool SceneGameplay::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
 	{
-		ListItem<Item*>* it = items.start;
-		//it = it->next;
-		it->data->equiped = true;
-		app->inventory->AddItem(it->data);
+		app->inventory->isActivated = !app->inventory->isActivated;
+	}
 
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
+	{
+		app->inventory->AddItem(firePaw);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
+	{
+		app->inventory->AddItem(dragonSlayer);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
+	{
+		app->inventory->AddItem(grapplingHook);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
+	{
+		app->inventory->AddItem(bulletPenetration);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
+	{
+		app->inventory->AddItem(mysticalEnergy);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
+	{
+		app->inventory->AddItem(arcaneSpirit);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
 	{
@@ -846,11 +893,11 @@ void SceneGameplay::Draw()
 {
 	app->map->Draw();
 
-	ListItem<Item*>* it = items.start;
+	/*ListItem<Item*>* it = items.start;
 	for (; it != items.end; ++it)
 	{
 		it->data->Draw();
-	}
+	}*/
 
 	if (app->debug->drawVariables)
 	{

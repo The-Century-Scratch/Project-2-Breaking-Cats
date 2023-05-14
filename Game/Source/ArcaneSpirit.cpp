@@ -10,7 +10,7 @@
 ArcaneSpirit::ArcaneSpirit(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
 
-	itemTextSection = { 0, 0, 16, 16 };
+	itemTextSection = { 161, 0, 32, 32 };
 	itemType = ItemType::ARCANE_SPIRIT;
 }
 

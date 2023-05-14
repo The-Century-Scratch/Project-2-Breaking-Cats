@@ -58,9 +58,10 @@
     <ClCompile Include="Source\Guardian.cpp" />
     <ClCompile Include="Source\LongRange.cpp" />
     <ClCompile Include="Source\GrapplingHook.cpp" />
-    <ClCompile Include="Source\DiggerSniper.cpp" />
+    <ClCompile Include="Source\BulletPenetration.cpp" />
     <ClCompile Include="Source\MysticalEnergy.cpp" />
     <ClCompile Include="Source\ArcaneSpirit.cpp" />
+    <ClCompile Include="Source\DragonSlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -131,9 +132,10 @@
     <ClInclude Include="Source\Guardian.h" />
     <ClInclude Include="Source\LongRange.h" />
     <ClInclude Include="Source\GrapplingHook.h" />
-    <ClInclude Include="Source\DiggerSniper.h" />
+    <ClInclude Include="Source\BulletPenetration.h" />
     <ClInclude Include="Source\MysticalEnergy.h" />
     <ClInclude Include="Source\ArcaneSpirit.h" />
+    <ClInclude Include="Source\DragonSlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />

@@ -2,11 +2,11 @@
 
 #include "Item.h"
 
-class DiggerSniper : public Item
+class DragonSlayer : public Item
 {
 public:
-	DiggerSniper(iPoint pos, SDL_Texture* atlas);
-	virtual ~DiggerSniper();
+	DragonSlayer(iPoint pos, SDL_Texture* atlas);
+	virtual ~DragonSlayer();
 
 	bool Start() override;
 	bool Update() override;
