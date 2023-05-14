@@ -78,7 +78,7 @@ bool DialogueManager::Update(float dt)
 
 	if (current != nullptr)
 	{
-		if (easingArrow2->easingsActivated == false) easingArrow->easingsActivated = true;
+		/*if (easingArrow2->easingsActivated == false) easingArrow->easingsActivated = true;
 
 		easingArrow->initialPos = current->currentNode->currentOption->bounds.x - 30;
 		easingArrow2->initialPos = easingArrow->initialPos + easingArrow->deltaPos;
@@ -112,7 +112,7 @@ bool DialogueManager::Update(float dt)
 				easingArrow2->easingsActivated = false;
 				easingArrow->easingsActivated = true;
 			}
-		}
+		}*/
 
 		if (current->currentNode->dialogFinished == true && current->currentNode->id >= 0)
 		{
@@ -221,8 +221,8 @@ bool DialogueManager::UnLoad()
 {
 	app->tex->Unload(texture);
 
-	//font->UnLoad(app->tex);
-	//RELEASE(font);
+	font->UnLoad(app->tex);
+	RELEASE(font);
 
 	if (current != nullptr)
 	{
@@ -248,9 +248,12 @@ bool DialogueManager::UnLoad()
 
 NpcNode* DialogueManager::LoadNode(int id, pugi::xml_node node)
 {
+	//carga el texto de los npcs en el npc node desde xml
 	NpcNode* tmp = new NpcNode(node.child("npc_text").attribute("text").as_string());
 	tmp->id = node.attribute("id").as_int();
 	int i = 0;
+	//carga las diferentes opciones de respuesta del player con las class dialogue option
+	//para cambiar medidas de letra diria que es aqui
 	for (pugi::xml_node m = node.child("option"); m; m = m.next_sibling("option"))
 	{
 		DialogueOption* option = new DialogueOption();
@@ -262,9 +265,9 @@ NpcNode* DialogueManager::LoadNode(int id, pugi::xml_node node)
 		option->bounds.x = 710;
 		option->bounds.y = 215 + i;
 		//option->bounds.w = 400;
-		int offset = font->GetBaseSize();
-		option->bounds.w = option->text.size() * offset;
-		option->bounds.h = font->GetBaseSize() + 10;
+		//int offset = font->GetBaseSize();
+		option->bounds.w = option->text.size() * 32/*offset*/;
+		option->bounds.h = 32/*font->GetBaseSize()*/ + 10;
 
 		tmp->options.push_back(option);
 		++tmp->optionsNum;

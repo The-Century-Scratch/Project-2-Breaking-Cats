@@ -119,6 +119,7 @@ bool SceneManager::Update(float dt)
 	current->Draw();
 	//draw dialogues
 	if (dialogueManager->isDialogueActive == true) {
+		dialogueManager->Update(dt);
 		dialogueManager->Draw();
 	}
 

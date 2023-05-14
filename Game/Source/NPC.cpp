@@ -44,16 +44,16 @@ bool NPC::Start() {
 	switch (npctype)
 	{
 	case NPCTYPE::NORMAL:
-		dialogueid = 1;
+		dialogueid = 0;
 		break;
 	case NPCTYPE::QUEST:
-		dialogueid = 1;
+		dialogueid = 0;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
 		cRect = { position.x - 6,position.y + 17,16 + 12,16 + 12 };
 		break;
 	case NPCTYPE::DEVELOPER:
-		dialogueid = 1;
+		dialogueid = 0;
 		break;
 	default:
 		break;
@@ -134,7 +134,7 @@ void NPC::OnCollision(Collider* c1, Collider* c2)
 		case Collider::Type::PLAYER:
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 				switch (this->dialogueid) {
-				case 1:
+				case 0:
 					LOG("TRIGGER DIALOGUE");
 					app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
 					app->sceneManager->dialogueManager->printText = true;
