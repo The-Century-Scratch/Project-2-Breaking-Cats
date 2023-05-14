@@ -24,8 +24,7 @@ SceneLogo::SceneLogo()
 	//drawCounter = 0.75f;
 
 	////Easings
-	//easing1 = new Easing(true,0,-650,1930,180);
-	//easing2 = new Easing(false,0,1280,-968,180);
+	easing = new Easing(true,0,-40,40,100);
 
 	//logoPositionX = -650.0f;
 	//logoPositionX = 1280.0f;
@@ -42,6 +41,7 @@ bool SceneLogo::Load()
 	//logoFx = app->audio->LoadFx("Audio/Fx/logo_intro.wav");
 
 	logo = app->tex->Load(app->LoadConfigFileToVar().child("sceneLogo").child("img").attribute("texturepath").as_string());
+	logofx = app->audio->LoadFx(app->LoadConfigFileToVar().child("sceneLogo").child("logofx").attribute("path").as_string());
 	
 	//SDL_Rect s1 =	{ 184 * 0, 0, 184, 98 } ;
 	//SDL_Rect s2 =	{ 184 * 1, 0, 184, 98 } ;
@@ -68,13 +68,16 @@ bool SceneLogo::Load()
 	logoAnimation.PushBack({ 184 * 9, 0, 184, 98 });
 	logoAnimation.PushBack({ 184 * 10, 0, 184, 98 });
 	logoAnimation.PushBack({ 184 * 11, 0, 184, 98 });
-	logoAnimation.speed = 0.5f;
-
+	logoAnimation.PushBack({ 184 * 0, 0, 184, 98 });
+	logoAnimation.speed = 0.3f;
 	logoAnimation.loop = false;
 
-	currentAnimation = &logoAnimation;
 
-	timer = 30;
+	logoAnimationStatic.PushBack({ 184 * 0, 0, 184, 98 });
+
+	currentAnimation = &logoAnimationStatic;
+
+	timer = 0;
 
 	return ret;
 }
@@ -83,21 +86,34 @@ bool SceneLogo::Update(float dt)
 {
 	bool ret = true;
 
-	//if (easing1->easingsActivated)
-	//{
-	//	logoPositionX = easing1->sineEaseOut(easing1->currentIteration, easing1->initialPos, easing1->deltaPos, easing1->totalIterations);
-	//	logoPositionX2 = easing1->sineEaseOut(easing1->currentIteration, 1280, (easing1->deltaPos)*-1, easing1->totalIterations);
-	//	if (easing1->currentIteration < easing1->totalIterations)
-	//	{
-	//		easing1->currentIteration++;
-	//	}
-	//	else
-	//	{
-	//		easing1->currentIteration = 0;
-	//		easing1->easingsActivated = false;
-	//		easing2->easingsActivated = true;
-	//	}
-	//}
+	if (timer == 200)
+	{
+		TransitionToScene(SceneType::TITLE, TransitionType::WIPE);
+	}
+	else if (timer > 101)
+	{
+		currentAnimation = &logoAnimation;
+	}
+	else if (timer == 100)
+	{
+		app->audio->PlayFx(logofx);
+	}
+	else if (timer > 0)
+	{
+		if (easing->easingsActivated)
+		{
+			Pos = easing->bounceEaseOut(easing->currentIteration, easing->initialPos, easing->deltaPos, easing->totalIterations);
+			if (easing->currentIteration < easing->totalIterations)
+			{
+				easing->currentIteration++;
+			}
+			else
+			{
+				easing->currentIteration = 0;
+				easing->easingsActivated = false;
+			}
+		}
+	}
 
 	//if (easing2->easingsActivated)
 	//{
@@ -148,10 +164,8 @@ bool SceneLogo::Update(float dt)
 	//	}
 	//	break;
 	//}
-	if (currentAnimation->HasFinished() == true) {
-		TransitionToScene(SceneType::TITLE, TransitionType::WIPE);
-		//app->hud->hudstate = hudSTATE::TITLESCREEN;
-	}
+	timer++;
+
 	currentAnimation->Update();
 	return ret;
 }
@@ -173,7 +187,7 @@ void SceneLogo::Draw()
 	//// Fade in Logo
 	//if (state == 1) app->render->DrawRectangle({ 0, 0, 1280, 720 }, 0, 0, 0, 255 * logoAlpha);
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(logo, 720/6, 420/6, &rect);
+	app->render->DrawTexture(logo, 0, Pos, &rect, 1.0f, 0.0, 2147483647, 2147483647, true, 7);
 
 }
 
@@ -183,7 +197,7 @@ bool SceneLogo::UnLoad()
 	bool ret = true;
 
 	app->tex->Unload(logo);
-	//RELEASE(easing1);
+	RELEASE(easing);
 	//RELEASE(easing2);
 
 	return ret;

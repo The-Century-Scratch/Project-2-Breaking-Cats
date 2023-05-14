@@ -22,19 +22,22 @@
 	</audio>
   <sceneLogo>
     <img texturepath ="Assets/Textures/TheCenturyScratchTitleAnimated12frames.png"/>
+    <logofx path="Assets/Audio/Fx/logoFx.wav"/>
   </sceneLogo>
   <sceneTitle>
-    <img texturepath="Assets/Textures/TitleScreen2.png"/>
+    <img texturepath="Assets/Textures/TitleBg.png"/>
     <imgRect x="0" y="0" w="1280" h="720"/>
+    <music path="Assets/Audio/Music/TitleScreen.ogg"/>
   </sceneTitle>
 	<Hud>
 		<hudbackground texturepath="Assets/Textures/GUI/guibackground.png"/>
 		<hudbuttonsconfig texturepath="Assets/Textures/GUI/guibuttons_config.png"/>
-		<hudbuttonstitle texturepath="Assets/Textures/GUI/guibuttons_titlescreen.png" />
+		<hudbuttonstitle texturepath="Assets/Textures/GUI/PawButtons.png" />
 		<hudbuttonsingame texturepath="Assets/Textures/GUI/guibuttons_ingamepause.png" />
 		<collectibles texturepath="Assets/Textures/collectibles.png"/>
+		<titletext texturepath="Assets/Textures/Title.png"/>
 		<clickfx path="Assets/Audio/Fx/clickfx.wav"/>
-		<mousebyfx path="Assets/Audio/Fx/mousebyfx.wav"/>
+		<mousebyfx path="Assets/Audio/Fx/hudfx.wav"/>
 	</Hud>
 	<scenegameplay>
 		<player x="136" y="23" texturepath="Assets/Textures/testPlayer.png">
