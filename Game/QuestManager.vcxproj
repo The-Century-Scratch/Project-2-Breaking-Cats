@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\ArcaneSpirit.cpp" />
     <ClCompile Include="Source\AssetsManager.cpp" />
     <ClCompile Include="Source\Catska.cpp" />
     <ClCompile Include="Source\CollectQuest.cpp" />
@@ -102,9 +103,11 @@
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\Dialogue.cpp" />
     <ClCompile Include="Source\DialogueManager.cpp" />
+    <ClCompile Include="Source\DiggerSniper.cpp" />
     <ClCompile Include="Source\easings.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Gats.cpp" />
+    <ClCompile Include="Source\GrapplingHook.cpp" />
     <ClCompile Include="Source\Guardian.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\GUICheckBox.cpp" />
@@ -115,6 +118,7 @@
     <ClCompile Include="Source\LongRange.cpp" />
     <ClCompile Include="Source\ModuleCollisions.cpp" />
     <ClCompile Include="Source\MovableObject.cpp" />
+    <ClCompile Include="Source\MysticalEnergy.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\ParticleSystemManager.cpp" />
@@ -148,6 +152,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\ArcaneSpirit.h" />
     <ClInclude Include="Source\AssetsManager.h" />
     <ClInclude Include="Source\Catska.h" />
     <ClInclude Include="Source\CollectQuest.h" />
@@ -155,10 +160,12 @@
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Dialogue.h" />
     <ClInclude Include="Source\DialogueManager.h" />
+    <ClInclude Include="Source\DiggerSniper.h" />
     <ClInclude Include="Source\easings.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Gats.h" />
+    <ClInclude Include="Source\GrapplingHook.h" />
     <ClInclude Include="Source\Guardian.h" />
     <ClInclude Include="Source\GuiButton.h" />
     <ClInclude Include="Source\GUICheckBox.h" />
@@ -171,6 +178,7 @@
     <ClInclude Include="Source\LongRange.h" />
     <ClInclude Include="Source\ModuleCollisions.h" />
     <ClInclude Include="Source\MovableObject.h" />
+    <ClInclude Include="Source\MysticalEnergy.h" />
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\ParticleSystemManager.h" />
