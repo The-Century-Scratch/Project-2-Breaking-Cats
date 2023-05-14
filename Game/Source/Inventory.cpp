@@ -416,13 +416,13 @@ bool Inventory:: PostUpdate()
 	return true;
 }
 
-Item* Inventory::GetItemFromSlot(int itemId_) //Tell me if it works?
+int Inventory::GetItemEquipped() //Tell me if it works?
 {
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
-		if (slotList[invSlot_].itemId == itemId_)
+		if (slotList[invSlot_].item->equiped)
 		{
-			return slotList[invSlot_].item;
+			return slotList[invSlot_].itemId;
 		}
 	}
 	return 0;

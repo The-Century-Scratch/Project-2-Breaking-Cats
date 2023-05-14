@@ -102,7 +102,7 @@ public:
 
 	int GetFirePaw();
 
-	Item* GetItemFromSlot(int itemId_);
+	int GetItemEquipped();
 
 private:
 
