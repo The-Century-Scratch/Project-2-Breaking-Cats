@@ -235,6 +235,8 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				case 5:
 					app->sceneManager->downAfterLabrinth = true;
 					break;
+				case 7:
+					app->sceneManager->topPreLab = true;
 				}
 			}
 			if (app->sceneManager->currentScene == 4)
@@ -262,6 +264,23 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					break;
 				case 4:
 					app->sceneManager->rightLabrinth = true;
+					break;
+				default:
+					break;
+				}
+			}
+			if (app->sceneManager->currentScene == 7)
+			{
+				switch (c2->scene)
+				{
+				case 0:
+					app->sceneManager->downCity = true;
+					break;
+				case 8://TO APPLY, THIS WILL BE FUTURE LAB
+
+					app->sceneManager->downCity = true;//MUST BE CHANGED TO FUTURE LAB MAP
+
+					app->sceneManager->puzzle3solved = true;//if you reach lab, it means you solved the 3rd puzzle, that is the invisible labrinth
 					break;
 				default:
 					break;

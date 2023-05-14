@@ -502,6 +502,16 @@ bool SceneGameplay::Update(float dt)
 			}
 		}
 
+		//leaving prelab map
+		if (app->sceneManager->currentScene == IDPRELAB)
+		{
+			if (app->sceneManager->downCity)
+			{
+				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;
+			}
+		}
+
 		if (app->sceneManager->currentScene == IDSCENEMAP)
 		{
 			//LEAVING CITY MAP
@@ -521,6 +531,11 @@ bool SceneGameplay::Update(float dt)
 			{
 				ChangeMap(LEAVECITYTOP, IDAFTERLABRINTH);
 				app->sceneManager->downAfterLabrinth = false;
+			}
+			else if (app->sceneManager->topPreLab )
+			{
+				ChangeMap(LEAVECITYDOWN, IDPRELAB);
+				app->sceneManager->topPreLab = false;
 			}
 		}
 	}

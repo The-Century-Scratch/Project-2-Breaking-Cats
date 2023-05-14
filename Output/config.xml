@@ -65,6 +65,7 @@
 			<mapfile path="Assets/Maps/Labrinth.tmx"/>	<!--this is 4 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>	<!--this is 5 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/PreLab.tmx"/>		<!--this is 7 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 
