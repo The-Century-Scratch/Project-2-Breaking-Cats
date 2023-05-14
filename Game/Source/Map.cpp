@@ -384,6 +384,11 @@ bool Map::Load(const char* scene)
     return ret;
 }
 
+void Map::ClearMaps()
+{
+    mapFileName.Clear();
+}
+
 // Implement LoadMap to load the map properties
 bool Map::LoadMap(pugi::xml_node mapFile)
 {

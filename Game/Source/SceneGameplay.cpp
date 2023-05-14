@@ -422,6 +422,13 @@ bool SceneGameplay::Update(float dt)
 		app->inventory->AddItem(it->data);
 
 	}
+	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
+	{
+		
+		int aux = app->inventory->GetFirePaw();
+		LOG("the number that you are trying to check is %i", aux);
+
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
