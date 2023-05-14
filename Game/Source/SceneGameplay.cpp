@@ -418,7 +418,7 @@ bool SceneGameplay::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
 	{
 		ListItem<Item*>* it = items.start;
-		it = it->next;
+		//it = it->next;
 		it->data->equiped = true;
 		app->inventory->AddItem(it->data);
 
