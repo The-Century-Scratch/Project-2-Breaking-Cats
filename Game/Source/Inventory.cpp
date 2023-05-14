@@ -411,6 +411,18 @@ bool Inventory::Update(float dt)
 	return true;
 }
 
+Item* Inventory::GetItemFromSlot(int itemId_) //Tell me if it works?
+{
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		if (slotList[invSlot_].itemId == itemId_)
+		{
+			return slotList[invSlot_].item;
+		}
+	}
+	return 0;
+}
+
 int Inventory::GetFirePaw() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
 {
 	for (auto& i : slotList)

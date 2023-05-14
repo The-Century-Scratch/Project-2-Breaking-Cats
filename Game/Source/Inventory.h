@@ -101,6 +101,8 @@ public:
 
 	int GetFirePaw();
 
+	Item* GetItemFromSlot(int itemId_);
+
 private:
 
 	void HandleObjects(InventorySlot objects[]);
