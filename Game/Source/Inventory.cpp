@@ -50,12 +50,12 @@ bool Inventory::Start()
 	invTex = app->tex->Load("Assets/Textures/TestInventory.png");
 	slotText = app->tex->Load("Assets/Textures/TestInvSlot.png");
 
-	slotRect = { 0,0,16,16 };
-	slotRectFocus = { 17,0,18,18 };
+	slotRect = { 0,0,20,20 };
+	slotRectFocus = { 21,0,20,20 };
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
-		slotList[invSlot_].bounds = { 0, 0, 16, 16 };
+		slotList[invSlot_].bounds = { 0, 0, 22, 22 };
 		slotList[invSlot_].currentSlot = invSlot_;
 		slotList[invSlot_].itemId = 0;
 		slotList[invSlot_].isfull = false;
@@ -212,17 +212,21 @@ bool Inventory::Update(float dt)
 	//invPos.x = -(app->render->camera.x / scale) - 100;
 	//invPos.y = -(app->render->camera.y / scale) - 100;
 
-	invPos.x = (-app->render->camera.x/scale)+150;
-	invPos.y = (-app->render->camera.y/scale)+100;
+	invPos.x = (-app->render->camera.x/scale) + 105;
+	invPos.y = (-app->render->camera.y/scale) + 60;
+
+	invPosText.x = (int)(app->render->camera.x + invPos.x * scale);
+	invPosText.y = (int)(app->render->camera.y + invPos.y * scale);
 	
 	iPoint invSpacing = { 0,0 };
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
-		slotList[invSlot_].bounds.x = invPos.x + invSpacing.x + 2;
-		slotList[invSlot_].bounds.y = invPos.y + invSpacing.y + 2;
-		invSpacing.x += 18;
-		if (invSlot_ == 3) invSpacing = { 0,18 };
+		slotList[invSlot_].bounds.x = invPos.x + invSpacing.x + 87;
+		slotList[invSlot_].bounds.y = invPos.y + invSpacing.y + 33;
+		invSpacing.x += 22;
+		if (invSlot_ == 3 || invSlot_ == 7 || invSlot_ == 11) invSpacing = { 0, invSpacing.y += 22 };
 	}
+
 
 	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
 	iPoint invSpacing = { 0,0 };
@@ -421,9 +425,12 @@ int Inventory::GetFirePaw() // TODO: Ideally, this would check the equipment slo
 
 void Inventory::Draw()
 {
-
-	SDL_Rect invRect = { 0,0,74,38 };
+	int scale = app->win->GetScale();
+	SDL_Color white = {255, 255, 255, 255};
+	SDL_Rect invRect = { 0, 0, 186, 130 };
 	app->render->DrawTexture(invTex, invPos.x, invPos.y, &invRect);
+	app->render->DrawText("INVENTORY",invPosText.x + 105*scale, invPosText.y + 12*scale, 50*scale, 14*scale, white);
+	app->render->DrawText("STATS", invPosText.x + 33 * scale, invPosText.y + 82 * scale, 20 * scale, 7 * scale, white);
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
@@ -433,7 +440,7 @@ void Inventory::Draw()
 		case SlotState::UNSELECTED:
 			break;
 		case SlotState::FOCUSED:
-			app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x - 1, slotList[invSlot_].bounds.y - 1, &slotRectFocus);
+			app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x + 1, slotList[invSlot_].bounds.y, &slotRectFocus);
 			break;
 		case SlotState::SELECTED:
 			break;
@@ -443,7 +450,7 @@ void Inventory::Draw()
 
 		if (slotList->itemId != 0)
 		{
-			app->render->DrawTexture(itemTexture, slotList[invSlot_].bounds.x, slotList[invSlot_].bounds.y, &slotList[invSlot_].itemTextureBounds);
+			app->render->DrawTexture(itemTexture, slotList[invSlot_].bounds.x+2, slotList[invSlot_].bounds.y+2, &slotList[invSlot_].itemTextureBounds);
 		}
 	}
 
@@ -1083,8 +1090,7 @@ void Inventory::AddItem(Item *it)
 bool Inventory::IsMouseInside(SDL_Rect r)
 {
 	int x, y;
-	app->input->GetMousePosition(x, y);
-	x += 156; 
+	app->input->GetMousePosition(x, y); 
 
 	return (x > r.x) && (x < r.x + r.w) && (y > r.y) && (y < r.y + r.h);
 }

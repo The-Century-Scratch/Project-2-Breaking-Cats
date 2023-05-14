@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#define MAX_INVENTORY_SLOTS 8
+#define MAX_INVENTORY_SLOTS 16
 #define MAX_EQUIPMENT_SLOTS 3
 #define ITEM_STACK 32
 
@@ -181,6 +181,7 @@ private:
 	int counter;
 
 	iPoint invPos;
+	iPoint invPosText;
 
 	bool grabbed;
 	float toGrabCount;
