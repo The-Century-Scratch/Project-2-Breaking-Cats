@@ -29,6 +29,7 @@ public:
 
 	int GetHealthPoints() override;
 	void DealDamage(int amount) override;
+	int GetDamage() override;
 
 	void Update() override;
 
@@ -53,6 +54,7 @@ private:
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
 	int healthPoints = 30;
+	int damage = 666;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

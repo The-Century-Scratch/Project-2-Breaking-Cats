@@ -20,7 +20,8 @@ public:
 			ATTACK = 0x0003,
 			ATTACK_LONG_RANGE = 0x0004,
 			ATTACK_TO_PLAYER = 0x0005,
-			ATTACK_TO_PLAYER_LONG_RANGE = 0x0006
+			ATTACK_TO_PLAYER_LONG_RANGE = 0x0006,
+			PREPARE_DASH = 0x0007
 		};
 
 		friend Action operator&(Action a, Action b)
@@ -67,6 +68,7 @@ public:
 
 	virtual void DealDamage(int amount);
 	virtual int GetHealthPoints();
+	virtual int GetDamage();
 
 	virtual void Update();
 
@@ -97,6 +99,7 @@ private:
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
 	int healthPoints = 1;
+	int damage;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

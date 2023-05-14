@@ -276,6 +276,10 @@ bool SceneBattle::Update(float dt)
 					i->StartAction(unitAction);
 				}
 			}
+			if ((unitAction.action) == UA::PREPARE_DASH)
+			{
+				i->StartAction(unitAction);
+			}
 			// TODO: make this a switch
 			if ((unitAction.action) == UA::ATTACK)
 			{
@@ -286,7 +290,7 @@ bool SceneBattle::Update(float dt)
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.DistanceTo(unitPos) < 18)
 						{
-							unit->DealDamage(10);
+							unit->DealDamage(i->GetDamage());
 							i->StartAction(unitAction);
 							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
 							i->SetHasFinishedTurn(true);
@@ -305,10 +309,11 @@ bool SceneBattle::Update(float dt)
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
 						{
-							unit->DealDamage(10);
+							unit->DealDamage(i->GetDamage());
 							i->StartAction(unitAction);
 							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
 							i->SetHasFinishedTurn(true);
+							break;
 
 						}
 					}
@@ -324,7 +329,7 @@ bool SceneBattle::Update(float dt)
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.DistanceTo(unitPos) < 18)
 						{
-							unit->DealDamage(10);
+							unit->DealDamage(i->GetDamage());
 							i->StartAction(unitAction);
 							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
 							i->SetHasFinishedTurn(true);
@@ -342,10 +347,11 @@ bool SceneBattle::Update(float dt)
 						iPoint  unitPos = unit.get()->GetPosition();
 						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
 						{
-							unit->DealDamage(10);
+							unit->DealDamage(i->GetDamage());
 							i->StartAction(unitAction);
 							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
 							i->SetHasFinishedTurn(true);
+							break;
 						}
 					}
 				}

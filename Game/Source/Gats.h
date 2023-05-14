@@ -31,8 +31,11 @@ public:
 
 	int GetHealthPoints() override;
 	void DealDamage(int amount) override;
+	int GetDamage() override;
 
 	void Update() override;
+
+	void Test();
 
 	//pugi::xml_node parameters;
 
@@ -41,11 +44,14 @@ private:
 	void SmoothMove();
 	void StartMovement();
 
+	
+
 	int moveTimer = 0;
 	iPoint moveVector = { 0,0 };
 	int speed = 4;
 	const int timeForATile = 2;
 	const int tileSize = 16;
+	bool goingToDash = false;
 
 	
 	int animTimer = 0;
@@ -58,6 +64,7 @@ private:
 	bool hasFinishedTurn = false;
 
 	int healthPoints = 50;
+	int damage = 10;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

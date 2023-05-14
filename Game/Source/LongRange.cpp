@@ -263,3 +263,8 @@ int LongRange::GetHealthPoints()
 {
 	return healthPoints;
 }
+
+int LongRange::GetDamage()
+{
+	return damage;
+}

@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "Inventory.h"
 
 //Gats::Gats() = default;
 Gats::Gats()
@@ -26,7 +27,7 @@ void Gats::DebugDraw() const
 	if (isMyTurn)
 	{
 		//app->render->DrawShape(debugPosition, false, SDL_Color(intensity, intensity, 0, 255));
-		app->render->DrawRectangle(debugPosition, intensity, intensity, 0, 255, false);
+		app->render->DrawRectangle(debugPosition, intensity, intensity, 255 * goingToDash, 255, false);
 	}
 	else
 	{
@@ -83,6 +84,11 @@ void Gats::Create(iPoint pos)
 	
 }
 
+void Gats::Test()
+{
+	LOG("the test has been successful");
+}
+
 Gats::PlayerAction Gats::HandleInput() const
 {
 	//using enum KeyState;
@@ -118,6 +124,10 @@ Gats::PlayerAction Gats::HandleInput() const
 		returnAction.action |= Gats::PlayerAction::Action::MOVE;
 		returnAction.destinationTile.x += tileSize;
 	}
+	else if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && app->inventory->GetFirePaw())
+	{
+		returnAction.action |= Gats::PlayerAction::Action::PREPARE_DASH;
+	}
 
 	return returnAction;
 }
@@ -133,6 +143,10 @@ void Gats::StartAction(PlayerAction playerAction)
 	{
 		
 	}
+	else if (playerAction.action == PlayerAction::Action::PREPARE_DASH)
+	{
+		goingToDash = !goingToDash;
+	}
 }
 
 void Gats::StartMovement()
@@ -140,25 +154,26 @@ void Gats::StartMovement()
 	//using enum KeyState;
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
-		moveVector.y = -1;
+		moveVector.y = -1 * (goingToDash * 2 + 1);
 		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
-		moveVector.x = -1;
+		moveVector.x = -1 * (goingToDash * 2 + 1);
 		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
-		moveVector.y = 1;
+		moveVector.y = 1 * (goingToDash * 2 + 1);
 		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
-		moveVector.x = 1;
+		moveVector.x = 1 * (goingToDash * 2 + 1);
 		
 		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
+	goingToDash = false;
 }
 
 void Gats::Update()
@@ -229,4 +244,9 @@ void Gats::DealDamage(int amount)
 int Gats::GetHealthPoints()
 {
 	return healthPoints;
+}
+
+int Gats::GetDamage()
+{
+	return damage;
 }

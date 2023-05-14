@@ -229,3 +229,8 @@ int Catska::GetHealthPoints()
 {
 	return healthPoints;
 }
+
+int Catska::GetDamage()
+{
+	return damage;
+}

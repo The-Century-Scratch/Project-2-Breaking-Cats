@@ -272,3 +272,8 @@ int Guardian::GetHealthPoints()
 {
 	return healthPoints;
 }
+
+int Guardian::GetDamage()
+{
+	return damage;
+}

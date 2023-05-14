@@ -218,3 +218,8 @@ int Unit::GetHealthPoints()
 {
 	return healthPoints;
 }
+
+int Unit::GetDamage()
+{
+	return damage;
+}

@@ -211,3 +211,8 @@ int Straw::GetHealthPoints()
 {
 	return healthPoints;
 }
+
+int Straw::GetDamage()
+{
+	return damage;
+}
