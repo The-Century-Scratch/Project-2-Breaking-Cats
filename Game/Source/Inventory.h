@@ -69,6 +69,7 @@ public:
 
 	bool Start() override;
 	bool Update(float dt) override;
+	bool PostUpdate() override;
 	void Draw();
 	bool CleanUp() override;
 	bool OnGuiMouseClickEvent(GuiControl* control);

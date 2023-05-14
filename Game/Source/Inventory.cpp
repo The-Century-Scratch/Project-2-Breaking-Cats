@@ -242,8 +242,6 @@ bool Inventory::Update(float dt)
 	}*/
 
 	HandleSlotState();
-
-	Draw();
 	//UpdatingButtons(app->input);
 
 	//int id = -1;
@@ -407,6 +405,13 @@ bool Inventory::Update(float dt)
 	//}
 
 	//if (state != InventoryState::STATS) HandleEquipment(dt);
+
+	return true;
+}
+
+bool Inventory:: PostUpdate()
+{
+	Draw();
 
 	return true;
 }
