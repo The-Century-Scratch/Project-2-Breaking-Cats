@@ -23,6 +23,7 @@
 #include <time.h>
 #include "ModuleCollisions.h"
 #include "Debug.h"
+#include "Inventory.h"
 
 SceneBattle::SceneBattle()
 {
@@ -300,6 +301,34 @@ bool SceneBattle::Update(float dt)
 				}
 
 			}
+			if ((unitAction.action) == UA::ATTACK_AND_HEAL_WITH_KILL)
+			{
+				for (auto& unit : units)
+				{
+					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					{
+						iPoint  unitPos = unit.get()->GetPosition();
+						if (i->position.DistanceTo(unitPos) < 18)
+						{
+							unit->DealDamage(i->GetDamage());
+							if (unit->GetHealthPoints() <= 0)
+							{
+								i->StartAction(unitAction);
+							}
+							else
+							{
+								unitAction.action = UA::ATTACK;
+								i->StartAction(unitAction);
+							}
+							
+							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+							i->SetHasFinishedTurn(true);
+
+						}
+					}
+				}
+
+			}
 			if ((unitAction.action) == UA::ATTACK_LONG_RANGE)
 			{
 				for (auto& unit : units)
@@ -313,7 +342,11 @@ bool SceneBattle::Update(float dt)
 							i->StartAction(unitAction);
 							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
 							i->SetHasFinishedTurn(true);
-							break;
+							if (!app->inventory->GetFirePaw())  // TODO: change fire paw into digger sniper
+							{
+								break;
+							}
+							
 
 						}
 					}

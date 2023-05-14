@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "Inventory.h"
 
 //Catska::Catska() = default;
 
@@ -82,6 +83,11 @@ void Catska::Create(iPoint pos)
 	
 	position = pos;
 	size = { 16, 16 };
+
+	if (app->inventory->GetFirePaw()) // TODO: replace fire paw by mystical energy
+	{
+		damage += 5;
+	}
 	
 }
 
@@ -222,7 +228,20 @@ void Catska::SmoothMove()
 
 void Catska::DealDamage(int amount)
 {
-	healthPoints -= amount;
+	if (app->inventory->GetFirePaw()) // TODO: replace fire paw by grappling hook
+	{
+		int aux = rand() % 4;
+		if (aux > 0)
+		{
+			healthPoints -= amount;
+			LOG("damage avoided");
+		}
+	}
+	else
+	{
+		healthPoints -= amount;
+	}
+	
 }
 
 int Catska::GetHealthPoints()

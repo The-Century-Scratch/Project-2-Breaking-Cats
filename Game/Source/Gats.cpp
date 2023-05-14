@@ -81,6 +81,10 @@ void Gats::Create(iPoint pos)
 	
 	position = pos;
 	size = { 16, 16 };
+	if (app->inventory->GetFirePaw()) // TODO: replace fire paw with arcane spirit
+	{
+		healthPoints += 15;
+	}
 	
 }
 
@@ -101,7 +105,15 @@ Gats::PlayerAction Gats::HandleInput() const
 
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
-		returnAction.action = Gats::PlayerAction::Action::ATTACK;
+		if (app->inventory->GetFirePaw()) // TODO: change fire paw for dragon slayer
+		{
+			returnAction.action = Gats::PlayerAction::Action::ATTACK_AND_HEAL_WITH_KILL;
+		}
+		else
+		{
+			returnAction.action = Gats::PlayerAction::Action::ATTACK;
+		}
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -141,7 +153,12 @@ void Gats::StartAction(PlayerAction playerAction)
 	}
 	else if (playerAction.action == PlayerAction::Action::ATTACK)
 	{
-		
+		//LOG("this is a normal attack");
+	}
+	else if (playerAction.action == PlayerAction::Action::ATTACK_AND_HEAL_WITH_KILL)
+	{
+		healthPoints += 10;
+		//LOG("this is a healing attack");
 	}
 	else if (playerAction.action == PlayerAction::Action::PREPARE_DASH)
 	{

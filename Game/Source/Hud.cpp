@@ -52,7 +52,7 @@ bool Hud::Start()
 	app->win->GetWindowSize(w,h);
 	scale = app->win->GetScale();
 	//title screen buttons
-	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Play",		{ (int)(w / 2 - 100) ,(int)(h / 2 - 120),197,46}, this);
+	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Play    ",		{ (int)(w / 2 - 100) ,(int)(h / 2 - 120),197,46}, this);
 	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue",	{ (int)(w / 2 - 100) ,(int)(h / 2 - 60 ),197,46}, this);
 	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Options",	{ (int)(w / 2 - 100) ,(int)(h / 2 + 0  ),197,46}, this);
 	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Credits",	{ (int)(w / 2 - 100) ,(int)(h / 2 + 60 ),197,46}, this);
