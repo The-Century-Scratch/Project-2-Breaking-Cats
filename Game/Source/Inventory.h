@@ -99,6 +99,8 @@ public:
 
 	void ResetStates();
 
+	int GetFirePaw();
+
 private:
 
 	void HandleObjects(InventorySlot objects[]);

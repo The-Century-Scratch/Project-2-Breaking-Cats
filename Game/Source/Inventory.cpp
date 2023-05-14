@@ -407,6 +407,18 @@ bool Inventory::Update(float dt)
 	return true;
 }
 
+int Inventory::GetFirePaw() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
+{
+	for (auto& i : slotList)
+	{
+		if (i.itemId == 1)
+		{
+			return i.itemId;
+		}
+	}
+	return 0;
+}
+
 void Inventory::Draw()
 {
 

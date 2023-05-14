@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetsManager.cpp" />
+    <ClCompile Include="Source\Catska.cpp" />
     <ClCompile Include="Source\CollectQuest.cpp" />
     <ClCompile Include="Source\Colliders.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
@@ -103,12 +104,15 @@
     <ClCompile Include="Source\DialogueManager.cpp" />
     <ClCompile Include="Source\easings.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
+    <ClCompile Include="Source\Gats.cpp" />
+    <ClCompile Include="Source\Guardian.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\GUICheckBox.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\GUISlider.cpp" />
     <ClCompile Include="Source\Hud.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\LongRange.cpp" />
     <ClCompile Include="Source\ModuleCollisions.cpp" />
     <ClCompile Include="Source\MovableObject.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
@@ -134,15 +138,18 @@
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\SceneTitle.cpp" />
     <ClCompile Include="Source\StaticObject.cpp" />
+    <ClCompile Include="Source\Straw.cpp" />
     <ClCompile Include="Source\TalkQuest.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\TransitionsManager.cpp" />
     <ClCompile Include="Source\TriggerableObject.cpp" />
+    <ClCompile Include="Source\Unit.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AssetsManager.h" />
+    <ClInclude Include="Source\Catska.h" />
     <ClInclude Include="Source\CollectQuest.h" />
     <ClInclude Include="Source\Colliders.h" />
     <ClInclude Include="Source\Debug.h" />
@@ -151,6 +158,8 @@
     <ClInclude Include="Source\easings.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
+    <ClInclude Include="Source\Gats.h" />
+    <ClInclude Include="Source\Guardian.h" />
     <ClInclude Include="Source\GuiButton.h" />
     <ClInclude Include="Source\GUICheckBox.h" />
     <ClInclude Include="Source\GuiControl.h" />
@@ -159,6 +168,7 @@
     <ClInclude Include="Source\Hud.h" />
     <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\Item.h" />
+    <ClInclude Include="Source\LongRange.h" />
     <ClInclude Include="Source\ModuleCollisions.h" />
     <ClInclude Include="Source\MovableObject.h" />
     <ClInclude Include="Source\Particle.h" />
@@ -187,11 +197,13 @@
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\SceneTitle.h" />
     <ClInclude Include="Source\StaticObject.h" />
+    <ClInclude Include="Source\Straw.h" />
     <ClInclude Include="Source\TalkQuest.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\TransitionsManager.h" />
     <ClInclude Include="Source\TriggerableObject.h" />
+    <ClInclude Include="Source\Unit.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />

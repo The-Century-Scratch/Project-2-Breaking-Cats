@@ -418,8 +418,28 @@ bool SceneGameplay::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
 	{
 		ListItem<Item*>* it = items.start;
+		//it = it->next;
 		it->data->equiped = true;
 		app->inventory->AddItem(it->data);
+
+	}
+	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
+	{
+		
+		int aux = app->inventory->GetFirePaw();
+		LOG("the number that you are trying to check is %i", aux);
+
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+
+		
+
+		app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
 
 	}
 
