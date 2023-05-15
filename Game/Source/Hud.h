@@ -123,8 +123,6 @@ private:
 
 	float titlePos;
 
-	SString forestTheme;
-
 };
 
 #endif // __HUD_H__

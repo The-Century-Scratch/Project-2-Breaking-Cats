@@ -69,7 +69,6 @@ private:
 	const char* texturePath;
 	uint walkinggrassfx;
 	uint walkingcityfx;
-	int walkingTimer;
 
 };
 

@@ -222,7 +222,6 @@ private:
 	//Music
 	SString cityTheme;
 	SString shopTheme;
-	SString forestTheme;
 
 
 
