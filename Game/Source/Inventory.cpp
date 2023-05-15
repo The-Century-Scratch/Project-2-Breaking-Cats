@@ -46,7 +46,7 @@ bool Inventory::Start()
 	pugi::xml_node config = configNode.child(name.GetString());
 
 	pugi::xml_node itemNode = config.child("item");
-	itemTexture = app->tex->Load("Assets/Textures/TestItem.png");
+	itemTexture = app->tex->Load("Assets/Textures/Items.png");
 	invTex = app->tex->Load("Assets/Textures/TestInventory.png");
 	slotText = app->tex->Load("Assets/Textures/TestInvSlot.png");
 

@@ -58,7 +58,7 @@
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
     <item>
-      <texturepath texturepath="Assets/Textures/TestItem.png"/>
+      <texturepath texturepath="Assets/Textures/Items.png"/>
       <firePaws scene="0" x="384" y="48" id="1"/>
       <dragonSlayer scene="0" x="384" y="48" id="2"/>
       <grapplingHook scene="0" x="384" y="48" id="3"/>
