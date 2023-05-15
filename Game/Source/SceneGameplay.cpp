@@ -220,9 +220,9 @@ bool SceneGameplay::Load()
 	items.Add(mysticalEnergy);
 	mysticalEnergy->Start();
 
-	mysticalEnergy = new ArcaneSpirit(iPoint(itemNode.child("arcaneSpirit").attribute("x").as_int(), itemNode.child("arcaneSpirit").attribute("y").as_int()), itemText);
-	items.Add(mysticalEnergy);
-	mysticalEnergy->Start();
+	arcaneSpirit = new ArcaneSpirit(iPoint(itemNode.child("arcaneSpirit").attribute("x").as_int(), itemNode.child("arcaneSpirit").attribute("y").as_int()), itemText);
+	items.Add(arcaneSpirit);
+	arcaneSpirit->Start();
 
 
 
@@ -596,14 +596,6 @@ bool SceneGameplay::Update(float dt)
 	}
 	
 
-
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{
-		app->hud->prevstate = app->hud->hudstate;
-		app->hud->hudstate = hudSTATE::PAUSESCREEN;
-		app->hud->wait1frame = true;
-	}
-
 	//switch (gameState)
 	//{
 	//case GameplayState::ROAMING:
@@ -920,7 +912,6 @@ void SceneGameplay::Draw()
 		DrawDebugVariable();
 	}
 
-
 	//SDL_Rect r = { 110,0,100,100 };
 
 	//switch (gameState)
@@ -1036,7 +1027,35 @@ bool SceneGameplay::UnLoad()
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
 
+	/*ListItem<Item*>* it = items.start;
+	for (; it != items.end; ++it)
+	{
+		it->data->CleanUp();
+	}*/
 
+	firePaw->CleanUp();
+	delete(firePaw);
+	firePaw = nullptr;
+
+	dragonSlayer->CleanUp();
+	delete(dragonSlayer);
+	dragonSlayer = nullptr;
+
+	grapplingHook->CleanUp();
+	delete(grapplingHook);
+	grapplingHook = nullptr;
+
+	bulletPenetration->CleanUp();
+	delete(bulletPenetration);
+	bulletPenetration = nullptr;
+
+	mysticalEnergy->CleanUp();
+	delete(mysticalEnergy);
+	mysticalEnergy = nullptr;
+
+	arcaneSpirit->CleanUp();
+	delete(arcaneSpirit);
+	arcaneSpirit = nullptr;
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -2033,13 +2052,15 @@ void SceneGameplay::LoadTriggerableObjects()
 }
 
 void SceneGameplay::LoadNpc()
-{	ListItem<NPC*>* npcItem = npcs.start;
+{
+	ListItem<NPC*>* npcItem = npcs.start;
 	while (npcItem != NULL)
 	{
 		npcItem->data->toDelete = true;
 		npcItem = npcItem->next;
 	}
 	npcs.Clear();
+
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
@@ -2049,10 +2070,15 @@ void SceneGameplay::LoadNpc()
 		{
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
 			npc->parameters = npcNode;
-			npcs.Add(npc); 
+			npcs.Add(npc);
 			npc->Start();
 		}
 	}
+
+
+
+
+
 
 	//pugi::xml_document animations;
 	//pugi::xml_node anims;
@@ -2281,7 +2307,6 @@ void SceneGameplay::DrawDebugVariable()
 	app->render->DrawText("Mouse Y  ", app->debug->debugX, app->debug->debugY + 190, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
 
-	app->input->GetMousePosition(MouseX_, MouseY_);
 	app->render->DrawText("InvPosX  ", app->debug->debugX, app->debug->debugY + 240, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(app->inventory->invPos.x).c_str(), app->debug->debugX + 110, app->debug->debugY + 240, 50, 20, app->debug->debugColor);
 	app->render->DrawText("InvPosY  ", app->debug->debugX, app->debug->debugY + 270, 100, 20, app->debug->debugColor);
