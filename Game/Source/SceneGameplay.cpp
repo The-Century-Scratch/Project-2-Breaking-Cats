@@ -447,6 +447,8 @@ bool SceneGameplay::Update(float dt)
 		app->inventory->isActivated = !app->inventory->isActivated;
 	}
 
+	
+
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
 		firePaw->equiped = true;

@@ -84,7 +84,7 @@ void Catska::Create(iPoint pos)
 	position = pos;
 	size = { 16, 16 };
 
-	if (app->inventory->GetFirePaw()) // TODO: replace fire paw by mystical energy
+	if (app->inventory->GetMysticalEnergy())
 	{
 		damage += 5;
 	}
@@ -228,7 +228,7 @@ void Catska::SmoothMove()
 
 void Catska::DealDamage(int amount)
 {
-	if (app->inventory->GetFirePaw()) // TODO: replace fire paw by grappling hook
+	if (app->inventory->GetGrapplingHook())
 	{
 		int aux = rand() % 4;
 		if (aux > 0)
