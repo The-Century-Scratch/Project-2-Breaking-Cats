@@ -243,10 +243,10 @@ bool Hud::Update(float dt)
 			}
 			control = control->next;
 		}
-		if (prevstate == hudSTATE::PAUSESCREEN)
+		/*if (prevstate == hudSTATE::PAUSESCREEN)
 		{
 			app->render->DrawTexture(guiBackground, (103 - app->render->camera.x), (69 - app->render->camera.y), 0, 1.0f, 0.0, 2147483647, 2147483647, true);
-		}
+		}*/
 	}
 	else if (hudstate == hudSTATE::PAUSESCREEN)
 	{
@@ -283,7 +283,7 @@ bool Hud::Update(float dt)
 			}
 			control = control->next;
 		}
-		app->render->DrawTexture(guiBackground, (103 - app->render->camera.x), (69 - app->render->camera.y), 0, 1.0f, 0.0, 2147483647, 2147483647, true);
+		//app->render->DrawTexture(guiBackground, (103 - app->render->camera.x), (69 - app->render->camera.y), 0, 1.0f, 0.0, 2147483647, 2147483647, true);
 	}
 	else if (hudstate == hudSTATE::CLOSED)
 	{
@@ -355,7 +355,7 @@ bool Hud::PostUpdate()
 
 
 	ret = !exit;
-	app->guiManager->Draw();
+	//app->guiManager->Draw();
 	if (hudstate == hudSTATE::TITLESCREEN)
 	{
 		if (easingTitleIn->easingsActivated || easingTitleOut->easingsActivated)
@@ -367,6 +367,11 @@ bool Hud::PostUpdate()
 			app->render->DrawTexture(titleText, 100, titlePos, &section, 1.0f, 0.0, 2147483647, 2147483647, true);
 		}
 	}
+	else if (hudstate == hudSTATE::PAUSESCREEN || hudstate == hudSTATE::CONFIGSCREEN)
+	{
+		app->render->DrawTexture(guiBackground, (235 - app->render->camera.x), (20 - app->render->camera.y), 0, 1.0f, 0.0, 2147483647, 2147483647, true);
+	}
+	app->guiManager->Draw();
 
 	// Draw the current transition in front of everything
 	app->sceneManager->DrawTransition();

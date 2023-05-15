@@ -595,6 +595,12 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		app->hud->prevstate = app->hud->hudstate;
+		app->hud->hudstate = hudSTATE::PAUSESCREEN;
+		app->hud->wait1frame = true;
+	}
 
 	//switch (gameState)
 	//{
