@@ -55,6 +55,8 @@ bool SceneBattle::Load()
 
 	app->map->Load(name.GetString());
 
+	combatTheme = config.child("music").attribute("path").as_string();
+
 
 
 	for (pugi::xml_node nodeUnit = config.child("gats");
@@ -209,6 +211,9 @@ bool SceneBattle::Load()
 	//app->render->camera.x = 0;
 	//app->render->camera.y = 0;
 
+
+	app->audio->PlayMusic(combatTheme.GetString());
+
 	return true;
 }
 
@@ -342,7 +347,7 @@ bool SceneBattle::Update(float dt)
 							i->StartAction(unitAction);
 							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
 							i->SetHasFinishedTurn(true);
-							if (!app->inventory->GetFirePaw())  // TODO: change fire paw into digger sniper
+							if (!app->inventory->GetBulletPenetration())
 							{
 								break;
 							}

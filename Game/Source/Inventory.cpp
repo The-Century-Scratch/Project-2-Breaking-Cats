@@ -298,6 +298,67 @@ int Inventory::GetFirePaw() // TODO: Ideally, this would check the equipment slo
 	return 0;
 }
 
+int Inventory::GetDragonSlayer() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
+{
+	for (auto& i : slotList)
+	{
+		if (i.itemId == 2)
+		{
+			return i.itemId;
+		}
+	}
+	return 0;
+}
+
+
+int Inventory::GetGrapplingHook() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
+{
+	for (auto& i : slotList)
+	{
+		if (i.itemId == 3)
+		{
+			return i.itemId;
+		}
+	}
+	return 0;
+}
+
+int Inventory::GetBulletPenetration() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
+{
+	for (auto& i : slotList)
+	{
+		if (i.itemId == 4)
+		{
+			return i.itemId;
+		}
+	}
+	return 0;
+}
+
+int Inventory::GetMysticalEnergy() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
+{
+	for (auto& i : slotList)
+	{
+		if (i.itemId == 5)
+		{
+			return i.itemId;
+		}
+	}
+	return 0;
+}
+
+int Inventory::GetArcaneSpirit() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
+{
+	for (auto& i : slotList)
+	{
+		if (i.itemId == 6)
+		{
+			return i.itemId;
+		}
+	}
+	return 0;
+}
+
 void Inventory::Draw()
 {
 	int scale = app->win->GetScale();

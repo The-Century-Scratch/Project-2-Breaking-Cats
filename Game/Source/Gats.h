@@ -65,6 +65,7 @@ private:
 
 	int healthPoints = 50;
 	int damage = 10;
+	int maxHealth = 50;
 
 	SDL_Rect currentSpriteSlice{ 0 };
 };

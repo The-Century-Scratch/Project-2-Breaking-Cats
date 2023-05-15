@@ -59,4 +59,6 @@ private:
 	Map* map;
 	// Menu
 	BattleMenu* battleMenu;
+
+	SString combatTheme;
 };

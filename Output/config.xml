@@ -36,13 +36,18 @@
 		<hudbuttonsingame texturepath="Assets/Textures/GUI/guibuttons_ingamepause.png" />
 		<collectibles texturepath="Assets/Textures/collectibles.png"/>
 		<clickfx path="Assets/Audio/Fx/CatTalking.wav"/>
-		<titletext texturepath="Assets/Textures/Title.png"/>
 		<mousebyfx path="Assets/Audio/Fx/hudfx.wav"/>
+		<titletext texturepath="Assets/Textures/Title.png"/>
+		<switchfx path="Assets/Audio/Fx/Switch.wav"/>
+		<unswitchfx path="Assets/Audio/Fx/Unswitch.wav"/>
+		<getitemfx path="Assets/Audio/Fx/GetItem.wav"/>
+		<swapscenesfx path="Assets/Audio/Fx/SwapScenes.wav"/>
 	</Hud>
 	<scenegameplay>
-		<player x="136" y="23" texturepath="Assets/Textures/Gats.png">
+		<player x="136" y="23" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrass.wav" stepcity="Assets/Audio/Fx/WalkingCity.wav">
 		</player>
-		<music path="Assets/Audio/Music/1_Astrub.ogg"/>
+		<citytheme path="Assets/Audio/Music/CityTheme.ogg"/>
+		<shoptheme path="Assets/Audio/Music/ShopTheme.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
 		<npc scene="0" x="480" y="160" texturepath="Assets/Textures/NPCs.png" id="1" type="0"/>
@@ -100,6 +105,8 @@
 			<!--this is 0 in the list of strings of maps-->
 
 		</map>
+    
+		<music path="Assets/Audio/Music/Combat.ogg"/>
 	</scenebattle>
 	
 	

@@ -8,6 +8,7 @@
 #include "Point.h"
 #include "ModuleCollisions.h"
 #include "SceneManager.h"
+#include "Hud.h"
 
 TriggerableObject::TriggerableObject(bool triggered) : Entity(EntityType::TRIGGERABLEOBJECT)
 {
@@ -59,8 +60,19 @@ bool TriggerableObject::Update()
 	{
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
-			triggered = true;
 			app->sceneManager->puzzle2solved = true;
+			if (triggered)
+			{
+				currentAnim = &untriggeredAnim;
+				app->audio->PlayFx(app->hud->unswitchfx);
+				triggered = false;
+			}
+			else if (!triggered)
+			{
+				currentAnim = &triggeredAnim;
+				app->audio->PlayFx(app->hud->switchfx);
+				triggered = true;
+			}
 		}
 	}
 	if (triggered)

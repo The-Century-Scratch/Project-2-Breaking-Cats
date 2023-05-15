@@ -21,7 +21,7 @@ Gats::~Gats() = default;
 void Gats::DebugDraw() const
 {
 	
-	int intensity = 255.0f * (static_cast<float>(healthPoints) / 50);
+	int intensity = 255.0f * (static_cast<float>(healthPoints) / maxHealth);
 	
 	SDL_Rect debugPosition = { position.x, position.y, size.x, size.y };
 	if (isMyTurn)
@@ -81,10 +81,11 @@ void Gats::Create(iPoint pos)
 	
 	position = pos;
 	size = { 16, 16 };
-	if (app->inventory->GetFirePaw()) // TODO: replace fire paw with arcane spirit
+	if (app->inventory->GetArcaneSpirit())
 	{
 		healthPoints += 15;
 	}
+	maxHealth = healthPoints;
 	
 }
 
@@ -105,7 +106,7 @@ Gats::PlayerAction Gats::HandleInput() const
 
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
-		if (app->inventory->GetFirePaw()) // TODO: change fire paw for dragon slayer
+		if (app->inventory->GetDragonSlayer())
 		{
 			returnAction.action = Gats::PlayerAction::Action::ATTACK_AND_HEAL_WITH_KILL;
 		}
@@ -158,6 +159,10 @@ void Gats::StartAction(PlayerAction playerAction)
 	else if (playerAction.action == PlayerAction::Action::ATTACK_AND_HEAL_WITH_KILL)
 	{
 		healthPoints += 10;
+		if (healthPoints > maxHealth)
+		{
+			healthPoints = maxHealth;
+		}
 		//LOG("this is a healing attack");
 	}
 	else if (playerAction.action == PlayerAction::Action::PREPARE_DASH)
