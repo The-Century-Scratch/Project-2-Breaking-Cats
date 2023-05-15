@@ -4,11 +4,18 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
-//#include "Font.h"
-//#include "Easings.h"
-
+#include "Debug.h"
+#include "ModuleCollisions.h"
+#include "Hud.h"
+#include "Window.h"
+#include "SceneGameplay.h"
+#include "SceneManager.h"
+#include "SceneBattle.h"
+#include "EntityManager.h"
+#include "Map.h"
+#include "Inventory.h"
+#include "Easings.h"
 #include "SceneEnding.h"
-//#include "EndingMenu.h"
 
 #include "Log.h"
 
@@ -51,10 +58,8 @@ bool SceneEnding::Load()
 	LOG("Loading Scene Ending");
 	bool ret = true;
 
-	//if (hasWin) bg = app->tex->Load("Textures/Scenes/battle_bg3.png");
-	//else bg = app->tex->Load("Textures/Scenes/battle_bg2.png");
-
-	//menu->Load(font);
+	if (hasWin) bg = app->tex->Load("Assets/Textures/victory.png");
+	else bg = app->tex->Load("Assets/Textures/defeat.png");
 
 	return ret;
 }
@@ -62,7 +67,22 @@ bool SceneEnding::Load()
 bool SceneEnding::Update(float dt)
 {
 	bool ret = true;
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+	{
 
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+
+
+
+		app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+
+	}
 	//if (easingUp->easingsActivated)
 	//{
 	//	easingPosition = easingUp->exponentialEaseInOut(easingUp->currentIteration, easingUp->initialPos, easingUp->deltaPos, easingUp->totalIterations);
@@ -100,14 +120,7 @@ bool SceneEnding::Update(float dt)
 
 void SceneEnding::Draw()
 {
-	//app->render->DrawTexture(bg, 0, 0);
-
-	//SDL_Color color = { 255,255,255,255 };
-
-	//if (hasWin) app->render->DrawText(font, "YOU WIN", 350, easingPosition, 150, 10, color);
-	//else app->render->DrawText(font, "YOU LOSE", 350, easingPosition, 150, 10, color);
-
-	//menu->Draw(font, showColliders);
+	app->render->DrawTexture(bg, 0, 0);
 }
 
 bool SceneEnding::UnLoad()
@@ -115,14 +128,8 @@ bool SceneEnding::UnLoad()
 	LOG("Unloading Scene Ending");
 	bool ret = true;
 
-	//app->tex->UnLoad(bg);
-	//font->UnLoad(app->tex);
-	//menu->UnLoad();
-
-	//RELEASE(font);
+	app->tex->Unload(bg);
 	//RELEASE(easingUp);
 	//RELEASE(easingDown);
-	//RELEASE(menu);
-
 	return ret;
 }

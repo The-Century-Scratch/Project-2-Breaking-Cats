@@ -3,9 +3,7 @@
 
 #include "Scene.h"
 
-class Font;
 class Easing;
-class EndingMenu;
 
 class SceneEnding : public Scene
 {
@@ -27,14 +25,10 @@ private:
 
 	SDL_Texture* bg;
 	bool hasWin;
-	Font* font;
 
 	Easing* easingUp;
 	Easing* easingDown;
 	float easingPosition;
-
-	// Menu
-	EndingMenu* menu;
 };
 
 #endif //__SCENEENDING_H__
