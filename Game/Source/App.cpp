@@ -53,18 +53,20 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneManager = new SceneManager(true);
 	moduleCollisions = new ModuleCollisions(true);
 	map = new Map(true);
+	assetsManager = new AssetsManager(true);
 	entityManager = new EntityManager(true);
 	particleSystemManager = new ParticleSystemManager(false);
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
 	hud = new Hud(true);
-	inventory = new Inventory(false);
+	inventory = new Inventory(true);
 	debug = new Debug(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(win);
 	AddModule(input);
+	AddModule(assetsManager);
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(sceneManager);

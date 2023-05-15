@@ -7,13 +7,12 @@
 #include "QuestManager.h"
 #include "DialogueManager.h"
 #include "Easings.h"
+#include "Window.h"
 
 #include "Log.h"
 
-DialogueManager::DialogueManager(QuestManager* quests, SceneGameplay* s)
+DialogueManager::DialogueManager()
 {
-	questManager = quests;
-	scene = s;
 }
 
 DialogueManager::~DialogueManager()
@@ -26,10 +25,13 @@ bool DialogueManager::Start()
 	//in future here uncomment and load dialogues form xml file that will be in the zip file
 
 
-	/*int size = app->assetsManager->MakeLoad("Xml/dialogues.xml");
+	int size = app->assetsManager->MakeLoad("Xml/dialogues.xml");
 	pugi::xml_parse_result result = file.load_buffer(app->assetsManager->GetLastBuffer(), size);
-	app->assetsManager->DeleteBuffer();*/
-	pugi::xml_parse_result result = file.load_file("");
+	app->assetsManager->DeleteBuffer();
+
+	/*pugi::xml_parse_result result = file.load("Assets/Xml/dialogues.xml");*/
+
+	//pugi::xml_parse_result result = file.load_file("dialogues.xml");
 
 	if (result == NULL)
 	{
@@ -38,8 +40,8 @@ bool DialogueManager::Start()
 	else
 	{
 		root = file.child("dialogues");
-		font = new Font(app, "Font/font3.xml", app->tex);
-		texture = app->tex->Load("Textures/UI/gui_dialogue_textures.png");
+		font = new Font(app, "Fonts/prova.xml");
+		texture = app->tex->Load("Assets/Textures/textBox.png");
 
 		letterCount = 0;
 		isDialogueActive = false;
@@ -79,7 +81,7 @@ bool DialogueManager::Update(float dt)
 
 	if (current != nullptr)
 	{
-		if (easingArrow2->easingsActivated == false) easingArrow->easingsActivated = true;
+		/*if (easingArrow2->easingsActivated == false) easingArrow->easingsActivated = true;
 
 		easingArrow->initialPos = current->currentNode->currentOption->bounds.x - 30;
 		easingArrow2->initialPos = easingArrow->initialPos + easingArrow->deltaPos;
@@ -113,7 +115,7 @@ bool DialogueManager::Update(float dt)
 				easingArrow2->easingsActivated = false;
 				easingArrow->easingsActivated = true;
 			}
-		}
+		}*/
 
 		if (current->currentNode->dialogFinished == true && current->currentNode->id >= 0)
 		{
@@ -192,12 +194,12 @@ void DialogueManager::Draw()
 	if (current != nullptr)
 	{
 		// Draw the background for the npc text
-		SDL_Rect sect = { 0,0,612, 479 };
-		app->render->DrawTexture(texture, 50, 100, &sect, false);
+		SDL_Rect sect = { 0,0,256,64 };
+		app->render->DrawTexture(texture,  5, (app->win->height / app->win->scale) - sect.h, &sect, false);
 
 		// Draw the background for the player options
-		sect = { 615, 137, 556, 203 };
-		app->render->DrawTexture(texture, 670, 200, &sect, false);
+		sect = { 0,0, 192, 64 };
+		app->render->DrawTexture(texture, 240, (app->win->height / app->win->scale) - sect.h, &sect, false);
 
 		// Draw the text
 		if (printText == true && current->currentNode->id >= -1)
@@ -249,9 +251,12 @@ bool DialogueManager::UnLoad()
 
 NpcNode* DialogueManager::LoadNode(int id, pugi::xml_node node)
 {
+	//carga el texto de los npcs en el npc node desde xml
 	NpcNode* tmp = new NpcNode(node.child("npc_text").attribute("text").as_string());
 	tmp->id = node.attribute("id").as_int();
 	int i = 0;
+	//carga las diferentes opciones de respuesta del player con las class dialogue option
+	//para cambiar medidas de letra diria que es aqui
 	for (pugi::xml_node m = node.child("option"); m; m = m.next_sibling("option"))
 	{
 		DialogueOption* option = new DialogueOption();
@@ -263,9 +268,9 @@ NpcNode* DialogueManager::LoadNode(int id, pugi::xml_node node)
 		option->bounds.x = 710;
 		option->bounds.y = 215 + i;
 		//option->bounds.w = 400;
-		int offset = font->GetBaseSize();
-		option->bounds.w = option->text.size() * offset;
-		option->bounds.h = font->GetBaseSize() + 10;
+		//int offset = font->GetBaseSize();
+		option->bounds.w = option->text.size() * 32/*offset*/;
+		option->bounds.h = 32/*font->GetBaseSize()*/ + 10;
 
 		tmp->options.push_back(option);
 		++tmp->optionsNum;

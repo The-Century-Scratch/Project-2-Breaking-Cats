@@ -7,7 +7,9 @@
 
 struct SDL_Texture;
 
+
 enum class TransitionStep;
+class DialogueManager;
 
 class SceneManager : public Module
 {
@@ -42,22 +44,26 @@ public:
 	
 	bool Pause = false;
 	//variable in city
-	bool tabern = false, store = false, resistance_base = false, downAfterLabrinth = false;
+	bool tabern = false, store = false, resistance_base = false, downAfterLabrinth = false, topPreLab = false;
 	//variable in labrinth
 	bool village = false, leftAfterLabrinth = false;
 	//variable in after labrinth
 	bool rightLabrinth = false, nordCity = false;
+	//variable in preLab
+	bool downCity = false, lab = false;
 
 	//variable to see what puzzles has ben solved
-	bool puzzle1solved = false; bool puzzle2solved = false;
+	bool puzzle1solved = false, puzzle2solved = false, puzzle3solved = false;
 
 	bool changeMap = false;
 
 	Scene* current;
 	Scene* next;
 	TransitionStep transitionStep;
+	DialogueManager* dialogueManager;
 private:
 	// Transitions rects
+
 };
 
 #endif // __SCENE_H__

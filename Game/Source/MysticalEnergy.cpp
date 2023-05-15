@@ -5,52 +5,51 @@
 
 #include "Player.h"
 
-#include "FirePaws.h"
+#include "MysticalEnergy.h"
 
-FirePaws::FirePaws(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
+MysticalEnergy::MysticalEnergy(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
 
-	itemTextSection = { 0, 0, 32, 32};
-	itemType = ItemType::FIRE_PAWS;
+	itemTextSection = { 129, 0, 32, 32 };
+	itemType = ItemType::MYSTICAL_ENERGY;
 }
 
-FirePaws::~FirePaws()
+MysticalEnergy::~MysticalEnergy()
 {
 }
 
-bool FirePaws::Start()
+bool MysticalEnergy::Start()
 {
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
-	itemid = 1;
-	itemType = ItemType::FIRE_PAWS;
+	itemid = 5;
 
 	return true;
 }
 
-bool FirePaws::Update()
+bool MysticalEnergy::Update()
 {
 	return true;
 }
 
-bool FirePaws::PostUpdate()
+bool MysticalEnergy::PostUpdate()
 {
 	Draw();
 	return true;
 }
 
-void FirePaws::Draw()
+void MysticalEnergy::Draw()
 {
 	//app->render->DrawTexture(texture, position.x, position.y, &itemTextSection);
 }
 
-bool FirePaws::CleanUp()
+bool MysticalEnergy::CleanUp()
 {
 	app->tex->Unload(texture);
 	return true;
 }
 
-bool FirePaws::SaveState(pugi::xml_node& n)
+bool MysticalEnergy::SaveState(pugi::xml_node& n)
 {
 	/*pugi::xml_node node = n.append_child("position");
 	node.append_attribute("x").set_value(bounds.x);
@@ -68,7 +67,7 @@ bool FirePaws::SaveState(pugi::xml_node& n)
 	return true;
 }
 
-void FirePaws::UseItem(Player* player)
+void MysticalEnergy::UseItem(Player* player)
 {
 	//player->GetHealed(healAmount);
 }

@@ -25,6 +25,11 @@
 
 //Items
 #include "FirePaws.h"
+#include "DragonSlayer.h"
+#include "GrapplingHook.h"
+#include "BulletPenetration.h"
+#include "MysticalEnergy.h"
+#include "ArcaneSpirit.h"
 
 //#include "KnightHelmet.h"
 //#include "KnightChest.h"
@@ -195,9 +200,30 @@ bool SceneGameplay::Load()
 	Item* item = nullptr;
 	pugi::xml_node itemNode = config.child("item");
 	
-	item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
-	items.Add(item);
-	item->Start();
+	firePaw = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+	items.Add(firePaw);
+	firePaw->Start();
+
+	dragonSlayer = new DragonSlayer(iPoint(itemNode.child("dragonSlayer").attribute("x").as_int(), itemNode.child("dragonSlayer").attribute("y").as_int()), itemText);
+	items.Add(dragonSlayer);
+	dragonSlayer->Start();
+
+	grapplingHook = new GrapplingHook(iPoint(itemNode.child("grapplingHook").attribute("x").as_int(), itemNode.child("grapplingHook").attribute("y").as_int()), itemText);
+	items.Add(grapplingHook);
+	grapplingHook->Start();
+
+	bulletPenetration = new BulletPenetration(iPoint(itemNode.child("bulletPenetration").attribute("x").as_int(), itemNode.child("bulletPenetration").attribute("y").as_int()), itemText);
+	items.Add(bulletPenetration);
+	bulletPenetration->Start();
+
+	mysticalEnergy = new MysticalEnergy(iPoint(itemNode.child("mysticalEnergy").attribute("x").as_int(), itemNode.child("mysticalEnergy").attribute("y").as_int()), itemText);
+	items.Add(mysticalEnergy);
+	mysticalEnergy->Start();
+
+	arcaneSpirit = new ArcaneSpirit(iPoint(itemNode.child("arcaneSpirit").attribute("x").as_int(), itemNode.child("arcaneSpirit").attribute("y").as_int()), itemText);
+	items.Add(arcaneSpirit);
+	arcaneSpirit->Start();
+
 
 
 	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
@@ -415,14 +441,43 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
+	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
 	{
-		ListItem<Item*>* it = items.start;
-		//it = it->next;
-		it->data->equiped = true;
-		app->inventory->AddItem(it->data);
-
+		app->inventory->isActivated = !app->inventory->isActivated;
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
+	{
+		firePaw->equiped = true;
+		app->inventory->AddItem(firePaw);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
+	{
+		dragonSlayer->equiped = true;
+		app->inventory->AddItem(dragonSlayer);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
+	{
+		grapplingHook->equiped = true;
+		app->inventory->AddItem(grapplingHook);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
+	{
+		bulletPenetration->equiped = true;
+		app->inventory->AddItem(bulletPenetration);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
+	{
+		mysticalEnergy->equiped = true;
+		app->inventory->AddItem(mysticalEnergy);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
+	{
+		arcaneSpirit->equiped = true;
+		app->inventory->AddItem(arcaneSpirit);
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
 	{
 		
@@ -502,6 +557,16 @@ bool SceneGameplay::Update(float dt)
 			}
 		}
 
+		//leaving prelab map
+		if (app->sceneManager->currentScene == IDPRELAB)
+		{
+			if (app->sceneManager->downCity)
+			{
+				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;
+			}
+		}
+
 		if (app->sceneManager->currentScene == IDSCENEMAP)
 		{
 			//LEAVING CITY MAP
@@ -522,9 +587,20 @@ bool SceneGameplay::Update(float dt)
 				ChangeMap(LEAVECITYTOP, IDAFTERLABRINTH);
 				app->sceneManager->downAfterLabrinth = false;
 			}
+			else if (app->sceneManager->topPreLab )
+			{
+				ChangeMap(LEAVECITYDOWN, IDPRELAB);
+				app->sceneManager->topPreLab = false;
+			}
 		}
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		app->hud->prevstate = app->hud->hudstate;
+		app->hud->hudstate = hudSTATE::PAUSESCREEN;
+		app->hud->wait1frame = true;
+	}
 
 	//switch (gameState)
 	//{
@@ -831,11 +907,11 @@ void SceneGameplay::Draw()
 {
 	app->map->Draw();
 
-	ListItem<Item*>* it = items.start;
+	/*ListItem<Item*>* it = items.start;
 	for (; it != items.end; ++it)
 	{
 		it->data->Draw();
-	}
+	}*/
 
 	if (app->debug->drawVariables)
 	{
@@ -957,12 +1033,35 @@ bool SceneGameplay::UnLoad()
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
 
-	ListItem<Item*>* it = items.start;
+	/*ListItem<Item*>* it = items.start;
 	for (; it != items.end; ++it)
 	{
 		it->data->CleanUp();
-	}
+	}*/
 
+	firePaw->CleanUp();
+	delete(firePaw);
+	firePaw = nullptr;
+
+	dragonSlayer->CleanUp();
+	delete(dragonSlayer);
+	dragonSlayer = nullptr;
+
+	grapplingHook->CleanUp();
+	delete(grapplingHook);
+	grapplingHook = nullptr;
+
+	bulletPenetration->CleanUp();
+	delete(bulletPenetration);
+	bulletPenetration = nullptr;
+
+	mysticalEnergy->CleanUp();
+	delete(mysticalEnergy);
+	mysticalEnergy = nullptr;
+
+	arcaneSpirit->CleanUp();
+	delete(arcaneSpirit);
+	arcaneSpirit = nullptr;
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -2213,4 +2312,9 @@ void SceneGameplay::DrawDebugVariable()
 	app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
 	app->render->DrawText("Mouse Y  ", app->debug->debugX, app->debug->debugY + 190, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
+
+	app->render->DrawText("InvPosX  ", app->debug->debugX, app->debug->debugY + 240, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->inventory->invPos.x).c_str(), app->debug->debugX + 110, app->debug->debugY + 240, 50, 20, app->debug->debugColor);
+	app->render->DrawText("InvPosY  ", app->debug->debugX, app->debug->debugY + 270, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->inventory->invPos.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 270, 50, 20, app->debug->debugColor);
 }

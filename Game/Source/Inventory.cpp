@@ -50,12 +50,14 @@ bool Inventory::Start()
 	invTex = app->tex->Load("Assets/Textures/TestInventory.png");
 	slotText = app->tex->Load("Assets/Textures/TestInvSlot.png");
 
-	slotRect = { 0,0,16,16 };
-	slotRectFocus = { 17,0,18,18 };
+	isActivated = false;
+
+	slotRect = { 0,0,36,36 };
+	slotRectFocus = { 37,0,36,36 };
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
-		slotList[invSlot_].bounds = { 0, 0, 16, 16 };
+		slotList[invSlot_].bounds = { 0, 0, 36, 36 };
 		slotList[invSlot_].currentSlot = invSlot_;
 		slotList[invSlot_].itemId = 0;
 		slotList[invSlot_].isfull = false;
@@ -208,203 +210,56 @@ bool Inventory::Start()
 
 bool Inventory::Update(float dt)
 {
-	int scale = app->win->GetScale();
-	//invPos.x = -(app->render->camera.x / scale) - 100;
-	//invPos.y = -(app->render->camera.y / scale) - 100;
-
-	invPos.x = (-app->render->camera.x/scale)+150;
-	invPos.y = (-app->render->camera.y/scale)+100;
-	
-	iPoint invSpacing = { 0,0 };
-	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	if (isActivated)
 	{
-		slotList[invSlot_].bounds.x = invPos.x + invSpacing.x + 2;
-		slotList[invSlot_].bounds.y = invPos.y + invSpacing.y + 2;
-		invSpacing.x += 18;
-		if (invSlot_ == 3) invSpacing = { 0,18 };
+		int scale = app->win->GetScale();
+
+		invPos.x = (-app->render->camera.x / scale) + 25;
+		invPos.y = (-app->render->camera.y / scale);
+
+		invPosText.x = (int)(app->render->camera.x + invPos.x * scale);
+		invPosText.y = (int)(app->render->camera.y + invPos.y * scale);
+
+		iPoint invSpacing = { 0,0 };
+		for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+		{
+			slotList[invSlot_].bounds.x = invPos.x + invSpacing.x + 193;
+			slotList[invSlot_].bounds.y = invPos.y + invSpacing.y + 63;
+			invSpacing.x += 39;
+			if (invSlot_ == 3 || invSlot_ == 7 || invSlot_ == 11) invSpacing = { 0, invSpacing.y += 39 };
+		}
+
+		HandleSlotState();
 	}
 
-	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
-	iPoint invSpacing = { 0,0 };
-	int slotCounter = 1;
-	while (itemInvSlot_ != NULL)
+	return true;
+}
+
+bool Inventory:: PostUpdate()
+{
+	if (isActivated)
 	{
-		itemInvSlot_->data->bounds.x = invPos.x + invSpacing.x + 2;
-		itemInvSlot_->data->bounds.y = invPos.y + invSpacing.y + 2;
-		invSpacing.x += 18;
-		if (slotCounter == 4) invSpacing = { 0,18 };
-		slotCounter++;
-		itemInvSlot_ = itemInvSlot_->next;
-	}*/
-
-	HandleSlotState();
-
-	Draw();
-	//UpdatingButtons(app->input);
-
-	//int id = -1;
-	//if (currentControl != nullptr)
-	//{
-	//	id = currentControl->id;
-	//}
-
-	//btnEquipment->Update(app->input, dt, id);
-	//btnItems->Update(app->input, dt, id);
-
-	//// Next and Prev character buttons update.
-	//// Kinda weird, but works. Do not touch it
-	//if (currentControl != nullptr && currentControl->id != 10 && currentControl->id != 11)
-	//{
-	//	btnNext->Update(app->input, dt, id);
-	//	btnPrev->Update(app->input, dt, id);
-	//}
-
-	//if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN || app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_X) == KEY_DOWN)
-	//{
-	//	easing2->easingsActivated = true;
-	//	counter = app->frameCount;
-	//}
-
-	//if (counter > 90 && app->frameCount - counter >= 90)
-	//{
-	//	counter = 0;
-	//	scene->ChangeState(GameplayMenuState::NONE);
-	//	ResetStates();
-	//}
-
-	//if (easing->easingsActivated)
-	//{
-	//	btnEquipment->bounds.x = easing->backEaseOut(easing->currentIteration, easing->initialPos, easing->deltaPos, easing->totalIterations);
-	//	btnItems->bounds.x = easing->backEaseOut(easing->currentIteration, easing->initialPos, easing->deltaPos, easing->totalIterations);
-	//	btnItems->bounds.x = easing->backEaseOut(easing->currentIteration, easing->initialPos, easing->deltaPos, easing->totalIterations);
-	//	btnNext->bounds.x = easing->backEaseOut(easing->currentIteration, easing->initialPos + 495, easing->deltaPos, easing->totalIterations);
-	//	btnPrev->bounds.x = easing->backEaseOut(easing->currentIteration, easing->initialPos + 319, easing->deltaPos, easing->totalIterations);
-
-	//	if (easing->currentIteration < easing->totalIterations)
-	//	{
-	//		easing->currentIteration++;
-	//	}
-	//	else
-	//	{
-	//		easing->currentIteration = 0;
-	//		easing->easingsActivated = false;
-	//	}
-	//}
-
-	//if (easing2->easingsActivated)
-	//{
-	//	btnEquipment->bounds.x = easing2->backEaseIn(easing2->currentIteration, easing2->initialPos, easing2->deltaPos, easing2->totalIterations);
-	//	btnItems->bounds.x = easing2->backEaseIn(easing2->currentIteration, easing2->initialPos, easing2->deltaPos, easing2->totalIterations);
-	//	btnItems->bounds.x = easing2->backEaseIn(easing2->currentIteration, easing2->initialPos, easing2->deltaPos, easing2->totalIterations);
-	//	btnNext->bounds.x = easing2->backEaseIn(easing2->currentIteration, easing2->initialPos + 495, easing2->deltaPos, easing2->totalIterations);
-	//	btnPrev->bounds.x = easing2->backEaseIn(easing2->currentIteration, easing2->initialPos + 319, easing2->deltaPos, easing2->totalIterations);
-
-	//	if (easing2->currentIteration < easing2->totalIterations)
-	//	{
-	//		easing2->currentIteration++;
-	//	}
-	//	else
-	//	{
-	//		easing2->currentIteration = 0;
-	//		easing2->easingsActivated = false;
-	//	}
-	//}
-
-	//switch (state)
-	//{
-	//case InventoryState::NONE:
-	//	// TODO
-	//	break;
-
-	//case InventoryState::EQUIPMENT:
-	//	
-	//	if (!inEquipment && armorSlots[currentSlotId].state != SlotState::SELECTED && app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_B) == KEY_UP)
-	//	{
-	//		InventoryState tmp = state;
-	//		state = InventoryState::NONE;
-
-	//		currentSlotId = 0;
-	//		armorSlots[0].state = SlotState::NONE;
-
-	//		currentArmorSlotId = 2;
-	//		equipment[2].state = SlotState::NONE;
-
-	//		controls.clear();
-	//		controls.push_back(btnEquipment);
-	//		controls.push_back(btnItems);
-
-	//		if (tmp == InventoryState::EQUIPMENT) currentControl = btnEquipment;
-	//		else if (tmp == InventoryState::ITEMS) currentControl = btnItems;
-
-	//		currentControl->state = GuiControlState::FOCUSED;
-	//		lastControl = nullptr;
-	//	}
-	//	else if (inEquipment && equipment[currentArmorSlotId].state != SlotState::SELECTED && app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_B) == KEY_UP)
-	//	{
-	//		InventoryState tmp = state;
-	//		state = InventoryState::NONE;
-
-	//		currentArmorSlotId = 2;
-	//		equipment[2].state = SlotState::NONE;
-
-	//		currentSlotId = 0;
-	//		armorSlots[0].state = SlotState::NONE;
-
-	//		controls.clear();
-	//		controls.push_back(btnEquipment);
-	//		controls.push_back(btnItems);
-
-	//		if (tmp == InventoryState::EQUIPMENT) currentControl = btnEquipment;
-	//		else if (tmp == InventoryState::ITEMS) currentControl = btnItems;
-
-	//		currentControl->state = GuiControlState::FOCUSED;
-	//		lastControl = nullptr;
-	//	}
-	//	
-	//	HandleObjects(armorSlots);
-	//	if (currentSlotId > -1) HandleSlot(armorSlots, dt);
-
-	//	btnUse->text = "EQUIP";
-
-	//	break;
-
-	//case InventoryState::ITEMS:
-	//	
-	//	if (!inEquipment && slots[currentSlotId].state != SlotState::SELECTED && app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_B) == KEY_UP)
-	//	{
-	//		InventoryState tmp = state;
-	//		state = InventoryState::NONE;
-	//		
-	//		currentSlotId = 0;
-	//		slots[0].state = SlotState::NONE;
-
-	//		controls.clear();
-	//		controls.push_back(btnEquipment);
-	//		controls.push_back(btnItems);
-
-	//		if (tmp == InventoryState::EQUIPMENT) currentControl = btnEquipment;
-	//		else if (tmp == InventoryState::ITEMS) currentControl = btnItems;
-
-	//		currentControl->state = GuiControlState::FOCUSED;
-	//		lastControl = nullptr;
-	//	}
-
-	//	HandleObjects(slots);
-	//	if (currentSlotId > -1) HandleSlot(slots, dt);
-	//	
-	//	btnUse->text = "USE";
-
-	//	break;
-
-	//case InventoryState::STATS:
-	//	// TODO
-	//	break;
-
-	//}
-
-	//if (state != InventoryState::STATS) HandleEquipment(dt);
+		Draw();
+	}
 
 	return true;
+}
+
+int Inventory::GetItemEquipped() //Tell me if it works?
+{
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
+	{
+		if (slotList[invSlot_].item->equiped)
+		{
+			return slotList[invSlot_].itemId;
+		}
+	}
+	return 0;
+}
+
+Player* Inventory::GetCurrentPlayer(Player* pl_)
+{
+	return currentPlayer;
 }
 
 int Inventory::GetFirePaw() // TODO: Ideally, this would check the equipment slot and return the item, that way it would be more versatile
@@ -421,9 +276,17 @@ int Inventory::GetFirePaw() // TODO: Ideally, this would check the equipment slo
 
 void Inventory::Draw()
 {
-
-	SDL_Rect invRect = { 0,0,74,38 };
+	int scale = app->win->GetScale();
+	SDL_Color white = {255, 255, 255, 255};
+	SDL_Rect invRect = { 0, 0, 372, 240 };
 	app->render->DrawTexture(invTex, invPos.x, invPos.y, &invRect);
+	app->render->DrawText("INVENTORY",invPosText.x + 222 * scale, invPosText.y + 27 * scale, 92 * scale, 24 * scale, white);
+	app->render->DrawText("STATS", invPosText.x + 77 * scale, invPosText.y + 127 * scale, 38 * scale, 11 * scale, white);
+
+	app->render->DrawText("HP ", invPosText.x + 48 * scale, invPosText.y + 156 * scale, 30 * scale, 18 * scale, white);
+	//app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
+	app->render->DrawText("DMG", invPosText.x + 48 * scale, invPosText.y + 186 * scale, 30 * scale, 18 * scale, white);
+	//app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
@@ -433,7 +296,7 @@ void Inventory::Draw()
 		case SlotState::UNSELECTED:
 			break;
 		case SlotState::FOCUSED:
-			app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x - 1, slotList[invSlot_].bounds.y - 1, &slotRectFocus);
+			app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x + 1, slotList[invSlot_].bounds.y, &slotRectFocus);
 			break;
 		case SlotState::SELECTED:
 			break;
@@ -443,165 +306,9 @@ void Inventory::Draw()
 
 		if (slotList->itemId != 0)
 		{
-			app->render->DrawTexture(itemTexture, slotList[invSlot_].bounds.x, slotList[invSlot_].bounds.y, &slotList[invSlot_].itemTextureBounds);
+			app->render->DrawTexture(itemTexture, slotList[invSlot_].bounds.x+2, slotList[invSlot_].bounds.y+2, &slotList[invSlot_].itemTextureBounds);
 		}
 	}
-
-	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
-	while (itemInvSlot_ != NULL)
-	{
-		app->render->DrawTexture(slotText, itemInvSlot_->data->bounds.x, itemInvSlot_->data->bounds.y, &slotRect);
-		switch (itemInvSlot_->data->state)
-		{
-		case SlotState::UNSELECTED:
-			break;
-		case SlotState::FOCUSED:
-			app->render->DrawTexture(slotText, itemInvSlot_->data->bounds.x-1, itemInvSlot_->data->bounds.y-1, &slotRectFocus);
-			break;
-		case SlotState::SELECTED:
-			break;
-		default:
-			break;
-		}
-		itemInvSlot_ = itemInvSlot_->next;
-	}*/
-
-	//// Big rectangle in the background
-	//app->render->DrawRectangle({ 0, 0, 1280, 720 }, 0, 0, 0, 150, true, false);
-
-	//// Shape of the inventory
-	//SDL_Rect section;
-	//if (state != InventoryState::STATS)
-	//{
-	//	section = { 0, 0, 739, 597 };
-	//	app->render->DrawTexture(guiTex, btnEquipment->bounds.x + 250, 53, &section, false);
-	//}
-
-	//else if (state == InventoryState::STATS)
-	//{
-	//	section = { 1144, 0, 739, 597 };
-	//	app->render->DrawTexture(guiTex, btnEquipment->bounds.x + 250, 53, &section, false);
-	//}
-
-	//btnEquipment->Draw(app->render, showColliders, 36);
-	//btnItems->Draw(app->render, showColliders, 36);
-
-	//if (state != InventoryState::STATS)
-	//{
-	//	// Shape where the stats should go
-	//	SDL_Rect r = { 163, 715, 40, 40 };
-
-	//	// Equipment equiped drawing
-	//	for (int i = 0; i < MAX_EQUIPMENT_SLOTS; ++i)
-	//	{
-	//		app->render->DrawTexture(atlasTexture, btnEquipment->bounds.x + 600, equipment[i].bounds.y, &r, false);
-	//		
-	//		if (equipment[i].item != nullptr && &equipment[i].item->atlasSection != NULL)
-	//			app->render->DrawTexture(atlasTexture, btnEquipment->bounds.x + 603, equipment[i].bounds.y + 4, &equipment[i].item->atlasSection, false);
-	//	}
-
-	//	r = { btnEquipment->bounds.x + 740, 130, 196, 50 };
-	//	app->render->DrawCenterText(font, "HUNTER", r, 30, 5, { 255,255,255,255 });
-	//	r.y = 235;
-	//	app->render->DrawCenterText(font, "WIZARD", r, 30, 5, { 255,255,255,255 });
-	//	r.y = 340;
-	//	app->render->DrawCenterText(font, "THIEF", r, 30, 5, { 255,255,255,255 });
-	//	r.y = 445;
-	//	app->render->DrawCenterText(font, "WARRIOR", r, 30, 5, { 255,255,255,255 });
-
-	//	// Draw current player
-	//	SDL_Rect rectan;
-	//	SDL_Rect rectan2 = { btnEquipment->bounds.x + 373,149,116,124 };
-	//	SDL_Rect rectan3;
-	//	app->render->DrawRectangle(rectan2, 205, 205, 205, 200, true, false);
-
-	//	if (currentPlayer->playerType == PlayerType::HUNTER)
-	//	{
-	//		rectan = { 739,103,106,113 };
-	//		rectan3 = { btnEquipment->bounds.x + 735, 120, 206, 110 };
-	//	}
-	//	else if (currentPlayer->playerType == PlayerType::WIZARD)
-	//	{
-	//		rectan = { 739, 217,106,113 };
-	//		rectan3 = { btnEquipment->bounds.x + 735, 225, 206, 110 };
-	//	}
-	//	else if (currentPlayer->playerType == PlayerType::THIEF)
-	//	{
-	//		rectan = { 739,331,106,113 };
-	//		rectan3 = { btnEquipment->bounds.x + 735, 330, 206, 110 };
-	//	}
-	//	else if (currentPlayer->playerType == PlayerType::WARRIOR)
-	//	{
-	//		rectan = { 739,445,106,113 };
-	//		rectan3 = { btnEquipment->bounds.x + 735, 435, 206, 110 };
-	//	}
-	//	app->render->DrawTexture(guiTex, btnEquipment->bounds.x + 377, 154, &rectan, false);
-	//	app->render->DrawRectangle(rectan3, 255, 255, 255, 255, false, false);
-
-	//	btnNext->Draw(app->render, showColliders);
-	//	btnPrev->Draw(app->render, showColliders);
-	//	{
-	//		SDL_Rect r = { 0,5,40,30 };
-	//		app->render->DrawTexture(buttonTex, btnNext->bounds.x, 116, &r, false);
-	//		r = { 41,5,40,30 };
-	//		app->render->DrawTexture(buttonTex, btnPrev->bounds.x, 116, &r, false);
-	//	}
-
-	//	// Stats drawing
-
-	//	eastl::list<Player*>::iterator it = players.begin();
-
-	//	for (int i = 0; i < 4; ++i, ++it)
-	//	{
-	//		Player* pl = (*it);
-
-	//		// Color bars
-	//		// Black bar
-	//		SDL_Rect statsBar = { 225, 797, 196, 9 };
-	//		for (int j = 0; j < 3; ++j)
-	//		{
-	//			app->render->DrawTexture(atlasTexture, btnEquipment->bounds.x + 740, 173 + (j * 14) + (i * 105), &statsBar, false);
-	//		}
-
-	//		int currHealth = (*it)->GetHealthPoints();
-	//		int maxHealth = (*it)->GetMaxHealthPoints();
-
-	//		if (currHealth < (maxHealth / 4))
-	//			statsBar = { 228, 750, (190 * currHealth) / maxHealth, 5 };
-	//		else if (currHealth < (maxHealth / 2))
-	//			statsBar = { 228, 737, (190 * currHealth) / maxHealth, 5 };
-	//		else
-	//			statsBar = { 228, 725, (190 * currHealth) / maxHealth, 5 };
-
-	//		// Green Bar
-	//		app->render->DrawTexture(atlasTexture, btnEquipment->bounds.x + 743, 175 + (i * 105), &statsBar, false);
-
-	//		// Blue Bar
-	//		statsBar = { 228, 764, (190 * pl->GetManaPoints()) / (pl->GetMaxManaPoints()), 5 };
-	//		app->render->DrawTexture(atlasTexture, btnEquipment->bounds.x + 743, 189 + (i * 105), &statsBar, false);
-
-	//		// Yellow Bar
-	//		statsBar = { 228, 778, (190 * pl->GetArmorPoints()) / (pl->GetMaxArmorPoints()), 5 };
-	//		app->render->DrawTexture(atlasTexture, btnEquipment->bounds.x + 743, 203 + (i * 105), &statsBar, false);
-	//	}
-	//}
-
-
-	//std::string iQuantity;
-	//switch (state)
-	//{
-	//case InventoryState::EQUIPMENT:
-	//	DrawObjects(armorSlots, font, showColliders);
-	//	app->render->DrawRectangle(btnItems->bounds, 0, 0, 0, 150, true, false);
-	//	break;
-	//case InventoryState::ITEMS:
-	//	DrawObjects(slots, font, showColliders);
-	//	app->render->DrawRectangle(btnEquipment->bounds, 0, 0, 0, 150, true, false);
-	//	break;
-	//case InventoryState::STATS:
-	//	break;
-	//}
-	////if (displayEquipmentMenu && state != InventoryState::STATS) DisplayMenuEquipment(showColliders);
 }
 
 bool Inventory::CleanUp()
@@ -875,9 +582,8 @@ void Inventory::UpdatingButtons(Input* input)
 	//}
 }
 
-//Loadstate
-//void Inventory::LoadState(pugi::xml_node& node)
-//{
+bool Inventory::LoadState(pugi::xml_node& node)
+{
 	/*pugi::xml_node n = node.child("inventory").child("items");
 	int i;
 	for (i = 0, n = n.child("slot"); n && i < MAX_INVENTORY_SLOTS; n = n.next_sibling("slot"), ++i)
@@ -962,11 +668,11 @@ void Inventory::UpdatingButtons(Input* input)
 			armorSlots[i].state = (SlotState)n.attribute("state").as_int();
 		}
 	}*/
-//}
+	return true;
+}
 
-//Savestate
-//void Inventory::SaveState(pugi::xml_node& node)
-//{
+bool Inventory::SaveState(pugi::xml_node& node)
+{
 	//pugi::xml_node n = node.append_child("inventory");
 	//pugi::xml_node it = n.append_child("items");
 	//for (int i = 0; i < MAX_INVENTORY_SLOTS; ++i)
@@ -1000,7 +706,8 @@ void Inventory::UpdatingButtons(Input* input)
 	//		armorSlots[i].item->SaveState(it);
 	//	}
 	//}
-//}
+	return true;
+}
 
 void Inventory::AddItem(Item *it)
 {
@@ -1014,79 +721,16 @@ void Inventory::AddItem(Item *it)
 			break;
 		}
 	}
-
-	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
-
-	for (size_t invSlot_ = 1; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
-	{
-		if (itemInvSlot_->data->itemId == 0)
-		{
-			itemInvSlot_->data->itemId = it->itemid;
-			itemInvSlot_->data->itemTextureBounds = it->itemTextSection;
-			itemInvSlot_->data->item = it;
-			slotlist.
-		}
-	}*/
-	//switch ((*it).objectType)
-	//{
-	//case ObjectType::ARMOR:
-	//	for (int i = 0; i < MAX_INVENTORY_SLOTS; ++i)
-	//	{
-	//		// Already an armor into the slot
-	//		if (armorSlots[i].item != nullptr && armorSlots[i].item == it && armorSlots[i].itemsAmount <= ITEM_STACK)
-	//		{
-	//			RELEASE(it);
-	//			armorSlots[i].itemsAmount++;
-	//			armorSlots[i].state = SlotState::UNSELECTED;
-	//			armorSlots[i].item->bounds = armorSlots[i].bounds;
-	//			break;
-	//		}
-	//		else if (armorSlots[i].item == nullptr)
-	//		{
-	//			armorSlots[i].item = it;
-	//			armorSlots[i].item->isDragging = false;
-	//			armorSlots[i].filled = true;
-	//			armorSlots[i].itemsAmount = 1;
-	//			armorSlots[i].state = SlotState::UNSELECTED;
-	//			armorSlots[i].item->bounds = armorSlots[i].bounds;
-	//			break;
-	//		}
-	//	}
-	//	break;
-
-	//case ObjectType::ITEM:
-	//	for (int i = 0; i < MAX_INVENTORY_SLOTS; ++i)
-	//	{
-	//		if (slots[i].item != nullptr && slots[i].item->itemType == (it)->itemType && slots[i].itemsAmount <= ITEM_STACK)
-	//		{
-	//			slots[i].itemsAmount++;
-	//			if (it->itemType == ItemType::ORB_FRAGMENT) CompleteOrb(i);
-	//			RELEASE(it);
-	//			slots[i].state = SlotState::UNSELECTED;
-	//			slots[i].item->bounds = slots[i].bounds;
-	//			break;
-	//		}
-	//		else if (slots[i].item == nullptr)
-	//		{
-	//			slots[i].item = it;
-	//			slots[i].filled = true;
-	//			slots[i].itemsAmount = 1;
-	//			slots[i].state = SlotState::UNSELECTED;
-	//			slots[i].item->bounds = slots[i].bounds;
-	//			break;
-	//		}
-	//	}
-	//	break;
-	//}
 }
 
 bool Inventory::IsMouseInside(SDL_Rect r)
-{
-	int x, y;
-	app->input->GetMousePosition(x, y);
-	x += 156; 
+ {
+	SDL_Rect auxR = {r.x-invPos.x+25, r.y-invPos.y, r.w, r.h};
 
-	return (x > r.x) && (x < r.x + r.w) && (y > r.y) && (y < r.y + r.h);
+	int x, y;
+	app->input->GetMousePosition(x, y); 
+
+	return (x > auxR.x) && (x < auxR.x + auxR.w) && (y > auxR.y) && (y < auxR.y + auxR.h);
 }
 
 void Inventory::DisplayText(SDL_Rect bounds, bool showColliders)

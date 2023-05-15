@@ -5,52 +5,51 @@
 
 #include "Player.h"
 
-#include "FirePaws.h"
+#include "GrapplingHook.h"
 
-FirePaws::FirePaws(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
+GrapplingHook::GrapplingHook(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
 
-	itemTextSection = { 0, 0, 32, 32};
-	itemType = ItemType::FIRE_PAWS;
+	itemTextSection = { 65, 0, 32, 32 };
+	itemType = ItemType::GRAPPLING_HOOK;
 }
 
-FirePaws::~FirePaws()
+GrapplingHook::~GrapplingHook()
 {
 }
 
-bool FirePaws::Start()
+bool GrapplingHook::Start()
 {
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
-	itemid = 1;
-	itemType = ItemType::FIRE_PAWS;
+	itemid = 3;
 
 	return true;
 }
 
-bool FirePaws::Update()
+bool GrapplingHook::Update()
 {
 	return true;
 }
 
-bool FirePaws::PostUpdate()
+bool GrapplingHook::PostUpdate()
 {
 	Draw();
 	return true;
 }
 
-void FirePaws::Draw()
+void GrapplingHook::Draw()
 {
 	//app->render->DrawTexture(texture, position.x, position.y, &itemTextSection);
 }
 
-bool FirePaws::CleanUp()
+bool GrapplingHook::CleanUp()
 {
 	app->tex->Unload(texture);
 	return true;
 }
 
-bool FirePaws::SaveState(pugi::xml_node& n)
+bool GrapplingHook::SaveState(pugi::xml_node& n)
 {
 	/*pugi::xml_node node = n.append_child("position");
 	node.append_attribute("x").set_value(bounds.x);
@@ -68,7 +67,7 @@ bool FirePaws::SaveState(pugi::xml_node& n)
 	return true;
 }
 
-void FirePaws::UseItem(Player* player)
+void GrapplingHook::UseItem(Player* player)
 {
 	//player->GetHealed(healAmount);
 }

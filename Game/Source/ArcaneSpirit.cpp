@@ -5,52 +5,51 @@
 
 #include "Player.h"
 
-#include "FirePaws.h"
+#include "ArcaneSpirit.h"
 
-FirePaws::FirePaws(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
+ArcaneSpirit::ArcaneSpirit(iPoint pos, SDL_Texture* itemText_) : Item(pos, itemText_)
 {
 
-	itemTextSection = { 0, 0, 32, 32};
-	itemType = ItemType::FIRE_PAWS;
+	itemTextSection = { 161, 0, 32, 32 };
+	itemType = ItemType::ARCANE_SPIRIT;
 }
 
-FirePaws::~FirePaws()
+ArcaneSpirit::~ArcaneSpirit()
 {
 }
 
-bool FirePaws::Start()
+bool ArcaneSpirit::Start()
 {
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
-	itemid = 1;
-	itemType = ItemType::FIRE_PAWS;
+	itemid = 6;
 
 	return true;
 }
 
-bool FirePaws::Update()
+bool ArcaneSpirit::Update()
 {
 	return true;
 }
 
-bool FirePaws::PostUpdate()
+bool ArcaneSpirit::PostUpdate()
 {
 	Draw();
 	return true;
 }
 
-void FirePaws::Draw()
+void ArcaneSpirit::Draw()
 {
 	//app->render->DrawTexture(texture, position.x, position.y, &itemTextSection);
 }
 
-bool FirePaws::CleanUp()
+bool ArcaneSpirit::CleanUp()
 {
 	app->tex->Unload(texture);
 	return true;
 }
 
-bool FirePaws::SaveState(pugi::xml_node& n)
+bool ArcaneSpirit::SaveState(pugi::xml_node& n)
 {
 	/*pugi::xml_node node = n.append_child("position");
 	node.append_attribute("x").set_value(bounds.x);
@@ -68,7 +67,7 @@ bool FirePaws::SaveState(pugi::xml_node& n)
 	return true;
 }
 
-void FirePaws::UseItem(Player* player)
+void ArcaneSpirit::UseItem(Player* player)
 {
 	//player->GetHealed(healAmount);
 }

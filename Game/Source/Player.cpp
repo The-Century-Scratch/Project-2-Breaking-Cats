@@ -12,6 +12,7 @@
 #include "SceneManager.h"
 #include "window.h"
 #include "Map.h"
+#include "Debug.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -190,14 +191,20 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::WALL:
 			//FUNCION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			if (!app->debug->godMode)
+			{
+				app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			}
 			break;
 		case Collider::Type::ENEMY:
 			//FUNCION TO START BATTLE
 			break;
 		case Collider::Type::NPC:
 			//FUNCTION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			if (!app->debug->godMode)
+			{
+				app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			}
 			break;
 		case Collider::Type::NPCINTERACTION:
 			//DIALOG FUNCTION + QUEST?
@@ -208,7 +215,10 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHEAST:
 			//FUNCTION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			if (!app->debug->godMode)
+			{
+				app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			}
 			break;
 		case Collider::Type::CHEASTINTERACTION:
 			//FUNCTION TO OPEN CHEAST
@@ -235,6 +245,8 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				case 5:
 					app->sceneManager->downAfterLabrinth = true;
 					break;
+				case 7:
+					app->sceneManager->topPreLab = true;
 				}
 			}
 			if (app->sceneManager->currentScene == 4)
@@ -262,6 +274,23 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 					break;
 				case 4:
 					app->sceneManager->rightLabrinth = true;
+					break;
+				default:
+					break;
+				}
+			}
+			if (app->sceneManager->currentScene == 7)
+			{
+				switch (c2->scene)
+				{
+				case 0:
+					app->sceneManager->downCity = true;
+					break;
+				case 8://TO APPLY, THIS WILL BE FUTURE LAB
+
+					app->sceneManager->downCity = true;//MUST BE CHANGED TO FUTURE LAB MAP
+
+					app->sceneManager->puzzle3solved = true;//if you reach lab, it means you solved the 3rd puzzle, that is the invisible labrinth
 					break;
 				default:
 					break;

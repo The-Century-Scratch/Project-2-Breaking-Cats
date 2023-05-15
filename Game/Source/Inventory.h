@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#define MAX_INVENTORY_SLOTS 8
+#define MAX_INVENTORY_SLOTS 16
 #define MAX_EQUIPMENT_SLOTS 3
 #define ITEM_STACK 32
 
@@ -69,13 +69,14 @@ public:
 
 	bool Start() override;
 	bool Update(float dt) override;
+	bool PostUpdate() override;
 	void Draw();
 	bool CleanUp() override;
 	bool OnGuiMouseClickEvent(GuiControl* control);
 	void UpdatingButtons(Input* input);
 
-	/*void LoadState(pugi::xml_node& node);
-	void SaveState(pugi::xml_node& node);*/
+	bool LoadState(pugi::xml_node& node);
+	bool SaveState(pugi::xml_node& node);
 
 	void AddItem(Item *it);
 
@@ -101,6 +102,10 @@ public:
 
 	int GetFirePaw();
 
+	int GetItemEquipped();
+
+	Player* GetCurrentPlayer(Player* pl_);
+
 private:
 
 	void HandleObjects(InventorySlot objects[]);
@@ -120,6 +125,9 @@ public:
 
 	GuiButton* btnEquipment; // Armors
 	GuiButton* btnItems;     // Potions etc
+
+	bool isActivated;
+	iPoint invPos;
 
 private:
 	SDL_Texture* itemTexture;
@@ -180,7 +188,8 @@ private:
 	Easing* easing2;
 	int counter;
 
-	iPoint invPos;
+	//iPoint invPos;
+	iPoint invPosText;
 
 	bool grabbed;
 	float toGrabCount;

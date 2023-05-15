@@ -35,8 +35,8 @@
 		<hudbuttonstitle texturepath="Assets/Textures/GUI/PawButtons.png" />
 		<hudbuttonsingame texturepath="Assets/Textures/GUI/guibuttons_ingamepause.png" />
 		<collectibles texturepath="Assets/Textures/collectibles.png"/>
+		<clickfx path="Assets/Audio/Fx/CatTalking.wav"/>
 		<titletext texturepath="Assets/Textures/Title.png"/>
-		<clickfx path="Assets/Audio/Fx/clickfx.wav"/>
 		<mousebyfx path="Assets/Audio/Fx/hudfx.wav"/>
 	</Hud>
 	<scenegameplay>
@@ -55,6 +55,11 @@
     <item>
       <texturepath texturepath="Assets/Textures/TestItem.png"/>
       <firePaws scene="0" x="384" y="48" id="1"/>
+      <dragonSlayer scene="0" x="384" y="48" id="2"/>
+      <grapplingHook scene="0" x="384" y="48" id="3"/>
+      <bulletPenetration scene="0" x="384" y="48" id="4"/>
+      <mysticalEnergy scene="0" x="384" y="48" id="5"/>
+      <arcaneSpirit scene="0" x="384" y="48" id="6"/>
     </item>
 		<map>
 			<mapfolder path="Assets/Maps/"/>
@@ -65,6 +70,7 @@
 			<mapfile path="Assets/Maps/Labrinth.tmx"/>	<!--this is 4 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>	<!--this is 5 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/PreLab.tmx"/>		<!--this is 7 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 
