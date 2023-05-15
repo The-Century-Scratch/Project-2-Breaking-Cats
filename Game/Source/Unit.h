@@ -70,10 +70,13 @@ public:
 	virtual void DealDamage(int amount);
 	virtual int GetHealthPoints();
 	virtual int GetDamage();
+	virtual int GetPlayerId();
+	virtual SString GetName();
 
 	virtual void Update();
 
 	int velocity = 0;
+	int playerId;
 	
 	virtual bool GetIsAlly();
 

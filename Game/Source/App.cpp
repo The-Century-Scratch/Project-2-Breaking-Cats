@@ -12,6 +12,7 @@
 #include "QuestManager.h"
 #include "AssetsManager.h"
 #include "GuiManager.h"
+#include "StatsManager.h"
 #include "Hud.h"
 #include "Inventory.h"
 #include "Debug.h"
@@ -58,6 +59,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	particleSystemManager = new ParticleSystemManager(false);
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
+	statsManager = new StatsManager(true);
 	hud = new Hud(true);
 	inventory = new Inventory(true);
 	debug = new Debug(true);
@@ -75,6 +77,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(particleSystemManager);
 	AddModule(questManager);
+	AddModule(statsManager);
 	AddModule(map);
 	AddModule(hud);
 	AddModule(inventory);

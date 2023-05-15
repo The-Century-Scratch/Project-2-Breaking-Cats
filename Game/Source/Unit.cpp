@@ -223,3 +223,13 @@ int Unit::GetDamage()
 {
 	return damage;
 }
+
+int Unit::GetPlayerId()
+{
+	return playerId;
+}
+
+SString Unit::GetName()
+{
+	return name;
+}

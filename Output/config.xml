@@ -53,7 +53,7 @@
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
     <item>
-      <texturepath texturepath="Assets/Textures/TestItem.png"/>
+      <texturepath texturepath="Assets/Textures/Items.png"/>
       <firePaws scene="0" x="384" y="48" id="1"/>
       <dragonSlayer scene="0" x="384" y="48" id="2"/>
       <grapplingHook scene="0" x="384" y="48" id="3"/>
@@ -74,13 +74,25 @@
 		</map>
 	</scenegameplay>
 
+  <inventory>
+    <itemTexture texturepath="Assets/Textures/Items.png"/>
+    <invTexture texturepath="Assets/Textures/Inventory.png"/>
+    <slotTexture texturepath="Assets/Textures/InvSlot.png"/>
+    <gats texturepath="Assets/Textures/GatsIdle.png"/>
+    <catska texturepath="Assets/Textures/Catska.png"/>
+  </inventory>
+  
+  <StatsManager>
+    <gats x="32" y="64" velocity="5" id="1" texturepath="Assets/Textures/GatsIdle.png"/>
+    <catska x="64" y="32" velocity="4" id="2" texturepath="Assets/Textures/Catska.png"/>
+  </StatsManager>
+  
 	<scenebattle>
 		<gats x="32" y="64" velocity="5" texturepath="Assets/Textures/GatsIdle.png"/>
 		<catska x="64" y="32" velocity="4" texturepath="Assets/Textures/Catska.png"/>
 		<guardian x="64" y="96" velocity="4" texturepath="Assets/Textures/TankEnemy.png"/>
 		<longrange x="96" y="112" velocity="4" texturepath="Assets/Textures/LargeRangeEnemy.png"/>
 		<straw x="112" y="112" velocity="4" texturepath="Assets/Textures/StrawDall.png"/>
-
 		<map>
 			<mapfolder path="Assets/Maps/"/>
 
