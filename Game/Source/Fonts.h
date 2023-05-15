@@ -11,7 +11,7 @@ class Font
 {
 public:
 
-	Font(App* App, const char* rtpFontFile, Textures* tex);
+	Font(App* App, const char* rtpFontFile);
 
 	~Font();
 

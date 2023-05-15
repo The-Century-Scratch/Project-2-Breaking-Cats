@@ -7,6 +7,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "ModuleCollisions.h"
+#include "SceneManager.h"
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -43,11 +44,16 @@ bool NPC::Start() {
 	switch (npctype)
 	{
 	case NPCTYPE::NORMAL:
+		dialogueid = 0;
 		break;
 	case NPCTYPE::QUEST:
+		dialogueid = 0;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
 		cRect = { position.x - 6,position.y + 17,16 + 12,16 + 12 };
+		break;
+	case NPCTYPE::DEVELOPER:
+		dialogueid = 0;
 		break;
 	default:
 		break;
@@ -74,7 +80,6 @@ bool NPC::Update()
 	default:
 		break;
 	}
-
 
 	SDL_Rect rect = NPCAnim.GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
@@ -127,6 +132,17 @@ void NPC::OnCollision(Collider* c1, Collider* c2)
 		case Collider::Type::WALL:
 			break;
 		case Collider::Type::PLAYER:
+			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+				switch (this->dialogueid) {
+				case 0:
+					LOG("TRIGGER DIALOGUE");
+					app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
+					app->sceneManager->dialogueManager->printText = true;
+					break;
+				default:
+					break;
+				}
+			}
 			break;
 		case Collider::Type::ENEMY:
 			break;

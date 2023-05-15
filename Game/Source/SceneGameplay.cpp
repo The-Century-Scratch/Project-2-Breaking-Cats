@@ -920,6 +920,7 @@ void SceneGameplay::Draw()
 		DrawDebugVariable();
 	}
 
+
 	//SDL_Rect r = { 110,0,100,100 };
 
 	//switch (gameState)
@@ -1035,11 +1036,6 @@ bool SceneGameplay::UnLoad()
 
 	if (app->entityManager->state) { app->entityManager->Disable(); }
 
-	//ListItem<Item*>* it = items.start;
-	//for (; it != items.end; ++it)
-	//{
-	//	it->data->toDelete = true;
-	//}
 
 
 	//entityManager->UnLoad();
@@ -2037,15 +2033,13 @@ void SceneGameplay::LoadTriggerableObjects()
 }
 
 void SceneGameplay::LoadNpc()
-{
-	ListItem<NPC*>* npcItem = npcs.start;
+{	ListItem<NPC*>* npcItem = npcs.start;
 	while (npcItem != NULL)
 	{
 		npcItem->data->toDelete = true;
 		npcItem = npcItem->next;
 	}
 	npcs.Clear();
-
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
@@ -2055,15 +2049,10 @@ void SceneGameplay::LoadNpc()
 		{
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
 			npc->parameters = npcNode;
-			npcs.Add(npc);
+			npcs.Add(npc); 
 			npc->Start();
 		}
 	}
-
-
-
-
-
 
 	//pugi::xml_document animations;
 	//pugi::xml_node anims;

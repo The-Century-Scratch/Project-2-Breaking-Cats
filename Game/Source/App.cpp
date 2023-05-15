@@ -53,6 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	sceneManager = new SceneManager(true);
 	moduleCollisions = new ModuleCollisions(true);
 	map = new Map(true);
+	assetsManager = new AssetsManager(true);
 	entityManager = new EntityManager(true);
 	particleSystemManager = new ParticleSystemManager(false);
 	questManager = new QuestManager(true);
@@ -65,6 +66,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	// Reverse order of CleanUp
 	AddModule(win);
 	AddModule(input);
+	AddModule(assetsManager);
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(sceneManager);
