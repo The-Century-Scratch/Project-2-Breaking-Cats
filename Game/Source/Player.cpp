@@ -57,6 +57,8 @@ bool Player::Start() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	walkingcityfx = app->audio->LoadFx(parameters.attribute("stepcity").as_string());
+	walkinggrassfx = app->audio->LoadFx(parameters.attribute("stepgrass").as_string());
 	w = h = 16;
 
 	// initilize textures

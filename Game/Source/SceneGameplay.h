@@ -219,6 +219,11 @@ private:
 
 	int lastUserInput;
 
+	//Music
+	SString cityTheme;
+	SString shopTheme;
+
+
 
 
 };

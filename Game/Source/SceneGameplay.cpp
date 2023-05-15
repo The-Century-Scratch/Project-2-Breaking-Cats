@@ -186,6 +186,9 @@ bool SceneGameplay::Load()
 	//app->map->Load("city_square.tmx");
 	isTown = app->map->Load(name.GetString());
 
+	cityTheme = config.child("citytheme").attribute("path").as_string();
+	shopTheme = config.child("shoptheme").attribute("path").as_string();
+
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
 		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentScene)
@@ -445,37 +448,44 @@ bool SceneGameplay::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
 	{
 		app->inventory->isActivated = !app->inventory->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
 		firePaw->equiped = true;
 		app->inventory->AddItem(firePaw);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
 	{
 		dragonSlayer->equiped = true;
 		app->inventory->AddItem(dragonSlayer);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
 	{
 		grapplingHook->equiped = true;
 		app->inventory->AddItem(grapplingHook);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
 	{
 		bulletPenetration->equiped = true;
 		app->inventory->AddItem(bulletPenetration);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
 	{
 		mysticalEnergy->equiped = true;
 		app->inventory->AddItem(mysticalEnergy);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
 	{
 		arcaneSpirit->equiped = true;
 		app->inventory->AddItem(arcaneSpirit);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
@@ -2240,16 +2250,19 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 		app->render->camera.x = -597;
 		app->render->camera.y = 0;
 		canMoveCam = true;
+		app->audio->PlayMusic(cityTheme.GetString());
 		break;
 	case 1:
 		app->render->camera.x = 283;
 		app->render->camera.y = -433;
 		canMoveCam = true;
+		app->audio->PlayMusic(cityTheme.GetString());
 		break;
 	case 2:
 		app->render->camera.x = 375;
 		app->render->camera.y = 43;
 		canMoveCam = false;
+		app->audio->PlayMusic(shopTheme.GetString());
 		break;
 	case 3:
 		app->render->camera.x = 102;
