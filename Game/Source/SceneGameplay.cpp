@@ -188,6 +188,7 @@ bool SceneGameplay::Load()
 
 	cityTheme = config.child("citytheme").attribute("path").as_string();
 	shopTheme = config.child("shoptheme").attribute("path").as_string();
+	forestTheme = config.child("foresttheme").attribute("path").as_string();
 
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
@@ -2307,7 +2308,6 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 		app->render->camera.x = 283;
 		app->render->camera.y = -433;
 		canMoveCam = true;
-		app->audio->PlayMusic(cityTheme.GetString());
 		break;
 	case 2:
 		app->render->camera.x = 375;
@@ -2319,6 +2319,13 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 		app->render->camera.x = 102;
 		app->render->camera.y = 18;
 		canMoveCam = false;
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		app->audio->PlayMusic(forestTheme.GetString());
 		break;
 	default:
 		break;

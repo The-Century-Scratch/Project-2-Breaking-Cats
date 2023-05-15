@@ -42,12 +42,14 @@
 		<unswitchfx path="Assets/Audio/Fx/Unswitch.wav"/>
 		<getitemfx path="Assets/Audio/Fx/GetItem.wav"/>
 		<swapscenesfx path="Assets/Audio/Fx/SwapScenes.wav"/>
+    <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 	</Hud>
 	<scenegameplay>
-		<player x="136" y="23" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrass.wav" stepcity="Assets/Audio/Fx/WalkingCity.wav">
+		<player x="136" y="23" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrassBase.wav" stepcity="Assets/Audio/Fx/walkingCityBase.wav">
 		</player>
 		<citytheme path="Assets/Audio/Music/CityTheme.ogg"/>
 		<shoptheme path="Assets/Audio/Music/ShopTheme.ogg"/>
+    <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
 		<npc scene="0" x="480" y="160" texturepath="Assets/Textures/NPCs.png" id="1" type="0"/>
