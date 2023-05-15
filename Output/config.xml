@@ -79,13 +79,13 @@
 		</map>
 	</scenegameplay>
 
-  <inventory>
+  <Inventory>
     <itemTexture texturepath="Assets/Textures/Items.png"/>
     <invTexture texturepath="Assets/Textures/Inventory.png"/>
     <slotTexture texturepath="Assets/Textures/InvSlot.png"/>
-    <gats texturepath="Assets/Textures/GatsIdle.png"/>
-    <catska texturepath="Assets/Textures/Catska.png"/>
-  </inventory>
+    <gatsTexture texturepath="Assets/Textures/GatsIdle.png"/>
+    <catskaTexture texturepath="Assets/Textures/Catska.png"/>
+  </Inventory>
   
   <StatsManager>
     <gats x="32" y="64" velocity="5" id="1" texturepath="Assets/Textures/GatsIdle.png"/>

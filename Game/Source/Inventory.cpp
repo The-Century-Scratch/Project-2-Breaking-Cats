@@ -46,30 +46,29 @@ bool Inventory::Start()
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
-	pugi::xml_node itemNode = config.child("inventory");
-	itemTexture = app->tex->Load("Assets/Textures/Items.png");
-	invTex = app->tex->Load("Assets/Textures/Inventory.png");
-	slotText = app->tex->Load("Assets/Textures/InvSlot.png");
-	gatsText = app->tex->Load("Assets/Textures/GatsIdle.png");
-	catskaText = app->tex->Load("Assets/Textures/Catska.png");
+	itemTexture =	app->tex->Load(config.child("itemTexture").attribute("texturepath").as_string());
+	invTex =		app->tex->Load(config.child("invTexture").attribute("texturepath").as_string());
+	slotText =		app->tex->Load(config.child("slotTexture").attribute("texturepath").as_string());
+	gatsText =		app->tex->Load(config.child("gatsTexture").attribute("texturepath").as_string());
+	catskaText =	app->tex->Load(config.child("catskaTexture").attribute("texturepath").as_string());
 
 
 	isActivated = false;
 	showStatsId = 1;
 
-	slotRect = { 0,0,36,36 };
-	slotRectFocus = { 36,0,36,36 };
+	slotRect =				{ 0, 0, 36,36 };
+	slotRectFocus =			{ 36,0, 36,36 };
 
-	gatsRect = { 0,0,32,32 };
-	catskaRect = { 0,0,32,32 };
+	gatsRect =				{ 0, 0, 32,32 };
+	catskaRect =			{ 0, 0, 32,32 };
 
-	leftArrowRect = { 72,16,22,16 };
-	leftArrowRectFocus = { 94,16,22,16 };
-	rightArrowRect = { 72,0,22,16 };
-	rightArrowRectFocus = { 94,0,22,16 };
+	leftArrowRect =			{ 72,16,22,16 };
+	leftArrowRectFocus =	{ 94,16,22,16 };
+	rightArrowRect =		{ 72,0, 22,16 };
+	rightArrowRectFocus =	{ 94,0, 22,16 };
 
-	boundsLeftArrow = { 0, 0, 22, 16 };
-	boundsRightArrow = { 0, 0, 22, 16 };
+	boundsLeftArrow =		{ 0, 0, 22, 16 };
+	boundsRightArrow =		{ 0, 0, 22, 16 };
 
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
@@ -79,7 +78,6 @@ bool Inventory::Start()
 		slotList[invSlot_].itemId = 0;
 		slotList[invSlot_].isfull = false;
 		slotList[invSlot_].state = SlotState::UNSELECTED;
-
 	}
 
 	/*InventorySlot* newInvSlot_ = nullptr;
@@ -247,9 +245,9 @@ bool Inventory::Update(float dt)
 		}
 
 		boundsLeftArrow.x = invPos.x + 20;
-		boundsLeftArrow.y = invPos.x + 93;
+		boundsLeftArrow.y = invPos.y + 93;
 		boundsRightArrow.x = invPos.x + 154;
-		boundsRightArrow.y = invPos.x + 93;
+		boundsRightArrow.y = invPos.y + 93;
 
 		HandleStatsInfo();
 
@@ -452,6 +450,10 @@ bool Inventory::CleanUp()
 	//RELEASE(easing);
 	app->tex->Unload(invTex);
 	app->tex->Unload(slotText);
+	app->tex->Unload(itemTexture);
+	app->tex->Unload(gatsText);
+	app->tex->Unload(catskaText);
+
 
 	/*for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
