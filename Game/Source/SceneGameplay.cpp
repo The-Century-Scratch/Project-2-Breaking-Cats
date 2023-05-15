@@ -441,6 +441,7 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
+	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
 	{
 		app->inventory->isActivated = !app->inventory->isActivated;
@@ -448,28 +449,35 @@ bool SceneGameplay::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
+		firePaw->equiped = true;
 		app->inventory->AddItem(firePaw);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
 	{
+		dragonSlayer->equiped = true;
 		app->inventory->AddItem(dragonSlayer);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
 	{
+		grapplingHook->equiped = true;
 		app->inventory->AddItem(grapplingHook);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
 	{
+		bulletPenetration->equiped = true;
 		app->inventory->AddItem(bulletPenetration);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
 	{
+		mysticalEnergy->equiped = true;
 		app->inventory->AddItem(mysticalEnergy);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
 	{
+		arcaneSpirit->equiped = true;
 		app->inventory->AddItem(arcaneSpirit);
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
 	{
 		
