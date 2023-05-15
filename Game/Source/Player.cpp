@@ -12,6 +12,7 @@
 #include "SceneManager.h"
 #include "window.h"
 #include "Map.h"
+#include "Debug.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -190,14 +191,20 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::WALL:
 			//FUNCION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			if (!app->debug->godMode)
+			{
+				app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			}
 			break;
 		case Collider::Type::ENEMY:
 			//FUNCION TO START BATTLE
 			break;
 		case Collider::Type::NPC:
 			//FUNCTION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			if (!app->debug->godMode)
+			{
+				app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			}
 			break;
 		case Collider::Type::NPCINTERACTION:
 			//DIALOG FUNCTION + QUEST?
@@ -208,7 +215,10 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::CHEAST:
 			//FUNCTION TO NOT TRASPASS
-			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			if (!app->debug->godMode)
+			{
+				app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+			}
 			break;
 		case Collider::Type::CHEASTINTERACTION:
 			//FUNCTION TO OPEN CHEAST
