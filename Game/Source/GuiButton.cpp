@@ -84,7 +84,7 @@ bool GuiButton::Draw(Render* render)
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			rect = { 0,139,197,45 };
+			rect = { 0,192,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -92,7 +92,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		case GuiControlState::NORMAL:
-			rect = { 0,0,197,45 };
+			rect = { 0,0,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -100,7 +100,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		case GuiControlState::FOCUSED:
-			rect = { 0,46,197,45 };
+			rect = { 0,64,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -108,7 +108,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		case GuiControlState::PRESSED:
-			rect = { 0,92,197,45 };
+			rect = { 0,128,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, bounds.x, bounds.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -116,7 +116,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		}
-		app->render->DrawText(text.GetString(), (bounds.x + 6), (bounds.y + 2), (bounds.w - 10), (bounds.h - 2), {255,255,255});
+		app->render->DrawText(text.GetString(), (bounds.x + 60), (bounds.y + 12), (bounds.w - 120), (bounds.h -24), {255,255,255});
 	}
 	else if (app->hud->hudstate == hudSTATE::PAUSESCREEN)
 	{
@@ -181,7 +181,7 @@ bool GuiButton::Draw(Render* render)
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			rect = { 0,139,197,45 };
+			rect = { 0,192,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -189,7 +189,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		case GuiControlState::NORMAL:
-			rect = { 0,0,197,45 };
+			rect = { 0, 0,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -197,7 +197,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		case GuiControlState::FOCUSED:
-			rect = { 0,46,197,45 };
+			rect = { 0,64,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -205,7 +205,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		case GuiControlState::PRESSED:
-			rect = { 0,92,197,45 };
+			rect = { 0,128,267,64 };
 			render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
 			if (app->debug->drawHugBounds)
 			{
@@ -213,7 +213,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		}
-		app->render->DrawText(text.GetString(), (bounds.x + 6), (bounds.y + 2), (bounds.w - 10), (bounds.h - 2), { 255,255,255 });
+		app->render->DrawText(text.GetString(), (bounds.x + 60), (bounds.y + 12), (bounds.w - 120), (bounds.h - 24), { 255,255,255 });
 	}
 
 	return false;

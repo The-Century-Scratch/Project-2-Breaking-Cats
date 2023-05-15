@@ -173,6 +173,8 @@ public:
 
 	bool CreateColliders(pugi::xml_node mapFile);
 
+	void ClearMaps();
+
 private:
 
 	bool LoadMap(pugi::xml_node mapFile);

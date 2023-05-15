@@ -5,6 +5,9 @@
 #include "Point.h"
 #include "Player.h"
 #include "NPC.h"
+#include "MovableObject.h"
+#include "TriggerableObject.h"
+#include "StaticObject.h"
 #include "List.h"
 //#include "ParticlesManager.h"
 
@@ -28,17 +31,36 @@ class Shop;
 class Font;
 
 
-
+//TO CITY
 #define LEAVETABERN iPoint(298,104)
-
 #define LEAVESTORE iPoint(568,714)
-
 #define LEAVEBASE iPoint(136,440)
+#define LEAVEAFTERLABRINTHDOWN iPoint(389, 8)
+#define LEAVEPRELABTOP iPoint(384, 748)
 
-#define IDSCENESTORE 2
-#define IDSCENEBASE 1
-#define IDSCENETABERN 3
+//TO LABRINTH
+#define LEAVEVILLAGE iPoint(6, 150)
+#define LEAVEAFTERLABRINTHLEFT iPoint(462, 150)
+
+//TO VILLAGE
+#define LEAVELABRINTHLEFT iPoint(620, 125)
+
+//TO AFTERLABRINTH
+#define LEAVELABRINTHRIGHT iPoint(5, 159)
+#define LEAVECITYTOP iPoint(243, 297)
+
+//TO PRELAB
+#define LEAVECITYDOWN iPoint(208, 6)
+#define LEAVELAB iPoint(379, 294)
+
 #define IDSCENEMAP 0
+#define IDSCENEBASE 1
+#define IDSCENESTORE 2
+#define IDSCENETABERN 3
+#define IDLABRINTH 4
+#define IDAFTERLABRINTH 5
+#define IDVILLAGE 6
+#define IDPRELAB 7
 
 #define INIT_POS_TABERN iPoint(334,106)
 #define INIT_POS_BASE iPoint(113,366)
@@ -103,7 +125,9 @@ private:
 	void SetCameraMovement(int target_x, int target_y, float dt);
 	void DrawDebugVariable();
 
-
+	void LoadMovableObjects();
+	void LoadTriggerableObjects();
+	void LoadStaticObject();
 	void LoadNpc();
 	void LoadItems(pugi::xml_node& n);
 
@@ -112,6 +136,9 @@ private:
 private:
 	Player* currentPlayer;
 	List<NPC*> npcs;
+	List<MovableObject*> movableObjectList;
+	List<TriggerableObject*> triggerableObjectList;
+	List<StaticObject*> staticObjectList;
 
 	SDL_Texture* goldTexture;
 	eastl::list<Player*> playerList;
@@ -153,7 +180,14 @@ private:
 	SDL_Texture* guiTex;
 	SDL_Texture* guiPad;
 
-	eastl::list<Item*> items;
+	List<Item*> items;
+
+	Item* firePaw;
+	Item* dragonSlayer;
+	Item* grapplingHook;
+	Item* bulletPenetration;
+	Item* mysticalEnergy;
+	Item* arcaneSpirit;
 
 	iPoint tmpPosPlayer;
 

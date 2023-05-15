@@ -47,6 +47,21 @@
     <ClCompile Include="Source\Log.cpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
     <ClCompile Include="Source\FirePaws.cpp" />
+    <ClCompile Include="Source\MovableObject.cpp" />
+    <ClCompile Include="Source\TriggerableObject.cpp" />
+    <ClCompile Include="Source\StaticObject.cpp" />
+    <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\Straw.cpp" />
+    <ClCompile Include="Source\Unit.cpp" />
+    <ClCompile Include="Source\Catska.cpp" />
+    <ClCompile Include="Source\Gats.cpp" />
+    <ClCompile Include="Source\Guardian.cpp" />
+    <ClCompile Include="Source\LongRange.cpp" />
+    <ClCompile Include="Source\GrapplingHook.cpp" />
+    <ClCompile Include="Source\BulletPenetration.cpp" />
+    <ClCompile Include="Source\MysticalEnergy.cpp" />
+    <ClCompile Include="Source\ArcaneSpirit.cpp" />
+    <ClCompile Include="Source\DragonSlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -106,6 +121,21 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Source\FirePaws.h" />
+    <ClInclude Include="Source\MovableObject.h" />
+    <ClInclude Include="Source\TriggerableObject.h" />
+    <ClInclude Include="Source\StaticObject.h" />
+    <ClInclude Include="Source\Inventory.h" />
+    <ClInclude Include="Source\Straw.h" />
+    <ClInclude Include="Source\Unit.h" />
+    <ClInclude Include="Source\Catska.h" />
+    <ClInclude Include="Source\Gats.h" />
+    <ClInclude Include="Source\Guardian.h" />
+    <ClInclude Include="Source\LongRange.h" />
+    <ClInclude Include="Source\GrapplingHook.h" />
+    <ClInclude Include="Source\BulletPenetration.h" />
+    <ClInclude Include="Source\MysticalEnergy.h" />
+    <ClInclude Include="Source\ArcaneSpirit.h" />
+    <ClInclude Include="Source\DragonSlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />
@@ -115,8 +145,5 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Output\Assets\Textures\ICON.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Output\Assets\Maps\LostChests.tmx" />
   </ItemGroup>
 </Project>

@@ -25,11 +25,18 @@
 
 //Items
 #include "FirePaws.h"
+#include "DragonSlayer.h"
+#include "GrapplingHook.h"
+#include "BulletPenetration.h"
+#include "MysticalEnergy.h"
+#include "ArcaneSpirit.h"
 
 //#include "KnightHelmet.h"
 //#include "KnightChest.h"
 
 #include "Npc.h"
+#include "MovableObject.h"
+#include "TriggerableObject.h"
 #include "Map.h"
 //#include "DialogueManager.h"
 
@@ -40,7 +47,7 @@
 
 //#include "CharacterManager.h"
 //#include "PauseMenu.h"
-//#include "Inventory.h"
+#include "Inventory.h"
 //#include "QuestMenu.h"
 //#include "Shop.h"
 
@@ -192,14 +199,72 @@ bool SceneGameplay::Load()
 
 	Item* item = nullptr;
 	pugi::xml_node itemNode = config.child("item");
+	
+	firePaw = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+	items.Add(firePaw);
+	firePaw->Start();
+
+	dragonSlayer = new DragonSlayer(iPoint(itemNode.child("dragonSlayer").attribute("x").as_int(), itemNode.child("dragonSlayer").attribute("y").as_int()), itemText);
+	items.Add(dragonSlayer);
+	dragonSlayer->Start();
+
+	grapplingHook = new GrapplingHook(iPoint(itemNode.child("grapplingHook").attribute("x").as_int(), itemNode.child("grapplingHook").attribute("y").as_int()), itemText);
+	items.Add(grapplingHook);
+	grapplingHook->Start();
+
+	bulletPenetration = new BulletPenetration(iPoint(itemNode.child("bulletPenetration").attribute("x").as_int(), itemNode.child("bulletPenetration").attribute("y").as_int()), itemText);
+	items.Add(bulletPenetration);
+	bulletPenetration->Start();
+
+	mysticalEnergy = new MysticalEnergy(iPoint(itemNode.child("mysticalEnergy").attribute("x").as_int(), itemNode.child("mysticalEnergy").attribute("y").as_int()), itemText);
+	items.Add(mysticalEnergy);
+	mysticalEnergy->Start();
+
+	mysticalEnergy = new ArcaneSpirit(iPoint(itemNode.child("arcaneSpirit").attribute("x").as_int(), itemNode.child("arcaneSpirit").attribute("y").as_int()), itemText);
+	items.Add(mysticalEnergy);
+	mysticalEnergy->Start();
+
+
+
+	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
 	{
-		if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
 		{
-			item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
-			items.push_back(item);
-			item->Start();
+			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT);
+			movableObject->parameters = movableObjectNode;
+			movableObjectList.Add(movableObject);
+			movableObject->Start();
 		}
 	}
+
+
+
+
+
+	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
+	{
+		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT);
+			triggerableObject->parameters = triggerableObjectNode;
+			triggerableObjectList.Add(triggerableObject);
+			triggerableObject->Start();
+		}
+	}
+
+	//Item* item = nullptr;
+	//pugi::xml_node itemNode = config.child("item");
+	//{
+	//	if (itemNode.child("firePaws").attribute("scene").as_int() == app->sceneManager->currentScene)
+	//	{
+	//		item = new FirePaws(iPoint(itemNode.child("firePaws").attribute("x").as_int(), itemNode.child("firePaws").attribute("y").as_int()), itemText);
+	//		items.push_back(item);
+	//		item->Start();
+	//	}
+	//}
+
+
+
 
 	switch (app->sceneManager->currentScene)
 	{
@@ -228,9 +293,23 @@ bool SceneGameplay::Load()
 		app->render->camera.y = 18;
 		canMoveCam = false;
 		break;
+	case 4:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 5:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 6:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
 	default:
 		break;
 	}
+
+	app->inventory->Enable();
 
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
 	//guiTex = app->tex->Load("Textures/UI/gui_gameplay_textures.png");
@@ -362,7 +441,62 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-	
+	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
+	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
+	{
+		app->inventory->isActivated = !app->inventory->isActivated;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
+	{
+		firePaw->equiped = true;
+		app->inventory->AddItem(firePaw);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
+	{
+		dragonSlayer->equiped = true;
+		app->inventory->AddItem(dragonSlayer);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
+	{
+		grapplingHook->equiped = true;
+		app->inventory->AddItem(grapplingHook);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
+	{
+		bulletPenetration->equiped = true;
+		app->inventory->AddItem(bulletPenetration);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
+	{
+		mysticalEnergy->equiped = true;
+		app->inventory->AddItem(mysticalEnergy);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
+	{
+		arcaneSpirit->equiped = true;
+		app->inventory->AddItem(arcaneSpirit);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
+	{
+		
+		int aux = app->inventory->GetFirePaw();
+		LOG("the number that you are trying to check is %i", aux);
+
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+
+		
+
+		app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
+
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -377,32 +511,98 @@ bool SceneGameplay::Update(float dt)
 	if (app->sceneManager->changeMap)
 	{
 
-		if (app->sceneManager->currentScene == 1) {
-			ChangeMap(LEAVEBASE, 0);
+		if (app->sceneManager->currentScene == IDSCENEBASE) {
+			ChangeMap(LEAVEBASE, IDSCENEMAP);
 		}
-		else if (app->sceneManager->currentScene == 2) {
-			ChangeMap(LEAVESTORE, 0);
+		else if (app->sceneManager->currentScene == IDSCENESTORE) {
+			ChangeMap(LEAVESTORE, IDSCENEMAP);
 		}
-		else if (app->sceneManager->currentScene == 3) {
-			ChangeMap(LEAVETABERN, 0);
+		else if (app->sceneManager->currentScene == IDSCENETABERN) {
+			ChangeMap(LEAVETABERN, IDSCENEMAP);
 		}
 
-		//ENTER DIFFERENT INTERIORS
-		if (app->sceneManager->store) {
-			ChangeMap(INIT_POS_STORE, IDSCENESTORE);
-			app->sceneManager->store = false;
 
+		//leaving village map
+		if (app->sceneManager->currentScene == IDVILLAGE)
+		{
+			ChangeMap(LEAVEVILLAGE, 4);
 		}
-		else if (app->sceneManager->tabern) {
-			ChangeMap(INIT_POS_TABERN,IDSCENETABERN);
-			app->sceneManager->tabern = false;
+
+		//leaving labrinth map
+		if (app->sceneManager->currentScene == IDLABRINTH)
+		{
+			if (app->sceneManager->village)
+			{
+				ChangeMap(LEAVELABRINTHLEFT, IDVILLAGE);
+				app->sceneManager->village = false;
+			}
+			if (app->sceneManager->leftAfterLabrinth)
+			{
+				ChangeMap(LEAVELABRINTHRIGHT, IDAFTERLABRINTH);
+				app->sceneManager->leftAfterLabrinth = false;
+			}
 		}
-		else if (app->sceneManager->resistance_base) {
-			ChangeMap(INIT_POS_BASE, IDSCENEBASE);
-			app->sceneManager->resistance_base = false;
+		//leaving afterlabrinth map
+		if (app->sceneManager->currentScene == IDAFTERLABRINTH)
+		{
+			if (app->sceneManager->rightLabrinth)
+			{
+				ChangeMap(LEAVEAFTERLABRINTHLEFT, IDLABRINTH);
+				app->sceneManager->rightLabrinth = false;
+			}
+			if (app->sceneManager->nordCity)
+			{
+				ChangeMap(LEAVEAFTERLABRINTHDOWN, IDSCENEMAP);
+				app->sceneManager->nordCity = false;
+			}
+		}
+
+		//leaving prelab map
+		if (app->sceneManager->currentScene == IDPRELAB)
+		{
+			if (app->sceneManager->downCity)
+			{
+				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;
+			}
+		}
+
+		if (app->sceneManager->currentScene == IDSCENEMAP)
+		{
+			//LEAVING CITY MAP
+			if (app->sceneManager->store) {
+				ChangeMap(INIT_POS_STORE, IDSCENESTORE);
+				app->sceneManager->store = false;
+			}
+			else if (app->sceneManager->tabern) {
+				ChangeMap(INIT_POS_TABERN, IDSCENETABERN);
+				app->sceneManager->tabern = false;
+			}
+			else if (app->sceneManager->resistance_base) {
+				ChangeMap(INIT_POS_BASE, IDSCENEBASE);
+				app->sceneManager->resistance_base = false;
+			}
+			else if (app->sceneManager->downAfterLabrinth)
+			{
+				ChangeMap(LEAVECITYTOP, IDAFTERLABRINTH);
+				app->sceneManager->downAfterLabrinth = false;
+			}
+			else if (app->sceneManager->topPreLab )
+			{
+				ChangeMap(LEAVECITYDOWN, IDPRELAB);
+				app->sceneManager->topPreLab = false;
+			}
 		}
 	}
 	
+
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		app->hud->prevstate = app->hud->hudstate;
+		app->hud->hudstate = hudSTATE::PAUSESCREEN;
+		app->hud->wait1frame = true;
+	}
 
 	//switch (gameState)
 	//{
@@ -709,11 +909,11 @@ void SceneGameplay::Draw()
 {
 	app->map->Draw();
 
-	eastl::list<Item*>::iterator it = items.begin();
-	for (; it != items.end(); ++it)
+	/*ListItem<Item*>* it = items.start;
+	for (; it != items.end; ++it)
 	{
-		(*it)->Draw();
-	}
+		it->data->Draw();
+	}*/
 
 	if (app->debug->drawVariables)
 	{
@@ -1754,6 +1954,84 @@ void SceneGameplay::ChangeBlockBounds(int bounds_x, int bounds_y)
 	//}
 }
 
+void SceneGameplay::LoadStaticObject()
+{
+	ListItem<StaticObject*>* staticObjectItem = staticObjectList.start;
+	while (staticObjectItem != NULL)
+	{
+		staticObjectItem->data->toDelete = true;
+		staticObjectItem = staticObjectItem->next;
+	}
+	staticObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node staticObjectNode = config.child("staticObject"); staticObjectNode; staticObjectNode = staticObjectNode.next_sibling("staticObject"))
+	{
+		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			if (app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved)
+			{
+				StaticObject* staticObject = (StaticObject*)app->entityManager->CreateEntity(EntityType::STATICOBJECT);
+				staticObject->parameters = staticObjectNode;
+				staticObjectList.Add(staticObject);
+				staticObject->Start();
+			}
+		}
+	}
+}
+
+void SceneGameplay::LoadMovableObjects()
+{
+	ListItem<MovableObject*>* movableObjectItem = movableObjectList.start;
+	while (movableObjectItem != NULL)
+	{
+		movableObjectItem->data->toDelete = true;
+		movableObjectItem = movableObjectItem->next;
+	}
+	movableObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
+	{
+		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT, app->sceneManager->puzzle1solved);
+			movableObject->parameters = movableObjectNode;
+			movableObjectList.Add(movableObject);
+			movableObject->Start();
+		}
+	}
+}
+
+void SceneGameplay::LoadTriggerableObjects()
+{
+	ListItem<TriggerableObject*>* triggerableObjectItem = triggerableObjectList.start;
+	while (triggerableObjectItem != NULL)
+	{
+		triggerableObjectItem->data->toDelete = true;
+		triggerableObjectItem = triggerableObjectItem->next;
+	}
+	triggerableObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
+	{
+		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT, app->sceneManager->puzzle2solved);
+			triggerableObject->parameters = triggerableObjectNode;
+			triggerableObjectList.Add(triggerableObject);
+			triggerableObject->Start();
+		}
+	}
+}
+
 void SceneGameplay::LoadNpc()
 {	ListItem<NPC*>* npcItem = npcs.start;
 	while (npcItem != NULL)
@@ -1911,6 +2189,12 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 
 	//load again new npcs
 	LoadNpc();
+	//load again new movableobjects
+	LoadMovableObjects();
+	//load again new triggerableobjects
+	LoadTriggerableObjects();
+	//load again new staticobjects
+	LoadStaticObject();
 
 	//set camera according new scene
 	switch (app->sceneManager->currentScene)
@@ -1984,4 +2268,16 @@ void SceneGameplay::DrawDebugVariable()
 	app->render->DrawText(std::to_string(currentPlayer->position.x).c_str(), app->debug->debugX + 110, app->debug->debugY, 50, 20, app->debug->debugColor);
 	app->render->DrawText("Player Y  ", app->debug->debugX, app->debug->debugY + 30, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(currentPlayer->position.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 30, 50, 20, app->debug->debugColor);
+
+	app->render->DrawText("Camara X  ", app->debug->debugX, app->debug->debugY + 80, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->render->camera.x).c_str(), app->debug->debugX + 110, app->debug->debugY + 80, 50, 20, app->debug->debugColor);
+	app->render->DrawText("Camara Y  ", app->debug->debugX, app->debug->debugY + 110, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->render->camera.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 110, 50, 20, app->debug->debugColor);
+
+	int MouseX_, MouseY_;
+	app->input->GetMousePosition(MouseX_, MouseY_);
+	app->render->DrawText("Mouse X  ", app->debug->debugX, app->debug->debugY + 160, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
+	app->render->DrawText("Mouse Y  ", app->debug->debugX, app->debug->debugY + 190, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
 }

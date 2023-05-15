@@ -384,6 +384,11 @@ bool Map::Load(const char* scene)
     return ret;
 }
 
+void Map::ClearMaps()
+{
+    mapFileName.Clear();
+}
+
 // Implement LoadMap to load the map properties
 bool Map::LoadMap(pugi::xml_node mapFile)
 {
@@ -693,10 +698,10 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                     switch (id)
                     {
                     case 54:
-                        newscene = 0;//to change
+                        newscene = 5;
                         break;
                     case 55:
-                        newscene = 0;//to change
+                        newscene = 7;
                         break;
                     case 56:
                         newscene = 3;
@@ -707,6 +712,47 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                     case 58:
                         newscene = 1;
                         break;
+                    default:
+                        break;
+                    }
+                }
+                if (app->sceneManager->currentScene == 4)
+                {
+                    switch (id)
+                    {
+                    case 18:
+                        newscene = 6;
+                        break;
+                    case 19:
+                        newscene = 5;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                if (app->sceneManager->currentScene == 5)
+                {
+                    switch (id)
+                    {
+                    case 21:
+                        newscene = 4;
+                        break;
+                    case 22:
+                        newscene = 0;
+                        break;
+                    default:
+                        break;
+                    }
+                }
+                if (app->sceneManager->currentScene == 7)
+                {
+                    switch (id)
+                    {
+                    case 59:
+                        newscene = 0;
+                        break;
+                    case 60:
+                        newscene = 8;// future lab that is not implemented
                     default:
                         break;
                     }

@@ -43,8 +43,18 @@ public:
 	int currentScene;
 	
 	bool Pause = false;
-	//variable to check which interior to enter
-	bool tabern = false, store = false, resistance_base = false;
+	//variable in city
+	bool tabern = false, store = false, resistance_base = false, downAfterLabrinth = false, topPreLab = false;
+	//variable in labrinth
+	bool village = false, leftAfterLabrinth = false;
+	//variable in after labrinth
+	bool rightLabrinth = false, nordCity = false;
+	//variable in preLab
+	bool downCity = false, lab = false;
+
+	//variable to see what puzzles has ben solved
+	bool puzzle1solved = false, puzzle2solved = false, puzzle3solved = false;
+
 	bool changeMap = false;
 
 	Scene* current;

@@ -69,6 +69,7 @@ private:
 
 	int maxChannels;
 	int numChannels;
+
 };
 
 #endif // __AUDIO_H__

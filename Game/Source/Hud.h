@@ -5,6 +5,7 @@
 #include "GuiButton.h"
 #include "GUICheckBox.h"
 #include "GUISlider.h"
+#include "easings.h"
 
 #define MAX_BUTTONS 17
 
@@ -58,6 +59,7 @@ public:
 	SDL_Texture* guiButtonsTitle;
 	SDL_Texture* guiButtonsInGame;
 	SDL_Texture* collectibles;
+	SDL_Texture* titleText;
 	
 	unsigned int clickfx;
 	unsigned int mousebyfx;
@@ -108,6 +110,14 @@ private:
 	GuiButton* button16;
 	//vsync checkbox
 	GuiCheckBox* button17;
+
+	//Easings
+	Easing* easingTitle;
+	Easing* easingTitleIn;
+	Easing* easingTitleOut;
+	Easing* easingTitleBtns;
+
+	float titlePos;
 
 };
 
