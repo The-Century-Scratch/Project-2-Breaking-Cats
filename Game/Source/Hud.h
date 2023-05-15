@@ -67,6 +67,8 @@ public:
 	uint unswitchfx;
 	uint getitemfx;
 	uint swapscenesfx;
+	uint victoryfx;
+	uint defeatfx;
 	int timeLeft;
 	bool debug = false;
 	bool wait1frame = false;

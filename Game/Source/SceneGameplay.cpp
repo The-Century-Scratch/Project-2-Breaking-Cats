@@ -511,6 +511,23 @@ bool SceneGameplay::Update(float dt)
 
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_DOWN)
+	{
+
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+
+
+
+		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
+
+	}
+
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -576,8 +593,19 @@ bool SceneGameplay::Update(float dt)
 		{
 			if (app->sceneManager->downCity)
 			{
-				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
-				app->sceneManager->downCity = false;
+				app->map->CleanUp();
+				app->map->ClearMaps();
+
+				app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+				app->render->camera.x = 0;
+				app->render->camera.y = 0;
+
+
+
+				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
+				/*ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;*/
 			}
 		}
 

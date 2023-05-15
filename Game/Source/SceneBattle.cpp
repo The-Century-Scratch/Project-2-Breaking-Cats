@@ -470,7 +470,7 @@ bool SceneBattle::Update(float dt)
 
 			app->sceneManager->currentScene = 6;
 
-			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
+			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
 			
 		}
 		if (!alliesAlive)
@@ -480,7 +480,7 @@ bool SceneBattle::Update(float dt)
 
 			app->sceneManager->currentScene = 6;
 
-			app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
 
 		}
 

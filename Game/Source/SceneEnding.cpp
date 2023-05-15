@@ -21,9 +21,8 @@
 
 SceneEnding::SceneEnding(bool win)
 {
-	//bg = nullptr;
-	//font = nullptr;
-	//hasWin = win;
+	bg = nullptr;
+	hasWin = win;
 
 	//if (hasWin) app->audio->PlayMusic("Audio/Music/win_theme.ogg", true);
 	//else app->audio->PlayMusic("Audio/Music/gameover_theme.ogg", true);
@@ -46,11 +45,6 @@ SceneEnding::SceneEnding(bool win)
 	//easingPosition = 300;
 
 	//showColliders = false;
-
-	//// Font
-	//font = new Font(app, "Font/font3.xml", app->tex);
-
-	//menu = new EndingMenu(font, this);
 }
 
 bool SceneEnding::Load()
@@ -60,6 +54,10 @@ bool SceneEnding::Load()
 
 	if (hasWin) bg = app->tex->Load("Assets/Textures/victory.png");
 	else bg = app->tex->Load("Assets/Textures/defeat.png");
+	if (hasWin) app->audio->PlayFx(app->hud->victoryfx);
+	else app->audio->PlayFx(app->hud->defeatfx);
+
+	app->audio->PlayMusic("");
 
 	return ret;
 }
@@ -120,7 +118,7 @@ bool SceneEnding::Update(float dt)
 
 void SceneEnding::Draw()
 {
-	app->render->DrawTexture(bg, 0, 0);
+	app->render->DrawTexture(bg, 0, 0, 0, 1.0F, 0.0, 2147483647, 2147483647, true, 10);
 }
 
 bool SceneEnding::UnLoad()

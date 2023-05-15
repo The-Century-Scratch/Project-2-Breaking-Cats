@@ -42,6 +42,8 @@
 		<unswitchfx path="Assets/Audio/Fx/Unswitch.wav"/>
 		<getitemfx path="Assets/Audio/Fx/GetItem.wav"/>
 		<swapscenesfx path="Assets/Audio/Fx/SwapScenes.wav"/>
+    <victoryfx path="Assets/Audio/Fx/VictoryTheme.wav"/>
+    <defeatfx path="Assets/Audio/Fx/LoseTheme.wav"/>
     <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 	</Hud>
 	<scenegameplay>

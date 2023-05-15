@@ -64,6 +64,8 @@ bool Hud::Start()
 	unswitchfx = app->audio->LoadFx(config.child("unswitchfx").attribute("path").as_string());
 	getitemfx = app->audio->LoadFx(config.child("getitemfx").attribute("path").as_string());
 	swapscenesfx = app->audio->LoadFx(config.child("swapscenesfx").attribute("path").as_string());
+	victoryfx = app->audio->LoadFx(config.child("victoryfx").attribute("path").as_string());
+	defeatfx = app->audio->LoadFx(config.child("defeatfx").attribute("path").as_string());
 	forestTheme = config.child("foresttheme").attribute("path").as_string();
 
 	app->win->GetWindowSize(w,h);
