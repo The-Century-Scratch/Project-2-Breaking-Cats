@@ -16,6 +16,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include <string>
+#include "Map.h"
 
 Hud::Hud(bool startEnabled) : Module(startEnabled)
 {
@@ -440,6 +441,9 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		//app->sceneIntro->beforePlay = true;
 		//app->fade->FadeToBlack((Module*)app->scene, (Module*)app->sceneIntro);
 		//app->sceneManager.
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
 		app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
 		app->hud->prevstate = app->hud->hudstate;
 		app->hud->hudstate = hudSTATE::TITLESCREEN;

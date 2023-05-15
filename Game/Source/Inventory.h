@@ -101,6 +101,11 @@ public:
 	void ResetStates();
 
 	int GetFirePaw();
+	int GetDragonSlayer();
+	int GetGrapplingHook();
+	int GetBulletPenetration();
+	int GetMysticalEnergy();
+	int GetArcaneSpirit();
 
 	int GetItemEquipped();
 

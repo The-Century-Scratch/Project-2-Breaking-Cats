@@ -451,6 +451,8 @@ bool SceneGameplay::Update(float dt)
 		app->audio->PlayFx(app->hud->swapscenesfx);
 	}
 
+	
+
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
 		firePaw->equiped = true;
