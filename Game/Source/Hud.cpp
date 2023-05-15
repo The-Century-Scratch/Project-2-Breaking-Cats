@@ -112,6 +112,8 @@ bool Hud::Update(float dt)
 		{
 			return false;
 		}
+		app->sceneManager->currentScene = -1;
+		app->render->camera = { 0,0 };
 
 		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
 
@@ -248,7 +250,11 @@ bool Hud::Update(float dt)
 	}
 	else if (hudstate == hudSTATE::PAUSESCREEN)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		if (wait1frame)
+		{
+			wait1frame = false;
+		}
+		else if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		{
 			prevstate = hudstate;
 			hudstate = hudSTATE::CLOSED;
