@@ -474,7 +474,7 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 	case 17:
 		LOG("Button 17 click");
 		//vsync code
-		//app->frcap = !app->frcap;
+		app->frcap = !app->frcap;
 	}
 
 	return true;

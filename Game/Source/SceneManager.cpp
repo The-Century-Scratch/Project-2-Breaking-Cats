@@ -169,7 +169,7 @@ bool SceneManager::LoadState(pugi::xml_node& load)
 	return ret;
 }
 
-bool SceneManager::SaveState(pugi::xml_node& save) const
+bool SceneManager::SaveState(pugi::xml_node& save) 
 {
 	LOG("Saving Scene Manager");
 	bool ret = true;

@@ -595,6 +595,15 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		app->SaveGameRequest();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		app->LoadGameRequest();
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		app->hud->prevstate = app->hud->hudstate;
@@ -1151,6 +1160,26 @@ void SceneGameplay::CharacterSwap(PlayerType player)
 
 bool SceneGameplay::LoadState(pugi::xml_node& load)
 {
+	//info of gameplay data
+	app->sceneManager->currentScene = load.child("SceneGameplayInfo").attribute("CurrentMap").as_int();
+	app->sceneManager->puzzle1solved = load.child("SceneGameplayInfo").attribute("Puzzle1Solved").as_bool();
+	app->sceneManager->puzzle2solved = load.child("SceneGameplayInfo").attribute("Puzzle2Solved").as_bool();
+	app->sceneManager->puzzle3solved = load.child("SceneGameplayInfo").attribute("Puzzle3Solved").as_bool();
+
+	//player data
+	currentPlayer->position.x = load.child("Player").attribute("x").as_int();
+	currentPlayer->position.y = load.child("Player").attribute("y").as_int();
+
+
+
+
+
+
+	//finally, after loading everything, lets apply automatically everything else
+	ChangeMap(currentPlayer->position, app->sceneManager->currentScene);
+
+
+
 	//// If the player is not in the map he saved at, set the current map to that one
 	//SString mapName = load.attribute("map_name").as_string();
 	//firstQuestAdded = load.attribute("first_quest").as_bool();
@@ -1261,6 +1290,26 @@ bool SceneGameplay::LoadState(pugi::xml_node& load)
 
 bool SceneGameplay::SaveState(pugi::xml_node& save) const
 {
+	//info of gameplay data
+	pugi::xml_node sceneGameplayInfoNode = save.append_child("SceneGameplayInfo");
+	sceneGameplayInfoNode.append_attribute("CurrentMap") = app->sceneManager->currentScene;
+	sceneGameplayInfoNode.append_attribute("Puzzle1Solved") = app->sceneManager->puzzle1solved;
+	sceneGameplayInfoNode.append_attribute("Puzzle2Solved") = app->sceneManager->puzzle2solved;
+	sceneGameplayInfoNode.append_attribute("Puzzle3Solved") = app->sceneManager->puzzle3solved;
+	
+	//Player data
+	pugi::xml_node playerNode = save.append_child("Player");
+	playerNode.append_attribute("x") = currentPlayer->position.x;
+	playerNode.append_attribute("y") = currentPlayer->position.y;
+
+
+
+
+
+
+
+
+
 	//save.append_attribute("map_name").set_value(map->name.GetString());
 	//save.append_attribute("first_quest").set_value(firstQuestAdded);
 	//

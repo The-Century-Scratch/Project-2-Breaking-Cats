@@ -1,12 +1,26 @@
 <?xml version="1.0"?>
-<!-- L02: TODO 4: Create a simulation xml file to read -->
-<game_state>
-	<input />
+<save_state>
 	<window />
+	<input />
+	<AssetsManager />
 	<textures />
 	<audio />
-	<scene />
+	<scenemanager>
+		<scenegameplay>
+			<SceneGameplayInfo CurrentMap="6" Puzzle1Solved="false" Puzzle2Solved="false" Puzzle3Solved="false" />
+			<Player x="193" y="131" />
+		</scenegameplay>
+	</scenemanager>
+	<moduleCollisions />
+	<guiManager />
+	<entitymanager />
+	<psmanager />
+	<questmanager />
+	<map />
+	<Hud />
+	<Inventory />
+	<debug />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="0" y="-33" />
 	</renderer>
-</game_state>
+</save_state>
