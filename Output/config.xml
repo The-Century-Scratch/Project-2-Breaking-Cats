@@ -33,7 +33,7 @@
 		<hudbuttonstitle texturepath="Assets/Textures/GUI/guibuttons_titlescreen.png" />
 		<hudbuttonsingame texturepath="Assets/Textures/GUI/guibuttons_ingamepause.png" />
 		<collectibles texturepath="Assets/Textures/collectibles.png"/>
-		<clickfx path="Assets/Audio/Fx/clickfx.wav"/>
+		<clickfx path="Assets/Audio/Fx/CatTalking.wav"/>
 		<mousebyfx path="Assets/Audio/Fx/mousebyfx.wav"/>
 	</Hud>
 	<scenegameplay>

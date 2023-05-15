@@ -17,6 +17,8 @@ Font::Font(App* App, const char* rtpFontFile)
 	pugi::xml_parse_result result = xmlDocFontAtlas.load_buffer(App->assetsManager->GetLastBuffer(), size);
 	App->assetsManager->DeleteBuffer();
 
+
+
 	if (result == NULL) LOG("Could not load xml file: %s. pugi error: %s", rtpFontFile, result.description());
 	else xmlNodeAtlas = xmlDocFontAtlas.child("AtlasTexture");
 
@@ -26,7 +28,7 @@ Font::Font(App* App, const char* rtpFontFile)
 		//int atlasWidth = xmlNodeAtlas.attribute("width").as_int();
 		//int atlasHeight = xmlNodeAtlas.attribute("height").as_int();
 
-		texture = app->tex->Load(PATH("Font/", path));
+		texture = app->tex->Load(PATH("Assets/Fonts/", path));
 
 		charsCount = xmlNodeAtlas.attribute("spriteCount").as_int();
 		baseSize = xmlNodeAtlas.attribute("fontSize").as_int();

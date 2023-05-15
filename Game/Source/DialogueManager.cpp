@@ -7,6 +7,7 @@
 #include "QuestManager.h"
 #include "DialogueManager.h"
 #include "Easings.h"
+#include "Window.h"
 
 #include "Log.h"
 
@@ -28,6 +29,8 @@ bool DialogueManager::Start()
 	pugi::xml_parse_result result = file.load_buffer(app->assetsManager->GetLastBuffer(), size);
 	app->assetsManager->DeleteBuffer();
 
+	/*pugi::xml_parse_result result = file.load("Assets/Xml/dialogues.xml");*/
+
 	//pugi::xml_parse_result result = file.load_file("dialogues.xml");
 
 	if (result == NULL)
@@ -37,7 +40,7 @@ bool DialogueManager::Start()
 	else
 	{
 		root = file.child("dialogues");
-		font = new Font(app, "Font/CleanCraters.xml");
+		font = new Font(app, "Fonts/prova.xml");
 		texture = app->tex->Load("Assets/Textures/textBox.png");
 
 		letterCount = 0;
@@ -191,12 +194,12 @@ void DialogueManager::Draw()
 	if (current != nullptr)
 	{
 		// Draw the background for the npc text
-		SDL_Rect sect = { 0,0,612, 479 };
-		app->render->DrawTexture(texture, 50, 100, &sect, false);
+		SDL_Rect sect = { 0,0,256,64 };
+		app->render->DrawTexture(texture,  5, (app->win->height / app->win->scale) - sect.h, &sect, false);
 
 		// Draw the background for the player options
-		sect = { 615, 137, 556, 203 };
-		app->render->DrawTexture(texture, 670, 200, &sect, false);
+		sect = { 0,0, 192, 64 };
+		app->render->DrawTexture(texture, 240, (app->win->height / app->win->scale) - sect.h, &sect, false);
 
 		// Draw the text
 		if (printText == true && current->currentNode->id >= -1)

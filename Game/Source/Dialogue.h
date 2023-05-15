@@ -67,6 +67,7 @@ public:
 	eastl::list<NpcNode*> nodes;
 
 	int talkingFx4;
+	uint audioCount;
 	bool firstTime;
 
 	int channel;
