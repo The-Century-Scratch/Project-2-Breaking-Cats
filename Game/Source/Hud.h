@@ -61,8 +61,12 @@ public:
 	SDL_Texture* collectibles;
 	SDL_Texture* titleText;
 	
-	unsigned int clickfx;
-	unsigned int mousebyfx;
+	uint clickfx;
+	uint mousebyfx;
+	uint switchfx;
+	uint unswitchfx;
+	uint getitemfx;
+	uint swapscenesfx;
 	int timeLeft;
 	bool debug = false;
 	bool wait1frame = false;

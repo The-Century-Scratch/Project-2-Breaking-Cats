@@ -54,9 +54,15 @@ bool Hud::Start()
 	guiButtonsTitle = app->tex->Load(config.child("hudbuttonstitle").attribute("texturepath").as_string());
 	guiButtonsInGame = app->tex->Load(config.child("hudbuttonsingame").attribute("texturepath").as_string());
 	collectibles = app->tex->Load(config.child("collectibles").attribute("texturepath").as_string());
+	titleText = app->tex->Load(config.child("titletext").attribute("texturepath").as_string());
+
+
 	clickfx = app->audio->LoadFx(config.child("clickfx").attribute("path").as_string());
 	mousebyfx = app->audio->LoadFx(config.child("mousebyfx").attribute("path").as_string());
-	titleText = app->tex->Load(config.child("titletext").attribute("texturepath").as_string());
+	switchfx = app->audio->LoadFx(config.child("switchfx").attribute("path").as_string());
+	unswitchfx = app->audio->LoadFx(config.child("unswitchfx").attribute("path").as_string());
+	getitemfx = app->audio->LoadFx(config.child("getitemfx").attribute("path").as_string());
+	swapscenesfx = app->audio->LoadFx(config.child("swapscenesfx").attribute("path").as_string());
 
 	app->win->GetWindowSize(w,h);
 	scale = app->win->GetScale();
