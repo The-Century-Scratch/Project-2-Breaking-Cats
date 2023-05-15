@@ -2280,4 +2280,10 @@ void SceneGameplay::DrawDebugVariable()
 	app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
 	app->render->DrawText("Mouse Y  ", app->debug->debugX, app->debug->debugY + 190, 100, 20, app->debug->debugColor);
 	app->render->DrawText(std::to_string(MouseY_).c_str(), app->debug->debugX + 110, app->debug->debugY + 190, 50, 20, app->debug->debugColor);
+
+	app->input->GetMousePosition(MouseX_, MouseY_);
+	app->render->DrawText("InvPosX  ", app->debug->debugX, app->debug->debugY + 240, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->inventory->invPos.x).c_str(), app->debug->debugX + 110, app->debug->debugY + 240, 50, 20, app->debug->debugColor);
+	app->render->DrawText("InvPosY  ", app->debug->debugX, app->debug->debugY + 270, 100, 20, app->debug->debugColor);
+	app->render->DrawText(std::to_string(app->inventory->invPos.y).c_str(), app->debug->debugX + 110, app->debug->debugY + 270, 50, 20, app->debug->debugColor);
 }

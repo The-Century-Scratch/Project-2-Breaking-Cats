@@ -75,8 +75,8 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 	void UpdatingButtons(Input* input);
 
-	/*void LoadState(pugi::xml_node& node);
-	void SaveState(pugi::xml_node& node);*/
+	bool LoadState(pugi::xml_node& node);
+	bool SaveState(pugi::xml_node& node);
 
 	void AddItem(Item *it);
 
@@ -127,6 +127,7 @@ public:
 	GuiButton* btnItems;     // Potions etc
 
 	bool isActivated;
+	iPoint invPos;
 
 private:
 	SDL_Texture* itemTexture;
@@ -187,7 +188,7 @@ private:
 	Easing* easing2;
 	int counter;
 
-	iPoint invPos;
+	//iPoint invPos;
 	iPoint invPosText;
 
 	bool grabbed;
