@@ -186,6 +186,9 @@ bool SceneGameplay::Load()
 	//app->map->Load("city_square.tmx");
 	isTown = app->map->Load(name.GetString());
 
+	cityTheme = config.child("citytheme").attribute("path").as_string();
+	shopTheme = config.child("shoptheme").attribute("path").as_string();
+
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
 		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentScene)
@@ -445,6 +448,7 @@ bool SceneGameplay::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
 	{
 		app->inventory->isActivated = !app->inventory->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
 	}
 
 	
@@ -453,31 +457,37 @@ bool SceneGameplay::Update(float dt)
 	{
 		firePaw->equiped = true;
 		app->inventory->AddItem(firePaw);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
 	{
 		dragonSlayer->equiped = true;
 		app->inventory->AddItem(dragonSlayer);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
 	{
 		grapplingHook->equiped = true;
 		app->inventory->AddItem(grapplingHook);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
 	{
 		bulletPenetration->equiped = true;
 		app->inventory->AddItem(bulletPenetration);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
 	{
 		mysticalEnergy->equiped = true;
 		app->inventory->AddItem(mysticalEnergy);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
 	{
 		arcaneSpirit->equiped = true;
 		app->inventory->AddItem(arcaneSpirit);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
@@ -597,6 +607,15 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		app->SaveGameRequest();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	{
+		app->LoadGameRequest();
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		app->hud->prevstate = app->hud->hudstate;
@@ -1153,6 +1172,26 @@ void SceneGameplay::CharacterSwap(PlayerType player)
 
 bool SceneGameplay::LoadState(pugi::xml_node& load)
 {
+	//info of gameplay data
+	app->sceneManager->currentScene = load.child("SceneGameplayInfo").attribute("CurrentMap").as_int();
+	app->sceneManager->puzzle1solved = load.child("SceneGameplayInfo").attribute("Puzzle1Solved").as_bool();
+	app->sceneManager->puzzle2solved = load.child("SceneGameplayInfo").attribute("Puzzle2Solved").as_bool();
+	app->sceneManager->puzzle3solved = load.child("SceneGameplayInfo").attribute("Puzzle3Solved").as_bool();
+
+	//player data
+	currentPlayer->position.x = load.child("Player").attribute("x").as_int();
+	currentPlayer->position.y = load.child("Player").attribute("y").as_int();
+
+
+
+
+
+
+	//finally, after loading everything, lets apply automatically everything else
+	ChangeMap(currentPlayer->position, app->sceneManager->currentScene);
+
+
+
 	//// If the player is not in the map he saved at, set the current map to that one
 	//SString mapName = load.attribute("map_name").as_string();
 	//firstQuestAdded = load.attribute("first_quest").as_bool();
@@ -1263,6 +1302,26 @@ bool SceneGameplay::LoadState(pugi::xml_node& load)
 
 bool SceneGameplay::SaveState(pugi::xml_node& save) const
 {
+	//info of gameplay data
+	pugi::xml_node sceneGameplayInfoNode = save.append_child("SceneGameplayInfo");
+	sceneGameplayInfoNode.append_attribute("CurrentMap") = app->sceneManager->currentScene;
+	sceneGameplayInfoNode.append_attribute("Puzzle1Solved") = app->sceneManager->puzzle1solved;
+	sceneGameplayInfoNode.append_attribute("Puzzle2Solved") = app->sceneManager->puzzle2solved;
+	sceneGameplayInfoNode.append_attribute("Puzzle3Solved") = app->sceneManager->puzzle3solved;
+	
+	//Player data
+	pugi::xml_node playerNode = save.append_child("Player");
+	playerNode.append_attribute("x") = currentPlayer->position.x;
+	playerNode.append_attribute("y") = currentPlayer->position.y;
+
+
+
+
+
+
+
+
+
 	//save.append_attribute("map_name").set_value(map->name.GetString());
 	//save.append_attribute("first_quest").set_value(firstQuestAdded);
 	//
@@ -2242,16 +2301,19 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 		app->render->camera.x = -597;
 		app->render->camera.y = 0;
 		canMoveCam = true;
+		app->audio->PlayMusic(cityTheme.GetString());
 		break;
 	case 1:
 		app->render->camera.x = 283;
 		app->render->camera.y = -433;
 		canMoveCam = true;
+		app->audio->PlayMusic(cityTheme.GetString());
 		break;
 	case 2:
 		app->render->camera.x = 375;
 		app->render->camera.y = 43;
 		canMoveCam = false;
+		app->audio->PlayMusic(shopTheme.GetString());
 		break;
 	case 3:
 		app->render->camera.x = 102;

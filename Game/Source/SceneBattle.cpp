@@ -55,6 +55,8 @@ bool SceneBattle::Load()
 
 	app->map->Load(name.GetString());
 
+	combatTheme = config.child("music").attribute("path").as_string();
+
 
 
 	for (pugi::xml_node nodeUnit = config.child("gats");
@@ -208,6 +210,9 @@ bool SceneBattle::Load()
 	//
 	//app->render->camera.x = 0;
 	//app->render->camera.y = 0;
+
+
+	app->audio->PlayMusic(combatTheme.GetString());
 
 	return true;
 }
