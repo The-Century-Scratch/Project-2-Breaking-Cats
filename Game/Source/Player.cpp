@@ -100,7 +100,7 @@ bool Player::Start() {
 	}
 
 
-
+	walkingTimer = 0;
 	//mPosition.x = METERS_TO_PIXELS((float)position.x);
 	//mPosition.y = METERS_TO_PIXELS((float)position.y);
 	return true;
@@ -352,15 +352,88 @@ void Player::AnimationState()
 		break;
 	case PlayerState::WUP:
 		currentAnim = &walkUpAnim;
+
+		walkingTimer++;
+		if (app->sceneManager->currentScene == 0)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkingcityfx);
+			}
+		}
+		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkinggrassfx);
+			}
+		}
 		break;
 	case PlayerState::WLEFT:
-		currentAnim = &walkLeftAnim;
+		currentAnim = &walkLeftAnim; 
+		
+		walkingTimer++;
+		if (app->sceneManager->currentScene == 0)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkingcityfx);
+			}
+		}
+		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkinggrassfx);
+			}
+		}
 		break;
 	case PlayerState::WRIGHT:
 		currentAnim = &walkRightAnim;
+
+		walkingTimer++;
+		if (app->sceneManager->currentScene == 0)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkingcityfx);
+			}
+		}
+		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkinggrassfx);
+			}
+		}
 		break;
 	case PlayerState::WDOWN:
 		currentAnim = &walkDownAnim;
+
+		walkingTimer++;
+		if (app->sceneManager->currentScene == 0)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkingcityfx);
+			}
+		}
+		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		{
+			if (walkingTimer > 10)
+			{
+				walkingTimer = 0;
+				app->audio->PlayFx(walkinggrassfx);
+			}
+		}
+
 		break;
 	case PlayerState::DYING:
 		currentAnim = &dieAnim;
