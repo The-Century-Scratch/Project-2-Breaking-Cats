@@ -2,23 +2,29 @@
 Breaking Cats is a rpg made by "The Century Scratch", a groups of students of Video Games Design and Development in UPC - Barcelona.
 
 ## Controls
-- P - Pause
-- Q - Return title
 - WASD - To move
-- C - Instant leave
-- E - Interact/attack
+- E - Interact/Attack
+- O - To open quests menu
+- I - To open inventory
+- P - Pause
+- Q - Prepare dash only in combat
+- 1,2,3,4 - Add items to the inventory
+- C - Enter combat instantly(debug)
+- F10 - God Mode
 - Mouse - To click the buttons
-- if you are within a dialogue z to say yes, x to say no and space to continue
-
+- SPACE - To skip logo
+- if you are within a dialogue up or down arrow and it will internally select it, enter to accept
 ## Key features
 This is a vertical slice with 3 locations, 3 NPCs, 4 dialogues, a combat, 3 locations, and a map. This is the beginning of a much more thrilling and exciting project that will be launched soon. In this world yoiu will take the reins of Gats who is fighting with the cat resistance against the dogs. In this world full of animals you will find different objects, powerups, great lore and obviously combats, a lot of combat.
 
+This is the alpha, it has 3 quests with its dialogues and a reward at the end of the 3rd. 4 items one of which is earned with the quests. many different dialogue branches. 7 locations counting different interiors and exteriors. three puzzles, 2 talking NPCS (more will be delivered in the gold) and a final combat with a lose/win screen. Everything has audio feedback and different musics for every scenario. the main character has moving and idle animations. Also it has an inventory from which you can see your players stats and items.
+
 ## Group members
 - Alex Delgado Linde - Team Leader - [_faelion_](https://github.com/faelion)
- - Luis Gonz·lez RamÌrez - Coding - [_punto16_](https://github.com/punto16)
- - Sergio GarrÌguez Redondo - Coding - [_SergioGarriguez_](https://github.com/SergioGarriguez)
+ - Luis Gonz√°lez Ram√≠rez - Coding - [_punto16_](https://github.com/punto16)
+ - Sergio Garr√≠guez Redondo - Coding - [_SergioGarriguez_](https://github.com/SergioGarriguez)
  - Paules Vivas Zamora - Management - [_Paules23_](https://github.com/Paules23)
- - Adri·n Gonzalo Ponce Jara - Designer - [_AdrianGPJ_](https://github.com/AdrianGPJ)
- - ”scar Escofet Fortet - Audio - [_OscarEscF_](https://github.com/OscarEscF)
- - Eric RegalÛn MartÌnez - Art + UI - [_RegalonaManda_](https://github.com/RegalonaManda)
+ - Adri√°n Gonzalo Ponce Jara - Designer - [_AdrianGPJ_](https://github.com/AdrianGPJ)
+ - √ìscar Escofet Fortet - Audio - [_OscarEscF_](https://github.com/OscarEscF)
+ - Eric Regal√≥n Mart√≠nez - Art + UI - [_RegalonaManda_](https://github.com/RegalonaManda)
  - Jan Neto Llorens - QA- [_JanNetoLlorens_](https://github.com/JanNetoLlorens)
