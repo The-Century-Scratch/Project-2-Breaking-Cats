@@ -14,6 +14,7 @@ public:
 	virtual ~TalkQuest();
 
 	bool Update() override;
+	void Draw(Font* font) override;
 
 public:
 

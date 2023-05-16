@@ -8,9 +8,9 @@
 
 enum class QuestType
 {
+	MOVEROCK,
 	TALK,
-	COLLECT,
-	UNKNOWN
+	LABYRINTH
 };
 
 class Quest
@@ -20,6 +20,8 @@ public:
 	Quest(QuestType type) : type(type) {}
 
 	virtual bool Update() { return true; }
+
+	virtual void Draw(Font* font) {}
 
 public:
 

@@ -34,33 +34,31 @@ bool NPC::Start() {
 
 	texture = app->tex->Load(texturePath);
 
-	NPCAnim.PushBack({ ((int)npctype) * 16,0 * 16,16,16 });
+	//NPCAnim.PushBack({ ((int)npctype) * 16,0 * 16,32,32 });
+	NPCAnim.PushBack({ 0,0,32,32 });
 	NPCAnim.loop = false;
 	NPCAnim.speed = 0.0f;
-	w = h = 16;
+	w = h = 32;
 
-	cRect = { position.x - 6,position.y - 6,16 + 12,16 + 12 };
+	cRect = { position.x - 6,position.y - 6,32 + 12,32 + 12 };
 
 	switch (npctype)
 	{
-	case NPCTYPE::NORMAL:
-		dialogueid = 0;
-		break;
-	case NPCTYPE::QUEST:
+	case NPCTYPE::GUARDIAN:
 		dialogueid = 0;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
-		cRect = { position.x - 6,position.y + 17,16 + 12,16 + 12 };
+		cRect = { position.x - 6,position.y + 27,16 + 12,16 + 12 };
+		dialogueid = 1;
 		break;
-	case NPCTYPE::DEVELOPER:
-		dialogueid = 0;
+	case NPCTYPE::CONTRABANDIST:
 		break;
 	default:
 		break;
 	}
 
 	boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
-	cRect = { position.x,position.y,16,16 };
+	cRect = { position.x+8,position.y+16,16,16 };
 	eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 
 	return true;
@@ -71,11 +69,11 @@ bool NPC::Update()
 
 	switch (npctype)
 	{
-	case NPCTYPE::NORMAL:
-		break;
-	case NPCTYPE::QUEST:
+	case NPCTYPE::GUARDIAN:
 		break;
 	case NPCTYPE::SHOP:
+		break;
+	case NPCTYPE::CONTRABANDIST:
 		break;
 	default:
 		break;
@@ -133,15 +131,9 @@ void NPC::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::PLAYER:
 			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
-				switch (this->dialogueid) {
-				case 0:
-					LOG("TRIGGER DIALOGUE");
-					app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
-					app->sceneManager->dialogueManager->printText = true;
-					break;
-				default:
-					break;
-				}
+				LOG("TRIGGER DIALOGUE");
+				app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
+				app->sceneManager->dialogueManager->printText = true;
 			}
 			break;
 		case Collider::Type::ENEMY:

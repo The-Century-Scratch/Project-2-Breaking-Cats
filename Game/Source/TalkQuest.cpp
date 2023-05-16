@@ -21,27 +21,9 @@ TalkQuest::~TalkQuest() {}
 bool TalkQuest::Update() {
 	bool ret = true;
 
-	////Check completion event
-	//ListItem<NPC*>* nitem = app->scene->npcs.start;
-	//NPC* npc = nitem->data;
-	//while (nitem != nullptr)
-	//{
-
-	//	if (npc->npcid == this->npcId) { break; }
-	//	nitem = nitem->next;
-	//	npc = nitem->data;
-	//}
-
-	////Completion event: player is in npc boundaries and talks to him (G key)
-	//if ((app->scene->player->tile.x * 32 >= npc->boundaries.x) &&
-	//	(app->scene->player->tile.x * 32 < npc->boundaries.x + npc->boundaries.w) &&
-	//	(app->scene->player->tile.y * 32 >= npc->boundaries.y) &&
-	//	(app->scene->player->tile.y * 32 < npc->boundaries.y + npc->boundaries.h) &&
-	//	(app->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)) {
-	//	ret = false;
-
-	//	app->scene->points += this->reward;
-	//}
-
 	return ret;
+}
+
+void TalkQuest::Draw(Font *font) {
+	app->render->DrawText(font, description.GetCharString(), 50, 50, 48, 5, { 255,255,255,255 }, 528);
 }

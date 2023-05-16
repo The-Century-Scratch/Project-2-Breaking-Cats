@@ -1114,6 +1114,10 @@ bool SceneGameplay::UnLoad()
 	delete(arcaneSpirit);
 	arcaneSpirit = nullptr;
 
+	app->tex->Unload(itemText);
+	app->tex->Unload(guiTex);
+	app->tex->Unload(guiPad);
+
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
 
