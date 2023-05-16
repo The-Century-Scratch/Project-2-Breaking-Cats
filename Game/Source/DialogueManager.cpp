@@ -161,7 +161,7 @@ bool DialogueManager::Update(float dt)
 				NpcNode* aux = GetNodeById(current->currentNode->currentOption->nextNodeId);
 				/*current->currentNode=current->currentNode.*/
 				//uncomment when quests done
-				//if (current->currentNode->currentOption->missionId != -1) questManager->ActivateQuest(current->currentNode->currentOption->missionId);
+				if (current->currentNode->currentOption->missionId != -1) app->questManager->ActivateQuest(current->currentNode->currentOption->missionId);
 				if (current->currentNode->currentOption->menu != -1) scene->ChangeState(GameplayMenuState::SHOP);
 
 				RELEASE(current->currentNode);
