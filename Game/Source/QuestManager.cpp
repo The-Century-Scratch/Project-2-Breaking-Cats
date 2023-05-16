@@ -85,6 +85,7 @@ bool QuestManager::Start() {
 	font = new Font(app, "Fonts/prova.xml");
 	quest1 = false;
 	quest3 = false;
+	printQuestMenu = false;
 
 	ItemText = app->tex->Load("Assets/Textures/Items.png");
 
@@ -111,33 +112,6 @@ bool QuestManager::Update(float dt)
 		app->inventory->AddItem(firePaw);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
-	
-
-	//ListItem<Quest*>* item;
-	//Quest* pQuest = NULL;
-
-	//for (item = activeQuests.start; item != NULL; item = item->next)
-	//{
-	//	pQuest = item->data;
-
-	//	if (pQuest->Update() == false) {
-	//		activeQuests.Del(item);
-
-	//		ListItem<Quest*>* qitem = quests.start;
-	//		while (qitem != nullptr)
-	//		{
-	//			Quest* item = qitem->data;
-	//			if (item->id == pQuest->nextQuestId) {
-	//				activeQuests.Add(item);
-	//				break;
-	//			}
-
-	//			qitem = qitem->next;
-	//		}
-
-	//		completedQuests.Add(pQuest);
-	//	}
-	//}
 
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) 
 	{
