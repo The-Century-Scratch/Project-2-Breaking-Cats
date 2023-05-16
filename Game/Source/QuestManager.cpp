@@ -7,6 +7,7 @@
 #include"AssetsManager.h"
 #include "Audio.h"
 #include "SceneManager.h"
+#include "FirePaws.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -82,6 +83,11 @@ bool QuestManager::Start() {
 	font = new Font(app, "Fonts/prova.xml");
 	quest1 = false;
 	quest3 = false;
+
+	ItemText = app->tex->Load("Assets/Textures/Items.png");
+
+	firePaw = new FirePaws(iPoint(384,48), ItemText);
+	firePaw->Start();
 	return ret;
 }
 
@@ -94,9 +100,14 @@ bool QuestManager::Update(float dt)
 		quest1 = true;
 	}
 
-	if (app->sceneManager->puzzle3solved) {
+	
+
+	if (app->sceneManager->puzzle3solved &&quest3 == false) {
 		ActivateQuest(-1);
 		quest3 = true;
+		firePaw->equiped = true;
+		app->inventory->AddItem(firePaw);
+		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	
 
@@ -220,6 +231,10 @@ bool QuestManager::CleanUp() {
 	app->tex->Unload(QuestMenuBox);
 	font->UnLoad(app->tex);
 	RELEASE(font);
+
+	firePaw->CleanUp();
+	delete(firePaw);
+	firePaw = nullptr;
 
 	return true;
 }

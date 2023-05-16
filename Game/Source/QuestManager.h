@@ -6,6 +6,8 @@
 #include "List.h"
 #include "EASTL/list.h"
 #include "Fonts.h"
+#include "Item.h"
+#include "Inventory.h"
 
 class QuestManager : public Module
 {
@@ -49,6 +51,9 @@ public:
 	bool printQuestMenu;
 	bool currentQuestComplete;
 	bool quest1, quest2, quest3;
+
+	SDL_Texture* ItemText;
+	Item* firePaw;
 
 	Font* font;
 
