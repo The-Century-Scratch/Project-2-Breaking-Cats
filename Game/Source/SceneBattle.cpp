@@ -225,7 +225,12 @@ bool SceneBattle::Update(float dt)
 
 	using UA = Unit::PlayerAction::Action;
 
-
+	//TODO: later delete this is just a quick thing for the alpha
+	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
+	{
+		app->inventory->isActivated = !app->inventory->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+	}
 
 	//for (auto& i : units)
 	//{
