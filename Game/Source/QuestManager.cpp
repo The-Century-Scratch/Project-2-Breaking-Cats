@@ -51,6 +51,7 @@ bool QuestManager::Start() {
 	bool ret = true;
 
 
+
 	pugi::xml_document questFile;
 	int size = app->assetsManager->MakeLoad("Xml/quests.xml");
 	pugi::xml_parse_result result = questFile.load_buffer(app->assetsManager->GetLastBuffer(), size);
