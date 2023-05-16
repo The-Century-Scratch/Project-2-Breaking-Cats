@@ -7,6 +7,8 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "Audio.h"
+#include "Hud.h"
 
 LongRange::LongRange() = default;
 
@@ -143,6 +145,7 @@ LongRange::PlayerAction LongRange::HandleInput() const
 	else
 	{
 		returnAction.action |= LongRange::PlayerAction::Action::ATTACK_TO_PLAYER_LONG_RANGE;
+		app->audio->PlayFx(app->hud->attkenemyfx);
 	}
 
 	return returnAction;

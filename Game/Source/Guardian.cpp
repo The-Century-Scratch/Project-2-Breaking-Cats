@@ -7,6 +7,8 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "Audio.h"
+#include "Hud.h"
 
 Guardian::Guardian() = default;
 
@@ -146,6 +148,7 @@ Guardian::PlayerAction Guardian::HandleInput() const
 	else
 	{
 		returnAction.action |= Guardian::PlayerAction::Action::ATTACK_TO_PLAYER;
+		app->audio->PlayFx(app->hud->attkenemyfx);
 	}
 
 	

@@ -8,6 +8,8 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Inventory.h"
+#include "Audio.h"
+#include "Hud.h"
 
 //Catska::Catska() = default;
 
@@ -104,6 +106,7 @@ Catska::PlayerAction Catska::HandleInput() const
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
 		returnAction.action = Catska::PlayerAction::Action::ATTACK_LONG_RANGE;
+		app->audio->PlayFx(app->hud->attkcatskafx);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -235,10 +238,12 @@ void Catska::DealDamage(int amount)
 		{
 			healthPoints -= amount;
 			LOG("damage avoided");
+			app->audio->PlayFx(app->hud->dmgcatskafx);
 		}
 	}
 	else
 	{
+		app->audio->PlayFx(app->hud->dmgcatskafx);
 		healthPoints -= amount;
 	}
 	

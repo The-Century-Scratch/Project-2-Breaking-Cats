@@ -8,6 +8,8 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Inventory.h"
+#include "Audio.h"
+#include "Hud.h"
 
 //Gats::Gats() = default;
 Gats::Gats()
@@ -114,7 +116,8 @@ Gats::PlayerAction Gats::HandleInput() const
 		{
 			returnAction.action = Gats::PlayerAction::Action::ATTACK;
 		}
-		
+
+		app->audio->PlayFx(app->hud->attkgatsfx);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -174,6 +177,10 @@ void Gats::StartAction(PlayerAction playerAction)
 void Gats::StartMovement()
 {
 	//using enum KeyState;
+	if (goingToDash)
+	{
+		app->audio->PlayFx(app->hud->dashgatsfx);
+	}
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		moveVector.y = -1 * (goingToDash * 2 + 1);
@@ -260,6 +267,7 @@ bool Gats::GetIsAlly()
 
 void Gats::DealDamage(int amount)
 {
+	app->audio->PlayFx(app->hud->dmggatsfx);
 	healthPoints -= amount;
 }
 

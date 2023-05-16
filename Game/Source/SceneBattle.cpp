@@ -24,6 +24,7 @@
 #include "ModuleCollisions.h"
 #include "Debug.h"
 #include "Inventory.h"
+#include "Hud.h"
 
 SceneBattle::SceneBattle()
 {

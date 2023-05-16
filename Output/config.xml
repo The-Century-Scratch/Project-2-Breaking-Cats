@@ -38,12 +38,20 @@
 		<clickfx path="Assets/Audio/Fx/CatTalking.wav"/>
 		<mousebyfx path="Assets/Audio/Fx/hudfx.wav"/>
 		<titletext texturepath="Assets/Textures/Title.png"/>
-		<switchfx path="Assets/Audio/Fx/Switch.wav"/>
-		<unswitchfx path="Assets/Audio/Fx/Unswitch.wav"/>
-		<getitemfx path="Assets/Audio/Fx/GetItem.wav"/>
-		<swapscenesfx path="Assets/Audio/Fx/SwapScenes.wav"/>
-    <victoryfx path="Assets/Audio/Fx/VictoryTheme.wav"/>
-    <defeatfx path="Assets/Audio/Fx/LoseTheme.wav"/>
+		<switchfx      path="Assets/Audio/Fx/Switch.wav"/>
+		<unswitchfx    path="Assets/Audio/Fx/Unswitch.wav"/>
+		<getitemfx     path="Assets/Audio/Fx/GetItem.wav"/>
+		<swapscenesfx  path="Assets/Audio/Fx/SwapScenes.wav"/>
+    <victoryfx     path="Assets/Audio/Fx/VictoryTheme.wav"/>
+    <defeatfx      path="Assets/Audio/Fx/LoseTheme.wav"/>
+    <deathgatsfx   path="Assets/Audio/Fx/DeathFx.wav"/>
+    <deathcatskafx path="Assets/Audio/Fx/DeathCatskaFx.wav"/>
+    <attkcatskafx  path="Assets/Audio/Fx/CatskaAttack.wav"/>
+    <attkgatsfx    path="Assets/Audio/Fx/GatsAtack.wav"/>
+    <attkenemyfx   path="Assets/Audio/Fx/EnemyAttack.wav"/>
+    <dmgcatskafx   path="Assets/Audio/Fx/CatskaGetDamage.wav"/>
+    <dmggatsfx     path="Assets/Audio/Fx/GatsGetDamage.wav"/>
+    <dashgatsfx    path="Assets/Audio/Fx/DashGats.wav"/>
     <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 	</Hud>
 	<scenegameplay>
