@@ -1,0 +1,131 @@
+<config>
+	<app>
+		<title>Breaking Cats Alpha</title>
+		<organization>UPC</organization>
+	<frcap value = "16"/>
+	</app>
+	
+	<renderer>
+		<vsync value="false"/>
+	</renderer>
+	
+	<window>
+		<resolution width="1280" height="720" scale="3"/>
+		<fullscreen value="false"/>
+		<borderless value="false"/>
+		<resizable value="false"/>
+		<fullscreen_window value="false"/>
+	</window>
+	<audio>
+		<music volume="128"/>
+		<fx volume="128"/>
+	</audio>
+  <sceneLogo>
+    <img texturepath ="Assets/Textures/TheCenturyScratchTitleAnimated12frames.png"/>
+    <logofx path="Assets/Audio/Fx/logoFx.wav"/>
+  </sceneLogo>
+  <sceneTitle>
+    <img texturepath="Assets/Textures/TitleBg.png"/>
+    <imgRect x="0" y="0" w="1280" h="720"/>
+    <music path="Assets/Audio/Music/TitleScreen.ogg"/>
+  </sceneTitle>
+	<Hud>
+		<hudbackground texturepath="Assets/Textures/GUI/guibackground.png"/>
+		<hudbuttonsconfig texturepath="Assets/Textures/GUI/guibuttons_config.png"/>
+		<hudbuttonstitle texturepath="Assets/Textures/GUI/PawButtons.png" />
+		<hudbuttonsingame texturepath="Assets/Textures/GUI/guibuttons_ingamepause.png" />
+		<collectibles texturepath="Assets/Textures/collectibles.png"/>
+		<clickfx path="Assets/Audio/Fx/CatTalking.wav"/>
+		<mousebyfx path="Assets/Audio/Fx/hudfx.wav"/>
+		<titletext texturepath="Assets/Textures/Title.png"/>
+		<switchfx      path="Assets/Audio/Fx/Switch.wav"/>
+		<unswitchfx    path="Assets/Audio/Fx/Unswitch.wav"/>
+		<getitemfx     path="Assets/Audio/Fx/GetItem.wav"/>
+		<swapscenesfx  path="Assets/Audio/Fx/SwapScenes.wav"/>
+    <victoryfx     path="Assets/Audio/Fx/VictoryTheme.wav"/>
+    <defeatfx      path="Assets/Audio/Fx/LoseTheme.wav"/>
+    <deathgatsfx   path="Assets/Audio/Fx/DeathFx.wav"/>
+    <deathcatskafx path="Assets/Audio/Fx/DeathCatskaFx.wav"/>
+    <attkcatskafx  path="Assets/Audio/Fx/CatskaAttack.wav"/>
+    <attkgatsfx    path="Assets/Audio/Fx/GatsAtack.wav"/>
+    <attkenemyfx   path="Assets/Audio/Fx/EnemyAttack.wav"/>
+    <dmgcatskafx   path="Assets/Audio/Fx/CatskaGetDamage.wav"/>
+    <dmggatsfx     path="Assets/Audio/Fx/GatsGetDamage.wav"/>
+    <dashgatsfx    path="Assets/Audio/Fx/DashGats.wav"/>
+    <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
+	</Hud>
+	<scenegameplay>
+		<player x="136" y="23" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrassBase.wav" stepcity="Assets/Audio/Fx/walkingCityBase.wav">
+		</player>
+		<citytheme path="Assets/Audio/Music/CityTheme.ogg"/>
+		<shoptheme path="Assets/Audio/Music/ShopTheme.ogg"/>
+    <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
+		<textures victory_defeat="Assets/Textures/victory_death.png"/>
+		<texturepaths font="Assets/Fonts/fontx2.png"/>
+		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/TheGuardian.png" id="1" type="0"/>  <!-- this is the guardian the type 0 is guardian too-->
+		<npc scene="2" x="73" y="59" texturepath="Assets/Textures/maicey.png" id="2" type="1"/>        <!-- this is Micey the type 1 is guardian too-->
+		
+		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>
+		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
+		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
+    <item>
+      <texturepath texturepath="Assets/Textures/Items.png"/>
+      <firePaws scene="0" x="384" y="48" id="1"/>
+      <dragonSlayer scene="0" x="384" y="48" id="2"/>
+      <grapplingHook scene="0" x="384" y="48" id="3"/>
+      <bulletPenetration scene="0" x="384" y="48" id="4"/>
+      <mysticalEnergy scene="0" x="384" y="48" id="5"/>
+      <arcaneSpirit scene="0" x="384" y="48" id="6"/>
+    </item>
+		<map>
+			<mapfolder path="Assets/Maps/"/>
+			<mapfile path="Assets/Maps/city_square.tmx"/>	<!--this is 0 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Resistance.tmx"/>	<!--this is 1 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Shop.tmx"/>			<!--this is 2 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Taverna.tmx"/>		<!--this is 3 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Labrinth.tmx"/>		<!--this is 4 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>	<!--this is 5 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/PreLab.tmx"/>		<!--this is 7 in the list of strings of maps-->
+		</map>
+	</scenegameplay>
+
+  <Inventory>
+    <itemTexture texturepath="Assets/Textures/Items.png"/>
+    <invTexture texturepath="Assets/Textures/Inventory.png"/>
+    <slotTexture texturepath="Assets/Textures/InvSlot.png"/>
+    <gatsTexture texturepath="Assets/Textures/GatsIdle.png"/>
+    <catskaTexture texturepath="Assets/Textures/Catska.png"/>
+  </Inventory>
+  
+  <StatsManager>
+    <gats x="32" y="64" velocity="5" id="1" texturepath="Assets/Textures/GatsIdle.png"/>
+    <catska x="64" y="32" velocity="4" id="2" texturepath="Assets/Textures/Catska.png"/>
+  </StatsManager>
+  
+	<scenebattle>
+		<gats x="32" y="64" velocity="5" texturepath="Assets/Textures/GatsIdle.png"/>
+		<catska x="64" y="32" velocity="4" texturepath="Assets/Textures/Catska.png"/>
+		<guardian x="64" y="96" velocity="4" texturepath="Assets/Textures/TankEnemy.png"/>
+		<longrange x="96" y="112" velocity="4" texturepath="Assets/Textures/LargeRangeEnemy.png"/>
+		<straw x="112" y="112" velocity="4" texturepath="Assets/Textures/StrawDall.png"/>
+		<map>
+			<mapfolder path="Assets/Maps/"/>
+
+			<mapfile path="Assets/Maps/combat.tmx"/>
+			<!--this is 0 in the list of strings of maps-->
+
+		</map>
+    
+		<music path="Assets/Audio/Music/Combat.ogg"/>
+	</scenebattle>
+	
+	
+	<questmanager>
+		<activequests>
+			<quest id="1"></quest>
+		</activequests>
+		<quest type="0" id="1" name="TALK WITH GRANDPA KIKO" description="Search for your grandfather hwo needs your help." nextQuestId="2" npcId="2" reward="700"></quest>
+		<quest type="1" id="2" name="FIND GRANDPA S LOST CHESTS" description="Grandpa's chests disappeared long ago. They have to be somewhere!" nextQuestId="0" itemId="1" reward="0"></quest>
+	</questmanager>
+</config>

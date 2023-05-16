@@ -1,0 +1,7 @@
+<quests>
+	<quest type="0" id="0" name="Move the rocks." description="Talk with the guardian, and move the rocks out of the way." nextQuestId="1" npcId="0" reward="700"></quest>
+	<quest type="1" id="1" name="Talk with the vendor in the shop." description="Talk with the vendor in the shop that is in the bottom right part of the city." nextQuestId="2" mapName="pub.tmx" reward="500"></quest>
+	<quest type="2" id="2" name="Resolve the labyrinth." description="Resolve the labyrinthy in the bottom part after the city in order to access the lab." nextQuestId="3" npcId="4" reward="700"></quest>
+	<!-- <quest type="1" id="4" name="Kill the skull" description="There's an enemy at the graveyard. Now that you have a potion, go to the graveyard and kill it." nextQuestId="5" enemy="1" reward="300"></quest>
+  <quest type="1" id="5" name="Kill the Final Boss" description="Enter the Dungeon. Then, complete all the puzzles to be able to reach the final boss and kill them." nextQuestId="6" enemy="2" reward="7000"></quest> -->
+</quests>
