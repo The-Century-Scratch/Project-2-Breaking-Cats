@@ -15,8 +15,6 @@ Breaking Cats is a rpg made by "The Century Scratch", a groups of students of Vi
 - SPACE - To skip logo
 - if you are within a dialogue up or down arrow and it will internally select it, enter to accept
 ## Key features
-This is a vertical slice with 3 locations, 3 NPCs, 4 dialogues, a combat, 3 locations, and a map. This is the beginning of a much more thrilling and exciting project that will be launched soon. In this world yoiu will take the reins of Gats who is fighting with the cat resistance against the dogs. In this world full of animals you will find different objects, powerups, great lore and obviously combats, a lot of combat.
-
 This is the alpha, it has 3 quests with its dialogues and a reward at the end of the 3rd. 4 items one of which is earned with the quests. many different dialogue branches. 7 locations counting different interiors and exteriors. three puzzles, 2 talking NPCS (more will be delivered in the gold) and a final combat with a lose/win screen. Everything has audio feedback and different musics for every scenario. the main character has moving and idle animations. Also it has an inventory from which you can see your players stats and items.
 
 ## Group members
