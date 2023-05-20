@@ -174,51 +174,51 @@ void Gats::StartAction(PlayerAction playerAction)
 	}
 }
 
-void Gats::StartMovement()
-{
-	//using enum KeyState;
-	if (goingToDash)
-	{
-		app->audio->PlayFx(app->hud->dashgatsfx);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-		moveVector.y = -1 * (goingToDash * 2 + 1);
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		moveVector.x = -1 * (goingToDash * 2 + 1);
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		moveVector.y = 1 * (goingToDash * 2 + 1);
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		moveVector.x = 1 * (goingToDash * 2 + 1);
-		
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
-	}
-	goingToDash = false;
-}
+//void Gats::StartMovement()
+//{
+//	//using enum KeyState;
+//	if (goingToDash)
+//	{
+//		app->audio->PlayFx(app->hud->dashgatsfx);
+//	}
+//	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+//	{
+//		moveVector.y = -1 * (goingToDash * 2 + 1);
+//		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
+//	}
+//	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+//	{
+//		moveVector.x = -1 * (goingToDash * 2 + 1);
+//		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
+//	}
+//	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+//	{
+//		moveVector.y = 1 * (goingToDash * 2 + 1);
+//		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
+//	}
+//	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+//	{
+//		moveVector.x = 1 * (goingToDash * 2 + 1);
+//		
+//		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
+//	}
+//	goingToDash = false;
+//}
 
-void Gats::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-	//hasFinishedTurn = true;
-
-	//moveTimer = 2;
-}
+//void Gats::Update()
+//{
+//	//LOG("the move vector x is %i" moveVector.x);
+//
+//	if (!moveVector.IsZero())
+//	{
+//		//AnimateMove();
+//		SmoothMove();
+//
+//	}
+//	//hasFinishedTurn = true;
+//
+//	//moveTimer = 2;
+//}
 
 void Gats::AnimateMove()
 {
@@ -237,28 +237,28 @@ void Gats::AnimateMove()
 	}
 }
 
-void Gats::SmoothMove()
-{
-
-
-	if (moveTimer == timeForATile)
-	{
-
-
-		moveTimer = 0;
-		position += (moveVector * speed);
-		if (position.x % tileSize == 0 && position.y % tileSize == 0)
-		{
-			moveVector.SetToZero();
-			hasFinishedTurn = true;
-		}
-	}
-	else
-	{
-		moveTimer++;
-	}
-	
-}
+//void Gats::SmoothMove()
+//{
+//
+//
+//	if (moveTimer == timeForATile)
+//	{
+//
+//
+//		moveTimer = 0;
+//		position += (moveVector * speed);
+//		if (position.x % tileSize == 0 && position.y % tileSize == 0)
+//		{
+//			moveVector.SetToZero();
+//			hasFinishedTurn = true;
+//		}
+//	}
+//	else
+//	{
+//		moveTimer++;
+//	}
+//	
+//}
 
 bool Gats::GetIsAlly()
 {

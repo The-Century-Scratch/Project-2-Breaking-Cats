@@ -169,20 +169,20 @@ void Catska::StartMovement()
 	}
 }
 
-void Catska::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//hasFinishedTurn = true;
-	//moveTimer = 2;
-}
+//void Catska::Update()
+//{
+//	//LOG("the move vector x is %i" moveVector.x);
+//
+//	if (!moveVector.IsZero())
+//	{
+//		//AnimateMove();
+//		SmoothMove();
+//
+//	}
+//
+//	//hasFinishedTurn = true;
+//	//moveTimer = 2;
+//}
 
 void Catska::AnimateMove()
 {

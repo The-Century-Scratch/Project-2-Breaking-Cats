@@ -201,21 +201,21 @@ void LongRange::StartMovement()
 	}
 }
 
-void LongRange::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//isMyTurn = false;
-	//hasFinishedTurn = true;
-	//moveTimer = 2;
-}
+//void LongRange::Update()
+//{
+//	//LOG("the move vector x is %i" moveVector.x);
+//
+//	if (!moveVector.IsZero())
+//	{
+//		//AnimateMove();
+//		SmoothMove();
+//
+//	}
+//
+//	//isMyTurn = false;
+//	//hasFinishedTurn = true;
+//	//moveTimer = 2;
+//}
 
 void LongRange::AnimateMove()
 {

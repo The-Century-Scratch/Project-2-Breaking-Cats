@@ -33,22 +33,13 @@ public:
 	void DealDamage(int amount) override;
 	int GetDamage() override;
 
-	void Update() override;
+	//void Update() override;
 
 	void Test();
 
 	//pugi::xml_node parameters;
 
 private:
-	void AnimateMove();
-	void SmoothMove();
-	void StartMovement();
-
-	
-
-	int moveTimer = 0;
-	iPoint moveVector = { 0,0 };
-	int speed = 4;
 	const int timeForATile = 2;
 	const int tileSize = 16;
 	bool goingToDash = false;
@@ -59,9 +50,6 @@ private:
 	SDL_Texture* texture;
 	SString name;
 	const char* texturePath;
-
-	bool isMyTurn = false;
-	bool hasFinishedTurn = false;
 
 	int healthPoints = 50;
 	int damage = 10;

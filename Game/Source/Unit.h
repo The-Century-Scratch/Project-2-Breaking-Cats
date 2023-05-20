@@ -73,7 +73,7 @@ public:
 	virtual int GetPlayerId();
 	virtual SString GetName();
 
-	virtual void Update();
+	void Update();
 
 	int velocity = 0;
 	int playerId;
@@ -82,10 +82,11 @@ public:
 
 	pugi::xml_node parameters;
 
-private:
 	void AnimateMove();
 	void SmoothMove();
 	void StartMovement();
+
+protected:
 
 	int moveTimer = 0;
 	iPoint moveVector = { 0,0 };
@@ -93,19 +94,8 @@ private:
 	const int timeForATile = 2;
 	const int tileSize = 16;
 
-	int animTimer = 0;
-	//int texture;
-	SDL_Texture* texture;
-	SString name;
-
-	const char* texturePath;
-
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
-	int healthPoints = 1;
-	int damage;
-
-	SDL_Rect currentSpriteSlice{ 0 };
 };
 
 #endif //__PLAYER_H__

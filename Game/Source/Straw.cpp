@@ -146,21 +146,21 @@ void Straw::StartMovement()
 	}
 }
 
-void Straw::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//isMyTurn = false;
-	hasFinishedTurn = true;
-	//moveTimer = 2;
-}
+//void Straw::Update()
+//{
+//	//LOG("the move vector x is %i" moveVector.x);
+//
+//	if (!moveVector.IsZero())
+//	{
+//		//AnimateMove();
+//		SmoothMove();
+//
+//	}
+//
+//	//isMyTurn = false;
+//	hasFinishedTurn = true;
+//	//moveTimer = 2;
+//}
 
 void Straw::AnimateMove()
 {

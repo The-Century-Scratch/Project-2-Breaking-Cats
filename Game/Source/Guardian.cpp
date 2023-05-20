@@ -210,21 +210,21 @@ void Guardian::StartMovement()
 	//moveVector.y = -1;  // CHANGED
 }
 
-void Guardian::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//isMyTurn = false;
-	//hasFinishedTurn = true;
-	//moveTimer = 2;
-}
+//void Guardian::Update()
+//{
+//	//LOG("the move vector x is %i" moveVector.x);
+//
+//	if (!moveVector.IsZero())
+//	{
+//		//AnimateMove();
+//		SmoothMove();
+//
+//	}
+//
+//	//isMyTurn = false;
+//	//hasFinishedTurn = true;
+//	//moveTimer = 2;
+//}
 
 void Guardian::AnimateMove()
 {

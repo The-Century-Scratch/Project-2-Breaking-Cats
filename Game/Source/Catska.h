@@ -33,7 +33,7 @@ public:
 	void DealDamage(int amount) override;
 	int GetDamage() override;
 
-	void Update() override;
+	//void Update() override;
 
 	//pugi::xml_node parameters;
 

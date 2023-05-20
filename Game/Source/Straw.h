@@ -31,7 +31,7 @@ public:
 	void DealDamage(int amount) override;
 	int GetDamage() override;
 
-	void Update() override;
+	//void Update() override;
 
 private:
 	void AnimateMove();
