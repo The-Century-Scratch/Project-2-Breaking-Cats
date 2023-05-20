@@ -61,17 +61,17 @@ public:
 	virtual PlayerAction HandleInput() const;
 	virtual void StartAction(PlayerAction playerAction);
 
-	virtual bool GetHasFinishedTurn();
-	virtual bool GetIsMyTurn();
+	bool GetHasFinishedTurn();
+	bool GetIsMyTurn();
 
-	virtual void SetHasFinishedTurn(bool value);
-	virtual void SetIsMyTurn(bool value);
+	void SetHasFinishedTurn(bool value);
+	void SetIsMyTurn(bool value);
 
-	virtual void DealDamage(int amount);
-	virtual int GetHealthPoints();
-	virtual int GetDamage();
-	virtual int GetPlayerId();
-	virtual SString GetName();
+	void DealDamage(int amount);
+	int GetHealthPoints();
+	int GetDamage();
+	int GetPlayerId();
+	SString GetName();
 
 	void Update();
 
@@ -81,8 +81,6 @@ public:
 	virtual bool GetIsAlly();
 
 	pugi::xml_node parameters;
-
-	void AnimateMove();
 	void SmoothMove();
 	void StartMovement();
 
@@ -94,8 +92,16 @@ protected:
 	const int timeForATile = 2;
 	const int tileSize = 16;
 
+	SDL_Texture* texture;
+	SString name;
+
+	const char* texturePath;
+
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
+	int healthPoints = 1;
+	int damage;
+	int maxHealth;
 };
 
 #endif //__PLAYER_H__

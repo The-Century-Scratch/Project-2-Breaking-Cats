@@ -53,42 +53,21 @@ void Gats::Draw() const
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
-bool Gats::GetIsMyTurn()
-{
-	return isMyTurn;
-}
-
-bool Gats::GetHasFinishedTurn()
-{
-	return hasFinishedTurn;
-}
-
-void Gats::SetIsMyTurn(bool value)
-{
-	isMyTurn = value;
-	//return isMyTurn;
-}
-
-void Gats::SetHasFinishedTurn(bool value)
-{
-	hasFinishedTurn = value;
-	//return hasFinishedTurn;
-}
-
 void Gats::Create(iPoint pos)
 {
-
 	texturePath = parameters.attribute("texturepath").as_string();
 	texture = app->tex->Load(texturePath);
-	
+
+	healthPoints = 50;
+	damage = 10;
 	position = pos;
 	size = { 16, 16 };
+
 	if (app->inventory->GetArcaneSpirit())
 	{
 		healthPoints += 15;
 	}
 	maxHealth = healthPoints;
-	
 }
 
 void Gats::Test()
@@ -98,9 +77,6 @@ void Gats::Test()
 
 Gats::PlayerAction Gats::HandleInput() const
 {
-	//using enum KeyState;
-	//using enum Gats::PlayerAction::Action;
-
 	PlayerAction returnAction = { position, Gats::PlayerAction::Action::NONE };
 
 	if (!moveVector.IsZero())
@@ -205,78 +181,7 @@ void Gats::StartAction(PlayerAction playerAction)
 //	goingToDash = false;
 //}
 
-//void Gats::Update()
-//{
-//	//LOG("the move vector x is %i" moveVector.x);
-//
-//	if (!moveVector.IsZero())
-//	{
-//		//AnimateMove();
-//		SmoothMove();
-//
-//	}
-//	//hasFinishedTurn = true;
-//
-//	//moveTimer = 2;
-//}
-
-void Gats::AnimateMove()
-{
-	if (animTimer == 8)
-	{
-		currentSpriteSlice.x += size.x;
-		if (currentSpriteSlice.x == size.x * (GetTextureIndex().x + 3))
-		{
-			currentSpriteSlice.x = GetTextureIndex().x * size.x;
-		}
-		animTimer = 0;
-	}
-	else
-	{
-		animTimer++;
-	}
-}
-
-//void Gats::SmoothMove()
-//{
-//
-//
-//	if (moveTimer == timeForATile)
-//	{
-//
-//
-//		moveTimer = 0;
-//		position += (moveVector * speed);
-//		if (position.x % tileSize == 0 && position.y % tileSize == 0)
-//		{
-//			moveVector.SetToZero();
-//			hasFinishedTurn = true;
-//		}
-//	}
-//	else
-//	{
-//		moveTimer++;
-//	}
-//	
-//}
-
 bool Gats::GetIsAlly()
 {
 	return true;
-}
-
-void Gats::DealDamage(int amount)
-{
-	app->audio->PlayFx(app->hud->dmggatsfx);
-	healthPoints -= amount;
-}
-
-int Gats::GetHealthPoints()
-{
-	return healthPoints;
-}
-
-int Gats::GetDamage()
-{
-	return damage;
 }
