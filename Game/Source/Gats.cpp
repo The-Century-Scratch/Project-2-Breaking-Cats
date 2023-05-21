@@ -19,6 +19,25 @@ Gats::Gats()
 
 Gats::~Gats() = default;
 
+void Gats::Create(iPoint pos)
+{
+	texturePath = parameters.attribute("texturepath").as_string();
+	velocity = parameters.attribute("velocity").as_int();
+	texture = app->tex->Load(texturePath);
+
+	healthPoints = 50;
+	damage = 10;
+	position = pos;
+	size = { 16, 16 };
+	type = UnitType::GATS;
+
+	if (app->inventory->GetArcaneSpirit())
+	{
+		healthPoints += 15;
+	}
+	maxHealth = healthPoints;
+}
+
 
 void Gats::DebugDraw() const
 {
@@ -51,23 +70,6 @@ void Gats::Draw() const
 	DebugDraw();
 	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
-void Gats::Create(iPoint pos)
-{
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
-
-	healthPoints = 50;
-	damage = 10;
-	position = pos;
-	size = { 16, 16 };
-
-	if (app->inventory->GetArcaneSpirit())
-	{
-		healthPoints += 15;
-	}
-	maxHealth = healthPoints;
 }
 
 void Gats::Test()
@@ -180,8 +182,3 @@ void Gats::StartAction(PlayerAction playerAction)
 //	}
 //	goingToDash = false;
 //}
-
-bool Gats::GetIsAlly()
-{
-	return true;
-}

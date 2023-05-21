@@ -20,6 +20,26 @@ Catska::Catska()
 
 Catska::~Catska() = default;
 
+void Catska::Create(iPoint pos)
+{
+
+	texturePath = parameters.attribute("texturepath").as_string();
+	velocity = parameters.attribute("velocity").as_int();
+	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
+
+	position = pos;
+	size = { 16, 16 };
+	healthPoints = 40;
+	damage = 6;
+	type = UnitType::CATSKA;
+
+	if (app->inventory->GetMysticalEnergy())
+	{
+		damage += 5;
+	}
+
+}
+
 
 void Catska::DebugDraw() const
 {
@@ -53,24 +73,6 @@ void Catska::Draw() const
 	DebugDraw();
 	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
-void Catska::Create(iPoint pos)
-{
-	
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
-	
-	position = pos;
-	size = { 16, 16 };
-	healthPoints = 40;
-	damage = 6;
-
-	if (app->inventory->GetMysticalEnergy())
-	{
-		damage += 5;
-	}
-	
 }
 
 Catska::PlayerAction Catska::HandleInput() const
@@ -121,11 +123,6 @@ void Catska::StartAction(PlayerAction playerAction)
 		StartMovement();
 	}
 	LOG("it does enter this scope right now, so be careful");
-}
-
-bool Catska::GetIsAlly()
-{
-	return true;
 }
 
 void Catska::DealDamage(int amount)

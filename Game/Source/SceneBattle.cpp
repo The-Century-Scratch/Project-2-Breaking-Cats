@@ -66,7 +66,6 @@ bool SceneBattle::Load()
 
 		std::unique_ptr<Unit> gats;
 		gats = std::make_unique<Gats>();
-		gats.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		gats.get()->parameters = nodeUnit;
 		gats.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
 		units.push_back(std::move(gats));
@@ -77,7 +76,6 @@ bool SceneBattle::Load()
 
 		std::unique_ptr<Unit> catska;
 		catska = std::make_unique<Catska>();
-		catska.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		catska.get()->parameters = nodeUnit;
 
 		catska.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
@@ -89,7 +87,6 @@ bool SceneBattle::Load()
 
 		std::unique_ptr<Unit> unit;
 		unit = std::make_unique<Guardian>();
-		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
 
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
@@ -101,7 +98,6 @@ bool SceneBattle::Load()
 
 		std::unique_ptr<Unit> unit;
 		unit = std::make_unique<LongRange>();
-		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
 
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
@@ -113,7 +109,6 @@ bool SceneBattle::Load()
 
 		std::unique_ptr<Unit> unit;
 		unit = std::make_unique<Straw>();
-		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
 
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });

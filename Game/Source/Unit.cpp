@@ -56,13 +56,11 @@ bool Unit::GetHasFinishedTurn()
 void Unit::SetIsMyTurn(bool value)
 {
 	isMyTurn = value;
-	//return isMyTurn;
 }
 
 void Unit::SetHasFinishedTurn(bool value)
 {
 	hasFinishedTurn = value;
-	//return hasFinishedTurn;
 }
 
 void Unit::Create(iPoint pos)
@@ -146,10 +144,6 @@ void Unit::StartMovement()
 	}
 	//playerAction.action = PlayerAction::Action::NONE;
 }
-bool Unit::GetIsAlly()
-{
-	return false;
-}
 
 void Unit::Update()
 {
@@ -164,6 +158,10 @@ void Unit::Update()
 
 	}
 
+	if (type == UnitType::STRAW)
+	{
+		hasFinishedTurn = true;
+	}
 
 	//moveTimer = 2;
 }
@@ -215,4 +213,37 @@ int Unit::GetPlayerId()
 SString Unit::GetName()
 {
 	return name;
+}
+
+UnitType Unit::GetType()
+{
+	return type;
+}
+
+bool Unit::GetIsAlly()
+{
+	switch (type)
+	{
+	case UnitType::UNDEFINED:
+		return false;
+		break;
+	case UnitType::GATS:
+		return true;
+		break;
+	case UnitType::CATSKA:
+		return true;
+		break;
+	case UnitType::GUARDIAN:
+		return false;
+		break;
+	case UnitType::LONGRANGE:
+		return false;
+		break;
+	case UnitType::STRAW:
+		return false;
+		break;
+	default:
+		break;
+	}
+	return false;
 }

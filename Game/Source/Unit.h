@@ -6,6 +6,15 @@
 #include "Point.h"
 #include "Player.h"
 
+enum class UnitType
+{
+	UNDEFINED,
+	GATS,
+	CATSKA,
+	GUARDIAN,
+	LONGRANGE,
+	STRAW
+};
 
 class Unit : public Sprite, public Transform
 {
@@ -72,13 +81,13 @@ public:
 	int GetDamage();
 	int GetPlayerId();
 	SString GetName();
+	UnitType GetType();
+	bool GetIsAlly();
 
 	void Update();
 
 	int velocity = 0;
 	int playerId;
-	
-	virtual bool GetIsAlly();
 
 	pugi::xml_node parameters;
 	void SmoothMove();
@@ -94,6 +103,7 @@ protected:
 
 	SDL_Texture* texture;
 	SString name;
+	UnitType type;
 
 	const char* texturePath;
 

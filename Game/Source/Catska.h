@@ -21,8 +21,6 @@ public:
 	PlayerAction HandleInput() const;
 	void StartAction(PlayerAction playerAction) override;
 
-	bool GetIsAlly() override;
-
 	void DealDamage(int amount);
 
 private:

@@ -14,6 +14,19 @@ Guardian::Guardian() = default;
 
 Guardian::~Guardian() = default;
 
+void Guardian::Create(iPoint pos)
+{
+	texturePath = parameters.attribute("texturepath").as_string();
+	velocity = parameters.attribute("velocity").as_int();
+	texture = app->tex->Load(texturePath);
+
+	healthPoints = 20;
+	damage = 10;
+	position = pos;
+	size = { 16, 16 };
+	type = UnitType::GUARDIAN;
+}
+
 
 void Guardian::DebugDraw() const
 {
@@ -47,22 +60,6 @@ void Guardian::Draw() const
 	DebugDraw();
 	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
-bool Guardian::GetIsAlly()
-{
-	return false;
-}
-
-void Guardian::Create(iPoint pos)
-{
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
-
-	healthPoints = 20;
-	damage = 10;
-	position = pos;
-	size = { 16, 16 };
 }
 
 Guardian::PlayerAction Guardian::HandleInput() const

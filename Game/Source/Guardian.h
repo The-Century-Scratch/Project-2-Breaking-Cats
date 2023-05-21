@@ -21,8 +21,6 @@ public:
 	PlayerAction HandleInput() const override;
 	void StartAction(PlayerAction playerAction) override;
 
-	bool GetIsAlly() override;
-
 private:
 };
 

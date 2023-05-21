@@ -14,6 +14,20 @@ LongRange::LongRange() = default;
 
 LongRange::~LongRange() = default;
 
+void LongRange::Create(iPoint pos)
+{
+	texturePath = parameters.attribute("texturepath").as_string();
+	velocity = parameters.attribute("velocity").as_int();
+	texture = app->tex->Load(texturePath);
+
+	healthPoints = 15;
+	damage = 7;
+	position = pos;
+	size = { 16, 16 };
+	type = UnitType::LONGRANGE;
+
+}
+
 
 void LongRange::DebugDraw() const
 {
@@ -47,18 +61,6 @@ void LongRange::Draw() const
 	DebugDraw();
 	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
-void LongRange::Create(iPoint pos)
-{
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
-
-	healthPoints = 15;
-	damage = 7;
-	position = pos;
-	size = { 16, 16 };
-
 }
 
 LongRange::PlayerAction LongRange::HandleInput() const
