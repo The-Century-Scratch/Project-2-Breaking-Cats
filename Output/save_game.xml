@@ -8,7 +8,7 @@
 	<scenemanager>
 		<scenegameplay>
 			<SceneGameplayInfo CurrentMap="6" Puzzle1Solved="false" Puzzle2Solved="false" Puzzle3Solved="false" />
-			<Player x="193" y="131" />
+			<Player x="181" y="170" />
 		</scenegameplay>
 	</scenemanager>
 	<moduleCollisions />
@@ -16,11 +16,12 @@
 	<entitymanager />
 	<psmanager />
 	<questmanager />
+	<StatsManager />
 	<map />
 	<Hud />
 	<Inventory />
 	<debug />
 	<renderer>
-		<camera x="0" y="-33" />
+		<camera x="0" y="-150" />
 	</renderer>
 </save_state>
