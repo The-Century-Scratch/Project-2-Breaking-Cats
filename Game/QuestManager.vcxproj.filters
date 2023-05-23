@@ -72,6 +72,7 @@
     <ClCompile Include="Source\MoveRockQuest.cpp">
       <Filter>Quests</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GridSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Source\MoveRockQuest.h">
       <Filter>Quests</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GridSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />

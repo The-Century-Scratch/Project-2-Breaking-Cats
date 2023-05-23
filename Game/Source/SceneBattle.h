@@ -46,8 +46,8 @@ private:
 	std::vector<std::unique_ptr<Unit>> units;
 
 	int turn = 0;
-	int numberFinished = 0;
 	int pauseMenu;
+	int turnTimer;
 
 
 	Unit unit;

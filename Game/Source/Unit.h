@@ -16,7 +16,7 @@ enum class UnitType
 	STRAW
 };
 
-class Unit : public Sprite, public Transform
+class Unit : public Transform
 {
 public:
 	struct PlayerAction

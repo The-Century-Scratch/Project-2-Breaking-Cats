@@ -24,7 +24,6 @@ void Catska::Create(iPoint pos)
 {
 
 	texturePath = parameters.attribute("texturepath").as_string();
-	velocity = parameters.attribute("velocity").as_int();
 	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
 
 	position = pos;

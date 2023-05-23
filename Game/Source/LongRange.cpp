@@ -17,7 +17,6 @@ LongRange::~LongRange() = default;
 void LongRange::Create(iPoint pos)
 {
 	texturePath = parameters.attribute("texturepath").as_string();
-	velocity = parameters.attribute("velocity").as_int();
 	texture = app->tex->Load(texturePath);
 
 	healthPoints = 15;

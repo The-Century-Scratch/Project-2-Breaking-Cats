@@ -108,6 +108,7 @@
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Gats.cpp" />
     <ClCompile Include="Source\GrapplingHook.cpp" />
+    <ClCompile Include="Source\GridSystem.cpp" />
     <ClCompile Include="Source\Guardian.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\GUICheckBox.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Gats.h" />
     <ClInclude Include="Source\GrapplingHook.h" />
+    <ClInclude Include="Source\GridSystem.h" />
     <ClInclude Include="Source\Guardian.h" />
     <ClInclude Include="Source\GuiButton.h" />
     <ClInclude Include="Source\GUICheckBox.h" />
