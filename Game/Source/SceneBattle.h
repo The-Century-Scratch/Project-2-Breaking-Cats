@@ -3,7 +3,9 @@
 #include "Scene.h"
 #include "Fonts.h"
 #include "EASTL/list.h"
+#include "EASTL/unique_ptr.h"
 #include "Unit.h"
+#include "GridSystem.h"
 #include <memory>
 #include <vector>
 
@@ -57,6 +59,8 @@ private:
 	Font* font;
 	ParticlesManager* particles;
 	Map* map;
+	//eastl::unique_ptr<GridSystem> gridSystem;
+	GridSystem* gridSystem;
 	// Menu
 	BattleMenu* battleMenu;
 

@@ -97,6 +97,10 @@
     <gatsTexture texturepath="Assets/Textures/GatsIdle.png"/>
     <catskaTexture texturepath="Assets/Textures/Catska.png"/>
   </Inventory>
+
+  <GridSystem>
+    <gridTexture texturepath="Assets/Textures/gridTexture.png"/>
+  </GridSystem>
   
   <StatsManager>
     <gats x="32" y="64" velocity="5" id="1" texturepath="Assets/Textures/GatsIdle.png"/>

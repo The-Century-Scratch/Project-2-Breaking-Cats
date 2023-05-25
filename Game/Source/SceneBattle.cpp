@@ -21,15 +21,7 @@
 SceneBattle::SceneBattle()
 {
 	name.Create("scenebattle");
-	//battleMenu = new BattleMenu(this, inventory);
-	//map = new Map();
-	//
-	//if (enemy != nullptr)
-	//{
-	//	enemy->SetCurrentState(EnemyState::NORMAL);
-	//	enemy->SetPos(iPoint(650, 140));
-	//	enemyList.push_back(enemy);
-	//}
+	gridSystem = new GridSystem();
 }
 
 SceneBattle::~SceneBattle()
@@ -203,6 +195,7 @@ bool SceneBattle::Load()
 
 	app->audio->PlayMusic(combatTheme.GetString());
 	turnTimer = 0;
+	gridSystem->Start();
 
 	return true;
 }
@@ -453,12 +446,17 @@ bool SceneBattle::Update(float dt)
 		}
 	}
 
+
+	gridSystem->Update();
+
 	return ret;
 }
 
 void SceneBattle::Draw()
 {
 	app->map->Draw();
+
+	gridSystem->Draw();
 
 	for (auto& i : units)
 	{
@@ -491,6 +489,7 @@ void SceneBattle::Draw()
 
 bool SceneBattle::UnLoad()
 {
+	gridSystem->CleanUp();
 	//font->UnLoad(app->tex);
 	//RELEASE(font);
 
