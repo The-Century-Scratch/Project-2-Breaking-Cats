@@ -217,10 +217,13 @@ void GridSystem::showActionArea()
 		showAttack(currentAction.destinationTile);
 		break;
 	case UA::ATTACK_LONG_RANGE:
+		showAttackRange(currentAction.destinationTile);
 		break;
 	case UA::PREPARE_DASH:
+		showDash(currentAction.destinationTile);
 		break;
 	case UA::ATTACK_AND_HEAL_WITH_KILL:
+		showAttack(currentAction.destinationTile);
 		break;
 	default:
 		break;
@@ -241,10 +244,33 @@ void GridSystem::showAttack(iPoint pos)
 
 void GridSystem::showAttackRange(iPoint pos)
 {
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
 
+	for (int i = 0; i < MAX_TILES_X; i++)
+	{
+		grid[i][y].state = TileState::CLICKABLE;
+	}
+
+	for (int j = 0; j < MAX_TILES_Y; j++)
+	{
+		grid[x][j].state = TileState::CLICKABLE;
+	}
 }
 
 void GridSystem::showDash(iPoint pos)
 {
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
 
+	for (int i = x - 3; i <= x + 3; i++)
+	{
+		grid[i][y].state = TileState::CLICKABLE;
+	}
+
+	for (int j =  y - 3; j <= y + 3; j++)
+	{
+		if(grid[x][j].walkability != TileWalkability::WALKABLE)
+			grid[x][j].state = TileState::CLICKABLE;
+	}
 }

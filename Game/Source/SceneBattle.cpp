@@ -196,6 +196,7 @@ bool SceneBattle::Update(float dt)
 					gridSystem->showArea = !gridSystem->showArea;
 					if (gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
+
 					i->StartAction(unitAction);
 					break;
 				case UA::ATTACK:

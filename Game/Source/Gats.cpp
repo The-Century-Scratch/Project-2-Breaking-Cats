@@ -121,7 +121,7 @@ Gats::PlayerAction Gats::HandleInput() const
 	{
 
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && app->inventory->GetFirePaw())
+	else if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN/* && app->inventory->GetFirePaw()*/)
 	{
 		returnAction.action |= Gats::PlayerAction::Action::PREPARE_DASH;
 	}
