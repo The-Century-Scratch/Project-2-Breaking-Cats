@@ -70,6 +70,8 @@ public:
 
 	void move(iPoint origin, iPoint destination);
 
+	void removeUnit(iPoint UnitPos);
+
 private:
 
 	bool IsMouseInside(SDL_Rect r);

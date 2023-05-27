@@ -184,8 +184,8 @@ bool SceneBattle::Update(float dt)
 				case UA::MOVE:
 					if (gridSystem->isWalkable(unitAction.destinationTile))
 					{
-						i->StartAction(unitAction);
 						gridSystem->move(i->position, unitAction.destinationTile);
+						i->StartAction(unitAction);
 					}
 					break;
 				case UA::PREPARE_DASH:
@@ -318,6 +318,7 @@ bool SceneBattle::Update(float dt)
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() <= 0)
 		{
 			i->SetHasFinishedTurn(true);
+			gridSystem->removeUnit(i->position);
 		}
 	}
 

@@ -118,18 +118,29 @@ void GridSystem::move(iPoint origin, iPoint destination)
 {
 	for (auto& u : unitsData)
 	{
-		if (u->unitPos == origin) u->unitPos = destination;
+		if (u->unitPos == origin) 
+			u->unitPos = destination;
 	}
+
+	LOG("This exixst? %i", grid[9][9].bounds.x);
 
 	int x = (origin.x - gridPos.x) / TILE_W;
 	int y = (origin.y - gridPos.y) / TILE_H;
 
-	grid[x][y].walkability == TileWalkability::WALKABLE;
+	grid[x][y].walkability = TileWalkability::WALKABLE;
 
 	x = (destination.x - gridPos.x) / TILE_W;
 	y = (destination.y - gridPos.y) / TILE_H;
 
-	grid[x][y].walkability == TileWalkability::UNIT;
+	grid[x][y].walkability = TileWalkability::UNIT;
+}
+
+void GridSystem::removeUnit(iPoint UnitPos)
+{
+	int x = (UnitPos.x - gridPos.x) / TILE_W;
+	int y = (UnitPos.y - gridPos.y) / TILE_H;
+
+	grid[x][y].walkability = TileWalkability::WALKABLE;
 }
 
 bool GridSystem::IsMouseInside(SDL_Rect r)
@@ -177,7 +188,8 @@ TileWalkability GridSystem::LoadWalkabilityfromCollisions(iPoint pos)
 	else tempWalkability = TileWalkability::WALKABLE;
 	for (auto& u : unitsData)
 	{
-		if (u.get()->unitPos == pos) tempWalkability = TileWalkability::UNIT;
+		if (u.get()->unitPos == pos)
+			tempWalkability = TileWalkability::UNIT;
 	}
 	return tempWalkability;
 }
