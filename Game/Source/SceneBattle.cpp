@@ -162,6 +162,8 @@ bool SceneBattle::Update(float dt)
 
 	bool noUnitHasActed = true;
 	turnTimer++;
+	if (turnTimer > 20)
+		turnTimer = 11;
 
 	for (auto& i : units)
 	{
@@ -182,6 +184,8 @@ bool SceneBattle::Update(float dt)
 				case UA::NONE:
 					break;
 				case UA::MOVE:
+					gridSystem->showArea = false;
+
 					if (gridSystem->isWalkable(unitAction.destinationTile))
 					{
 						gridSystem->move(i->position, unitAction.destinationTile);
@@ -189,9 +193,15 @@ bool SceneBattle::Update(float dt)
 					}
 					break;
 				case UA::PREPARE_DASH:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
 					i->StartAction(unitAction);
 					break;
 				case UA::ATTACK:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
 					for (auto& unit : units)
 					{
 						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
@@ -209,6 +219,9 @@ bool SceneBattle::Update(float dt)
 					}
 					break;
 				case UA::ATTACK_AND_HEAL_WITH_KILL:
+					gridSystem->showArea = !gridSystem->showArea;
+					if(gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
 					for (auto& unit : units)
 					{
 						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
@@ -235,6 +248,9 @@ bool SceneBattle::Update(float dt)
 					}
 					break;
 				case UA::ATTACK_LONG_RANGE:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
 					for (auto& unit : units)
 					{
 						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
@@ -293,7 +309,10 @@ bool SceneBattle::Update(float dt)
 					break;
 				}
 			}
-			
+			if (gridSystem->showArea)
+			{
+				gridSystem->showActionArea();
+			}
 		}
 		i->Update();
 

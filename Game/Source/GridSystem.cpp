@@ -35,6 +35,7 @@ bool GridSystem::Start()
 
 
 	gridPos = { 16,16 }; // TODO: que lo loadee de la propia escena/ del tmx
+	showArea = false;
 
 
 	for (size_t x = 0; x < MAX_TILES_X; x++)
@@ -122,8 +123,6 @@ void GridSystem::move(iPoint origin, iPoint destination)
 			u->unitPos = destination;
 	}
 
-	LOG("This exixst? %i", grid[9][9].bounds.x);
-
 	int x = (origin.x - gridPos.x) / TILE_W;
 	int y = (origin.y - gridPos.y) / TILE_H;
 
@@ -161,20 +160,23 @@ void GridSystem::HandleTileState()
 	{
 		for (size_t y = 0; y < MAX_TILES_Y; y++)
 		{
+			if (IsMouseInside(grid[x][y].bounds))
+				grid[x][y].isFocused = true;
+			else 
+				grid[x][y].isFocused = false;
+
+
 			if (IsMouseInside(grid[x][y].bounds) && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT)
 			{
 				grid[x][y].state = TileState::AREA_EFFECT;
-				grid[x][y].isFocused = true;
 			}
-			else if (IsMouseInside(grid[x][y].bounds))
+			else if (grid[x][y].state == TileState::CLICKABLE && showArea)
 			{
-				grid[x][y].state = TileState::UNSELECTED;
-				grid[x][y].isFocused = true;
+				//TODO: implementar las areas de efecto y ejecutar los ataques mediante eso
 			}
 			else
 			{
 				grid[x][y].state = TileState::UNSELECTED;
-				grid[x][y].isFocused = false;
 			}
 		}
 	}
@@ -203,4 +205,46 @@ void GridSystem::LoadUnitData(Unit* u)
 	tempData.get()->unitPos = u->position;
 
 	unitsData.push_back(eastl::move(tempData));
+}
+
+void GridSystem::showActionArea()
+{
+	using UA = Unit::PlayerAction::Action;
+
+	switch (currentAction.action)
+	{
+	case UA::ATTACK:
+		showAttack(currentAction.destinationTile);
+		break;
+	case UA::ATTACK_LONG_RANGE:
+		break;
+	case UA::PREPARE_DASH:
+		break;
+	case UA::ATTACK_AND_HEAL_WITH_KILL:
+		break;
+	default:
+		break;
+	}
+}
+
+
+void GridSystem::showAttack(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	grid[x - 1][y].state = TileState::CLICKABLE;
+	grid[x + 1][y].state = TileState::CLICKABLE;
+	grid[x][y - 1].state = TileState::CLICKABLE;
+	grid[x][y + 1].state = TileState::CLICKABLE;
+}
+
+void GridSystem::showAttackRange(iPoint pos)
+{
+
+}
+
+void GridSystem::showDash(iPoint pos)
+{
+
 }

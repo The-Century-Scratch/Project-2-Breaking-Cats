@@ -46,6 +46,7 @@ private:
 	int turn = 0;
 	int turnTimer;
 
+
 	eastl::unique_ptr<GridSystem> gridSystem;
 
 	SString combatTheme;

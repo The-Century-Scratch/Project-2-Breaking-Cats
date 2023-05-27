@@ -72,6 +72,13 @@ public:
 
 	void removeUnit(iPoint UnitPos);
 
+	void showActionArea();
+
+
+	Unit::PlayerAction currentAction;
+
+	bool showArea;
+
 private:
 
 	bool IsMouseInside(SDL_Rect r);
@@ -81,6 +88,12 @@ private:
 	void DrawTileState();
 
 	TileWalkability LoadWalkabilityfromCollisions(iPoint pos);
+
+	void showAttack(iPoint pos);
+
+	void showAttackRange(iPoint pos);
+
+	void showDash(iPoint pos);
 
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;
@@ -93,6 +106,7 @@ private:
 
 	Tile grid[MAX_TILES_X][MAX_TILES_Y];
 	iPoint gridPos;
+
 };
 
 #endif // __GRIDSYSTEM_H__
