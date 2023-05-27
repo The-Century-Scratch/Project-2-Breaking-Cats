@@ -6,6 +6,10 @@
 #include "Animation.h"
 #include "Colliders.h"
 #include "SDL/include/SDL.h"
+#include "EASTL/list.h"
+#include "EASTL/vector.h"
+#include "EASTL/unique_ptr.h"
+#include "Unit.h"
 
 #define MAX_TILES_X 9
 #define MAX_TILES_Y 9
@@ -34,9 +38,15 @@ enum class TileWalkability
 struct Tile
 {
 	SDL_Rect bounds;
-	TileWalkability walkablility;
+	TileWalkability walkability;
 	TileState state;
 	bool isFocused;
+};
+
+struct UnitData
+{
+	iPoint unitPos;
+	UnitType type;
 };
 
 class GridSystem
@@ -54,6 +64,12 @@ public:
 
 	bool CleanUp();
 
+	void LoadUnitData(Unit* u);
+
+	bool isWalkable(iPoint pos);
+
+	void move(iPoint origin, iPoint destination);
+
 private:
 
 	bool IsMouseInside(SDL_Rect r);
@@ -62,6 +78,8 @@ private:
 
 	void DrawTileState();
 
+	TileWalkability LoadWalkabilityfromCollisions(iPoint pos);
+
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;
 	SDL_Rect areaSection;
@@ -69,7 +87,7 @@ private:
 	Animation focusedAnim;
 	Animation* currentAnim = nullptr;
 
-
+	eastl::vector<eastl::unique_ptr<UnitData>> unitsData;
 
 	Tile grid[MAX_TILES_X][MAX_TILES_Y];
 	iPoint gridPos;

@@ -123,26 +123,19 @@ void Unit::StartMovement()
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		moveVector.y = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
 		moveVector.x = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
 		moveVector.y = 1;
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		moveVector.x = 1;
-		
-		
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
-	//playerAction.action = PlayerAction::Action::NONE;
 }
 
 void Unit::Update()

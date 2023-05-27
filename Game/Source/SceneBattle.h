@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Fonts.h"
 #include "EASTL/list.h"
+#include "EASTL/vector.h"
 #include "EASTL/unique_ptr.h"
 #include "Unit.h"
 #include "GridSystem.h"
@@ -38,31 +39,14 @@ public:
 
 	bool SaveState(pugi::xml_node&) const { return true; }*/
 
-public:
-	eastl::list<Enemy*> enemyList;
-	eastl::list<Player*> playerList;
 
 private:
-	int numEnemies;
-
-	std::vector<std::unique_ptr<Unit>> units;
+	eastl::vector<eastl::unique_ptr<Unit>> units;
 
 	int turn = 0;
-	int pauseMenu;
 	int turnTimer;
 
-
-	Unit unit;
-
-	// Reference for the scene
-	SceneGameplay* scene;
-	Font* font;
-	ParticlesManager* particles;
-	Map* map;
-	//eastl::unique_ptr<GridSystem> gridSystem;
-	GridSystem* gridSystem;
-	// Menu
-	BattleMenu* battleMenu;
+	eastl::unique_ptr<GridSystem> gridSystem;
 
 	SString combatTheme;
 };

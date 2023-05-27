@@ -117,6 +117,10 @@ Gats::PlayerAction Gats::HandleInput() const
 		returnAction.action |= Gats::PlayerAction::Action::MOVE;
 		returnAction.destinationTile.x += tileSize;
 	}
+	else if (goingToDash && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+
+	}
 	else if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && app->inventory->GetFirePaw())
 	{
 		returnAction.action |= Gats::PlayerAction::Action::PREPARE_DASH;

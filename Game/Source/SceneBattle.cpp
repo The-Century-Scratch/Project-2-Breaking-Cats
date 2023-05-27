@@ -21,7 +21,7 @@
 SceneBattle::SceneBattle()
 {
 	name.Create("scenebattle");
-	gridSystem = new GridSystem();
+	gridSystem = eastl::make_unique<GridSystem>();
 }
 
 SceneBattle::~SceneBattle()
@@ -48,56 +48,61 @@ bool SceneBattle::Load()
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("gats"))
 	{
 
-		std::unique_ptr<Unit> gats;
-		gats = std::make_unique<Gats>();
+		eastl::unique_ptr<Unit> gats;
+		gats = eastl::make_unique<Gats>();
 		gats.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		gats.get()->parameters = nodeUnit;
 		gats.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(gats));
+		gridSystem->LoadUnitData(gats.get());
+		units.push_back(eastl::move(gats));
 	}
 	for (pugi::xml_node nodeUnit = config.child("catska");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("catska"))
 	{
 
-		std::unique_ptr<Unit> catska;
-		catska = std::make_unique<Catska>();
+		eastl::unique_ptr<Unit> catska;
+		catska = eastl::make_unique<Catska>();
 		catska.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		catska.get()->parameters = nodeUnit;
 		catska.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(catska));
+		gridSystem->LoadUnitData(catska.get());
+		units.push_back(eastl::move(catska));
 	}
 	for (pugi::xml_node nodeUnit = config.child("guardian");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("guardian"))
 	{
 
-		std::unique_ptr<Unit> unit;
-		unit = std::make_unique<Guardian>();
+		eastl::unique_ptr<Unit> unit;
+		unit = eastl::make_unique<Guardian>();
 		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(unit));
+		gridSystem->LoadUnitData(unit.get());
+		units.push_back(eastl::move(unit));
 	}
 	for (pugi::xml_node nodeUnit = config.child("longrange");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("longrange"))
 	{
 
-		std::unique_ptr<Unit> unit;
-		unit = std::make_unique<LongRange>();
+		eastl::unique_ptr<Unit> unit;
+		unit = eastl::make_unique<LongRange>();
 		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(unit));
+		gridSystem->LoadUnitData(unit.get());
+		units.push_back(eastl::move(unit));
 	}
 	for (pugi::xml_node nodeUnit = config.child("straw");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("straw"))
 	{
 
-		std::unique_ptr<Unit> unit;
-		unit = std::make_unique<Straw>();
+		eastl::unique_ptr<Unit> unit;
+		unit = eastl::make_unique<Straw>();
 		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(unit));
+		gridSystem->LoadUnitData(unit.get());
+		units.push_back(eastl::move(unit));
 	}
 
 
@@ -112,28 +117,7 @@ bool SceneBattle::Load()
 			}
 		}
 	}
-
-
-
-
-	//unit.parameters = config.child("gats");
-	//
-	//unit.Create({64,64});
-
-
-
-	//particles = new ParticlesManager();
-	//if (scene->isDungeon == true)
-	//{
-	//	map->Load("battle_map2.tmx", app->tex);
-	//}
-	//else
-	//{
-	//	map->Load("battle_map.tmx", app->tex);
-	//}
-
-	//font = new Font(app, "Font/font3.xml", app->tex);
-
+	
 	////backgroundTexture = app->tex->Load("Assets/Textures/Scenes/battle_bg.png");
 
 	//// Start music
@@ -150,45 +134,7 @@ bool SceneBattle::Load()
 	//	(*it)->generatorList(particles, 1);
 	//}
 
-	//pugi::xml_document animations;
-	//pugi::xml_node anims;
-	//int size = app->assetsManager->MakeLoad("Xml/animations.xml");
-	//pugi::xml_parse_result result = animations.load_buffer(app->assetsManager->GetLastBuffer(), size);
-	//app->assetsManager->DeleteBuffer();
-	////pugi::xml_parse_result result = animations.load_file("animations.xml");
-
-	//if (result == NULL)
-	//	LOG("Could not load xml file: %s. pugi error: %s", "animations.xml", result.description());
-	//else
-	//	anims = animations.child("animations");
-
-	//Enemy* enemy = nullptr;
-	//particles->CreateGenerator({ 0,0 }, ParticleType::FIRE);
-	//particles->CreateGenerator({ 0,0 }, ParticleType::MAGIC);
-	//particles->CreateGenerator({ 0,0 }, ParticleType::GRAVITY);
-	//for (int i = 0; i < 2; ++i)
-	//{
-	//	int num = (rand() % 3) + 1;
-	//	switch(num)
-	//	{
-	//	case 1:
-	//		enemy = new Golem(iPoint(650, 230 + (i * 90)), anims);
-	//		break;
-	//	case 2:
-	//		enemy = new Skull(iPoint(650, 230 + (i * 90)), anims);
-	//		break;
-	//	case 3:
-	//		enemy = new Bat(iPoint(650, 230 + (i * 90)), anims);
-	//		break;
-	//	}
-	//	//(rand()%2)
-	//	enemy->generatorList(particles, 1);
-
-	//	if (enemy != nullptr) enemyList.push_back(enemy);
-	//}
-	//
-	//battleMenu->Load(font);
-	//
+	
 	//app->render->camera.x = 0;
 	//app->render->camera.y = 0;
 
@@ -236,9 +182,10 @@ bool SceneBattle::Update(float dt)
 				case UA::NONE:
 					break;
 				case UA::MOVE:
-					if (app->moduleCollisions->isWalkable(unitAction.destinationTile))
+					if (gridSystem->isWalkable(unitAction.destinationTile))
 					{
 						i->StartAction(unitAction);
+						gridSystem->move(i->position, unitAction.destinationTile);
 					}
 					break;
 				case UA::PREPARE_DASH:

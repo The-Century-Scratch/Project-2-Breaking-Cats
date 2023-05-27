@@ -44,6 +44,7 @@ bool GridSystem::Start()
 			grid[x][y].bounds = { TILE_W * (int) x + gridPos.x, TILE_H * (int) y + gridPos.y, TILE_W, TILE_H };
 			grid[x][y].state = TileState::UNSELECTED;
 			//TODO: tile walkability loadeado de las collisions
+			grid[x][y].walkability = LoadWalkabilityfromCollisions({ grid[x][y].bounds.x , grid[x][y].bounds.y });
 		}
 	}
 	return true;
@@ -99,6 +100,38 @@ bool GridSystem::CleanUp()
 	return true;
 }
 
+bool GridSystem::isWalkable(iPoint pos)
+{
+	if (pos.x < TILE_W || pos.y < TILE_H) return false;
+
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	if (x > MAX_TILES_X || y > MAX_TILES_Y) return false;
+
+	if(grid[x][y].walkability == TileWalkability::WALKABLE) return true;
+
+	return false;
+}
+
+void GridSystem::move(iPoint origin, iPoint destination)
+{
+	for (auto& u : unitsData)
+	{
+		if (u->unitPos == origin) u->unitPos = destination;
+	}
+
+	int x = (origin.x - gridPos.x) / TILE_W;
+	int y = (origin.y - gridPos.y) / TILE_H;
+
+	grid[x][y].walkability == TileWalkability::WALKABLE;
+
+	x = (destination.x - gridPos.x) / TILE_W;
+	y = (destination.y - gridPos.y) / TILE_H;
+
+	grid[x][y].walkability == TileWalkability::UNIT;
+}
+
 bool GridSystem::IsMouseInside(SDL_Rect r)
 {
 	int scale = app->win->GetScale();
@@ -134,4 +167,28 @@ void GridSystem::HandleTileState()
 			}
 		}
 	}
+}
+
+TileWalkability GridSystem::LoadWalkabilityfromCollisions(iPoint pos)
+{
+	TileWalkability tempWalkability = TileWalkability::UNWALKABLE;
+
+	if (!app->moduleCollisions->isWalkable(pos)) tempWalkability = TileWalkability::OBSTACLE;
+	else tempWalkability = TileWalkability::WALKABLE;
+	for (auto& u : unitsData)
+	{
+		if (u.get()->unitPos == pos) tempWalkability = TileWalkability::UNIT;
+	}
+	return tempWalkability;
+}
+
+void GridSystem::LoadUnitData(Unit* u)
+{
+	eastl::unique_ptr<UnitData> tempData;
+	tempData = eastl::make_unique<UnitData>();
+
+	tempData.get()->type = u->GetType();
+	tempData.get()->unitPos = u->position;
+
+	unitsData.push_back(eastl::move(tempData));
 }
