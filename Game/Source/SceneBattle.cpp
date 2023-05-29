@@ -317,9 +317,37 @@ bool SceneBattle::Update(float dt)
 			if (gridSystem->showArea)
 			{
 				gridSystem->showActionArea();
-				if (gridSystem->AreaIsClicked())
+				if (gridSystem->Update() && gridSystem->AreaIsClicked())
 				{
-					LOG("Area is clicked");
+					eastl::vector<iPoint> hitsMade = gridSystem->GetHitsPosition();
+
+					gridSystem->showArea = !gridSystem->showArea;
+
+					if (!hitsMade.empty())
+					{
+						for (eastl::unique_ptr<Unit>& unit : units)
+						{
+							for (iPoint& hit : hitsMade)
+							{
+								switch (gridSystem->currentAction.action)
+								{
+								case UA::NONE:
+									break;
+								case UA::ATTACK:
+									break;
+								case UA::ATTACK_LONG_RANGE:
+									break;
+								case UA::PREPARE_DASH:
+									break;
+								case UA::ATTACK_AND_HEAL_WITH_KILL:
+									break;
+								default:
+									break;
+								}
+							}
+						}
+						i->SetHasFinishedTurn(true);
+					}
 				}
 			}
 		}

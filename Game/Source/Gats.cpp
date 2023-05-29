@@ -151,6 +151,7 @@ void Gats::StartAction(PlayerAction playerAction)
 	}
 	else if (playerAction.action == PlayerAction::Action::PREPARE_DASH)
 	{
+		//DoDash(playerAction.destinationTile.x, playerAction.destinationTile.y);
 		goingToDash = !goingToDash;
 	}
 }

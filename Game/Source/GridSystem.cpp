@@ -223,29 +223,34 @@ void GridSystem::LoadUnitData(Unit* u)
 
 bool GridSystem::AreaIsClicked()
 {
-	/*int x = (focusPos.x - gridPos.x) / TILE_W;
+	int x = (focusPos.x - gridPos.x) / TILE_W;
 	int y = (focusPos.y - gridPos.y) / TILE_H;
 
 	if (IsMouseInside(focusPos) &&
 		app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN &&
 		grid[x][y].state == TileState::AREA_EFFECT)
-	{
-		LOG("Area is clicked");
 		return true;
-	}*/
+
+	return false;
+}
+
+eastl::vector<iPoint> GridSystem::GetHitsPosition()
+{
+	eastl::vector<iPoint> Hits;
 
 	for (size_t x = 0; x < MAX_TILES_X; x++)
 	{
 		for (size_t y = 0; y < MAX_TILES_Y; y++)
 		{
-			if (IsMouseInside(grid[x][y].bounds) &&
-				app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN &&
-				grid[x][y].state == TileState::AREA_EFFECT)
-				return true;
+			if (grid[x][y].state == TileState::AREA_EFFECT && grid[x][y].walkability == TileWalkability::UNIT)
+			{
+				iPoint tempPos = { grid[x][y].bounds.x, grid[x][y].bounds.y };
+				Hits.push_back(eastl::move(tempPos));
+			}
 		}
 	}
 
-	return false;
+	return Hits;
 }
 
 void GridSystem::showActionArea()
