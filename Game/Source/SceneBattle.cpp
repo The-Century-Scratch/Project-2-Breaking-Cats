@@ -203,7 +203,7 @@ bool SceneBattle::Update(float dt)
 					gridSystem->showArea = !gridSystem->showArea;
 					if (gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
-					for (auto& unit : units)
+					/*for (auto& unit : units)
 					{
 						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 						{
@@ -217,13 +217,13 @@ bool SceneBattle::Update(float dt)
 
 							}
 						}
-					}
+					}*/
 					break;
 				case UA::ATTACK_AND_HEAL_WITH_KILL:
 					gridSystem->showArea = !gridSystem->showArea;
 					if(gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
-					for (auto& unit : units)
+					/*for (auto& unit : units)
 					{
 						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 						{
@@ -246,13 +246,13 @@ bool SceneBattle::Update(float dt)
 
 							}
 						}
-					}
+					}*/
 					break;
 				case UA::ATTACK_LONG_RANGE:
 					gridSystem->showArea = !gridSystem->showArea;
 					if (gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
-					for (auto& unit : units)
+					/*for (auto& unit : units)
 					{
 						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 						{
@@ -271,9 +271,11 @@ bool SceneBattle::Update(float dt)
 
 							}
 						}
-					}
+					}*/
 					break;
 				case UA::ATTACK_TO_PLAYER:
+					gridSystem->showArea = false;
+
 					for (auto& unit : units)
 					{
 						if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
@@ -290,6 +292,8 @@ bool SceneBattle::Update(float dt)
 					}
 					break;
 				case UA::ATTACK_TO_PLAYER_LONG_RANGE:
+					gridSystem->showArea = false;
+
 					for (auto& unit : units)
 					{
 						if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
@@ -313,6 +317,10 @@ bool SceneBattle::Update(float dt)
 			if (gridSystem->showArea)
 			{
 				gridSystem->showActionArea();
+				if (gridSystem->AreaIsClicked())
+				{
+					LOG("Area is clicked");
+				}
 			}
 		}
 		i->Update();

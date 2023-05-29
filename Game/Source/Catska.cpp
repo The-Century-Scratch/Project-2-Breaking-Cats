@@ -87,7 +87,7 @@ Catska::PlayerAction Catska::HandleInput() const
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
 		returnAction.action = Catska::PlayerAction::Action::ATTACK_LONG_RANGE;
-		app->audio->PlayFx(app->hud->attkcatskafx);
+		/*app->audio->PlayFx(app->hud->attkcatskafx);*/
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)

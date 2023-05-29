@@ -74,6 +74,8 @@ public:
 
 	void showActionArea();
 
+	bool AreaIsClicked();
+
 
 	Unit::PlayerAction currentAction;
 
@@ -85,6 +87,8 @@ private:
 
 	void HandleTileState();
 
+	void showEffectArea(SDL_Rect r);
+
 	void DrawTileState();
 
 	TileWalkability LoadWalkabilityfromCollisions(iPoint pos);
@@ -94,6 +98,12 @@ private:
 	void showAttackRange(iPoint pos);
 
 	void showDash(iPoint pos);
+
+	void showAttackAOE(iPoint pos);
+
+	void showAttackRangeAOE(iPoint pos);
+
+	void showDashAOE(iPoint pos);
 
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;
@@ -106,6 +116,7 @@ private:
 
 	Tile grid[MAX_TILES_X][MAX_TILES_Y];
 	iPoint gridPos;
+	SDL_Rect focusPos;
 
 };
 
