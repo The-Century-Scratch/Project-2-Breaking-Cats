@@ -238,6 +238,12 @@ eastl::vector<iPoint> GridSystem::getHitsPosition()
 {
 	eastl::vector<iPoint> Hits;
 
+	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH)
+	{
+		iPoint dashDestination = { focusPos.x, focusPos.y };
+		Hits.push_back(eastl::move(dashDestination));
+	}
+
 	for (size_t x = 0; x < MAX_TILES_X; x++)
 	{
 		for (size_t y = 0; y < MAX_TILES_Y; y++)

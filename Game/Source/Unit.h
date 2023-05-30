@@ -100,6 +100,7 @@ protected:
 	int speed = 4;
 	const int timeForATile = 2;
 	const int tileSize = 16;
+	iPoint destination;
 
 	SDL_Texture* texture;
 	SString name;

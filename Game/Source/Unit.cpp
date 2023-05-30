@@ -169,11 +169,42 @@ void Unit::SmoothMove()
 
 		moveTimer = 0;
 		position += (moveVector * speed);
-		LOG("this is the tileSize %i, then we have the pos X: %i", tileSize, position.x);
-		if (position.x % tileSize == 0 && position.y % tileSize == 0)
+		if (moveVector.x < 0)
 		{
-			moveVector.SetToZero();
-			hasFinishedTurn = true;
+			if (position.x <= destination.x)
+			{
+				position = destination;
+				moveVector.SetToZero();
+				hasFinishedTurn = true;
+			}
+		}
+		else if (moveVector.x > 0)
+		{
+			if (position.x >= destination.x)
+			{
+				position = destination;
+				moveVector.SetToZero();
+				hasFinishedTurn = true;
+			}
+		}
+
+		if (moveVector.y < 0)
+		{
+			if (position.y <= destination.y)
+			{
+				position = destination;
+				moveVector.SetToZero();
+				hasFinishedTurn = true;
+			}
+		}
+		else if (moveVector.y > 0)
+		{
+			if (position.y >= destination.y)
+			{
+				position = destination;
+				moveVector.SetToZero();
+				hasFinishedTurn = true;
+			}
 		}
 	}
 	else
