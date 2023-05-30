@@ -1,8 +1,6 @@
 #include "App.h"
 #include "Render.h"
-//#include"ParticlesManager.h"
 #include "Textures.h"
-//#include"AssetsManager.h"
 #include "SceneBattle.h"
 #include "SceneGameplay.h"
 #include "SceneManager.h"
@@ -12,31 +10,18 @@
 #include "Guardian.h"
 #include "LongRange.h"
 #include "Straw.h"
-//#include "BattleMenu.h"
 #include "Player.h"
-//#include "Enemy.h"
-//#include "Golem.h"
-//#include "Skull.h"
-//#include "Bat.h"
 #include "Audio.h"
-//#include "Inventory.h"
 #include <time.h>
 #include "ModuleCollisions.h"
 #include "Debug.h"
 #include "Inventory.h"
+#include "Hud.h"
 
 SceneBattle::SceneBattle()
 {
 	name.Create("scenebattle");
-	//battleMenu = new BattleMenu(this, inventory);
-	//map = new Map();
-	//
-	//if (enemy != nullptr)
-	//{
-	//	enemy->SetCurrentState(EnemyState::NORMAL);
-	//	enemy->SetPos(iPoint(650, 140));
-	//	enemyList.push_back(enemy);
-	//}
+	gridSystem = eastl::make_unique<GridSystem>();
 }
 
 SceneBattle::~SceneBattle()
@@ -63,60 +48,61 @@ bool SceneBattle::Load()
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("gats"))
 	{
 
-		std::unique_ptr<Unit> gats;
-		gats = std::make_unique<Gats>();
+		eastl::unique_ptr<Unit> gats;
+		gats = eastl::make_unique<Gats>();
 		gats.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		gats.get()->parameters = nodeUnit;
 		gats.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(gats));
+		gridSystem->LoadUnitData(gats.get());
+		units.push_back(eastl::move(gats));
 	}
 	for (pugi::xml_node nodeUnit = config.child("catska");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("catska"))
 	{
 
-		std::unique_ptr<Unit> catska;
-		catska = std::make_unique<Catska>();
+		eastl::unique_ptr<Unit> catska;
+		catska = eastl::make_unique<Catska>();
 		catska.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		catska.get()->parameters = nodeUnit;
-
 		catska.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(catska));
+		gridSystem->LoadUnitData(catska.get());
+		units.push_back(eastl::move(catska));
 	}
 	for (pugi::xml_node nodeUnit = config.child("guardian");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("guardian"))
 	{
 
-		std::unique_ptr<Unit> unit;
-		unit = std::make_unique<Guardian>();
+		eastl::unique_ptr<Unit> unit;
+		unit = eastl::make_unique<Guardian>();
 		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
-
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(unit));
+		gridSystem->LoadUnitData(unit.get());
+		units.push_back(eastl::move(unit));
 	}
 	for (pugi::xml_node nodeUnit = config.child("longrange");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("longrange"))
 	{
 
-		std::unique_ptr<Unit> unit;
-		unit = std::make_unique<LongRange>();
+		eastl::unique_ptr<Unit> unit;
+		unit = eastl::make_unique<LongRange>();
 		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
-
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(unit));
+		gridSystem->LoadUnitData(unit.get());
+		units.push_back(eastl::move(unit));
 	}
 	for (pugi::xml_node nodeUnit = config.child("straw");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("straw"))
 	{
 
-		std::unique_ptr<Unit> unit;
-		unit = std::make_unique<Straw>();
+		eastl::unique_ptr<Unit> unit;
+		unit = eastl::make_unique<Straw>();
 		unit.get()->velocity = nodeUnit.attribute("velocity").as_int();
 		unit.get()->parameters = nodeUnit;
-
 		unit.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		units.push_back(std::move(unit));
+		gridSystem->LoadUnitData(unit.get());
+		units.push_back(eastl::move(unit));
 	}
 
 
@@ -131,28 +117,7 @@ bool SceneBattle::Load()
 			}
 		}
 	}
-
-
-
-
-	//unit.parameters = config.child("gats");
-	//
-	//unit.Create({64,64});
-
-
-
-	//particles = new ParticlesManager();
-	//if (scene->isDungeon == true)
-	//{
-	//	map->Load("battle_map2.tmx", app->tex);
-	//}
-	//else
-	//{
-	//	map->Load("battle_map.tmx", app->tex);
-	//}
-
-	//font = new Font(app, "Font/font3.xml", app->tex);
-
+	
 	////backgroundTexture = app->tex->Load("Assets/Textures/Scenes/battle_bg.png");
 
 	//// Start music
@@ -169,50 +134,14 @@ bool SceneBattle::Load()
 	//	(*it)->generatorList(particles, 1);
 	//}
 
-	//pugi::xml_document animations;
-	//pugi::xml_node anims;
-	//int size = app->assetsManager->MakeLoad("Xml/animations.xml");
-	//pugi::xml_parse_result result = animations.load_buffer(app->assetsManager->GetLastBuffer(), size);
-	//app->assetsManager->DeleteBuffer();
-	////pugi::xml_parse_result result = animations.load_file("animations.xml");
-
-	//if (result == NULL)
-	//	LOG("Could not load xml file: %s. pugi error: %s", "animations.xml", result.description());
-	//else
-	//	anims = animations.child("animations");
-
-	//Enemy* enemy = nullptr;
-	//particles->CreateGenerator({ 0,0 }, ParticleType::FIRE);
-	//particles->CreateGenerator({ 0,0 }, ParticleType::MAGIC);
-	//particles->CreateGenerator({ 0,0 }, ParticleType::GRAVITY);
-	//for (int i = 0; i < 2; ++i)
-	//{
-	//	int num = (rand() % 3) + 1;
-	//	switch(num)
-	//	{
-	//	case 1:
-	//		enemy = new Golem(iPoint(650, 230 + (i * 90)), anims);
-	//		break;
-	//	case 2:
-	//		enemy = new Skull(iPoint(650, 230 + (i * 90)), anims);
-	//		break;
-	//	case 3:
-	//		enemy = new Bat(iPoint(650, 230 + (i * 90)), anims);
-	//		break;
-	//	}
-	//	//(rand()%2)
-	//	enemy->generatorList(particles, 1);
-
-	//	if (enemy != nullptr) enemyList.push_back(enemy);
-	//}
-	//
-	//battleMenu->Load(font);
-	//
+	
 	//app->render->camera.x = 0;
 	//app->render->camera.y = 0;
 
 
 	app->audio->PlayMusic(combatTheme.GetString());
+	turnTimer = 0;
+	gridSystem->Start();
 
 	return true;
 }
@@ -224,191 +153,214 @@ bool SceneBattle::Update(float dt)
 
 	using UA = Unit::PlayerAction::Action;
 
-
-
-	//for (auto& i : units)
-	//{
-	//	
-	//	auto unitAction = i->HandleInput();
-	//
-	//	if ((unitAction.action & UA::MOVE) == UA::MOVE)
-	//	{
-	//
-	//		//if (map.IsWalkable(unitAction.destinationTile))
-	//		if (app->moduleCollisions->isWalkable(unitAction.destinationTile))
-	//		{
-	//
-	//			{
-	//				i->StartAction(unitAction);
-	//			}
-	//		}
-	//	}
-	//	i->Update();
-	//}
-
-	//particles->PreUpdate();
-	//eastl::list<Player*>::iterator item = playerList.begin();
-	//for (; item != playerList.end(); ++item)
-	//{
-	//	(*item)->generatorList(particles, (rand() % 3));
-	//	(*item)->Update(dt);
-	//}
-
-	//eastl::list<Enemy*>::iterator it = enemyList.begin();
-	//for (; it != enemyList.end(); ++it)
-	//{
-	//	(*it)->generatorList(particles, (rand() % 3));
-	//	(*it)->Update(dt);
-	//}
-	//particles->Update(dt);
-	//if (battleMenu->Update(dt) == false) ret = false;
+	//TODO: later delete this is just a quick thing for the alpha
+	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
+	{
+		app->inventory->isActivated = !app->inventory->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+	}
 
 	bool noUnitHasActed = true;
+	turnTimer++;
+	if (turnTimer > 20)
+		turnTimer = 11;
 
 	for (auto& i : units)
 	{
-
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
 		{
 			noUnitHasActed = false;
 
-			auto unitAction = i->HandleInput();
-
-			if ((unitAction.action) == UA::MOVE)
+			Unit::PlayerAction unitAction = i->HandleInput();
+			if(turnTimer > 10)
 			{
-
-				if (app->moduleCollisions->isWalkable(unitAction.destinationTile))
+				if (unitAction.action != UA::NONE)
 				{
+					turnTimer = 0;
+				}
+
+				switch (unitAction.action)
+				{
+				case UA::NONE:
+					break;
+				case UA::MOVE:
+					gridSystem->showArea = false;
+
+					if (gridSystem->isWalkable(unitAction.destinationTile))
+					{
+						gridSystem->move(i->position, unitAction.destinationTile);
+						i->StartAction(unitAction);
+					}
+					break;
+				case UA::PREPARE_DASH:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+
 					i->StartAction(unitAction);
-				}
-			}
-			if ((unitAction.action) == UA::PREPARE_DASH)
-			{
-				i->StartAction(unitAction);
-			}
-			// TODO: make this a switch
-			if ((unitAction.action) == UA::ATTACK)
-			{
-				for (auto& unit : units)
-				{
-					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					break;
+				case UA::ATTACK:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+					/*for (auto& unit : units)
 					{
-						iPoint  unitPos = unit.get()->GetPosition();
-						if (i->position.DistanceTo(unitPos) < 18)
+						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 						{
-							unit->DealDamage(i->GetDamage());
-							i->StartAction(unitAction);
-							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-							i->SetHasFinishedTurn(true);
+							iPoint  unitPos = unit.get()->GetPosition();
+							if (i->position.DistanceTo(unitPos) < 18)
+							{
+								unit->DealDamage(i->GetDamage());
+								i->StartAction(unitAction);
+								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+								i->SetHasFinishedTurn(true);
 
+							}
+						}
+					}*/
+					break;
+				case UA::ATTACK_AND_HEAL_WITH_KILL:
+					gridSystem->showArea = !gridSystem->showArea;
+					if(gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+					/*for (auto& unit : units)
+					{
+						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+						{
+							iPoint  unitPos = unit.get()->GetPosition();
+							if (i->position.DistanceTo(unitPos) < 18)
+							{
+								unit->DealDamage(i->GetDamage());
+								if (unit->GetHealthPoints() <= 0)
+								{
+									i->StartAction(unitAction);
+								}
+								else
+								{
+									unitAction.action = UA::ATTACK;
+									i->StartAction(unitAction);
+								}
+
+								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+								i->SetHasFinishedTurn(true);
+
+							}
+						}
+					}*/
+					break;
+				case UA::ATTACK_LONG_RANGE:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+					/*for (auto& unit : units)
+					{
+						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+						{
+							iPoint  unitPos = unit.get()->GetPosition();
+							if (i->position.x == unit->position.x || i->position.y == unit->position.y)
+							{
+								unit->DealDamage(i->GetDamage());
+								i->StartAction(unitAction);
+								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+								i->SetHasFinishedTurn(true);
+								if (!app->inventory->GetBulletPenetration())
+								{
+									break;
+								}
+
+
+							}
+						}
+					}*/
+					break;
+				case UA::ATTACK_TO_PLAYER:
+					gridSystem->showArea = false;
+
+					for (auto& unit : units)
+					{
+						if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+						{
+							iPoint  unitPos = unit.get()->GetPosition();
+							if (i->position.DistanceTo(unitPos) < 18)
+							{
+								unit->DealDamage(i->GetDamage());
+								i->StartAction(unitAction);
+								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+								i->SetHasFinishedTurn(true);
+							}
 						}
 					}
-				}
+					break;
+				case UA::ATTACK_TO_PLAYER_LONG_RANGE:
+					gridSystem->showArea = false;
 
-			}
-			if ((unitAction.action) == UA::ATTACK_AND_HEAL_WITH_KILL)
-			{
-				for (auto& unit : units)
-				{
-					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					for (auto& unit : units)
 					{
-						iPoint  unitPos = unit.get()->GetPosition();
-						if (i->position.DistanceTo(unitPos) < 18)
+						if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
 						{
-							unit->DealDamage(i->GetDamage());
-							if (unit->GetHealthPoints() <= 0)
+							iPoint  unitPos = unit.get()->GetPosition();
+							if (i->position.x == unit->position.x || i->position.y == unit->position.y)
 							{
+								unit->DealDamage(i->GetDamage());
 								i->StartAction(unitAction);
-							}
-							else
-							{
-								unitAction.action = UA::ATTACK;
-								i->StartAction(unitAction);
-							}
-							
-							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-							i->SetHasFinishedTurn(true);
-
-						}
-					}
-				}
-
-			}
-			if ((unitAction.action) == UA::ATTACK_LONG_RANGE)
-			{
-				for (auto& unit : units)
-				{
-					if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
-					{
-						iPoint  unitPos = unit.get()->GetPosition();
-						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
-						{
-							unit->DealDamage(i->GetDamage());
-							i->StartAction(unitAction);
-							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-							i->SetHasFinishedTurn(true);
-							if (!app->inventory->GetBulletPenetration())
-							{
+								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
+								i->SetHasFinishedTurn(true);
 								break;
 							}
-							
-
 						}
 					}
+					break;
+				default:
+					break;
 				}
-
 			}
-			if ((unitAction.action) == UA::ATTACK_TO_PLAYER)
+			if (gridSystem->showArea)
 			{
-				for (auto& unit : units)
+				gridSystem->showActionArea();
+				if (gridSystem->Update() && gridSystem->AreaIsClicked())
 				{
-					if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
+					eastl::vector<iPoint> hitsMade = gridSystem->getHitsPosition();
+
+					gridSystem->showArea = !gridSystem->showArea;
+
+					if (!hitsMade.empty())
 					{
-						iPoint  unitPos = unit.get()->GetPosition();
-						if (i->position.DistanceTo(unitPos) < 18)
+						for (eastl::unique_ptr<Unit>& unit : units)
 						{
-							unit->DealDamage(i->GetDamage());
-							i->StartAction(unitAction);
-							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-							i->SetHasFinishedTurn(true);
+							for (iPoint& hit : hitsMade)
+							{
+								switch (gridSystem->currentAction.action)
+								{
+								case UA::NONE:
+									break;
+								case UA::ATTACK:
+									break;
+								case UA::ATTACK_LONG_RANGE:
+									break;
+								case UA::PREPARE_DASH:
+									break;
+								case UA::ATTACK_AND_HEAL_WITH_KILL:
+									break;
+								default:
+									break;
+								}
+							}
 						}
+						i->SetHasFinishedTurn(true);
 					}
 				}
-
 			}
-			if ((unitAction.action) == UA::ATTACK_TO_PLAYER_LONG_RANGE)
-			{
-				for (auto& unit : units)
-				{
-					if (unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
-					{
-						iPoint  unitPos = unit.get()->GetPosition();
-						if (i->position.x == unit->position.x || i->position.y == unit->position.y)
-						{
-							unit->DealDamage(i->GetDamage());
-							i->StartAction(unitAction);
-							LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-							i->SetHasFinishedTurn(true);
-							break;
-						}
-					}
-				}
-
-			}
-
-
-
 		}
 		i->Update();
 
 		if (i->GetHasFinishedTurn() && i->GetIsMyTurn())
 		{
 			i->SetIsMyTurn(false);
-			numberFinished++; // that is a variable    // all of this check first if this variable is bigger thatn the allowed number for the vector
+			turn++; // that is a variable    // all of this check first if this variable is bigger thatn the allowed number for the vector
 
-			if (numberFinished < units.size())
+			if (turn < units.size())
 			{
-				units[numberFinished]->SetIsMyTurn(true);
+				units[turn]->SetIsMyTurn(true);
 			}
 
 
@@ -422,8 +374,8 @@ bool SceneBattle::Update(float dt)
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() <= 0)
 		{
 			i->SetHasFinishedTurn(true);
+			gridSystem->removeUnit(i->position);
 		}
-
 	}
 
 
@@ -443,7 +395,7 @@ bool SceneBattle::Update(float dt)
 		{
 			i->SetHasFinishedTurn(false);
 		}
-		numberFinished = 0;
+		turn = 0;
 
 		bool enemiesAlive = false;
 		for (auto& i : units)
@@ -470,7 +422,7 @@ bool SceneBattle::Update(float dt)
 
 			app->sceneManager->currentScene = 6;
 
-			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
+			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
 			
 		}
 		if (!alliesAlive)
@@ -480,7 +432,7 @@ bool SceneBattle::Update(float dt)
 
 			app->sceneManager->currentScene = 6;
 
-			app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
 
 		}
 
@@ -498,12 +450,17 @@ bool SceneBattle::Update(float dt)
 		}
 	}
 
+
+	gridSystem->Update();
+
 	return ret;
 }
 
 void SceneBattle::Draw()
 {
 	app->map->Draw();
+
+	gridSystem->Draw();
 
 	for (auto& i : units)
 	{
@@ -536,6 +493,7 @@ void SceneBattle::Draw()
 
 bool SceneBattle::UnLoad()
 {
+	gridSystem->CleanUp();
 	//font->UnLoad(app->tex);
 	//RELEASE(font);
 

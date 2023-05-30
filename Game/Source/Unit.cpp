@@ -56,13 +56,11 @@ bool Unit::GetHasFinishedTurn()
 void Unit::SetIsMyTurn(bool value)
 {
 	isMyTurn = value;
-	//return isMyTurn;
 }
 
 void Unit::SetHasFinishedTurn(bool value)
 {
 	hasFinishedTurn = value;
-	//return hasFinishedTurn;
 }
 
 void Unit::Create(iPoint pos)
@@ -125,30 +123,19 @@ void Unit::StartMovement()
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		moveVector.y = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
 		moveVector.x = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
 	{
 		moveVector.y = 1;
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		moveVector.x = 1;
-		
-		
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
 	}
-	//playerAction.action = PlayerAction::Action::NONE;
-}
-bool Unit::GetIsAlly()
-{
-	return false;
 }
 
 void Unit::Update()
@@ -164,25 +151,12 @@ void Unit::Update()
 
 	}
 
+	if (type == UnitType::STRAW)
+	{
+		hasFinishedTurn = true;
+	}
 
 	//moveTimer = 2;
-}
-
-void Unit::AnimateMove()
-{
-	if (animTimer == 8)
-	{
-		currentSpriteSlice.x += size.x;
-		if (currentSpriteSlice.x == size.x * (GetTextureIndex().x + 3))
-		{
-			currentSpriteSlice.x = GetTextureIndex().x * size.x;
-		}
-		animTimer = 0;
-	}
-	else
-	{
-		animTimer++;
-	}
 }
 
 void Unit::SmoothMove()
@@ -222,4 +196,47 @@ int Unit::GetHealthPoints()
 int Unit::GetDamage()
 {
 	return damage;
+}
+
+int Unit::GetPlayerId()
+{
+	return playerId;
+}
+
+SString Unit::GetName()
+{
+	return name;
+}
+
+UnitType Unit::GetType()
+{
+	return type;
+}
+
+bool Unit::GetIsAlly()
+{
+	switch (type)
+	{
+	case UnitType::UNDEFINED:
+		return false;
+		break;
+	case UnitType::GATS:
+		return true;
+		break;
+	case UnitType::CATSKA:
+		return true;
+		break;
+	case UnitType::GUARDIAN:
+		return false;
+		break;
+	case UnitType::LONGRANGE:
+		return false;
+		break;
+	case UnitType::STRAW:
+		return false;
+		break;
+	default:
+		break;
+	}
+	return false;
 }

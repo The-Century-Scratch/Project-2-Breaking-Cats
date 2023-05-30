@@ -6,8 +6,17 @@
 #include "Point.h"
 #include "Player.h"
 
+enum class UnitType
+{
+	UNDEFINED,
+	GATS,
+	CATSKA,
+	GUARDIAN,
+	LONGRANGE,
+	STRAW
+};
 
-class Unit : public Sprite, public Transform
+class Unit : public Transform
 {
 public:
 	struct PlayerAction
@@ -61,28 +70,30 @@ public:
 	virtual PlayerAction HandleInput() const;
 	virtual void StartAction(PlayerAction playerAction);
 
-	virtual bool GetHasFinishedTurn();
-	virtual bool GetIsMyTurn();
+	bool GetHasFinishedTurn();
+	bool GetIsMyTurn();
 
-	virtual void SetHasFinishedTurn(bool value);
-	virtual void SetIsMyTurn(bool value);
+	void SetHasFinishedTurn(bool value);
+	void SetIsMyTurn(bool value);
 
-	virtual void DealDamage(int amount);
-	virtual int GetHealthPoints();
-	virtual int GetDamage();
+	void DealDamage(int amount);
+	int GetHealthPoints();
+	int GetDamage();
+	int GetPlayerId();
+	SString GetName();
+	UnitType GetType();
+	bool GetIsAlly();
 
-	virtual void Update();
+	void Update();
 
 	int velocity = 0;
-	
-	virtual bool GetIsAlly();
+	int playerId;
 
 	pugi::xml_node parameters;
-
-private:
-	void AnimateMove();
 	void SmoothMove();
 	void StartMovement();
+
+protected:
 
 	int moveTimer = 0;
 	iPoint moveVector = { 0,0 };
@@ -90,10 +101,9 @@ private:
 	const int timeForATile = 2;
 	const int tileSize = 16;
 
-	int animTimer = 0;
-	//int texture;
 	SDL_Texture* texture;
 	SString name;
+	UnitType type;
 
 	const char* texturePath;
 
@@ -101,8 +111,7 @@ private:
 	bool hasFinishedTurn = false;
 	int healthPoints = 1;
 	int damage;
-
-	SDL_Rect currentSpriteSlice{ 0 };
+	int maxHealth;
 };
 
 #endif //__PLAYER_H__

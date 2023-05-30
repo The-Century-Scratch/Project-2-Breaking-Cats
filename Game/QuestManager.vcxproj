@@ -98,7 +98,6 @@
     <ClCompile Include="Source\ArcaneSpirit.cpp" />
     <ClCompile Include="Source\AssetsManager.cpp" />
     <ClCompile Include="Source\Catska.cpp" />
-    <ClCompile Include="Source\CollectQuest.cpp" />
     <ClCompile Include="Source\Colliders.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\Dialogue.cpp" />
@@ -109,6 +108,7 @@
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Gats.cpp" />
     <ClCompile Include="Source\GrapplingHook.cpp" />
+    <ClCompile Include="Source\GridSystem.cpp" />
     <ClCompile Include="Source\Guardian.cpp" />
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\GUICheckBox.cpp" />
@@ -116,9 +116,11 @@
     <ClCompile Include="Source\GUISlider.cpp" />
     <ClCompile Include="Source\Hud.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\LabyrinthQuest.cpp" />
     <ClCompile Include="Source\LongRange.cpp" />
     <ClCompile Include="Source\ModuleCollisions.cpp" />
     <ClCompile Include="Source\MovableObject.cpp" />
+    <ClCompile Include="Source\MoveRockQuest.cpp" />
     <ClCompile Include="Source\MysticalEnergy.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\ParticleSystem.cpp" />
@@ -143,6 +145,7 @@
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\SceneTitle.cpp" />
     <ClCompile Include="Source\StaticObject.cpp" />
+    <ClCompile Include="Source\StatsManager.cpp" />
     <ClCompile Include="Source\Straw.cpp" />
     <ClCompile Include="Source\TalkQuest.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
@@ -156,7 +159,6 @@
     <ClInclude Include="Source\ArcaneSpirit.h" />
     <ClInclude Include="Source\AssetsManager.h" />
     <ClInclude Include="Source\Catska.h" />
-    <ClInclude Include="Source\CollectQuest.h" />
     <ClInclude Include="Source\Colliders.h" />
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Dialogue.h" />
@@ -168,6 +170,7 @@
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Gats.h" />
     <ClInclude Include="Source\GrapplingHook.h" />
+    <ClInclude Include="Source\GridSystem.h" />
     <ClInclude Include="Source\Guardian.h" />
     <ClInclude Include="Source\GuiButton.h" />
     <ClInclude Include="Source\GUICheckBox.h" />
@@ -177,9 +180,11 @@
     <ClInclude Include="Source\Hud.h" />
     <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\Item.h" />
+    <ClInclude Include="Source\LabyrinthQuest.h" />
     <ClInclude Include="Source\LongRange.h" />
     <ClInclude Include="Source\ModuleCollisions.h" />
     <ClInclude Include="Source\MovableObject.h" />
+    <ClInclude Include="Source\MoveRockQuest.h" />
     <ClInclude Include="Source\MysticalEnergy.h" />
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\ParticleSystem.h" />
@@ -207,6 +212,7 @@
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\SceneTitle.h" />
     <ClInclude Include="Source\StaticObject.h" />
+    <ClInclude Include="Source\StatsManager.h" />
     <ClInclude Include="Source\Straw.h" />
     <ClInclude Include="Source\TalkQuest.h" />
     <ClInclude Include="Source\Textures.h" />

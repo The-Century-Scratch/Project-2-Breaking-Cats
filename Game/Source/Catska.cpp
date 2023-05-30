@@ -8,6 +8,8 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Inventory.h"
+#include "Audio.h"
+#include "Hud.h"
 
 //Catska::Catska() = default;
 
@@ -17,6 +19,25 @@ Catska::Catska()
 }
 
 Catska::~Catska() = default;
+
+void Catska::Create(iPoint pos)
+{
+
+	texturePath = parameters.attribute("texturepath").as_string();
+	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
+
+	position = pos;
+	size = { 16, 16 };
+	healthPoints = 40;
+	damage = 6;
+	type = UnitType::CATSKA;
+
+	if (app->inventory->GetMysticalEnergy())
+	{
+		damage += 5;
+	}
+
+}
 
 
 void Catska::DebugDraw() const
@@ -53,44 +74,6 @@ void Catska::Draw() const
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
-bool Catska::GetIsMyTurn()
-{
-	return isMyTurn;
-}
-
-bool Catska::GetHasFinishedTurn()
-{
-	return hasFinishedTurn;
-}
-
-void Catska::SetIsMyTurn(bool value)
-{
-	isMyTurn = value;
-	//return isMyTurn;
-}
-
-void Catska::SetHasFinishedTurn(bool value)
-{
-	hasFinishedTurn = value;
-	//return hasFinishedTurn;
-}
-
-void Catska::Create(iPoint pos)
-{
-	
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
-	
-	position = pos;
-	size = { 16, 16 };
-
-	if (app->inventory->GetMysticalEnergy())
-	{
-		damage += 5;
-	}
-	
-}
-
 Catska::PlayerAction Catska::HandleInput() const
 {
 	//using enum KeyState;
@@ -104,6 +87,7 @@ Catska::PlayerAction Catska::HandleInput() const
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 	{
 		returnAction.action = Catska::PlayerAction::Action::ATTACK_LONG_RANGE;
+		/*app->audio->PlayFx(app->hud->attkcatskafx);*/
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -140,92 +124,6 @@ void Catska::StartAction(PlayerAction playerAction)
 	LOG("it does enter this scope right now, so be careful");
 }
 
-void Catska::StartMovement()
-{
-	//using enum KeyState;
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-		moveVector.y = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		moveVector.x = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		moveVector.y = 1;
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		moveVector.x = 1;
-		
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
-	}
-}
-
-void Catska::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//hasFinishedTurn = true;
-	//moveTimer = 2;
-}
-
-void Catska::AnimateMove()
-{
-	if (animTimer == 8)
-	{
-		currentSpriteSlice.x += size.x;
-		if (currentSpriteSlice.x == size.x * (GetTextureIndex().x + 3))
-		{
-			currentSpriteSlice.x = GetTextureIndex().x * size.x;
-		}
-		animTimer = 0;
-	}
-	else
-	{
-		animTimer++;
-	}
-}
-
-bool Catska::GetIsAlly()
-{
-	return true;
-}
-
-void Catska::SmoothMove()
-{
-
-
-	if (moveTimer == timeForATile)
-	{
-
-
-		moveTimer = 0;
-		position += (moveVector * speed);
-		if (position.x % tileSize == 0 && position.y % tileSize == 0)
-		{
-			moveVector.SetToZero();
-			hasFinishedTurn = true;
-		}
-	}
-	else
-	{
-		moveTimer++;
-	}
-	
-}
-
 void Catska::DealDamage(int amount)
 {
 	if (app->inventory->GetGrapplingHook())
@@ -235,21 +133,13 @@ void Catska::DealDamage(int amount)
 		{
 			healthPoints -= amount;
 			LOG("damage avoided");
+			app->audio->PlayFx(app->hud->dmgcatskafx);
 		}
 	}
 	else
 	{
+		app->audio->PlayFx(app->hud->dmgcatskafx);
 		healthPoints -= amount;
 	}
 	
-}
-
-int Catska::GetHealthPoints()
-{
-	return healthPoints;
-}
-
-int Catska::GetDamage()
-{
-	return damage;
 }

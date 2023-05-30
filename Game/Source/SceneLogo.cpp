@@ -86,6 +86,11 @@ bool SceneLogo::Update(float dt)
 {
 	bool ret = true;
 
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
+	{
+		TransitionToScene(SceneType::TITLE, TransitionType::WIPE);
+	}
+
 	if (timer == 200)
 	{
 		TransitionToScene(SceneType::TITLE, TransitionType::WIPE);

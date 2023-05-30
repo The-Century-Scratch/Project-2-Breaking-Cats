@@ -26,6 +26,7 @@ class EntityManager;
 class ParticleSystemManager;
 class QuestManager;
 class GuiManager;
+class StatsManager;
 class Hud;
 class Inventory;
 class Debug;
@@ -108,6 +109,7 @@ public:
 	ParticleSystemManager* particleSystemManager;
 	QuestManager* questManager;
 	GuiManager* guiManager;
+	StatsManager* statsManager;
 	Hud* hud;
 	Inventory* inventory;
 	Debug* debug;

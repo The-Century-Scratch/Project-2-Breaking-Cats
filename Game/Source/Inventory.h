@@ -109,7 +109,7 @@ public:
 
 	int GetItemEquipped();
 
-	Player* GetCurrentPlayer(Player* pl_);
+	Player* GetPlayers(ListItem<Player*>* pl_);
 
 private:
 
@@ -119,14 +119,14 @@ private:
 
 	void HandleSlotState();
 
-	void UseObject(InventorySlot objects[], Player* player);
-
 	void HandleStatsInfo();
+
+	void UseObject(InventorySlot objects[], Player* player);
 
 	void DrawStatsInfo(bool showColliders);
 
 public:
-	//eastl::list<Player*> players;
+	List<Player*> players;
 
 	GuiButton* btnEquipment; // Armors
 	GuiButton* btnItems;     // Potions etc
@@ -134,14 +134,36 @@ public:
 	bool isActivated;
 	iPoint invPos;
 
+	Player* catska;
+	Player* gats;
+
+
+
 private:
 	SDL_Texture* itemTexture;
 	SDL_Texture* invTex;
 	SDL_Texture* slotText;
-	SDL_Texture* buttonTex;
+	SDL_Texture* gatsText;
+	SDL_Texture* catskaText;
+
+	SDL_Rect gatsRect;
+	SDL_Rect catskaRect;
 
 	SDL_Rect slotRect;
 	SDL_Rect slotRectFocus;
+
+	SDL_Rect leftArrowRect;
+	SDL_Rect leftArrowRectFocus;
+	SDL_Rect rightArrowRect;
+	SDL_Rect rightArrowRectFocus;
+
+	SDL_Rect boundsLeftArrow;
+	SDL_Rect boundsRightArrow;
+
+	GuiButton* leftArrow;
+	GuiButton* rightArrow;
+
+	int showStatsId;
 
 	SceneGameplay* scene;
 

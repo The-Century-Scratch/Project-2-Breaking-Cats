@@ -13,10 +13,9 @@ struct SDL_Texture;
 
 enum class NPCTYPE
 {
-	NORMAL,
-	QUEST,
+	GUARDIAN,
 	SHOP,
-	DEVELOPER,
+	CONTRABANDIST,
 };
 
 class NPC : public Entity

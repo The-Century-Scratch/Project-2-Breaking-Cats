@@ -188,6 +188,7 @@ bool SceneGameplay::Load()
 
 	cityTheme = config.child("citytheme").attribute("path").as_string();
 	shopTheme = config.child("shoptheme").attribute("path").as_string();
+	forestTheme = config.child("foresttheme").attribute("path").as_string();
 
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
@@ -510,6 +511,24 @@ bool SceneGameplay::Update(float dt)
 
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_Z) == KeyState::KEY_DOWN)
+	{
+
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+
+
+
+		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
+
+	}
+
+
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		app->moduleCollisions->debug = !app->moduleCollisions->debug;
@@ -574,8 +593,19 @@ bool SceneGameplay::Update(float dt)
 		{
 			if (app->sceneManager->downCity)
 			{
-				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
-				app->sceneManager->downCity = false;
+				app->map->CleanUp();
+				app->map->ClearMaps();
+
+				app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+				app->render->camera.x = 0;
+				app->render->camera.y = 0;
+
+
+
+				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
+				/*ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;*/
 			}
 		}
 
@@ -1083,6 +1113,10 @@ bool SceneGameplay::UnLoad()
 	arcaneSpirit->CleanUp();
 	delete(arcaneSpirit);
 	arcaneSpirit = nullptr;
+
+	app->tex->Unload(itemText);
+	app->tex->Unload(guiTex);
+	app->tex->Unload(guiPad);
 
 	//entityManager->UnLoad();
 	//RELEASE(entityManager);
@@ -2307,7 +2341,6 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 		app->render->camera.x = 283;
 		app->render->camera.y = -433;
 		canMoveCam = true;
-		app->audio->PlayMusic(cityTheme.GetString());
 		break;
 	case 2:
 		app->render->camera.x = 375;
@@ -2319,6 +2352,13 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 		app->render->camera.x = 102;
 		app->render->camera.y = 18;
 		canMoveCam = false;
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		app->audio->PlayMusic(forestTheme.GetString());
 		break;
 	default:
 		break;

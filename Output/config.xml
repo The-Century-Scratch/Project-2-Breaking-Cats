@@ -38,22 +38,33 @@
 		<clickfx path="Assets/Audio/Fx/CatTalking.wav"/>
 		<mousebyfx path="Assets/Audio/Fx/hudfx.wav"/>
 		<titletext texturepath="Assets/Textures/Title.png"/>
-		<switchfx path="Assets/Audio/Fx/Switch.wav"/>
-		<unswitchfx path="Assets/Audio/Fx/Unswitch.wav"/>
-		<getitemfx path="Assets/Audio/Fx/GetItem.wav"/>
-		<swapscenesfx path="Assets/Audio/Fx/SwapScenes.wav"/>
+		<switchfx      path="Assets/Audio/Fx/Switch.wav"/>
+		<unswitchfx    path="Assets/Audio/Fx/Unswitch.wav"/>
+		<getitemfx     path="Assets/Audio/Fx/GetItem.wav"/>
+		<swapscenesfx  path="Assets/Audio/Fx/SwapScenes.wav"/>
+    <victoryfx     path="Assets/Audio/Fx/VictoryTheme.wav"/>
+    <defeatfx      path="Assets/Audio/Fx/LoseTheme.wav"/>
+    <deathgatsfx   path="Assets/Audio/Fx/DeathFx.wav"/>
+    <deathcatskafx path="Assets/Audio/Fx/DeathCatskaFx.wav"/>
+    <attkcatskafx  path="Assets/Audio/Fx/CatskaAttack.wav"/>
+    <attkgatsfx    path="Assets/Audio/Fx/GatsAtack.wav"/>
+    <attkenemyfx   path="Assets/Audio/Fx/EnemyAttack.wav"/>
+    <dmgcatskafx   path="Assets/Audio/Fx/CatskaGetDamage.wav"/>
+    <dmggatsfx     path="Assets/Audio/Fx/GatsGetDamage.wav"/>
+    <dashgatsfx    path="Assets/Audio/Fx/DashGats.wav"/>
+    <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 	</Hud>
 	<scenegameplay>
-		<player x="136" y="23" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrass.wav" stepcity="Assets/Audio/Fx/WalkingCity.wav">
+		<player x="136" y="23" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrassBase.wav" stepcity="Assets/Audio/Fx/walkingCityBase.wav">
 		</player>
 		<citytheme path="Assets/Audio/Music/CityTheme.ogg"/>
 		<shoptheme path="Assets/Audio/Music/ShopTheme.ogg"/>
+    <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
-		<npc scene="0" x="480" y="160" texturepath="Assets/Textures/NPCs.png" id="1" type="0"/>
-		<npc scene="1" x="86" y="178" texturepath="Assets/Textures/NPCs.png" id="2" type="1"/>
-		<npc scene="2" x="72" y="69" texturepath="Assets/Textures/NPCs.png" id="3" type="2"/>
-		<npc scene="3" x="96" y="112" texturepath="Assets/Textures/NPCs.png" id="4" type="1"/>
+		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/TheGuardian.png" id="1" type="0"/>  <!-- this is the guardian the type 0 is guardian too-->
+		<npc scene="2" x="73" y="59" texturepath="Assets/Textures/maicey.png" id="2" type="1"/>        <!-- this is Micey the type 1 is guardian too-->
+		
 		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
@@ -70,22 +81,38 @@
 			<mapfolder path="Assets/Maps/"/>
 			<mapfile path="Assets/Maps/city_square.tmx"/>	<!--this is 0 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Resistance.tmx"/>	<!--this is 1 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Shop.tmx"/>		<!--this is 2 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Shop.tmx"/>			<!--this is 2 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Taverna.tmx"/>		<!--this is 3 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Labrinth.tmx"/>	<!--this is 4 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Labrinth.tmx"/>		<!--this is 4 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>	<!--this is 5 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/PreLab.tmx"/>		<!--this is 7 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 
+  <Inventory>
+    <itemTexture texturepath="Assets/Textures/Items.png"/>
+    <invTexture texturepath="Assets/Textures/Inventory.png"/>
+    <slotTexture texturepath="Assets/Textures/InvSlot.png"/>
+    <gatsTexture texturepath="Assets/Textures/GatsIdle.png"/>
+    <catskaTexture texturepath="Assets/Textures/Catska.png"/>
+  </Inventory>
+
+  <GridSystem>
+    <gridTexture texturepath="Assets/Textures/gridTexture.png"/>
+  </GridSystem>
+  
+  <StatsManager>
+    <gats x="32" y="64" velocity="5" id="1" texturepath="Assets/Textures/GatsIdle.png"/>
+    <catska x="64" y="32" velocity="4" id="2" texturepath="Assets/Textures/Catska.png"/>
+  </StatsManager>
+  
 	<scenebattle>
 		<gats x="32" y="64" velocity="5" texturepath="Assets/Textures/GatsIdle.png"/>
 		<catska x="64" y="32" velocity="4" texturepath="Assets/Textures/Catska.png"/>
 		<guardian x="64" y="96" velocity="4" texturepath="Assets/Textures/TankEnemy.png"/>
 		<longrange x="96" y="112" velocity="4" texturepath="Assets/Textures/LargeRangeEnemy.png"/>
 		<straw x="112" y="112" velocity="4" texturepath="Assets/Textures/StrawDall.png"/>
-
 		<map>
 			<mapfolder path="Assets/Maps/"/>
 

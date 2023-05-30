@@ -10,6 +10,7 @@
 #include "Inventory.h"
 #include "SceneGameplay.h"
 #include "GuiManager.h"
+#include "StatsManager.h"
 
 //#include "Font.h"
 #include "Item.h"
@@ -45,15 +46,30 @@ bool Inventory::Start()
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
-	pugi::xml_node itemNode = config.child("item");
-	itemTexture = app->tex->Load("Assets/Textures/Items.png");
-	invTex = app->tex->Load("Assets/Textures/TestInventory.png");
-	slotText = app->tex->Load("Assets/Textures/TestInvSlot.png");
+	itemTexture =	app->tex->Load(config.child("itemTexture").attribute("texturepath").as_string());
+	invTex =		app->tex->Load(config.child("invTexture").attribute("texturepath").as_string());
+	slotText =		app->tex->Load(config.child("slotTexture").attribute("texturepath").as_string());
+	gatsText =		app->tex->Load(config.child("gatsTexture").attribute("texturepath").as_string());
+	catskaText =	app->tex->Load(config.child("catskaTexture").attribute("texturepath").as_string());
+
 
 	isActivated = false;
+	showStatsId = 1;
 
-	slotRect = { 0,0,36,36 };
-	slotRectFocus = { 37,0,36,36 };
+	slotRect =				{ 0, 0, 36,36 };
+	slotRectFocus =			{ 36,0, 36,36 };
+
+	gatsRect =				{ 0, 0, 32,32 };
+	catskaRect =			{ 0, 0, 32,32 };
+
+	leftArrowRect =			{ 72,16,22,16 };
+	leftArrowRectFocus =	{ 94,16,22,16 };
+	rightArrowRect =		{ 72,0, 22,16 };
+	rightArrowRectFocus =	{ 94,0, 22,16 };
+
+	boundsLeftArrow =		{ 0, 0, 22, 16 };
+	boundsRightArrow =		{ 0, 0, 22, 16 };
+
 
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
@@ -62,7 +78,6 @@ bool Inventory::Start()
 		slotList[invSlot_].itemId = 0;
 		slotList[invSlot_].isfull = false;
 		slotList[invSlot_].state = SlotState::UNSELECTED;
-
 	}
 
 	/*InventorySlot* newInvSlot_ = nullptr;
@@ -229,6 +244,13 @@ bool Inventory::Update(float dt)
 			if (invSlot_ == 3 || invSlot_ == 7 || invSlot_ == 11) invSpacing = { 0, invSpacing.y += 39 };
 		}
 
+		boundsLeftArrow.x = invPos.x + 20;
+		boundsLeftArrow.y = invPos.y + 93;
+		boundsRightArrow.x = invPos.x + 154;
+		boundsRightArrow.y = invPos.y + 93;
+
+		HandleStatsInfo();
+
 		HandleSlotState();
 	}
 
@@ -257,7 +279,7 @@ int Inventory::GetItemEquipped() //Tell me if it works?
 	return 0;
 }
 
-Player* Inventory::GetCurrentPlayer(Player* pl_)
+Player* Inventory::GetPlayers(ListItem<Player*>* pl_)
 {
 	return currentPlayer;
 }
@@ -344,6 +366,44 @@ void Inventory::Draw()
 	app->render->DrawText("INVENTORY",invPosText.x + 222 * scale, invPosText.y + 27 * scale, 92 * scale, 24 * scale, white);
 	app->render->DrawText("STATS", invPosText.x + 77 * scale, invPosText.y + 127 * scale, 38 * scale, 11 * scale, white);
 
+	if (IsMouseInside(boundsLeftArrow))
+	{
+		app->render->DrawTexture(slotText, boundsLeftArrow.x, boundsLeftArrow.y, &leftArrowRectFocus);
+	}
+	else
+	{
+		app->render->DrawTexture(slotText, boundsLeftArrow.x, boundsLeftArrow.y, &leftArrowRect);
+	}
+
+	if (IsMouseInside(boundsRightArrow))
+	{
+		app->render->DrawTexture(slotText, boundsRightArrow.x, boundsRightArrow.y, &rightArrowRectFocus);
+	}
+	else
+	{
+		app->render->DrawTexture(slotText, boundsRightArrow.x, boundsRightArrow.y, &rightArrowRect);
+	}
+
+	app->render->DrawText("HP ", invPosText.x + 48 * scale, invPosText.y + 156 * scale, 30 * scale, 18 * scale, white);
+	app->render->DrawText("DMG", invPosText.x + 48 * scale, invPosText.y + 186 * scale, 30 * scale, 18 * scale, white);
+
+	switch (showStatsId)
+	{
+	case 1:
+		app->render->DrawTexture(gatsText, invPos.x + 82, invPos.y + 33, &gatsRect);
+		app->render->DrawText("GATS", invPosText.x + 74 * scale, invPosText.y + 95 * scale, 50 * scale, 12 * scale, white);
+		app->render->DrawText(std::to_string(app->statsManager->gats_hp).c_str(), invPosText.x + 100 * scale, invPosText.y + 156 * scale, 30 * scale, 18 * scale, white);
+		app->render->DrawText(std::to_string(app->statsManager->gats_dmg).c_str(), invPosText.x + 100 * scale, invPosText.y + 186 * scale, 30 * scale, 18 * scale, white);
+		break;
+	case 2:
+		app->render->DrawTexture(catskaText, invPos.x + 82, invPos.y + 33, &catskaRect);
+		app->render->DrawText("CATSKA", invPosText.x + 70 * scale, invPosText.y + 95 * scale, 60 * scale, 12 * scale, white);
+		app->render->DrawText(std::to_string(app->statsManager->catska_hp).c_str(), invPosText.x + 100 * scale, invPosText.y + 156 * scale, 30 * scale, 18 * scale, white);
+		app->render->DrawText(std::to_string(app->statsManager->catska_dmg).c_str(), invPosText.x + 100 * scale, invPosText.y + 186 * scale, 30 * scale, 18 * scale, white);
+		break;
+	default:
+		break;
+	}
 	app->render->DrawText("HP ", invPosText.x + 48 * scale, invPosText.y + 156 * scale, 30 * scale, 18 * scale, white);
 	//app->render->DrawText(std::to_string(MouseX_).c_str(), app->debug->debugX + 110, app->debug->debugY + 160, 50, 20, app->debug->debugColor);
 	app->render->DrawText("DMG", invPosText.x + 48 * scale, invPosText.y + 186 * scale, 30 * scale, 18 * scale, white);
@@ -352,12 +412,13 @@ void Inventory::Draw()
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
 		app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x, slotList[invSlot_].bounds.y, &slotRect);
+
 		switch (slotList[invSlot_].state)
 		{
 		case SlotState::UNSELECTED:
 			break;
 		case SlotState::FOCUSED:
-			app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x + 1, slotList[invSlot_].bounds.y, &slotRectFocus);
+			app->render->DrawTexture(slotText, slotList[invSlot_].bounds.x, slotList[invSlot_].bounds.y, &slotRectFocus);
 			break;
 		case SlotState::SELECTED:
 			break;
@@ -389,6 +450,10 @@ bool Inventory::CleanUp()
 	//RELEASE(easing);
 	app->tex->Unload(invTex);
 	app->tex->Unload(slotText);
+	app->tex->Unload(itemTexture);
+	app->tex->Unload(gatsText);
+	app->tex->Unload(catskaText);
+
 
 	/*for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
@@ -406,144 +471,17 @@ bool Inventory::CleanUp()
 
 bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
 {
-	//switch (control->type)
-	//{
-	//case GuiControlType::BUTTON:
-
-	//	if (control->id == 1)
-	//	{
-	//		state = InventoryState::EQUIPMENT;
-
-	//		controls.clear();
-	//		lastControl = currentControl;
-	//		currentControl = nullptr;
-	//	}
-	//	else if (control->id == 2) // Items
-	//	{
-	//		state = InventoryState::ITEMS;
-
-	//		controls.clear();
-	//		lastControl = currentControl;
-	//		currentControl = nullptr;
-	//	}
-	//	else if (control->id == 3) state = InventoryState::STATS;
-	//	else if (control->id == 4) // Use
-	//	{
-	//		if (state == InventoryState::ITEMS)
-	//		{
-	//			//slots[currentSlotId].state = SlotState::USE;
-	//			if (!inEquipment)
-	//			{
-	//				UseObject(slots, currentPlayer);
-	//			}
-	//			else
-	//			{
-	//				AddItem(equipment[currentArmorSlotId].item);
-	//				currentPlayer->UnequipArmor((Armor*)equipment[currentArmorSlotId].item);
-	//				equipment[currentArmorSlotId].item = nullptr;
-	//				equipment[currentArmorSlotId].itemsAmount--;
-	//				equipment[currentArmorSlotId].filled = false;
-	//				equipment[currentArmorSlotId].state = SlotState::NONE;
-	//				displayEquipmentMenu = false;
-	//				isTextDisplayed = false;
-	//			}
-	//		}
-	//		else if (state == InventoryState::EQUIPMENT)
-	//		{
-	//			if (!inEquipment)
-	//			{
-	//				currentPlayer->SetEquipment((Armor*)armorSlots[currentSlotId].item);
-	//				GetEquipment(currentPlayer);
-	//				UseObject(armorSlots, currentPlayer);
-	//			}
-	//			else
-	//			{
-	//				AddItem(equipment[currentArmorSlotId].item);
-	//				currentPlayer->UnequipArmor((Armor*)equipment[currentArmorSlotId].item);
-	//				equipment[currentArmorSlotId].item = nullptr;
-	//				equipment[currentArmorSlotId].itemsAmount--;
-	//				equipment[currentArmorSlotId].filled = false;
-	//				equipment[currentArmorSlotId].state = SlotState::NONE;
-	//				displayEquipmentMenu = false;
-	//				isTextDisplayed = false;
-	//			}
-	//		}
-	//		
-	//	}
-	//	else if (control->id == 5) // Delete
-	//	{
-	//		if (state == InventoryState::ITEMS)
-	//		{
-	//			//slots[currentSlotId].state = SlotState::DELETE;
-	//			slots[currentSlotId].itemsAmount--;
-	//			slots[currentSlotId].state = SlotState::UNSELECTED;
-	//			isTextDisplayed = false;
-	//			usingItem = false;
-	//		}
-	//		else if (state == InventoryState::EQUIPMENT)
-	//		{
-	//			//armorSlots[currentSlotId].state = SlotState::DELETE;
-	//			armorSlots[currentSlotId].itemsAmount--;
-	//			armorSlots[currentSlotId].state = SlotState::UNSELECTED;
-	//			isTextDisplayed = false;
-	//			usingItem = false;
-	//		}
-	//	}
-	//	else if (control->id == 6) // Equip
-	//	{
-	//		switch (state)
-	//		{
-	//		case InventoryState::ITEMS:			
-	//			UseObject(slots, currentPlayer);
-	//			break;
-
-	//		case InventoryState::EQUIPMENT:
-	//			currentPlayer->SetEquipment((Armor*)armorSlots[currentSlotId].item);
-	//			GetEquipment(currentPlayer);
-	//			UseObject(armorSlots, currentPlayer);
-
-	//			break;
-	//		}
-	//	}
-	//	else if (control->id == 10)
-	//	{
-	//		eastl::list<Player*>::iterator it = players.begin();
-	//		eastl::list<Player*>::iterator itEnd = players.end().prev();
-	//		for (; it != itEnd; ++it)
-	//		{
-	//			if ((*it) == currentPlayer && (*it.next()) != nullptr)
-	//			{
-	//				currentPlayer = *(it.next());
-	//				GetEquipment(currentPlayer);
-	//				break;
-	//			}
-	//		}
-	//	}
-	//	else if (control->id == 11)
-	//	{
-	//		eastl::list<Player*>::iterator it = players.end().prev();
-	//		eastl::list<Player*>::iterator itBegin = players.begin();
-	//		for (; it != itBegin; --it)
-	//		{
-	//			if ((*it) == currentPlayer && (*it.prev()) != nullptr)
-	//			{
-	//				currentPlayer = *(it.prev());
-	//				GetEquipment(currentPlayer);
-	//				break;
-	//			}
-	//		}
-	//	}
-	//	else if (control->id == 12)
-	//	{
-	//		AddItem(equipment[currentEquipmentId].item);
-	//		currentPlayer->UnequipArmor((Armor*)equipment[currentEquipmentId].item);
-	//		equipment[currentEquipmentId].item = nullptr;
-	//		equipment[currentEquipmentId].itemsAmount--;
-	//		equipment[currentEquipmentId].filled = false;
-	//		displayEquipmentMenu = false;
-	//	}
-	//	break;
-	//}
+	switch (control->id)
+	{
+	case 1:
+		LOG("Left Arrow click");
+		break;
+	case 2:
+		LOG("Right Arrow click");
+		break;
+	default:
+		break;
+	}
 
 	return false;
 }
@@ -1054,22 +992,24 @@ void Inventory::HandleSlotState()
 			slotList[invSlot_].state = SlotState::UNSELECTED;
 		}
 	}
+}
 
-	/*ListItem<InventorySlot*>* itemInvSlot_ = slotList.start;
-
-	while (itemInvSlot_ != NULL)
+void Inventory::HandleStatsInfo()
+{
+	if (IsMouseInside(boundsLeftArrow) && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
 	{
-		if (IsMouseInside(itemInvSlot_->data->bounds))
+		if (showStatsId == 2)
 		{
-			itemInvSlot_->data->state = SlotState::FOCUSED;
+			showStatsId--;
 		}
-		else
+	}
+	if (IsMouseInside(boundsRightArrow) && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
+	{
+		if (showStatsId == 1)
 		{
-			itemInvSlot_->data->state = SlotState::UNSELECTED;
+			showStatsId++;
 		}
-		itemInvSlot_ = itemInvSlot_->next;
-	}*/
-
+	}
 }
 
 void Inventory::UseObject(InventorySlot objects[], Player* player)
@@ -1172,10 +1112,6 @@ int Inventory::ObjectQuantity(ItemType itemType)
 		}
 	}*/
 	return counter;
-}
-
-void Inventory::HandleStatsInfo()
-{
 }
 
 void Inventory::DrawStatsInfo(bool showColliders)

@@ -67,6 +67,17 @@ public:
 	uint unswitchfx;
 	uint getitemfx;
 	uint swapscenesfx;
+	uint victoryfx;
+	uint defeatfx;
+
+	uint deathgatsfx;
+	uint deathcatskafx;
+	uint attkcatskafx;
+	uint attkgatsfx;
+	uint attkenemyfx;
+	uint dmgcatskafx;
+	uint dmggatsfx;
+	uint dashgatsfx;
 	int timeLeft;
 	bool debug = false;
 	bool wait1frame = false;
@@ -122,6 +133,8 @@ private:
 	Easing* easingTitleBtns;
 
 	float titlePos;
+
+	SString forestTheme;
 
 };
 

@@ -5,7 +5,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\AssetsManager.cpp" />
-    <ClCompile Include="Source\CollectQuest.cpp" />
     <ClCompile Include="Source\Colliders.cpp" />
     <ClCompile Include="Source\Debug.cpp" />
     <ClCompile Include="Source\Dialogue.cpp" />
@@ -22,7 +21,6 @@
     <ClCompile Include="Source\ParticleSystem.cpp" />
     <ClCompile Include="Source\ParticleSystemManager.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
-    <ClCompile Include="Source\QuestManager.cpp" />
     <ClCompile Include="Source\Chest.cpp" />
     <ClCompile Include="Source\NPC.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -39,7 +37,6 @@
     <ClCompile Include="Source\SceneLogo.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\SceneTitle.cpp" />
-    <ClCompile Include="Source\TalkQuest.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\TransitionsManager.cpp" />
@@ -62,12 +59,25 @@
     <ClCompile Include="Source\MysticalEnergy.cpp" />
     <ClCompile Include="Source\ArcaneSpirit.cpp" />
     <ClCompile Include="Source\DragonSlayer.cpp" />
+    <ClCompile Include="Source\StatsManager.cpp" />
+    <ClCompile Include="Source\QuestManager.cpp">
+      <Filter>Quests</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TalkQuest.cpp">
+      <Filter>Quests</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LabyrinthQuest.cpp">
+      <Filter>Quests</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MoveRockQuest.cpp">
+      <Filter>Quests</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GridSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\AssetsManager.h" />
-    <ClInclude Include="Source\CollectQuest.h" />
     <ClInclude Include="Source\Colliders.h" />
     <ClInclude Include="Source\Debug.h" />
     <ClInclude Include="Source\Dialogue.h" />
@@ -87,8 +97,6 @@
     <ClInclude Include="Source\ParticleSystem.h" />
     <ClInclude Include="Source\ParticleSystemManager.h" />
     <ClInclude Include="Source\PerfTimer.h" />
-    <ClInclude Include="Source\Quest.h" />
-    <ClInclude Include="Source\QuestManager.h" />
     <ClInclude Include="Source\Chest.h" />
     <ClInclude Include="Source\NPC.h" />
     <ClInclude Include="Source\Fonts.h" />
@@ -107,7 +115,6 @@
     <ClInclude Include="Source\SceneLogo.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\SceneTitle.h" />
-    <ClInclude Include="Source\TalkQuest.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\TransitionsManager.h" />
@@ -136,6 +143,23 @@
     <ClInclude Include="Source\MysticalEnergy.h" />
     <ClInclude Include="Source\ArcaneSpirit.h" />
     <ClInclude Include="Source\DragonSlayer.h" />
+    <ClInclude Include="Source\StatsManager.h" />
+    <ClInclude Include="Source\Quest.h">
+      <Filter>Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\QuestManager.h">
+      <Filter>Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TalkQuest.h">
+      <Filter>Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LabyrinthQuest.h">
+      <Filter>Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MoveRockQuest.h">
+      <Filter>Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GridSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />
@@ -145,5 +169,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Output\Assets\Textures\ICON.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Quests">
+      <UniqueIdentifier>{e6aa4211-bb25-49a7-8de8-bb68c9bce6b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

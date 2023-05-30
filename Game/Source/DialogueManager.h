@@ -31,7 +31,6 @@ public:
 	bool isDialogueActive;
 private:
 	SDL_Texture* texture;
-	QuestManager* questManager;
 	SceneGameplay* scene;
 
 	// Pugi stuff to load dialogues

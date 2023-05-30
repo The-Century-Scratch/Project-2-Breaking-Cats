@@ -64,6 +64,18 @@ bool Hud::Start()
 	unswitchfx = app->audio->LoadFx(config.child("unswitchfx").attribute("path").as_string());
 	getitemfx = app->audio->LoadFx(config.child("getitemfx").attribute("path").as_string());
 	swapscenesfx = app->audio->LoadFx(config.child("swapscenesfx").attribute("path").as_string());
+	victoryfx = app->audio->LoadFx(config.child("victoryfx").attribute("path").as_string());
+	defeatfx = app->audio->LoadFx(config.child("defeatfx").attribute("path").as_string());
+	forestTheme = config.child("foresttheme").attribute("path").as_string();
+
+	deathgatsfx   = app->audio->LoadFx(config.child("deathgatsfx").attribute("path").as_string());;
+	deathcatskafx = app->audio->LoadFx(config.child("deathcatskafx").attribute("path").as_string());;
+	attkcatskafx  = app->audio->LoadFx(config.child("attkcatskafx").attribute("path").as_string());;
+	attkgatsfx    = app->audio->LoadFx(config.child("attkgatsfx").attribute("path").as_string());;
+	attkenemyfx   = app->audio->LoadFx(config.child("attkenemyfx").attribute("path").as_string());;
+	dmgcatskafx   = app->audio->LoadFx(config.child("dmgcatskafx").attribute("path").as_string());;
+	dmggatsfx     = app->audio->LoadFx(config.child("dmggatsfx").attribute("path").as_string());;
+	dashgatsfx    = app->audio->LoadFx(config.child("dashgatsfx").attribute("path").as_string());;
 
 	app->win->GetWindowSize(w,h);
 	scale = app->win->GetScale();
@@ -399,6 +411,7 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 		app->sceneManager->currentScene = 6;
 		app->hud->hudstate = hudSTATE::CLOSED;
+		app->audio->PlayMusic(forestTheme.GetString());
 		break;
 	case 2:
 		LOG("Button 2 click");

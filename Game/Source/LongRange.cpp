@@ -7,10 +7,25 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "Audio.h"
+#include "Hud.h"
 
 LongRange::LongRange() = default;
 
 LongRange::~LongRange() = default;
+
+void LongRange::Create(iPoint pos)
+{
+	texturePath = parameters.attribute("texturepath").as_string();
+	texture = app->tex->Load(texturePath);
+
+	healthPoints = 15;
+	damage = 7;
+	position = pos;
+	size = { 16, 16 };
+	type = UnitType::LONGRANGE;
+
+}
 
 
 void LongRange::DebugDraw() const
@@ -45,38 +60,6 @@ void LongRange::Draw() const
 	DebugDraw();
 	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
-bool LongRange::GetIsMyTurn()
-{
-	return isMyTurn;
-}
-
-bool LongRange::GetHasFinishedTurn()
-{
-	return hasFinishedTurn;
-}
-
-void LongRange::SetIsMyTurn(bool value)
-{
-	isMyTurn = value;
-	//return isMyTurn;
-}
-
-void LongRange::SetHasFinishedTurn(bool value)
-{
-	hasFinishedTurn = value;
-	//return hasFinishedTurn;
-}
-
-void LongRange::Create(iPoint pos)
-{
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
-
-	position = pos;
-	size = { 16, 16 };
-
 }
 
 LongRange::PlayerAction LongRange::HandleInput() const
@@ -143,6 +126,7 @@ LongRange::PlayerAction LongRange::HandleInput() const
 	else
 	{
 		returnAction.action |= LongRange::PlayerAction::Action::ATTACK_TO_PLAYER_LONG_RANGE;
+		app->audio->PlayFx(app->hud->attkenemyfx);
 	}
 
 	return returnAction;
@@ -170,101 +154,4 @@ void LongRange::StartAction(PlayerAction playerAction)
 		}
 		StartMovement();
 	}
-}
-
-void LongRange::StartMovement()
-{
-	//using enum KeyState;
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-		moveVector.y = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		moveVector.x = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		moveVector.y = 1;
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		moveVector.x = 1;
-		
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
-	}
-}
-
-void LongRange::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//isMyTurn = false;
-	//hasFinishedTurn = true;
-	//moveTimer = 2;
-}
-
-void LongRange::AnimateMove()
-{
-	if (animTimer == 8)
-	{
-		currentSpriteSlice.x += size.x;
-		if (currentSpriteSlice.x == size.x * (GetTextureIndex().x + 3))
-		{
-			currentSpriteSlice.x = GetTextureIndex().x * size.x;
-		}
-		animTimer = 0;
-	}
-	else
-	{
-		animTimer++;
-	}
-}
-
-void LongRange::SmoothMove()
-{
-
-
-	if (moveTimer == timeForATile)
-	{
-
-
-		moveTimer = 0;
-		position += (moveVector * speed);
-		if (position.x % tileSize == 0 && position.y % tileSize == 0)
-		{
-			moveVector.SetToZero();
-			hasFinishedTurn = true;
-		}
-	}
-	else
-	{
-		moveTimer++;
-	}
-	
-}
-
-void LongRange::DealDamage(int amount)
-{
-	healthPoints -= amount;
-}
-
-int LongRange::GetHealthPoints()
-{
-	return healthPoints;
-}
-
-int LongRange::GetDamage()
-{
-	return damage;
 }

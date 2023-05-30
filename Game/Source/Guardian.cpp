@@ -7,10 +7,24 @@
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "Audio.h"
+#include "Hud.h"
 
 Guardian::Guardian() = default;
 
 Guardian::~Guardian() = default;
+
+void Guardian::Create(iPoint pos)
+{
+	texturePath = parameters.attribute("texturepath").as_string();
+	texture = app->tex->Load(texturePath);
+
+	healthPoints = 20;
+	damage = 10;
+	position = pos;
+	size = { 16, 16 };
+	type = UnitType::GUARDIAN;
+}
 
 
 void Guardian::DebugDraw() const
@@ -45,42 +59,6 @@ void Guardian::Draw() const
 	DebugDraw();
 	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
-bool Guardian::GetIsMyTurn()
-{
-	return isMyTurn;
-}
-
-bool Guardian::GetHasFinishedTurn()
-{
-	return hasFinishedTurn;
-}
-
-void Guardian::SetIsMyTurn(bool value)
-{
-	isMyTurn = value;
-	//return isMyTurn;
-}
-
-void Guardian::SetHasFinishedTurn(bool value)
-{
-	hasFinishedTurn = value;
-	//return hasFinishedTurn;
-}
-
-bool Guardian::GetIsAlly()
-{
-	return false;
-}
-
-void Guardian::Create(iPoint pos)
-{
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
-
-	position = pos;
-	size = { 16, 16 };
 }
 
 Guardian::PlayerAction Guardian::HandleInput() const
@@ -146,6 +124,7 @@ Guardian::PlayerAction Guardian::HandleInput() const
 	else
 	{
 		returnAction.action |= Guardian::PlayerAction::Action::ATTACK_TO_PLAYER;
+		app->audio->PlayFx(app->hud->attkenemyfx);
 	}
 
 	
@@ -178,102 +157,4 @@ void Guardian::StartAction(PlayerAction playerAction)
 		}
 		StartMovement();
 	}
-}
-
-void Guardian::StartMovement()
-{
-	//using enum KeyState;
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-		moveVector.y = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		moveVector.x = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		moveVector.y = 1;
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		moveVector.x = 1;
-		
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
-	}
-	//moveVector.y = -1;  // CHANGED
-}
-
-void Guardian::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//isMyTurn = false;
-	//hasFinishedTurn = true;
-	//moveTimer = 2;
-}
-
-void Guardian::AnimateMove()
-{
-	if (animTimer == 8)
-	{
-		currentSpriteSlice.x += size.x;
-		if (currentSpriteSlice.x == size.x * (GetTextureIndex().x + 3))
-		{
-			currentSpriteSlice.x = GetTextureIndex().x * size.x;
-		}
-		animTimer = 0;
-	}
-	else
-	{
-		animTimer++;
-	}
-}
-
-void Guardian::SmoothMove()
-{
-
-
-	if (moveTimer == timeForATile)
-	{
-
-
-		moveTimer = 0;
-		position += (moveVector * speed);
-		if (position.x % tileSize == 0 && position.y % tileSize == 0)
-		{
-			moveVector.SetToZero();
-			hasFinishedTurn = true;
-		}
-	}
-	else
-	{
-		moveTimer++;
-	}
-	
-}
-
-void Guardian::DealDamage(int amount)
-{
-	healthPoints -= amount;
-}
-
-int Guardian::GetHealthPoints()
-{
-	return healthPoints;
-}
-
-int Guardian::GetDamage()
-{
-	return damage;
 }

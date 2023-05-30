@@ -37,78 +37,10 @@ bool Debug::Start()
 
 bool Debug::Update(float dt)
 {
-	/*if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN)
-		debug = !debug;*/
-
-	/*if (debug)
-	{
-		if (app->input->GetKey(SDL_SCANCODE_V) == KEY_DOWN)
-			variables = !variables;
-
-		if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
-			camLimits = !camLimits;
-
-		if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
-			teleport = !teleport;
-
-		if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
-			freeCam = !freeCam;
-
-	}*/
-
-	//// F1/F2: Start from the first/second level
-	//if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-	//	app->fade->FadeBlack((Module*)app->scene, (Module*)app->scene); //actually this should not work like this but there is no level 2 so it works
-	//}
-
-	//if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-	//	//No level 2 yet :D
-	//}
-
-	//// F3: Start from the beginning of the current level
-	//if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-	//	app->fade->FadeBlack((Module*)app->scene, (Module*)app->scene);
-	//}
-
-	//// F5: Save the current game state
-	//if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
-	//	app->SaveGameRequest();
-	//}
-
-	//// F6: Load the previous state (even across levels)
-	//if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
-	//	app->LoadGameRequest();
-	//}
-
-	//// F7: Move between checkpoints
-	//if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
-
-	//}
-
-	//// F8:  View GUI bounds rectangles and state in different colors
-	//if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
-	//	colourblind = !colourblind;
-	//}
-
-	//// F9: View colliders / logic / paths
-	//if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
-	//	drawColliders = !drawColliders;
-	//}
-
-	//// F10: God Mode (fly around, cannot be killed, etc)
-	//if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
-	//	godMode = !godMode;
-	//}
-
-	//// F11: Enable/Disable FPS cap to xml value
-	//if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
-	//	controlFPS = !controlFPS;
-	//}
-
 	int scale = app->win->GetScale();
 
-	debugX = (app->render->camera.w / scale)-380;
-	debugY = (app->render->camera.h / scale)-200;
+	debugX = (app->render->camera.w / scale) + 10;
+	debugY = (app->render->camera.h / scale) + 10;
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{

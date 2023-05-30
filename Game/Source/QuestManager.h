@@ -4,6 +4,10 @@
 #include "Module.h"
 #include "Quest.h"
 #include "List.h"
+#include "EASTL/list.h"
+#include "Fonts.h"
+#include "Item.h"
+#include "Inventory.h"
 
 class QuestManager : public Module
 {
@@ -23,13 +27,36 @@ public:
 	// Called every frame
 	bool Update(float dt);
 
+	bool PostUpdate();
+
+	// Called before quitting
+	bool CleanUp();
+
 	// Additional methods
+
+	bool ActivateQuest(int id);
+
+	void DeleteAllQuests();
 
 public:
 
-	List<Quest*> quests;
-	List<Quest*> activeQuests;
-	List<Quest*> completedQuests;
+	eastl::list<Quest*> loadedQuests;
+	eastl::list<Quest*> activeQuests;
+	eastl::list<Quest*> finishedQuests;
+
+	SDL_Texture* QuestMenuBox;
+	Quest* questFinished;
+	Quest* questActive;
+	int completeQuestFx;
+	bool printQuestMenu;
+	bool currentQuestComplete;
+	bool quest1, quest2, quest3;
+
+	SDL_Texture* ItemText;
+	Item* firePaw;
+
+	Font* font;
+
 
 };
 

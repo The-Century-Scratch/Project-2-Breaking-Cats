@@ -12,6 +12,19 @@ Straw::Straw() = default;
 
 Straw::~Straw() = default;
 
+void Straw::Create(iPoint pos)
+{
+	texturePath = parameters.attribute("texturepath").as_string();
+	texture = app->tex->Load(texturePath);
+
+	healthPoints = 30;
+	damage = 666;
+
+	position = pos;
+	size = { 16, 16 };
+	type = UnitType::STRAW;
+}
+
 
 void Straw::DebugDraw() const
 {
@@ -46,37 +59,6 @@ void Straw::Draw() const
 	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
-bool Straw::GetIsMyTurn()
-{
-	return isMyTurn;
-}
-
-bool Straw::GetHasFinishedTurn()
-{
-	return hasFinishedTurn;
-}
-
-void Straw::SetIsMyTurn(bool value)
-{
-	isMyTurn = value;
-	//return isMyTurn;
-}
-
-void Straw::SetHasFinishedTurn(bool value)
-{
-	hasFinishedTurn = value;
-	//return hasFinishedTurn;
-}
-
-void Straw::Create(iPoint pos)
-{
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
-
-	position = pos;
-	size = { 16, 16 };
-}
-
 Straw::PlayerAction Straw::HandleInput() const
 {
 	//using enum KeyState;
@@ -86,27 +68,6 @@ Straw::PlayerAction Straw::HandleInput() const
 
 	if (!moveVector.IsZero())
 		return returnAction;
-
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-		returnAction.action |= Straw::PlayerAction::Action::MOVE;
-		returnAction.destinationTile.y -= tileSize;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		returnAction.action |= Straw::PlayerAction::Action::MOVE;
-		returnAction.destinationTile.x -= tileSize;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		returnAction.action |= Straw::PlayerAction::Action::MOVE;
-		returnAction.destinationTile.y += tileSize;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		returnAction.action |= Straw::PlayerAction::Action::MOVE;
-		returnAction.destinationTile.x += tileSize;
-	}
 
 	return returnAction;
 }
@@ -118,101 +79,4 @@ void Straw::StartAction(PlayerAction playerAction)
 
 		StartMovement();
 	}
-}
-
-void Straw::StartMovement()
-{
-	//using enum KeyState;
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-	{
-		moveVector.y = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	{
-		moveVector.x = -1;
-		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-	{
-		moveVector.y = 1;
-		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
-	}
-	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		moveVector.x = 1;
-		
-		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
-	}
-}
-
-void Straw::Update()
-{
-	//LOG("the move vector x is %i" moveVector.x);
-
-	if (!moveVector.IsZero())
-	{
-		//AnimateMove();
-		SmoothMove();
-
-	}
-
-	//isMyTurn = false;
-	hasFinishedTurn = true;
-	//moveTimer = 2;
-}
-
-void Straw::AnimateMove()
-{
-	if (animTimer == 8)
-	{
-		currentSpriteSlice.x += size.x;
-		if (currentSpriteSlice.x == size.x * (GetTextureIndex().x + 3))
-		{
-			currentSpriteSlice.x = GetTextureIndex().x * size.x;
-		}
-		animTimer = 0;
-	}
-	else
-	{
-		animTimer++;
-	}
-}
-
-void Straw::SmoothMove()
-{
-
-
-	if (moveTimer == timeForATile)
-	{
-
-
-		moveTimer = 0;
-		position += (moveVector * speed);
-		if (position.x % tileSize == 0 && position.y % tileSize == 0)
-		{
-			moveVector.SetToZero();
-			hasFinishedTurn = true;
-		}
-	}
-	else
-	{
-		moveTimer++;
-	}
-	
-}
-
-void Straw::DealDamage(int amount)
-{
-	healthPoints -= amount;
-}
-
-int Straw::GetHealthPoints()
-{
-	return healthPoints;
-}
-
-int Straw::GetDamage()
-{
-	return damage;
 }

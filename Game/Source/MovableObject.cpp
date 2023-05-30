@@ -8,6 +8,7 @@
 #include "Point.h"
 #include "ModuleCollisions.h"
 #include "SceneManager.h"
+#include "QuestManager.h"
 
 MovableObject::MovableObject(bool solved) : Entity(EntityType::MOVABLEOBJECT)
 {
@@ -85,6 +86,11 @@ void MovableObject::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::PLAYER:
 			//FUNCTION TO BE PUSHED AWAY
+			if (app->questManager->questActive == nullptr) {
+				app->moduleCollisions->collision_solver(c1->listener, c2->rect);
+				eCollider->type = Collider::Type::WALL;
+				break;
+			}
 			app->moduleCollisions->collision_solver(c1->listener, c2->rect);
 			break;
 		case Collider::Type::ENEMY:
