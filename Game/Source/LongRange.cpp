@@ -136,6 +136,7 @@ void LongRange::StartAction(PlayerAction playerAction)
 {
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
+		destination = playerAction.destinationTile;
 		if (playerAction.destinationTile.y < position.y)
 		{
 			moveVector.y = -1;

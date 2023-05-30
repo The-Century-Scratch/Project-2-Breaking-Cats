@@ -334,12 +334,46 @@ bool SceneBattle::Update(float dt)
 								case UA::NONE:
 									break;
 								case UA::ATTACK:
+									if (hit == unit->position)
+									{
+										unit->DealDamage(i->GetDamage());
+										i->StartAction(gridSystem->currentAction);
+									}
 									break;
 								case UA::ATTACK_LONG_RANGE:
+									if (hit == unit->position)
+									{
+										unit->DealDamage(i->GetDamage());
+										i->StartAction(gridSystem->currentAction);
+									}
 									break;
 								case UA::PREPARE_DASH:
+									if (hit == unit->position && unit->GetType() != UnitType::GATS)
+									{
+										unit->DealDamage(i->GetDamage());
+										i->StartAction(gridSystem->currentAction);
+									}
+									else
+									{
+										gridSystem->currentAction.destinationTile = gridSystem->getFocusPosition();
+										gridSystem->move(i->position, gridSystem->currentAction.destinationTile);
+										i->StartAction(gridSystem->currentAction);
+									}
 									break;
 								case UA::ATTACK_AND_HEAL_WITH_KILL:
+									if (hit == unit->position)
+									{
+										unit->DealDamage(i->GetDamage());
+										if (unit->GetHealthPoints() <= 0)
+										{
+											i->StartAction(gridSystem->currentAction);
+										}
+										else
+										{
+											gridSystem->currentAction.action = UA::ATTACK;
+											i->StartAction(gridSystem->currentAction);
+										}
+									}
 									break;
 								default:
 									break;

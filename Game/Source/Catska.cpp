@@ -119,6 +119,7 @@ void Catska::StartAction(PlayerAction playerAction)
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 
+		destination = playerAction.destinationTile;
 		StartMovement();
 	}
 	LOG("it does enter this scope right now, so be careful");

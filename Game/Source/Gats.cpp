@@ -134,6 +134,7 @@ void Gats::StartAction(PlayerAction playerAction)
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 		//LOG("according to the software the character is moving right now......");
+		destination = playerAction.destinationTile;
 		StartMovement();
 	}
 	else if (playerAction.action == PlayerAction::Action::ATTACK)
@@ -152,7 +153,8 @@ void Gats::StartAction(PlayerAction playerAction)
 	else if (playerAction.action == PlayerAction::Action::PREPARE_DASH)
 	{
 		//DoDash(playerAction.destinationTile.x, playerAction.destinationTile.y);
-		goingToDash = !goingToDash;
+		destination = playerAction.destinationTile;
+		moveVector = {(playerAction.destinationTile.x - position.x) / tileSize, (playerAction.destinationTile.y - position.y) / tileSize};
 	}
 }
 
