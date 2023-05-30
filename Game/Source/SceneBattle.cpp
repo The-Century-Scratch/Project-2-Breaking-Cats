@@ -319,7 +319,7 @@ bool SceneBattle::Update(float dt)
 				gridSystem->showActionArea();
 				if (gridSystem->Update() && gridSystem->AreaIsClicked())
 				{
-					eastl::vector<iPoint> hitsMade = gridSystem->GetHitsPosition();
+					eastl::vector<iPoint> hitsMade = gridSystem->getHitsPosition();
 
 					gridSystem->showArea = !gridSystem->showArea;
 

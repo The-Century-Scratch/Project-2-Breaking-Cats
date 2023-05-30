@@ -76,7 +76,9 @@ public:
 
 	bool AreaIsClicked();
 
-	eastl::vector<iPoint> GetHitsPosition();
+	eastl::vector<iPoint> getHitsPosition();
+
+	iPoint getFocusPosition();
 
 
 	Unit::PlayerAction currentAction;

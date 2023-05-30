@@ -234,7 +234,7 @@ bool GridSystem::AreaIsClicked()
 	return false;
 }
 
-eastl::vector<iPoint> GridSystem::GetHitsPosition()
+eastl::vector<iPoint> GridSystem::getHitsPosition()
 {
 	eastl::vector<iPoint> Hits;
 
@@ -251,6 +251,11 @@ eastl::vector<iPoint> GridSystem::GetHitsPosition()
 	}
 
 	return Hits;
+}
+
+iPoint GridSystem::getFocusPosition()
+{
+	return iPoint(focusPos.x, focusPos.y);
 }
 
 void GridSystem::showActionArea()
