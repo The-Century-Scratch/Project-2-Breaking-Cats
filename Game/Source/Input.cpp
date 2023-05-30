@@ -218,12 +218,15 @@ Input::Input(bool startEnabled) : Module(startEnabled)
 	keyboard = new KeyState[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KeyState) * MAX_KEYS);
 	memset(mouseButtons, KEY_IDLE, sizeof(KeyState) * NUM_MOUSE_BUTTONS);
+
+	pad = new GamePad();
 }
 
 // Destructor
 Input::~Input()
 {
-	delete[] keyboard;
+	RELEASE(pad);
+	RELEASE(keyboard);
 }
 
 // Called before render is available
@@ -236,6 +239,18 @@ bool Input::Awake(pugi::xml_node& config)
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
+		ret = false;
+	}
+
+	if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) < 0)
+	{
+		LOG("SDL_INIT_GAMECONTROLLER could not initialize! SDL_Error: %s\n", SDL_GetError());
+		ret = false;
+	}
+
+	if (SDL_InitSubSystem(SDL_INIT_HAPTIC) < 0)
+	{
+		LOG("SDL_INIT_HAPTIC could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 
@@ -311,6 +326,19 @@ bool Input::PreUpdate()
 				}
 			break;
 
+			case(SDL_CONTROLLERDEVICEADDED):
+			{
+				pad->HandleDeviceConnection(event.cdevice.which);
+				break;
+			}
+
+			case(SDL_CONTROLLERDEVICEREMOVED):
+			{
+				pad->HandleDeviceRemoval(event.cdevice.which);
+				RELEASE(pad);
+				break;
+			}
+
 			case SDL_MOUSEBUTTONDOWN:
 				mouseButtons[event.button.button - 1] = KEY_DOWN;
 				//LOG("Mouse button %d down", event.button.button-1);
@@ -332,6 +360,9 @@ bool Input::PreUpdate()
 		}
 	}
 
+	if (pad)
+		pad->UpdateGamepadInput();
+
 	return true;
 }
 
@@ -339,7 +370,19 @@ bool Input::PreUpdate()
 bool Input::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
+
+	//if (pad->controller != nullptr) SDL_GameControllerClose(pad->controller);
+	if (pad->haptic != nullptr)
+	{
+		SDL_HapticStopAll(pad->haptic);
+		SDL_HapticClose(pad->haptic);
+	}
+
+	RELEASE(pad);
+	SDL_QuitSubSystem(SDL_INIT_HAPTIC);
+	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+
 	return true;
 }
 
