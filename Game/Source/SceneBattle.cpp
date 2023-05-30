@@ -167,6 +167,8 @@ bool SceneBattle::Update(float dt)
 
 	for (auto& i : units)
 	{
+		if (i->GetType() == UnitType::STRAW) continue;
+
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
 		{
 			noUnitHasActed = false;

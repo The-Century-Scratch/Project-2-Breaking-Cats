@@ -151,11 +151,6 @@ void Unit::Update()
 
 	}
 
-	if (type == UnitType::STRAW)
-	{
-		hasFinishedTurn = true;
-	}
-
 	//moveTimer = 2;
 }
 
