@@ -11,6 +11,7 @@
 #include "EntityManager.h"
 #include "SceneBattle.h"
 #include "Window.h"
+#include "Inventory.h"
 
 GridSystem::GridSystem()
 {
@@ -172,7 +173,7 @@ void GridSystem::HandleTileState()
 				
 				if (IsMouseInside(grid[x][y].bounds)/* && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT*/)
 				{
-					aoePos = { (int)x,(int)y };
+					aoePos = { (int)x + gridPos.x,(int)y + gridPos.y };
 				}  
 			}
 			else
@@ -192,7 +193,7 @@ void GridSystem::HandleTileState()
 
 	if (!aoePos.IsZero())
 	{
-		showEffectArea(grid[aoePos.x][aoePos.y].bounds);
+		showEffectArea(grid[aoePos.x - gridPos.x][aoePos.y - gridPos.y].bounds);
 	}
 }
 
@@ -238,7 +239,7 @@ eastl::vector<iPoint> GridSystem::getHitsPosition()
 {
 	eastl::vector<iPoint> Hits;
 
-	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH)
+	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH || currentAction.action == Unit::PlayerAction::Action::ATTACK_LONG_RANGE)
 	{
 		iPoint dashDestination = { focusPos.x, focusPos.y };
 		Hits.push_back(eastl::move(dashDestination));
@@ -282,6 +283,9 @@ void GridSystem::showActionArea()
 	case UA::ATTACK_AND_HEAL_WITH_KILL:
 		showAttack(currentAction.destinationTile);
 		break;
+	case UA::GRENADE:
+		showGrenade(currentAction.destinationTile);
+		break;
 	default:
 		break;
 	}
@@ -306,6 +310,9 @@ void GridSystem::showEffectArea(SDL_Rect r)
 		break;
 	case UA::ATTACK_AND_HEAL_WITH_KILL:
 		showAttackAOE(pos);
+		break;
+	case UA::GRENADE:
+		showGrenadeAOE(pos);
 		break;
 	default:
 		break;
@@ -362,6 +369,27 @@ void GridSystem::showDash(iPoint pos)
 	}
 }
 
+void GridSystem::showGrenade(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	iPoint unitPos = { grid[x][y].bounds.x , grid[x][y].bounds.y };
+
+	for (size_t i = 0; i < MAX_TILES_X; i++)
+	{
+		for (size_t j = 0; j < MAX_TILES_Y; j++)
+		{
+			if (grid[i][j].walkability == TileWalkability::OBSTACLE) continue;
+			iPoint tilePos = { grid[i][j].bounds.x , grid[i][j].bounds.y };
+			if (unitPos.DistanceTo(tilePos) < 5 * TILE_W && unitPos.DistanceTo(tilePos) > 3 * TILE_W)
+			{
+				grid[i][j].state = TileState::CLICKABLE;
+			}
+		}
+	}
+}
+
 void GridSystem::showAttackAOE(iPoint pos)
 {
 	int x = (pos.x - gridPos.x) / TILE_W;
@@ -401,7 +429,7 @@ void GridSystem::showAttackRangeAOE(iPoint pos)
 		for (int i = x; (grid[i][y].walkability == TileWalkability::WALKABLE || grid[i][y].walkability == TileWalkability::UNIT) && grid[i][y].walkability != TileWalkability::OBSTACLE && i >= 0 && i < 9; i++)
 		{
 			grid[i][y].state = TileState::AREA_EFFECT;
-			if (grid[i][y].walkability == TileWalkability::UNIT) break;
+			if (grid[i][y].walkability == TileWalkability::UNIT && !app->inventory->GetBulletPenetration()) break;
 		}
 	}
 	else if (pos.x < currentAction.destinationTile.x)
@@ -409,7 +437,7 @@ void GridSystem::showAttackRangeAOE(iPoint pos)
 		for (int i = x; (grid[i][y].walkability == TileWalkability::WALKABLE || grid[i][y].walkability == TileWalkability::UNIT) && grid[i][y].walkability != TileWalkability::OBSTACLE && i >= 0 && i < 9; i--)
 		{
 			grid[i][y].state = TileState::AREA_EFFECT;
-			if (grid[i][y].walkability == TileWalkability::UNIT) break;
+			if (grid[i][y].walkability == TileWalkability::UNIT && !app->inventory->GetBulletPenetration()) break;
 		}
 	}
 	else if (pos.y > currentAction.destinationTile.y)
@@ -417,7 +445,7 @@ void GridSystem::showAttackRangeAOE(iPoint pos)
 		for (int i = y; (grid[x][i].walkability == TileWalkability::WALKABLE || grid[x][i].walkability == TileWalkability::UNIT) && grid[x][i].walkability != TileWalkability::OBSTACLE && i >= 0 && i < 9; i++)
 		{
 			grid[x][i].state = TileState::AREA_EFFECT;
-			if (grid[x][i].walkability == TileWalkability::UNIT) break;
+			if (grid[x][i].walkability == TileWalkability::UNIT && !app->inventory->GetBulletPenetration()) break;
 		}
 	}
 	else if (pos.y < currentAction.destinationTile.y)
@@ -425,7 +453,7 @@ void GridSystem::showAttackRangeAOE(iPoint pos)
 		for (int i = y; (grid[x][i].walkability == TileWalkability::WALKABLE || grid[x][i].walkability == TileWalkability::UNIT) && grid[x][i].walkability != TileWalkability::OBSTACLE && i >= 0 && i < 9; i--)
 		{
 			grid[x][i].state = TileState::AREA_EFFECT;
-			if (grid[x][i].walkability == TileWalkability::UNIT) break;
+			if (grid[x][i].walkability == TileWalkability::UNIT && !app->inventory->GetBulletPenetration()) break;
 		}
 	}
 }
@@ -466,4 +494,22 @@ void GridSystem::showDashAOE(iPoint pos)
 			grid[x][i].state = TileState::AREA_EFFECT;
 		}
 	}
+}
+
+void GridSystem::showGrenadeAOE(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	grid[x][y].state = TileState::AREA_EFFECT;
+
+	if (grid[x + 1][y].walkability != TileWalkability::OBSTACLE && x + 1 >= 0 && x + 1 < 9)
+		grid[x + 1][y].state = TileState::AREA_EFFECT;
+	if (grid[x - 1][y].walkability != TileWalkability::OBSTACLE && x - 1 >= 0 && x - 1 < 9)
+		grid[x - 1][y].state = TileState::AREA_EFFECT;
+	if (grid[x][y + 1].walkability != TileWalkability::OBSTACLE && y + 1 >= 0 && y + 1 < 9)
+		grid[x][y + 1].state = TileState::AREA_EFFECT;
+	if (grid[x][y - 1].walkability != TileWalkability::OBSTACLE && y - 1 >= 0 && y - 1 < 9)
+		grid[x][y - 1].state = TileState::AREA_EFFECT;
+
 }

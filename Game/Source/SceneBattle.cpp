@@ -205,75 +205,16 @@ bool SceneBattle::Update(float dt)
 					gridSystem->showArea = !gridSystem->showArea;
 					if (gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
-					/*for (auto& unit : units)
-					{
-						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
-						{
-							iPoint  unitPos = unit.get()->GetPosition();
-							if (i->position.DistanceTo(unitPos) < 18)
-							{
-								unit->DealDamage(i->GetDamage());
-								i->StartAction(unitAction);
-								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-								i->SetHasFinishedTurn(true);
-
-							}
-						}
-					}*/
 					break;
 				case UA::ATTACK_AND_HEAL_WITH_KILL:
 					gridSystem->showArea = !gridSystem->showArea;
 					if(gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
-					/*for (auto& unit : units)
-					{
-						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
-						{
-							iPoint  unitPos = unit.get()->GetPosition();
-							if (i->position.DistanceTo(unitPos) < 18)
-							{
-								unit->DealDamage(i->GetDamage());
-								if (unit->GetHealthPoints() <= 0)
-								{
-									i->StartAction(unitAction);
-								}
-								else
-								{
-									unitAction.action = UA::ATTACK;
-									i->StartAction(unitAction);
-								}
-
-								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-								i->SetHasFinishedTurn(true);
-
-							}
-						}
-					}*/
 					break;
 				case UA::ATTACK_LONG_RANGE:
 					gridSystem->showArea = !gridSystem->showArea;
 					if (gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
-					/*for (auto& unit : units)
-					{
-						if (!unit.get()->GetIsAlly() && unit->GetHealthPoints() > 0)
-						{
-							iPoint  unitPos = unit.get()->GetPosition();
-							if (i->position.x == unit->position.x || i->position.y == unit->position.y)
-							{
-								unit->DealDamage(i->GetDamage());
-								i->StartAction(unitAction);
-								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
-								i->SetHasFinishedTurn(true);
-								if (!app->inventory->GetBulletPenetration())
-								{
-									break;
-								}
-
-
-							}
-						}
-					}*/
 					break;
 				case UA::ATTACK_TO_PLAYER:
 					gridSystem->showArea = false;
@@ -312,6 +253,11 @@ bool SceneBattle::Update(float dt)
 						}
 					}
 					break;
+				case UA::GRENADE:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+					break;
 				default:
 					break;
 				}
@@ -343,10 +289,33 @@ bool SceneBattle::Update(float dt)
 									}
 									break;
 								case UA::ATTACK_LONG_RANGE:
+									if (i->position == gridSystem->currentAction.destinationTile)
+									{
+										if (hit.x < i->position.x)
+										{
+											gridSystem->currentAction.destinationTile.x += TILE_W;
+										}
+										if (hit.x > i->position.x)
+										{
+											gridSystem->currentAction.destinationTile.x -= TILE_W;
+										}
+										if (hit.y < i->position.y)
+										{
+											gridSystem->currentAction.destinationTile.y += TILE_H;
+										}
+										if (hit.y > i->position.y)
+										{
+											gridSystem->currentAction.destinationTile.y -= TILE_H;
+										}
+										if (gridSystem->isWalkable(gridSystem->currentAction.destinationTile))
+										{
+											gridSystem->move(i->position, gridSystem->currentAction.destinationTile);
+											i->StartAction(gridSystem->currentAction);
+										}
+									}
 									if (hit == unit->position)
 									{
 										unit->DealDamage(i->GetDamage());
-										i->StartAction(gridSystem->currentAction);
 									}
 									break;
 								case UA::PREPARE_DASH:
@@ -375,6 +344,13 @@ bool SceneBattle::Update(float dt)
 											gridSystem->currentAction.action = UA::ATTACK;
 											i->StartAction(gridSystem->currentAction);
 										}
+									}
+									break;
+								case UA::GRENADE:
+									if (hit == unit->position)
+									{
+										unit->DealDamage(i->GetDamage());
+										i->StartAction(gridSystem->currentAction);
 									}
 									break;
 								default:
