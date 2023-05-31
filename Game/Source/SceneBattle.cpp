@@ -158,6 +158,13 @@ bool SceneBattle::Update(float dt)
 	{
 		app->inventory->isActivated = !app->inventory->isActivated;
 		app->audio->PlayFx(app->hud->swapscenesfx);
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	if (CONTROLLERX)
+	{
+		app->inventory->isActivated = !app->inventory->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	bool noUnitHasActed = true;

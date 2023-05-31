@@ -58,6 +58,7 @@ bool TriggerableObject::Update()
 {
 	if (inRange)
 	{
+		//keyboard input
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
 			app->sceneManager->puzzle2solved = true;
@@ -73,7 +74,27 @@ bool TriggerableObject::Update()
 				app->audio->PlayFx(app->hud->switchfx);
 				triggered = true;
 			}
+			SDL_ShowCursor(SDL_ENABLE);
 		}
+		//controller input
+		else if (CONTROLLERA)
+		{
+			app->sceneManager->puzzle2solved = true;
+			if (triggered)
+			{
+				currentAnim = &untriggeredAnim;
+				app->audio->PlayFx(app->hud->unswitchfx);
+				triggered = false;
+			}
+			else if (!triggered)
+			{
+				currentAnim = &triggeredAnim;
+				app->audio->PlayFx(app->hud->switchfx);
+				triggered = true;
+			}
+			SDL_ShowCursor(SDL_DISABLE);
+		}
+
 	}
 	if (triggered)
 	{

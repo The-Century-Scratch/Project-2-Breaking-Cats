@@ -8,6 +8,7 @@
 #include "Point.h"
 #include "ModuleCollisions.h"
 #include "SceneManager.h"
+#include "Input.h"
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -134,6 +135,14 @@ void NPC::OnCollision(Collider* c1, Collider* c2)
 				LOG("TRIGGER DIALOGUE");
 				app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
 				app->sceneManager->dialogueManager->printText = true;
+				SDL_ShowCursor(SDL_ENABLE);
+			}
+			else if (CONTROLLERA)
+			{
+				LOG("TRIGGER DIALOGUE");
+				app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
+				app->sceneManager->dialogueManager->printText = true;
+				SDL_ShowCursor(SDL_DISABLE);
 			}
 			break;
 		case Collider::Type::ENEMY:

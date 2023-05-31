@@ -450,6 +450,13 @@ bool SceneGameplay::Update(float dt)
 	{
 		app->inventory->isActivated = !app->inventory->isActivated;
 		app->audio->PlayFx(app->hud->swapscenesfx);
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	if (CONTROLLERX)
+	{
+		app->inventory->isActivated = !app->inventory->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	
@@ -651,6 +658,16 @@ bool SceneGameplay::Update(float dt)
 		app->hud->prevstate = app->hud->hudstate;
 		app->hud->hudstate = hudSTATE::PAUSESCREEN;
 		app->hud->wait1frame = true;
+		app->sceneManager->Pause = true;
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	if (CONTROLLERSTART)
+	{
+		app->hud->prevstate = app->hud->hudstate;
+		app->hud->hudstate = hudSTATE::PAUSESCREEN;
+		app->hud->wait1frame = true;
+		app->sceneManager->Pause = true;
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	//switch (gameState)

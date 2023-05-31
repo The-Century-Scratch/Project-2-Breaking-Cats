@@ -4,6 +4,20 @@
 #include "Module.h"
 #include "SDL/include/SDL.h"
 
+
+
+#define CONTROLLERUP (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == KEY_REPEAT || app->input->pad->l_y < -0.5)
+#define CONTROLLERDOWN (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == KEY_REPEAT || app->input->pad->l_y > 0.5)
+#define CONTROLLERLEFT (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == KEY_REPEAT || app->input->pad->l_x < -0.5)
+#define CONTROLLERRIGHT (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == KEY_REPEAT || app->input->pad->l_x > 0.5)
+
+#define CONTROLLERA (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_DOWN)
+#define CONTROLLERB (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_B) == KEY_DOWN)
+#define CONTROLLERX (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_X) == KEY_DOWN)
+#define CONTROLLERY (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_Y) == KEY_DOWN)
+
+#define CONTROLLERSTART (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_START) == KEY_DOWN)
+
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
 #define MAX_BUTTONS 15

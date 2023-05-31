@@ -127,7 +127,7 @@ void EntityManager::AddEntity(Entity* entity)
 
 bool EntityManager::Update(float dt)
 {
-	//if (app->pauseMenus->isPaused()) { return true; } //This is to use in the case a "game pause" is implemented for skiping entities update
+	if (app->sceneManager->Pause) { return true; } //This is to use in the case a "game pause" is implemented for skiping entities update
 
 	bool ret = true;
 

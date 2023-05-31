@@ -6,6 +6,7 @@
 #include "Hud.h"
 #include "Window.h"
 #include "Debug.h"
+//#include <WinUser.h>
 
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -55,11 +56,21 @@ bool GuiSlider::Update(float dt)
 
 			state = GuiControlState::FOCUSED;
 
+			bool mouse = true;
 
+			//keyboard input
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) {
 				state = GuiControlState::PRESSED;
+				SDL_ShowCursor(SDL_ENABLE);
+				mouse = true;
 			}
 
+			//gamepad inut
+			if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_REPEAT) {
+				state = GuiControlState::PRESSED;
+				SDL_ShowCursor(SDL_DISABLE);
+				mouse = false;
+			}
 
 			if (previousState == GuiControlState::PRESSED && state == GuiControlState::NORMAL) {
 				//in case you want to change the volume in intervals of 25
@@ -90,8 +101,27 @@ bool GuiSlider::Update(float dt)
 				app->audio->PlayFx(app->hud->mousebyfx);
 			}
 
+			//GAMEPAD INPUT
+			if (CONTROLLERLEFT)
+			{
+				if (mouseX * scale - 30 >= sliderbounds.x && mouseX * scale <= sliderbounds.x + sliderbounds.w) //condition so cursor wont move out of boundries while moving with gamepad
+				{
+					mouseX += -3;
+					SDL_WarpMouseInWindow(app->win->window, mouseX * scale, mouseY * scale);
+				}
+			}
+			if (CONTROLLERRIGHT)
+			{
+				if (mouseX * scale >= sliderbounds.x && mouseX * scale + 20 <= sliderbounds.x + sliderbounds.w) //condition so cursor wont move out of boundries while moving with gamepad
+				{
+					mouseX += 3;
+					SDL_WarpMouseInWindow(app->win->window, mouseX * scale, mouseY * scale);
+				}
+			}
+			 
+			//keyboard input
 			if (state == GuiControlState::PRESSED) {
-				bounds.x = mouseX*scale - (bounds.w / 2);
+				bounds.x = mouseX * scale - (bounds.w / 2);
 				if (bounds.x > sliderbounds.x + sliderbounds.w) {
 					bounds.x = sliderbounds.x + sliderbounds.w;
 				}
@@ -99,6 +129,16 @@ bool GuiSlider::Update(float dt)
 					bounds.x = sliderbounds.x;
 				}
 			}
+
+			if (!mouse)
+			{
+				SDL_ShowCursor(SDL_DISABLE);
+			}
+			else if (mouse)
+			{
+				SDL_ShowCursor(SDL_ENABLE);
+			}
+
 
 			if (this->id == 10) {
 				Mix_VolumeMusic(bounds.x - sliderbounds.x);

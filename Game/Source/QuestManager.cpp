@@ -116,6 +116,12 @@ bool QuestManager::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) 
 	{
 		printQuestMenu = !printQuestMenu;
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	if (CONTROLLERY)
+	{
+		printQuestMenu = !printQuestMenu;
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 	
 	return ret;

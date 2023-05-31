@@ -109,12 +109,19 @@ bool Hud::Start()
 	easingTitleIn->easingsActivated = false;
 	easingTitleOut->easingsActivated = false;
 
+	currentIDUsingPad = 1;
+
 	return true;
 }
 
 // Called each loop iteration
 bool Hud::PreUpdate()
 {
+	if (!usingPad && (CONTROLLERA || CONTROLLERUP || CONTROLLERDOWN || CONTROLLERLEFT || CONTROLLERRIGHT))
+	{
+		usingPad = true;
+	}
+
 	return true;
 }
 
@@ -127,7 +134,7 @@ bool Hud::Update(float dt)
 		{
 			wait1frame = false;
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		else if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || CONTROLLERB)
 		{
 			return false;
 		}
@@ -241,6 +248,21 @@ bool Hud::Update(float dt)
 				prevstate = hudSTATE::CONFIGSCREEN;
 				hudstate = hudSTATE::PAUSESCREEN;
 			}
+			SDL_ShowCursor(SDL_ENABLE);
+		}
+		if (CONTROLLERB)
+		{
+			if (prevstate == hudSTATE::TITLESCREEN)
+			{
+				prevstate = hudSTATE::CONFIGSCREEN;
+				hudstate = hudSTATE::TITLESCREEN;
+			}
+			else if (prevstate == hudSTATE::PAUSESCREEN)
+			{
+				prevstate = hudSTATE::CONFIGSCREEN;
+				hudstate = hudSTATE::PAUSESCREEN;
+			}
+			SDL_ShowCursor(SDL_DISABLE);
 		}
 		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
 		while (control != nullptr)
@@ -269,16 +291,33 @@ bool Hud::Update(float dt)
 	}
 	else if (hudstate == hudSTATE::PAUSESCREEN)
 	{
+		if (!wait1frame)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+			{
+				prevstate = hudstate;
+				hudstate = hudSTATE::CLOSED;
+				app->sceneManager->Pause = false;
+				SDL_ShowCursor(SDL_ENABLE);
+			}
+			if (CONTROLLERSTART || CONTROLLERB)
+			{
+				prevstate = hudstate;
+				hudstate = hudSTATE::CLOSED;
+				app->sceneManager->Pause = false;
+				SDL_ShowCursor(SDL_DISABLE);
+			}
+		}
 		if (wait1frame)
 		{
 			wait1frame = false;
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		{
-			prevstate = hudstate;
-			hudstate = hudSTATE::CLOSED;
-		}
-		app->sceneManager->Pause = false;
+		//else if (CONTROLLERB)
+		//{
+		//	prevstate = hudstate;
+		//	hudstate = hudSTATE::CLOSED;
+		//	app->sceneManager->Pause = false;
+		//}
 
 		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
 
@@ -372,6 +411,77 @@ bool Hud::PostUpdate()
 
 	app->hud->debug = app->moduleCollisions->debug;
 
+
+	if (usingPad)
+	{
+		bool fail = true;
+		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
+
+		while (control != nullptr)
+		{
+			if (currentIDUsingPad == control->data->id && control->data->enabled)
+			{
+				SDL_WarpMouseInWindow(app->win->window, (control->data->bounds.x + control->data->bounds.w / 2) /** scale*/,
+														(control->data->bounds.y + control->data->bounds.h / 2) /** scale*/);
+				fail = false;
+				break;
+			}
+
+			control = control->next;
+		}
+		if (fail)
+		{
+			control = app->guiManager->guiControlsList.start;
+
+			while (control != nullptr)
+			{
+				if (control->data->enabled)
+				{
+					SDL_WarpMouseInWindow(app->win->window, (control->data->bounds.x + control->data->bounds.w / 2) /** scale*/,
+															(control->data->bounds.y + control->data->bounds.h / 2) /** scale*/);
+					currentIDUsingPad = control->data->id;
+					fail = false;
+					break;
+				}
+
+				control = control->next;
+			}
+		}
+
+		if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == KEY_DOWN)
+		{
+			if (currentIDUsingPad > 1)
+			{
+				currentIDUsingPad--;
+				if (currentIDUsingPad == 11 || currentIDUsingPad == 14 || currentIDUsingPad == 16)
+				{
+					currentIDUsingPad--;
+					if (currentIDUsingPad == 13)
+					{
+						currentIDUsingPad--;
+					}
+				}
+			}
+
+		}
+		if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == KEY_DOWN)
+		{
+			if (currentIDUsingPad < MAX_BUTTONS)
+			{
+				currentIDUsingPad++;
+				if (currentIDUsingPad == 11 || currentIDUsingPad == 13 || currentIDUsingPad == 16)
+				{
+					currentIDUsingPad++;
+					if (currentIDUsingPad == 14)
+					{
+						currentIDUsingPad++;
+					}
+				}
+			}
+		}
+
+		SDL_ShowCursor(SDL_DISABLE);
+	}
 
 	ret = !exit;
 	//app->guiManager->Draw();

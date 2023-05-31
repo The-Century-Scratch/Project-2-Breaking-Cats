@@ -46,7 +46,7 @@ bool GuiButton::Update(float dt)
 					app->audio->PlayFx(app->hud->mousebyfx);
 				}
 			}
-
+			//mouse input
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) {
 				state = GuiControlState::PRESSED;
 				if (!fxDone)
@@ -54,13 +54,34 @@ bool GuiButton::Update(float dt)
 					app->audio->PlayFx(app->hud->clickfx);
 					fxDone = true;
 				}
+				SDL_ShowCursor(SDL_ENABLE);
 			}
 
 			//
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 				NotifyObserver();
 				fxDone = false;
+				SDL_ShowCursor(SDL_ENABLE);
 			}
+
+			//gamepad input
+			if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_REPEAT) {
+				state = GuiControlState::PRESSED;
+				if (!fxDone)
+				{
+					app->audio->PlayFx(app->hud->clickfx);
+					fxDone = true;
+				}
+				SDL_ShowCursor(SDL_DISABLE);
+			}
+
+			//
+			if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_UP) {
+				NotifyObserver();
+				fxDone = false;
+				SDL_ShowCursor(SDL_DISABLE);
+			}
+
 		}
 		else {
 			state = GuiControlState::NORMAL;

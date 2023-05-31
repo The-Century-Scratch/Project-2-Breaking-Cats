@@ -82,6 +82,9 @@ public:
 	bool debug = false;
 	bool wait1frame = false;
 
+	bool usingPad = false;
+	int currentIDUsingPad;
+
 private:
 	//window attributes
 	uint w, h, scale;
