@@ -109,6 +109,8 @@ public:
 	void BasicAnimationState();
 	virtual void SpecificAnimationState();
 
+	void ActivateDmgEasing();
+
 protected:
 
 	int moveTimer = 0;
@@ -118,6 +120,9 @@ protected:
 	const int tileSize = 16;
 	iPoint destination;
 
+	eastl::unique_ptr<Easing> dmgEasingIn;
+	eastl::unique_ptr<Easing> dmgEasingOut;
+	float sillyDmg;
 	eastl::unique_ptr<Easing> sillyEasingJump;
 	eastl::unique_ptr<Easing> sillyEasingFall;
 	float sillyJump;

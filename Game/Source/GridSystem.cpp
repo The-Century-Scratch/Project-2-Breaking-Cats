@@ -109,7 +109,7 @@ bool GridSystem::isWalkable(iPoint pos)
 	int x = (pos.x - gridPos.x) / TILE_W;
 	int y = (pos.y - gridPos.y) / TILE_H;
 
-	if (x > MAX_TILES_X || y > MAX_TILES_Y) return false;
+	if (x >= MAX_TILES_X || y >= MAX_TILES_Y) return false;
 
 	if(grid[x][y].walkability == TileWalkability::WALKABLE) return true;
 

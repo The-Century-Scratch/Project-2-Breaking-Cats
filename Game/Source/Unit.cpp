@@ -27,6 +27,9 @@ void Unit::Create(iPoint pos)
 
 	sillyEasingJump = eastl::make_unique<Easing>(false, 0, 20, 0, 8);
 	sillyEasingFall = eastl::make_unique<Easing>(false, 0, 0, 20, 8);
+
+	dmgEasingIn = eastl::make_unique<Easing>(false, 0, 8, 0, 2);
+	dmgEasingOut = eastl::make_unique<Easing>(false, 0, 0, 8, 2);
 }
 
 void Unit::DebugDraw() const
@@ -47,22 +50,19 @@ void Unit::DebugDraw() const
 
 void Unit::Draw() const
 {
-	//iPoint Displacement = { 8,24 };
-	////iPoint Displacement = { 0,0 };
-	//DebugDraw();
-	////app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	//app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 	iPoint Displacement = { 8,24 };
 	DebugDraw();
+
+	// Gats idle combat animation has a strange sprite displacement between left and right
 	if (type == UnitType::GATS)
 	{
 		if (facing == FACING_LEFT)
-			Displacement = { 12, 24 };
+			Displacement = { 11, 24 };
 		if (facing == FACING_RIGHT)
-			Displacement = { 4, 24 };
+			Displacement = { 5, 24 };
 	}
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y - sillyJump, &currentAnim->GetCurrentFrame());
+
+	app->render->DrawTexture(texture, position.x - Displacement.x + sillyDmg, position.y - Displacement.y - sillyJump, &currentAnim->GetCurrentFrame());
 }
 
 bool Unit::GetIsMyTurn()
@@ -151,6 +151,7 @@ void Unit::StartMovement()
 
 void Unit::BasicAnimationState()
 {
+	// Function for basic animations every unit has
 	switch (state)
 	{
 	case ActionState::IDLE:
@@ -170,6 +171,7 @@ void Unit::BasicAnimationState()
 
 void Unit::SpecificAnimationState()
 {
+	// virtual Function for specific animations that changes between enemies like Gats dash f.e.
 	switch (state)
 	{
 	default:
@@ -177,23 +179,27 @@ void Unit::SpecificAnimationState()
 	}
 }
 
+void Unit::ActivateDmgEasing()
+{
+	dmgEasingIn->currentIteration = 0;
+	dmgEasingIn->easingsActivated = true;
+}
+
 void Unit::Update()
 {
-	//LOG("the move vector x is %i", moveVector.x);
-
-	
-
 	if (!moveVector.IsZero())
 	{
-		//AnimateMove();
 		SmoothMove();
-
 	}
 
 	BasicAnimationState();
 	SpecificAnimationState();
 	currentAnim->Update();
 
+
+	////////// EASINGS //////////
+
+	// JUMP EASING
 	int sum = moveVector.x * moveVector.x + moveVector.y * moveVector.y;
 
 	if (!moveVector.IsZero() && sqrt(sum) == 1)
@@ -239,7 +245,41 @@ void Unit::Update()
 		}
 	}
 
-	//moveTimer = 2;
+	// DMG EASING
+	if (dmgEasingIn->easingsActivated)
+	{
+		sillyDmg = dmgEasingIn->sineEaseOut(dmgEasingIn->currentIteration, dmgEasingIn->initialPos, dmgEasingIn->deltaPos, dmgEasingIn->totalIterations);
+
+		if (dmgEasingIn->currentIteration < dmgEasingIn->totalIterations)
+		{
+			dmgEasingIn->currentIteration++;
+		}
+		else
+		{
+			dmgEasingIn->currentIteration = 0;
+			dmgEasingIn->easingsActivated = false;
+			dmgEasingOut->easingsActivated = true;
+		}
+	}
+
+	if (dmgEasingOut->easingsActivated)
+	{
+		sillyDmg = dmgEasingOut->sineEaseIn(dmgEasingOut->currentIteration, dmgEasingOut->initialPos, dmgEasingOut->deltaPos, dmgEasingOut->totalIterations);
+
+		if (dmgEasingOut->currentIteration < dmgEasingOut->totalIterations)
+		{
+			dmgEasingOut->currentIteration++;
+		}
+		else
+		{
+			dmgEasingOut->currentIteration = 0;
+			dmgEasingOut->easingsActivated = false;
+		}
+	}
+	else if (!dmgEasingIn->easingsActivated)
+	{
+		sillyDmg = 0;
+	}
 }
 
 void Unit::SmoothMove()

@@ -226,6 +226,7 @@ bool SceneBattle::Update(float dt)
 							iPoint  unitPos = unit.get()->GetPosition();
 							if (i->position.DistanceTo(unitPos) < 18)
 							{
+								unit->ActivateDmgEasing();
 								unit->DealDamage(i->GetDamage());
 								i->StartAction(unitAction);
 								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
@@ -244,6 +245,7 @@ bool SceneBattle::Update(float dt)
 							iPoint  unitPos = unit.get()->GetPosition();
 							if (i->position.x == unit->position.x || i->position.y == unit->position.y)
 							{
+								unit->ActivateDmgEasing();
 								unit->DealDamage(i->GetDamage());
 								i->StartAction(unitAction);
 								LOG("the health points that this unit has after the attack that you have thrown to it are the number that you are going to see: %i", unit->GetHealthPoints());
@@ -284,6 +286,7 @@ bool SceneBattle::Update(float dt)
 								case UA::ATTACK:
 									if (hit == unit->position)
 									{
+										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 										i->StartAction(gridSystem->currentAction);
 									}
@@ -315,12 +318,14 @@ bool SceneBattle::Update(float dt)
 									}
 									if (hit == unit->position)
 									{
+										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 									}
 									break;
 								case UA::PREPARE_DASH:
 									if (hit == unit->position && unit->GetType() != UnitType::GATS)
 									{
+										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 										i->StartAction(gridSystem->currentAction);
 									}
@@ -334,6 +339,7 @@ bool SceneBattle::Update(float dt)
 								case UA::ATTACK_AND_HEAL_WITH_KILL:
 									if (hit == unit->position)
 									{
+										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 										if (unit->GetHealthPoints() <= 0)
 										{
@@ -349,6 +355,7 @@ bool SceneBattle::Update(float dt)
 								case UA::GRENADE:
 									if (hit == unit->position)
 									{
+										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 										i->StartAction(gridSystem->currentAction);
 									}
