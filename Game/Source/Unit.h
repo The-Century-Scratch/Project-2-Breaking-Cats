@@ -5,7 +5,19 @@
 #include "Transform.h"
 #include "Point.h"
 #include "Player.h"
+#include "EASTL/unique_ptr.h"
 
+#define FACING_LEFT 0
+#define FACING_RIGHT 1
+
+class Easing;
+
+enum class ActionState
+{
+	IDLE,
+	ATTACK,
+	DIE
+};
 enum class UnitType
 {
 	UNDEFINED,
@@ -63,7 +75,7 @@ public:
 
 	Unit();
 	~Unit();
-	virtual void Create(iPoint pos);
+	void Create(iPoint pos);
 
 	virtual void Draw() const;
 	virtual void DebugDraw() const;
@@ -94,6 +106,9 @@ public:
 	void SmoothMove();
 	void StartMovement();
 
+	void BasicAnimationState();
+	virtual void SpecificAnimationState();
+
 protected:
 
 	int moveTimer = 0;
@@ -102,6 +117,15 @@ protected:
 	const int timeForATile = 2;
 	const int tileSize = 16;
 	iPoint destination;
+
+	eastl::unique_ptr<Easing> sillyEasingJump;
+	eastl::unique_ptr<Easing> sillyEasingFall;
+	float sillyJump;
+	ActionState state;
+	bool facing;
+	Animation* currentAnim = nullptr;
+	Animation idleLeftAnim;
+	Animation idleRightAnim;
 
 	SDL_Texture* texture;
 	SString name;

@@ -3,10 +3,10 @@
 
 #include "Map.h"
 #include "Log.h"
-
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
+#include "easings.h"
 
 //Unit::Unit() = default;
 
@@ -17,6 +17,17 @@ Unit::Unit()
 
 Unit::~Unit() = default;
 
+void Unit::Create(iPoint pos)
+{
+	texturePath = parameters.attribute("texturepath").as_string();
+	texture = app->tex->Load(texturePath);
+
+	position = pos;
+	size = { 16, 16 };
+
+	sillyEasingJump = eastl::make_unique<Easing>(false, 0, 20, 0, 8);
+	sillyEasingFall = eastl::make_unique<Easing>(false, 0, 0, 20, 8);
+}
 
 void Unit::DebugDraw() const
 {
@@ -36,11 +47,22 @@ void Unit::DebugDraw() const
 
 void Unit::Draw() const
 {
+	//iPoint Displacement = { 8,24 };
+	////iPoint Displacement = { 0,0 };
+	//DebugDraw();
+	////app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
+	//app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 	iPoint Displacement = { 8,24 };
-	//iPoint Displacement = { 0,0 };
 	DebugDraw();
+	if (type == UnitType::GATS)
+	{
+		if (facing == FACING_LEFT)
+			Displacement = { 12, 24 };
+		if (facing == FACING_RIGHT)
+			Displacement = { 4, 24 };
+	}
 	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
+	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y - sillyJump, &currentAnim->GetCurrentFrame());
 }
 
 bool Unit::GetIsMyTurn()
@@ -61,17 +83,6 @@ void Unit::SetIsMyTurn(bool value)
 void Unit::SetHasFinishedTurn(bool value)
 {
 	hasFinishedTurn = value;
-}
-
-void Unit::Create(iPoint pos)
-{
-	
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
-	
-	position = pos;
-	size = { 16, 16 };
-	
 }
 
 Unit::PlayerAction Unit::HandleInput() const
@@ -138,6 +149,34 @@ void Unit::StartMovement()
 	}
 }
 
+void Unit::BasicAnimationState()
+{
+	switch (state)
+	{
+	case ActionState::IDLE:
+		if (facing == FACING_LEFT)
+			currentAnim = &idleLeftAnim;
+		else if (facing == FACING_RIGHT)
+			currentAnim = &idleRightAnim;
+		break;
+	case ActionState::ATTACK:
+		break;
+	case ActionState::DIE:
+		break;
+	default:
+		break;
+	}
+}
+
+void Unit::SpecificAnimationState()
+{
+	switch (state)
+	{
+	default:
+		break;
+	}
+}
+
 void Unit::Update()
 {
 	//LOG("the move vector x is %i", moveVector.x);
@@ -149,6 +188,55 @@ void Unit::Update()
 		//AnimateMove();
 		SmoothMove();
 
+	}
+
+	BasicAnimationState();
+	SpecificAnimationState();
+	currentAnim->Update();
+
+	int sum = moveVector.x * moveVector.x + moveVector.y * moveVector.y;
+
+	if (!moveVector.IsZero() && sqrt(sum) == 1)
+	{
+		sillyEasingJump->easingsActivated = true;
+	}
+	else
+	{
+		sillyEasingJump->currentIteration = 0;
+		sillyEasingJump->easingsActivated = false;
+		sillyEasingFall->currentIteration = 0;
+		sillyEasingFall->easingsActivated = false;
+	}
+
+	if (sillyEasingJump->easingsActivated)
+	{
+		sillyJump = sillyEasingJump->sineEaseOut(sillyEasingJump->currentIteration, sillyEasingJump->initialPos, sillyEasingJump->deltaPos, sillyEasingJump->totalIterations);
+
+		if (sillyEasingJump->currentIteration < sillyEasingJump->totalIterations)
+		{
+			sillyEasingJump->currentIteration++;
+		}
+		else
+		{
+			sillyEasingJump->currentIteration = 0;
+			sillyEasingJump->easingsActivated = false;
+			sillyEasingFall->easingsActivated = true;
+		}
+	}
+
+	if (sillyEasingFall->easingsActivated)
+	{
+		sillyJump = sillyEasingFall->sineEaseIn(sillyEasingFall->currentIteration, sillyEasingFall->initialPos, sillyEasingFall->deltaPos, sillyEasingFall->totalIterations);
+
+		if (sillyEasingFall->currentIteration < sillyEasingFall->totalIterations)
+		{
+			sillyEasingFall->currentIteration++;
+		}
+		else
+		{
+			sillyEasingFall->currentIteration = 0;
+			sillyEasingFall->easingsActivated = false;
+		}
 	}
 
 	//moveTimer = 2;

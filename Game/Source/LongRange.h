@@ -13,9 +13,7 @@ class LongRange : public Unit
 public:
 	LongRange();
 	~LongRange();
-	void Create(iPoint pos) override;
 
-	void Draw() const override;
 	void DebugDraw() const override;
 
 	PlayerAction HandleInput() const;

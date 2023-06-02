@@ -3,7 +3,7 @@
 
 #include "Map.h"
 #include "Log.h"
-
+#include "Animation.h"
 #include "Input.h"
 #include "Render.h"
 #include "Textures.h"
@@ -15,19 +15,9 @@
 Gats::Gats()
 {
 	name.Create("gats");
-}
-
-Gats::~Gats() = default;
-
-void Gats::Create(iPoint pos)
-{
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
 
 	healthPoints = 50;
 	damage = 10;
-	position = pos;
-	size = { 16, 16 };
 	type = UnitType::GATS;
 
 	if (app->inventory->GetArcaneSpirit())
@@ -35,7 +25,19 @@ void Gats::Create(iPoint pos)
 		healthPoints += 15;
 	}
 	maxHealth = healthPoints;
+
+	idleLeftAnim.AnimateCat32x32(5, 6);
+	idleLeftAnim.speed = 0.2f;
+
+	idleRightAnim.AnimateCat32x32(5, 7);
+	idleRightAnim.speed = 0.2f;
+
+	currentAnim = &idleLeftAnim;
+	state = ActionState::IDLE;
+	facing = FACING_LEFT;
 }
+
+Gats::~Gats() = default;
 
 
 void Gats::DebugDraw() const
@@ -61,14 +63,6 @@ void Gats::DebugDraw() const
 
 	//app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	app->render->DrawRectangle(debugPosition, 255 - intensity, intensity, 0, 255, true);
-}
-
-void Gats::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
 void Gats::Test()
@@ -156,35 +150,10 @@ void Gats::StartAction(PlayerAction playerAction)
 		destination = playerAction.destinationTile;
 		moveVector = {(playerAction.destinationTile.x - position.x) / tileSize, (playerAction.destinationTile.y - position.y) / tileSize};
 	}
-}
 
-//void Gats::StartMovement()
-//{
-//	//using enum KeyState;
-//	if (goingToDash)
-//	{
-//		app->audio->PlayFx(app->hud->dashgatsfx);
-//	}
-//	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-//	{
-//		moveVector.y = -1 * (goingToDash * 2 + 1);
-//		//currentSpriteSlice.y = (GetTextureIndex().y + 3) * size.y;
-//	}
-//	else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-//	{
-//		moveVector.x = -1 * (goingToDash * 2 + 1);
-//		//currentSpriteSlice.y = (GetTextureIndex().y + 1) * size.y;
-//	}
-//	else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-//	{
-//		moveVector.y = 1 * (goingToDash * 2 + 1);
-//		//currentSpriteSlice.y = GetTextureIndex().y * size.y;
-//	}
-//	else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-//	{
-//		moveVector.x = 1 * (goingToDash * 2 + 1);
-//		
-//		//currentSpriteSlice.y = (GetTextureIndex().y + 2) * size.y;
-//	}
-//	goingToDash = false;
-//}
+
+	if (moveVector.x > 0)
+		facing = FACING_RIGHT;
+	else if (moveVector.x < 0)
+		facing = FACING_LEFT;
+}

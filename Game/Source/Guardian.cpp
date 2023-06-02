@@ -10,21 +10,23 @@
 #include "Audio.h"
 #include "Hud.h"
 
-Guardian::Guardian() = default;
-
-Guardian::~Guardian() = default;
-
-void Guardian::Create(iPoint pos)
+Guardian::Guardian()
 {
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
+	name.Create("unit");
 
 	healthPoints = 20;
 	damage = 10;
-	position = pos;
-	size = { 16, 16 };
 	type = UnitType::GUARDIAN;
+
+	idleLeftAnim.AnimateCat32x32(1, 0);
+	idleLeftAnim.speed = 0.2f;
+
+	currentAnim = &idleLeftAnim;
+	state = ActionState::IDLE;
+	facing = FACING_LEFT;
 }
+
+Guardian::~Guardian() = default;
 
 
 void Guardian::DebugDraw() const
@@ -51,14 +53,6 @@ void Guardian::DebugDraw() const
 	//app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	app->render->DrawRectangle(debugPosition, 255 - intensity, intensity, 0, 255, true);
 	
-}
-
-void Guardian::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
 Guardian::PlayerAction Guardian::HandleInput() const

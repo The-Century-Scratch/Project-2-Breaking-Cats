@@ -19,27 +19,27 @@ Player::Player() : Entity(EntityType::PLAYER)
 	name.Create("player");
 
 	// IDLE
-	idleAnim.AnimateCat32x32x8(0);
+	idleAnim.AnimateCat32x32(8,0);
 	idleAnim.speed = 0.2f;
 
 	// WALKING UP
-	walkUpAnim.AnimateCat32x32x4(1);
+	walkUpAnim.AnimateCat32x32(4,1);
 	walkUpAnim.speed = 0.2f;
 
 	// WALKING LEFT
-	walkLeftAnim.AnimateCat32x32x4(2);
+	walkLeftAnim.AnimateCat32x32(4,2);
 	walkLeftAnim.speed = 0.2f;
 
 	// WALKING RIGHT
-	walkRightAnim.AnimateCat32x32x4(3);
+	walkRightAnim.AnimateCat32x32(4,3);
 	walkRightAnim.speed = 0.2f;
 
 	// WALKING DOWN
-	walkDownAnim.AnimateCat32x32x4(4);
+	walkDownAnim.AnimateCat32x32(4,4);
 	walkDownAnim.speed = 0.2f;
 
 	// DYING
-	dieAnim.AnimateCat32x32x4(5);
+	dieAnim.AnimateCat32x32(4,5);
 	dieAnim.speed = 0.2f;
 
 }

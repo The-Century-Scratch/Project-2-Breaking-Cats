@@ -16,18 +16,7 @@
 Catska::Catska()
 {
 	name.Create("catska");
-}
 
-Catska::~Catska() = default;
-
-void Catska::Create(iPoint pos)
-{
-
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
-
-	position = pos;
-	size = { 16, 16 };
 	healthPoints = 40;
 	damage = 6;
 	type = UnitType::CATSKA;
@@ -37,7 +26,15 @@ void Catska::Create(iPoint pos)
 		damage += 5;
 	}
 
+	idleLeftAnim.AnimateCat32x32(1, 0);
+	idleLeftAnim.speed = 0.2f;
+
+	currentAnim = &idleLeftAnim;
+	state = ActionState::IDLE;
+	facing = FACING_LEFT;
 }
+
+Catska::~Catska() = default;
 
 
 void Catska::DebugDraw() const
@@ -64,14 +61,6 @@ void Catska::DebugDraw() const
 	//app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	app->render->DrawRectangle(debugPosition, 255 - intensity, intensity, 0, 255, true);
 	
-}
-
-void Catska::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
 Catska::PlayerAction Catska::HandleInput() const

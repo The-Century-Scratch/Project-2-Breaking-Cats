@@ -13,9 +13,7 @@ class Guardian : public Unit
 public:
 	Guardian();
 	~Guardian();
-	void Create(iPoint pos) override;
 
-	void Draw() const override;
 	void DebugDraw() const override;
 
 	PlayerAction HandleInput() const override;

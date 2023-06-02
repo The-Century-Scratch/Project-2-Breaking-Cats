@@ -8,22 +8,23 @@
 #include "Render.h"
 #include "Textures.h"
 
-Straw::Straw() = default;
-
-Straw::~Straw() = default;
-
-void Straw::Create(iPoint pos)
+Straw::Straw()
 {
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
+	name.Create("unit");
 
 	healthPoints = 30;
 	damage = 666;
-
-	position = pos;
-	size = { 16, 16 };
 	type = UnitType::STRAW;
+
+	idleLeftAnim.AnimateCat32x32(1, 0);
+	idleLeftAnim.speed = 0.2f;
+
+	currentAnim = &idleLeftAnim;
+	state = ActionState::IDLE;
+	facing = FACING_LEFT;
 }
+
+Straw::~Straw() = default;
 
 
 void Straw::DebugDraw() const
@@ -49,14 +50,6 @@ void Straw::DebugDraw() const
 	//app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	app->render->DrawRectangle(debugPosition, 255 - intensity, intensity, 0, 255, true);
 	
-}
-
-void Straw::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
 Straw::PlayerAction Straw::HandleInput() const

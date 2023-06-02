@@ -13,9 +13,7 @@ class Gats : public Unit
 public:
 	Gats();
 	~Gats();
-	void Create(iPoint pos) override;
 
-	void Draw() const override;
 	void DebugDraw() const override;
 
 	PlayerAction HandleInput() const override;
