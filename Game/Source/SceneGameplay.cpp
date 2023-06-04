@@ -256,6 +256,21 @@ bool SceneGameplay::Load()
 		}
 	}
 
+	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
+	{
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
+			collectibleObject->parameters = collectibleObjectNode;
+			collectibleObjectList.Add(collectibleObject);
+			collectibleObject->Start();
+		}
+	}
+
+
+
+
+
 	//Item* item = nullptr;
 	//pugi::xml_node itemNode = config.child("item");
 	//{
@@ -308,6 +323,14 @@ bool SceneGameplay::Load()
 	case 6:
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 7:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 8:
+		app->render->camera.x = 0;
+		app->render->camera.y = -2000;
 		canMoveCam = true;
 	default:
 		break;
@@ -556,7 +579,13 @@ bool SceneGameplay::Update(float dt)
 		//leaving village map
 		if (app->sceneManager->currentScene == IDVILLAGE)
 		{
-			ChangeMap(LEAVEVILLAGE, 4);
+			ChangeMap(LEAVEVILLAGE, IDLABRINTH);
+		}
+
+		//leaving tutorial map
+		if (app->sceneManager->currentScene == IDTUTORIAL)
+		{
+			ChangeMap(LEAVETUTORIAL,IDVILLAGE);
 		}
 
 		//leaving labrinth map
@@ -2152,6 +2181,31 @@ void SceneGameplay::LoadTriggerableObjects()
 	}
 }
 
+void SceneGameplay::LoadCollectibleObjects()
+{
+	ListItem<CollectibleObject*>* collectibleObjectItem = collectibleObjectList.start;
+	while (collectibleObjectItem != NULL)
+	{
+		collectibleObjectItem->data->toDelete = true;
+		collectibleObjectItem = collectibleObjectItem->next;
+	}
+	collectibleObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
+	{
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
+			collectibleObject->parameters = collectibleObjectNode;
+			collectibleObjectList.Add(collectibleObject);
+			collectibleObject->Start();
+		}
+	}
+}
+
 void SceneGameplay::LoadNpc()
 {
 	ListItem<NPC*>* npcItem = npcs.start;
@@ -2320,6 +2374,8 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 	LoadMovableObjects();
 	//load again new triggerableobjects
 	LoadTriggerableObjects();
+	//load again new collectbleobjects
+	LoadCollectibleObjects();
 	//load again new staticobjects
 	LoadStaticObject();
 

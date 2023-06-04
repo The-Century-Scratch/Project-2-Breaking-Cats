@@ -55,20 +55,31 @@
     <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 	</Hud>
 	<scenegameplay>
-		<player x="136" y="23" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrassBase.wav" stepcity="Assets/Audio/Fx/walkingCityBase.wav">
+		<player x="215" y="930" texturepath="Assets/Textures/Gats.png" stepgrass="Assets/Audio/Fx/WalkingGrassBase.wav" stepcity="Assets/Audio/Fx/walkingCityBase.wav">
 		</player>
 		<citytheme path="Assets/Audio/Music/CityTheme.ogg"/>
 		<shoptheme path="Assets/Audio/Music/ShopTheme.ogg"/>
     <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
-		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/TheGuardian.png" id="1" type="0"/>  <!-- this is the guardian the type 0 is guardian too-->
-		<npc scene="2" x="73" y="59" texturepath="Assets/Textures/maicey.png" id="2" type="1"/>        <!-- this is Micey the type 1 is guardian too-->
+		<npc scene="8" x="80" y="780" texturepath="Assets/Textures/testPlayer.png" id="0" type="0"/>			<!-- this is a sign the type 0 SIGN-->
+		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/Npc3.png" id="1" type="1"/>				<!-- this is a regular npc in the village the type 1 VILLAGE-->
+		<npc scene="1" x="50" y="50" texturepath="Assets/Textures/TheGuardian.png" id="2" type="2"/>		<!-- this is the guardian the type 2 GUARDIAN-->
+		<npc scene="3" x="50" y="50" texturepath="Assets/Textures/Contrabandista.png" id="3" type="3"/>		<!-- this is the contrabandist the type 3 CONTRABANDIST-->
+		<npc scene="2" x="73" y="59" texturepath="Assets/Textures/maicey.png" id="4" type="4"/>				<!-- this is Micey the type 4 SHOP-->
 		
 		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
-    <item>
+
+		<collectibleObject scene="0" x="100" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="1"/>
+		<collectibleObject scene="0" x="120" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="2"/>
+		<collectibleObject scene="0" x="140" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="3"/>
+		<collectibleObject scene="0" x="160" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="4"/>
+		<collectibleObject scene="0" x="180" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="5"/>
+
+
+		<item>
       <texturepath texturepath="Assets/Textures/Items.png"/>
       <firePaws scene="0" x="384" y="48" id="1"/>
       <dragonSlayer scene="0" x="384" y="48" id="2"/>
@@ -79,14 +90,15 @@
     </item>
 		<map>
 			<mapfolder path="Assets/Maps/"/>
-			<mapfile path="Assets/Maps/city_square.tmx"/>	<!--this is 0 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Resistance.tmx"/>	<!--this is 1 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Shop.tmx"/>			<!--this is 2 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Taverna.tmx"/>		<!--this is 3 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Labrinth.tmx"/>		<!--this is 4 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>	<!--this is 5 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/PreLab.tmx"/>		<!--this is 7 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/city_square.tmx"/>			<!--this is 0 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Resistance.tmx"/>			<!--this is 1 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Shop.tmx"/>					<!--this is 2 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Taverna.tmx"/>				<!--this is 3 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/MoveRock.tmx"/>				<!--this is 4 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/AfterMoveRock.tmx"/>			<!--this is 5 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Village.tmx"/>				<!--this is 6 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/PreLab.tmx"/>				<!--this is 7 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/TutorialPlaceholder.tmx"/>	<!--this is 8 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __MOVEROCKQUEST_H__
-#define __MOVEROCKQUEST_H__
+#ifndef __MAINQUEST_H__
+#define __MAINQUEST_H__
 
 #include "Quest.h"
 #include "Point.h"
@@ -8,11 +8,11 @@
 
 struct SDL_Texture;
 
-class MoveRockQuest: public Quest
+class MainQuest: public Quest
 {
 public:
-	MoveRockQuest(pugi::xml_node node);
-	virtual ~MoveRockQuest();
+	MainQuest(pugi::xml_node node);
+	virtual ~MainQuest();
 
 	bool Update() override;
 	void Draw(Font* font) override;
@@ -22,4 +22,4 @@ public:
 	int npcId;
 };
 
-#endif // __MOVEROCKQUEST_H__
+#endif // __MAINQUEST_H__

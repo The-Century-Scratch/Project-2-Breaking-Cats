@@ -44,8 +44,14 @@ bool NPC::Start() {
 
 	switch (npctype)
 	{
-	case NPCTYPE::GUARDIAN:
+	case NPCTYPE::SIGN:
 		dialogueid = 0;
+		break;
+	case NPCTYPE::VILLAGE:
+		dialogueid = 1;
+		break;
+	case NPCTYPE::GUARDIAN:
+		dialogueid = 2;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
 		cRect = { position.x - 6,position.y + 27,16 + 12,16 + 12 };
@@ -53,6 +59,7 @@ bool NPC::Start() {
 		break;
 	case NPCTYPE::CONTRABANDIST:
 		break;
+	
 	default:
 		break;
 	}
@@ -74,6 +81,8 @@ bool NPC::Update()
 	case NPCTYPE::SHOP:
 		break;
 	case NPCTYPE::CONTRABANDIST:
+		break;
+	case NPCTYPE::SIGN:
 		break;
 	default:
 		break;

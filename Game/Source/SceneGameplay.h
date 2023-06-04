@@ -8,6 +8,7 @@
 #include "MovableObject.h"
 #include "TriggerableObject.h"
 #include "StaticObject.h"
+#include "CollectibleObject.h"
 #include "List.h"
 //#include "ParticlesManager.h"
 
@@ -44,6 +45,7 @@ class Font;
 
 //TO VILLAGE
 #define LEAVELABRINTHLEFT iPoint(620, 125)
+#define LEAVETUTORIAL iPoint(136,23)
 
 //TO AFTERLABRINTH
 #define LEAVELABRINTHRIGHT iPoint(5, 159)
@@ -61,6 +63,7 @@ class Font;
 #define IDAFTERLABRINTH 5
 #define IDVILLAGE 6
 #define IDPRELAB 7
+#define IDTUTORIAL 8
 
 #define INIT_POS_TABERN iPoint(334,106)
 #define INIT_POS_BASE iPoint(113,366)
@@ -128,6 +131,7 @@ private:
 	void LoadMovableObjects();
 	void LoadTriggerableObjects();
 	void LoadStaticObject();
+	void LoadCollectibleObjects();
 	void LoadNpc();
 	void LoadItems(pugi::xml_node& n);
 
@@ -139,6 +143,8 @@ private:
 	List<MovableObject*> movableObjectList;
 	List<TriggerableObject*> triggerableObjectList;
 	List<StaticObject*> staticObjectList;
+	List<CollectibleObject*> collectibleObjectList;
+
 
 	SDL_Texture* goldTexture;
 	eastl::list<Player*> playerList;

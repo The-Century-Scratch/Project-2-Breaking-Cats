@@ -1,4 +1,4 @@
-#include "MoveRockQuest.h"
+#include "MainQuest.h"
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -8,19 +8,19 @@
 #include "SceneManager.h"
 #include "QuestManager.h"
 
-MoveRockQuest::MoveRockQuest(pugi::xml_node node) {
+MainQuest::MainQuest(pugi::xml_node node) {
 	this->id = node.attribute("id").as_int();
 	this->name = node.attribute("name").as_string();
 	this->description = node.attribute("description").as_string();
 	this->nextQuestId = node.attribute("nextQuestId").as_int();
 	this->npcId = node.attribute("npcId").as_int();
 	this->reward = node.attribute("reward").as_int();
-	this->type = QuestType::TALK;
+	this->type = QuestType::MAINQUEST;
 }
 
-MoveRockQuest::~MoveRockQuest() {}
+MainQuest::~MainQuest() {}
 
-bool MoveRockQuest::Update() {
+bool MainQuest::Update() {
 	bool ret = true;
 
 	//for the moment it literallt doesnt enter here xd, not necessary
@@ -50,6 +50,6 @@ bool MoveRockQuest::Update() {
 	return ret;
 }
 
-void MoveRockQuest::Draw(Font* font) {
+void MainQuest::Draw(Font* font) {
 	app->render->DrawText(font, description.GetCharString(), 50, 50, 48, 5, { 255,255,255,255 }, 528);
 }

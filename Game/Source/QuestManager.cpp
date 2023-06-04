@@ -1,9 +1,8 @@
 #include "QuestManager.h"
 #include "App.h"
 #include "Textures.h"
-#include "LabyrinthQuest.h"
-#include "TalkQuest.h"
-#include "MoveRockQuest.h"
+#include "MainQuest.h"
+#include "SideQuest.h"
 #include"AssetsManager.h"
 #include "Audio.h"
 #include "SceneManager.h"
@@ -62,35 +61,38 @@ bool QuestManager::Start() {
 		Quest* quest;
 		switch ((QuestType)node.attribute("type").as_int())
 		{
-		case QuestType::MOVEROCK:
-			quest = new MoveRockQuest(node);
+		case QuestType::MAINQUEST:
+			quest = new MainQuest(node);
+			loadedQuests.push_back(quest);
 			break;
-		case QuestType::TALK:
-			quest = new TalkQuest(node);
-			break;
-		case QuestType::LABYRINTH:
-			quest = new LabyrinthQuest(node);
+		case QuestType::SIDEQUEST:
+			quest = new SideQuest(node);
+			loadedSideQuests.push_back(quest);
 			break;
 		default:
 			break;
 		}		
-		loadedQuests.push_back(quest);
+		
 	}
 
 	completeQuestFx = app->audio->LoadFx("Assets/Audio/Fx/CompleteQuestPlaceholder .wav");
 	QuestMenuBox = app->tex->Load("Assets/Textures/GUI/menuBoxPlaceholder.png");
-	questFinished = nullptr;
 	questActive = nullptr;
-	currentQuestComplete = false;
+	sidequestActive = nullptr;
 	font = new Font(app, "Fonts/prova.xml");
-	quest1 = false;
+	RocksQuest = false;
+	quest2 = false;
 	quest3 = false;
 	printQuestMenu = false;
+
+	ObjectsCount = 0;
 
 	ItemText = app->tex->Load("Assets/Textures/Items.png");
 
 	firePaw = new FirePaws(iPoint(384,48), ItemText);
 	firePaw->Start();
+
+	ActivateQuest(TUTORIAL);
 	return ret;
 }
 
@@ -98,15 +100,14 @@ bool QuestManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->sceneManager->puzzle2solved && quest1 == false) {
-		ActivateQuest(1);
-		quest1 = true;
+	if (app->sceneManager->puzzle2solved && RocksQuest == false) {
+		ActivateQuest(EXPLORECITY);
+		ActivateSideQuest(COLLECT1);
+		RocksQuest = true;
 	}
 
-	
-
 	if (app->sceneManager->puzzle3solved &&quest3 == false) {
-		ActivateQuest(-1);
+		ActivateQuest(ENDMISSIONS);
 		quest3 = true;
 		firePaw->equiped = true;
 		app->inventory->AddItem(firePaw);
@@ -131,6 +132,16 @@ bool QuestManager::PostUpdate() {
 		else {
 			questActive->Draw(font);
 		}
+
+		sect = { 0,0,192,256 };
+		app->render->DrawTexture(QuestMenuBox, 256, 0, &sect, false);
+		if (sidequestActive == nullptr) {
+			app->render->DrawText(font, "No active sidequests", 830, 0, 48, 5, { 255,255,255,255 }, 528);
+		}
+		else {
+			sidequestActive->Draw(font);
+		}
+		
 	}
 	return true;
 }
@@ -152,13 +163,37 @@ bool QuestManager::ActivateQuest(int id)
 		}
 	}
 	else {
-		DeleteAllQuests();
+		DeleteAllMainQuests();
 	}
 
 	return true;
 }
 
-void QuestManager::DeleteAllQuests()
+bool QuestManager::ActivateSideQuest(int id)
+{
+	if (id != -1)
+	{
+		eastl::list<Quest*>::iterator it = loadedSideQuests.begin();
+		eastl::list<Quest*>::iterator itEnd = loadedSideQuests.end();
+		for (; it != itEnd; ++it)
+		{
+			if ((*it)->id == id)
+			{
+				loadedSideQuests.erase(it);
+				sidequestActive = *it;
+				break;
+			}
+		}
+	}
+	else {
+		DeleteAllSideQuests();
+	}
+
+	return true;
+}
+
+
+void QuestManager::DeleteAllMainQuests()
 {
 	if (!loadedQuests.empty())
 	{
@@ -184,20 +219,39 @@ void QuestManager::DeleteAllQuests()
 	}
 	activeQuests.clear();
 
-	if (!finishedQuests.empty())
+	RELEASE(questActive);
+	questActive = nullptr;
+
+}
+
+void QuestManager::DeleteAllSideQuests()
+{
+	if (!loadedSideQuests.empty())
 	{
-		eastl::list<Quest*>::iterator it = finishedQuests.begin();
-		eastl::list<Quest*>::iterator itEnd = finishedQuests.end();
+		eastl::list<Quest*>::iterator it = loadedSideQuests.begin();
+		eastl::list<Quest*>::iterator itEnd = loadedSideQuests.end();
 		for (; it != itEnd; ++it)
 		{
 			RELEASE(*it);
-			finishedQuests.erase(it);
+			loadedSideQuests.erase(it);
 		}
 	}
-	finishedQuests.clear();
+	loadedSideQuests.clear();
 
-	RELEASE(questActive);
-	questActive = nullptr;
+	if (!activeSideQuests.empty())
+	{
+		eastl::list<Quest*>::iterator it = activeSideQuests.begin();
+		eastl::list<Quest*>::iterator itEnd = activeSideQuests.end();
+		for (; it != itEnd; ++it)
+		{
+			RELEASE(*it);
+			activeSideQuests.erase(it);
+		}
+	}
+	activeSideQuests.clear();
+
+	RELEASE(sidequestActive);
+	sidequestActive = nullptr;
 
 }
 

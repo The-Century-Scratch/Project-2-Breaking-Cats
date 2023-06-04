@@ -52,6 +52,7 @@ public:
 	//variable in preLab
 	bool downCity = false, lab = false;
 
+
 	//variable to see what puzzles has ben solved
 	bool puzzle1solved = false, puzzle2solved = false, puzzle3solved = false;
 

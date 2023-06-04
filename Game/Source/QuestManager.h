@@ -9,6 +9,21 @@
 #include "Item.h"
 #include "Inventory.h"
 
+//main quests
+#define TUTORIAL 0
+#define MOVEROCKS 1
+#define EXPLORECITY 2
+#define LABERYNTH 3
+#define LABORATORY 4
+
+#define ENDMISSIONS -1
+
+//sidequests
+#define COLLECT1 0
+#define COLLECT2 1
+
+
+
 class QuestManager : public Module
 {
 public:
@@ -36,21 +51,30 @@ public:
 
 	bool ActivateQuest(int id);
 
-	void DeleteAllQuests();
+	bool ActivateSideQuest(int id);
+
+	void DeleteAllMainQuests();
+
+	void DeleteAllSideQuests();
 
 public:
 
 	eastl::list<Quest*> loadedQuests;
 	eastl::list<Quest*> activeQuests;
-	eastl::list<Quest*> finishedQuests;
+
+	eastl::list<Quest*> loadedSideQuests;
+	eastl::list<Quest*> activeSideQuests;
+
 
 	SDL_Texture* QuestMenuBox;
-	Quest* questFinished;
 	Quest* questActive;
+	Quest* sidequestActive;
 	int completeQuestFx;
 	bool printQuestMenu;
-	bool currentQuestComplete;
-	bool quest1, quest2, quest3;
+	bool RocksQuest, quest2, quest3;
+
+	//count of collectible objects
+	uint ObjectsCount;
 
 	SDL_Texture* ItemText;
 	Item* firePaw;

@@ -8,9 +8,8 @@
 
 enum class QuestType
 {
-	MOVEROCK,
-	TALK,
-	LABYRINTH
+	MAINQUEST,
+	SIDEQUEST
 };
 
 class Quest

@@ -1,4 +1,4 @@
-#include "TalkQuest.h"
+#include "SideQuest.h"
 #include "App.h"
 #include "Audio.h"
 #include "Input.h"
@@ -6,24 +6,24 @@
 #include "Point.h"
 #include "Scene.h"
 
-TalkQuest::TalkQuest(pugi::xml_node node) {
+SideQuest::SideQuest(pugi::xml_node node) {
 	this->id = node.attribute("id").as_int();
 	this->name = node.attribute("name").as_string();
 	this->description = node.attribute("description").as_string();
 	this->nextQuestId = node.attribute("nextQuestId").as_int();
 	this->npcId = node.attribute("npcId").as_int();
 	this->reward = node.attribute("reward").as_int();
-	this->type = QuestType::TALK;
+	this->type = QuestType::SIDEQUEST;
 }
 
-TalkQuest::~TalkQuest() {}
+SideQuest::~SideQuest() {}
 
-bool TalkQuest::Update() {
+bool SideQuest::Update() {
 	bool ret = true;
 
 	return ret;
 }
 
-void TalkQuest::Draw(Font *font) {
-	app->render->DrawText(font, description.GetCharString(), 50, 50, 48, 5, { 255,255,255,255 }, 528);
+void SideQuest::Draw(Font *font) {
+	app->render->DrawText(font, description.GetCharString(), 830, 50, 48, 5, { 255,255,255,255 }, 528);
 }

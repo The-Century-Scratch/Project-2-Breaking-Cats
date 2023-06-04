@@ -1,5 +1,5 @@
-#ifndef __TALKQUEST_H__
-#define __TALKQUEST_H__
+#ifndef __SIDEQUEST_H__
+#define __SIDEQUEST_H__
 
 #include "Quest.h"
 #include "Point.h"
@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class TalkQuest : public Quest
+class SideQuest : public Quest
 {
 public:
-	TalkQuest(pugi::xml_node node);
-	virtual ~TalkQuest();
+	SideQuest(pugi::xml_node node);
+	virtual ~SideQuest();
 
 	bool Update() override;
 	void Draw(Font* font) override;
@@ -21,4 +21,4 @@ public:
 	int npcId;
 };
 
-#endif // __TALKQUEST_H__
+#endif // __SIDEQUEST_H__
