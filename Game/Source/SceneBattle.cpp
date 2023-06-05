@@ -261,6 +261,11 @@ bool SceneBattle::Update(float dt)
 					if (gridSystem->showArea)
 						gridSystem->currentAction = unitAction;
 					break;
+				case UA::TELEPORT:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+					break;
 				default:
 					break;
 				}
@@ -366,6 +371,11 @@ bool SceneBattle::Update(float dt)
 									{
 										app->particleManager->CreateParticleSystem(hit, EXPLOSION);
 									}
+									break;
+								case UA::TELEPORT:
+									gridSystem->move(i->position, hit);
+									gridSystem->currentAction.destinationTile = hit;
+									i->StartAction(gridSystem->currentAction);
 									break;
 								default:
 									break;

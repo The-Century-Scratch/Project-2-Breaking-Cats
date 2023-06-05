@@ -82,7 +82,11 @@ Catska::PlayerAction Catska::HandleInput() const
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 	{
 		returnAction.action = Catska::PlayerAction::Action::GRENADE;
-		/*app->audio->PlayFx(app->hud->attkcatskafx);*/
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		returnAction.action = Catska::PlayerAction::Action::TELEPORT;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -138,6 +142,10 @@ void Catska::StartAction(PlayerAction playerAction)
 		{
 			moveVector.x = 1;
 		}
+	}
+	else if (playerAction.action == PlayerAction::Action::TELEPORT)
+	{
+		position = playerAction.destinationTile;
 	}
 	LOG("it does enter this scope right now, so be careful");
 }

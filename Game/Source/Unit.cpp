@@ -202,7 +202,7 @@ void Unit::Update()
 	// JUMP EASING
 	int sum = moveVector.x * moveVector.x + moveVector.y * moveVector.y;
 
-	if (!moveVector.IsZero() && sqrt(sum) == 1)
+	if (!moveVector.IsZero() && moveVector.Magnitude() == 1)
 	{
 		sillyEasingJump->easingsActivated = true;
 	}

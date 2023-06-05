@@ -44,7 +44,8 @@ public:
 			ATTACK_TO_PLAYER_LONG_RANGE = 0x0006,
 			PREPARE_DASH = 0x0007,
 			ATTACK_AND_HEAL_WITH_KILL = 0x0008,
-			GRENADE = 0x0009
+			GRENADE = 0x0009,
+			TELEPORT = 0x0010
 		};
 
 		friend Action operator&(Action a, Action b)

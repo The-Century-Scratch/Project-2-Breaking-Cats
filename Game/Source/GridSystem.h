@@ -105,6 +105,8 @@ private:
 
 	void showGrenade(iPoint pos);
 
+	void showTeleport(iPoint pos);
+
 	void showAttackAOE(iPoint pos);
 
 	void showAttackRangeAOE(iPoint pos);
@@ -112,6 +114,8 @@ private:
 	void showDashAOE(iPoint pos);
 
 	void showGrenadeAOE(iPoint pos);
+
+	void showTeleportAOE(iPoint pos);
 
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;

@@ -91,6 +91,11 @@ Gats::PlayerAction Gats::HandleInput() const
 		app->audio->PlayFx(app->hud->attkgatsfx);
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		returnAction.action = Gats::PlayerAction::Action::TELEPORT;
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		returnAction.action |= Gats::PlayerAction::Action::MOVE;
@@ -146,9 +151,12 @@ void Gats::StartAction(PlayerAction playerAction)
 	}
 	else if (playerAction.action == PlayerAction::Action::PREPARE_DASH)
 	{
-		//DoDash(playerAction.destinationTile.x, playerAction.destinationTile.y);
 		destination = playerAction.destinationTile;
 		moveVector = {(playerAction.destinationTile.x - position.x) / tileSize, (playerAction.destinationTile.y - position.y) / tileSize};
+	}
+	else if (playerAction.action == PlayerAction::Action::TELEPORT)
+	{
+		position = playerAction.destinationTile;
 	}
 
 

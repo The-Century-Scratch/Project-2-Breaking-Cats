@@ -239,7 +239,10 @@ eastl::vector<iPoint> GridSystem::getHitsPosition()
 {
 	eastl::vector<iPoint> Hits;
 
-	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH || currentAction.action == Unit::PlayerAction::Action::ATTACK_LONG_RANGE || currentAction.action == Unit::PlayerAction::Action::GRENADE)
+	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH || 
+		currentAction.action == Unit::PlayerAction::Action::ATTACK_LONG_RANGE || 
+		currentAction.action == Unit::PlayerAction::Action::GRENADE || 
+		currentAction.action == Unit::PlayerAction::Action::TELEPORT)
 	{
 		iPoint dashDestination = { focusPos.x, focusPos.y };
 		Hits.push_back(eastl::move(dashDestination));
@@ -286,6 +289,9 @@ void GridSystem::showActionArea()
 	case UA::GRENADE:
 		showGrenade(currentAction.destinationTile);
 		break;
+	case UA::TELEPORT:
+		showTeleport(currentAction.destinationTile);
+		break;
 	default:
 		break;
 	}
@@ -314,6 +320,8 @@ void GridSystem::showEffectArea(SDL_Rect r)
 	case UA::GRENADE:
 		showGrenadeAOE(pos);
 		break;
+	case UA::TELEPORT:
+		showTeleportAOE(pos);
 	default:
 		break;
 	}
@@ -325,9 +333,13 @@ void GridSystem::showAttack(iPoint pos)
 	int x = (pos.x - gridPos.x) / TILE_W;
 	int y = (pos.y - gridPos.y) / TILE_H;
 
+	if (x - 1 >= 0)
 	grid[x - 1][y].state = TileState::CLICKABLE;
+	if (x + 1 < MAX_TILES_X)
 	grid[x + 1][y].state = TileState::CLICKABLE;
+	if (y - 1 >= 0)
 	grid[x][y - 1].state = TileState::CLICKABLE;
+	if (y + 1 < MAX_TILES_Y)
 	grid[x][y + 1].state = TileState::CLICKABLE;
 }
 
@@ -390,6 +402,18 @@ void GridSystem::showGrenade(iPoint pos)
 	}
 }
 
+void GridSystem::showTeleport(iPoint pos)
+{
+	for (size_t i = 0; i < MAX_TILES_X; i++)
+	{
+		for (size_t j = 0; j < MAX_TILES_Y; j++)
+		{
+			if (grid[i][j].walkability == TileWalkability::WALKABLE)
+				grid[i][j].state = TileState::CLICKABLE;
+		}
+	}
+}
+
 void GridSystem::showAttackAOE(iPoint pos)
 {
 	int x = (pos.x - gridPos.x) / TILE_W;
@@ -397,10 +421,10 @@ void GridSystem::showAttackAOE(iPoint pos)
 	
 	if (pos.x > currentAction.destinationTile.x || pos.x < currentAction.destinationTile.x)
 	{
-		if (grid[x][y - 1].walkability != TileWalkability::OBSTACLE)
+		if (grid[x][y - 1].walkability != TileWalkability::OBSTACLE && y - 1 >= 0)
 			grid[x][y - 1].state = TileState::AREA_EFFECT;
 
-		if (grid[x][y + 1].walkability != TileWalkability::OBSTACLE)
+		if (grid[x][y + 1].walkability != TileWalkability::OBSTACLE && y + 1 < MAX_TILES_Y)
 			grid[x][y + 1].state = TileState::AREA_EFFECT;
 
 		if (grid[x][y].walkability != TileWalkability::OBSTACLE)
@@ -408,10 +432,10 @@ void GridSystem::showAttackAOE(iPoint pos)
 	}
 	else if (pos.y > currentAction.destinationTile.y || pos.y < currentAction.destinationTile.y)
 	{
-		if (grid[x - 1][y].walkability != TileWalkability::OBSTACLE)
+		if (grid[x - 1][y].walkability != TileWalkability::OBSTACLE && x - 1 >= 0)
 			grid[x - 1][y].state = TileState::AREA_EFFECT;
 
-		if (grid[x + 1][y].walkability != TileWalkability::OBSTACLE)
+		if (grid[x + 1][y].walkability != TileWalkability::OBSTACLE && x + 1 < MAX_TILES_X)
 			grid[x + 1][y].state = TileState::AREA_EFFECT;
 
 		if (grid[x][y].walkability != TileWalkability::OBSTACLE)
@@ -512,4 +536,12 @@ void GridSystem::showGrenadeAOE(iPoint pos)
 	if (grid[x][y - 1].walkability != TileWalkability::OBSTACLE && y - 1 >= 0 && y - 1 < 9)
 		grid[x][y - 1].state = TileState::AREA_EFFECT;
 
+}
+
+void GridSystem::showTeleportAOE(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	grid[x][y].state = TileState::AREA_EFFECT;
 }

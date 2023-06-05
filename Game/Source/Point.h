@@ -133,6 +133,11 @@ public:
 	{
 		return abs(v.x - x) + abs(v.y - y);
 	}
+
+	TYPE Magnitude() const
+	{
+		return sqrtf((x * x) + (y * y));
+	}
 };
 
 typedef Point<int> iPoint;
