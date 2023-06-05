@@ -146,6 +146,5 @@ void LongRange::StartAction(PlayerAction playerAction)
 		{
 			moveVector.x = 1;
 		}
-		StartMovement();
 	}
 }

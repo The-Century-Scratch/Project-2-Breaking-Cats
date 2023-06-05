@@ -67,9 +67,4 @@ Straw::PlayerAction Straw::HandleInput() const
 
 void Straw::StartAction(PlayerAction playerAction)
 {
-	if (playerAction.action == PlayerAction::Action::MOVE)
-	{
-
-		StartMovement();
-	}
 }

@@ -13,6 +13,7 @@ enum Blueprint {
 	FIRE,
 	SMOKE,
 	EXPLOSION,
+	BULLET,
 	NONE
 };
 
@@ -56,7 +57,7 @@ public:
 	bool CleanUp();
 
 
-	ParticleSystem* CreateParticleSystem(iPoint initialPosition, Blueprint blueprint);
+	ParticleSystem* CreateParticleSystem(iPoint initialPosition, Blueprint blueprint, iPoint finalPosition = { 0,0 });
 
 
 private:

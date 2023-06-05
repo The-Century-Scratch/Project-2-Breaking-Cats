@@ -56,7 +56,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(true);
 	assetsManager = new AssetsManager(true);
 	entityManager = new EntityManager(true);
-	particleSystemManager = new ParticleSystemManager(false);
+	particleManager = new ParticleSystemManager(true);
 	questManager = new QuestManager(true);
 	guiManager = new GuiManager(true);
 	statsManager = new StatsManager(true);
@@ -75,7 +75,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(moduleCollisions);
 	AddModule(guiManager);
 	AddModule(entityManager);
-	AddModule(particleSystemManager);
+	AddModule(particleManager);
 	AddModule(questManager);
 	AddModule(statsManager);
 	AddModule(map);

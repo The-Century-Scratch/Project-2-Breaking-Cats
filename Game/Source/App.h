@@ -106,7 +106,7 @@ public:
 	ModuleCollisions* moduleCollisions;
 	Map* map;
 	EntityManager* entityManager;
-	ParticleSystemManager* particleSystemManager;
+	ParticleSystemManager* particleManager;
 	QuestManager* questManager;
 	GuiManager* guiManager;
 	StatsManager* statsManager;

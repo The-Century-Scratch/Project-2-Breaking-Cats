@@ -239,7 +239,7 @@ eastl::vector<iPoint> GridSystem::getHitsPosition()
 {
 	eastl::vector<iPoint> Hits;
 
-	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH || currentAction.action == Unit::PlayerAction::Action::ATTACK_LONG_RANGE)
+	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH || currentAction.action == Unit::PlayerAction::Action::ATTACK_LONG_RANGE || currentAction.action == Unit::PlayerAction::Action::GRENADE)
 	{
 		iPoint dashDestination = { focusPos.x, focusPos.y };
 		Hits.push_back(eastl::move(dashDestination));

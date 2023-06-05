@@ -71,12 +71,16 @@ bool ParticleSystemManager::PostUpdate()
 	return true;
 }
 
-ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPosition, Blueprint blueprint)
+ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPosition, Blueprint blueprint, iPoint finalPosition)
 {
 	ParticleSystem* PS = new ParticleSystem();
 	PS->initialPosition = initialPosition;
 	PS->position = initialPosition;
 	PS->objectivePosition = initialPosition;
+	/*if(finalPosition.IsZero())
+		PS->objectivePosition = initialPosition;
+	else
+		PS->objectivePosition = finalPosition;*/
 
 	switch (blueprint)
 	{
@@ -130,7 +134,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 
 		break;
 	case EXPLOSION:
-		GiveParticlesToPS(PS, 20);
+		GiveParticlesToPS(PS, 10);
 		PS->PSLifespan = 0.1f;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
 		PS->spawnRate = 0.0f;
@@ -145,6 +149,29 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->randomSpawnPositionRangeMax = iPoint{ 0, 0 };
 		PS->initialScale = 6.0f;
 		PS->objectiveScale = 1.0f;
+		break;
+	case BULLET:
+		GiveParticlesToPS(PS, 60);
+		PS->PSLifespan = 0.1f;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.0f;
+		PS->isConstant = false;
+		PS->initialColor.Set(255, 255, 255, 255);
+		PS->objectiveColor.Set(255, 255, 255, 255);
+		PS->particleLifespan = 0.4f;
+		if (initialPosition.x < finalPosition.x)
+			PS->shootingAcceleration = fPoint{ 50.0f, 0.0f };
+		else if (initialPosition.x > finalPosition.x)
+			PS->shootingAcceleration = fPoint{ -50.0f, 0.0f };
+		else if (initialPosition.y < finalPosition.y)
+			PS->shootingAcceleration = fPoint{ 0.0f, 50.0f };
+		else if (initialPosition.y > finalPosition.y)
+			PS->shootingAcceleration = fPoint{ 0.0f, -50.0f };
+		PS->randomSpawnPositionRangeMin = initialPosition;
+		PS->randomSpawnPositionRangeMax = finalPosition;
+		PS->initialScale = 1.0f;
+		PS->objectiveScale = 1.0f;
+		PS->shootingVelocity = { 0,0 }/*{ (float)((PS->objectivePosition.x - PS->initialPosition.x) * 5), (float)((PS->objectivePosition.y - PS->initialPosition.y) * 5) }*/;
 		break;
 	case NONE:
 		break;

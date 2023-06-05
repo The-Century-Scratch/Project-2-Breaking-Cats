@@ -103,19 +103,19 @@ void ParticleSystem::SpawnParticle(Particle* p)
 
 	if (randomSpawnPositionRangeMin.x - randomSpawnPositionRangeMax.x != 0) {
 		if (randomSpawnPositionRangeMax.x > randomSpawnPositionRangeMin.x) {
-			position.x += (rand() % abs(randomSpawnPositionRangeMax.x - randomSpawnPositionRangeMin.x)) + randomSpawnPositionRangeMin.x;
+			position.x += (rand() % abs(randomSpawnPositionRangeMax.x - randomSpawnPositionRangeMin.x))/* + randomSpawnPositionRangeMin.x*/;
 		}
 		else {
-			position.x += (rand() % abs(randomSpawnPositionRangeMin.x - randomSpawnPositionRangeMax.x)) + randomSpawnPositionRangeMax.x;
+			position.x -= (rand() % abs(randomSpawnPositionRangeMin.x - randomSpawnPositionRangeMax.x))/* + randomSpawnPositionRangeMax.x*/;
 		}
 	}
 
 	if (randomSpawnPositionRangeMin.y - randomSpawnPositionRangeMax.y != 0) {
 		if (randomSpawnPositionRangeMax.y > randomSpawnPositionRangeMin.y) {
-			position.y += (rand() % abs(randomSpawnPositionRangeMax.y - randomSpawnPositionRangeMin.y)) + randomSpawnPositionRangeMin.y;
+			position.y += (rand() % abs(randomSpawnPositionRangeMax.y - randomSpawnPositionRangeMin.y))/* + randomSpawnPositionRangeMin.y*/;
 		}
 		else {
-			position.y += (rand() % abs(randomSpawnPositionRangeMin.y - randomSpawnPositionRangeMax.y)) + randomSpawnPositionRangeMax.y;
+			position.y -= (rand() % abs(randomSpawnPositionRangeMin.y - randomSpawnPositionRangeMax.y))/* + randomSpawnPositionRangeMax.y*/;
 		}
 	}
 

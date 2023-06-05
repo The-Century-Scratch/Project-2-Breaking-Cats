@@ -17,6 +17,7 @@
 #include "Debug.h"
 #include "Inventory.h"
 #include "Hud.h"
+#include "ParticleSystemManager.h"
 
 SceneBattle::SceneBattle()
 {
@@ -318,6 +319,8 @@ bool SceneBattle::Update(float dt)
 									}
 									if (hit == unit->position)
 									{
+										iPoint displacement = { 8,8 };
+										app->particleManager->CreateParticleSystem(i->position + displacement, BULLET, unit->position + displacement);
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 									}
@@ -358,6 +361,10 @@ bool SceneBattle::Update(float dt)
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 										i->StartAction(gridSystem->currentAction);
+									}
+									else
+									{
+										app->particleManager->CreateParticleSystem(hit, EXPLOSION);
 									}
 									break;
 								default:
