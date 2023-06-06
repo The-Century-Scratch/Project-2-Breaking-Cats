@@ -325,7 +325,7 @@ bool SceneBattle::Update(float dt)
 									if (hit == unit->position)
 									{
 										iPoint displacement = { 8,8 };
-										app->particleManager->CreateParticleSystem(i->position + displacement, BULLET, unit->position + displacement);
+										app->particleManager->CreateParticleSystem(i->position + displacement, Blueprint::BULLET, unit->position + displacement);
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 									}
@@ -369,7 +369,7 @@ bool SceneBattle::Update(float dt)
 									}
 									else
 									{
-										app->particleManager->CreateParticleSystem(hit, EXPLOSION);
+										app->particleManager->CreateParticleSystem(hit, Blueprint::EXPLOSION, hit);
 									}
 									break;
 								case UA::TELEPORT:

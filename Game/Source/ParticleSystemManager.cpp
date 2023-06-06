@@ -34,6 +34,8 @@ bool ParticleSystemManager::Start()
 
 	alphaTextures[2] = app->tex->Load("Assets/Textures/particles/smoke_shaded.png");
 
+	alphaTextures[2] = app->tex->Load("Assets/Textures/particles/slashGats.png");
+
 
 	// adapt it to xml
 	/*for (int i = 0; i < ALPHAS_AVAILABLES; ++i) {
@@ -76,15 +78,16 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 	ParticleSystem* PS = new ParticleSystem();
 	PS->initialPosition = initialPosition;
 	PS->position = initialPosition;
-	PS->objectivePosition = initialPosition;
-	/*if(finalPosition.IsZero())
+	//PS->setAnim(blueprint);
+	/*PS->objectivePosition = initialPosition;*/
+	if(finalPosition.IsZero())
 		PS->objectivePosition = initialPosition;
 	else
-		PS->objectivePosition = finalPosition;*/
+		PS->objectivePosition = finalPosition;
 
 	switch (blueprint)
 	{
-	case CONSTANT_FIRE:
+	case Blueprint::CONSTANT_FIRE:
 		GiveParticlesToPS(PS, 150);
 		PS->PSLifespan = 5;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
@@ -101,7 +104,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->initialScale = 6.0f;
 		PS->objectiveScale = 1.0f;
 		break;
-	case FIRE:
+	case Blueprint::FIRE:
 		GiveParticlesToPS(PS, 150);
 		PS->PSLifespan = 5;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
@@ -118,7 +121,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->initialScale = 6.0f;
 		PS->objectiveScale = 1.0f;
 		break;
-	case SMOKE:
+	case Blueprint::SMOKE:
 		GiveParticlesToPS(PS, 50);
 		PS->SetTexture(alphaTextures[SMOKE_SHADED]);
 		PS->spawnRate = 0.3f;
@@ -133,7 +136,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->randomShootingVelocityRangeMax = iPoint{ 10, 0 };
 
 		break;
-	case EXPLOSION:
+	case Blueprint::EXPLOSION:
 		GiveParticlesToPS(PS, 10);
 		PS->PSLifespan = 0.1f;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
@@ -150,7 +153,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->initialScale = 6.0f;
 		PS->objectiveScale = 1.0f;
 		break;
-	case BULLET:
+	case Blueprint::BULLET:
 		GiveParticlesToPS(PS, 60);
 		PS->PSLifespan = 0.1f;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
@@ -173,7 +176,24 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->objectiveScale = 1.0f;
 		PS->shootingVelocity = { 0,0 }/*{ (float)((PS->objectivePosition.x - PS->initialPosition.x) * 5), (float)((PS->objectivePosition.y - PS->initialPosition.y) * 5) }*/;
 		break;
-	case NONE:
+	case Blueprint::SLASH:
+		GiveParticlesToPS(PS, 0);
+		PS->PSLifespan = 0.1f;
+		PS->SetTexture(alphaTextures[AlphasIDs::SLASHGATS]);
+		PS->spawnRate = 0.0f;
+		PS->isConstant = false;
+		PS->initialColor.Set(255, 255, 0, 255);
+		PS->objectiveColor.Set(255, 0, 0, 0);
+		PS->particleLifespan = 0.4f;
+		PS->shootingAcceleration = fPoint{ 0.0f, 100.0f };
+		PS->randomShootingVelocityRangeMin = iPoint{ -100, -300 };
+		PS->randomShootingVelocityRangeMax = iPoint{ 300, 100 };
+		PS->randomSpawnPositionRangeMin = iPoint{ 0, 0 };
+		PS->randomSpawnPositionRangeMax = iPoint{ 0, 0 };
+		PS->initialScale = 6.0f;
+		PS->objectiveScale = 1.0f;
+		break;
+	case Blueprint::NONE:
 		break;
 	default:
 		break;
