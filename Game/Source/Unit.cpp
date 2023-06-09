@@ -30,6 +30,9 @@ void Unit::Create(iPoint pos)
 
 	dmgEasingIn = eastl::make_unique<Easing>(false, 0, 8, 0, 2);
 	dmgEasingOut = eastl::make_unique<Easing>(false, 0, 0, 8, 2);
+
+	atkEasingIn = eastl::make_unique<Easing>(false, 0, 8, 0, 4);
+	atkEasingOut = eastl::make_unique<Easing>(false, 0, 0, 8, 6);
 }
 
 void Unit::DebugDraw() const
@@ -185,6 +188,20 @@ void Unit::ActivateDmgEasing()
 	dmgEasingIn->easingsActivated = true;
 }
 
+void Unit::ActivateAtkEasing()
+{
+	atkEasingIn->currentIteration = 0;
+	atkEasingIn->easingsActivated = true;
+}
+
+bool Unit::atkEasingHasEnded()
+{
+	if (atkEasingOut->currentIteration == atkEasingOut->totalIterations)
+		return true;
+	
+	return false;
+}
+
 void Unit::Update()
 {
 	if (!moveVector.IsZero())
@@ -200,7 +217,6 @@ void Unit::Update()
 	////////// EASINGS //////////
 
 	// JUMP EASING
-	int sum = moveVector.x * moveVector.x + moveVector.y * moveVector.y;
 
 	if (!moveVector.IsZero() && moveVector.Magnitude() == 1)
 	{
@@ -279,6 +295,42 @@ void Unit::Update()
 	else if (!dmgEasingIn->easingsActivated)
 	{
 		sillyDmg = 0;
+	}
+
+	// ATK EASING
+	if (atkEasingIn->easingsActivated)
+	{
+		sillyAtk = atkEasingIn->sineEaseOut(atkEasingIn->currentIteration, atkEasingIn->initialPos, atkEasingIn->deltaPos, atkEasingIn->totalIterations);
+
+		if (atkEasingIn->currentIteration < atkEasingIn->totalIterations)
+		{
+			atkEasingIn->currentIteration++;
+		}
+		else
+		{
+			atkEasingIn->currentIteration = 0;
+			atkEasingIn->easingsActivated = false;
+			atkEasingOut->easingsActivated = true;
+		}
+	}
+
+	if (atkEasingOut->easingsActivated)
+	{
+		sillyAtk = atkEasingOut->sineEaseIn(atkEasingOut->currentIteration, atkEasingOut->initialPos, atkEasingOut->deltaPos, atkEasingOut->totalIterations);
+
+		if (atkEasingOut->currentIteration < atkEasingOut->totalIterations)
+		{
+			atkEasingOut->currentIteration++;
+		}
+		else
+		{
+			atkEasingOut->currentIteration = 0;
+			atkEasingOut->easingsActivated = false;
+		}
+	}
+	else if (!atkEasingOut->easingsActivated)
+	{
+		sillyAtk = 0;
 	}
 }
 

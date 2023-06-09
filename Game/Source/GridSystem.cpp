@@ -116,6 +116,20 @@ bool GridSystem::isWalkable(iPoint pos)
 	return false;
 }
 
+bool GridSystem::isUnit(iPoint pos)
+{
+	if (pos.x < TILE_W || pos.y < TILE_H) return false;
+
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	if (x >= MAX_TILES_X || y >= MAX_TILES_Y) return false;
+
+	if (grid[x][y].walkability == TileWalkability::UNIT) return true;
+
+	return false;
+}
+
 void GridSystem::move(iPoint origin, iPoint destination)
 {
 	for (auto& u : unitsData)

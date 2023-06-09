@@ -182,6 +182,21 @@ bool SceneBattle::Update(float dt)
 					turnTimer = 0;
 				}
 
+				if (i->atkEasingHasEnded())
+				{
+					for (auto& unit : units)
+					{
+						if (unit->GetPosition() == gridSystem->currentAction.destinationTile)
+						{
+							app->particleManager->CreateParticleSystem(gridSystem->currentAction.destinationTile, Blueprint::SLASH, gridSystem->currentAction.destinationTile);
+							unit->ActivateDmgEasing();
+							unit->DealDamage(i->GetDamage());
+							i->StartAction(gridSystem->currentAction);
+							i->SetHasFinishedTurn(true);
+						}
+					}
+				}
+
 				switch (unitAction.action)
 				{
 				case UA::NONE:
@@ -191,8 +206,13 @@ bool SceneBattle::Update(float dt)
 
 					if (gridSystem->isWalkable(unitAction.destinationTile))
 					{
+						gridSystem->currentAction = unitAction;
 						gridSystem->move(i->position, unitAction.destinationTile);
 						i->StartAction(unitAction);
+					}
+					else if (gridSystem->isUnit(unitAction.destinationTile))
+					{
+						i->ActivateAtkEasing();
 					}
 					break;
 				case UA::PREPARE_DASH:
@@ -292,6 +312,7 @@ bool SceneBattle::Update(float dt)
 								case UA::ATTACK:
 									if (hit == unit->position)
 									{
+										app->particleManager->CreateParticleSystem(hit, Blueprint::SLASH, hit);
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 										i->StartAction(gridSystem->currentAction);
@@ -382,6 +403,7 @@ bool SceneBattle::Update(float dt)
 								}
 							}
 						}
+						if(gridSystem->currentAction.action != UA::ATTACK)
 						i->SetHasFinishedTurn(true);
 					}
 				}
@@ -405,6 +427,7 @@ bool SceneBattle::Update(float dt)
 		if (!i->GetHealthPoints() > 0)
 		{
 			i->SetHasFinishedTurn(true);
+			gridSystem->removeUnit(i->position);
 
 		}
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() <= 0)

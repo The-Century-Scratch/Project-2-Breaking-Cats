@@ -112,6 +112,10 @@ public:
 
 	void ActivateDmgEasing();
 
+	void ActivateAtkEasing();
+
+	bool atkEasingHasEnded();
+
 protected:
 
 	int moveTimer = 0;
@@ -121,6 +125,9 @@ protected:
 	const int tileSize = 16;
 	iPoint destination;
 
+	eastl::unique_ptr<Easing> atkEasingIn;
+	eastl::unique_ptr<Easing> atkEasingOut;
+	float sillyAtk;
 	eastl::unique_ptr<Easing> dmgEasingIn;
 	eastl::unique_ptr<Easing> dmgEasingOut;
 	float sillyDmg;

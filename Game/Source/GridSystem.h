@@ -68,6 +68,8 @@ public:
 
 	bool isWalkable(iPoint pos);
 
+	bool isUnit(iPoint pos);
+
 	void move(iPoint origin, iPoint destination);
 
 	void removeUnit(iPoint UnitPos);
