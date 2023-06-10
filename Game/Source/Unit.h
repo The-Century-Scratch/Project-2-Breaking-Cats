@@ -18,6 +18,13 @@ enum class ActionState
 	ATTACK,
 	DIE
 };
+enum Facing
+{
+	LEFT = 0,
+	RIGHT,
+	UP,
+	DOWN
+};
 enum class UnitType
 {
 	UNDEFINED,
@@ -97,11 +104,13 @@ public:
 	SString GetName();
 	UnitType GetType();
 	bool GetIsAlly();
+	bool GetIsMelee();
 
 	void Update();
 
 	int velocity = 0;
 	int playerId;
+	Facing gridFacing;
 
 	pugi::xml_node parameters;
 	void SmoothMove();

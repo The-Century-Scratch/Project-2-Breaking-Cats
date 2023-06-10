@@ -168,6 +168,18 @@ bool SceneBattle::Update(float dt)
 
 	for (auto& i : units)
 	{
+		if (!i->GetHealthPoints() > 0)
+		{
+			i->SetHasFinishedTurn(true);
+			gridSystem->removeUnit(i->position);
+
+		}
+		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() <= 0)
+		{
+			i->SetHasFinishedTurn(true);
+			gridSystem->removeUnit(i->position);
+		}
+
 		if (i->GetType() == UnitType::STRAW) continue;
 
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
@@ -175,26 +187,29 @@ bool SceneBattle::Update(float dt)
 			noUnitHasActed = false;
 
 			Unit::PlayerAction unitAction = i->HandleInput();
+
+			if (i->atkEasingHasEnded())
+			{
+				for (auto& unit : units)
+				{
+					if (unit->GetPosition() == gridSystem->currentAction.destinationTile)
+					{
+						iPoint displacement = { 8,-8 };
+						gridSystem->currentAction.action = UA::ATTACK;
+						app->particleManager->CreateParticleSystem(gridSystem->currentAction.destinationTile + displacement, Blueprint::SLASH, gridSystem->currentAction.destinationTile + displacement);
+						unit->ActivateDmgEasing();
+						unit->DealDamage(i->GetDamage());
+						i->StartAction(gridSystem->currentAction);
+						i->SetHasFinishedTurn(true);
+					}
+				}
+			}
+
 			if(turnTimer > 10)
 			{
 				if (unitAction.action != UA::NONE)
 				{
 					turnTimer = 0;
-				}
-
-				if (i->atkEasingHasEnded())
-				{
-					for (auto& unit : units)
-					{
-						if (unit->GetPosition() == gridSystem->currentAction.destinationTile)
-						{
-							app->particleManager->CreateParticleSystem(gridSystem->currentAction.destinationTile, Blueprint::SLASH, gridSystem->currentAction.destinationTile);
-							unit->ActivateDmgEasing();
-							unit->DealDamage(i->GetDamage());
-							i->StartAction(gridSystem->currentAction);
-							i->SetHasFinishedTurn(true);
-						}
-					}
 				}
 
 				switch (unitAction.action)
@@ -204,15 +219,24 @@ bool SceneBattle::Update(float dt)
 				case UA::MOVE:
 					gridSystem->showArea = false;
 
+					if (unitAction.destinationTile.x < i->position.x)
+						i->gridFacing = LEFT;
+					else if (unitAction.destinationTile.x > i->position.x)
+						i->gridFacing = RIGHT;
+					else if (unitAction.destinationTile.y < i->position.y)
+						i->gridFacing = UP;
+					else if (unitAction.destinationTile.y > i->position.y)
+						i->gridFacing = DOWN;
+
 					if (gridSystem->isWalkable(unitAction.destinationTile))
 					{
-						gridSystem->currentAction = unitAction;
 						gridSystem->move(i->position, unitAction.destinationTile);
 						i->StartAction(unitAction);
 					}
-					else if (gridSystem->isUnit(unitAction.destinationTile))
+					else if (gridSystem->isUnit(unitAction.destinationTile) && i->GetIsMelee())
 					{
 						i->ActivateAtkEasing();
+						gridSystem->currentAction = unitAction;
 					}
 					break;
 				case UA::PREPARE_DASH:
@@ -247,6 +271,8 @@ bool SceneBattle::Update(float dt)
 							iPoint  unitPos = unit.get()->GetPosition();
 							if (i->position.DistanceTo(unitPos) < 18)
 							{
+								iPoint displacement = { 8,-8 };
+								app->particleManager->CreateParticleSystem(unit->position + displacement, Blueprint::SLASH, unit->position + displacement);
 								unit->ActivateDmgEasing();
 								unit->DealDamage(i->GetDamage());
 								i->StartAction(unitAction);
@@ -266,6 +292,8 @@ bool SceneBattle::Update(float dt)
 							iPoint  unitPos = unit.get()->GetPosition();
 							if (i->position.x == unit->position.x || i->position.y == unit->position.y)
 							{
+								iPoint displacement = { 8,8 };
+								app->particleManager->CreateParticleSystem(i->position + displacement, Blueprint::BULLET, unit->position + displacement);
 								unit->ActivateDmgEasing();
 								unit->DealDamage(i->GetDamage());
 								i->StartAction(unitAction);
@@ -312,7 +340,8 @@ bool SceneBattle::Update(float dt)
 								case UA::ATTACK:
 									if (hit == unit->position)
 									{
-										app->particleManager->CreateParticleSystem(hit, Blueprint::SLASH, hit);
+										iPoint displacement = { 8,-8 };
+										app->particleManager->CreateParticleSystem(hit + displacement, Blueprint::SLASH, hit + displacement);
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
 										i->StartAction(gridSystem->currentAction);
@@ -360,6 +389,8 @@ bool SceneBattle::Update(float dt)
 									}
 									else
 									{
+										iPoint displacement = { 8,8 };
+										app->particleManager->CreateParticleSystem(i->position + displacement, Blueprint::DASH, hit + displacement);
 										gridSystem->currentAction.destinationTile = gridSystem->getFocusPosition();
 										gridSystem->move(i->position, gridSystem->currentAction.destinationTile);
 										i->StartAction(gridSystem->currentAction);
@@ -403,13 +434,13 @@ bool SceneBattle::Update(float dt)
 								}
 							}
 						}
-						if(gridSystem->currentAction.action != UA::ATTACK)
 						i->SetHasFinishedTurn(true);
 					}
 				}
 			}
 		}
 		i->Update();
+
 
 		if (i->GetHasFinishedTurn() && i->GetIsMyTurn())
 		{
@@ -420,20 +451,6 @@ bool SceneBattle::Update(float dt)
 			{
 				units[turn]->SetIsMyTurn(true);
 			}
-
-
-			//noUnitHasActed = false;
-		}
-		if (!i->GetHealthPoints() > 0)
-		{
-			i->SetHasFinishedTurn(true);
-			gridSystem->removeUnit(i->position);
-
-		}
-		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() <= 0)
-		{
-			i->SetHasFinishedTurn(true);
-			gridSystem->removeUnit(i->position);
 		}
 	}
 
@@ -455,49 +472,48 @@ bool SceneBattle::Update(float dt)
 			i->SetHasFinishedTurn(false);
 		}
 		turn = 0;
-
-		bool enemiesAlive = false;
-		for (auto& i : units)
-		{
-			if (!i->GetIsAlly() && i->GetHealthPoints() > 0)
-			{
-				enemiesAlive = true;
-			}
-
-		}
-		bool alliesAlive = false;
-		for (auto& i : units)
-		{
-			if (i->GetIsAlly() && i->GetHealthPoints() > 0)
-			{
-				alliesAlive = true;
-			}
-
-		}
-		if (!enemiesAlive)
-		{
-			app->map->CleanUp();
-			app->map->ClearMaps();
-
-			app->sceneManager->currentScene = 6;
-
-			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
-			
-		}
-		if (!alliesAlive)
-		{
-			app->map->CleanUp();
-			app->map->ClearMaps();
-
-			app->sceneManager->currentScene = 6;
-
-			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
-
-		}
-
 	}
 
 
+
+	bool enemiesAlive = false;
+	for (auto& i : units)
+	{
+		if (!i->GetIsAlly() && i->GetHealthPoints() > 0)
+		{
+			enemiesAlive = true;
+		}
+
+	}
+	bool alliesAlive = false;
+	for (auto& i : units)
+	{
+		if (i->GetIsAlly() && i->GetHealthPoints() > 0)
+		{
+			alliesAlive = true;
+		}
+
+	}
+	if (!enemiesAlive)
+	{
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->currentScene = 6;
+
+		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
+
+	}
+	if (!alliesAlive)
+	{
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->currentScene = 6;
+
+		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
+
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{

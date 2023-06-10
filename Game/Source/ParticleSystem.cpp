@@ -78,7 +78,7 @@ bool ParticleSystem::Update(float dt)
 			}
 		}
 	}
-	currentAnim->Update();
+	/*currentAnim->Update();*/
 	return (age < (PSLifespan + particleLifespan) || isConstant);
 }
 
@@ -88,7 +88,7 @@ void ParticleSystem::PostUpdate()
 		if (item->data != nullptr) {
 			if (item->data->IsBeingUsed()) {
 				app->render->DrawParticleAlpha(texture, item->data->GetPosition().x, item->data->GetPosition().y,
-					item->data->GetColor().r, item->data->GetColor().g, item->data->GetColor().b, item->data->GetColor().a, item->data->GetScale(), &currentAnim->GetCurrentFrame());
+					item->data->GetColor().r, item->data->GetColor().g, item->data->GetColor().b, item->data->GetColor().a, item->data->GetScale()/*, &currentAnim->GetCurrentFrame()*/);
 			}
 		}
 	}

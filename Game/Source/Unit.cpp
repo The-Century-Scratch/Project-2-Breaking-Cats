@@ -24,6 +24,7 @@ void Unit::Create(iPoint pos)
 
 	position = pos;
 	size = { 16, 16 };
+	gridFacing = LEFT;
 
 	sillyEasingJump = eastl::make_unique<Easing>(false, 0, 20, 0, 8);
 	sillyEasingFall = eastl::make_unique<Easing>(false, 0, 0, 20, 8);
@@ -31,8 +32,8 @@ void Unit::Create(iPoint pos)
 	dmgEasingIn = eastl::make_unique<Easing>(false, 0, 8, 0, 2);
 	dmgEasingOut = eastl::make_unique<Easing>(false, 0, 0, 8, 2);
 
-	atkEasingIn = eastl::make_unique<Easing>(false, 0, 8, 0, 4);
-	atkEasingOut = eastl::make_unique<Easing>(false, 0, 0, 8, 6);
+	atkEasingIn = eastl::make_unique<Easing>(false, 0, 12, 0, 6);
+	atkEasingOut = eastl::make_unique<Easing>(false, 0, 0, 12, 6);
 }
 
 void Unit::DebugDraw() const
@@ -65,7 +66,24 @@ void Unit::Draw() const
 			Displacement = { 5, 24 };
 	}
 
-	app->render->DrawTexture(texture, position.x - Displacement.x + sillyDmg, position.y - Displacement.y - sillyJump, &currentAnim->GetCurrentFrame());
+	switch (gridFacing)
+	{
+	case LEFT:
+		app->render->DrawTexture(texture, position.x - Displacement.x + sillyDmg - sillyAtk, position.y - Displacement.y - sillyJump, &currentAnim->GetCurrentFrame());
+		break;
+	case RIGHT:
+		app->render->DrawTexture(texture, position.x - Displacement.x + sillyDmg + sillyAtk, position.y - Displacement.y - sillyJump, &currentAnim->GetCurrentFrame());
+		break;
+	case UP:
+		app->render->DrawTexture(texture, position.x - Displacement.x + sillyDmg, position.y - Displacement.y - sillyJump - sillyAtk, &currentAnim->GetCurrentFrame());
+		break;
+	case DOWN:
+		app->render->DrawTexture(texture, position.x - Displacement.x + sillyDmg, position.y - Displacement.y - sillyJump + sillyAtk, &currentAnim->GetCurrentFrame());
+		break;
+	default:
+		break;
+	}
+
 }
 
 bool Unit::GetIsMyTurn()
@@ -300,7 +318,7 @@ void Unit::Update()
 	// ATK EASING
 	if (atkEasingIn->easingsActivated)
 	{
-		sillyAtk = atkEasingIn->sineEaseOut(atkEasingIn->currentIteration, atkEasingIn->initialPos, atkEasingIn->deltaPos, atkEasingIn->totalIterations);
+		sillyAtk = atkEasingIn->sineEaseIn(atkEasingIn->currentIteration, atkEasingIn->initialPos, atkEasingIn->deltaPos, atkEasingIn->totalIterations);
 
 		if (atkEasingIn->currentIteration < atkEasingIn->totalIterations)
 		{
@@ -316,7 +334,7 @@ void Unit::Update()
 
 	if (atkEasingOut->easingsActivated)
 	{
-		sillyAtk = atkEasingOut->sineEaseIn(atkEasingOut->currentIteration, atkEasingOut->initialPos, atkEasingOut->deltaPos, atkEasingOut->totalIterations);
+		sillyAtk = atkEasingOut->sineEaseOut(atkEasingOut->currentIteration, atkEasingOut->initialPos, atkEasingOut->deltaPos, atkEasingOut->totalIterations);
 
 		if (atkEasingOut->currentIteration < atkEasingOut->totalIterations)
 		{
@@ -434,6 +452,34 @@ bool Unit::GetIsAlly()
 		break;
 	case UnitType::GUARDIAN:
 		return false;
+		break;
+	case UnitType::LONGRANGE:
+		return false;
+		break;
+	case UnitType::STRAW:
+		return false;
+		break;
+	default:
+		break;
+	}
+	return false;
+}
+
+bool Unit::GetIsMelee()
+{
+	switch (type)
+	{
+	case UnitType::UNDEFINED:
+		return false;
+		break;
+	case UnitType::GATS:
+		return true;
+		break;
+	case UnitType::CATSKA:
+		return false;
+		break;
+	case UnitType::GUARDIAN:
+		return true;
 		break;
 	case UnitType::LONGRANGE:
 		return false;

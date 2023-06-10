@@ -184,14 +184,53 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->isConstant = false;
 		PS->initialColor.Set(255, 255, 255, 255);
 		PS->objectiveColor.Set(255, 255, 255, 255);
-		PS->particleLifespan = 0.4f;
+		PS->particleLifespan = 0.2f;
 		PS->shootingAcceleration = fPoint{ 0.0f, -50.0f };
-		PS->randomShootingVelocityRangeMin = iPoint{ -100, -300 };
-		PS->randomShootingVelocityRangeMax = iPoint{ 300, 100 };
+		PS->randomShootingVelocityRangeMin = iPoint{ -200, -200 };
+		PS->randomShootingVelocityRangeMax = iPoint{ 200, 200 };
 		PS->randomSpawnPositionRangeMin = iPoint{ 0, 0 };
 		PS->randomSpawnPositionRangeMax = iPoint{ 0, 0 };
-		PS->initialScale = 0.2f;
-		PS->objectiveScale = 0.2f;
+		PS->initialScale = 1.6f;
+		PS->objectiveScale = 1.6f;
+		break;
+	case Blueprint::DASH:
+		GiveParticlesToPS(PS, 10);
+		PS->PSLifespan = 0.1f;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.0f;
+		PS->isConstant = false;
+		PS->initialColor.Set(255, 255, 0, 255);
+		PS->objectiveColor.Set(255, 0, 0, 0);
+		PS->particleLifespan = 1.0f;
+		PS->objectivePosition = finalPosition;
+		if (initialPosition.x < finalPosition.x)
+		{
+			PS->shootingAcceleration = fPoint{ -50.0f, 0.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ 20, -20 };
+			PS->randomShootingVelocityRangeMax = iPoint{ 80, 20 };
+		}
+		else if (initialPosition.x > finalPosition.x)
+		{
+			PS->shootingAcceleration = fPoint{ 50.0f, 0.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ -20, -20 };
+			PS->randomShootingVelocityRangeMax = iPoint{ -80, 20 };
+		}
+		else if (initialPosition.y < finalPosition.y)
+		{
+			PS->shootingAcceleration = fPoint{ 0.0f, -50.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ -20, 80 };
+			PS->randomShootingVelocityRangeMax = iPoint{ 20, 20 };
+		}
+		else if (initialPosition.y > finalPosition.y)
+		{
+			PS->shootingAcceleration = fPoint{ 0.0f, 50.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ -20, -80 };
+			PS->randomShootingVelocityRangeMax = iPoint{ 20, -20 };
+		}
+		PS->randomSpawnPositionRangeMin = iPoint{ 0, 0 };
+		PS->randomSpawnPositionRangeMax = iPoint{ 0, 0 };
+		PS->initialScale = 2.0f;
+		PS->objectiveScale = 2.4f;
 		break;
 	case Blueprint::NONE:
 		break;
