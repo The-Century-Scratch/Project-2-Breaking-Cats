@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "Map.h"
 #include "Catska.h"
+#include "Serpicat.h"
 #include "Gats.h"
 #include "Guardian.h"
 #include "LongRange.h"
@@ -68,6 +69,18 @@ bool SceneBattle::Load()
 		catska.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
 		gridSystem->LoadUnitData(catska.get());
 		units.push_back(eastl::move(catska));
+	}
+	for (pugi::xml_node nodeUnit = config.child("serpicat");
+		nodeUnit; nodeUnit = nodeUnit.next_sibling("serpicat"))
+	{
+
+		eastl::unique_ptr<Unit> serpicat;
+		serpicat = eastl::make_unique<Serpicat>();
+		serpicat.get()->velocity = nodeUnit.attribute("velocity").as_int();
+		serpicat.get()->parameters = nodeUnit;
+		serpicat.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
+		gridSystem->LoadUnitData(serpicat.get());
+		units.push_back(eastl::move(serpicat));
 	}
 	for (pugi::xml_node nodeUnit = config.child("guardian");
 		nodeUnit; nodeUnit = nodeUnit.next_sibling("guardian"))
@@ -310,6 +323,16 @@ bool SceneBattle::Update(float dt)
 						gridSystem->currentAction = unitAction;
 					break;
 				case UA::TELEPORT:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+					break;
+				case UA::PORTAL:
+					gridSystem->showArea = !gridSystem->showArea;
+					if (gridSystem->showArea)
+						gridSystem->currentAction = unitAction;
+					break;
+				case UA::SILLYMAGIC:
 					gridSystem->showArea = !gridSystem->showArea;
 					if (gridSystem->showArea)
 						gridSystem->currentAction = unitAction;

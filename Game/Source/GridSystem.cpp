@@ -130,6 +130,20 @@ bool GridSystem::isUnit(iPoint pos)
 	return false;
 }
 
+bool GridSystem::isPortal(iPoint pos)
+{
+	if (pos.x < TILE_W || pos.y < TILE_H) return false;
+
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	if (x >= MAX_TILES_X || y >= MAX_TILES_Y) return false;
+
+	if (pos == lastPortal || pos == firstPortal) return true;
+
+	return false;
+}
+
 void GridSystem::move(iPoint origin, iPoint destination)
 {
 	for (auto& u : unitsData)
@@ -253,13 +267,22 @@ eastl::vector<iPoint> GridSystem::getHitsPosition()
 {
 	eastl::vector<iPoint> Hits;
 
+	// Acciones que necesitan pasar el objetivo
 	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH || 
 		currentAction.action == Unit::PlayerAction::Action::ATTACK_LONG_RANGE || 
-		currentAction.action == Unit::PlayerAction::Action::GRENADE || 
-		currentAction.action == Unit::PlayerAction::Action::TELEPORT)
+		currentAction.action == Unit::PlayerAction::Action::GRENADE)
 	{
 		iPoint dashDestination = { focusPos.x, focusPos.y };
 		Hits.push_back(eastl::move(dashDestination));
+	}
+
+	// Acciones que solo necesitan 1 casilla
+	if (currentAction.action == Unit::PlayerAction::Action::TELEPORT ||
+		currentAction.action == Unit::PlayerAction::Action::PORTAL)
+	{
+		iPoint dashDestination = { focusPos.x, focusPos.y };
+		Hits.push_back(eastl::move(dashDestination));
+		return Hits;
 	}
 
 	for (size_t x = 0; x < MAX_TILES_X; x++)
@@ -280,6 +303,22 @@ eastl::vector<iPoint> GridSystem::getHitsPosition()
 iPoint GridSystem::getFocusPosition()
 {
 	return iPoint(focusPos.x, focusPos.y);
+}
+
+void GridSystem::PlacePortal(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	if (lastPortal.IsZero())
+	{
+		lastPortal = pos;
+	}
+	else
+	{
+		firstPortal = lastPortal;
+		lastPortal = pos;
+	}
 }
 
 void GridSystem::showActionArea()
@@ -305,6 +344,11 @@ void GridSystem::showActionArea()
 		break;
 	case UA::TELEPORT:
 		showTeleport(currentAction.destinationTile);
+		break;
+	case UA::PORTAL:
+		showPortal(currentAction.destinationTile);
+		break;
+	case UA::SILLYMAGIC:
 		break;
 	default:
 		break;
@@ -336,6 +380,12 @@ void GridSystem::showEffectArea(SDL_Rect r)
 		break;
 	case UA::TELEPORT:
 		showTeleportAOE(pos);
+		break;
+	case UA::PORTAL:
+		showPortalAOE(pos);
+		break;
+	case UA::SILLYMAGIC:
+		break;
 	default:
 		break;
 	}
@@ -424,6 +474,27 @@ void GridSystem::showTeleport(iPoint pos)
 		{
 			if (grid[i][j].walkability == TileWalkability::WALKABLE)
 				grid[i][j].state = TileState::CLICKABLE;
+		}
+	}
+}
+
+void GridSystem::showPortal(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	iPoint unitPos = { grid[x][y].bounds.x , grid[x][y].bounds.y };
+
+	for (size_t i = 0; i < MAX_TILES_X; i++)
+	{
+		for (size_t j = 0; j < MAX_TILES_Y; j++)
+		{
+			iPoint tilePos = { grid[i][j].bounds.x , grid[i][j].bounds.y };
+			if (grid[i][j].walkability != TileWalkability::WALKABLE && tilePos != lastPortal) continue;
+			if (unitPos.DistanceTo(tilePos) < 5 * TILE_W)
+			{
+				grid[i][j].state = TileState::CLICKABLE;
+			}
 		}
 	}
 }
@@ -553,6 +624,14 @@ void GridSystem::showGrenadeAOE(iPoint pos)
 }
 
 void GridSystem::showTeleportAOE(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	grid[x][y].state = TileState::AREA_EFFECT;
+}
+
+void GridSystem::showPortalAOE(iPoint pos)
 {
 	int x = (pos.x - gridPos.x) / TILE_W;
 	int y = (pos.y - gridPos.y) / TILE_H;

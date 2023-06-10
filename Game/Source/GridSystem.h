@@ -70,6 +70,8 @@ public:
 
 	bool isUnit(iPoint pos);
 
+	bool isPortal(iPoint pos);
+
 	void move(iPoint origin, iPoint destination);
 
 	void removeUnit(iPoint UnitPos);
@@ -82,11 +84,14 @@ public:
 
 	iPoint getFocusPosition();
 
+	void PlacePortal(iPoint pos);
+
 
 	Unit::PlayerAction currentAction;
 
 	bool showArea;
 
+	iPoint lastPortal, firstPortal;
 private:
 
 	bool IsMouseInside(SDL_Rect r);
@@ -109,6 +114,8 @@ private:
 
 	void showTeleport(iPoint pos);
 
+	void showPortal(iPoint pos);
+
 	void showAttackAOE(iPoint pos);
 
 	void showAttackRangeAOE(iPoint pos);
@@ -118,6 +125,8 @@ private:
 	void showGrenadeAOE(iPoint pos);
 
 	void showTeleportAOE(iPoint pos);
+
+	void showPortalAOE(iPoint pos);
 
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;

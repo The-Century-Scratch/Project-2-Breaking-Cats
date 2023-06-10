@@ -412,6 +412,11 @@ void Unit::DealDamage(int amount)
 	healthPoints -= amount;
 }
 
+void Unit::Heal(int amount)
+{
+	healthPoints += amount;
+}
+
 int Unit::GetHealthPoints()
 {
 	return healthPoints;
@@ -420,6 +425,11 @@ int Unit::GetHealthPoints()
 int Unit::GetDamage()
 {
 	return damage;
+}
+
+int Unit::GetMagic()
+{
+	return magic;
 }
 
 int Unit::GetPlayerId()
@@ -450,6 +460,9 @@ bool Unit::GetIsAlly()
 	case UnitType::CATSKA:
 		return true;
 		break;
+	case UnitType::SERPICAT:
+		return true;
+		break;
 	case UnitType::GUARDIAN:
 		return false;
 		break;
@@ -477,6 +490,9 @@ bool Unit::GetIsMelee()
 		break;
 	case UnitType::CATSKA:
 		return false;
+		break;
+	case UnitType::SERPICAT:
+		return true;
 		break;
 	case UnitType::GUARDIAN:
 		return true;

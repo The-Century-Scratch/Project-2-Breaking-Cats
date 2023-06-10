@@ -30,6 +30,7 @@ enum class UnitType
 	UNDEFINED,
 	GATS,
 	CATSKA,
+	SERPICAT,	
 	GUARDIAN,
 	LONGRANGE,
 	STRAW
@@ -52,7 +53,9 @@ public:
 			PREPARE_DASH = 0x0007,
 			ATTACK_AND_HEAL_WITH_KILL = 0x0008,
 			GRENADE = 0x0009,
-			TELEPORT = 0x0010
+			TELEPORT = 0x0010,
+			PORTAL = 0x0011,
+			SILLYMAGIC = 0x0012
 		};
 
 		friend Action operator&(Action a, Action b)
@@ -98,8 +101,10 @@ public:
 	void SetIsMyTurn(bool value);
 
 	void DealDamage(int amount);
+	void Heal(int amount);
 	int GetHealthPoints();
 	int GetDamage();
+	int GetMagic();
 	int GetPlayerId();
 	SString GetName();
 	UnitType GetType();
@@ -159,6 +164,7 @@ protected:
 	bool hasFinishedTurn = false;
 	int healthPoints = 1;
 	int damage;
+	int magic;
 	int maxHealth;
 };
 

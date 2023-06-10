@@ -144,6 +144,7 @@
     <ClCompile Include="Source\SceneLogo.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\SceneTitle.cpp" />
+    <ClCompile Include="Source\Serpicat.cpp" />
     <ClCompile Include="Source\StaticObject.cpp" />
     <ClCompile Include="Source\StatsManager.cpp" />
     <ClCompile Include="Source\Straw.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Source\SceneLogo.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\SceneTitle.h" />
+    <ClInclude Include="Source\Serpicat.h" />
     <ClInclude Include="Source\StaticObject.h" />
     <ClInclude Include="Source\StatsManager.h" />
     <ClInclude Include="Source\Straw.h" />

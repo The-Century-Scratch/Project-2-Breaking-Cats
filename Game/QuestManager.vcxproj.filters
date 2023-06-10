@@ -73,6 +73,7 @@
       <Filter>Quests</Filter>
     </ClCompile>
     <ClCompile Include="Source\GridSystem.cpp" />
+    <ClCompile Include="Source\Serpicat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -160,6 +161,7 @@
       <Filter>Quests</Filter>
     </ClInclude>
     <ClInclude Include="Source\GridSystem.h" />
+    <ClInclude Include="Source\Serpicat.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />
