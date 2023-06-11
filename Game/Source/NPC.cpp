@@ -56,6 +56,8 @@ bool NPC::Start() {
 		NPCIdle.PushBack({ 64,0,32,32 });
 		NPCIdle.loop = true;
 		NPCIdle.speed = 0.1f;
+		//anim2
+		NPCIdleAction.speed = -1;
 		break;
 	case NPCTYPE::VILLAGE:
 		//collider
@@ -68,6 +70,8 @@ bool NPC::Start() {
 		NPCIdle.PushBack({ 0,0,32,32 });
 		NPCIdle.loop = false;
 		NPCIdle.speed = 0.0f;
+		//anim2
+		NPCIdleAction.speed = -1;
 		break;
 	case NPCTYPE::GUARDIAN:
 		//collider
@@ -76,10 +80,18 @@ bool NPC::Start() {
 		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 		//dialogue id
 		dialogueid = 2;
-		// anim
-		NPCIdle.PushBack({ 0,0,32,32 });
-		NPCIdle.loop = false;
-		NPCIdle.speed = 0.0f;
+		//anim1
+		for (int i = 0; i < 8; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 8; i < 15; ++i) {
+			NPCIdleAction.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.1f;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
 		//collider
@@ -89,10 +101,18 @@ bool NPC::Start() {
 		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 		//dialogue id
 		dialogueid = 1;
-		//anim
-		NPCIdle.PushBack({ 0,0,32,32 });
-		NPCIdle.loop = false;
-		NPCIdle.speed = 0.0f;
+		//anim1
+		for (int i = 0; i < 7; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 7; i < 17; ++i) {
+			NPCIdleAction.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.2f;
 		break;
 	case NPCTYPE::CONTRABANDIST:
 		//collider
@@ -102,11 +122,9 @@ bool NPC::Start() {
 		//dialogue id
 		dialogueid = 3;
 		//anim1
-		NPCIdle.PushBack({ 0,0,32,32 });
-		NPCIdle.PushBack({ 32,0,32,32 });
-		NPCIdle.PushBack({ 64,0,32,32 });
-		NPCIdle.PushBack({ 96,0,32,32 });
-		NPCIdle.PushBack({ 128,0,32,32 });
+		for (int i = 0; i < 5; ++i) {
+			NPCIdle.PushBack({ 32*i,0,32,32 });
+		}
 		NPCIdle.loop = true;
 		NPCIdle.speed = 0.1f;
 		//anim2
@@ -152,23 +170,30 @@ bool NPC::Update()
 	}
 
 	
-	
-
-	++actionanimcounter;
-	if (actionanimcounter >= 400) {
-		SDL_Rect rect = NPCIdleAction.GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
-		NPCIdleAction.Update();
-		if (NPCIdleAction.HasFinished() == true) {
-			actionanimcounter = 0;
-			NPCIdleAction.Reset();
-		}
-	}
-	else {
+	//anim things basically trigger the action for the anim if the npc has it check if speed is -1 to know if the action for the idle animation exists or no
+	if (this->NPCIdleAction.speed == -1) {
 		SDL_Rect rect = NPCIdle.GetCurrentFrame();
 		app->render->DrawTexture(texture, position.x, position.y, &rect);
 		NPCIdle.Update();
 	}
+	else {
+		++actionanimcounter;
+		if (actionanimcounter >= 400) {
+			SDL_Rect rect = NPCIdleAction.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdleAction.Update();
+			if (NPCIdleAction.HasFinished() == true) {
+				actionanimcounter = 0;
+				NPCIdleAction.Reset();
+			}
+		}
+		else {
+			SDL_Rect rect = NPCIdle.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdle.Update();
+		}
+	}
+	
 	
 	return true;
 }
