@@ -31,6 +31,8 @@ public:
 
 	bool Update();
 
+	bool PostUpdate();
+
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2) override;

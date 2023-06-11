@@ -80,6 +80,11 @@ bool NPC::Update()
 		break;
 	}
 
+	return true;
+}
+
+bool NPC::PostUpdate()
+{
 	SDL_Rect rect = NPCAnim.GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	NPCAnim.Update();
@@ -131,17 +136,19 @@ void NPC::OnCollision(Collider* c1, Collider* c2)
 		case Collider::Type::WALL:
 			break;
 		case Collider::Type::PLAYER:
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+			if (!app->sceneManager->Pause && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 				LOG("TRIGGER DIALOGUE");
 				app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
 				app->sceneManager->dialogueManager->printText = true;
+				app->sceneManager->Pause = true;
 				SDL_ShowCursor(SDL_ENABLE);
 			}
-			else if (CONTROLLERA)
+			else if (!app->sceneManager->Pause && CONTROLLERA)
 			{
 				LOG("TRIGGER DIALOGUE");
 				app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
 				app->sceneManager->dialogueManager->printText = true;
+				app->sceneManager->Pause = true;
 				SDL_ShowCursor(SDL_DISABLE);
 			}
 			break;
