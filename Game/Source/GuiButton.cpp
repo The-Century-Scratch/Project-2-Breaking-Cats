@@ -236,6 +236,45 @@ bool GuiButton::Draw(Render* render)
 		}
 		app->render->DrawText(text.GetString(), (bounds.x + 60), (bounds.y + 12), (bounds.w - 120), (bounds.h - 24), { 255,255,255 });
 	}
+	else if (app->hud->hudstate == hudSTATE::ENDSCREEN)
+	{
+	switch (state)
+	{
+	case GuiControlState::DISABLED:
+		rect = { 0,192,267,64 };
+		render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
+		if (app->debug->drawHugBounds)
+		{
+			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 130, 130, 130, 255, false);
+		}
+		break;
+	case GuiControlState::NORMAL:
+		rect = { 0, 0,267,64 };
+		render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
+		if (app->debug->drawHugBounds)
+		{
+			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 0, 255, 0, 255, false);
+		}
+		break;
+	case GuiControlState::FOCUSED:
+		rect = { 0,64,267,64 };
+		render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
+		if (app->debug->drawHugBounds)
+		{
+			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 102, 0, 255, false);
+		}
+		break;
+	case GuiControlState::PRESSED:
+		rect = { 0,128,267,64 };
+		render->DrawTexture(app->hud->guiButtonsTitle, (bounds.x) - app->render->camera.x, (bounds.y) - app->render->camera.y, &rect, 1.0f, 0.0, 2147483647, 2147483647, true);
+		if (app->debug->drawHugBounds)
+		{
+			app->render->DrawRectangle({ (bounds.x - app->render->camera.x) / scale,(bounds.y - app->render->camera.y) / scale,bounds.w / scale,bounds.h / scale }, 255, 0, 0, 255, false);
+		}
+		break;
+	}
+	app->render->DrawText(text.GetString(), (bounds.x + 60), (bounds.y + 12), (bounds.w - 120), (bounds.h - 24), { 255,255,255 });
+	}
 
 	return false;
 }

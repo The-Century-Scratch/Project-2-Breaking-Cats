@@ -644,13 +644,36 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 	
+	//load request out from a bool triggerable out of scene
+	if (app->sceneManager->LoadRequestOutScene)
+	{
+		app->LoadGameRequest();
+		app->sceneManager->LoadRequestOutScene = false;
+	}
+
+	//save and load inputs on keyboard
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 	{
 		app->SaveGameRequest();
+		SDL_ShowCursor(SDL_ENABLE);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
 		app->LoadGameRequest();
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	//save and load inputs on controller
+	if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_BACK) == KEY_REPEAT)
+	{
+		if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))
+		{
+			app->SaveGameRequest();
+		}
+		if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_LEFTSHOULDER))
+		{
+			app->LoadGameRequest();
+		}
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)

@@ -57,6 +57,8 @@ public:
 
 	bool changeMap = false;
 
+	bool LoadRequestOutScene = false;
+
 	Scene* current;
 	Scene* next;
 	TransitionStep transitionStep;

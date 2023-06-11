@@ -429,6 +429,9 @@ bool SceneBattle::Update(float dt)
 
 			app->sceneManager->currentScene = 6;
 
+			//app->hud->prevstate = app->hud->hudstate;
+			//app->hud->hudstate = hudSTATE::ENDSCREEN;
+
 			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
 			
 		}
@@ -439,12 +442,32 @@ bool SceneBattle::Update(float dt)
 
 			app->sceneManager->currentScene = 6;
 
+			//app->hud->prevstate = app->hud->hudstate;
+			//app->hud->hudstate = hudSTATE::ENDSCREEN;
+
 			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
 
 		}
 
 	}
 
+
+	//win/lose debug buttons
+
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
+		app->map->CleanUp();
+		app->map->ClearMaps();
+		app->sceneManager->currentScene = 6;
+		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+	{
+		app->map->CleanUp();
+		app->map->ClearMaps();
+		app->sceneManager->currentScene = 6;
+		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
+	}
 
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)

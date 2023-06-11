@@ -11,6 +11,11 @@
 #define CONTROLLERLEFT (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == KEY_REPEAT || app->input->pad->l_x < -0.5)
 #define CONTROLLERRIGHT (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == KEY_REPEAT || app->input->pad->l_x > 0.5)
 
+#define CONTROLLERUPONCE (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == KEY_DOWN)
+#define CONTROLLERDOWNONCE (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == KEY_DOWN)
+#define CONTROLLERLEFTONCE (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT) == KEY_DOWN)
+#define CONTROLLERRIGHTONCE (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT) == KEY_DOWN)
+
 #define CONTROLLERA (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_DOWN)
 #define CONTROLLERB (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_B) == KEY_DOWN)
 #define CONTROLLERX (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_X) == KEY_DOWN)
