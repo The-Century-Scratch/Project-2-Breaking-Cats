@@ -108,6 +108,7 @@
     <slotTexture texturepath="Assets/Textures/InvSlot.png"/>
     <gatsTexture texturepath="Assets/Textures/GatsIdle.png"/>
     <catskaTexture texturepath="Assets/Textures/Catska.png"/>
+    <itemMenuTexture texturepath="Assets/Textures/ItemMenu.png"/>
   </Inventory>
 
   <GridSystem>

@@ -23,6 +23,7 @@ bool BulletPenetration::Start()
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
 	itemid = 4;
+	equiped = false;
 
 	return true;
 }

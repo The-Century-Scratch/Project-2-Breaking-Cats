@@ -479,37 +479,31 @@ bool SceneGameplay::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
-		firePaw->equiped = true;
 		app->inventory->AddItem(firePaw);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
 	{
-		dragonSlayer->equiped = true;
 		app->inventory->AddItem(dragonSlayer);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
 	{
-		grapplingHook->equiped = true;
 		app->inventory->AddItem(grapplingHook);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
 	{
-		bulletPenetration->equiped = true;
 		app->inventory->AddItem(bulletPenetration);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
 	{
-		mysticalEnergy->equiped = true;
 		app->inventory->AddItem(mysticalEnergy);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
 	{
-		arcaneSpirit->equiped = true;
 		app->inventory->AddItem(arcaneSpirit);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}

@@ -51,21 +51,30 @@ bool Inventory::Start()
 	slotText =		app->tex->Load(config.child("slotTexture").attribute("texturepath").as_string());
 	gatsText =		app->tex->Load(config.child("gatsTexture").attribute("texturepath").as_string());
 	catskaText =	app->tex->Load(config.child("catskaTexture").attribute("texturepath").as_string());
+	itemMenuTexture =	app->tex->Load(config.child("itemMenuTexture").attribute("texturepath").as_string());
 
 
 	isActivated = false;
+	isItemMenu_Active = false;
+
 	showStatsId = 1;
 
-	slotRect =				{ 0, 0, 36,36 };
-	slotRectFocus =			{ 36,0, 36,36 };
+	slotRect =				{ 0,  0, 36, 36 };
+	slotRectFocus =			{ 36, 0, 36, 36 };
+
+	itemMenuBounds =		{ 0, 0,	  104, 115 };
+	itemMenuPos =			{ 0, 0,   0,   0   };
+	itemMenuButton =		{ 0, 115, 104, 25  };
+	itemMenuButtonFocus =	{ 0, 140, 104, 25  };
+	itemMenuButtonPos =		{ 0, 0,   0,   0   };
 
 	gatsRect =				{ 0, 0, 32,32 };
 	catskaRect =			{ 0, 0, 32,32 };
 
-	leftArrowRect =			{ 72,16,22,16 };
-	leftArrowRectFocus =	{ 94,16,22,16 };
-	rightArrowRect =		{ 72,0, 22,16 };
-	rightArrowRectFocus =	{ 94,0, 22,16 };
+	leftArrowRect =			{ 72, 16, 22, 16 };
+	leftArrowRectFocus =	{ 94, 16, 22, 16 };
+	rightArrowRect =		{ 72, 0,  22, 16 };
+	rightArrowRectFocus =	{ 94, 0,  22, 16 };
 
 	boundsLeftArrow =		{ 0, 0, 22, 16 };
 	boundsRightArrow =		{ 0, 0, 22, 16 };
@@ -252,6 +261,18 @@ bool Inventory::Update(float dt)
 		HandleStatsInfo();
 
 		HandleSlotState();
+
+		if (isItemMenu_Active)
+		{
+			ItemMenu(currentSlot_);
+		}
+
+		if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
+		{
+			SaveMouseClickPos();
+			OnMouseClickEvent();
+		}
+
 	}
 
 	return true;
@@ -267,7 +288,88 @@ bool Inventory:: PostUpdate()
 	return true;
 }
 
-int Inventory::GetItemEquipped() //Tell me if it works?
+void Inventory::ItemMenu(int curSlot_)
+{
+	itemMenuButtonPos.x = slotList[curSlot_].bounds.x - itemMenuBounds.w;
+	itemMenuButtonPos.y = slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 88;
+	itemMenuButtonPos.w = itemMenuButton.w;
+	itemMenuButtonPos.h = itemMenuButton.h;
+
+	itemMenuPos.x = slotList[curSlot_].bounds.x - itemMenuBounds.w;
+	itemMenuPos.y = slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5;
+	itemMenuPos.w = itemMenuBounds.w;
+	itemMenuPos.h = itemMenuBounds.h;
+
+	if (IsMouseInside(itemMenuButtonPos) && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
+	{
+		slotList[curSlot_].item->equiped = !slotList[curSlot_].item->equiped;
+	}
+}
+
+void Inventory::ItemMenuDraw(int curSlot_)
+{
+	int scale = app->win->GetScale();
+	SDL_Color white = { 255, 255, 255, 255 };
+	app->render->DrawTexture(itemMenuTexture, slotList[curSlot_].bounds.x - itemMenuBounds.w, slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5, &itemMenuBounds);
+
+	if (IsMouseInside(itemMenuButtonPos))
+	{
+		app->render->DrawTexture(itemMenuTexture, slotList[curSlot_].bounds.x - itemMenuBounds.w, slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 88, &itemMenuButtonFocus);
+	}
+	else
+	{
+		app->render->DrawTexture(itemMenuTexture, slotList[curSlot_].bounds.x - itemMenuBounds.w, slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 88, &itemMenuButton);
+	}
+
+	if (slotList[curSlot_].item->equiped)
+	{
+		app->render->DrawText("UNEQUIP", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 5) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 91) * scale, 94 * scale, 19 * scale, white);
+	}
+	else
+	{
+		app->render->DrawText(" EQUIP ", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 5) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 91) * scale, 94 * scale, 19 * scale, white);
+	}
+	SString pep = "te mare tenia una polla\n que ja la voldria jo";
+
+	switch (slotList[curSlot_].itemId)
+	{
+	case 1:
+		app->render->DrawText("Fire Paws", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 12) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 10) * scale, 80 * scale, 14 * scale, white);
+		app->render->DrawText("Dash  through  enemies", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 38) * scale, 84 * scale, 10 * scale, white);
+		app->render->DrawText("and  damage  them", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 55) * scale, 84 * scale, 10 * scale, white);
+		break;
+	case 2:
+		app->render->DrawText("Dragon Slayer", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 10) * scale, 84 * scale, 14 * scale, white);
+		app->render->DrawText("Heal  when  killing", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 38) * scale, 84 * scale, 10 * scale, white);
+		app->render->DrawText("and  gain  speed", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 55) * scale, 84 * scale, 10 * scale, white);
+		break;
+	case 3:
+		app->render->DrawText("Grappling Hook", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 10) * scale, 84 * scale, 14 * scale, white);
+		app->render->DrawText("When  hit  by  an", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 38) * scale, 84 * scale, 10 * scale, white);
+		app->render->DrawText("enemy  move  towards", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 52) * scale, 84 * scale, 10 * scale, white);
+		app->render->DrawText("the  nearest  ally", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 65) * scale, 84 * scale, 10 * scale, white);
+		break;
+	case 4:
+		app->render->DrawText("Penetration Bullet", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 10) * scale, 84 * scale, 14 * scale, white);
+		app->render->DrawText("Attacks  pass ", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 38) * scale, 84 * scale, 10 * scale, white);
+		app->render->DrawText("through  enemies", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 55) * scale, 84 * scale, 10 * scale, white);
+		break;
+	case 5:
+		app->render->DrawText("Mystical Energy", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 10) * scale, 84 * scale, 14 * scale, white);
+		app->render->DrawText("new  information", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 38) * scale, 84 * scale, 10 * scale, white);
+		app->render->DrawText("very  soon...", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 55) * scale, 84 * scale, 10 * scale, white);
+		break;
+	case 6:
+		app->render->DrawText("Arcane  Spirit", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 10) * scale, 84 * scale, 14 * scale, white);
+		app->render->DrawText("new  information", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 38) * scale, 84 * scale, 10 * scale, white);
+		app->render->DrawText("very  soon...", app->render->camera.x + (slotList[curSlot_].bounds.x - itemMenuBounds.w + 10) * scale, app->render->camera.y + (slotList[curSlot_].bounds.y - itemMenuBounds.h * 0.5 + 55) * scale, 84 * scale, 10 * scale, white);
+		break;
+	default:
+		break;
+	}
+}
+
+int Inventory::GetItemEquipped()
 {
 	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
@@ -430,6 +532,12 @@ void Inventory::Draw()
 		{
 			app->render->DrawTexture(itemTexture, slotList[invSlot_].bounds.x+2, slotList[invSlot_].bounds.y+2, &slotList[invSlot_].itemTextureBounds);
 		}
+
+		if (isItemMenu_Active)
+		{
+			ItemMenuDraw(currentSlot_);
+		}
+
 	}
 }
 
@@ -469,18 +577,27 @@ bool Inventory::CleanUp()
 	return true;
 }
 
-bool Inventory::OnGuiMouseClickEvent(GuiControl* control)
+bool Inventory::OnMouseClickEvent()
 {
-	switch (control->id)
+	for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)
 	{
-	case 1:
-		LOG("Left Arrow click");
-		break;
-	case 2:
-		LOG("Right Arrow click");
-		break;
-	default:
-		break;
+		if (IsMouseClickInside(itemMenuPos, mouseClickPos))
+		{
+			break;
+		}
+		if (IsMouseClickInside(slotList[invSlot_].bounds, mouseClickPos))
+		{
+			if (slotList[invSlot_].itemId != 0)
+				isItemMenu_Active = true;
+
+			currentSlot_ = slotList[invSlot_].currentSlot;
+			break;
+		}
+		else if(!IsMouseClickInside(slotList[invSlot_].bounds, mouseClickPos))
+		{
+			isItemMenu_Active = false;
+			itemMenuPos = { 0, 0, 0, 0 };
+		}
 	}
 
 	return false;
@@ -730,6 +847,18 @@ bool Inventory::IsMouseInside(SDL_Rect r)
 	app->input->GetMousePosition(x, y); 
 
 	return (x > auxR.x) && (x < auxR.x + auxR.w) && (y > auxR.y) && (y < auxR.y + auxR.h);
+}
+
+bool Inventory::IsMouseClickInside(SDL_Rect r, iPoint clickPos)
+{
+	SDL_Rect auxR2 = { r.x - invPos.x + 25, r.y - invPos.y, r.w, r.h };
+
+	return (clickPos.x > auxR2.x) && (clickPos.x < auxR2.x + auxR2.w) && (clickPos.y > auxR2.y) && (clickPos.y < auxR2.y + auxR2.h);
+}
+
+void Inventory::SaveMouseClickPos()
+{
+	app->input->GetMousePosition(mouseClickPos.x, mouseClickPos.y);
 }
 
 void Inventory::DisplayText(SDL_Rect bounds, bool showColliders)

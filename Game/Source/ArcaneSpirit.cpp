@@ -23,6 +23,7 @@ bool ArcaneSpirit::Start()
 	//eCollider = app->moduleCollisions->AddCollider({ position.x,position.y,16,16 }, Collider::Type::ITEM, (Entity*)this);
 	//currentAnim = &idleanim;
 	itemid = 6;
+	equiped = false;
 
 	return true;
 }
