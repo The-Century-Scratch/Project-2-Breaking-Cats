@@ -21,6 +21,9 @@
 #define CONTROLLERX (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_X) == KEY_DOWN)
 #define CONTROLLERY (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_Y) == KEY_DOWN)
 
+#define CONTROLLERBACKRIGHT (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) == KEY_DOWN)
+#define CONTROLLERBACKLEFT (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_LEFTSHOULDER) == KEY_DOWN)
+
 #define CONTROLLERSTART (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_START) == KEY_DOWN)
 
 //#define NUM_KEYS 352

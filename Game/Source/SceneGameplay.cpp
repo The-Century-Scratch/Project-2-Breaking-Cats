@@ -445,22 +445,6 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
-	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
-	{
-		app->inventory->isActivated = !app->inventory->isActivated;
-		app->audio->PlayFx(app->hud->swapscenesfx);
-		SDL_ShowCursor(SDL_ENABLE);
-	}
-	if (CONTROLLERX)
-	{
-		app->inventory->isActivated = !app->inventory->isActivated;
-		app->audio->PlayFx(app->hud->swapscenesfx);
-		SDL_ShowCursor(SDL_DISABLE);
-	}
-
-	
-
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
 		firePaw->equiped = true;
@@ -665,11 +649,11 @@ bool SceneGameplay::Update(float dt)
 	//save and load inputs on controller
 	if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_BACK) == KEY_REPEAT)
 	{
-		if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))
+		if (CONTROLLERBACKRIGHT)
 		{
 			app->SaveGameRequest();
 		}
-		if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_LEFTSHOULDER))
+		if (CONTROLLERBACKLEFT)
 		{
 			app->LoadGameRequest();
 		}
