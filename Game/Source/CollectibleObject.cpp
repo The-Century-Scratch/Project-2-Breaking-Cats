@@ -34,14 +34,17 @@ bool CollectibleObject::Start() {
 	id = parameters.attribute("id").as_int();
 	texture = app->tex->Load(texturePath);
 
-	anim.PushBack({ 0 * 16,0 * 16,24,43 });
-	anim.loop = false;
-	anim.speed = 0.0f;
-	w = 24;
-	h = 43;
+	anim.PushBack({ 0,0,32,32 });
+	anim.PushBack({ 32,0,32,32 });
+	anim.PushBack({ 64,0,32,32 });
+	anim.PushBack({ 96,0,32,32 });
+	anim.PushBack({ 128,0,32,32 });
+	anim.loop = true;
+	anim.speed = 0.1f;
+	w = h = 32;
 
 
-	cRect = { position.x,position.y,24,43 };
+	cRect = { position.x,position.y,20,18 };
 	eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::COLLECTIBLEOBJECT, (Entity*)this);
 
 	return true;
@@ -57,7 +60,7 @@ bool CollectibleObject::Update()
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	anim.Update();
 
-	eCollider->SetPos(position.x, position.y);
+	eCollider->SetPos(position.x+5, position.y+6);
 
 	return true;
 }

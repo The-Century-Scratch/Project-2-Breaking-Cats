@@ -161,7 +161,13 @@ bool DialogueManager::Update(float dt)
 				NpcNode* aux = GetNodeById(current->currentNode->currentOption->nextNodeId);
 				/*current->currentNode=current->currentNode.*/
 				//uncomment when quests done
-				if (current->currentNode->currentOption->missionId != -1) app->questManager->ActivateQuest(current->currentNode->currentOption->missionId);
+				if (current->currentNode->currentOption->missionId != -1) {
+					app->questManager->GiveItem = true;
+					app->questManager->ActivateQuest(current->currentNode->currentOption->missionId);
+				}
+				if (current->currentNode->currentOption->sideMissionId != -1) {
+					app->questManager->ActivateSideQuest(current->currentNode->currentOption->sideMissionId);
+				}
 				if (current->currentNode->currentOption->menu != -1) scene->ChangeState(GameplayMenuState::SHOP);
 
 				RELEASE(current->currentNode);
@@ -264,6 +270,7 @@ NpcNode* DialogueManager::LoadNode(int id, pugi::xml_node node)
 		option->id = m.attribute("id").as_int();
 		option->nextNodeId = m.attribute("nextNodeId").as_int();
 		option->missionId = m.attribute("missionId").as_int();
+		option->sideMissionId = m.attribute("sideMissionId").as_int();
 		option->menu = m.attribute("menu").as_int(-1);
 		option->bounds.x = 710;
 		option->bounds.y = 215 + i;

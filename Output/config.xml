@@ -62,7 +62,7 @@
     <foresttheme path="Assets/Audio/Music/ForestTheme.ogg"/>
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
-		<npc scene="8" x="80" y="780" texturepath="Assets/Textures/testPlayer.png" id="0" type="0"/>			<!-- this is a sign the type 0 SIGN-->
+		<npc scene="8" x="80" y="780" texturepath="Assets/Textures/Sign.png" id="0" type="0"/>			<!-- this is a sign the type 0 SIGN-->
 		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/Npc3.png" id="1" type="1"/>				<!-- this is a regular npc in the village the type 1 VILLAGE-->
 		<npc scene="1" x="50" y="50" texturepath="Assets/Textures/TheGuardian.png" id="2" type="2"/>		<!-- this is the guardian the type 2 GUARDIAN-->
 		<npc scene="3" x="50" y="50" texturepath="Assets/Textures/Contrabandista.png" id="3" type="3"/>		<!-- this is the contrabandist the type 3 CONTRABANDIST-->
@@ -72,11 +72,11 @@
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
 
-		<collectibleObject scene="0" x="100" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="1"/>
-		<collectibleObject scene="0" x="120" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="2"/>
-		<collectibleObject scene="0" x="140" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="3"/>
-		<collectibleObject scene="0" x="160" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="4"/>
-		<collectibleObject scene="0" x="180" y="137" texturepath="Assets/Textures/collectiblePlaceholder.png" id="5"/>
+		<collectibleObject scene="0" x="100" y="137" texturepath="Assets/Textures/Collectible.png" id="1"/>
+		<collectibleObject scene="0" x="120" y="137" texturepath="Assets/Textures/Collectible.png" id="2"/>
+		<collectibleObject scene="0" x="140" y="137" texturepath="Assets/Textures/Collectible.png" id="3"/>
+		<collectibleObject scene="0" x="160" y="137" texturepath="Assets/Textures/Collectible.png" id="4"/>
+		<collectibleObject scene="0" x="180" y="137" texturepath="Assets/Textures/Collectible.png" id="5"/>
 
 
 		<item>

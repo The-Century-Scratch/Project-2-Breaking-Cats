@@ -71,13 +71,24 @@ public:
 	Quest* sidequestActive;
 	int completeQuestFx;
 	bool printQuestMenu;
-	bool RocksQuest, quest2, quest3;
+	bool RocksQuest, quest3;
+	bool changeDialogueIdAfterRocks, changeDialogueIdAfterCollecting;
 
 	//count of collectible objects
 	uint ObjectsCount;
+	uint MenuID;
 
+	//items
 	SDL_Texture* ItemText;
+
 	Item* firePaw;
+	Item* dragonSlayer;
+	Item* grapplingHook;
+	Item* bulletPenetration;
+	Item* mysticalEnergy;
+	Item* arcaneSpirit;
+
+	bool GiveItem;
 
 	Font* font;
 

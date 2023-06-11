@@ -8,6 +8,7 @@
 #include "Point.h"
 #include "ModuleCollisions.h"
 #include "SceneManager.h"
+#include "QuestManager.h"
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -45,28 +46,60 @@ bool NPC::Start() {
 	switch (npctype)
 	{
 	case NPCTYPE::SIGN:
+		//collider
+		cRect = { position.x - 6,position.y - 6,32 + 12,32 + 12 };
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 6,position.y + 4,20,22 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
 		dialogueid = 0;
+		//anim
+		NPCAnim.PushBack({ 0,0,32,32 });
+		NPCAnim.PushBack({ 32,0,32,32 });
+		NPCAnim.PushBack({ 64,0,32,32 });
+		NPCAnim.PushBack({ 32,0,32,32 });
+		NPCAnim.PushBack({ 64,0,32,32 });
+		NPCAnim.loop = true;
+		NPCAnim.speed = 0.1f;
 		break;
 	case NPCTYPE::VILLAGE:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
 		dialogueid = 1;
 		break;
 	case NPCTYPE::GUARDIAN:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+
 		dialogueid = 2;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
+		//collider
 		cRect = { position.x - 6,position.y + 27,16 + 12,16 + 12 };
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
 		dialogueid = 1;
 		break;
 	case NPCTYPE::CONTRABANDIST:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = 3;
 		break;
 	
 	default:
 		break;
 	}
-
-	boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
-	cRect = { position.x+8,position.y+16,16,16 };
-	eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 
 	return true;
 }
@@ -78,9 +111,19 @@ bool NPC::Update()
 	{
 	case NPCTYPE::GUARDIAN:
 		break;
+	case NPCTYPE::VILLAGE:
+		if (app->questManager->changeDialogueIdAfterRocks) {
+			this->dialogueid = 5;
+			app->questManager->changeDialogueIdAfterRocks = false;
+		}
+		break;
 	case NPCTYPE::SHOP:
 		break;
 	case NPCTYPE::CONTRABANDIST:
+		if (app->questManager->changeDialogueIdAfterCollecting) {
+			this->dialogueid = 4;
+			app->questManager->changeDialogueIdAfterCollecting = false;
+		}
 		break;
 	case NPCTYPE::SIGN:
 		break;

@@ -5,6 +5,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Scene.h"
+#include "QuestManager.h"
 
 SideQuest::SideQuest(pugi::xml_node node) {
 	this->id = node.attribute("id").as_int();
@@ -25,5 +26,30 @@ bool SideQuest::Update() {
 }
 
 void SideQuest::Draw(Font *font) {
-	app->render->DrawText(font, description.GetCharString(), 830, 50, 48, 5, { 255,255,255,255 }, 528);
+	//title
+	app->render->DrawText(font, name.GetCharString(), 80, 115, 80, 5, { 255,255,255,255 }, 1000);
+	//description
+	app->render->DrawText(font, description.GetCharString(), 50, 250, 48, 5, { 255,255,255,255 }, 1000);
+	//rewards
+	app->render->DrawText(font, "Rewards:", 1000, 200, 48, 5, { 255,255,255,255 }, 100);
+	//count lo voy a harcodear y me la pela
+	switch (app->questManager->ObjectsCount) {
+	case 0:
+		app->render->DrawText(font, "Count: 0", 780, 550, 48, 5, { 255,255,255,255 });
+		break;
+	case 1:
+		app->render->DrawText(font, "Count: 1", 780, 550, 48, 5, { 255,255,255,255 });
+		break;
+	case 2:
+		app->render->DrawText(font, "Count: 2", 780, 550, 48, 5, { 255,255,255,255 });
+		break;
+	case 3:
+		app->render->DrawText(font, "Count: 3", 780, 550, 48, 5, { 255,255,255,255 });
+		break;
+	case 4:
+		app->render->DrawText(font, "Count: 4", 780, 550, 48, 5, { 255,255,255,255 });
+		break;
+	default:break;
+
+	}
 }

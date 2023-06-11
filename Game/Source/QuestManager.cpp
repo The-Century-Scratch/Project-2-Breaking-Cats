@@ -7,6 +7,11 @@
 #include "Audio.h"
 #include "SceneManager.h"
 #include "FirePaws.h"
+#include "DragonSlayer.h"
+#include "GrapplingHook.h"
+#include "BulletPenetration.h"
+#include "MysticalEnergy.h"
+#include "ArcaneSpirit.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -75,22 +80,42 @@ bool QuestManager::Start() {
 		
 	}
 
-	completeQuestFx = app->audio->LoadFx("Assets/Audio/Fx/CompleteQuestPlaceholder .wav");
-	QuestMenuBox = app->tex->Load("Assets/Textures/GUI/menuBoxPlaceholder.png");
+	completeQuestFx = app->audio->LoadFx("Assets/Audio/Fx/CompleteQuestPlaceholder.wav");
+	QuestMenuBox = app->tex->Load("Assets/Textures/GUI/Menu.png");
 	questActive = nullptr;
 	sidequestActive = nullptr;
 	font = new Font(app, "Fonts/prova.xml");
 	RocksQuest = false;
-	quest2 = false;
 	quest3 = false;
+	changeDialogueIdAfterCollecting = false;
+	changeDialogueIdAfterRocks = false;
 	printQuestMenu = false;
 
 	ObjectsCount = 0;
+	MenuID = 1;
 
+	//items
 	ItemText = app->tex->Load("Assets/Textures/Items.png");
 
 	firePaw = new FirePaws(iPoint(384,48), ItemText);
 	firePaw->Start();
+
+	dragonSlayer = new DragonSlayer(iPoint(384, 48), ItemText);
+	dragonSlayer->Start();
+
+	grapplingHook = new GrapplingHook(iPoint(384, 48), ItemText);
+	grapplingHook->Start();
+
+	bulletPenetration = new BulletPenetration(iPoint(384, 48), ItemText);
+	bulletPenetration->Start();
+
+	mysticalEnergy = new MysticalEnergy(iPoint(384, 48), ItemText);
+	mysticalEnergy->Start();
+
+	arcaneSpirit = new ArcaneSpirit(iPoint(384, 48), ItemText);
+	arcaneSpirit->Start();
+
+	GiveItem = false;
 
 	ActivateQuest(TUTORIAL);
 	return ret;
@@ -100,49 +125,101 @@ bool QuestManager::Update(float dt)
 {
 	bool ret = true;
 
+	if (GiveItem) {
+		switch (questActive->id) {
+		case 1: //tutorial finished
+			firePaw->equiped = true;
+			app->inventory->AddItem(firePaw);
+			app->audio->PlayFx(app->hud->getitemfx);
+		case 2: //when rocks finished, give coin
+		case 3: //When talked with the guardian
+		case 4: //When the labyrinth is resolved
+		case 5: //when you left the lab and talked with the guardian
+		case 6: //when you found the vident
+		default:
+			break;
+		}
+		GiveItem = false;
+	}
+
+	if (ObjectsCount == 5) {
+		sidequestActive = nullptr; //when doing the logics of having more than one sidequest active delete this also logic for adding a coin should be added
+		changeDialogueIdAfterCollecting = true;
+	}
+
 	if (app->sceneManager->puzzle2solved && RocksQuest == false) {
 		ActivateQuest(EXPLORECITY);
-		ActivateSideQuest(COLLECT1);
 		RocksQuest = true;
+		changeDialogueIdAfterRocks = true;
 	}
 
 	if (app->sceneManager->puzzle3solved &&quest3 == false) {
+		// add item get when enterring laboratory
 		ActivateQuest(ENDMISSIONS);
 		quest3 = true;
-		firePaw->equiped = true;
-		app->inventory->AddItem(firePaw);
-		app->audio->PlayFx(app->hud->getitemfx);
+		
 	}
+
 
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) 
 	{
 		printQuestMenu = !printQuestMenu;
 	}
-	
+
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	{
+		if (MenuID != 1 && printQuestMenu) {
+			--MenuID;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	{
+		if (MenuID != 2 && printQuestMenu) {
+			++MenuID;
+		}
+	}
+
 	return ret;
 }
 
 bool QuestManager::PostUpdate() {
-	if(printQuestMenu) {
-		SDL_Rect sect{ 0,0,256,256 };
-		app->render->DrawTexture(QuestMenuBox, 0, 0, &sect, false);
+	
+	if(!printQuestMenu) { //dont delete
+		return true;
+	}
+	SDL_Rect sect{ 0,0,417,240 };
+	app->render->DrawTexture(QuestMenuBox, 0, 0, &sect, false);
+
+	if (MenuID == 1) {
 		if (questActive == nullptr) {
-			app->render->DrawText(font, "No active quests", 50, 50, 48, 5, { 255,255,255,255 }, 528);
+			app->render->DrawText(font, "No active quests", 80, 115, 80, 5, { 255,255,255,255 }, 900);
 		}
 		else {
 			questActive->Draw(font);
 		}
-
-		sect = { 0,0,192,256 };
-		app->render->DrawTexture(QuestMenuBox, 256, 0, &sect, false);
+	}
+	else if (MenuID == 2) {
+		//afegir mouyre sidequests actives amb fletxes adalt i avall
 		if (sidequestActive == nullptr) {
-			app->render->DrawText(font, "No active sidequests", 830, 0, 48, 5, { 255,255,255,255 }, 528);
+			app->render->DrawText(font, "No active sidequests", 80, 115, 80, 5, { 255,255,255,255 }, 900);
 		}
 		else {
 			sidequestActive->Draw(font);
 		}
-		
 	}
+	//si despues me enxixo que se puedan seleccionar y que te diga las rewards de las complete quests
+	/*else {
+		if (sidequestActive == nullptr) {
+			app->render->DrawText(font, "No complete quests", 80, 115, 80, 5, { 255,255,255,255 }, 1000);
+		}
+		else {
+			sidequestActive->Draw(font);
+		}
+	}*/
+	
+
+	
 	return true;
 }
 
