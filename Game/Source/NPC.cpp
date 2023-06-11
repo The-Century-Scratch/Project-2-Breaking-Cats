@@ -34,11 +34,6 @@ bool NPC::Start() {
 	npctype = (NPCTYPE)parameters.attribute("type").as_int();
 
 	texture = app->tex->Load(texturePath);
-
-	//NPCAnim.PushBack({ ((int)npctype) * 16,0 * 16,32,32 });
-	NPCAnim.PushBack({ 0,0,32,32 });
-	NPCAnim.loop = false;
-	NPCAnim.speed = 0.0f;
 	w = h = 32;
 
 	cRect = { position.x - 6,position.y - 6,32 + 12,32 + 12 };
@@ -54,13 +49,13 @@ bool NPC::Start() {
 		//dialogue id
 		dialogueid = 0;
 		//anim
-		NPCAnim.PushBack({ 0,0,32,32 });
-		NPCAnim.PushBack({ 32,0,32,32 });
-		NPCAnim.PushBack({ 64,0,32,32 });
-		NPCAnim.PushBack({ 32,0,32,32 });
-		NPCAnim.PushBack({ 64,0,32,32 });
-		NPCAnim.loop = true;
-		NPCAnim.speed = 0.1f;
+		NPCIdle.PushBack({ 0,0,32,32 });
+		NPCIdle.PushBack({ 32,0,32,32 });
+		NPCIdle.PushBack({ 64,0,32,32 });
+		NPCIdle.PushBack({ 32,0,32,32 });
+		NPCIdle.PushBack({ 64,0,32,32 });
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
 		break;
 	case NPCTYPE::VILLAGE:
 		//collider
@@ -69,6 +64,10 @@ bool NPC::Start() {
 		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 		//dialogue id
 		dialogueid = 1;
+		//anim
+		NPCIdle.PushBack({ 0,0,32,32 });
+		NPCIdle.loop = false;
+		NPCIdle.speed = 0.0f;
 		break;
 	case NPCTYPE::GUARDIAN:
 		//collider
@@ -76,8 +75,11 @@ bool NPC::Start() {
 		cRect = { position.x + 8,position.y + 16,16,16 };
 		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 		//dialogue id
-
 		dialogueid = 2;
+		// anim
+		NPCIdle.PushBack({ 0,0,32,32 });
+		NPCIdle.loop = false;
+		NPCIdle.speed = 0.0f;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
 		//collider
@@ -87,6 +89,10 @@ bool NPC::Start() {
 		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 		//dialogue id
 		dialogueid = 1;
+		//anim
+		NPCIdle.PushBack({ 0,0,32,32 });
+		NPCIdle.loop = false;
+		NPCIdle.speed = 0.0f;
 		break;
 	case NPCTYPE::CONTRABANDIST:
 		//collider
@@ -95,6 +101,20 @@ bool NPC::Start() {
 		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 		//dialogue id
 		dialogueid = 3;
+		//anim1
+		NPCIdle.PushBack({ 0,0,32,32 });
+		NPCIdle.PushBack({ 32,0,32,32 });
+		NPCIdle.PushBack({ 64,0,32,32 });
+		NPCIdle.PushBack({ 96,0,32,32 });
+		NPCIdle.PushBack({ 128,0,32,32 });
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 5; i < 24; ++i) {
+			NPCIdleAction.PushBack({ 32*i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.1f;
 		break;
 	
 	default:
@@ -131,9 +151,25 @@ bool NPC::Update()
 		break;
 	}
 
-	SDL_Rect rect = NPCAnim.GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x, position.y, &rect);
-	NPCAnim.Update();
+	
+	
+
+	++actionanimcounter;
+	if (actionanimcounter >= 400) {
+		SDL_Rect rect = NPCIdleAction.GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		NPCIdleAction.Update();
+		if (NPCIdleAction.HasFinished() == true) {
+			actionanimcounter = 0;
+			NPCIdleAction.Reset();
+		}
+	}
+	else {
+		SDL_Rect rect = NPCIdle.GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		NPCIdle.Update();
+	}
+	
 	return true;
 }
 

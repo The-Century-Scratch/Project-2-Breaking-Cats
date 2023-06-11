@@ -53,7 +53,9 @@ private:
 	const char* texturePath;
 
 
-	Animation NPCAnim;
+	Animation NPCIdle;
+	Animation NPCIdleAction;
+	int actionanimcounter;
 };
 
 #endif // __NPC_H__
