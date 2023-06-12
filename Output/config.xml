@@ -119,6 +119,12 @@
 
 			<mapfile path="Assets/Maps/combat.tmx"/>
 			<!--this is 0 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/combat2.tmx"/>
+			<!--this is 1 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/combat3.tmx"/>
+			<!--this is 2 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/combat4.tmx"/>
+			<!--this is 3 in the list of strings of maps-->
 
 		</map>
     

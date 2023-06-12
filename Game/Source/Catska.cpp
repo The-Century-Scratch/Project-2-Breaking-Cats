@@ -17,6 +17,16 @@ Catska::Catska()
 {
 	name.Create("catska");
 
+Catska::~Catska() = default;
+
+void Catska::Create(iPoint pos)
+{
+
+	texturePath = parameters.attribute("texturepath").as_string();
+	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
+
+	position = pos;
+	size = { 16, 16 };
 	healthPoints = 40;
 	damage = 6;
 	type = UnitType::CATSKA;
