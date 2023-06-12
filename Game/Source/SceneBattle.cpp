@@ -60,21 +60,31 @@ bool SceneBattle::Load()
 				pugi::xml_node unitProperty = i.child("property"); // this is giving a problem
 				LOG("The step of this log is the number 4");
 
+				if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+				{
+					continue;
+				}
+				LOG("The step of this log is the number 4.5");
+
 				if (unitProperty.attribute("value"))
 				{
 					LOG("The step of this log is the number 5");
 					UnitType unitType = static_cast<UnitType>(unitProperty.attribute("value").as_int());
 					LOG("The step of this log is the number 6");
-
 					switch (unitType)
 					{
 					case UnitType::UNDEFINED:
 						break;
 					case UnitType::GATS:
 					{
+						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+						{
+							break;
+						}
 						eastl::unique_ptr<Unit> gats;
 						gats = eastl::make_unique<Gats>();
-						if (unitProperty.empty() || unitProperty.empty() || unitProperty.parent().parent().empty() || unitProperty.parent().parent().empty())
+
+						if (!unitProperty.next_sibling("property"))
 						{
 							break;
 						}
@@ -95,14 +105,20 @@ bool SceneBattle::Load()
 						gats.get()->Create({ x,y });
 						gridSystem->LoadUnitData(gats.get());
 						units.push_back(eastl::move(gats));
+						LOG("The step of this log is the number 7");
 					}
 
 					break;
 					case UnitType::CATSKA:
 					{
+						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+						{
+							break;
+						}
 						eastl::unique_ptr<Unit> unit;
 						unit = eastl::make_unique<Catska>();
-						if (unitProperty.empty() || unitProperty.empty() || unitProperty.parent().parent().empty() || unitProperty.parent().parent().empty())
+
+						if (!unitProperty.next_sibling("property"))
 						{
 							break;
 						}
@@ -123,13 +139,19 @@ bool SceneBattle::Load()
 						unit.get()->Create({ x,y });
 						gridSystem->LoadUnitData(unit.get());
 						units.push_back(eastl::move(unit));
+						LOG("The step of this log is the number 7");
 					}
 					break;
 					case UnitType::GUARDIAN:
 					{
+						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+						{
+							break;
+						}
 						eastl::unique_ptr<Unit> unit;
 						unit = eastl::make_unique<Guardian>();
-						if (unitProperty.empty() || unitProperty.empty() || unitProperty.parent().parent().empty() || unitProperty.parent().parent().empty())
+
+						if (!unitProperty.next_sibling("property"))
 						{
 							break;
 						}
@@ -150,13 +172,19 @@ bool SceneBattle::Load()
 						unit.get()->Create({ x,y });
 						gridSystem->LoadUnitData(unit.get());
 						units.push_back(eastl::move(unit));
+						LOG("The step of this log is the number 7");
 					}
 					break;
 					case UnitType::LONGRANGE:
 					{
+						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+						{
+							break;
+						}
 						eastl::unique_ptr<Unit> unit;
 						unit = eastl::make_unique<LongRange>();
-						if (unitProperty.empty() || unitProperty.empty() || unitProperty.parent().parent().empty() || unitProperty.parent().parent().empty())
+
+						if (!unitProperty.next_sibling("property"))
 						{
 							break;
 						}
@@ -177,13 +205,19 @@ bool SceneBattle::Load()
 						unit.get()->Create({ x,y });
 						gridSystem->LoadUnitData(unit.get());
 						units.push_back(eastl::move(unit));
+						LOG("The step of this log is the number 7");
 					}
 					break;
 					case UnitType::STRAW:
 					{
+						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+						{
+							break;
+						}
 						eastl::unique_ptr<Unit> unit;
 						unit = eastl::make_unique<Straw>();
-						if (unitProperty.empty() || unitProperty.empty() || unitProperty.parent().parent().empty() || unitProperty.parent().parent().empty())
+
+						if (!unitProperty.next_sibling("property"))
 						{
 							break;
 						}
@@ -204,10 +238,10 @@ bool SceneBattle::Load()
 						unit.get()->Create({ x,y });
 						gridSystem->LoadUnitData(unit.get());
 						units.push_back(eastl::move(unit));
+						LOG("The step of this log is the number 7");
 					}
 					break;
 					}
-					LOG("The step of this log is the number 7");
 				}
 				LOG("The step of this log is the number 8");
 
