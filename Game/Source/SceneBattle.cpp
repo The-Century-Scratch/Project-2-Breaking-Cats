@@ -120,30 +120,6 @@ bool SceneBattle::Load()
 						}
 						eastl::unique_ptr<Unit> unit;
 						unit = eastl::make_unique<Catska>();
-
-		eastl::unique_ptr<Unit> catska;
-		catska = eastl::make_unique<Catska>();
-		catska.get()->velocity = nodeUnit.attribute("velocity").as_int();
-		catska.get()->parameters = nodeUnit;
-		catska.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		gridSystem->LoadUnitData(catska.get());
-		units.push_back(eastl::move(catska));
-	}
-	for (pugi::xml_node nodeUnit = config.child("serpicat");
-		nodeUnit; nodeUnit = nodeUnit.next_sibling("serpicat"))
-	{
-
-		eastl::unique_ptr<Unit> serpicat;
-		serpicat = eastl::make_unique<Serpicat>();
-		serpicat.get()->velocity = nodeUnit.attribute("velocity").as_int();
-		serpicat.get()->parameters = nodeUnit;
-		serpicat.get()->Create({ nodeUnit.attribute("x").as_int(), nodeUnit.attribute("y").as_int() });
-		gridSystem->LoadUnitData(serpicat.get());
-		units.push_back(eastl::move(serpicat));
-	}
-	for (pugi::xml_node nodeUnit = config.child("guardian");
-		nodeUnit; nodeUnit = nodeUnit.next_sibling("guardian"))
-	{
 						if (!unitProperty.next_sibling("property"))
 						{
 							break;
@@ -253,6 +229,40 @@ bool SceneBattle::Load()
 						unitProperty = unitProperty.next_sibling("property");
 						if (unitProperty.attribute("value"))
 						unit.get()->velocity = unitProperty.attribute("value").as_int();
+						int x = unitProperty.parent().parent().attribute("x").as_int();
+						int y = unitProperty.parent().parent().attribute("y").as_int();
+
+
+						if (!unitProperty.next_sibling("property"))
+						{
+							break;
+						}
+						unitProperty = unitProperty.next_sibling("property");
+
+						unit.get()->parameters = unitProperty;
+
+						unit.get()->Create({ x,y });
+						gridSystem->LoadUnitData(unit.get());
+						units.push_back(eastl::move(unit));
+						LOG("The step of this log is the number 7");
+					break;
+					}
+					case UnitType::SERPICAT:
+					{
+						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+						{
+							break;
+						}
+						eastl::unique_ptr<Unit> unit;
+						unit = eastl::make_unique<Serpicat>();
+
+						if (!unitProperty.next_sibling("property"))
+						{
+							break;
+						}
+						unitProperty = unitProperty.next_sibling("property");
+						if (unitProperty.attribute("value"))
+							unit.get()->velocity = unitProperty.attribute("value").as_int();
 						int x = unitProperty.parent().parent().attribute("x").as_int();
 						int y = unitProperty.parent().parent().attribute("y").as_int();
 
@@ -877,8 +887,6 @@ bool SceneBattle::Update(float dt)
 		app->sceneManager->currentScene = 6;
 
 		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
-
-		}
 
 	}
 

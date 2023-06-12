@@ -19,7 +19,7 @@ Unit::~Unit() = default;
 
 void Unit::Create(iPoint pos)
 {
-	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath = parameters.attribute("value").as_string();
 	texture = app->tex->Load(texturePath);
 
 	maxHealth = healthPoints;
@@ -463,9 +463,6 @@ bool Unit::GetIsAlly()
 	case UnitType::CATSKA:
 		return true;
 		break;
-	case UnitType::SERPICAT:
-		return true;
-		break;
 	case UnitType::GUARDIAN:
 		return false;
 		break;
@@ -474,6 +471,9 @@ bool Unit::GetIsAlly()
 		break;
 	case UnitType::STRAW:
 		return false;
+		break;
+	case UnitType::SERPICAT:
+		return true;
 		break;
 	default:
 		break;
@@ -494,9 +494,6 @@ bool Unit::GetIsMelee()
 	case UnitType::CATSKA:
 		return false;
 		break;
-	case UnitType::SERPICAT:
-		return true;
-		break;
 	case UnitType::GUARDIAN:
 		return true;
 		break;
@@ -505,6 +502,9 @@ bool Unit::GetIsMelee()
 		break;
 	case UnitType::STRAW:
 		return false;
+		break;
+	case UnitType::SERPICAT:
+		return true;
 		break;
 	default:
 		break;

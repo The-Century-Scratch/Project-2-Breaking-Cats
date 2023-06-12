@@ -29,11 +29,11 @@ enum class UnitType
 {
 	UNDEFINED,
 	GATS,
-	CATSKA,
-	SERPICAT,	
+	CATSKA,	
 	GUARDIAN,
 	LONGRANGE,
-	STRAW
+	STRAW,
+	SERPICAT
 };
 
 class Unit : public Transform
