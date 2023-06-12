@@ -147,6 +147,8 @@ private:
 	ParticleSystem* firstPortalPS;
 
 	Animation focusedAnim;
+	Animation clickableAnim;
+	Animation areaAnim;
 	Animation* currentAnim = nullptr;
 
 	eastl::vector<eastl::unique_ptr<UnitData>> unitsData;

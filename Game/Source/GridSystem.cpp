@@ -37,6 +37,16 @@ bool GridSystem::Start()
 	focusedAnim.loop = true;
 	focusedAnim.speed = 0.05f;
 
+	areaAnim.PushBack({ 0, TILE_H * 3, TILE_W, TILE_H });
+	areaAnim.PushBack({ TILE_W, TILE_H * 3, TILE_W, TILE_H });
+	areaAnim.loop = true;
+	areaAnim.speed = 0.1f;
+
+	clickableAnim.PushBack({ 0, TILE_H * 4, TILE_W, TILE_H });
+	clickableAnim.PushBack({ TILE_W, TILE_H * 4, TILE_W, TILE_H });
+	clickableAnim.loop = true;
+	clickableAnim.speed = 0.1f;
+
 
 	gridPos = { 16,16 }; // TODO: que lo loadee de la propia escena/ del tmx
 	showArea = false;
@@ -79,10 +89,12 @@ void GridSystem::DrawTileState()
 			case TileState::UNSELECTED:
 				break;
 			case TileState::CLICKABLE:
-				app->render->DrawTexture(gridTex, grid[x][y].bounds.x, grid[x][y].bounds.y, &clickableSection);
+				//app->render->DrawTexture(gridTex, grid[x][y].bounds.x, grid[x][y].bounds.y, &clickableSection);
+				app->render->DrawTexture(gridTex, grid[x][y].bounds.x, grid[x][y].bounds.y, &clickableAnim.GetCurrentFrame());
 				break;
 			case TileState::AREA_EFFECT:
 				app->render->DrawTexture(gridTex, grid[x][y].bounds.x, grid[x][y].bounds.y, &areaSection);
+				app->render->DrawTexture(gridTex, grid[x][y].bounds.x, grid[x][y].bounds.y, &areaAnim.GetCurrentFrame());
 				break;
 			default:
 				break;
@@ -99,6 +111,8 @@ void GridSystem::DrawTileState()
 		}
 	}
 
+	clickableAnim.Update();
+	areaAnim.Update();
 	if (!lastPortal.IsZero())
 		app->render->DrawTexture(gridTex,lastPortal.x, lastPortal.y, &portal1);
 	if (!firstPortal.IsZero())
