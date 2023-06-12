@@ -116,11 +116,11 @@
 		<map>
 			<mapfolder path="Assets/Maps/"/>
 
-			<mapfile path="Assets/Maps/combat.tmx"/>
+			<mapfile path="Assets/Maps/combatVillage.tmx"/>
 			<!--this is 0 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/combat2.tmx"/>
+			<mapfile path="Assets/Maps/combatBuilding.tmx"/>
 			<!--this is 1 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/combat3.tmx"/>
+			<mapfile path="Assets/Maps/combatCity.tmx"/>
 			<!--this is 2 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/combat4.tmx"/>
 			<!--this is 3 in the list of strings of maps-->
