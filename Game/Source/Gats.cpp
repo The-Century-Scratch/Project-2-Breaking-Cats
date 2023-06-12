@@ -25,10 +25,10 @@ Gats::Gats()
 		healthPoints += 15;
 	}
 
-	idleLeftAnim.AnimateCat32x32(5, 6);
+	idleLeftAnim.AnimateCat32x32(5, 0);
 	idleLeftAnim.speed = 0.2f;
 
-	idleRightAnim.AnimateCat32x32(5, 7);
+	idleRightAnim.AnimateCat32x32(5, 1);
 	idleRightAnim.speed = 0.2f;
 
 	currentAnim = &idleLeftAnim;
