@@ -89,6 +89,7 @@ bool SceneBattle::Load()
 							break;
 						}
 						unitProperty = unitProperty.next_sibling("property");
+						if(unitProperty.attribute("value"))
 						gats.get()->velocity = unitProperty.attribute("value").as_int();
 						int x = unitProperty.parent().parent().attribute("x").as_int();
 						int y = unitProperty.parent().parent().attribute("y").as_int();
@@ -123,6 +124,7 @@ bool SceneBattle::Load()
 							break;
 						}
 						unitProperty = unitProperty.next_sibling("property");
+						if (unitProperty.attribute("value"))
 						unit.get()->velocity = unitProperty.attribute("value").as_int();
 						int x = unitProperty.parent().parent().attribute("x").as_int();
 						int y = unitProperty.parent().parent().attribute("y").as_int();
@@ -156,6 +158,7 @@ bool SceneBattle::Load()
 							break;
 						}
 						unitProperty = unitProperty.next_sibling("property");
+						if (unitProperty.attribute("value"))
 						unit.get()->velocity = unitProperty.attribute("value").as_int(); // this is giving a problem
 						int x = unitProperty.parent().parent().attribute("x").as_int();
 						int y = unitProperty.parent().parent().attribute("y").as_int();
@@ -189,6 +192,7 @@ bool SceneBattle::Load()
 							break;
 						}
 						unitProperty = unitProperty.next_sibling("property");
+						if (unitProperty.attribute("value"))
 						unit.get()->velocity = unitProperty.attribute("value").as_int();
 						int x = unitProperty.parent().parent().attribute("x").as_int();
 						int y = unitProperty.parent().parent().attribute("y").as_int();
@@ -222,6 +226,7 @@ bool SceneBattle::Load()
 							break;
 						}
 						unitProperty = unitProperty.next_sibling("property");
+						if (unitProperty.attribute("value"))
 						unit.get()->velocity = unitProperty.attribute("value").as_int();
 						int x = unitProperty.parent().parent().attribute("x").as_int();
 						int y = unitProperty.parent().parent().attribute("y").as_int();
