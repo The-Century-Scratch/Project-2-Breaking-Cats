@@ -21,7 +21,7 @@ Gats::~Gats() = default;
 
 void Gats::Create(iPoint pos)
 {
-	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath = parameters.attribute("value").as_string();
 	texture = app->tex->Load(texturePath);
 
 	healthPoints = 50;

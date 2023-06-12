@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="46">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
  <tileset firstgid="1" name="Tiles" tilewidth="16" tileheight="16" tilecount="625" columns="25">
   <image source="BasicTopDown/Tiles.png" width="400" height="400"/>
  </tileset>
@@ -1268,35 +1268,98 @@
   <properties>
    <property name="isEnemies" type="bool" value="true"/>
   </properties>
-  <object id="41" x="48" y="96" width="16" height="16">
+  <object id="41" x="32" y="96" width="16" height="16">
    <properties>
     <property name="1EnemyType" type="int" value="1"/>
-    <property name="2Velocity" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="1"/>
     <property name="3TexturePath" value="Assets/Textures/GatsIdle.png"/>
    </properties>
   </object>
-  <object id="42" x="32" y="64" width="16" height="16">
+  <object id="42" x="32" y="80" width="16" height="16">
    <properties>
     <property name="1EnemyType" type="int" value="2"/>
-    <property name="2Velocity" type="int" value="4"/>
+    <property name="2Velocity" type="int" value="1"/>
     <property name="3TexturePath" value="Assets/Textures/Catska.png"/>
    </properties>
   </object>
-  <object id="43" x="96" y="64" width="16" height="16">
-   <properties>
-    <property name="1EnemyType" type="int" value="3"/>
-    <property name="2Velocity" type="int" value="3"/>
-    <property name="3TexturePath" value="Assets/Textures/TankEnemy.png"/>
-   </properties>
-  </object>
-  <object id="44" x="80" y="128" width="16" height="16">
-   <properties>
-    <property name="1EnemyType" type="int" value="4"/>
-    <property name="2Velocity" type="int" value="3"/>
-    <property name="3TexturePath" value="Assets/Textures/LargeRangeEnemy.png"/>
-   </properties>
-  </object>
   <object id="45" x="128" y="128" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="51" x="128" y="112" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="52" x="128" y="96" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="53" x="128" y="80" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="54" x="128" y="64" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="55" x="128" y="48" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="56" x="128" y="32" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="57" x="112" y="32" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="58" x="112" y="48" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="59" x="112" y="64" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="60" x="112" y="96" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="61" x="112" y="80" width="16" height="16">
    <properties>
     <property name="1EnemyType" type="int" value="5"/>
     <property name="2Velocity" type="int" value="2"/>

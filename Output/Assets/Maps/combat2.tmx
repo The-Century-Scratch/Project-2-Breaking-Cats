@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="46">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="51">
  <tileset firstgid="1" name="Tiles" tilewidth="16" tileheight="16" tilecount="625" columns="25">
   <image source="BasicTopDown/Tiles.png" width="400" height="400"/>
  </tileset>
@@ -1271,14 +1271,14 @@
   <object id="41" x="48" y="96" width="16" height="16">
    <properties>
     <property name="1EnemyType" type="int" value="1"/>
-    <property name="2Velocity" type="int" value="5"/>
+    <property name="2Velocity" type="int" value="1"/>
     <property name="3TexturePath" value="Assets/Textures/GatsIdle.png"/>
    </properties>
   </object>
   <object id="42" x="32" y="64" width="16" height="16">
    <properties>
     <property name="1EnemyType" type="int" value="2"/>
-    <property name="2Velocity" type="int" value="4"/>
+    <property name="2Velocity" type="int" value="1"/>
     <property name="3TexturePath" value="Assets/Textures/Catska.png"/>
    </properties>
   </object>
@@ -1292,7 +1292,7 @@
   <object id="44" x="80" y="128" width="16" height="16">
    <properties>
     <property name="1EnemyType" type="int" value="4"/>
-    <property name="2Velocity" type="int" value="3"/>
+    <property name="2Velocity" type="int" value="2"/>
     <property name="3TexturePath" value="Assets/Textures/LargeRangeEnemy.png"/>
    </properties>
   </object>
@@ -1301,6 +1301,34 @@
     <property name="1EnemyType" type="int" value="5"/>
     <property name="2Velocity" type="int" value="2"/>
     <property name="3TexturePath" value="Assets/Textures/StrawDall.png"/>
+   </properties>
+  </object>
+  <object id="46" x="128" y="32" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="3"/>
+    <property name="2Velocity" type="int" value="2"/>
+    <property name="3TexturePath" value="Assets/Textures/TankEnemy.png"/>
+   </properties>
+  </object>
+  <object id="47" x="144" y="80" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="3"/>
+    <property name="2Velocity" type="int" value="3"/>
+    <property name="3TexturePath" value="Assets/Textures/TankEnemy.png"/>
+   </properties>
+  </object>
+  <object id="49" x="64" y="32" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="4"/>
+    <property name="2Velocity" type="int" value="3"/>
+    <property name="3TexturePath" value="Assets/Textures/LargeRangeEnemy.png"/>
+   </properties>
+  </object>
+  <object id="50" x="16" y="16" width="16" height="16">
+   <properties>
+    <property name="1EnemyType" type="int" value="4"/>
+    <property name="2Velocity" type="int" value="5"/>
+    <property name="3TexturePath" value="Assets/Textures/LargeRangeEnemy.png"/>
    </properties>
   </object>
  </objectgroup>

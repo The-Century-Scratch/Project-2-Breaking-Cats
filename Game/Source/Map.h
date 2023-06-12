@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
+#include "EASTL/vector.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -200,6 +201,8 @@ public:
 
 	// Declare a variable data of the struct MapData
 	MapData mapData;
+
+	eastl::vector<pugi::xml_node> propertyNodes;
 
 	//List<Collider*> mapColliders;
 
