@@ -12,6 +12,7 @@
 #include "SceneBattle.h"
 #include "Window.h"
 #include "Inventory.h"
+#include "ParticleSystemManager.h"
 
 GridSystem::GridSystem()
 {
@@ -28,6 +29,8 @@ bool GridSystem::Start()
 
 	clickableSection = { 0, 0, TILE_W, TILE_H };
 	areaSection      = { TILE_W, 0, TILE_W, TILE_H };
+	portal1          = { 0, TILE_H * 2, TILE_W, TILE_H };
+	portal2          = { TILE_W, TILE_H * 2, TILE_W, TILE_H };
 
 	focusedAnim.PushBack({ 0, TILE_H, TILE_W, TILE_H });
 	focusedAnim.PushBack({ TILE_W, TILE_H, TILE_W, TILE_H });
@@ -38,6 +41,8 @@ bool GridSystem::Start()
 	gridPos = { 16,16 }; // TODO: que lo loadee de la propia escena/ del tmx
 	showArea = false;
 
+	lastPortal = { 0,0 };
+	firstPortal = { 0,0 };
 
 	for (size_t x = 0; x < MAX_TILES_X; x++)
 	{
@@ -94,10 +99,24 @@ void GridSystem::DrawTileState()
 		}
 	}
 
+	if (!lastPortal.IsZero())
+		app->render->DrawTexture(gridTex,lastPortal.x, lastPortal.y, &portal1);
+	if (!firstPortal.IsZero())
+		app->render->DrawTexture(gridTex, firstPortal.x, firstPortal.y, &portal2);
 }
 
 bool GridSystem::CleanUp()
 {
+	if (firstPortalPS != nullptr)
+	{
+		firstPortalPS->TurnOff();
+		firstPortalPS = nullptr;
+	}
+	if (lastPortalPS != nullptr)
+	{
+		lastPortalPS->TurnOff();
+		lastPortalPS = nullptr;
+	}
 	app->tex->Unload(gridTex);
 	return true;
 }
@@ -140,6 +159,14 @@ bool GridSystem::isPortal(iPoint pos)
 	if (x >= MAX_TILES_X || y >= MAX_TILES_Y) return false;
 
 	if (pos == lastPortal || pos == firstPortal) return true;
+
+	return false;
+}
+
+bool GridSystem::isPortalsActivated()
+{
+	if (!lastPortal.IsZero() && !firstPortal.IsZero())
+		return true;
 
 	return false;
 }
@@ -197,8 +224,6 @@ void GridSystem::HandleTileState()
 
 			if ((grid[x][y].state == TileState::CLICKABLE || grid[x][y].state == TileState::AREA_EFFECT) && showArea)
 			{
-				//TODO: implementar las areas de efecto y ejecutar los ataques mediante eso
-				
 				if (IsMouseInside(grid[x][y].bounds)/* && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT*/)
 				{
 					aoePos = { (int)x + gridPos.x,(int)y + gridPos.y };
@@ -270,7 +295,8 @@ eastl::vector<iPoint> GridSystem::getHitsPosition()
 	// Acciones que necesitan pasar el objetivo
 	if (currentAction.action == Unit::PlayerAction::Action::PREPARE_DASH || 
 		currentAction.action == Unit::PlayerAction::Action::ATTACK_LONG_RANGE || 
-		currentAction.action == Unit::PlayerAction::Action::GRENADE)
+		currentAction.action == Unit::PlayerAction::Action::GRENADE ||
+		currentAction.action == Unit::PlayerAction::Action::SILLYMAGIC)
 	{
 		iPoint dashDestination = { focusPos.x, focusPos.y };
 		Hits.push_back(eastl::move(dashDestination));
@@ -307,18 +333,39 @@ iPoint GridSystem::getFocusPosition()
 
 void GridSystem::PlacePortal(iPoint pos)
 {
-	int x = (pos.x - gridPos.x) / TILE_W;
-	int y = (pos.y - gridPos.y) / TILE_H;
+	if (firstPortalPS != nullptr)
+	{
+		firstPortalPS->TurnOff();
+		firstPortalPS = nullptr;
+	}
+	if (lastPortalPS != nullptr)
+	{
+		lastPortalPS->TurnOff();
+		lastPortalPS = nullptr;
+	}
 
-	if (lastPortal.IsZero())
+	firstPortal = lastPortal;
+	lastPortal = pos;
+
+	if (!lastPortal.IsZero())
 	{
-		lastPortal = pos;
+		lastPortalPS = app->particleManager->CreateParticleSystem(lastPortal, Blueprint::PORTAL1, { lastPortal.x + TILE_W, lastPortal.y + TILE_H });
 	}
-	else
+
+	if (!firstPortal.IsZero())
 	{
-		firstPortal = lastPortal;
-		lastPortal = pos;
+		firstPortalPS = app->particleManager->CreateParticleSystem(firstPortal, Blueprint::PORTAL2, { firstPortal.x + TILE_W, firstPortal.y + TILE_H });
 	}
+}
+
+iPoint GridSystem::getOtherPortal(iPoint pos)
+{
+	if (pos == lastPortal)
+		return firstPortal;
+	if (pos == firstPortal)
+		return lastPortal;
+
+	return iPoint(0, 0);
 }
 
 void GridSystem::showActionArea()
@@ -349,6 +396,7 @@ void GridSystem::showActionArea()
 		showPortal(currentAction.destinationTile);
 		break;
 	case UA::SILLYMAGIC:
+		showSillyMagic(currentAction.destinationTile);
 		break;
 	default:
 		break;
@@ -385,6 +433,7 @@ void GridSystem::showEffectArea(SDL_Rect r)
 		showPortalAOE(pos);
 		break;
 	case UA::SILLYMAGIC:
+		showSillyMagicAOE(pos);
 		break;
 	default:
 		break;
@@ -490,8 +539,29 @@ void GridSystem::showPortal(iPoint pos)
 		for (size_t j = 0; j < MAX_TILES_Y; j++)
 		{
 			iPoint tilePos = { grid[i][j].bounds.x , grid[i][j].bounds.y };
-			if (grid[i][j].walkability != TileWalkability::WALKABLE && tilePos != lastPortal) continue;
+			if (grid[i][j].walkability != TileWalkability::WALKABLE || tilePos == lastPortal) continue;
 			if (unitPos.DistanceTo(tilePos) < 5 * TILE_W)
+			{
+				grid[i][j].state = TileState::CLICKABLE;
+			}
+		}
+	}
+}
+
+void GridSystem::showSillyMagic(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	iPoint unitPos = { grid[x][y].bounds.x , grid[x][y].bounds.y };
+
+	for (size_t i = 0; i < MAX_TILES_X; i++)
+	{
+		for (size_t j = 0; j < MAX_TILES_Y; j++)
+		{
+			iPoint tilePos = { grid[i][j].bounds.x , grid[i][j].bounds.y };
+			if (grid[i][j].walkability == TileWalkability::OBSTACLE) continue;
+			if (unitPos.DistanceTo(tilePos) < 3 * TILE_W)
 			{
 				grid[i][j].state = TileState::CLICKABLE;
 			}
@@ -637,4 +707,32 @@ void GridSystem::showPortalAOE(iPoint pos)
 	int y = (pos.y - gridPos.y) / TILE_H;
 
 	grid[x][y].state = TileState::AREA_EFFECT;
+}
+
+void GridSystem::showSillyMagicAOE(iPoint pos)
+{
+	int x = (pos.x - gridPos.x) / TILE_W;
+	int y = (pos.y - gridPos.y) / TILE_H;
+
+	grid[x][y].state = TileState::AREA_EFFECT;
+
+	if (isPortal(pos))
+	{
+		if (grid[x + 1][y].walkability != TileWalkability::OBSTACLE && x + 1 >= 0 && x + 1 < 9)
+			grid[x + 1][y].state = TileState::AREA_EFFECT;
+		if (grid[x - 1][y].walkability != TileWalkability::OBSTACLE && x - 1 >= 0 && x - 1 < 9)
+			grid[x - 1][y].state = TileState::AREA_EFFECT;
+		if (grid[x + 1][y + 1].walkability != TileWalkability::OBSTACLE && x + 1 >= 0 && x + 1 < 9)
+			grid[x + 1][y + 1].state = TileState::AREA_EFFECT;
+		if (grid[x - 1][y + 1].walkability != TileWalkability::OBSTACLE && x - 1 >= 0 && x - 1 < 9)
+			grid[x - 1][y + 1].state = TileState::AREA_EFFECT;
+		if (grid[x][y + 1].walkability != TileWalkability::OBSTACLE && y + 1 >= 0 && y + 1 < 9)
+			grid[x][y + 1].state = TileState::AREA_EFFECT;
+		if (grid[x][y - 1].walkability != TileWalkability::OBSTACLE && y - 1 >= 0 && y - 1 < 9)
+			grid[x][y - 1].state = TileState::AREA_EFFECT;
+		if (grid[x + 1][y - 1].walkability != TileWalkability::OBSTACLE && y + 1 >= 0 && y + 1 < 9)
+			grid[x + 1][y - 1].state = TileState::AREA_EFFECT;
+		if (grid[x - 1][y - 1].walkability != TileWalkability::OBSTACLE && y - 1 >= 0 && y - 1 < 9)
+			grid[x - 1][y - 1].state = TileState::AREA_EFFECT;
+	}
 }

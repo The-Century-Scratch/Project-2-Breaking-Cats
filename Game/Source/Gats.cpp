@@ -24,7 +24,6 @@ Gats::Gats()
 	{
 		healthPoints += 15;
 	}
-	maxHealth = healthPoints;
 
 	idleLeftAnim.AnimateCat32x32(5, 6);
 	idleLeftAnim.speed = 0.2f;

@@ -22,6 +22,7 @@ void Unit::Create(iPoint pos)
 	texturePath = parameters.attribute("texturepath").as_string();
 	texture = app->tex->Load(texturePath);
 
+	maxHealth = healthPoints;
 	position = pos;
 	size = { 16, 16 };
 	gridFacing = LEFT;
@@ -415,6 +416,8 @@ void Unit::DealDamage(int amount)
 void Unit::Heal(int amount)
 {
 	healthPoints += amount;
+	if (healthPoints > maxHealth)
+		healthPoints = maxHealth;
 }
 
 int Unit::GetHealthPoints()

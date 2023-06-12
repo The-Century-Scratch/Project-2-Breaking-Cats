@@ -18,13 +18,10 @@ Serpicat::Serpicat()
 	name.Create("serpicat");
 
 	healthPoints = 40;
-	damage = 6;
-	type = UnitType::CATSKA;
+	damage = 3;
+	magic = 5;
+	type = UnitType::SERPICAT;
 
-	if (app->inventory->GetMysticalEnergy())
-	{
-		damage += 5;
-	}
 
 	idleLeftAnim.AnimateCat32x32(1, 0);
 	idleLeftAnim.speed = 0.2f;

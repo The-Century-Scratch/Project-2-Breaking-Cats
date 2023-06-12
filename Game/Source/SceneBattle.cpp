@@ -231,6 +231,7 @@ bool SceneBattle::Update(float dt)
 					break;
 				case UA::MOVE:
 					gridSystem->showArea = false;
+					gridSystem->currentAction = unitAction;
 
 					if (unitAction.destinationTile.x < i->position.x)
 						i->gridFacing = LEFT;
@@ -241,7 +242,7 @@ bool SceneBattle::Update(float dt)
 					else if (unitAction.destinationTile.y > i->position.y)
 						i->gridFacing = DOWN;
 
-					if (gridSystem->isWalkable(unitAction.destinationTile))
+					if (gridSystem->isWalkable(unitAction.destinationTile) && !gridSystem->isPortal(unitAction.destinationTile))
 					{
 						gridSystem->move(i->position, unitAction.destinationTile);
 						i->StartAction(unitAction);
@@ -250,6 +251,17 @@ bool SceneBattle::Update(float dt)
 					{
 						i->ActivateAtkEasing();
 						gridSystem->currentAction = unitAction;
+					}
+					else if (gridSystem->isPortal(unitAction.destinationTile))
+					{
+						iPoint travel = gridSystem->getOtherPortal(unitAction.destinationTile) + (unitAction.destinationTile - i->position);
+						if (gridSystem->isWalkable(travel))
+						{
+							gridSystem->currentAction.destinationTile = travel;
+							gridSystem->move(i->position, travel);
+							i->position = gridSystem->getOtherPortal(unitAction.destinationTile);
+							i->StartAction(gridSystem->currentAction);
+						}
 					}
 					break;
 				case UA::PREPARE_DASH:
@@ -346,15 +358,92 @@ bool SceneBattle::Update(float dt)
 				gridSystem->showActionArea();
 				if (gridSystem->Update() && gridSystem->AreaIsClicked())
 				{
+					bool tp = false;
+
 					eastl::vector<iPoint> hitsMade = gridSystem->getHitsPosition();
 
 					gridSystem->showArea = !gridSystem->showArea;
 
 					if (!hitsMade.empty())
 					{
-						for (eastl::unique_ptr<Unit>& unit : units)
+						iPoint displacement = { 8,8 };
+						// GENERAL EFFECTS
+						switch (gridSystem->currentAction.action)
 						{
-							for (iPoint& hit : hitsMade)
+						case UA::ATTACK_LONG_RANGE:
+							if (i->position == gridSystem->currentAction.destinationTile)
+							{
+								if (hitsMade.at(0).x < i->position.x)
+								{
+									gridSystem->currentAction.destinationTile.x += TILE_W;
+								}
+								if (hitsMade.at(0).x > i->position.x)
+								{
+									gridSystem->currentAction.destinationTile.x -= TILE_W;
+								}
+								if (hitsMade.at(0).y < i->position.y)
+								{
+									gridSystem->currentAction.destinationTile.y += TILE_H;
+								}
+								if (hitsMade.at(0).y > i->position.y)
+								{
+									gridSystem->currentAction.destinationTile.y -= TILE_H;
+								}
+								if (gridSystem->isWalkable(gridSystem->currentAction.destinationTile))
+								{
+									gridSystem->move(i->position, gridSystem->currentAction.destinationTile);
+									i->StartAction(gridSystem->currentAction);
+								}
+							}
+							break;
+						case UA::PREPARE_DASH:
+							
+							gridSystem->currentAction.destinationTile = hitsMade.at(0);
+							app->particleManager->CreateParticleSystem(i->position + displacement, Blueprint::DASH, hitsMade.at(0) + displacement);
+
+							if (gridSystem->isPortal(gridSystem->currentAction.destinationTile))
+							{
+								iPoint travel = gridSystem->getOtherPortal(gridSystem->currentAction.destinationTile) + (gridSystem->currentAction.destinationTile - i->position);
+								if (gridSystem->isWalkable(travel))
+								{
+									i->position = gridSystem->getOtherPortal(gridSystem->currentAction.destinationTile);
+									gridSystem->currentAction.destinationTile = travel;
+								}
+							}
+							gridSystem->move(i->position, gridSystem->currentAction.destinationTile);
+							i->StartAction(gridSystem->currentAction);
+							break;
+						case UA::GRENADE:
+							app->particleManager->CreateParticleSystem(hitsMade.at(0), Blueprint::EXPLOSION, hitsMade.at(0));
+							break;
+						case UA::TELEPORT:
+							gridSystem->move(i->position, hitsMade.at(0));
+							gridSystem->currentAction.destinationTile = hitsMade.at(0);
+							i->StartAction(gridSystem->currentAction);
+							break;
+						case UA::PORTAL:
+							if (!gridSystem->isPortal(hitsMade.at(0)))
+							{
+								gridSystem->PlacePortal(hitsMade.at(0));
+								gridSystem->currentAction.destinationTile = hitsMade.at(0);
+								i->StartAction(gridSystem->currentAction);
+							}
+							break;
+						case UA::SILLYMAGIC:
+							app->particleManager->CreateParticleSystem(hitsMade.at(0), Blueprint::MAGICIMPACT, hitsMade.at(0));
+							if (gridSystem->isPortal(hitsMade.at(0)) && gridSystem->isPortalsActivated())
+							{
+								tp = true;
+							}
+							break;
+						default:
+							break;
+						}
+
+						// DAMAGE & EFFECTS TO UNITS
+						for (iPoint& hit : hitsMade)
+						{
+							for (eastl::unique_ptr<Unit>& unit : units)
 							{
 								switch (gridSystem->currentAction.action)
 								{
@@ -363,7 +452,6 @@ bool SceneBattle::Update(float dt)
 								case UA::ATTACK:
 									if (hit == unit->position)
 									{
-										iPoint displacement = { 8,-8 };
 										app->particleManager->CreateParticleSystem(hit + displacement, Blueprint::SLASH, hit + displacement);
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
@@ -371,33 +459,8 @@ bool SceneBattle::Update(float dt)
 									}
 									break;
 								case UA::ATTACK_LONG_RANGE:
-									if (i->position == gridSystem->currentAction.destinationTile)
-									{
-										if (hit.x < i->position.x)
-										{
-											gridSystem->currentAction.destinationTile.x += TILE_W;
-										}
-										if (hit.x > i->position.x)
-										{
-											gridSystem->currentAction.destinationTile.x -= TILE_W;
-										}
-										if (hit.y < i->position.y)
-										{
-											gridSystem->currentAction.destinationTile.y += TILE_H;
-										}
-										if (hit.y > i->position.y)
-										{
-											gridSystem->currentAction.destinationTile.y -= TILE_H;
-										}
-										if (gridSystem->isWalkable(gridSystem->currentAction.destinationTile))
-										{
-											gridSystem->move(i->position, gridSystem->currentAction.destinationTile);
-											i->StartAction(gridSystem->currentAction);
-										}
-									}
 									if (hit == unit->position)
 									{
-										iPoint displacement = { 8,8 };
 										app->particleManager->CreateParticleSystem(i->position + displacement, Blueprint::BULLET, unit->position + displacement);
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
@@ -408,15 +471,6 @@ bool SceneBattle::Update(float dt)
 									{
 										unit->ActivateDmgEasing();
 										unit->DealDamage(i->GetDamage());
-										i->StartAction(gridSystem->currentAction);
-									}
-									else
-									{
-										iPoint displacement = { 8,8 };
-										app->particleManager->CreateParticleSystem(i->position + displacement, Blueprint::DASH, hit + displacement);
-										gridSystem->currentAction.destinationTile = gridSystem->getFocusPosition();
-										gridSystem->move(i->position, gridSystem->currentAction.destinationTile);
-										i->StartAction(gridSystem->currentAction);
 									}
 									break;
 								case UA::ATTACK_AND_HEAL_WITH_KILL:
@@ -442,15 +496,64 @@ bool SceneBattle::Update(float dt)
 										unit->DealDamage(i->GetDamage());
 										i->StartAction(gridSystem->currentAction);
 									}
-									else
-									{
-										app->particleManager->CreateParticleSystem(hit, Blueprint::EXPLOSION, hit);
-									}
 									break;
-								case UA::TELEPORT:
-									gridSystem->move(i->position, hit);
-									gridSystem->currentAction.destinationTile = hit;
-									i->StartAction(gridSystem->currentAction);
+								case UA::SILLYMAGIC:
+									if (hit == unit->position)
+									{
+										if (unit->GetIsAlly())
+										{
+											unit->Heal(i->GetMagic());
+										}
+										else if (!unit->GetIsAlly())
+										{
+											unit->ActivateDmgEasing();
+											unit->DealDamage(i->GetMagic());
+										}
+										if (tp)
+										{
+											iPoint randomPos = unit->position;
+											for (int i = 0; i < 100 || !gridSystem->isWalkable(randomPos); i++)
+											{
+												randomPos = gridSystem->getOtherPortal(hitsMade.at(0));
+												switch (rand() % 8)
+												{
+												case 0:
+													randomPos = { randomPos.x - TILE_W, randomPos.y - TILE_H };
+													break;
+												case 1:
+													randomPos = { randomPos.x, randomPos.y - TILE_H };
+													break;
+												case 2:
+													randomPos = { randomPos.x + TILE_W, randomPos.y - TILE_H };
+													break;
+												case 3:
+													randomPos = { randomPos.x + TILE_W, randomPos.y};
+													break;
+												case 4:
+													randomPos = { randomPos.x + TILE_W, randomPos.y + TILE_H };
+													break;
+												case 5:
+													randomPos = { randomPos.x, randomPos.y + TILE_H };
+													break;
+												case 6:
+													randomPos = { randomPos.x - TILE_W, randomPos.y + TILE_H };
+													break;
+												case 7:
+													randomPos = { randomPos.x - TILE_W, randomPos.y};
+													break;
+												default:
+													break;
+												}
+											}
+
+											if (gridSystem->isWalkable(randomPos))
+											{
+												gridSystem->move(unit->position, randomPos);
+												unit->position = randomPos;
+											}
+										}
+										i->StartAction(gridSystem->currentAction);
+									}
 									break;
 								default:
 									break;
@@ -474,6 +577,12 @@ bool SceneBattle::Update(float dt)
 			{
 				units[turn]->SetIsMyTurn(true);
 			}
+		}
+		if (!i->GetHealthPoints() > 0)
+		{
+			i->SetHasFinishedTurn(true);
+			gridSystem->removeUnit(i->position);
+
 		}
 	}
 

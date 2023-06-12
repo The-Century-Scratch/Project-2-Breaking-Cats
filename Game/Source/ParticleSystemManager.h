@@ -15,6 +15,9 @@ enum class Blueprint {
 	BULLET,
 	SLASH,
 	DASH,
+	PORTAL1,
+	PORTAL2,
+	MAGICIMPACT,
 	NONE
 };
 

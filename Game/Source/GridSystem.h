@@ -10,6 +10,7 @@
 #include "EASTL/vector.h"
 #include "EASTL/unique_ptr.h"
 #include "Unit.h"
+#include "ParticleSystem.h"
 
 #define MAX_TILES_X 9
 #define MAX_TILES_Y 9
@@ -72,6 +73,8 @@ public:
 
 	bool isPortal(iPoint pos);
 
+	bool isPortalsActivated();
+
 	void move(iPoint origin, iPoint destination);
 
 	void removeUnit(iPoint UnitPos);
@@ -85,6 +88,8 @@ public:
 	iPoint getFocusPosition();
 
 	void PlacePortal(iPoint pos);
+
+	iPoint getOtherPortal(iPoint pos);
 
 
 	Unit::PlayerAction currentAction;
@@ -116,6 +121,8 @@ private:
 
 	void showPortal(iPoint pos);
 
+	void showSillyMagic(iPoint pos);
+
 	void showAttackAOE(iPoint pos);
 
 	void showAttackRangeAOE(iPoint pos);
@@ -128,9 +135,16 @@ private:
 
 	void showPortalAOE(iPoint pos);
 
+	void showSillyMagicAOE(iPoint pos);
+
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;
 	SDL_Rect areaSection;
+	SDL_Rect portal1;
+	SDL_Rect portal2;
+
+	ParticleSystem* lastPortalPS;
+	ParticleSystem* firstPortalPS;
 
 	Animation focusedAnim;
 	Animation* currentAnim = nullptr;
