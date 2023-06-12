@@ -22,6 +22,10 @@
 #define COLLECT1 0
 #define COLLECT2 1
 
+//number of menus and number of sidequests
+#define SIDEQUESTSCOUNTFROM0 1
+#define MENUSCOUNT 2
+
 
 
 class QuestManager : public Module
@@ -76,7 +80,9 @@ public:
 
 	//count of collectible objects
 	uint ObjectsCount;
+	//change menus
 	uint MenuID;
+	uint SideQuestID;
 
 	//items
 	SDL_Texture* ItemText;

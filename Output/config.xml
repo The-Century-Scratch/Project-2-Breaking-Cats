@@ -65,7 +65,7 @@
 		<npc scene="8" x="80" y="780" texturepath="Assets/Textures/Sign.png" id="0" type="0"/>			<!-- this is a sign the type 0 SIGN-->
 		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/Npc3.png" id="1" type="1"/>				<!-- this is a regular npc in the village the type 1 VILLAGE-->
 		<npc scene="1" x="50" y="50" texturepath="Assets/Textures/TheGuardian.png" id="2" type="2"/>		<!-- this is the guardian the type 2 GUARDIAN-->
-		<npc scene="3" x="50" y="50" texturepath="Assets/Textures/Contrabandist.png" id="3" type="3"/>		<!-- this is the contrabandist the type 3 CONTRABANDIST-->
+		<npc scene="8" x="50" y="850" texturepath="Assets/Textures/Contrabandist.png" id="3" type="3"/>		<!-- this is the contrabandist the type 3 CONTRABANDIST-->
 		<npc scene="2" x="73" y="59" texturepath="Assets/Textures/Maicey.png" id="4" type="4"/>				<!-- this is Micey the type 4 SHOP-->
 		
 		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>

@@ -30,6 +30,7 @@ public:
 	int id;
 	int nextQuestId;
 	int reward;
+	bool active;
 };
 
 #endif // __QUEST_H__

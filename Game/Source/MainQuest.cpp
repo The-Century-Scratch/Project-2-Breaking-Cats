@@ -7,6 +7,9 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "QuestManager.h"
+#include "Render.h"
+#include "Inventory.h"
+#include "Textures.h"
 
 MainQuest::MainQuest(pugi::xml_node node) {
 	this->id = node.attribute("id").as_int();
@@ -16,6 +19,8 @@ MainQuest::MainQuest(pugi::xml_node node) {
 	this->npcId = node.attribute("npcId").as_int();
 	this->reward = node.attribute("reward").as_int();
 	this->type = QuestType::MAINQUEST;
+	Coinrect = { 192,0,32,32 };
+	rect = { 0,0,0,0 };
 }
 
 MainQuest::~MainQuest() {}
@@ -46,6 +51,7 @@ bool MainQuest::Update() {
 
 	//	app->scene->points += this->reward;
 	//}
+	
 
 	return ret;
 }
@@ -57,4 +63,23 @@ void MainQuest::Draw(Font* font) {
 	app->render->DrawText(font, description.GetCharString(), 50, 250, 48, 5, { 255,255,255,255 }, 1000);
 	//rewards
 	app->render->DrawText(font, "Rewards:", 1000, 200, 48, 5, { 255,255,255,255 }, 100);
+	//rewrads texture
+	switch (this->id) {
+	case 0:
+		app->render->DrawTexture(app->inventory->itemTexture, 350, 125, &Coinrect,0);
+		break;
+	case 1:
+		rect = { 0,0,32,32 };
+		app->render->DrawTexture(app->inventory->itemTexture, 350, 125, &rect,0);
+		break;
+	case 2:
+		app->render->DrawTexture(app->inventory->itemTexture, 350, 125, &Coinrect, 0);
+		break;
+	case 3:
+		rect = { 64,0,32,32 };
+		app->render->DrawTexture(app->inventory->itemTexture, 350, 125, &rect, 0);
+		break;
+	default:break;
+	}
+	
 }
