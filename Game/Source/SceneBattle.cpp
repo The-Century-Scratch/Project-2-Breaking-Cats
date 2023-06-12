@@ -37,263 +37,534 @@ bool SceneBattle::Load()
 	LOG("Loading Scene Battle");
 	bool ret = true;
 
+	switch (app->sceneManager->currentScene)
+	{
+	case 0:
+	{
+		//GATS
+		{
+			eastl::unique_ptr<Unit> gats;
+			gats = eastl::make_unique<Gats>();
+
+			gats.get()->velocity = 6;
+			gats.get()->Create({ 80,96 });
+			gridSystem->LoadUnitData(gats.get());
+			units.push_back(eastl::move(gats));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 5;
+			guardian.get()->Create({ 80,32 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//STRAWDOLL
+		{
+			eastl::unique_ptr<Unit> straw;
+			straw = eastl::make_unique<Straw>();
+
+			straw.get()->velocity = 5;
+			straw.get()->Create({ 32,32 });
+			gridSystem->LoadUnitData(straw.get());
+			units.push_back(eastl::move(straw)); 
+		}
+
+		//STRAWDOLL
+		{
+			eastl::unique_ptr<Unit> straw;
+			straw = eastl::make_unique<Straw>();
+
+			straw.get()->velocity = 5;
+			straw.get()->Create({ 32,128 });
+			gridSystem->LoadUnitData(straw.get());
+			units.push_back(eastl::move(straw));
+		}
+		//STRAWDOLL
+		{
+			eastl::unique_ptr<Unit> straw;
+			straw = eastl::make_unique<Straw>();
+
+			straw.get()->velocity = 5;
+			straw.get()->Create({ 128,32 });
+			gridSystem->LoadUnitData(straw.get());
+			units.push_back(eastl::move(straw));
+		}
+		break;
+	}
+	case 1:
+	{
+		//GATS
+		{
+			eastl::unique_ptr<Unit> gats;
+			gats = eastl::make_unique<Gats>();
+
+			gats.get()->velocity = 5;
+			gats.get()->Create({ 32,112 });
+			gridSystem->LoadUnitData(gats.get());
+			units.push_back(eastl::move(gats));
+		}
+
+		//CATSKA
+		{
+			eastl::unique_ptr<Unit> catska;
+			catska = eastl::make_unique<Catska>();
+
+			catska.get()->velocity = 4;
+			catska.get()->Create({ 32,48 });
+			gridSystem->LoadUnitData(catska.get());
+			units.push_back(eastl::move(catska));
+
+		}
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 32,80 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 128,128 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 112,96 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 96,64 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+
+		break;
+	}
+	case 2:
+	{
+		//GATS
+		{
+			eastl::unique_ptr<Unit> gats;
+			gats = eastl::make_unique<Gats>();
+
+			gats.get()->velocity = 5;
+			gats.get()->Create({ 32,144 });
+			gridSystem->LoadUnitData(gats.get());
+			units.push_back(eastl::move(gats));
+		}
+
+		//CATSKA
+		{
+			eastl::unique_ptr<Unit> catska;
+			catska = eastl::make_unique<Catska>();
+
+			catska.get()->velocity = 4;
+			catska.get()->Create({ 32,112 });
+			gridSystem->LoadUnitData(catska.get());
+			units.push_back(eastl::move(catska));
+		}
+
+		//SERPICAT
+		{
+			eastl::unique_ptr<Unit> serpicat;
+			serpicat = eastl::make_unique<Serpicat>();
+
+			serpicat.get()->velocity = 4;
+			serpicat.get()->Create({ 80,160 });
+			gridSystem->LoadUnitData(serpicat.get());
+			units.push_back(eastl::move(serpicat));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 48,224 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 128,144 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 144,96 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 128,208 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//GUARDIAN
+		{
+			eastl::unique_ptr<Unit> guardian;
+			guardian = eastl::make_unique<Guardian>();
+
+			guardian.get()->velocity = 3;
+			guardian.get()->Create({ 112,208 });
+			gridSystem->LoadUnitData(guardian.get());
+			units.push_back(eastl::move(guardian));
+		}
+
+		//LONGRANGE
+		{
+			eastl::unique_ptr<Unit> longrange;
+			longrange = eastl::make_unique<LongRange>();
+
+			longrange.get()->velocity = 4;
+			longrange.get()->Create({ 80,112 });
+			gridSystem->LoadUnitData(longrange.get());
+			units.push_back(eastl::move(longrange));
+		}
+
+		//LONGRANGE
+		{
+			eastl::unique_ptr<Unit> longrange;
+			longrange = eastl::make_unique<LongRange>();
+
+			longrange.get()->velocity = 4;
+			longrange.get()->Create({ 128,192 });
+			gridSystem->LoadUnitData(longrange.get());
+			units.push_back(eastl::move(longrange));
+		}
+
+		//LONGRANGE
+		{
+			eastl::unique_ptr<Unit> longrange;
+			longrange = eastl::make_unique<LongRange>();
+
+			longrange.get()->velocity = 4;
+			longrange.get()->Create({ 32,208 });
+			gridSystem->LoadUnitData(longrange.get());
+			units.push_back(eastl::move(longrange));
+		}
+
+		//LONGRANGE
+		{
+			eastl::unique_ptr<Unit> longrange;
+			longrange = eastl::make_unique<LongRange>();
+
+			longrange.get()->velocity = 4;
+			longrange.get()->Create({ 32,192 });
+			gridSystem->LoadUnitData(longrange.get());
+			units.push_back(eastl::move(longrange));
+		}
+
+
+
+		break;
+	}
+	default:
+		break;
+	}
+
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
 
 	app->map->Load(name.GetString());
 
-	if (!app->map->propertyNodes.empty())
-	{
-		for (auto& const i : app->map->propertyNodes)
-		{
-			//pugi::xml_node unitNode = i.;
+	//if (!app->map->propertyNodes.empty())
+	//{
+	//	for (auto& const i : app->map->propertyNodes)
+	//	{
+	//		//pugi::xml_node unitNode = i.;
 
-			LOG("The step of this log is the number 1");
-			if (!i)
-			{
-				break;
-			}
-			LOG("The step of this log is the number 2");
+	//		LOG("The step of this log is the number 1");
+	//		if (!i)
+	//		{
+	//			break;
+	//		}
+	//		LOG("The step of this log is the number 2");
 
-			if (!i.empty())
-			{
-				LOG("The step of this log is the number 3");
-				pugi::xml_node unitProperty = i.child("property"); // this is giving a problem
-				LOG("The step of this log is the number 4");
+	//		if (!i.empty())
+	//		{
+	//			LOG("The step of this log is the number 3");
+	//			pugi::xml_node unitProperty = i.child("property"); // this is giving a problem
+	//			LOG("The step of this log is the number 4");
 
-				if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
-				{
-					continue;
-				}
-				LOG("The step of this log is the number 4.5");
+	//			if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+	//			{
+	//				continue;
+	//			}
+	//			LOG("The step of this log is the number 4.5");
 
-				if (unitProperty.attribute("value"))
-				{
-					LOG("The step of this log is the number 5");
-					UnitType unitType = static_cast<UnitType>(unitProperty.attribute("value").as_int());
-					LOG("The step of this log is the number 6");
-					switch (unitType)
-					{
-					case UnitType::UNDEFINED:
-						break;
-					case UnitType::GATS:
-					{
-						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
-						{
-							break;
-						}
-						eastl::unique_ptr<Unit> gats;
-						gats = eastl::make_unique<Gats>();
+	//			if (unitProperty.attribute("value"))
+	//			{
+	//				LOG("The step of this log is the number 5");
+	//				UnitType unitType = static_cast<UnitType>(unitProperty.attribute("value").as_int());
+	//				LOG("The step of this log is the number 6");
+	//				switch (unitType)
+	//				{
+	//				case UnitType::UNDEFINED:
+	//					break;
+	//				case UnitType::GATS:
+	//				{
+	//					if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+	//					{
+	//						break;
+	//					}
+	//					eastl::unique_ptr<Unit> gats;
+	//					gats = eastl::make_unique<Gats>();
 
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-						if(unitProperty.attribute("value"))
-						gats.get()->velocity = unitProperty.attribute("value").as_int();
-						int x = unitProperty.parent().parent().attribute("x").as_int();
-						int y = unitProperty.parent().parent().attribute("y").as_int();
-
-
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-
-						gats.get()->parameters = unitProperty;
-
-						gats.get()->Create({ x,y });
-						gridSystem->LoadUnitData(gats.get());
-						units.push_back(eastl::move(gats));
-						LOG("The step of this log is the number 7");
-					}
-
-					break;
-					case UnitType::CATSKA:
-					{
-						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
-						{
-							break;
-						}
-						eastl::unique_ptr<Unit> unit;
-						unit = eastl::make_unique<Catska>();
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-						if (unitProperty.attribute("value"))
-						unit.get()->velocity = unitProperty.attribute("value").as_int();
-						int x = unitProperty.parent().parent().attribute("x").as_int();
-						int y = unitProperty.parent().parent().attribute("y").as_int();
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+	//					if(unitProperty.attribute("value"))
+	//					gats.get()->velocity = unitProperty.attribute("value").as_int();
+	//					int x = unitProperty.parent().parent().attribute("x").as_int();
+	//					int y = unitProperty.parent().parent().attribute("y").as_int();
 
 
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
 
-						unit.get()->parameters = unitProperty;
+	//					gats.get()->parameters = unitProperty;
 
-						unit.get()->Create({ x,y });
-						gridSystem->LoadUnitData(unit.get());
-						units.push_back(eastl::move(unit));
-						LOG("The step of this log is the number 7");
-					}
-					break;
-					case UnitType::GUARDIAN:
-					{
-						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
-						{
-							break;
-						}
-						eastl::unique_ptr<Unit> unit;
-						unit = eastl::make_unique<Guardian>();
+	//					gats.get()->Create({ x,y });
+	//					gridSystem->LoadUnitData(gats.get());
+	//					units.push_back(eastl::move(gats));
+	//					LOG("The step of this log is the number 7");
+	//				}
 
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-						if (unitProperty.attribute("value"))
-						unit.get()->velocity = unitProperty.attribute("value").as_int(); // this is giving a problem
-						int x = unitProperty.parent().parent().attribute("x").as_int();
-						int y = unitProperty.parent().parent().attribute("y").as_int();
-
-
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-
-						unit.get()->parameters = unitProperty;
-
-						unit.get()->Create({ x,y });
-						gridSystem->LoadUnitData(unit.get());
-						units.push_back(eastl::move(unit));
-						LOG("The step of this log is the number 7");
-					}
-					break;
-					case UnitType::LONGRANGE:
-					{
-						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
-						{
-							break;
-						}
-						eastl::unique_ptr<Unit> unit;
-						unit = eastl::make_unique<LongRange>();
-
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-						if (unitProperty.attribute("value"))
-						unit.get()->velocity = unitProperty.attribute("value").as_int();
-						int x = unitProperty.parent().parent().attribute("x").as_int();
-						int y = unitProperty.parent().parent().attribute("y").as_int();
+	//				break;
+	//				case UnitType::CATSKA:
+	//				{
+	//					if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+	//					{
+	//						break;
+	//					}
+	//					eastl::unique_ptr<Unit> unit;
+	//					unit = eastl::make_unique<Catska>();
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+	//					if (unitProperty.attribute("value"))
+	//					unit.get()->velocity = unitProperty.attribute("value").as_int();
+	//					int x = unitProperty.parent().parent().attribute("x").as_int();
+	//					int y = unitProperty.parent().parent().attribute("y").as_int();
 
 
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
 
-						unit.get()->parameters = unitProperty;
+	//					unit.get()->parameters = unitProperty;
 
-						unit.get()->Create({ x,y });
-						gridSystem->LoadUnitData(unit.get());
-						units.push_back(eastl::move(unit));
-						LOG("The step of this log is the number 7");
-					}
-					break;
-					case UnitType::STRAW:
-					{
-						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
-						{
-							break;
-						}
-						eastl::unique_ptr<Unit> unit;
-						unit = eastl::make_unique<Straw>();
+	//					unit.get()->Create({ x,y });
+	//					gridSystem->LoadUnitData(unit.get());
+	//					units.push_back(eastl::move(unit));
+	//					LOG("The step of this log is the number 7");
+	//				}
+	//				break;
+	//				case UnitType::GUARDIAN:
+	//				{
+	//					if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+	//					{
+	//						break;
+	//					}
+	//					eastl::unique_ptr<Unit> unit;
+	//					unit = eastl::make_unique<Guardian>();
 
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-						if (unitProperty.attribute("value"))
-						unit.get()->velocity = unitProperty.attribute("value").as_int();
-						int x = unitProperty.parent().parent().attribute("x").as_int();
-						int y = unitProperty.parent().parent().attribute("y").as_int();
-
-
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-
-						unit.get()->parameters = unitProperty;
-
-						unit.get()->Create({ x,y });
-						gridSystem->LoadUnitData(unit.get());
-						units.push_back(eastl::move(unit));
-						LOG("The step of this log is the number 7");
-					break;
-					}
-					case UnitType::SERPICAT:
-					{
-						if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
-						{
-							break;
-						}
-						eastl::unique_ptr<Unit> unit;
-						unit = eastl::make_unique<Serpicat>();
-
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
-						if (unitProperty.attribute("value"))
-							unit.get()->velocity = unitProperty.attribute("value").as_int();
-						int x = unitProperty.parent().parent().attribute("x").as_int();
-						int y = unitProperty.parent().parent().attribute("y").as_int();
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+	//					if (unitProperty.attribute("value"))
+	//					unit.get()->velocity = unitProperty.attribute("value").as_int(); // this is giving a problem
+	//					int x = unitProperty.parent().parent().attribute("x").as_int();
+	//					int y = unitProperty.parent().parent().attribute("y").as_int();
 
 
-						if (!unitProperty.next_sibling("property"))
-						{
-							break;
-						}
-						unitProperty = unitProperty.next_sibling("property");
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
 
-						unit.get()->parameters = unitProperty;
+	//					unit.get()->parameters = unitProperty;
 
-						unit.get()->Create({ x,y });
-						gridSystem->LoadUnitData(unit.get());
-						units.push_back(eastl::move(unit));
-						LOG("The step of this log is the number 7");
-					}
-					break;
-					}
-				}
-				LOG("The step of this log is the number 8");
+	//					unit.get()->Create({ x,y });
+	//					gridSystem->LoadUnitData(unit.get());
+	//					units.push_back(eastl::move(unit));
+	//					LOG("The step of this log is the number 7");
+	//				}
+	//				break;
+	//				case UnitType::LONGRANGE:
+	//				{
+	//					if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+	//					{
+	//						break;
+	//					}
+	//					eastl::unique_ptr<Unit> unit;
+	//					unit = eastl::make_unique<LongRange>();
 
-			}
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+	//					if (unitProperty.attribute("value"))
+	//					unit.get()->velocity = unitProperty.attribute("value").as_int();
+	//					int x = unitProperty.parent().parent().attribute("x").as_int();
+	//					int y = unitProperty.parent().parent().attribute("y").as_int();
 
 
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+
+	//					unit.get()->parameters = unitProperty;
+
+	//					unit.get()->Create({ x,y });
+	//					gridSystem->LoadUnitData(unit.get());
+	//					units.push_back(eastl::move(unit));
+	//					LOG("The step of this log is the number 7");
+	//				}
+	//				break;
+	//				case UnitType::STRAW:
+	//				{
+	//					if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+	//					{
+	//						break;
+	//					}
+	//					eastl::unique_ptr<Unit> unit;
+	//					unit = eastl::make_unique<Straw>();
+
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+	//					if (unitProperty.attribute("value"))
+	//					unit.get()->velocity = unitProperty.attribute("value").as_int();
+	//					int x = unitProperty.parent().parent().attribute("x").as_int();
+	//					int y = unitProperty.parent().parent().attribute("y").as_int();
+
+
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+
+	//					unit.get()->parameters = unitProperty;
+
+	//					unit.get()->Create({ x,y });
+	//					gridSystem->LoadUnitData(unit.get());
+	//					units.push_back(eastl::move(unit));
+	//					LOG("The step of this log is the number 7");
+	//				break;
+	//				}
+	//				case UnitType::SERPICAT:
+	//				{
+	//					if (unitProperty.empty() || unitProperty.parent().empty() || unitProperty.parent().parent().empty())
+	//					{
+	//						break;
+	//					}
+	//					eastl::unique_ptr<Unit> unit;
+	//					unit = eastl::make_unique<Serpicat>();
+
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+	//					if (unitProperty.attribute("value"))
+	//						unit.get()->velocity = unitProperty.attribute("value").as_int();
+	//					int x = unitProperty.parent().parent().attribute("x").as_int();
+	//					int y = unitProperty.parent().parent().attribute("y").as_int();
+
+
+	//					if (!unitProperty.next_sibling("property"))
+	//					{
+	//						break;
+	//					}
+	//					unitProperty = unitProperty.next_sibling("property");
+
+	//					unit.get()->parameters = unitProperty;
+
+	//					unit.get()->Create({ x,y });
+	//					gridSystem->LoadUnitData(unit.get());
+	//					units.push_back(eastl::move(unit));
+	//					LOG("The step of this log is the number 7");
+	//				}
+	//				break;
+	//				}
+	//			}
+	//			LOG("The step of this log is the number 8");
+
+	//		}
 
 
 
-		}
-		app->map->propertyNodes.clear();
-	}
+
+
+	//	}
+	//	app->map->propertyNodes.clear();
+	//}
 	
 
 

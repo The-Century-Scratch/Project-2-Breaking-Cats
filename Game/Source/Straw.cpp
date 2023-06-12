@@ -11,8 +11,7 @@
 Straw::Straw()
 {
 	name.Create("unit");
-	texturePath = parameters.attribute("value").as_string();
-	texture = app->tex->Load(texturePath);
+	texturePath = "Assets/Textures/StrawDall.png";
 
 	healthPoints = 30;
 	damage = 666;

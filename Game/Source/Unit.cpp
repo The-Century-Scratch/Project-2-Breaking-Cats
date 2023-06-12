@@ -19,7 +19,6 @@ Unit::~Unit() = default;
 
 void Unit::Create(iPoint pos)
 {
-	texturePath = parameters.attribute("value").as_string();
 	texture = app->tex->Load(texturePath);
 
 	maxHealth = healthPoints;

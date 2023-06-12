@@ -14,6 +14,7 @@ LongRange::LongRange()
 {
 	name.Create("unit");
 
+	texturePath = "Assets/Textures/LargeRangeEnemy.png";
 	healthPoints = 15;
 	damage = 7;
 	type = UnitType::LONGRANGE;

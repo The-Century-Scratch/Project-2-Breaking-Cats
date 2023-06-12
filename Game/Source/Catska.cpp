@@ -17,6 +17,7 @@ Catska::Catska()
 {
 	name.Create("catska");
 
+	texturePath = "Assets/Textures/Catska.png";
 	healthPoints = 40;
 	damage = 6;
 	type = UnitType::CATSKA;

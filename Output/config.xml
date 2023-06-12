@@ -123,8 +123,6 @@
 			<!--this is 1 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/combatCity.tmx"/>
 			<!--this is 2 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/combat4.tmx"/>
-			<!--this is 3 in the list of strings of maps-->
 
 		</map>
     

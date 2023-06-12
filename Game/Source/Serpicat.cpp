@@ -17,6 +17,7 @@ Serpicat::Serpicat()
 {
 	name.Create("serpicat");
 
+	texturePath = "Assets/Textures/Serpicat.png";
 	healthPoints = 40;
 	damage = 3;
 	magic = 5;

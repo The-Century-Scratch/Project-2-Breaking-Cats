@@ -14,6 +14,7 @@ Guardian::Guardian()
 {
 	name.Create("unit");
 
+	texturePath = "Assets/Textures/TankEnemy.png";
 	healthPoints = 20;
 	damage = 10;
 	type = UnitType::GUARDIAN;

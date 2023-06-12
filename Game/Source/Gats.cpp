@@ -16,6 +16,7 @@ Gats::Gats()
 {
 	name.Create("gats");
 
+	texturePath = "Assets/Textures/GatsCombat.png";
 	healthPoints = 50;
 	damage = 10;
 	type = UnitType::GATS;
