@@ -50,6 +50,8 @@ public:
 
 	bool isWalkable(iPoint pos);
 
+	iPoint CornerPosition();
+
 private:
 	// All existing colliders in the scene
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };

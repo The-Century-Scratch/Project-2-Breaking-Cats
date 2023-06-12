@@ -48,7 +48,8 @@ bool GridSystem::Start()
 	clickableAnim.speed = 0.1f;
 
 
-	gridPos = { 16,16 }; // TODO: que lo loadee de la propia escena/ del tmx
+	//gridPos = { 16,16 }; // TODO: que lo loadee de la propia escena/ del tmx
+	gridPos = app->moduleCollisions->CornerPosition();
 	showArea = false;
 
 	lastPortal = { 0,0 };
