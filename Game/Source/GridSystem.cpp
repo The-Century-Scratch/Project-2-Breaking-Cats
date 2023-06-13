@@ -63,6 +63,7 @@ bool GridSystem::Start()
 			grid[x][y].state = TileState::UNSELECTED;
 			//TODO: tile walkability loadeado de las collisions
 			grid[x][y].walkability = LoadWalkabilityfromCollisions({ grid[x][y].bounds.x , grid[x][y].bounds.y });
+			grid[x][y].isFocused = false;
 		}
 	}
 	return true;

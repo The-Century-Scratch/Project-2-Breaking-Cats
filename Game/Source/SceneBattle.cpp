@@ -1313,6 +1313,8 @@ void SceneBattle::Draw()
 bool SceneBattle::UnLoad()
 {
 	gridSystem->CleanUp();
+	app->tex->Unload(GuiCombat);
+	app->tex->Unload(GuiKeyboard);
 	//font->UnLoad(app->tex);
 	//RELEASE(font);
 
