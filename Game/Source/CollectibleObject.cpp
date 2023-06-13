@@ -52,7 +52,7 @@ bool CollectibleObject::Start() {
 
 bool CollectibleObject::Update()
 {
-	if (solved)
+	if (solved || app->questManager->sidequestActive == nullptr)
 	{
 		return true;
 	}
@@ -74,38 +74,41 @@ bool CollectibleObject::CleanUp()
 
 void CollectibleObject::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1->type == Collider::Type::COLLECTIBLEOBJECT)
-	{
-		switch (c2->type)
+	if (app->questManager->sidequestActive != nullptr) {
+		if (c1->type == Collider::Type::COLLECTIBLEOBJECT)
 		{
-		case Collider::Type::NONE:
-			break;
-		case Collider::Type::WALL:
-			break;
-		case Collider::Type::PLAYER:
-			//FUNCTION TO BE COLLECTED
-			if (app->questManager->sidequestActive->id == COLLECT1) {
+			switch (c2->type)
+			{
+			case Collider::Type::NONE:
+				break;
+			case Collider::Type::WALL:
+				break;
+			case Collider::Type::PLAYER:
+				//FUNCTION TO BE COLLECTED
+				
 				app->questManager->ObjectsCount++;
 				eCollider->type = Collider::Type::NONE;
 				this->solved = true;
 				this->toDelete = true;
 				break;
+				
+				break;
+			case Collider::Type::ENEMY:
+				break;
+			case Collider::Type::NPCINTERACTION:
+				break;
+			case Collider::Type::CAMLIMIT:
+				break;
+			case Collider::Type::CHEAST:
+				break;
+			case Collider::Type::CHEASTINTERACTION:
+				break;
+			case Collider::Type::CHANGESCENE:
+				break;
+			default:
+				break;
 			}
-			break;
-		case Collider::Type::ENEMY:
-			break;
-		case Collider::Type::NPCINTERACTION:
-			break;
-		case Collider::Type::CAMLIMIT:
-			break;
-		case Collider::Type::CHEAST:
-			break;
-		case Collider::Type::CHEASTINTERACTION:
-			break;
-		case Collider::Type::CHANGESCENE:
-			break;
-		default:
-			break;
 		}
 	}
+	
 }

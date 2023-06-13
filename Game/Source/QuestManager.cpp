@@ -90,6 +90,8 @@ bool QuestManager::Start() {
 	changeDialogueIdAfterCollecting = false;
 	changeDialogueIdAfterRocks = false;
 	printQuestMenu = false;
+	sidequest1 = false;
+	sidequest2 = false; 
 
 	ObjectsCount = 0;
 	MenuID = 1;

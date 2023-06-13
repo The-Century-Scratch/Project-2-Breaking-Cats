@@ -75,7 +75,7 @@ public:
 	Quest* sidequestActive;
 	int completeQuestFx;
 	bool printQuestMenu;
-	bool RocksQuest, quest3;
+	bool RocksQuest, quest3, sidequest1, sidequest2;
 	bool changeDialogueIdAfterRocks, changeDialogueIdAfterCollecting;
 
 	//count of collectible objects
