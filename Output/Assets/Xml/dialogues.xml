@@ -4,8 +4,8 @@
 		<!--this is the sign in the tutorial, and completes the first tutorial quest -->
 		<node id ="0">
 			<npc_text text ="Do you want to read a breaf tutorial of the controls of the game?"/>
-			<option id="0" nextNodeId="1" text="Yeah sure!" missionId="-1"/>
-			<option id="1" nextNodeId="-1" text="Nah" missionId="1" sideMissionId="-1"/>
+			<option id="0" nextNodeId="1" text="Yeah sure!" missionId="1"/> sideMissionId="-1"/>
+			<option id="1" nextNodeId="-1" text="Nah" missionId="-1" sideMissionId="-1"/>
 			<!--change to -1 before deliver -->
 		</node>
 		<node id ="1">
