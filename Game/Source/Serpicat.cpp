@@ -23,9 +23,11 @@ Serpicat::Serpicat()
 	magic = 5;
 	type = UnitType::SERPICAT;
 
-
-	idleLeftAnim.AnimateCat32x32(1, 0);
+	idleLeftAnim.AnimateCat32x32(5, 0);
 	idleLeftAnim.speed = 0.2f;
+
+	idleRightAnim.AnimateCat32x32(5, 1);
+	idleRightAnim.speed = 0.2f;
 
 	currentAnim = &idleLeftAnim;
 	state = ActionState::IDLE;

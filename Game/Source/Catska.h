@@ -21,7 +21,11 @@ public:
 
 	void DealDamage(int amount);
 
+	void SpecificAnimationState();
+
 private:
+	Animation attackLeftAnim;
+	Animation attackRightAnim;
 };
 
 #endif //__PLAYER_H__

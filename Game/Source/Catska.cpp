@@ -27,8 +27,17 @@ Catska::Catska()
 		damage += 5;
 	}
 
-	idleLeftAnim.AnimateCat32x32(1, 0);
+	idleLeftAnim.AnimateCat32x32(5, 0);
 	idleLeftAnim.speed = 0.2f;
+
+	idleRightAnim.AnimateCat32x32(5, 1);
+	idleRightAnim.speed = 0.2f;
+
+	attackLeftAnim.AnimateCat32x32(5, 2);
+	attackLeftAnim.speed = 0.2f;
+
+	attackRightAnim.AnimateCat32x32(5, 3);
+	attackRightAnim.speed = 0.2f;
 
 	currentAnim = &idleLeftAnim;
 	state = ActionState::IDLE;
@@ -148,6 +157,12 @@ void Catska::StartAction(PlayerAction playerAction)
 		position = playerAction.destinationTile;
 	}
 	LOG("it does enter this scope right now, so be careful");
+
+
+	if (moveVector.x > 0)
+		facing = FACING_RIGHT;
+	else if (moveVector.x < 0)
+		facing = FACING_LEFT;
 }
 
 void Catska::DealDamage(int amount)
@@ -169,3 +184,16 @@ void Catska::DealDamage(int amount)
 	}
 	
 }
+
+void Catska::SpecificAnimationState()
+{
+	// virtual Function for specific animations that changes between enemies like Gats dash f.e.
+	switch (state)
+	{
+	case ActionState::ATTACK:
+		break;
+	default:
+		break;
+	}
+}
+

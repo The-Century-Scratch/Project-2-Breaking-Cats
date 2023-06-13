@@ -732,7 +732,7 @@ bool SceneBattle::Update(float dt)
 				}
 			}
 
-			if(turnTimer > 10)
+			if(turnTimer > 10 || !i->GetIsAlly())
 			{
 				if (unitAction.action != UA::NONE)
 				{

@@ -49,7 +49,7 @@ bool GridSystem::Start()
 
 
 	//gridPos = { 16,16 }; // TODO: que lo loadee de la propia escena/ del tmx
-	gridPos = app->moduleCollisions->CornerPosition();
+	gridPos = app->moduleCollisions->CornerPosition() + iPoint(TILE_W,TILE_H);
 	showArea = false;
 
 	lastPortal = { 0,0 };
@@ -138,7 +138,7 @@ bool GridSystem::CleanUp()
 
 bool GridSystem::isWalkable(iPoint pos)
 {
-	if (pos.x < TILE_W || pos.y < TILE_H) return false;
+	if (pos.x < gridPos.x || pos.y < gridPos.y) return false;
 
 	int x = (pos.x - gridPos.x) / TILE_W;
 	int y = (pos.y - gridPos.y) / TILE_H;
