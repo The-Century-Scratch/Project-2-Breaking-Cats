@@ -31,6 +31,7 @@ public:
 	bool isDialogueActive;
 private:
 	SDL_Texture* texture;
+	SDL_Texture* arrowTex;
 	SceneGameplay* scene;
 
 	// Pugi stuff to load dialogues

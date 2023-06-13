@@ -72,7 +72,7 @@ public:
 	bool PostUpdate() override;
 	void Draw();
 	bool CleanUp() override;
-	bool OnGuiMouseClickEvent(GuiControl* control);
+	bool OnMouseClickEvent();
 	void UpdatingButtons(Input* input);
 
 	bool LoadState(pugi::xml_node& node);
@@ -81,6 +81,8 @@ public:
 	void AddItem(Item *it);
 
 	bool IsMouseInside(SDL_Rect r);
+	bool IsMouseClickInside(SDL_Rect r, iPoint clickPos);
+	void SaveMouseClickPos();
 
 	void DisplayText(SDL_Rect bounds, bool showColliders);
 
@@ -113,6 +115,10 @@ public:
 
 private:
 
+	void ItemMenu(int curSlot_);
+
+	void ItemMenuDraw(int curSlot_);
+
 	void HandleObjects(InventorySlot objects[]);
 
 	void DrawObjects(InventorySlot objects[], Font* font, bool showColliders);
@@ -133,24 +139,35 @@ public:
 
 	bool isActivated;
 	iPoint invPos;
+	iPoint mouseClickPos;
 
 	Player* catska;
 	Player* gats;
 
+	SDL_Texture* itemTexture;
 
+	Easing* easing;
 
 private:
-	SDL_Texture* itemTexture;
 	SDL_Texture* invTex;
 	SDL_Texture* slotText;
 	SDL_Texture* gatsText;
 	SDL_Texture* catskaText;
+	SDL_Texture* itemMenuTexture;
+
+	int easingPos;
 
 	SDL_Rect gatsRect;
 	SDL_Rect catskaRect;
 
 	SDL_Rect slotRect;
 	SDL_Rect slotRectFocus;
+
+	SDL_Rect itemMenuBounds;
+	SDL_Rect itemMenuPos;
+	SDL_Rect itemMenuButton;
+	SDL_Rect itemMenuButtonFocus;
+	SDL_Rect itemMenuButtonPos;
 
 	SDL_Rect leftArrowRect;
 	SDL_Rect leftArrowRectFocus;
@@ -211,7 +228,6 @@ private:
 	SDL_Rect tmpCharBounds;
 	SDL_Rect tmpEquipMenuBounds;
 
-	Easing* easing;
 	Easing* easing2;
 	int counter;
 
@@ -224,4 +240,9 @@ private:
 	bool usingItem;
 	bool displayEquipmentMenu;
 	int currentEquipmentId;
+
+	//Item Menu
+	SString itName;
+	bool isItemMenu_Active;
+	int currentSlot_;
 };

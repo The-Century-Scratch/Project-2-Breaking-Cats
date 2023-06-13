@@ -8,6 +8,7 @@
 #include "MovableObject.h"
 #include "TriggerableObject.h"
 #include "StaticObject.h"
+#include "CollectibleObject.h"
 #include "List.h"
 //#include "ParticlesManager.h"
 
@@ -37,6 +38,7 @@ class Font;
 #define LEAVEBASE iPoint(136,440)
 #define LEAVEAFTERLABRINTHDOWN iPoint(389, 8)
 #define LEAVEPRELABTOP iPoint(384, 748)
+#define LEAVELABTOP iPoint(384, 748)
 
 //TO LABRINTH
 #define LEAVEVILLAGE iPoint(6, 150)
@@ -44,6 +46,7 @@ class Font;
 
 //TO VILLAGE
 #define LEAVELABRINTHLEFT iPoint(620, 125)
+#define LEAVETUTORIAL iPoint(136,23)
 
 //TO AFTERLABRINTH
 #define LEAVELABRINTHRIGHT iPoint(5, 159)
@@ -51,7 +54,10 @@ class Font;
 
 //TO PRELAB
 #define LEAVECITYDOWN iPoint(208, 6)
-#define LEAVELAB iPoint(379, 294)
+#define LEAVELAB iPoint(381, 293)
+
+//TO LAB
+#define LEAVEPRELAB iPoint(178, 461)
 
 #define IDSCENEMAP 0
 #define IDSCENEBASE 1
@@ -61,6 +67,8 @@ class Font;
 #define IDAFTERLABRINTH 5
 #define IDVILLAGE 6
 #define IDPRELAB 7
+#define IDTUTORIAL 8
+#define IDLAB 9
 
 #define INIT_POS_TABERN iPoint(334,106)
 #define INIT_POS_BASE iPoint(113,366)
@@ -128,6 +136,7 @@ private:
 	void LoadMovableObjects();
 	void LoadTriggerableObjects();
 	void LoadStaticObject();
+	void LoadCollectibleObjects();
 	void LoadNpc();
 	void LoadItems(pugi::xml_node& n);
 
@@ -139,6 +148,8 @@ private:
 	List<MovableObject*> movableObjectList;
 	List<TriggerableObject*> triggerableObjectList;
 	List<StaticObject*> staticObjectList;
+	List<CollectibleObject*> collectibleObjectList;
+
 
 	SDL_Texture* goldTexture;
 	eastl::list<Player*> playerList;
@@ -196,6 +207,8 @@ private:
 	bool fadeOut;
 	bool loadObjects;
 	bool deleteDoor;
+	bool addItems_;
+
 	//Fx
 	int doorOpenedFx;
 	int doorClosedFx;

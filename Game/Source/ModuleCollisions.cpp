@@ -27,6 +27,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::WALL][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::WALL][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::WALL][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
@@ -39,6 +41,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::CHANGESCENE] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::MOVABLEOBJECT] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::TRIGGERABLEOBJECT] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::COLLECTIBLEOBJECT] = true;
+
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
@@ -51,6 +55,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::NPC][Collider::Type::WALL] = true;
 	matrix[Collider::Type::NPC][Collider::Type::PLAYER] = true;
@@ -63,6 +69,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::NPC][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::NPC][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::NPC][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::NPC][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::NPCINTERACTION][Collider::Type::WALL] = false;
 	matrix[Collider::Type::NPCINTERACTION][Collider::Type::PLAYER] = true;
@@ -75,6 +83,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::NPCINTERACTION][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::NPCINTERACTION][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::NPCINTERACTION][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::NPCINTERACTION][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::CAMLIMIT][Collider::Type::WALL] = false;
 	matrix[Collider::Type::CAMLIMIT][Collider::Type::PLAYER] = true;
@@ -87,6 +97,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::CAMLIMIT][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::CAMLIMIT][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::CAMLIMIT][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::CAMLIMIT][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::CHEAST][Collider::Type::WALL] = false;
 	matrix[Collider::Type::CHEAST][Collider::Type::PLAYER] = true;
@@ -99,6 +111,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::CHEAST][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::CHEAST][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::CHEAST][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::CHEAST][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::CHEASTINTERACTION][Collider::Type::WALL] = false;
 	matrix[Collider::Type::CHEASTINTERACTION][Collider::Type::PLAYER] = true;
@@ -111,6 +125,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::CHEASTINTERACTION][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::CHEASTINTERACTION][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::CHEASTINTERACTION][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::CHEASTINTERACTION][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::WALL] = false;
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::PLAYER] = true;
@@ -123,6 +139,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::CHANGESCENE][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::CHANGESCENE][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 
 	matrix[Collider::Type::MOVABLEOBJECT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::MOVABLEOBJECT][Collider::Type::PLAYER] = true;
@@ -135,6 +153,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::MOVABLEOBJECT][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::MOVABLEOBJECT][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::MOVABLEOBJECT][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::MOVABLEOBJECT][Collider::Type::COLLECTIBLEOBJECT] = false;
 
 	matrix[Collider::Type::TRIGGERABLEOBJECT][Collider::Type::WALL] = false;
 	matrix[Collider::Type::TRIGGERABLEOBJECT][Collider::Type::PLAYER] = true;
@@ -147,6 +166,22 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::TRIGGERABLEOBJECT][Collider::Type::CHANGESCENE] = false;
 	matrix[Collider::Type::TRIGGERABLEOBJECT][Collider::Type::MOVABLEOBJECT] = false;
 	matrix[Collider::Type::TRIGGERABLEOBJECT][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::TRIGGERABLEOBJECT][Collider::Type::COLLECTIBLEOBJECT] = false;
+
+
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::NPC] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::NPCINTERACTION] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::CAMLIMIT] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::CHEAST] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::CHEASTINTERACTION] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::CHANGESCENE] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::MOVABLEOBJECT] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::TRIGGERABLEOBJECT] = false;
+	matrix[Collider::Type::COLLECTIBLEOBJECT][Collider::Type::COLLECTIBLEOBJECT] = false;
+
 						  
 	/*debug = true;*/
 }
@@ -283,6 +318,9 @@ void ModuleCollisions::DebugDraw()
 			break;
 		case Collider::Type::TRIGGERABLEOBJECT:
 			app->render->DrawRectangle(colliders[i]->rect, 0, 0, 255, alpha * 0.25, true);		//blue but lower oppacity
+			break;
+		case Collider::Type::COLLECTIBLEOBJECT:
+			app->render->DrawRectangle(colliders[i]->rect, 255, 140, 0, alpha , true);			//orange
 			break;
 		default:
 			break;

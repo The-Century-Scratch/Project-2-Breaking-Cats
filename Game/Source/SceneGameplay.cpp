@@ -48,6 +48,7 @@
 //#include "CharacterManager.h"
 //#include "PauseMenu.h"
 #include "Inventory.h"
+#include "InventoryShop.h"
 //#include "QuestMenu.h"
 //#include "Shop.h"
 
@@ -256,6 +257,21 @@ bool SceneGameplay::Load()
 		}
 	}
 
+	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
+	{
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
+			collectibleObject->parameters = collectibleObjectNode;
+			collectibleObjectList.Add(collectibleObject);
+			collectibleObject->Start();
+		}
+	}
+
+
+
+
+
 	//Item* item = nullptr;
 	//pugi::xml_node itemNode = config.child("item");
 	//{
@@ -309,9 +325,19 @@ bool SceneGameplay::Load()
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 		canMoveCam = true;
+	case 7:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 8:
+		app->render->camera.x = 0;
+		app->render->camera.y = -2000;
+		canMoveCam = true;
 	default:
 		break;
 	}
+
+	addItems_ = true;
 
 	app->inventory->Enable();
 
@@ -396,8 +422,16 @@ bool SceneGameplay::Update(float dt)
 
 	if (canMoveCam)
 	{
-		if (app->sceneManager->currentScene == 1)
+		if (app->sceneManager->currentScene == 1 || app->sceneManager->currentScene == IDLAB)
 		{
+			if (app->sceneManager->currentScene == 1)
+			{
+				app->render->camera.x = 283;
+			}
+			if (app->sceneManager->currentScene ==  IDLAB)
+			{
+				app->render->camera.x = 150;
+			}
 			//camera fix to player in y axis
 			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
 			{
@@ -445,48 +479,41 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
-	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
+	if (addItems_)
 	{
-		app->inventory->isActivated = !app->inventory->isActivated;
-		app->audio->PlayFx(app->hud->swapscenesfx);
+		app->inventoryShop->AddItem(dragonSlayer);
+		app->inventoryShop->AddItem(bulletPenetration);
+		app->inventoryShop->AddItem(arcaneSpirit);
+		addItems_ = false;
 	}
-
-	
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
-		firePaw->equiped = true;
 		app->inventory->AddItem(firePaw);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
 	{
-		dragonSlayer->equiped = true;
 		app->inventory->AddItem(dragonSlayer);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
 	{
-		grapplingHook->equiped = true;
 		app->inventory->AddItem(grapplingHook);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
 	{
-		bulletPenetration->equiped = true;
 		app->inventory->AddItem(bulletPenetration);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
 	{
-		mysticalEnergy->equiped = true;
 		app->inventory->AddItem(mysticalEnergy);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
 	{
-		arcaneSpirit->equiped = true;
 		app->inventory->AddItem(arcaneSpirit);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
@@ -556,7 +583,13 @@ bool SceneGameplay::Update(float dt)
 		//leaving village map
 		if (app->sceneManager->currentScene == IDVILLAGE)
 		{
-			ChangeMap(LEAVEVILLAGE, 4);
+			ChangeMap(LEAVEVILLAGE, IDLABRINTH);
+		}
+
+		//leaving tutorial map
+		if (app->sceneManager->currentScene == IDTUTORIAL)
+		{
+			ChangeMap(LEAVETUTORIAL,IDVILLAGE);
 		}
 
 		//leaving labrinth map
@@ -593,19 +626,35 @@ bool SceneGameplay::Update(float dt)
 		{
 			if (app->sceneManager->downCity)
 			{
-				app->map->CleanUp();
-				app->map->ClearMaps();
+				//app->map->CleanUp();
+				//app->map->ClearMaps();
+				//app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+				//app->render->camera.x = 0;
+				//app->render->camera.y = 0;
+				////app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
 
-				app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;
+			}
+			if (app->sceneManager->lab)
+			{
+				ChangeMap(LEAVEPRELAB, IDLAB);
+				app->sceneManager->lab = false;
+			}
+		}
 
-				app->render->camera.x = 0;
-				app->render->camera.y = 0;
-
-
-
-				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
-				/*ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
-				app->sceneManager->downCity = false;*/
+		//leaving lab map
+		if (app->sceneManager->currentScene == IDLAB)
+		{
+			if (app->sceneManager->downCity)
+			{
+				ChangeMap(LEAVELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;
+			}
+			if (app->sceneManager->prelab)
+			{
+				ChangeMap(LEAVELAB, IDPRELAB);
+				app->sceneManager->prelab = false;
 			}
 		}
 
@@ -637,13 +686,36 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 	
+	//load request out from a bool triggerable out of scene
+	if (app->sceneManager->LoadRequestOutScene)
+	{
+		app->LoadGameRequest();
+		app->sceneManager->LoadRequestOutScene = false;
+	}
+
+	//save and load inputs on keyboard
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 	{
 		app->SaveGameRequest();
+		SDL_ShowCursor(SDL_ENABLE);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
 		app->LoadGameRequest();
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	//save and load inputs on controller
+	if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_BACK) == KEY_REPEAT)
+	{
+		if (CONTROLLERBACKRIGHT)
+		{
+			app->SaveGameRequest();
+		}
+		if (CONTROLLERBACKLEFT)
+		{
+			app->LoadGameRequest();
+		}
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -651,6 +723,16 @@ bool SceneGameplay::Update(float dt)
 		app->hud->prevstate = app->hud->hudstate;
 		app->hud->hudstate = hudSTATE::PAUSESCREEN;
 		app->hud->wait1frame = true;
+		app->sceneManager->Pause = true;
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	if (CONTROLLERSTART)
+	{
+		app->hud->prevstate = app->hud->hudstate;
+		app->hud->hudstate = hudSTATE::PAUSESCREEN;
+		app->hud->wait1frame = true;
+		app->sceneManager->Pause = true;
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	//switch (gameState)
@@ -1118,68 +1200,6 @@ bool SceneGameplay::UnLoad()
 	app->tex->Unload(guiTex);
 	app->tex->Unload(guiPad);
 
-	//entityManager->UnLoad();
-	//RELEASE(entityManager);
-
-	//questManager->UnLoad();
-	//RELEASE(questManager);
-
-	//map->CleanUp();
-	//RELEASE(map);
-	//
-	//eastl::list<Player*>::iterator it = playerList.begin();
-	//eastl::list<Player*>::iterator itEnd = playerList.end();
-	//for (; it != itEnd; ++it)
-	//{
-	//	(*it)->UnLoad();
-	//	RELEASE((*it));
-	//	playerList.erase(it);
-	//}
-	//playerList.clear();
-
-	//eastl::list<Item*>::iterator item = items.begin();
-	//eastl::list<Item*>::iterator itemEnd = items.end();
-	//for (; item != itemEnd; ++item)
-	//{
-	//	(*item)->UnLoad();
-	//	RELEASE((*item));
-	//	items.erase(item);
-	//}
-	//items.clear();
-
-	//eastl::list<Enemy*>::iterator en = enemyList.begin();
-	//eastl::list<Enemy*>::iterator enemyEnd = enemyList.end();
-	//for (; en != enemyEnd; ++en)
-	//{
-	//	(*en)->UnLoad();
-	//	RELEASE((*en));
-	//	enemyList.erase(en);
-	//}
-	//enemyList.clear();
-
-	//charManager->UnLoad();
-	//RELEASE(charManager);
-
-	//pause->UnLoad();
-	//RELEASE(pause);
-
-	//inventory->UnLoad();
-	//RELEASE(inventory);
-	//
-	//dialogueManager->UnLoad();
-	//RELEASE(dialogueManager);
-
-	//font->UnLoad(app->tex);
-	//RELEASE(font);
-	//
-	//particles->CleanUp();
-	//RELEASE(particles);
-
-	//app->audio->UnLoadFxs();
-	//app->tex->UnLoad(goldTexture);
-	//app->tex->UnLoad(guiTex);
-	//app->tex->UnLoad(guiPad);
-
 	return ret;
 }
 
@@ -1211,6 +1231,7 @@ bool SceneGameplay::LoadState(pugi::xml_node& load)
 	app->sceneManager->puzzle1solved = load.child("SceneGameplayInfo").attribute("Puzzle1Solved").as_bool();
 	app->sceneManager->puzzle2solved = load.child("SceneGameplayInfo").attribute("Puzzle2Solved").as_bool();
 	app->sceneManager->puzzle3solved = load.child("SceneGameplayInfo").attribute("Puzzle3Solved").as_bool();
+	app->sceneManager->puzzle4solved = load.child("SceneGameplayInfo").attribute("Puzzle4Solved").as_bool();
 
 	//player data
 	currentPlayer->position.x = load.child("Player").attribute("x").as_int();
@@ -1342,6 +1363,7 @@ bool SceneGameplay::SaveState(pugi::xml_node& save) const
 	sceneGameplayInfoNode.append_attribute("Puzzle1Solved") = app->sceneManager->puzzle1solved;
 	sceneGameplayInfoNode.append_attribute("Puzzle2Solved") = app->sceneManager->puzzle2solved;
 	sceneGameplayInfoNode.append_attribute("Puzzle3Solved") = app->sceneManager->puzzle3solved;
+	sceneGameplayInfoNode.append_attribute("Puzzle4Solved") = app->sceneManager->puzzle4solved;
 	
 	//Player data
 	pugi::xml_node playerNode = save.append_child("Player");
@@ -2091,7 +2113,8 @@ void SceneGameplay::LoadStaticObject()
 	{
 		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
 		{
-			if (app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved)
+			if ((app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved) ||	//if current scene is after labrinth and puzzle 2 is NOT solved it will spawn
+				(app->sceneManager->currentScene == IDLAB && !app->sceneManager->puzzle4solved))		//if current scene is lab and puzzle 4 is NOT solved it will spawn
 			{
 				StaticObject* staticObject = (StaticObject*)app->entityManager->CreateEntity(EntityType::STATICOBJECT);
 				staticObject->parameters = staticObjectNode;
@@ -2148,6 +2171,31 @@ void SceneGameplay::LoadTriggerableObjects()
 			triggerableObject->parameters = triggerableObjectNode;
 			triggerableObjectList.Add(triggerableObject);
 			triggerableObject->Start();
+		}
+	}
+}
+
+void SceneGameplay::LoadCollectibleObjects()
+{
+	ListItem<CollectibleObject*>* collectibleObjectItem = collectibleObjectList.start;
+	while (collectibleObjectItem != NULL)
+	{
+		collectibleObjectItem->data->toDelete = true;
+		collectibleObjectItem = collectibleObjectItem->next;
+	}
+	collectibleObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
+	{
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
+			collectibleObject->parameters = collectibleObjectNode;
+			collectibleObjectList.Add(collectibleObject);
+			collectibleObject->Start();
 		}
 	}
 }
@@ -2320,6 +2368,8 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 	LoadMovableObjects();
 	//load again new triggerableobjects
 	LoadTriggerableObjects();
+	//load again new collectbleobjects
+	LoadCollectibleObjects();
 	//load again new staticobjects
 	LoadStaticObject();
 

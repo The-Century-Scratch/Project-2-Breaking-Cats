@@ -7,8 +7,8 @@
 	<audio />
 	<scenemanager>
 		<scenegameplay>
-			<SceneGameplayInfo CurrentMap="6" Puzzle1Solved="false" Puzzle2Solved="false" Puzzle3Solved="false" />
-			<Player x="193" y="131" />
+			<SceneGameplayInfo CurrentMap="7" Puzzle1Solved="true" Puzzle2Solved="true" Puzzle3Solved="true" Puzzle4Solved="false" />
+			<Player x="375" y="296" />
 		</scenegameplay>
 	</scenemanager>
 	<moduleCollisions />
@@ -16,11 +16,12 @@
 	<entitymanager />
 	<psmanager />
 	<questmanager />
+	<StatsManager />
 	<map />
 	<Hud />
 	<Inventory />
 	<debug />
 	<renderer>
-		<camera x="0" y="-33" />
+		<camera x="-162" y="-240" />
 	</renderer>
 </save_state>

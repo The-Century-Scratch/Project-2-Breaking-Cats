@@ -59,17 +59,23 @@ bool SceneEnding::Load()
 
 	app->audio->PlayMusic("");
 
+	app->hud->prevstate = app->hud->hudstate;
+	app->hud->hudstate = hudSTATE::ENDSCREEN;
+
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
 	return ret;
 }
 
 bool SceneEnding::Update(float dt)
 {
 	bool ret = true;
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
-	{
+	//if (app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_DOWN)
+	//{
 
-		app->map->CleanUp();
-		app->map->ClearMaps();
+	//	app->map->CleanUp();
+	//	app->map->ClearMaps();
 
 		app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
@@ -78,9 +84,9 @@ bool SceneEnding::Update(float dt)
 
 
 
-		app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+	//	app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
 
-	}
+	//}
 	//if (easingUp->easingsActivated)
 	//{
 	//	easingPosition = easingUp->exponentialEaseInOut(easingUp->currentIteration, easingUp->initialPos, easingUp->deltaPos, easingUp->totalIterations);

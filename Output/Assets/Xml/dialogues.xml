@@ -1,65 +1,174 @@
 <dialogues>
-	<npc id ="0">  <!-- this is the guardian, and gives the moving rocks quest -->
+
+	<npc id ="0">
+		<!--this is the sign in the tutorial, and completes the first tutorial quest -->
+		<node id ="0">
+			<npc_text text ="Do you want to read a breaf tutorial of the controls of the game?"/>
+			<option id="0" nextNodeId="1" text="Yeah sure!" missionId="1"/> sideMissionId="-1"/>
+			<option id="1" nextNodeId="-1" text="Nah" missionId="-1" sideMissionId="-1"/>
+			<!--change to -1 before deliver -->
+		</node>
+		<node id ="1">
+			<npc_text text ="First you probably have already discovered that you move with WASD"/>
+			<option id="0" nextNodeId="2" text="Yep" missionId="-1" sideMissionId="-1"/>
+		</node>
+		<node id ="2">
+			<npc_text text =" And also discovered that you interact with things in the overworld with E"/>
+			<option id="0" nextNodeId="3" text="Yep" missionId="-1" sideMissionId="-1"/>
+		</node>
+		<node id ="3">
+			<npc_text text ="But you probably don't know that to open the quests menu is with O"/>
+			<option id="0" nextNodeId="4" text="Oh nice!" missionId="-1" sideMissionId="-1"/>
+		</node>
+		<node id ="4">
+			<npc_text text ="And also to open the inventory and stats is with I"/>
+			<option id="0" nextNodeId="5" text="Damn!" missionId="-1" sideMissionId="-1"/>
+		</node>
+		<node id ="5">
+			<npc_text text ="To end use esc to go to the pause menu with options and all that stuff"/>
+			<option id="0" nextNodeId="6" text="prrrfct" missionId="-1" sideMissionId="-1"/>
+		</node>
+		<node id ="6">
+			<npc_text text ="Feel free to check this sign whenever you want it will be all over the world"/>
+			<option id="0" nextNodeId="-1" text="Thanks!, Bye!" missionId="1" sideMissionId="-1"/>
+		</node>
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
+			<npc_text text ="Press enter to back"/>
+		</node>
+	</npc>
+
+	<!-- Next NPC -->
+
+	<npc id ="1">
+		<!-- this is the village cat, and gives the moving rocks quest -->
 		<node id ="0">
 			<npc_text text ="Hello!, felllow soldier I Need you to do something for me"/>
-			<option id="0" nextNodeId="1" text="Wha what is it guardian kun..." missionId="-1"/>
-			<option id="1" nextNodeId="4" text="I don't give crap" missionId="-1"/>
+			<option id="0" nextNodeId="1" text="Yeah tell me" missionId="-1" sideMissionId="-1"/>
+			<option id="1" nextNodeId="-1" text="Sorry I don't have time right now" missionId="-1" sideMissionId="-1"/>
 		</node>
 		<node id ="1">
 			<npc_text text ="As you might know there has been some rockslides in the area next to the town"/>
-			<option id="0" nextNodeId="2" text="Yes, I know what can i do to solve it?" missionId="-1"/>
-			<option id="1" nextNodeId="3" text="Yes, I'm sure its Ada Colau's fault as everything." missionId="-1"/>
+			<option id="0" nextNodeId="2" text="Yes, I know what can I do to solve it?" missionId="-1" sideMissionId="-1"/>
 		</node>
 		<node id="2">
 			<npc_text text ="I need you to clean the rocks in order to acces the city, figure it on your own. Follow the path to get to it."/>
-			<option id="0" nextNodeId ="-1" text="Alright, I'mma get to it" missionId="0"/>
+			<option id="0" nextNodeId ="-1" text="Alright, I'mma get to it" missionId="-1" sideMissionId="-1"/>
 		</node>
-		<node id="3">
-			<npc_text text="Yes, whatever I need you to clean it figure it on your own. Follow the path to get to it."/>
-			<option id="0" nextNodeId="-1" text="Alright, I'mma get to it" missionId="0"/>
-		</node>
-		<node id="4">
-			<npc_text text="Your in home arrest for 3 days soldier!"/>
-			<option id="0" nextNodeId="-1" text="Whatever you say." missionId="-1"/>
-			<option id="1" nextNodeId="-1" text="Sure sure." missionId="-1"/>
-		</node>
-		<node id ="-1"> <!-- Keep this here to avoid crashes -->
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
 			<npc_text text ="Press enter to back"/>
 		</node>
 	</npc>
-	
+
 	<!-- Next NPC -->
-	
-	<npc id ="1">  <!-- this is the vendor, and completes the talking quest -->
+
+	<npc id ="2">
+		<!-- this is the Guardian that gives you the labyrinth quest -->
 		<node id ="0">
-			<npc_text text ="You know a long time ago I used to have a lot of items but something happened"/>
-			<option id="0" nextNodeId="1" text="Oh what is it?" missionId="-1"/>
+			<npc_text text ="Our laboratory is blocked by a purryfith magic trick"/>
+			<option id="0" nextNodeId="1" text="What a mess" missionId="-1" sideMissionId="-1"/>
+		</node>
+		
+		<node id ="1">
+			<npc_text text ="We need the strength of a new foreigner to enter and turn back the energy"/>
+			<option id="0" nextNodeId="2" text="hm hm tell me more" missionId="-1" sideMissionId="-1"/>
+		</node>
+		
+		<node id ="2">
+			<npc_text text ="Would you mind to help us for the common welth?"/>
+			<option id="0" nextNodeId="-1" text="No problem" missionId="3" sideMissionId="-1"/>
+			<option id="0" nextNodeId="-1" text="No time" missionId="-1" sideMissionId="-1"/>
+		</node>
+
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
+			<npc_text text ="Press enter to back"/>
+		</node>
+	</npc>
+
+	<!-- Next NPC -->
+
+	<npc id ="3">
+		<!-- this is the contrabandist, and gives the sidequest of collecting things -->
+		<node id ="0">
+			<npc_text text ="Pssst Pssst"/>
+			<option id="0" nextNodeId="1" text="What?" missionId="-1" sideMissionId="-1"/>
 		</node>
 		<node id ="1">
-			<npc_text text ="Some misterious force took them all away from me, and I would like to recover them."/>
-			<option id="0" nextNodeId="2" text="Hmm. Okay." missionId="-1"/>
+			<npc_text text ="Do you want to gain some money and Items?"/>
+			<option id="0" nextNodeId="2" text="I mean yeah for sure" missionId="-1" sideMissionId="-1"/>
+			<option id="1" nextNodeId="-1" text="No, thank you" missionId="-1" sideMissionId="-1"/>
 		</node>
 		<node id ="2">
-			<npc_text text =" I NEED YOUR HELP SON. Go get them in the labyrinth downtown travelling the city."/>
-			<option id="0" nextNodeId="3" text="What if I don't want?" missionId="-1"/>
-			<option id="1" nextNodeId="4" text="Ok, dude don't get mad I'll go." missionId="-1"/>
+			<npc_text text ="Then I need you to collect some... let's say goods"/>
+			<option id="0" nextNodeId="3" text="hmm okay but it isn't something illegal right?" missionId="-1" sideMissionId="-1"/>
 		</node>
 		<node id ="3">
-			<npc_text text ="YOU GO IF I SAY IT OKAY?"/>
-			<option id="0" nextNodeId="4" text="Okay dude chill I'll go" missionId="-1"/>
+			<npc_text text ="Nah don't worry you just have to collect the fishes that you find around town, if i'm not wrong there are around 5"/>
+			<option id="0" nextNodeId="4" text="Hmm okay sure but what do I get in return?" missionId="-1" sideMissionId="-1"/>
 		</node>
 		<node id ="4">
-			<npc_text text ="ONE MORE THING. The developers told me that if you press 1,2,3,4 all the items available will appear in your iventory."/>
-			<option id="0" nextNodeId="5" text="Ok dude I don't really care" missionId="-1"/>
+			<npc_text text ="Ooh don't worry about that I'll pay you one full gold coin that you will be able to trade in the store, we have a deal? "/>
+			<option id="0" nextNodeId="5" text="Hmm okay we have a deal" missionId="-1" sideMissionId="-1"/>
 		</node>
 		<node id ="5">
-			<npc_text text ="BUT DON'T PRESS THEM BEFORE COMPLETING THE QUEST OKAY?"/>
-			<option id="0" nextNodeId="-1" text="CHIIIILLL I won't." missionId="2"/>
+			<npc_text text ="But remember, you didn't see me here"/>
+			<option id="0" nextNodeId="-1" text="ok" missionId="-1" sideMissionId="0"/>
 		</node>
-		<node id ="-1"> <!-- Keep this here to avoid crashes -->
+
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
 			<npc_text text ="Press enter to back"/>
 		</node>
 	</npc>
-	
+
 	<!-- Next NPC -->
+
+	<npc id ="4">
+		<!-- this is the contrabandist in the city after finishing the collecting quest -->
+		<node id ="0">
+			<npc_text text ="Thanks for collecting all my shit, remember don't tell anybody that I was here"/>
+			<option id="0" nextNodeId="-1" text="Ok" missionId="-1" sideMissionId="-1"/>
+		</node>
+
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
+			<npc_text text ="Press enter to back"/>
+		</node>
+	</npc>
+
+	<!-- Next NPC -->
+
+	<npc id ="5">
+		<!-- this is the villager cat after completing the moving rocks quest -->
+		<node id ="0">
+			<npc_text text ="Thanks for moving the rocks out of the way now we can travel to the city easily"/>
+			<option id="0" nextNodeId="-1" text="No problem" missionId="-1" sideMissionId="-1"/>
+		</node>
+
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
+			<npc_text text ="Press enter to back"/>
+		</node>
+	</npc>
+
+	<!-- Next NPC -->
+
+	<npc id ="6">
+		<!-- this is maicey he open the shop -->
+		<node id ="0">
+			<npc_text text ="Dou you want to see my stuff?"/>
+			<option id="0" nextNodeId="-1" text="Yes please" missionId="-2" sideMissionId="-1"/>
+			<option id="0" nextNodeId="-1" text="No thanks" missionId="-1" sideMissionId="-1"/>
+		</node>
+
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
+			<npc_text text ="Press enter to back"/>
+		</node>
+	</npc>
+
+	<!-- Next NPC -->
+
 </dialogues>

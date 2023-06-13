@@ -63,16 +63,15 @@
     <ClCompile Include="Source\QuestManager.cpp">
       <Filter>Quests</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TalkQuest.cpp">
+    <ClCompile Include="Source\SideQuest.cpp">
       <Filter>Quests</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LabyrinthQuest.cpp">
-      <Filter>Quests</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MoveRockQuest.cpp">
+    <ClCompile Include="Source\MainQuest.cpp">
       <Filter>Quests</Filter>
     </ClCompile>
     <ClCompile Include="Source\GridSystem.cpp" />
+    <ClCompile Include="Source\CollectibleObject.cpp" />
+    <ClCompile Include="Source\InventoryShop.cpp" />
     <ClCompile Include="Source\Serpicat.cpp" />
     <ClCompile Include="Source\SceneCredits.cpp" />
   </ItemGroup>
@@ -152,16 +151,15 @@
     <ClInclude Include="Source\QuestManager.h">
       <Filter>Quests</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TalkQuest.h">
+    <ClInclude Include="Source\SideQuest.h">
       <Filter>Quests</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LabyrinthQuest.h">
-      <Filter>Quests</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MoveRockQuest.h">
+    <ClInclude Include="Source\MainQuest.h">
       <Filter>Quests</Filter>
     </ClInclude>
     <ClInclude Include="Source\GridSystem.h" />
+    <ClInclude Include="Source\CollectibleObject.h" />
+    <ClInclude Include="Source\InventoryShop.h" />
     <ClInclude Include="Source\Serpicat.h" />
     <ClInclude Include="Source\SceneCredits.h" />
   </ItemGroup>

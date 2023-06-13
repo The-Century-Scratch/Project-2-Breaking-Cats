@@ -29,6 +29,7 @@ class GuiManager;
 class StatsManager;
 class Hud;
 class Inventory;
+class InventoryShop;
 class Debug;
 
 class App
@@ -112,6 +113,7 @@ public:
 	StatsManager* statsManager;
 	Hud* hud;
 	Inventory* inventory;
+	InventoryShop* inventoryShop;
 	Debug* debug;
 
 	bool frcap = true;

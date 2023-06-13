@@ -35,12 +35,23 @@ bool StaticObject::Start() {
 
 	texture = app->tex->Load(texturePath);
 
-	anim.PushBack({ 0 * 16,0 * 16,112,32 });
+	if (id == 1)
+	{
+		w = 112;
+		h = 32;
+		anim.PushBack({ 0 * 16,0 * 16,112,32 });
+	}
+	if (id == 2)
+	{
+		w = 96;
+		h = 16;
+		anim.PushBack({ 0 * 16,0 * 16,96,16 });
+	}
+
 	anim.loop = false;
 	anim.speed = 0.0f;
 
-	w = 112;
-	h = 32;
+
 
 	cRect = { position.x,position.y,w,h };
 	eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::WALL);
@@ -50,7 +61,12 @@ bool StaticObject::Start() {
 
 bool StaticObject::Update()
 {
-	if (app->sceneManager->puzzle2solved)
+	if (app->sceneManager->puzzle2solved && id == 1)
+	{
+		CleanUp();
+		//app->entityManager->DestroyEntity((Entity*)this);
+	}
+	if (app->sceneManager->puzzle4solved && id == 2)
 	{
 		CleanUp();
 		//app->entityManager->DestroyEntity((Entity*)this);

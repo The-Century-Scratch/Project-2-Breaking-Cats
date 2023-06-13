@@ -33,7 +33,16 @@ bool TriggerableObject::Start() {
 	texturePath = parameters.attribute("texturepath").as_string();
 	id = parameters.attribute("id").as_int();
 
-	texture = app->tex->Load(texturePath);
+	if (id == 1)
+	{
+		texture = app->tex->Load(texturePath);
+		w = h = 16;
+	}
+	if (id == 2)
+	{
+		w = 32;
+		h = 16;
+	}
 
 	untriggeredAnim.PushBack({ 0 * 16,0 * 16,16,16 });
 	untriggeredAnim.loop = false;
@@ -43,9 +52,8 @@ bool TriggerableObject::Start() {
 	triggeredAnim.loop = false;
 	triggeredAnim.speed = 0.0f;
 
-	w = h = 16;
 
-	cRect = { position.x - 6,position.y - 6,16 + 12,16 + 12 };
+	cRect = { position.x - 6,position.y - 6,w + 12,h + 12 };
 
 	boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::TRIGGERABLEOBJECT, (Entity*)this);
 	cRect = { position.x,position.y,16,16 };
@@ -58,9 +66,17 @@ bool TriggerableObject::Update()
 {
 	if (inRange)
 	{
+		//keyboard input
 		if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
 		{
-			app->sceneManager->puzzle2solved = true;
+			if (id == 1)
+			{
+				app->sceneManager->puzzle2solved = true;
+			}
+			if (id == 2)
+			{
+				app->sceneManager->puzzle4solved = true;
+			}
 			if (triggered)
 			{
 				currentAnim = &untriggeredAnim;
@@ -73,7 +89,34 @@ bool TriggerableObject::Update()
 				app->audio->PlayFx(app->hud->switchfx);
 				triggered = true;
 			}
+			SDL_ShowCursor(SDL_ENABLE);
 		}
+		//controller input
+		else if (CONTROLLERA)
+		{
+			if (id == 1)
+			{
+				app->sceneManager->puzzle2solved = true;
+			}
+			if (id == 2)
+			{
+				app->sceneManager->puzzle4solved = true;
+			}
+			if (triggered)
+			{
+				currentAnim = &untriggeredAnim;
+				app->audio->PlayFx(app->hud->unswitchfx);
+				triggered = false;
+			}
+			else if (!triggered)
+			{
+				currentAnim = &triggeredAnim;
+				app->audio->PlayFx(app->hud->switchfx);
+				triggered = true;
+			}
+			SDL_ShowCursor(SDL_DISABLE);
+		}
+
 	}
 	if (triggered)
 	{

@@ -3,6 +3,7 @@
 #include "NPC.h"
 #include "MovableObject.h"
 #include "TriggerableObject.h"
+#include "CollectibleObject.h"
 #include "StaticObject.h"
 #include "App.h"
 #include "Textures.h"
@@ -77,7 +78,7 @@ Entity* EntityManager::CreateEntity(EntityType type, bool solved)
 {
 	Entity* entity = nullptr; 
 
-	// Instantiate entity according to the type and add the new entoty it to the list of Entities
+	// Instantiate entity according to the type and add the new entity it to the list of Entities
 
 	switch (type)
 	{
@@ -101,7 +102,12 @@ Entity* EntityManager::CreateEntity(EntityType type, bool solved)
 	case EntityType::STATICOBJECT:
 		entity = new StaticObject();
 		break;
-	default: break;
+
+	case EntityType::COLLECTIBLEOBJECT:
+		entity = new CollectibleObject(solved);
+		break;
+	default: 
+		break;
 	}
 
 	// Created entities are added to the list
@@ -127,7 +133,7 @@ void EntityManager::AddEntity(Entity* entity)
 
 bool EntityManager::Update(float dt)
 {
-	//if (app->pauseMenus->isPaused()) { return true; } //This is to use in the case a "game pause" is implemented for skiping entities update
+	if (app->sceneManager->Pause) { return true; } //This is to use in the case a "game pause" is implemented for skiping entities update
 
 	bool ret = true;
 

@@ -13,9 +13,18 @@ struct SDL_Texture;
 
 enum class NPCTYPE
 {
+	SIGN,
+	VILLAGE,
 	GUARDIAN,
-	SHOP,
 	CONTRABANDIST,
+	SHOP,
+	TABERN, //15 frames npcs
+	BARMAN,
+	FRAME5, //5 frames npcs
+	VILLAGE2, //9 frames npcs
+	WORKER,
+
+	
 };
 
 class NPC : public Entity
@@ -30,6 +39,8 @@ public:
 	bool Start();
 
 	bool Update();
+
+	bool PostUpdate();
 
 	bool CleanUp();
 
@@ -50,7 +61,9 @@ private:
 	const char* texturePath;
 
 
-	Animation NPCAnim;
+	Animation NPCIdle;
+	Animation NPCIdleAction;
+	int actionanimcounter;
 };
 
 #endif // __NPC_H__

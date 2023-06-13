@@ -8,9 +8,8 @@
 
 enum class QuestType
 {
-	MOVEROCK,
-	TALK,
-	LABYRINTH
+	MAINQUEST,
+	SIDEQUEST
 };
 
 class Quest
@@ -31,6 +30,7 @@ public:
 	int id;
 	int nextQuestId;
 	int reward;
+	bool active;
 };
 
 #endif // __QUEST_H__
