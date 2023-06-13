@@ -12,6 +12,7 @@
 #include "BulletPenetration.h"
 #include "MysticalEnergy.h"
 #include "ArcaneSpirit.h"
+#include "InventoryShop.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -131,12 +132,14 @@ bool QuestManager::Update(float dt)
 	if (GiveItem) {
 		switch (questActive->id) {
 		case 1: //tutorial finished
+			app->inventoryShop->coins += 1;
 			firePaw->equiped = true;
 			app->inventory->AddItem(firePaw);
 			app->audio->PlayFx(app->hud->getitemfx);
 		case 2: //when rocks finished, give coin
 		case 3: //When talked with the guardian
 		case 4: //When the labyrinth is resolved
+			app->inventoryShop->coins += 1;
 		case 5: //when you left the lab and talked with the guardian
 		case 6: //when you found the vident
 		default:
