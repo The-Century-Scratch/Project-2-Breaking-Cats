@@ -585,15 +585,6 @@ bool SceneGameplay::Update(float dt)
 		//leaving tutorial map
 		if (app->sceneManager->currentScene == IDTUTORIAL)
 		{
-			app->map->CleanUp();
-			app->map->ClearMaps();
-			app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
-
-			app->render->camera.x = 0;
-			app->render->camera.y = 0;
-
-			app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
-
 			/*ChangeMap(LEAVETUTORIAL, IDVILLAGE);*/
 		}
 

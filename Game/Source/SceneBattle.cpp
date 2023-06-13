@@ -33,9 +33,17 @@ SceneBattle::~SceneBattle()
 
 bool SceneBattle::Load()
 {
-
 	LOG("Loading Scene Battle");
 	bool ret = true;
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
+
+	app->map->Load("scenegameplay");
 
 	GuiCombat = app->tex->Load("Assets/Textures/GUI/CombatGUI.png");
 	GuiKeyboard = app->tex->Load("Assets/Textures/GUI/keyboard.png");
@@ -50,7 +58,7 @@ bool SceneBattle::Load()
 
 	switch (app->sceneManager->currentScene)
 	{
-	case 0:
+	case 10:
 	{
 		//GATS
 		{
@@ -107,7 +115,7 @@ bool SceneBattle::Load()
 		}
 		break;
 	}
-	case 1:
+	case 11:
 	{
 		//GATS
 		{
@@ -177,7 +185,7 @@ bool SceneBattle::Load()
 
 		break;
 	}
-	case 2:
+	case 12:
 	{
 		//GATS
 		{
@@ -318,12 +326,6 @@ bool SceneBattle::Load()
 	default:
 		break;
 	}
-
-	pugi::xml_node configNode = app->LoadConfigFileToVar();
-	pugi::xml_node config = configNode.child(name.GetString());
-
-
-	app->map->Load(name.GetString());
 
 	//if (!app->map->propertyNodes.empty())
 	//{
@@ -1167,24 +1169,27 @@ bool SceneBattle::Update(float dt)
 		}
 
 	}
-	if (!enemiesAlive)
+	if (!enemiesAlive || app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		app->map->CleanUp();
 		app->map->ClearMaps();
     
 			//app->hud->prevstate = app->hud->hudstate;
 			//app->hud->hudstate = hudSTATE::ENDSCREEN;
-		switch (app->sceneManager->previousScene) 
+		switch (app->sceneManager->currentScene) 
 		{
-		case 0:
+		case 10:
 			app->sceneManager->currentScene = 6;
 			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 			break;
-		case 1:
-			app->sceneManager->currentScene = 0;
+		case 11:
+			app->sceneManager->currentScene = 1;
 			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
+			app->sceneManager->cityCombatDone = true;
+			app->sceneManager->changeMap = true;
+			app->sceneManager->nordCity = true;
 			break;
-		case 2:
+		case 12:
 			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
 			break;
 		default:break;
@@ -1192,7 +1197,7 @@ bool SceneBattle::Update(float dt)
 		}
 			
 	}
-	if (!alliesAlive)
+	if (!alliesAlive || app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		app->map->CleanUp();
 		app->map->ClearMaps();
@@ -1218,20 +1223,6 @@ bool SceneBattle::Update(float dt)
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 
-	}
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-	{
-		app->map->CleanUp();
-		app->map->ClearMaps();
-		app->sceneManager->currentScene = 6;
-		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
-	{
-		app->map->CleanUp();
-		app->map->ClearMaps();
-		app->sceneManager->currentScene = 6;
-		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
