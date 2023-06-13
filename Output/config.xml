@@ -70,16 +70,16 @@
 		
 		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
+		<triggerableObject scene="9" x="64" y="352" texturepath="Assets/Textures/lever.png" id="2"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
-
+	  <staticObject scene="9" x="160" y="320" texturepath="Assets/Textures/laser.png" id="2"/>
 		<collectibleObject scene="0" x="100" y="137" texturepath="Assets/Textures/Collectible.png" id="1"/>
 		<collectibleObject scene="0" x="120" y="137" texturepath="Assets/Textures/Collectible.png" id="2"/>
 		<collectibleObject scene="0" x="140" y="137" texturepath="Assets/Textures/Collectible.png" id="3"/>
 		<collectibleObject scene="0" x="160" y="137" texturepath="Assets/Textures/Collectible.png" id="4"/>
 		<collectibleObject scene="0" x="180" y="137" texturepath="Assets/Textures/Collectible.png" id="5"/>
-
-
-		<item>
+    
+    <item>
       <texturepath texturepath="Assets/Textures/Items.png"/>
       <firePaws scene="0" x="384" y="48" id="1"/>
       <dragonSlayer scene="0" x="384" y="48" id="2"/>
@@ -99,6 +99,7 @@
 			<mapfile path="Assets/Maps/Village.tmx"/>				<!--this is 6 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/PreLab.tmx"/>				<!--this is 7 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/TutorialPlaceholder.tmx"/>	<!--this is 8 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Lab.tmx"/>					<!--this is 9 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 

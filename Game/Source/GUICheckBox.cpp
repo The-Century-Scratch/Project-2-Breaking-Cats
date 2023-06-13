@@ -62,12 +62,24 @@ bool GuiCheckBox::Update(float dt)
 
 			state = GuiControlState::FOCUSED;
 
-
+			//keyboard input
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) {
 				state = GuiControlState::PRESSED;
+				SDL_ShowCursor(SDL_ENABLE);
 			}
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
 				checked = !checked;
+				SDL_ShowCursor(SDL_ENABLE);
+			}
+
+			//gamepad input
+			if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_REPEAT) {
+				state = GuiControlState::PRESSED;
+				SDL_ShowCursor(SDL_DISABLE);
+			}
+			if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_DOWN) {
+				checked = !checked;
+				SDL_ShowCursor(SDL_DISABLE);
 			}
 
 			if (previousState == GuiControlState::FOCUSED && state == GuiControlState::PRESSED) {
@@ -86,9 +98,18 @@ bool GuiCheckBox::Update(float dt)
 				}
 			}
 
+			//keyboard input
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 				NotifyObserver();
 				fxDone = false;
+				SDL_ShowCursor(SDL_ENABLE);
+			}
+
+			//gamepad input
+			if (app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_A) == KEY_UP) {
+				NotifyObserver();
+				fxDone = false;
+				SDL_ShowCursor(SDL_DISABLE);
 			}
 		}
 		else {

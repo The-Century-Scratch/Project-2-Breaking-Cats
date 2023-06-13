@@ -9,6 +9,8 @@
 #include "ModuleCollisions.h"
 #include "SceneManager.h"
 #include "QuestManager.h"
+#include "Input.h"
+
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -167,9 +169,7 @@ bool NPC::Update()
 		break;
 	default:
 		break;
-	}
-
-	
+	}	
 	//anim things basically trigger the action for the anim if the npc has it check if speed is -1 to know if the action for the idle animation exists or no
 	if (this->NPCIdleAction.speed == -1) {
 		SDL_Rect rect = NPCIdle.GetCurrentFrame();
@@ -194,6 +194,34 @@ bool NPC::Update()
 		}
 	}
 	
+	return true;
+}
+
+bool NPC::PostUpdate()
+{
+//anim things basically trigger the action for the anim if the npc has it check if speed is -1 to know if the action for the idle animation exists or no
+	if (this->NPCIdleAction.speed == -1) {
+		SDL_Rect rect = NPCIdle.GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		NPCIdle.Update();
+	}
+	else {
+		++actionanimcounter;
+		if (actionanimcounter >= 400) {
+			SDL_Rect rect = NPCIdleAction.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdleAction.Update();
+			if (NPCIdleAction.HasFinished() == true) {
+				actionanimcounter = 0;
+				NPCIdleAction.Reset();
+			}
+		}
+		else {
+			SDL_Rect rect = NPCIdle.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdle.Update();
+		}
+	}
 	
 	return true;
 }
@@ -243,10 +271,20 @@ void NPC::OnCollision(Collider* c1, Collider* c2)
 		case Collider::Type::WALL:
 			break;
 		case Collider::Type::PLAYER:
-			if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+			if (!app->sceneManager->Pause && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 				LOG("TRIGGER DIALOGUE");
 				app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
 				app->sceneManager->dialogueManager->printText = true;
+				app->sceneManager->Pause = true;
+				SDL_ShowCursor(SDL_ENABLE);
+			}
+			else if (!app->sceneManager->Pause && CONTROLLERA)
+			{
+				LOG("TRIGGER DIALOGUE");
+				app->sceneManager->dialogueManager->LoadDialogue(this->dialogueid);
+				app->sceneManager->dialogueManager->printText = true;
+				app->sceneManager->Pause = true;
+				SDL_ShowCursor(SDL_DISABLE);
 			}
 			break;
 		case Collider::Type::ENEMY:

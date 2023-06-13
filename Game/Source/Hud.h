@@ -7,7 +7,7 @@
 #include "GUISlider.h"
 #include "easings.h"
 
-#define MAX_BUTTONS 17
+#define MAX_BUTTONS 19
 
 struct SDL_Texture;
 
@@ -16,7 +16,8 @@ enum class hudSTATE
 	CLOSED,
 	TITLESCREEN,
 	PAUSESCREEN,
-	CONFIGSCREEN
+	CONFIGSCREEN,
+	ENDSCREEN
 };
 
 class Hud : public Module
@@ -82,6 +83,9 @@ public:
 	bool debug = false;
 	bool wait1frame = false;
 
+	bool usingPad = false;
+	int currentIDUsingPad;
+
 private:
 	//window attributes
 	uint w, h, scale;
@@ -125,6 +129,12 @@ private:
 	GuiButton* button16;
 	//vsync checkbox
 	GuiCheckBox* button17;
+
+	//end game buttons
+	//continue last save
+	GuiButton* button18;
+	//return to main menu
+	GuiButton* button19;
 
 	//Easings
 	Easing* easingTitle;

@@ -111,25 +111,56 @@ bool Player::Update()
 	int speed = 3;
 	state = PlayerState::IDLE;
 
+	//keyboard inputs
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		position.y -= speed;
 		state = PlayerState::WDOWN;
+		SDL_ShowCursor(SDL_ENABLE);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 	{
 		position.y += speed;
 		state = PlayerState::WUP;
+		SDL_ShowCursor(SDL_ENABLE);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		position.x -= speed;
 		state = PlayerState::WLEFT;
+		SDL_ShowCursor(SDL_ENABLE);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		position.x += speed;
 		state = PlayerState::WRIGHT;
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+
+	//gamepad inputs
+	if (CONTROLLERUP)
+	{
+		position.y -= speed;
+		state = PlayerState::WDOWN;
+		SDL_ShowCursor(SDL_DISABLE);
+	}
+	if (CONTROLLERDOWN)
+	{
+		position.y += speed;
+		state = PlayerState::WUP;
+		SDL_ShowCursor(SDL_DISABLE);
+	}
+	if (CONTROLLERLEFT)
+	{
+		position.x -= speed;
+		state = PlayerState::WLEFT;
+		SDL_ShowCursor(SDL_DISABLE);
+	}
+	if (CONTROLLERRIGHT)
+	{
+		position.x += speed;
+		state = PlayerState::WRIGHT;
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	//also move collider
@@ -288,11 +319,25 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				case 0:
 					app->sceneManager->downCity = true;
 					break;
-				case 8://TO APPLY, THIS WILL BE FUTURE LAB
-
-					app->sceneManager->downCity = true;//MUST BE CHANGED TO FUTURE LAB MAP
+				case 9:
+					app->sceneManager->lab = true;
 
 					app->sceneManager->puzzle3solved = true;//if you reach lab, it means you solved the 3rd puzzle, that is the invisible labrinth
+					break;
+				default:
+					break;
+				}
+			}
+			if (app->sceneManager->currentScene == 9)
+			{
+				switch (c2->scene)
+				{
+				case 0:
+					app->sceneManager->downCity = true;
+					app->sceneManager->puzzle4solved = true;
+					break;
+				case 7:
+					app->sceneManager->prelab = true;
 					break;
 				default:
 					break;

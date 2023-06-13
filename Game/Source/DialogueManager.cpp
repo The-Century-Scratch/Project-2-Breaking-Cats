@@ -4,6 +4,7 @@
 #include "Textures.h"
 #include "AssetsManager.h"
 #include "SceneGameplay.h"
+#include "SceneManager.h"
 #include "QuestManager.h"
 #include "DialogueManager.h"
 #include "Easings.h"
@@ -120,7 +121,7 @@ bool DialogueManager::Update(float dt)
 
 		if (current->currentNode->dialogFinished == true && current->currentNode->id >= 0)
 		{
-			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == KEY_UP)
+			if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || CONTROLLERDOWNONCE)
 			{
 				if (!current->currentNode->currentOption->isPressed)
 				{
@@ -136,7 +137,7 @@ bool DialogueManager::Update(float dt)
 				}
 			}
 
-			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || app->input->pad->GetButton(SDL_CONTROLLER_BUTTON_DPAD_UP) == KEY_UP)
+			if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || CONTROLLERUPONCE)
 			{
 				if (!current->currentNode->currentOption->isPressed)
 				{
@@ -188,6 +189,7 @@ bool DialogueManager::Update(float dt)
 				current->currentNode->dialogFinished = false;
 				isDialogueActive = false;
 				printText = false;
+				app->sceneManager->Pause = false;
 				ret = false;
 			}
 		}

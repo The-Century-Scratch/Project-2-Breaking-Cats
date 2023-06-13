@@ -79,8 +79,8 @@ bool Hud::Start()
 
 	app->win->GetWindowSize(w,h);
 	scale = app->win->GetScale();
-	//title screen buttons
 
+	//title screen buttons
 	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "        Play        ",		{ (int)(w / 2 - 300) ,(int)(h - 250 * 2),267,64}, this);
 	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue",	{ (int)(w / 2 - 300) ,(int)(h - 300 * 2),267,64}, this);
 	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "    Options    ",	{ (int)(w / 2 - 300) ,(int)(h - 350 * 2),267,64}, this);
@@ -92,6 +92,7 @@ bool Hud::Start()
 	button7 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "",	{ (int)(w * 3/ 4-120),(int)(h		/ 4 + 100),120,120 }, this);
 	button8 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "",	{ (int)(w	 / 4	),(int)(h * 3	/ 4 - 120),120,120 }, this);
 	button9 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "",	{ (int)(w * 3/ 4-120),(int)(h * 3	/ 4 - 120),120,120 }, this);
+
 	//option buttons
 	button10 = (GuiSlider*)app->guiManager->CreateGuiControl(	GuiControlType::SLIDER	, 10, ""			,{ (int)(w / 2 + 50),	(int)(h / 2 - 128	),47,47},	this, { (int)(w / 2 - 50),	(int)(h / 2 - 120),293,47 });
 	button11 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 11, "music volume",{ (int)(w / 2 - 300),	(int)(h / 2 - 120	),267,64},	this);
@@ -102,6 +103,9 @@ bool Hud::Start()
 	button16 = (GuiButton*)app->guiManager->CreateGuiControl(	GuiControlType::BUTTON	, 16, "vsync"		,{ (int)(w / 2 - 300),	(int)(h / 2 + 60	),267,64},	this);
 	button17 = (GuiCheckBox*)app->guiManager->CreateGuiControl(	GuiControlType::CHECKBOX, 17, ""			,{ (int)(w / 2 - 50),	(int)(h / 2 + 60	), 46,47},	this);
 
+	//end screen buttons
+	button18 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 18, "Continue",  { (int)(w / 3 - 120) ,(int)(h - 100),267,64 }, this);
+	button19 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 19, "Main Menu", { (int)(w * 2 / 3 - 120) ,(int)(h - 100),267,64 }, this);
 
 	hudstate = hudSTATE::CLOSED;
 	//hudstate = hudSTATE::TITLESCREEN;
@@ -109,12 +113,19 @@ bool Hud::Start()
 	easingTitleIn->easingsActivated = false;
 	easingTitleOut->easingsActivated = false;
 
+	currentIDUsingPad = 1;
+
 	return true;
 }
 
 // Called each loop iteration
 bool Hud::PreUpdate()
 {
+	if (!usingPad && (CONTROLLERA || CONTROLLERUP || CONTROLLERDOWN || CONTROLLERLEFT || CONTROLLERRIGHT))
+	{
+		usingPad = true;
+	}
+
 	return true;
 }
 
@@ -127,7 +138,7 @@ bool Hud::Update(float dt)
 		{
 			wait1frame = false;
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		else if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || CONTROLLERB)
 		{
 			return false;
 		}
@@ -241,6 +252,21 @@ bool Hud::Update(float dt)
 				prevstate = hudSTATE::CONFIGSCREEN;
 				hudstate = hudSTATE::PAUSESCREEN;
 			}
+			SDL_ShowCursor(SDL_ENABLE);
+		}
+		if (CONTROLLERB)
+		{
+			if (prevstate == hudSTATE::TITLESCREEN)
+			{
+				prevstate = hudSTATE::CONFIGSCREEN;
+				hudstate = hudSTATE::TITLESCREEN;
+			}
+			else if (prevstate == hudSTATE::PAUSESCREEN)
+			{
+				prevstate = hudSTATE::CONFIGSCREEN;
+				hudstate = hudSTATE::PAUSESCREEN;
+			}
+			SDL_ShowCursor(SDL_DISABLE);
 		}
 		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
 		while (control != nullptr)
@@ -255,7 +281,7 @@ bool Hud::Update(float dt)
 		control = app->guiManager->guiControlsList.start;
 		while (control != nullptr)
 		{
-			for (int i = 10; i <= MAX_BUTTONS; ++i) {
+			for (int i = 10; i <= 17; ++i) {
 				if (control->data->id == i) {
 					control->data->enabled = true;
 				}
@@ -269,16 +295,33 @@ bool Hud::Update(float dt)
 	}
 	else if (hudstate == hudSTATE::PAUSESCREEN)
 	{
+		if (!wait1frame)
+		{
+			if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+			{
+				prevstate = hudstate;
+				hudstate = hudSTATE::CLOSED;
+				app->sceneManager->Pause = false;
+				SDL_ShowCursor(SDL_ENABLE);
+			}
+			if (CONTROLLERSTART || CONTROLLERB)
+			{
+				prevstate = hudstate;
+				hudstate = hudSTATE::CLOSED;
+				app->sceneManager->Pause = false;
+				SDL_ShowCursor(SDL_DISABLE);
+			}
+		}
 		if (wait1frame)
 		{
 			wait1frame = false;
 		}
-		else if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		{
-			prevstate = hudstate;
-			hudstate = hudSTATE::CLOSED;
-		}
-		app->sceneManager->Pause = false;
+		//else if (CONTROLLERB)
+		//{
+		//	prevstate = hudstate;
+		//	hudstate = hudSTATE::CLOSED;
+		//	app->sceneManager->Pause = false;
+		//}
 
 		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
 
@@ -313,6 +356,31 @@ bool Hud::Update(float dt)
 			for (int i = 1; i <= MAX_BUTTONS ; ++i) {
 				if (control->data->id == i) {
 					control->data->enabled = false;
+				}
+			}
+			control = control->next;
+		}
+	}
+	else if (hudstate == hudSTATE::ENDSCREEN)
+	{
+		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
+
+		while (control != nullptr)
+		{
+			for (int i = 1; i <= MAX_BUTTONS; ++i) {
+				if (control->data->id == i) {
+					control->data->enabled = false;
+				}
+			}
+			control = control->next;
+		}
+
+		control = app->guiManager->guiControlsList.start;
+		while (control != nullptr)
+		{
+			for (int i = 18; i <= MAX_BUTTONS; ++i) {
+				if (control->data->id == i) {
+					control->data->enabled = true;
 				}
 			}
 			control = control->next;
@@ -373,9 +441,80 @@ bool Hud::PostUpdate()
 	app->hud->debug = app->moduleCollisions->debug;
 
 
+	if (usingPad)
+	{
+		bool fail = true;
+		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
+
+		while (control != nullptr)
+		{
+			if (currentIDUsingPad == control->data->id && control->data->enabled)
+			{
+				SDL_WarpMouseInWindow(app->win->window, (control->data->bounds.x + control->data->bounds.w / 2) /** scale*/,
+														(control->data->bounds.y + control->data->bounds.h / 2) /** scale*/);
+				fail = false;
+				break;
+			}
+
+			control = control->next;
+		}
+		if (fail)
+		{
+			control = app->guiManager->guiControlsList.start;
+
+			while (control != nullptr)
+			{
+				if (control->data->enabled)
+				{
+					SDL_WarpMouseInWindow(app->win->window, (control->data->bounds.x + control->data->bounds.w / 2) /** scale*/,
+															(control->data->bounds.y + control->data->bounds.h / 2) /** scale*/);
+					currentIDUsingPad = control->data->id;
+					fail = false;
+					break;
+				}
+
+				control = control->next;
+			}
+		}
+
+		if (CONTROLLERUPONCE)
+		{
+			if (currentIDUsingPad > 1)
+			{
+				currentIDUsingPad--;
+				if (currentIDUsingPad == 11 || currentIDUsingPad == 14 || currentIDUsingPad == 16)
+				{
+					currentIDUsingPad--;
+					if (currentIDUsingPad == 13)
+					{
+						currentIDUsingPad--;
+					}
+				}
+			}
+
+		}
+		if (CONTROLLERDOWNONCE)
+		{
+			if (currentIDUsingPad < MAX_BUTTONS)
+			{
+				currentIDUsingPad++;
+				if (currentIDUsingPad == 11 || currentIDUsingPad == 13 || currentIDUsingPad == 16)
+				{
+					currentIDUsingPad++;
+					if (currentIDUsingPad == 14)
+					{
+						currentIDUsingPad++;
+					}
+				}
+			}
+		}
+
+		SDL_ShowCursor(SDL_DISABLE);
+	}
+
 	ret = !exit;
 	//app->guiManager->Draw();
-	if (hudstate == hudSTATE::TITLESCREEN)
+	if (hudstate == hudSTATE::TITLESCREEN/* || hudstate == hudSTATE::ENDSCREEN*/)
 	{
 		if (easingTitleIn->easingsActivated || easingTitleOut->easingsActivated)
 		{
@@ -498,6 +637,25 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button 17 click");
 		//vsync code
 		app->frcap = !app->frcap;
+		break;
+	case 18:
+		LOG("Button 18 click");
+		app->hud->prevstate = app->hud->hudstate;
+		app->sceneManager->currentScene = 6;
+		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
+		app->hud->hudstate = hudSTATE::CLOSED;
+		app->audio->PlayMusic(forestTheme.GetString());
+		app->sceneManager->LoadRequestOutScene = true;
+		break;
+	case 19:
+		LOG("Button 19 click");
+		app->map->CleanUp();
+		app->map->ClearMaps();
+
+		app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
+		app->hud->prevstate = app->hud->hudstate;
+		app->hud->hudstate = hudSTATE::TITLESCREEN;
+		break;
 	}
 
 	return true;

@@ -162,9 +162,17 @@ bool QuestManager::Update(float dt)
 	}
 
 
-	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN && app->hud->hudstate == hudSTATE::CLOSED && !app->inventory->isActivated) 
 	{
+		app->sceneManager->Pause = !app->sceneManager->Pause;
 		printQuestMenu = !printQuestMenu;
+		SDL_ShowCursor(SDL_ENABLE);
+	}
+	if (CONTROLLERY && app->hud->hudstate == hudSTATE::CLOSED && !app->inventory->isActivated)
+	{
+		app->sceneManager->Pause = !app->sceneManager->Pause;
+		printQuestMenu = !printQuestMenu;
+		SDL_ShowCursor(SDL_DISABLE);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
