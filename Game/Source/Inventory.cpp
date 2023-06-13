@@ -9,6 +9,7 @@
 #include "Window.h"
 #include "Debug.h"
 #include "Inventory.h"
+#include "InventoryShop.h"
 #include "SceneManager.h"
 #include "SceneGameplay.h"
 #include "GuiManager.h"
@@ -302,10 +303,13 @@ bool Inventory:: PostUpdate()
 	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
 	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN && app->hud->hudstate == hudSTATE::CLOSED && !app->questManager->printQuestMenu)
 	{
-		app->inventory->isActivated = !app->inventory->isActivated;
-		app->sceneManager->Pause = app->inventory->isActivated;
+		isActivated = !isActivated;
+		app->sceneManager->Pause = isActivated;
 		app->audio->PlayFx(app->hud->swapscenesfx);
 		SDL_ShowCursor(SDL_ENABLE);
+		easing->easingsActivated = true;
+		easing->currentIteration = 0;
+		app->inventoryShop->isActivated = false;
 	}
 	if (CONTROLLERX && app->hud->hudstate == hudSTATE::CLOSED && !app->questManager->printQuestMenu)
 	{

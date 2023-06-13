@@ -12,6 +12,8 @@
 #include "SceneGameplay.h"
 #include "GuiManager.h"
 #include "StatsManager.h"
+#include "SceneManager.h"
+#include "QuestManager.h"
 
 #include "Item.h"
 
@@ -161,6 +163,17 @@ bool InventoryShop::Update(float dt)
 
 bool InventoryShop:: PostUpdate()
 {
+	if (app->input->GetKey(SDL_SCANCODE_P) == KeyState::KEY_DOWN && app->hud->hudstate == hudSTATE::CLOSED && !app->questManager->printQuestMenu)
+	{
+		isActivated = !isActivated;
+		app->sceneManager->Pause = isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+		SDL_ShowCursor(SDL_ENABLE);
+		easing->easingsActivated = true;
+		easing->currentIteration = 0;
+		app->inventory->isActivated = false;
+	}
+
 	if (isActivated)
 	{
 		Draw();

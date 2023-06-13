@@ -478,23 +478,6 @@ bool SceneGameplay::Update(float dt)
 			}
 		}
 	}
-/*
-	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
-	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
-	{
-		app->inventory->isActivated = !app->inventory->isActivated;
-		app->audio->PlayFx(app->hud->swapscenesfx);
-		app->inventory->easing->easingsActivated = true;
-		app->inventory->easing->currentIteration = 0;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_P) == KeyState::KEY_DOWN)
-	{
-		app->inventoryShop->isActivated = !app->inventoryShop->isActivated;
-		app->audio->PlayFx(app->hud->swapscenesfx);
-		app->inventoryShop->easing->easingsActivated = true;
-		app->inventoryShop->easing->currentIteration = 0;
-	}
 
 	if (addItems_)
 	{
@@ -504,7 +487,6 @@ bool SceneGameplay::Update(float dt)
 		addItems_ = false;
 	}
 
-*/
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
 		app->inventory->AddItem(firePaw);
