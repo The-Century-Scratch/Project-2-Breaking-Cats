@@ -5444,7 +5444,5 @@
   <object id="56" x="335.667" y="64" width="32" height="32"/>
   <object id="57" x="352" y="96" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="5" name="ChangeScene">
-  <object id="18" x="160.333" y="954.667" width="192" height="4.66667"/>
- </objectgroup>
+ <objectgroup id="5" name="ChangeScene"/>
 </map>
