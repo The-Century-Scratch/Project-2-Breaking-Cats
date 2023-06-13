@@ -18,6 +18,12 @@ enum class NPCTYPE
 	GUARDIAN,
 	CONTRABANDIST,
 	SHOP,
+	TABERN, //15 frames npcs
+	BARMAN,
+	FRAME5, //5 frames npcs
+	VILLAGE2, //9 frames npcs
+	WORKER,
+
 	
 };
 
