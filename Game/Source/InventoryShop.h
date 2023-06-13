@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#define MAX_INVENTORY_SLOTS 16
+#define MAX_INVENTORY_SLOTS 10
 #define MAX_EQUIPMENT_SLOTS 3
 #define ITEM_STACK 32
 
@@ -20,7 +20,7 @@ class SceneGameplay;
 
 enum class PlayerType;
 
-enum class SlotState
+enum class SlotStateShop
 {
 	NONE = 0,
 	UNSELECTED,
@@ -30,7 +30,7 @@ enum class SlotState
 	DELETE
 };
 
-enum class InventoryState
+enum class InventoryShopState
 {
 	NONE = 0,
 	EQUIPMENT,
@@ -38,7 +38,7 @@ enum class InventoryState
 	STATS,
 };
 
-struct InventorySlot
+struct InventoryShopSlot
 {
 	SDL_Rect bounds;
 	SDL_Rect itemTextureBounds;
@@ -47,7 +47,7 @@ struct InventorySlot
 	bool isfull;
 	int currentSlot;
 	int itemId; //if zero empty
-	SlotState state;
+	SlotStateShop state;
 
 	/*bool operator==(InventorySlot& i) const
 	{
@@ -61,11 +61,11 @@ struct InventorySlot
 	}*/
 };
 
-class Inventory : public Module
+class InventoryShop : public Module
 {
 public:
-	Inventory(bool startEnabled);
-	virtual ~Inventory();
+	InventoryShop(bool startEnabled);
+	virtual ~InventoryShop();
 
 	bool Start() override;
 	bool Update(float dt) override;
@@ -115,19 +115,21 @@ public:
 
 private:
 
-	void ItemMenu(int curSlot_);
+	void BuyItem(int curSlot_);
+
+	void DeleteItem(int curSlot_);
 
 	void ItemMenuDraw(int curSlot_);
 
-	void HandleObjects(InventorySlot objects[]);
+	void HandleObjects(InventoryShopSlot objects[]);
 
-	void DrawObjects(InventorySlot objects[], Font* font, bool showColliders);
+	void DrawObjects(InventoryShopSlot objects[], Font* font, bool showColliders);
 
 	void HandleSlotState();
 
 	void HandleStatsInfo();
 
-	void UseObject(InventorySlot objects[], Player* player);
+	void UseObject(InventoryShopSlot objects[], Player* player);
 
 	void DrawStatsInfo(bool showColliders);
 
@@ -144,29 +146,32 @@ public:
 	Player* catska;
 	Player* gats;
 
-	Easing* easing;
+
 
 private:
 	SDL_Texture* itemTexture;
-	SDL_Texture* invTex;
+	SDL_Texture* invShopTexture;
+	SDL_Texture* coinTexture;
+
 	SDL_Texture* slotText;
 	SDL_Texture* gatsText;
 	SDL_Texture* catskaText;
 	SDL_Texture* itemMenuTexture;
 
-	int easingPos;
+	Easing* easing;
 
 	SDL_Rect gatsRect;
 	SDL_Rect catskaRect;
 
 	SDL_Rect slotRect;
 	SDL_Rect slotRectFocus;
+	SDL_Rect coinRect;
 
 	SDL_Rect itemMenuBounds;
 	SDL_Rect itemMenuPos;
-	SDL_Rect itemMenuButton;
-	SDL_Rect itemMenuButtonFocus;
-	SDL_Rect itemMenuButtonPos;
+	SDL_Rect buyButton;
+	SDL_Rect buyButtonFocus;
+	SDL_Rect buyButtonPos;
 
 	SDL_Rect leftArrowRect;
 	SDL_Rect leftArrowRectFocus;
@@ -183,21 +188,21 @@ private:
 
 	SceneGameplay* scene;
 
-	InventoryState state;
+	InventoryShopState state;
 
 	// Armor and weapons equiped slots
-	InventorySlot equipment[MAX_EQUIPMENT_SLOTS];
-	bool inEquipment;
+	/*InventorySlot equipment[MAX_EQUIPMENT_SLOTS];
+	bool inEquipment;*/
 
 	// There will be 32 slots for items
 	//InventorySlot slots[MAX_INVENTORY_SLOTS];
 	int currentSlotId;
-	InventorySlot* originSlot;
+	InventoryShopSlot* originSlot;
 
 	// There will be 32 slots for Armor
-	InventorySlot armorSlots[MAX_INVENTORY_SLOTS];
+	/*InventorySlot armorSlots[MAX_INVENTORY_SLOTS];
 	int currentArmorSlotId;
-	InventorySlot* originArmorSlot;
+	InventorySlot* originArmorSlot;*/
 
 	Player* currentPlayer;
 
@@ -210,7 +215,7 @@ private:
 	GuiButton* btnWarrior;*/
 
 	//List<InventorySlot*> slotList;
-	InventorySlot slotList[MAX_INVENTORY_SLOTS];
+	InventoryShopSlot slotList[MAX_INVENTORY_SLOTS];
 	GuiButton* btnUse;       // Use item
 	GuiButton* btnDelete;	 // Delete an item
 	//GuiButton* btnEquip;	// Equips an armor
@@ -239,6 +244,10 @@ private:
 	bool usingItem;
 	bool displayEquipmentMenu;
 	int currentEquipmentId;
+
+	int coin;
+
+	bool buyItem_;
 
 	//Item Menu
 	SString itName;

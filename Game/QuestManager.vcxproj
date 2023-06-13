@@ -117,6 +117,7 @@
     <ClCompile Include="Source\GUISlider.cpp" />
     <ClCompile Include="Source\Hud.cpp" />
     <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\InventoryShop.cpp" />
     <ClCompile Include="Source\LongRange.cpp" />
     <ClCompile Include="Source\ModuleCollisions.cpp" />
     <ClCompile Include="Source\MovableObject.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Source\GUISlider.h" />
     <ClInclude Include="Source\Hud.h" />
     <ClInclude Include="Source\Inventory.h" />
+    <ClInclude Include="Source\InventoryShop.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\LongRange.h" />
     <ClInclude Include="Source\ModuleCollisions.h" />

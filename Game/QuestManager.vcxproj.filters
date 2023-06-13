@@ -71,6 +71,7 @@
     </ClCompile>
     <ClCompile Include="Source\GridSystem.cpp" />
     <ClCompile Include="Source\CollectibleObject.cpp" />
+    <ClCompile Include="Source\InventoryShop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -156,6 +157,7 @@
     </ClInclude>
     <ClInclude Include="Source\GridSystem.h" />
     <ClInclude Include="Source\CollectibleObject.h" />
+    <ClInclude Include="Source\InventoryShop.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />

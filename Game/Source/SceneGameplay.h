@@ -202,6 +202,8 @@ private:
 	bool fadeOut;
 	bool loadObjects;
 	bool deleteDoor;
+	bool addItems_;
+
 	//Fx
 	int doorOpenedFx;
 	int doorClosedFx;

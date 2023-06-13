@@ -48,6 +48,7 @@
 //#include "CharacterManager.h"
 //#include "PauseMenu.h"
 #include "Inventory.h"
+#include "InventoryShop.h"
 //#include "QuestMenu.h"
 //#include "Shop.h"
 
@@ -336,6 +337,8 @@ bool SceneGameplay::Load()
 		break;
 	}
 
+	addItems_ = true;
+
 	app->inventory->Enable();
 
 	//goldTexture = app->tex->Load("Textures/UI/gold.png");
@@ -473,9 +476,23 @@ bool SceneGameplay::Update(float dt)
 	{
 		app->inventory->isActivated = !app->inventory->isActivated;
 		app->audio->PlayFx(app->hud->swapscenesfx);
+		app->inventory->easing->easingsActivated = true;
+		app->inventory->easing->currentIteration = 0;
 	}
 
-	
+	if (app->input->GetKey(SDL_SCANCODE_P) == KeyState::KEY_DOWN)
+	{
+		app->inventoryShop->isActivated = !app->inventoryShop->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+	}
+
+	if (addItems_)
+	{
+		app->inventoryShop->AddItem(dragonSlayer);
+		app->inventoryShop->AddItem(bulletPenetration);
+		app->inventoryShop->AddItem(arcaneSpirit);
+		addItems_ = false;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
@@ -1140,68 +1157,6 @@ bool SceneGameplay::UnLoad()
 	app->tex->Unload(itemText);
 	app->tex->Unload(guiTex);
 	app->tex->Unload(guiPad);
-
-	//entityManager->UnLoad();
-	//RELEASE(entityManager);
-
-	//questManager->UnLoad();
-	//RELEASE(questManager);
-
-	//map->CleanUp();
-	//RELEASE(map);
-	//
-	//eastl::list<Player*>::iterator it = playerList.begin();
-	//eastl::list<Player*>::iterator itEnd = playerList.end();
-	//for (; it != itEnd; ++it)
-	//{
-	//	(*it)->UnLoad();
-	//	RELEASE((*it));
-	//	playerList.erase(it);
-	//}
-	//playerList.clear();
-
-	//eastl::list<Item*>::iterator item = items.begin();
-	//eastl::list<Item*>::iterator itemEnd = items.end();
-	//for (; item != itemEnd; ++item)
-	//{
-	//	(*item)->UnLoad();
-	//	RELEASE((*item));
-	//	items.erase(item);
-	//}
-	//items.clear();
-
-	//eastl::list<Enemy*>::iterator en = enemyList.begin();
-	//eastl::list<Enemy*>::iterator enemyEnd = enemyList.end();
-	//for (; en != enemyEnd; ++en)
-	//{
-	//	(*en)->UnLoad();
-	//	RELEASE((*en));
-	//	enemyList.erase(en);
-	//}
-	//enemyList.clear();
-
-	//charManager->UnLoad();
-	//RELEASE(charManager);
-
-	//pause->UnLoad();
-	//RELEASE(pause);
-
-	//inventory->UnLoad();
-	//RELEASE(inventory);
-	//
-	//dialogueManager->UnLoad();
-	//RELEASE(dialogueManager);
-
-	//font->UnLoad(app->tex);
-	//RELEASE(font);
-	//
-	//particles->CleanUp();
-	//RELEASE(particles);
-
-	//app->audio->UnLoadFxs();
-	//app->tex->UnLoad(goldTexture);
-	//app->tex->UnLoad(guiTex);
-	//app->tex->UnLoad(guiPad);
 
 	return ret;
 }

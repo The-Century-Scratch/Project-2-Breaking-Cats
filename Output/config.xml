@@ -110,6 +110,12 @@
     <catskaTexture texturepath="Assets/Textures/Catska.png"/>
     <itemMenuTexture texturepath="Assets/Textures/ItemMenu.png"/>
   </Inventory>
+  
+  <InventoryShop>
+    <itemTexture texturepath="Assets/Textures/Items.png"/>
+    <invShopTexture texturepath="Assets/Textures/InventoryShop.png"/>
+    <coinTexture texturepath="Assets/Textures/Coin.png"/>
+  </InventoryShop>
 
   <GridSystem>
     <gridTexture texturepath="Assets/Textures/gridTexture.png"/>
