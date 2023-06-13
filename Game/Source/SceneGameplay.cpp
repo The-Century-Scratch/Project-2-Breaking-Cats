@@ -520,14 +520,10 @@ bool SceneGameplay::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
 	{
-		
-		int aux = app->inventory->GetFirePaw();
-		LOG("the number that you are trying to check is %i", aux);
-
 		app->map->CleanUp();
 		app->map->ClearMaps();
 
-		app->sceneManager->currentScene = 3; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+		app->sceneManager->currentScene = rand() % 3; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;

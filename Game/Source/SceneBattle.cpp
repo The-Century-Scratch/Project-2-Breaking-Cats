@@ -1174,16 +1174,17 @@ bool SceneBattle::Update(float dt)
     
 			//app->hud->prevstate = app->hud->hudstate;
 			//app->hud->hudstate = hudSTATE::ENDSCREEN;
-		switch (app->sceneManager->previousScene) {
+		switch (app->sceneManager->previousScene) 
+		{
 		case 0:
 			app->sceneManager->currentScene = 6;
-			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS, true);
+			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 			break;
 		case 1:
 			app->sceneManager->currentScene = 0;
-			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS, true);
+			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 			break;
-		case2:
+		case 2:
 			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
 			break;
 		default:break;
@@ -1191,25 +1192,23 @@ bool SceneBattle::Update(float dt)
 		}
 			
 	}
-		if (!alliesAlive)
-		{
-			app->map->CleanUp();
-			app->map->ClearMaps();
+	if (!alliesAlive)
+	{
+		app->map->CleanUp();
+		app->map->ClearMaps();
 
 		app->sceneManager->currentScene = 6;
-			//app->hud->prevstate = app->hud->hudstate;
-			//app->hud->hudstate = hudSTATE::ENDSCREEN;
+		//app->hud->prevstate = app->hud->hudstate;
+		//app->hud->hudstate = hudSTATE::ENDSCREEN;
 
-			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
+		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
 
-	  }
+
+	}
 
 
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
 	{
-
-		//int aux = app->inventory->GetFirePaw();
-		//LOG("the number that you are trying to check is %i", aux);
 
 		app->map->CleanUp();
 		app->map->ClearMaps();
@@ -1219,8 +1218,7 @@ bool SceneBattle::Update(float dt)
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 
-	//win/lose debug buttons
-
+	}
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		app->map->CleanUp();
@@ -1234,12 +1232,6 @@ bool SceneBattle::Update(float dt)
 		app->map->ClearMaps();
 		app->sceneManager->currentScene = 6;
 		app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS);
-	}
-
-
-
-		app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
-
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
