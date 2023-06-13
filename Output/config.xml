@@ -67,7 +67,9 @@
 		
 		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
+		<triggerableObject scene="9" x="64" y="352" texturepath="Assets/Textures/lever.png" id="2"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
+		<staticObject scene="9" x="160" y="320" texturepath="Assets/Textures/laser.png" id="2"/>
     <item>
       <texturepath texturepath="Assets/Textures/Items.png"/>
       <firePaws scene="0" x="384" y="48" id="1"/>
@@ -79,14 +81,16 @@
     </item>
 		<map>
 			<mapfolder path="Assets/Maps/"/>
-			<mapfile path="Assets/Maps/city_square.tmx"/>	<!--this is 0 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Resistance.tmx"/>	<!--this is 1 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Shop.tmx"/>			<!--this is 2 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Taverna.tmx"/>		<!--this is 3 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Labrinth.tmx"/>		<!--this is 4 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>	<!--this is 5 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/Village.tmx"/>		<!--this is 6 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/PreLab.tmx"/>		<!--this is 7 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/city_square.tmx"/>			<!--this is 0 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Resistance.tmx"/>			<!--this is 1 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Shop.tmx"/>					<!--this is 2 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Taverna.tmx"/>				<!--this is 3 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Labrinth.tmx"/>				<!--this is 4 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/AfterLabrinth.tmx"/>			<!--this is 5 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Village.tmx"/>				<!--this is 6 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/PreLab.tmx"/>				<!--this is 7 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/TutorialPlaceholder.tmx"/>	<!--this is 9 in the list of strings of maps-->
+			<mapfile path="Assets/Maps/Lab.tmx"/>					<!--this is 9 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 

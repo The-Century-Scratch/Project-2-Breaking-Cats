@@ -309,6 +309,10 @@ bool SceneGameplay::Load()
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 		canMoveCam = true;
+	//case 8:
+	//	app->render->camera.x = 300;
+	//	app->render->camera.y = 0;
+	//	canMoveCam = true;
 	default:
 		break;
 	}
@@ -396,8 +400,16 @@ bool SceneGameplay::Update(float dt)
 
 	if (canMoveCam)
 	{
-		if (app->sceneManager->currentScene == 1)
+		if (app->sceneManager->currentScene == 1 || app->sceneManager->currentScene == IDLAB)
 		{
+			if (app->sceneManager->currentScene == 1)
+			{
+				app->render->camera.x = 283;
+			}
+			if (app->sceneManager->currentScene ==  IDLAB)
+			{
+				app->render->camera.x = 150;
+			}
 			//camera fix to player in y axis
 			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
 			{
@@ -584,19 +596,35 @@ bool SceneGameplay::Update(float dt)
 		{
 			if (app->sceneManager->downCity)
 			{
-				app->map->CleanUp();
-				app->map->ClearMaps();
+				//app->map->CleanUp();
+				//app->map->ClearMaps();
+				//app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+				//app->render->camera.x = 0;
+				//app->render->camera.y = 0;
+				////app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
 
-				app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;
+			}
+			if (app->sceneManager->lab)
+			{
+				ChangeMap(LEAVEPRELAB, IDLAB);
+				app->sceneManager->lab = false;
+			}
+		}
 
-				app->render->camera.x = 0;
-				app->render->camera.y = 0;
-
-
-
-				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
-				/*ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
-				app->sceneManager->downCity = false;*/
+		//leaving lab map
+		if (app->sceneManager->currentScene == IDLAB)
+		{
+			if (app->sceneManager->downCity)
+			{
+				ChangeMap(LEAVELABTOP, IDSCENEMAP);
+				app->sceneManager->downCity = false;
+			}
+			if (app->sceneManager->prelab)
+			{
+				ChangeMap(LEAVELAB, IDPRELAB);
+				app->sceneManager->prelab = false;
 			}
 		}
 
@@ -1235,6 +1263,7 @@ bool SceneGameplay::LoadState(pugi::xml_node& load)
 	app->sceneManager->puzzle1solved = load.child("SceneGameplayInfo").attribute("Puzzle1Solved").as_bool();
 	app->sceneManager->puzzle2solved = load.child("SceneGameplayInfo").attribute("Puzzle2Solved").as_bool();
 	app->sceneManager->puzzle3solved = load.child("SceneGameplayInfo").attribute("Puzzle3Solved").as_bool();
+	app->sceneManager->puzzle4solved = load.child("SceneGameplayInfo").attribute("Puzzle4Solved").as_bool();
 
 	//player data
 	currentPlayer->position.x = load.child("Player").attribute("x").as_int();
@@ -1366,6 +1395,7 @@ bool SceneGameplay::SaveState(pugi::xml_node& save) const
 	sceneGameplayInfoNode.append_attribute("Puzzle1Solved") = app->sceneManager->puzzle1solved;
 	sceneGameplayInfoNode.append_attribute("Puzzle2Solved") = app->sceneManager->puzzle2solved;
 	sceneGameplayInfoNode.append_attribute("Puzzle3Solved") = app->sceneManager->puzzle3solved;
+	sceneGameplayInfoNode.append_attribute("Puzzle4Solved") = app->sceneManager->puzzle4solved;
 	
 	//Player data
 	pugi::xml_node playerNode = save.append_child("Player");
@@ -2115,7 +2145,8 @@ void SceneGameplay::LoadStaticObject()
 	{
 		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
 		{
-			if (app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved)
+			if ((app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved) ||	//if current scene is after labrinth and puzzle 2 is NOT solved it will spawn
+				(app->sceneManager->currentScene == IDLAB && !app->sceneManager->puzzle4solved))		//if current scene is lab and puzzle 4 is NOT solved it will spawn
 			{
 				StaticObject* staticObject = (StaticObject*)app->entityManager->CreateEntity(EntityType::STATICOBJECT);
 				staticObject->parameters = staticObjectNode;

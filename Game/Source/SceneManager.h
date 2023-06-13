@@ -51,9 +51,11 @@ public:
 	bool rightLabrinth = false, nordCity = false;
 	//variable in preLab
 	bool downCity = false, lab = false;
+	//variable in lab
+	bool prelab = false; // ALSO LAB CAN USE downCity VARIABLE TO RETURN DIRECTLY TO CITY
 
 	//variable to see what puzzles has ben solved
-	bool puzzle1solved = false, puzzle2solved = false, puzzle3solved = false;
+	bool puzzle1solved = false, puzzle2solved = false, puzzle3solved = false, puzzle4solved = false;
 
 	bool changeMap = false;
 

@@ -37,6 +37,7 @@ class Font;
 #define LEAVEBASE iPoint(136,440)
 #define LEAVEAFTERLABRINTHDOWN iPoint(389, 8)
 #define LEAVEPRELABTOP iPoint(384, 748)
+#define LEAVELABTOP iPoint(384, 748)
 
 //TO LABRINTH
 #define LEAVEVILLAGE iPoint(6, 150)
@@ -51,7 +52,10 @@ class Font;
 
 //TO PRELAB
 #define LEAVECITYDOWN iPoint(208, 6)
-#define LEAVELAB iPoint(379, 294)
+#define LEAVELAB iPoint(381, 293)
+
+//TO LAB
+#define LEAVEPRELAB iPoint(178, 461)
 
 #define IDSCENEMAP 0
 #define IDSCENEBASE 1
@@ -61,6 +65,7 @@ class Font;
 #define IDAFTERLABRINTH 5
 #define IDVILLAGE 6
 #define IDPRELAB 7
+#define IDLAB 9
 
 #define INIT_POS_TABERN iPoint(334,106)
 #define INIT_POS_BASE iPoint(113,366)
