@@ -87,3 +87,5 @@ The Century Scratch is a group of 8 students of Video Game Design and Developmen
  - Óscar Escofet Fortet - Audio - [_OscarEscF_](https://github.com/OscarEscF)
  - Eric Regalón Martínez - Art + UI - [_RegalonaManda_](https://github.com/RegalonaManda)
  - Jan Neto Llorens - QA- [_JanNetoLlorens_](https://github.com/JanNetoLlorens)
+
+DOWNLOAD THE GAME [HERE](https://github.com/The-Century-Scratch/Project-2-Breaking-Cats/releases/download/Version1.1/The_Century_Scratch-Breaking_Cats_v.1.1.zip)!
