@@ -144,10 +144,11 @@ public:
 	Player* catska;
 	Player* gats;
 
+	SDL_Texture* itemTexture;
+
 	Easing* easing;
 
 private:
-	SDL_Texture* itemTexture;
 	SDL_Texture* invTex;
 	SDL_Texture* slotText;
 	SDL_Texture* gatsText;

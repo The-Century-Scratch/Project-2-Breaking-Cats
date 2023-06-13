@@ -18,7 +18,8 @@ public:
 	void Draw(Font* font) override;
 
 public:
-	bool completed = false;
+	SDL_Rect Coinrect;
+	SDL_Rect rect;
 	int npcId;
 };
 

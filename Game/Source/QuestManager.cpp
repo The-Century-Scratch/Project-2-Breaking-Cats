@@ -93,6 +93,7 @@ bool QuestManager::Start() {
 
 	ObjectsCount = 0;
 	MenuID = 1;
+	SideQuestID = 1;
 
 	//items
 	ItemText = app->tex->Load("Assets/Textures/Items.png");
@@ -153,9 +154,9 @@ bool QuestManager::Update(float dt)
 		changeDialogueIdAfterRocks = true;
 	}
 
-	if (app->sceneManager->puzzle3solved &&quest3 == false) {
-		// add item get when enterring laboratory
-		ActivateQuest(ENDMISSIONS);
+	if (app->sceneManager->puzzle3solved && quest3 == false) {
+		
+		ActivateQuest(LABORATORY);
 		quest3 = true;
 		
 	}
@@ -175,8 +176,22 @@ bool QuestManager::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		if (MenuID != 2 && printQuestMenu) {
+		if (MenuID != MENUSCOUNT && printQuestMenu) {
 			++MenuID;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		if (SideQuestID != 0 && printQuestMenu) {
+			--SideQuestID;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		if (SideQuestID != SIDEQUESTSCOUNTFROM0 && printQuestMenu) {
+			++SideQuestID;
 		}
 	}
 
@@ -200,12 +215,22 @@ bool QuestManager::PostUpdate() {
 		}
 	}
 	else if (MenuID == 2) {
-		//afegir mouyre sidequests actives amb fletxes adalt i avall
+
+
 		if (sidequestActive == nullptr) {
 			app->render->DrawText(font, "No active sidequests", 80, 115, 80, 5, { 255,255,255,255 }, 900);
 		}
 		else {
-			sidequestActive->Draw(font);
+			eastl::list<Quest*>::iterator it = loadedSideQuests.begin();
+			eastl::list<Quest*>::iterator itEnd = loadedSideQuests.end();
+			for (int i = 0; i <= SIDEQUESTSCOUNTFROM0; ++i)
+			{
+				sidequestActive = *it;
+				if (sidequestActive->active == true) {
+					sidequestActive->Draw(font);
+				}
+				++it;
+			}
 		}
 	}
 	//si despues me enxixo que se puedan seleccionar y que te diga las rewards de las complete quests
@@ -256,8 +281,8 @@ bool QuestManager::ActivateSideQuest(int id)
 		{
 			if ((*it)->id == id)
 			{
-				loadedSideQuests.erase(it);
 				sidequestActive = *it;
+				sidequestActive->active = true;
 				break;
 			}
 		}
