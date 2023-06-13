@@ -146,7 +146,7 @@ public:
 	Player* catska;
 	Player* gats;
 
-
+	Easing* easing;
 
 private:
 	SDL_Texture* itemTexture;
@@ -158,7 +158,7 @@ private:
 	SDL_Texture* catskaText;
 	SDL_Texture* itemMenuTexture;
 
-	Easing* easing;
+	int easingPos;
 
 	SDL_Rect gatsRect;
 	SDL_Rect catskaRect;

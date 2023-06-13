@@ -81,6 +81,8 @@ bool InventoryShop::Start()
 		slotList[invSlot_].state = SlotStateShop::UNSELECTED;
 	}
 
+	easing = new Easing(false, 0, -40, 40, 100);
+
 	return true;
 }
 
@@ -88,13 +90,27 @@ bool InventoryShop::Update(float dt)
 {
 	if (isActivated)
 	{
+		if (easing->easingsActivated)
+		{
+			easingPos = easing->bounceEaseOut(easing->currentIteration, easing->initialPos, easing->deltaPos, easing->totalIterations);
+			if (easing->currentIteration < easing->totalIterations)
+			{
+				easing->currentIteration++;
+			}
+			else
+			{
+				easing->currentIteration = 0;
+				easing->easingsActivated = false;
+			}
+		}
+
 		int scale = app->win->GetScale();
 
 		invPos.x = (-app->render->camera.x / scale) + 25;
-		invPos.y = (-app->render->camera.y / scale);
+		invPos.y = (-app->render->camera.y / scale) + easingPos;
 
 		invPosText.x = (int)(app->render->camera.x + invPos.x * scale);
-		invPosText.y = (int)(app->render->camera.y + invPos.y * scale);
+		invPosText.y = (int)(app->render->camera.y + invPos.y * scale) + easingPos;
 
 		iPoint invSpacing = { 0,0 };
 		for (size_t invSlot_ = 0; invSlot_ < MAX_INVENTORY_SLOTS; invSlot_++)

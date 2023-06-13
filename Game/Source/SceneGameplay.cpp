@@ -484,6 +484,8 @@ bool SceneGameplay::Update(float dt)
 	{
 		app->inventoryShop->isActivated = !app->inventoryShop->isActivated;
 		app->audio->PlayFx(app->hud->swapscenesfx);
+		app->inventoryShop->easing->easingsActivated = true;
+		app->inventoryShop->easing->currentIteration = 0;
 	}
 
 	if (addItems_)
