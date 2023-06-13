@@ -12,7 +12,8 @@ enum class SceneType
 	TITLE,
 	GAMEPLAY,
 	BATTLE,
-	ENDING
+	ENDING,
+	CREDITS
 };
 
 enum class TransitionType;

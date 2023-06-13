@@ -74,6 +74,7 @@
     </ClCompile>
     <ClCompile Include="Source\GridSystem.cpp" />
     <ClCompile Include="Source\Serpicat.cpp" />
+    <ClCompile Include="Source\SceneCredits.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -162,6 +163,7 @@
     </ClInclude>
     <ClInclude Include="Source\GridSystem.h" />
     <ClInclude Include="Source\Serpicat.h" />
+    <ClInclude Include="Source\SceneCredits.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />

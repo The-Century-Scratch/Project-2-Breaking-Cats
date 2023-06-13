@@ -17,8 +17,8 @@ Straw::Straw()
 	damage = 666;
 	type = UnitType::STRAW;
 
-	idleLeftAnim.AnimateCat32x32(1, 0);
-	idleLeftAnim.speed = 0.2f;
+	idleLeftAnim.AnimateCat32x32(8, 0);
+	idleLeftAnim.speed = 0.15f;
 
 	currentAnim = &idleLeftAnim;
 	state = ActionState::IDLE;

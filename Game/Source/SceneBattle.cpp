@@ -718,7 +718,11 @@ bool SceneBattle::Update(float dt)
 			gridSystem->removeUnit(i->position);
 		}
 
-		if (i->GetType() == UnitType::STRAW) continue;
+		if (i->GetType() == UnitType::STRAW)
+		{
+			i->Update();
+			continue;
+		}
 
 		if (i->GetIsMyTurn() && !i->GetHasFinishedTurn() && i->GetHealthPoints() > 0)
 		{
