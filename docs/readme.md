@@ -18,6 +18,12 @@ _TeamPhoto_
 
 ***
 
+## Trailer
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hU91COygkUw" title="[YouTube](https://www.youtube.com/) video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+YouTube
+
+
 ## Game Pillars
 ### Tactical Combat
 Our turn-based combat system structure will be based on a tactical/strategy format with a few changes.
@@ -27,7 +33,6 @@ Dialogues and the rest of the narrative elements as well as the locations and pl
 
 ### Aesthetics
 Aesthetics and consistency in design are a really important part of the game, that is based largely on a cat related look. Almost every element of the game and graphical design references the fact that almost every character in the game is a cat and the design is inspired by it.
-
 
 ## Story & Narrative Structure
 In the past of a magical and peaceful world where cats and dogs lived in society, a laboratory began to experiment with the creation of a rare and powerful artifact "The Ball of Golden Wool".
