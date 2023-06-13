@@ -715,6 +715,11 @@ bool SceneBattle::Update(float dt)
 
 			Unit::PlayerAction unitAction = i->HandleInput();
 
+			if (i->GetIsAlly())
+			{
+				actualTurnUnit = i->GetType();
+			}
+
 			if (i->atkEasingHasEnded())
 			{
 				for (auto& unit : units)

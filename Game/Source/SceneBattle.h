@@ -55,6 +55,8 @@ private:
 	int turn = 0;
 	int turnTimer;
 
+	UnitType actualTurnUnit;
+
 
 	eastl::unique_ptr<GridSystem> gridSystem;
 
