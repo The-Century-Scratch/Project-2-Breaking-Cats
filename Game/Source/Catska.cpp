@@ -90,6 +90,12 @@ Catska::PlayerAction Catska::HandleInput() const
 		/*app->audio->PlayFx(app->hud->attkcatskafx);*/
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
+	{
+		returnAction.action = Catska::PlayerAction::Action::GRENADE;
+		/*app->audio->PlayFx(app->hud->attkcatskafx);*/
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 	{
 		returnAction.action |= Catska::PlayerAction::Action::MOVE;
@@ -119,7 +125,30 @@ void Catska::StartAction(PlayerAction playerAction)
 	if (playerAction.action == PlayerAction::Action::MOVE)
 	{
 
+		destination = playerAction.destinationTile;
 		StartMovement();
+	}
+	else if (playerAction.action == PlayerAction::Action::ATTACK_LONG_RANGE)
+	{
+
+		destination = playerAction.destinationTile;
+
+		if (playerAction.destinationTile.y < position.y)
+		{
+			moveVector.y = -1;
+		}
+		else if (playerAction.destinationTile.x < position.x)
+		{
+			moveVector.x = -1;
+		}
+		else if (playerAction.destinationTile.y > position.y)
+		{
+			moveVector.y = 1;
+		}
+		else if (playerAction.destinationTile.x > position.x)
+		{
+			moveVector.x = 1;
+		}
 	}
 	LOG("it does enter this scope right now, so be careful");
 }

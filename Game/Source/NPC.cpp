@@ -8,7 +8,9 @@
 #include "Point.h"
 #include "ModuleCollisions.h"
 #include "SceneManager.h"
+#include "QuestManager.h"
 #include "Input.h"
+
 
 NPC::NPC() : Entity(EntityType::NPC)
 {
@@ -34,33 +36,110 @@ bool NPC::Start() {
 	npctype = (NPCTYPE)parameters.attribute("type").as_int();
 
 	texture = app->tex->Load(texturePath);
-
-	//NPCAnim.PushBack({ ((int)npctype) * 16,0 * 16,32,32 });
-	NPCAnim.PushBack({ 0,0,32,32 });
-	NPCAnim.loop = false;
-	NPCAnim.speed = 0.0f;
 	w = h = 32;
 
 	cRect = { position.x - 6,position.y - 6,32 + 12,32 + 12 };
 
 	switch (npctype)
 	{
-	case NPCTYPE::GUARDIAN:
+	case NPCTYPE::SIGN:
+		//collider
+		cRect = { position.x - 6,position.y - 6,32 + 12,32 + 12 };
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 6,position.y + 4,20,22 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
 		dialogueid = 0;
+		//anim
+		NPCIdle.PushBack({ 0,0,32,32 });
+		NPCIdle.PushBack({ 32,0,32,32 });
+		NPCIdle.PushBack({ 64,0,32,32 });
+		NPCIdle.PushBack({ 32,0,32,32 });
+		NPCIdle.PushBack({ 64,0,32,32 });
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		NPCIdleAction.speed = -1;
+		break;
+	case NPCTYPE::VILLAGE:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = 1;
+		//anim
+		NPCIdle.PushBack({ 0,0,32,32 });
+		NPCIdle.loop = false;
+		NPCIdle.speed = 0.0f;
+		//anim2
+		NPCIdleAction.speed = -1;
+		break;
+	case NPCTYPE::GUARDIAN:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = 2;
+		//anim1
+		for (int i = 0; i < 8; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 8; i < 15; ++i) {
+			NPCIdleAction.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.1f;
 		break;
 	case NPCTYPE::SHOP: //shop boundries must be lowered in y position
+		//collider
 		cRect = { position.x - 6,position.y + 27,16 + 12,16 + 12 };
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
 		dialogueid = 1;
+		//anim1
+		for (int i = 0; i < 7; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 7; i < 17; ++i) {
+			NPCIdleAction.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.2f;
 		break;
 	case NPCTYPE::CONTRABANDIST:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = 3;
+		//anim1
+		for (int i = 0; i < 5; ++i) {
+			NPCIdle.PushBack({ 32*i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 5; i < 24; ++i) {
+			NPCIdleAction.PushBack({ 32*i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.1f;
 		break;
+	
 	default:
 		break;
 	}
-
-	boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
-	cRect = { position.x+8,position.y+16,16,16 };
-	eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 
 	return true;
 }
@@ -72,22 +151,78 @@ bool NPC::Update()
 	{
 	case NPCTYPE::GUARDIAN:
 		break;
+	case NPCTYPE::VILLAGE:
+		if (app->questManager->changeDialogueIdAfterRocks) {
+			this->dialogueid = 5;
+			app->questManager->changeDialogueIdAfterRocks = false;
+		}
+		break;
 	case NPCTYPE::SHOP:
 		break;
 	case NPCTYPE::CONTRABANDIST:
+		if (app->questManager->changeDialogueIdAfterCollecting) {
+			this->dialogueid = 4;
+			app->questManager->changeDialogueIdAfterCollecting = false;
+		}
+		break;
+	case NPCTYPE::SIGN:
 		break;
 	default:
 		break;
+	}	
+	//anim things basically trigger the action for the anim if the npc has it check if speed is -1 to know if the action for the idle animation exists or no
+	if (this->NPCIdleAction.speed == -1) {
+		SDL_Rect rect = NPCIdle.GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		NPCIdle.Update();
 	}
-
+	else {
+		++actionanimcounter;
+		if (actionanimcounter >= 400) {
+			SDL_Rect rect = NPCIdleAction.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdleAction.Update();
+			if (NPCIdleAction.HasFinished() == true) {
+				actionanimcounter = 0;
+				NPCIdleAction.Reset();
+			}
+		}
+		else {
+			SDL_Rect rect = NPCIdle.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdle.Update();
+		}
+	}
+	
 	return true;
 }
 
 bool NPC::PostUpdate()
 {
-	SDL_Rect rect = NPCAnim.GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x, position.y, &rect);
-	NPCAnim.Update();
+//anim things basically trigger the action for the anim if the npc has it check if speed is -1 to know if the action for the idle animation exists or no
+	if (this->NPCIdleAction.speed == -1) {
+		SDL_Rect rect = NPCIdle.GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		NPCIdle.Update();
+	}
+	else {
+		++actionanimcounter;
+		if (actionanimcounter >= 400) {
+			SDL_Rect rect = NPCIdleAction.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdleAction.Update();
+			if (NPCIdleAction.HasFinished() == true) {
+				actionanimcounter = 0;
+				NPCIdleAction.Reset();
+			}
+		}
+		else {
+			SDL_Rect rect = NPCIdle.GetCurrentFrame();
+			app->render->DrawTexture(texture, position.x, position.y, &rect);
+			NPCIdle.Update();
+		}
+	}
+	
 	return true;
 }
 

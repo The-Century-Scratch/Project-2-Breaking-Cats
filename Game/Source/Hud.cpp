@@ -548,7 +548,7 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button 1 click");
 		app->hud->prevstate = app->hud->hudstate;
 		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
-		app->sceneManager->currentScene = 6;
+		app->sceneManager->currentScene = 8;
 		app->hud->hudstate = hudSTATE::CLOSED;
 		app->audio->PlayMusic(forestTheme.GetString());
 		break;

@@ -1,13 +1,17 @@
 #include "QuestManager.h"
 #include "App.h"
 #include "Textures.h"
-#include "LabyrinthQuest.h"
-#include "TalkQuest.h"
-#include "MoveRockQuest.h"
+#include "MainQuest.h"
+#include "SideQuest.h"
 #include"AssetsManager.h"
 #include "Audio.h"
 #include "SceneManager.h"
 #include "FirePaws.h"
+#include "DragonSlayer.h"
+#include "GrapplingHook.h"
+#include "BulletPenetration.h"
+#include "MysticalEnergy.h"
+#include "ArcaneSpirit.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -62,35 +66,59 @@ bool QuestManager::Start() {
 		Quest* quest;
 		switch ((QuestType)node.attribute("type").as_int())
 		{
-		case QuestType::MOVEROCK:
-			quest = new MoveRockQuest(node);
+		case QuestType::MAINQUEST:
+			quest = new MainQuest(node);
+			loadedQuests.push_back(quest);
 			break;
-		case QuestType::TALK:
-			quest = new TalkQuest(node);
-			break;
-		case QuestType::LABYRINTH:
-			quest = new LabyrinthQuest(node);
+		case QuestType::SIDEQUEST:
+			quest = new SideQuest(node);
+			loadedSideQuests.push_back(quest);
 			break;
 		default:
 			break;
 		}		
-		loadedQuests.push_back(quest);
+		
 	}
 
-	completeQuestFx = app->audio->LoadFx("Assets/Audio/Fx/CompleteQuestPlaceholder .wav");
-	QuestMenuBox = app->tex->Load("Assets/Textures/GUI/menuBoxPlaceholder.png");
-	questFinished = nullptr;
+	completeQuestFx = app->audio->LoadFx("Assets/Audio/Fx/CompleteQuestPlaceholder.wav");
+	QuestMenuBox = app->tex->Load("Assets/Textures/GUI/Menu.png");
 	questActive = nullptr;
-	currentQuestComplete = false;
+	sidequestActive = nullptr;
 	font = new Font(app, "Fonts/prova.xml");
-	quest1 = false;
+	RocksQuest = false;
 	quest3 = false;
+	changeDialogueIdAfterCollecting = false;
+	changeDialogueIdAfterRocks = false;
 	printQuestMenu = false;
 
+	ObjectsCount = 0;
+	MenuID = 1;
+	SideQuestID = 1;
+
+	//items
 	ItemText = app->tex->Load("Assets/Textures/Items.png");
 
 	firePaw = new FirePaws(iPoint(384,48), ItemText);
 	firePaw->Start();
+
+	dragonSlayer = new DragonSlayer(iPoint(384, 48), ItemText);
+	dragonSlayer->Start();
+
+	grapplingHook = new GrapplingHook(iPoint(384, 48), ItemText);
+	grapplingHook->Start();
+
+	bulletPenetration = new BulletPenetration(iPoint(384, 48), ItemText);
+	bulletPenetration->Start();
+
+	mysticalEnergy = new MysticalEnergy(iPoint(384, 48), ItemText);
+	mysticalEnergy->Start();
+
+	arcaneSpirit = new ArcaneSpirit(iPoint(384, 48), ItemText);
+	arcaneSpirit->Start();
+
+	GiveItem = false;
+
+	ActivateQuest(TUTORIAL);
 	return ret;
 }
 
@@ -98,20 +126,41 @@ bool QuestManager::Update(float dt)
 {
 	bool ret = true;
 
-	if (app->sceneManager->puzzle2solved && quest1 == false) {
-		ActivateQuest(1);
-		quest1 = true;
+	if (GiveItem) {
+		switch (questActive->id) {
+		case 1: //tutorial finished
+			firePaw->equiped = true;
+			app->inventory->AddItem(firePaw);
+			app->audio->PlayFx(app->hud->getitemfx);
+		case 2: //when rocks finished, give coin
+		case 3: //When talked with the guardian
+		case 4: //When the labyrinth is resolved
+		case 5: //when you left the lab and talked with the guardian
+		case 6: //when you found the vident
+		default:
+			break;
+		}
+		GiveItem = false;
 	}
 
-	
+	if (ObjectsCount == 5) {
+		sidequestActive = nullptr; //when doing the logics of having more than one sidequest active delete this also logic for adding a coin should be added
+		changeDialogueIdAfterCollecting = true;
+	}
 
-	if (app->sceneManager->puzzle3solved &&quest3 == false) {
-		ActivateQuest(-1);
+	if (app->sceneManager->puzzle2solved && RocksQuest == false) {
+		ActivateQuest(EXPLORECITY);
+		RocksQuest = true;
+		changeDialogueIdAfterRocks = true;
+	}
+
+	if (app->sceneManager->puzzle3solved && quest3 == false) {
+		
+		ActivateQuest(LABORATORY);
 		quest3 = true;
-		firePaw->equiped = true;
-		app->inventory->AddItem(firePaw);
-		app->audio->PlayFx(app->hud->getitemfx);
+		
 	}
+
 
 	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_DOWN && app->hud->hudstate == hudSTATE::CLOSED && !app->inventory->isActivated) 
 	{
@@ -125,21 +174,85 @@ bool QuestManager::Update(float dt)
 		printQuestMenu = !printQuestMenu;
 		SDL_ShowCursor(SDL_DISABLE);
 	}
-	
+
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	{
+		if (MenuID != 1 && printQuestMenu) {
+			--MenuID;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	{
+		if (MenuID != MENUSCOUNT && printQuestMenu) {
+			++MenuID;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		if (SideQuestID != 0 && printQuestMenu) {
+			--SideQuestID;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		if (SideQuestID != SIDEQUESTSCOUNTFROM0 && printQuestMenu) {
+			++SideQuestID;
+		}
+	}
+
 	return ret;
 }
 
 bool QuestManager::PostUpdate() {
-	if(printQuestMenu) {
-		SDL_Rect sect{ 0,0,256,256 };
-		app->render->DrawTexture(QuestMenuBox, 0, 0, &sect, false);
+	
+	if(!printQuestMenu) { //dont delete
+		return true;
+	}
+	SDL_Rect sect{ 0,0,417,240 };
+	app->render->DrawTexture(QuestMenuBox, 0, 0, &sect, false);
+
+	if (MenuID == 1) {
 		if (questActive == nullptr) {
-			app->render->DrawText(font, "No active quests", 50, 50, 48, 5, { 255,255,255,255 }, 528);
+			app->render->DrawText(font, "No active quests", 80, 115, 80, 5, { 255,255,255,255 }, 900);
 		}
 		else {
 			questActive->Draw(font);
 		}
 	}
+	else if (MenuID == 2) {
+
+
+		if (sidequestActive == nullptr) {
+			app->render->DrawText(font, "No active sidequests", 80, 115, 80, 5, { 255,255,255,255 }, 900);
+		}
+		else {
+			eastl::list<Quest*>::iterator it = loadedSideQuests.begin();
+			eastl::list<Quest*>::iterator itEnd = loadedSideQuests.end();
+			for (int i = 0; i <= SIDEQUESTSCOUNTFROM0; ++i)
+			{
+				sidequestActive = *it;
+				if (sidequestActive->active == true) {
+					sidequestActive->Draw(font);
+				}
+				++it;
+			}
+		}
+	}
+	//si despues me enxixo que se puedan seleccionar y que te diga las rewards de las complete quests
+	/*else {
+		if (sidequestActive == nullptr) {
+			app->render->DrawText(font, "No complete quests", 80, 115, 80, 5, { 255,255,255,255 }, 1000);
+		}
+		else {
+			sidequestActive->Draw(font);
+		}
+	}*/
+	
+
+	
 	return true;
 }
 
@@ -160,13 +273,37 @@ bool QuestManager::ActivateQuest(int id)
 		}
 	}
 	else {
-		DeleteAllQuests();
+		DeleteAllMainQuests();
 	}
 
 	return true;
 }
 
-void QuestManager::DeleteAllQuests()
+bool QuestManager::ActivateSideQuest(int id)
+{
+	if (id != -1)
+	{
+		eastl::list<Quest*>::iterator it = loadedSideQuests.begin();
+		eastl::list<Quest*>::iterator itEnd = loadedSideQuests.end();
+		for (; it != itEnd; ++it)
+		{
+			if ((*it)->id == id)
+			{
+				sidequestActive = *it;
+				sidequestActive->active = true;
+				break;
+			}
+		}
+	}
+	else {
+		DeleteAllSideQuests();
+	}
+
+	return true;
+}
+
+
+void QuestManager::DeleteAllMainQuests()
 {
 	if (!loadedQuests.empty())
 	{
@@ -192,20 +329,39 @@ void QuestManager::DeleteAllQuests()
 	}
 	activeQuests.clear();
 
-	if (!finishedQuests.empty())
+	RELEASE(questActive);
+	questActive = nullptr;
+
+}
+
+void QuestManager::DeleteAllSideQuests()
+{
+	if (!loadedSideQuests.empty())
 	{
-		eastl::list<Quest*>::iterator it = finishedQuests.begin();
-		eastl::list<Quest*>::iterator itEnd = finishedQuests.end();
+		eastl::list<Quest*>::iterator it = loadedSideQuests.begin();
+		eastl::list<Quest*>::iterator itEnd = loadedSideQuests.end();
 		for (; it != itEnd; ++it)
 		{
 			RELEASE(*it);
-			finishedQuests.erase(it);
+			loadedSideQuests.erase(it);
 		}
 	}
-	finishedQuests.clear();
+	loadedSideQuests.clear();
 
-	RELEASE(questActive);
-	questActive = nullptr;
+	if (!activeSideQuests.empty())
+	{
+		eastl::list<Quest*>::iterator it = activeSideQuests.begin();
+		eastl::list<Quest*>::iterator itEnd = activeSideQuests.end();
+		for (; it != itEnd; ++it)
+		{
+			RELEASE(*it);
+			activeSideQuests.erase(it);
+		}
+	}
+	activeSideQuests.clear();
+
+	RELEASE(sidequestActive);
+	sidequestActive = nullptr;
 
 }
 

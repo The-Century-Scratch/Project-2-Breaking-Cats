@@ -103,11 +103,15 @@ private:
 
 	void showDash(iPoint pos);
 
+	void showGrenade(iPoint pos);
+
 	void showAttackAOE(iPoint pos);
 
 	void showAttackRangeAOE(iPoint pos);
 
 	void showDashAOE(iPoint pos);
+
+	void showGrenadeAOE(iPoint pos);
 
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;

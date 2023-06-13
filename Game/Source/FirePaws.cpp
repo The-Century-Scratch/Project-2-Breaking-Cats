@@ -24,6 +24,7 @@ bool FirePaws::Start()
 	//currentAnim = &idleanim;
 	itemid = 1;
 	itemType = ItemType::FIRE_PAWS;
+	equiped = false;
 
 	return true;
 }

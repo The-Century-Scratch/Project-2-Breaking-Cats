@@ -48,6 +48,7 @@
 //#include "CharacterManager.h"
 //#include "PauseMenu.h"
 #include "Inventory.h"
+#include "InventoryShop.h"
 //#include "QuestMenu.h"
 //#include "Shop.h"
 
@@ -256,6 +257,21 @@ bool SceneGameplay::Load()
 		}
 	}
 
+	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
+	{
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
+			collectibleObject->parameters = collectibleObjectNode;
+			collectibleObjectList.Add(collectibleObject);
+			collectibleObject->Start();
+		}
+	}
+
+
+
+
+
 	//Item* item = nullptr;
 	//pugi::xml_node itemNode = config.child("item");
 	//{
@@ -309,13 +325,19 @@ bool SceneGameplay::Load()
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 		canMoveCam = true;
-	//case 8:
-	//	app->render->camera.x = 300;
-	//	app->render->camera.y = 0;
-	//	canMoveCam = true;
+	case 7:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
+		canMoveCam = true;
+	case 8:
+		app->render->camera.x = 0;
+		app->render->camera.y = -2000;
+		canMoveCam = true;
 	default:
 		break;
 	}
+
+	addItems_ = true;
 
 	app->inventory->Enable();
 
@@ -456,40 +478,60 @@ bool SceneGameplay::Update(float dt)
 			}
 		}
 	}
+/*
+	//Add items --> the final idea is to create a switch wich gets an id from 1-6 from the quest or chest and the switch will add the corresponding item to the inv
+	if (app->input->GetKey(SDL_SCANCODE_I) == KeyState::KEY_DOWN)
+	{
+		app->inventory->isActivated = !app->inventory->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+		app->inventory->easing->easingsActivated = true;
+		app->inventory->easing->currentIteration = 0;
+	}
 
+	if (app->input->GetKey(SDL_SCANCODE_P) == KeyState::KEY_DOWN)
+	{
+		app->inventoryShop->isActivated = !app->inventoryShop->isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+		app->inventoryShop->easing->easingsActivated = true;
+		app->inventoryShop->easing->currentIteration = 0;
+	}
+
+	if (addItems_)
+	{
+		app->inventoryShop->AddItem(dragonSlayer);
+		app->inventoryShop->AddItem(bulletPenetration);
+		app->inventoryShop->AddItem(arcaneSpirit);
+		addItems_ = false;
+	}
+
+*/
 	if (app->input->GetKey(SDL_SCANCODE_1) == KeyState::KEY_DOWN)
 	{
-		firePaw->equiped = true;
 		app->inventory->AddItem(firePaw);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_2) == KeyState::KEY_DOWN)
 	{
-		dragonSlayer->equiped = true;
 		app->inventory->AddItem(dragonSlayer);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_3) == KeyState::KEY_DOWN)
 	{
-		grapplingHook->equiped = true;
 		app->inventory->AddItem(grapplingHook);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_4) == KeyState::KEY_DOWN)
 	{
-		bulletPenetration->equiped = true;
 		app->inventory->AddItem(bulletPenetration);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_5) == KeyState::KEY_DOWN)
 	{
-		mysticalEnergy->equiped = true;
 		app->inventory->AddItem(mysticalEnergy);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_6) == KeyState::KEY_DOWN)
 	{
-		arcaneSpirit->equiped = true;
 		app->inventory->AddItem(arcaneSpirit);
 		app->audio->PlayFx(app->hud->getitemfx);
 	}
@@ -559,7 +601,13 @@ bool SceneGameplay::Update(float dt)
 		//leaving village map
 		if (app->sceneManager->currentScene == IDVILLAGE)
 		{
-			ChangeMap(LEAVEVILLAGE, 4);
+			ChangeMap(LEAVEVILLAGE, IDLABRINTH);
+		}
+
+		//leaving tutorial map
+		if (app->sceneManager->currentScene == IDTUTORIAL)
+		{
+			ChangeMap(LEAVETUTORIAL,IDVILLAGE);
 		}
 
 		//leaving labrinth map
@@ -1169,68 +1217,6 @@ bool SceneGameplay::UnLoad()
 	app->tex->Unload(itemText);
 	app->tex->Unload(guiTex);
 	app->tex->Unload(guiPad);
-
-	//entityManager->UnLoad();
-	//RELEASE(entityManager);
-
-	//questManager->UnLoad();
-	//RELEASE(questManager);
-
-	//map->CleanUp();
-	//RELEASE(map);
-	//
-	//eastl::list<Player*>::iterator it = playerList.begin();
-	//eastl::list<Player*>::iterator itEnd = playerList.end();
-	//for (; it != itEnd; ++it)
-	//{
-	//	(*it)->UnLoad();
-	//	RELEASE((*it));
-	//	playerList.erase(it);
-	//}
-	//playerList.clear();
-
-	//eastl::list<Item*>::iterator item = items.begin();
-	//eastl::list<Item*>::iterator itemEnd = items.end();
-	//for (; item != itemEnd; ++item)
-	//{
-	//	(*item)->UnLoad();
-	//	RELEASE((*item));
-	//	items.erase(item);
-	//}
-	//items.clear();
-
-	//eastl::list<Enemy*>::iterator en = enemyList.begin();
-	//eastl::list<Enemy*>::iterator enemyEnd = enemyList.end();
-	//for (; en != enemyEnd; ++en)
-	//{
-	//	(*en)->UnLoad();
-	//	RELEASE((*en));
-	//	enemyList.erase(en);
-	//}
-	//enemyList.clear();
-
-	//charManager->UnLoad();
-	//RELEASE(charManager);
-
-	//pause->UnLoad();
-	//RELEASE(pause);
-
-	//inventory->UnLoad();
-	//RELEASE(inventory);
-	//
-	//dialogueManager->UnLoad();
-	//RELEASE(dialogueManager);
-
-	//font->UnLoad(app->tex);
-	//RELEASE(font);
-	//
-	//particles->CleanUp();
-	//RELEASE(particles);
-
-	//app->audio->UnLoadFxs();
-	//app->tex->UnLoad(goldTexture);
-	//app->tex->UnLoad(guiTex);
-	//app->tex->UnLoad(guiPad);
 
 	return ret;
 }
@@ -2207,6 +2193,31 @@ void SceneGameplay::LoadTriggerableObjects()
 	}
 }
 
+void SceneGameplay::LoadCollectibleObjects()
+{
+	ListItem<CollectibleObject*>* collectibleObjectItem = collectibleObjectList.start;
+	while (collectibleObjectItem != NULL)
+	{
+		collectibleObjectItem->data->toDelete = true;
+		collectibleObjectItem = collectibleObjectItem->next;
+	}
+	collectibleObjectList.Clear();
+
+	pugi::xml_node configNode = app->LoadConfigFileToVar();
+	pugi::xml_node config = configNode.child(name.GetString());
+
+	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
+	{
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		{
+			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
+			collectibleObject->parameters = collectibleObjectNode;
+			collectibleObjectList.Add(collectibleObject);
+			collectibleObject->Start();
+		}
+	}
+}
+
 void SceneGameplay::LoadNpc()
 {
 	ListItem<NPC*>* npcItem = npcs.start;
@@ -2375,6 +2386,8 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 	LoadMovableObjects();
 	//load again new triggerableobjects
 	LoadTriggerableObjects();
+	//load again new collectbleobjects
+	LoadCollectibleObjects();
 	//load again new staticobjects
 	LoadStaticObject();
 

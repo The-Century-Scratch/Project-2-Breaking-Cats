@@ -1,7 +1,17 @@
 <quests>
-	<quest type="0" id="0" name="Move the rocks." description="Talk with the guardian, and move the rocks out of the way." nextQuestId="1" npcId="0" reward="700"></quest>
-	<quest type="1" id="1" name="Talk with the vendor in the shop." description="Talk with the vendor in the shop that is in the bottom right part of the city." nextQuestId="2" mapName="pub.tmx" reward="500"></quest>
-	<quest type="2" id="2" name="Resolve the labyrinth." description="Resolve the labyrinthy in the bottom part after the city in order to access the lab." nextQuestId="3" npcId="4" reward="700"></quest>
+	<quest type="0" id="0" name="Tutorial" description="Read the sign and reunite with your comrades in the clearence at the end of the forest" nextQuestId="1" npcId="0" reward="coin"></quest>
+	<quest type="0" id="1" name="Move the rocks." description="Talk with the cat, and move the rocks out of the way." nextQuestId="2" npcId="0" reward="tygerpaw"></quest>
+	<quest type="0" id="2" name="Explore the city" description="Talk with the Guardian in the base of the resistance at the bottom left part also feel free to visit the shop and the tabern you might find something interesting" nextQuestId="3" mapName="pub.tmx" reward="item for catska"></quest>
+	<quest type="0" id="3" name="Resolve the labyrinth." description="Resolve the labyrinthy in the bottom part after the city in order to access the lab." nextQuestId="4" npcId="4" reward="coin"></quest>
+	<quest type="0" id="4" name="Explore the lab" description="Find a way to read the signs, important read them all, then come talk with the guardian again" nextQuestId="5" npcId="4" reward=""></quest>
+	<quest type="0" id="5" name="Find the vident" description="find the vident at the right part of the city to know where to find gryffith " nextQuestId="6" npcId="4" reward=""></quest>
+	<quest type="0" id="6" name="kill Gryffith" description="find and kill gryffith" nextQuestId="6" npcId="4" reward="700"></quest>
+
+	
+	<!--  sidequests-->
+	<quest type="1" id="0" name="Gather all the objects" description="gather all the objects in the city, there are 5" nextQuestId="6" npcId="3" reward="coin"></quest>
+	<quest type="1" id="1" name="Gather all the objects" description="gather all the objects in the woods, there are 5" nextQuestId="6" npcId="3" reward="item para serpikat"></quest>
+
 	<!-- <quest type="1" id="4" name="Kill the skull" description="There's an enemy at the graveyard. Now that you have a potion, go to the graveyard and kill it." nextQuestId="5" enemy="1" reward="300"></quest>
   <quest type="1" id="5" name="Kill the Final Boss" description="Enter the Dungeon. Then, complete all the puzzles to be able to reach the final boss and kill them." nextQuestId="6" enemy="2" reward="7000"></quest> -->
 </quests>

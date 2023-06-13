@@ -43,6 +43,7 @@ bool DialogueManager::Start()
 		root = file.child("dialogues");
 		font = new Font(app, "Fonts/prova.xml");
 		texture = app->tex->Load("Assets/Textures/textBox.png");
+		arrowTex = app->tex->Load("Assets/Textures/Arrow.png");
 
 		letterCount = 0;
 		isDialogueActive = false;
@@ -82,7 +83,7 @@ bool DialogueManager::Update(float dt)
 
 	if (current != nullptr)
 	{
-		/*if (easingArrow2->easingsActivated == false) easingArrow->easingsActivated = true;
+		if (easingArrow2->easingsActivated == false) easingArrow->easingsActivated = true;
 
 		easingArrow->initialPos = current->currentNode->currentOption->bounds.x - 30;
 		easingArrow2->initialPos = easingArrow->initialPos + easingArrow->deltaPos;
@@ -116,7 +117,7 @@ bool DialogueManager::Update(float dt)
 				easingArrow2->easingsActivated = false;
 				easingArrow->easingsActivated = true;
 			}
-		}*/
+		}
 
 		if (current->currentNode->dialogFinished == true && current->currentNode->id >= 0)
 		{
@@ -162,7 +163,13 @@ bool DialogueManager::Update(float dt)
 				NpcNode* aux = GetNodeById(current->currentNode->currentOption->nextNodeId);
 				/*current->currentNode=current->currentNode.*/
 				//uncomment when quests done
-				if (current->currentNode->currentOption->missionId != -1) app->questManager->ActivateQuest(current->currentNode->currentOption->missionId);
+				if (current->currentNode->currentOption->missionId != -1) {
+					app->questManager->GiveItem = true;
+					app->questManager->ActivateQuest(current->currentNode->currentOption->missionId);
+				}
+				if (current->currentNode->currentOption->sideMissionId != -1) {
+					app->questManager->ActivateSideQuest(current->currentNode->currentOption->sideMissionId);
+				}
 				if (current->currentNode->currentOption->menu != -1) scene->ChangeState(GameplayMenuState::SHOP);
 
 				RELEASE(current->currentNode);
@@ -216,8 +223,8 @@ void DialogueManager::Draw()
 		// Draw the arrow to give visual feedback of the current option
 		if (current->currentNode->dialogFinished)
 		{
-			sect = { 622, 352, 16,23 };
-			app->render->DrawTexture(texture, arrowPosition, current->currentNode->currentOption->bounds.y, &sect, false);
+			sect = { 0,0, 16,16 };
+			app->render->DrawTexture(arrowTex, arrowPosition -460, current->currentNode->currentOption->bounds.y -35, &sect, 0);
 		}
 	}
 }
@@ -266,6 +273,7 @@ NpcNode* DialogueManager::LoadNode(int id, pugi::xml_node node)
 		option->id = m.attribute("id").as_int();
 		option->nextNodeId = m.attribute("nextNodeId").as_int();
 		option->missionId = m.attribute("missionId").as_int();
+		option->sideMissionId = m.attribute("sideMissionId").as_int();
 		option->menu = m.attribute("menu").as_int(-1);
 		option->bounds.x = 710;
 		option->bounds.y = 215 + i;
@@ -276,7 +284,7 @@ NpcNode* DialogueManager::LoadNode(int id, pugi::xml_node node)
 
 		tmp->options.push_back(option);
 		++tmp->optionsNum;
-		i += 90;
+		i += 30;
 	}
 
 	return tmp;

@@ -25,7 +25,8 @@ class Item : public Entity
 public:
 
 	Item() {};
-	Item(iPoint pos, SDL_Texture* itemText_, EntityType entityType = EntityType::ITEM) : Entity(entityType), texture(itemText_) {
+	Item(iPoint pos, SDL_Texture* itemText_, EntityType entityType = EntityType::ITEM) : Entity(entityType), texture(itemText_) 
+	{
 		position.x = pos.x;
 		position.y = pos.y;
 		equiped = false;

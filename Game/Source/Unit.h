@@ -31,7 +31,8 @@ public:
 			ATTACK_TO_PLAYER = 0x0005,
 			ATTACK_TO_PLAYER_LONG_RANGE = 0x0006,
 			PREPARE_DASH = 0x0007,
-			ATTACK_AND_HEAL_WITH_KILL = 0x0008
+			ATTACK_AND_HEAL_WITH_KILL = 0x0008,
+			GRENADE = 0x0009
 		};
 
 		friend Action operator&(Action a, Action b)
@@ -100,6 +101,7 @@ protected:
 	int speed = 4;
 	const int timeForATile = 2;
 	const int tileSize = 16;
+	iPoint destination;
 
 	SDL_Texture* texture;
 	SString name;

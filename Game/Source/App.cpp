@@ -15,6 +15,7 @@
 #include "StatsManager.h"
 #include "Hud.h"
 #include "Inventory.h"
+#include "InventoryShop.h"
 #include "Debug.h"
 
 #include "Defs.h"
@@ -62,6 +63,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	statsManager = new StatsManager(true);
 	hud = new Hud(true);
 	inventory = new Inventory(true);
+	inventoryShop = new InventoryShop(true);
 	debug = new Debug(true);
 
 	// Ordered for awake / Start / Update
@@ -81,6 +83,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(hud);
 	AddModule(inventory);
+	AddModule(inventoryShop);
 	AddModule(debug);
 	// Render last to swap buffer
 	AddModule(render);

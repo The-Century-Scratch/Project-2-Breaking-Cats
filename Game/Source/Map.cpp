@@ -771,6 +771,17 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                         break;
                     }
                 }
+                if (app->sceneManager->currentScene == 8)
+                {
+                    switch (id)
+                    {
+                    case 16:
+                        newscene = 6;
+                        break;
+                    default:
+                        break;
+                    }
+                }
 
                 Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE, nullptr, true, newscene);
 
