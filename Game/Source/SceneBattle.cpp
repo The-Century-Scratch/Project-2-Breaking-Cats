@@ -1174,10 +1174,23 @@ bool SceneBattle::Update(float dt)
     
 			//app->hud->prevstate = app->hud->hudstate;
 			//app->hud->hudstate = hudSTATE::ENDSCREEN;
-
+		switch (app->sceneManager->previousScene) {
+		case 0:
+			app->sceneManager->currentScene = 6;
+			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS, true);
+			break;
+		case 1:
+			app->sceneManager->currentScene = 0;
+			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS, true);
+			break;
+		case2:
 			app->sceneManager->current->TransitionToScene(SceneType::ENDING, TransitionType::ALTERNATING_BARS, true);
-			
+			break;
+		default:break;
+
 		}
+			
+	}
 		if (!alliesAlive)
 		{
 			app->map->CleanUp();

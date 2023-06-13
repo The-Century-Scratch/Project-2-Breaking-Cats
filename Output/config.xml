@@ -87,11 +87,11 @@
 		<triggerableObject scene="9" x="64" y="352" texturepath="Assets/Textures/lever.png" id="2"/>
 		<staticObject scene="5" x="192" y="288" texturepath="Assets/Textures/barrier.png" id="1"/>
 	  <staticObject scene="9" x="160" y="320" texturepath="Assets/Textures/laser.png" id="2"/>
-		<collectibleObject scene="0" x="100" y="137" texturepath="Assets/Textures/Collectible.png" id="1"/>
-		<collectibleObject scene="0" x="120" y="137" texturepath="Assets/Textures/Collectible.png" id="2"/>
-		<collectibleObject scene="0" x="140" y="137" texturepath="Assets/Textures/Collectible.png" id="3"/>
-		<collectibleObject scene="0" x="160" y="137" texturepath="Assets/Textures/Collectible.png" id="4"/>
-		<collectibleObject scene="0" x="180" y="137" texturepath="Assets/Textures/Collectible.png" id="5"/>
+		<collectibleObject scene="0" x="83" y="11" texturepath="Assets/Textures/Collectible.png" id="1"/>
+		<collectibleObject scene="0" x="173" y="530" texturepath="Assets/Textures/Collectible.png" id="2"/>
+		<collectibleObject scene="0" x="473" y="578" texturepath="Assets/Textures/Collectible.png" id="3"/>
+		<collectibleObject scene="0" x="707" y="467" texturepath="Assets/Textures/Collectible.png" id="4"/>
+		<collectibleObject scene="0" x="614" y="206" texturepath="Assets/Textures/Collectible.png" id="5"/>
     
     <item>
       <texturepath texturepath="Assets/Textures/Items.png"/>

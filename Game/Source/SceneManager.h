@@ -62,6 +62,8 @@ public:
 
 	bool LoadRequestOutScene = false;
 
+	int previousScene = 0;
+
 	Scene* current;
 	Scene* next;
 	TransitionStep transitionStep;
