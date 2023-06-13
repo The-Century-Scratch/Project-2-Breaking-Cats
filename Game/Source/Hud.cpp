@@ -571,6 +571,7 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button 4 click");
 		//app->sceneIntro->credits = true;
 		app->hud->prevstate = app->hud->hudstate;
+		app->sceneManager->current->TransitionToScene(SceneType::CREDITS, TransitionType::ALTERNATING_BARS);
 		hudstate = hudSTATE::CLOSED;
 		break;
 	case 5:

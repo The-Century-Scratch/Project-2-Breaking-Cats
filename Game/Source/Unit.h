@@ -5,15 +5,35 @@
 #include "Transform.h"
 #include "Point.h"
 #include "Player.h"
+#include "EASTL/unique_ptr.h"
 
+#define FACING_LEFT 0
+#define FACING_RIGHT 1
+
+class Easing;
+
+enum class ActionState
+{
+	IDLE,
+	ATTACK,
+	DIE
+};
+enum Facing
+{
+	LEFT = 0,
+	RIGHT,
+	UP,
+	DOWN
+};
 enum class UnitType
 {
 	UNDEFINED,
 	GATS,
-	CATSKA,
+	CATSKA,	
 	GUARDIAN,
 	LONGRANGE,
-	STRAW
+	STRAW,
+	SERPICAT
 };
 
 class Unit : public Transform
@@ -23,16 +43,19 @@ public:
 	{
 		enum class Action
 		{
-			NONE = 0x0000,
-			MOVE = 0x0001,
-			INTERACT = 0x0002,
-			ATTACK = 0x0003,
-			ATTACK_LONG_RANGE = 0x0004,
-			ATTACK_TO_PLAYER = 0x0005,
-			ATTACK_TO_PLAYER_LONG_RANGE = 0x0006,
-			PREPARE_DASH = 0x0007,
-			ATTACK_AND_HEAL_WITH_KILL = 0x0008,
-			GRENADE = 0x0009
+			NONE,
+			MOVE,
+			INTERACT,
+			ATTACK,
+			ATTACK_LONG_RANGE,
+			ATTACK_TO_PLAYER,
+			ATTACK_TO_PLAYER_LONG_RANGE,
+			PREPARE_DASH,
+			ATTACK_AND_HEAL_WITH_KILL,
+			GRENADE,
+			TELEPORT,
+			PORTAL,
+			SILLYMAGIC
 		};
 
 		friend Action operator&(Action a, Action b)
@@ -63,7 +86,7 @@ public:
 
 	Unit();
 	~Unit();
-	virtual void Create(iPoint pos);
+	void Create(iPoint pos);
 
 	virtual void Draw() const;
 	virtual void DebugDraw() const;
@@ -78,21 +101,34 @@ public:
 	void SetIsMyTurn(bool value);
 
 	void DealDamage(int amount);
+	void Heal(int amount);
 	int GetHealthPoints();
 	int GetDamage();
+	int GetMagic();
 	int GetPlayerId();
 	SString GetName();
 	UnitType GetType();
 	bool GetIsAlly();
+	bool GetIsMelee();
 
 	void Update();
 
 	int velocity = 0;
 	int playerId;
+	Facing gridFacing;
 
 	pugi::xml_node parameters;
 	void SmoothMove();
 	void StartMovement();
+
+	void BasicAnimationState();
+	virtual void SpecificAnimationState();
+
+	void ActivateDmgEasing();
+
+	void ActivateAtkEasing();
+
+	bool atkEasingHasEnded();
 
 protected:
 
@@ -102,6 +138,21 @@ protected:
 	const int timeForATile = 2;
 	const int tileSize = 16;
 	iPoint destination;
+
+	eastl::unique_ptr<Easing> atkEasingIn;
+	eastl::unique_ptr<Easing> atkEasingOut;
+	float sillyAtk;
+	eastl::unique_ptr<Easing> dmgEasingIn;
+	eastl::unique_ptr<Easing> dmgEasingOut;
+	float sillyDmg;
+	eastl::unique_ptr<Easing> sillyEasingJump;
+	eastl::unique_ptr<Easing> sillyEasingFall;
+	float sillyJump;
+	ActionState state;
+	bool facing;
+	Animation* currentAnim = nullptr;
+	Animation idleLeftAnim;
+	Animation idleRightAnim;
 
 	SDL_Texture* texture;
 	SString name;
@@ -113,6 +164,7 @@ protected:
 	bool hasFinishedTurn = false;
 	int healthPoints = 1;
 	int damage;
+	int magic;
 	int maxHealth;
 };
 

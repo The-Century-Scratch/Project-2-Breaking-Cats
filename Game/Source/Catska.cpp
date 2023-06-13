@@ -16,18 +16,8 @@
 Catska::Catska()
 {
 	name.Create("catska");
-}
 
-Catska::~Catska() = default;
-
-void Catska::Create(iPoint pos)
-{
-
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath); // TODO: find a way to use texturePath instead of hardcoding it
-
-	position = pos;
-	size = { 16, 16 };
+	texturePath = "Assets/Textures/Catska.png";
 	healthPoints = 40;
 	damage = 6;
 	type = UnitType::CATSKA;
@@ -37,8 +27,24 @@ void Catska::Create(iPoint pos)
 		damage += 5;
 	}
 
+	idleLeftAnim.AnimateCat32x32(5, 0);
+	idleLeftAnim.speed = 0.2f;
+
+	idleRightAnim.AnimateCat32x32(5, 1);
+	idleRightAnim.speed = 0.2f;
+
+	attackLeftAnim.AnimateCat32x32(5, 2);
+	attackLeftAnim.speed = 0.2f;
+
+	attackRightAnim.AnimateCat32x32(5, 3);
+	attackRightAnim.speed = 0.2f;
+
+	currentAnim = &idleLeftAnim;
+	state = ActionState::IDLE;
+	facing = FACING_LEFT;
 }
 
+Catska::~Catska() = default;
 
 void Catska::DebugDraw() const
 {
@@ -66,14 +72,6 @@ void Catska::DebugDraw() const
 	
 }
 
-void Catska::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
 Catska::PlayerAction Catska::HandleInput() const
 {
 	//using enum KeyState;
@@ -93,7 +91,11 @@ Catska::PlayerAction Catska::HandleInput() const
 	if (app->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN)
 	{
 		returnAction.action = Catska::PlayerAction::Action::GRENADE;
-		/*app->audio->PlayFx(app->hud->attkcatskafx);*/
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		returnAction.action = Catska::PlayerAction::Action::TELEPORT;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -150,7 +152,17 @@ void Catska::StartAction(PlayerAction playerAction)
 			moveVector.x = 1;
 		}
 	}
+	else if (playerAction.action == PlayerAction::Action::TELEPORT)
+	{
+		position = playerAction.destinationTile;
+	}
 	LOG("it does enter this scope right now, so be careful");
+
+
+	if (moveVector.x > 0)
+		facing = FACING_RIGHT;
+	else if (moveVector.x < 0)
+		facing = FACING_LEFT;
 }
 
 void Catska::DealDamage(int amount)
@@ -172,3 +184,16 @@ void Catska::DealDamage(int amount)
 	}
 	
 }
+
+void Catska::SpecificAnimationState()
+{
+	// virtual Function for specific animations that changes between enemies like Gats dash f.e.
+	switch (state)
+	{
+	case ActionState::ATTACK:
+		break;
+	default:
+		break;
+	}
+}
+

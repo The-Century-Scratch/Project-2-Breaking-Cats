@@ -1,4 +1,5 @@
 #include "ParticleSystem.h"
+#include "ParticleSystemManager.h"
 
 #include "App.h"
 
@@ -6,6 +7,17 @@
 
 ParticleSystem::ParticleSystem()
 {
+	slashAnim.AnimateCat32x32(8, 0);
+	slashAnim.loop = false;
+	slashAnim.speed = 0.1f;
+
+	simpleParticleAnim.PushBack({0,0,4,4});
+	simpleParticleAnim.loop = true;
+	simpleParticleAnim.speed = 0.00001f;
+
+	smokeAnim.PushBack({ 0,0,16,16 });
+	smokeAnim.loop = true;
+	smokeAnim.speed = 0.00001f;
 }
 
 ParticleSystem::~ParticleSystem()
@@ -66,7 +78,7 @@ bool ParticleSystem::Update(float dt)
 			}
 		}
 	}
-
+	/*currentAnim->Update();*/
 	return (age < (PSLifespan + particleLifespan) || isConstant);
 }
 
@@ -76,7 +88,7 @@ void ParticleSystem::PostUpdate()
 		if (item->data != nullptr) {
 			if (item->data->IsBeingUsed()) {
 				app->render->DrawParticleAlpha(texture, item->data->GetPosition().x, item->data->GetPosition().y,
-					item->data->GetColor().r, item->data->GetColor().g, item->data->GetColor().b, item->data->GetColor().a, item->data->GetScale());
+					item->data->GetColor().r, item->data->GetColor().g, item->data->GetColor().b, item->data->GetColor().a, item->data->GetScale()/*, &currentAnim->GetCurrentFrame()*/);
 			}
 		}
 	}
@@ -103,19 +115,19 @@ void ParticleSystem::SpawnParticle(Particle* p)
 
 	if (randomSpawnPositionRangeMin.x - randomSpawnPositionRangeMax.x != 0) {
 		if (randomSpawnPositionRangeMax.x > randomSpawnPositionRangeMin.x) {
-			position.x += (rand() % abs(randomSpawnPositionRangeMax.x - randomSpawnPositionRangeMin.x)) + randomSpawnPositionRangeMin.x;
+			position.x += (rand() % abs(randomSpawnPositionRangeMax.x - randomSpawnPositionRangeMin.x))/* + randomSpawnPositionRangeMin.x*/;
 		}
 		else {
-			position.x += (rand() % abs(randomSpawnPositionRangeMin.x - randomSpawnPositionRangeMax.x)) + randomSpawnPositionRangeMax.x;
+			position.x -= (rand() % abs(randomSpawnPositionRangeMin.x - randomSpawnPositionRangeMax.x))/* + randomSpawnPositionRangeMax.x*/;
 		}
 	}
 
 	if (randomSpawnPositionRangeMin.y - randomSpawnPositionRangeMax.y != 0) {
 		if (randomSpawnPositionRangeMax.y > randomSpawnPositionRangeMin.y) {
-			position.y += (rand() % abs(randomSpawnPositionRangeMax.y - randomSpawnPositionRangeMin.y)) + randomSpawnPositionRangeMin.y;
+			position.y += (rand() % abs(randomSpawnPositionRangeMax.y - randomSpawnPositionRangeMin.y))/* + randomSpawnPositionRangeMin.y*/;
 		}
 		else {
-			position.y += (rand() % abs(randomSpawnPositionRangeMin.y - randomSpawnPositionRangeMax.y)) + randomSpawnPositionRangeMax.y;
+			position.y -= (rand() % abs(randomSpawnPositionRangeMin.y - randomSpawnPositionRangeMax.y))/* + randomSpawnPositionRangeMax.y*/;
 		}
 	}
 
@@ -144,4 +156,33 @@ void ParticleSystem::SpawnParticle(Particle* p)
 	spawnPosition.y = position.y;
 
 	p->Initialize(spawnPosition, velocity, shootingAcceleration, initialColor, objectiveColor, initialScale, objectiveScale, particleLifespan);
+}
+
+void ParticleSystem::setAnim(Blueprint type)
+{
+	switch (type)
+	{
+	case Blueprint::CONSTANT_FIRE:
+		currentAnim = &simpleParticleAnim;
+		break;
+	case Blueprint::FIRE:
+		currentAnim = &simpleParticleAnim;
+		break;
+	case Blueprint::SMOKE:
+		currentAnim = &smokeAnim;
+		break;
+	case Blueprint::EXPLOSION:
+		currentAnim = &simpleParticleAnim;
+		break;
+	case Blueprint::BULLET:
+		currentAnim = &simpleParticleAnim;
+		break;
+	case Blueprint::SLASH:
+		currentAnim = &slashAnim;
+		break;
+	case Blueprint::NONE:
+		break;
+	default:
+		break;
+	}
 }

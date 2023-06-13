@@ -13,9 +13,7 @@ class Catska : public Unit
 public:
 	Catska();
 	~Catska();
-	void Create(iPoint pos) override;
 
-	void Draw() const override;
 	void DebugDraw() const override;
 
 	PlayerAction HandleInput() const;
@@ -23,7 +21,11 @@ public:
 
 	void DealDamage(int amount);
 
+	void SpecificAnimationState();
+
 private:
+	Animation attackLeftAnim;
+	Animation attackRightAnim;
 };
 
 #endif //__PLAYER_H__

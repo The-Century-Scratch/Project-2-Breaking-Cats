@@ -65,24 +65,12 @@ public:
 		currentFrame = frame;
 	}
 
-	void AnimateCat32x32x8(int y)
+	void AnimateCat32x32(int framesAmount, int y)
 	{
-		PushBack({ 0, y * 32, 32, 32 });
-		PushBack({ 32 * 1, y * 32, 32, 32 });
-		PushBack({ 32 * 2, y * 32, 32, 32 });
-		PushBack({ 32 * 3, y * 32, 32, 32 });
-		PushBack({ 32 * 4, y * 32, 32, 32 });
-		PushBack({ 32 * 5, y * 32, 32, 32 });
-		PushBack({ 32 * 6, y * 32, 32, 32 });
-		PushBack({ 32 * 7, y * 32, 32, 32 });
-	}
-
-	void AnimateCat32x32x4(int y)
-	{
-		PushBack({ 0, y * 32, 32, 32 });
-		PushBack({ 32 * 1, y * 32, 32, 32 });
-		PushBack({ 32 * 2, y * 32, 32, 32 });
-		PushBack({ 32 * 3, y * 32, 32, 32 });
+		for (int i = 0; i < framesAmount; i++)
+		{
+			PushBack({ i * 32, y * 32, 32, 32 });
+		}
 	}
 };
 

@@ -10,6 +10,7 @@
 #include "EASTL/vector.h"
 #include "EASTL/unique_ptr.h"
 #include "Unit.h"
+#include "ParticleSystem.h"
 
 #define MAX_TILES_X 9
 #define MAX_TILES_Y 9
@@ -68,6 +69,12 @@ public:
 
 	bool isWalkable(iPoint pos);
 
+	bool isUnit(iPoint pos);
+
+	bool isPortal(iPoint pos);
+
+	bool isPortalsActivated();
+
 	void move(iPoint origin, iPoint destination);
 
 	void removeUnit(iPoint UnitPos);
@@ -80,11 +87,16 @@ public:
 
 	iPoint getFocusPosition();
 
+	void PlacePortal(iPoint pos);
+
+	iPoint getOtherPortal(iPoint pos);
+
 
 	Unit::PlayerAction currentAction;
 
 	bool showArea;
 
+	iPoint lastPortal, firstPortal;
 private:
 
 	bool IsMouseInside(SDL_Rect r);
@@ -105,6 +117,12 @@ private:
 
 	void showGrenade(iPoint pos);
 
+	void showTeleport(iPoint pos);
+
+	void showPortal(iPoint pos);
+
+	void showSillyMagic(iPoint pos);
+
 	void showAttackAOE(iPoint pos);
 
 	void showAttackRangeAOE(iPoint pos);
@@ -113,11 +131,24 @@ private:
 
 	void showGrenadeAOE(iPoint pos);
 
+	void showTeleportAOE(iPoint pos);
+
+	void showPortalAOE(iPoint pos);
+
+	void showSillyMagicAOE(iPoint pos);
+
 	SDL_Texture* gridTex;
 	SDL_Rect clickableSection;
 	SDL_Rect areaSection;
+	SDL_Rect portal1;
+	SDL_Rect portal2;
+
+	ParticleSystem* lastPortalPS;
+	ParticleSystem* firstPortalPS;
 
 	Animation focusedAnim;
+	Animation clickableAnim;
+	Animation areaAnim;
 	Animation* currentAnim = nullptr;
 
 	eastl::vector<eastl::unique_ptr<UnitData>> unitsData;

@@ -12,6 +12,7 @@
 #include "SceneGameplay.h"
 #include "SceneEnding.h"
 #include "SceneBattle.h"
+#include "SceneCredits.h"
 #include "EntityManager.h"
 
 #include "TransitionsManager.h"
@@ -138,6 +139,7 @@ bool SceneManager::Update(float dt)
 		case SceneType::GAMEPLAY: next = new SceneGameplay(); break;
 		case SceneType::BATTLE: next = new SceneBattle(); break;
 		case SceneType::ENDING: next = new SceneEnding(current->win); break;
+		case SceneType::CREDITS: next = new SceneCredits(); break;
 		default: break;
 		}
 		current->transitionRequired = false;

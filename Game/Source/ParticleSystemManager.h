@@ -1,4 +1,3 @@
-#pragma once
 #ifndef __PARTICLESYSTEMMANAGER_H__
 #define __PARTICLESYSTEMMANAGER_H__
 
@@ -8,11 +7,17 @@
 
 #define PARTICLE_POOL_SIZE 10000
 
-enum Blueprint {
+enum class Blueprint {
 	CONSTANT_FIRE,
 	FIRE,
 	SMOKE,
 	EXPLOSION,
+	BULLET,
+	SLASH,
+	DASH,
+	PORTAL1,
+	PORTAL2,
+	MAGICIMPACT,
 	NONE
 };
 
@@ -20,6 +25,7 @@ enum AlphasIDs {
 	BASIC = 0,
 	SMOKE_WHITE,
 	SMOKE_SHADED,
+	SLASHGATS,
 
 	ALPHAS_AVAILABLES
 };
@@ -56,7 +62,7 @@ public:
 	bool CleanUp();
 
 
-	ParticleSystem* CreateParticleSystem(iPoint initialPosition, Blueprint blueprint);
+	ParticleSystem* CreateParticleSystem(iPoint initialPosition, Blueprint blueprint, iPoint finalPosition);
 
 
 private:

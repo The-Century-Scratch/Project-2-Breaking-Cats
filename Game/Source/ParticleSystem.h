@@ -1,11 +1,13 @@
-#pragma once
+#ifndef __PARTICLESYSTEM_H__
+#define __PARTICLESYSTEM_H__
 
 #include "Point.h"
 #include "Textures.h"
 #include "List.h"
 #include "Particle.h"
+#include "Animation.h"
 
-
+enum class Blueprint;
 
 class ParticleSystem {
 	// methods
@@ -37,6 +39,8 @@ public:
 	}
 
 	void SpawnParticle(Particle* p);
+
+	void setAnim(Blueprint type);
 
 	void TurnOff() {
 		isConstant = false;
@@ -91,6 +95,13 @@ public:
 
 	float particleLifespan = 5;
 
+	// ANIMATIONS
+
+	Animation* currentAnim = nullptr;
+	Animation slashAnim;
+	Animation simpleParticleAnim;
+	Animation smokeAnim;
+
 protected:
 private:
 
@@ -99,3 +110,5 @@ private:
 	SDL_Texture* texture;
 	List<Particle*> particles;
 };
+
+#endif

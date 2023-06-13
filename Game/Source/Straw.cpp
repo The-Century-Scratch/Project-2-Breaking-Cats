@@ -8,22 +8,24 @@
 #include "Render.h"
 #include "Textures.h"
 
-Straw::Straw() = default;
-
-Straw::~Straw() = default;
-
-void Straw::Create(iPoint pos)
+Straw::Straw()
 {
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
+	name.Create("unit");
+	texturePath = "Assets/Textures/StrawDall.png";
 
 	healthPoints = 30;
 	damage = 666;
-
-	position = pos;
-	size = { 16, 16 };
 	type = UnitType::STRAW;
+
+	idleLeftAnim.AnimateCat32x32(8, 0);
+	idleLeftAnim.speed = 0.15f;
+
+	currentAnim = &idleLeftAnim;
+	state = ActionState::IDLE;
+	facing = FACING_LEFT;
 }
+
+Straw::~Straw() = default;
 
 
 void Straw::DebugDraw() const
@@ -51,14 +53,6 @@ void Straw::DebugDraw() const
 	
 }
 
-void Straw::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
-}
-
 Straw::PlayerAction Straw::HandleInput() const
 {
 	//using enum KeyState;
@@ -74,9 +68,4 @@ Straw::PlayerAction Straw::HandleInput() const
 
 void Straw::StartAction(PlayerAction playerAction)
 {
-	if (playerAction.action == PlayerAction::Action::MOVE)
-	{
-
-		StartMovement();
-	}
 }

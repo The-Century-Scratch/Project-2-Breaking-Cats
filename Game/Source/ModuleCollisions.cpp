@@ -342,6 +342,30 @@ bool ModuleCollisions::isWalkable(iPoint pos)
 	return true;
 }
 
+iPoint ModuleCollisions::CornerPosition()
+{
+	iPoint pos = { 2133234,463634 };
+
+	for (auto& i : colliders)
+	{
+		if (i != nullptr)
+		{
+			
+			if (i->rect.x < pos.x || i->rect.y < pos.y)
+			{
+				pos.x = i->rect.x;
+				pos.y = i->rect.y;
+
+			}
+		}
+		
+
+	}
+	return pos;
+
+
+}
+
 // Called before quitting
 bool ModuleCollisions::CleanUp(bool mapColliderOnly)
 {

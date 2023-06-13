@@ -34,6 +34,8 @@ bool ParticleSystemManager::Start()
 
 	alphaTextures[2] = app->tex->Load("Assets/Textures/particles/smoke_shaded.png");
 
+	alphaTextures[2] = app->tex->Load("Assets/Textures/particles/SlashGats.png");
+
 
 	// adapt it to xml
 	/*for (int i = 0; i < ALPHAS_AVAILABLES; ++i) {
@@ -71,16 +73,17 @@ bool ParticleSystemManager::PostUpdate()
 	return true;
 }
 
-ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPosition, Blueprint blueprint)
+ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPosition, Blueprint blueprint, iPoint finalPosition)
 {
 	ParticleSystem* PS = new ParticleSystem();
 	PS->initialPosition = initialPosition;
 	PS->position = initialPosition;
+	PS->setAnim(blueprint);
 	PS->objectivePosition = initialPosition;
 
 	switch (blueprint)
 	{
-	case CONSTANT_FIRE:
+	case Blueprint::CONSTANT_FIRE:
 		GiveParticlesToPS(PS, 150);
 		PS->PSLifespan = 5;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
@@ -97,7 +100,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->initialScale = 6.0f;
 		PS->objectiveScale = 1.0f;
 		break;
-	case FIRE:
+	case Blueprint::FIRE:
 		GiveParticlesToPS(PS, 150);
 		PS->PSLifespan = 5;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
@@ -114,7 +117,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->initialScale = 6.0f;
 		PS->objectiveScale = 1.0f;
 		break;
-	case SMOKE:
+	case Blueprint::SMOKE:
 		GiveParticlesToPS(PS, 50);
 		PS->SetTexture(alphaTextures[SMOKE_SHADED]);
 		PS->spawnRate = 0.3f;
@@ -129,7 +132,7 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->randomShootingVelocityRangeMax = iPoint{ 10, 0 };
 
 		break;
-	case EXPLOSION:
+	case Blueprint::EXPLOSION:
 		GiveParticlesToPS(PS, 20);
 		PS->PSLifespan = 0.1f;
 		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
@@ -146,7 +149,137 @@ ParticleSystem* ParticleSystemManager::CreateParticleSystem(iPoint initialPositi
 		PS->initialScale = 6.0f;
 		PS->objectiveScale = 1.0f;
 		break;
-	case NONE:
+	case Blueprint::BULLET:
+		GiveParticlesToPS(PS, 60);
+		PS->PSLifespan = 0.1f;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.0f;
+		PS->isConstant = false;
+		PS->initialColor.Set(255, 255, 255, 255);
+		PS->objectiveColor.Set(255, 255, 255, 255);
+		PS->particleLifespan = 0.4f;
+		if (initialPosition.x < finalPosition.x)
+			PS->shootingAcceleration = fPoint{ 50.0f, 0.0f };
+		else if (initialPosition.x > finalPosition.x)
+			PS->shootingAcceleration = fPoint{ -50.0f, 0.0f };
+		else if (initialPosition.y < finalPosition.y)
+			PS->shootingAcceleration = fPoint{ 0.0f, 50.0f };
+		else if (initialPosition.y > finalPosition.y)
+			PS->shootingAcceleration = fPoint{ 0.0f, -50.0f };
+		PS->randomSpawnPositionRangeMin = initialPosition;
+		PS->randomSpawnPositionRangeMax = finalPosition;
+		PS->initialScale = 1.0f;
+		PS->objectiveScale = 1.0f;
+		PS->shootingVelocity = { 0,0 }/*{ (float)((PS->objectivePosition.x - PS->initialPosition.x) * 5), (float)((PS->objectivePosition.y - PS->initialPosition.y) * 5) }*/;
+		break;
+	case Blueprint::SLASH:
+		GiveParticlesToPS(PS, 15);
+		PS->PSLifespan = 0.1f;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.0f;
+		PS->isConstant = false;
+		PS->initialColor.Set(255, 255, 255, 255);
+		PS->objectiveColor.Set(255, 255, 255, 255);
+		PS->particleLifespan = 0.2f;
+		PS->shootingAcceleration = fPoint{ 0.0f, -50.0f };
+		PS->randomShootingVelocityRangeMin = iPoint{ -200, -200 };
+		PS->randomShootingVelocityRangeMax = iPoint{ 200, 200 };
+		PS->randomSpawnPositionRangeMin = iPoint{ 0, 0 };
+		PS->randomSpawnPositionRangeMax = iPoint{ 0, 0 };
+		PS->initialScale = 1.6f;
+		PS->objectiveScale = 1.6f;
+		break;
+	case Blueprint::DASH:
+		GiveParticlesToPS(PS, 25);
+		PS->PSLifespan = 0.1f;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.0f;
+		PS->isConstant = false;
+		PS->initialColor.Set(255, 255, 0, 255);
+		PS->objectiveColor.Set(255, 0, 0, 0);
+		PS->particleLifespan = 1.0f;
+		PS->objectivePosition = finalPosition;
+		if (initialPosition.x < finalPosition.x)
+		{
+			PS->shootingAcceleration = fPoint{ -50.0f, 0.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ 20, -20 };
+			PS->randomShootingVelocityRangeMax = iPoint{ 80, 20 };
+		}
+		else if (initialPosition.x > finalPosition.x)
+		{
+			PS->shootingAcceleration = fPoint{ 50.0f, 0.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ -20, -20 };
+			PS->randomShootingVelocityRangeMax = iPoint{ -80, 20 };
+		}
+		else if (initialPosition.y < finalPosition.y)
+		{
+			PS->shootingAcceleration = fPoint{ 0.0f, -50.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ -20, 80 };
+			PS->randomShootingVelocityRangeMax = iPoint{ 20, 20 };
+		}
+		else if (initialPosition.y > finalPosition.y)
+		{
+			PS->shootingAcceleration = fPoint{ 0.0f, 50.0f };
+			PS->randomShootingVelocityRangeMin = iPoint{ -20, -80 };
+			PS->randomShootingVelocityRangeMax = iPoint{ 20, -20 };
+		}
+		PS->randomSpawnPositionRangeMin = iPoint{ 0, 0 };
+		PS->randomSpawnPositionRangeMax = iPoint{ 0, 0 };
+		PS->initialScale = 2.0f;
+		PS->objectiveScale = 2.4f;
+		break;
+	case Blueprint::PORTAL1:
+		GiveParticlesToPS(PS, 15);
+		PS->PSLifespan = 5;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.1f;
+		PS->isConstant = true;
+		PS->initialColor.Set(187, 245, 255, 255);
+		PS->objectiveColor.Set(187, 245, 255, 0);
+		PS->particleLifespan = 1.3f;
+		PS->shootingAcceleration = fPoint{ 0.0f, -10.0f };
+		PS->randomShootingVelocityRangeMin = iPoint{ -5, -10 };
+		PS->randomShootingVelocityRangeMax = iPoint{ 5, 2 };
+		PS->randomSpawnPositionRangeMin = initialPosition;
+		PS->randomSpawnPositionRangeMax = finalPosition;
+		PS->initialScale = 1.0f;
+		PS->objectiveScale = 1.0f;
+		break;
+	case Blueprint::PORTAL2:
+		GiveParticlesToPS(PS, 15);
+		PS->PSLifespan = 5;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.1f;
+		PS->isConstant = true;
+		PS->initialColor.Set(212, 119, 183, 255);
+		PS->objectiveColor.Set(212, 119, 183, 0);
+		PS->particleLifespan = 1.3f;
+		PS->shootingAcceleration = fPoint{ 0.0f, -10.0f };
+		PS->randomShootingVelocityRangeMin = iPoint{ -5, -10 };
+		PS->randomShootingVelocityRangeMax = iPoint{ 5, 2 };
+		PS->randomSpawnPositionRangeMin = initialPosition;
+		PS->randomSpawnPositionRangeMax = finalPosition;
+		PS->initialScale = 1.0f;
+		PS->objectiveScale = 1.0f;
+		break;
+	case Blueprint::MAGICIMPACT:
+		GiveParticlesToPS(PS, 20);
+		PS->PSLifespan = 0.1f;
+		PS->SetTexture(alphaTextures[AlphasIDs::BASIC]);
+		PS->spawnRate = 0.0f;
+		PS->isConstant = false;
+		PS->initialColor.Set(187, 245, 255, 255);
+		PS->objectiveColor.Set(255, 255, 255, 0);
+		PS->particleLifespan = 0.2f;
+		PS->shootingAcceleration = fPoint{ 0.0f, -50.0f };
+		PS->randomShootingVelocityRangeMin = iPoint{ -200, -200 };
+		PS->randomShootingVelocityRangeMax = iPoint{ 200, 200 };
+		PS->randomSpawnPositionRangeMin = iPoint{ 0, 0 };
+		PS->randomSpawnPositionRangeMax = iPoint{ 0, 0 };
+		PS->initialScale = 2.6f;
+		PS->objectiveScale = 1.6f;
+		break;
+	case Blueprint::NONE:
 		break;
 	default:
 		break;

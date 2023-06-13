@@ -671,6 +671,8 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
 
         if (objectGroupNode.attribute("id").as_int() == 4  /*!strcmp(objectGroupNode.attribute("name").as_string(), "Wall")*/)
         {
+            //LOG("jskdflgjwkesrhgjljskn\n   safjsulfaui ljfnusdnfaiernfjuewidnjiaunjcdmisadlmfeiajunfaumediamfie\n\n\n\nafdisufjaudnfuiearjifmvjksnjisjugrismfirdfmreiujgnsilngfmgdsinbgjiusfgnhiusojgriusgjdfngiljngri\n\n\n\n");
+
             while (objectNode != NULL)
             {
                 rect = {    objectNode.attribute("x").as_int(),
@@ -788,6 +790,64 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                 objectNode = objectNode.next_sibling("object");
             }
         }
+
+        if (objectGroupNode.child("properties").child("property").attribute("value").as_bool())
+        {
+            propertyNodes.clear();
+            while (objectNode != NULL)
+            {
+                //rect = { objectNode.attribute("x").as_int(),
+                //            objectNode.attribute("y").as_int(),
+                //            objectNode.attribute("width").as_int(),
+                //            objectNode.attribute("height").as_int() };
+
+                //pugi::xml_node properties = objectNode.child("properties");
+
+                //int test = objectNode.child("properties").child("property").attribute("value").as_int();
+                //LOG("the number xalinda is: %i", test);
+                //test = objectNode.child("properties").child("property").attribute("value").as_int();
+                //LOG("the number xalinda is: %i", test);
+                //test = objectNode.child("properties").child("property").attribute("value").as_int();
+                //LOG("the number xalinda is: %i", test);
+                //test = objectNode.child("properties").child("property").attribute("value").as_int();
+                //LOG("the number xalinda is: %i", test);
+
+                pugi::xml_node properties = objectNode.child("properties");
+
+                //while (properties != NULL)
+                if (!properties.empty())
+                {
+                    //pugi::xml_node propertyNode = properties.child("property");
+                    //
+                    //int test = propertyNode.attribute("value").as_int();
+                    //LOG("the number xalinda is: %i", test);
+                    //propertyNode = propertyNode.next_sibling("property");
+                    //test = propertyNode.attribute("value").as_int();
+                    //LOG("the number xalinda is: %i", test);
+                    propertyNodes.push_back(properties);
+                     
+                    //test = propertyNode.attribute("value").as_int();
+                    //LOG("the number xalinda is: %i", test);
+                    //test = propertyNode.attribute("value").as_int();
+                    //LOG("the number xalinda is: %i", test);
+
+                    //properties = properties.next_sibling("properties");
+                }
+
+                
+
+
+                objectNode = objectNode.next_sibling("object");
+            }
+            
+        }
+        //if (objectGroupNode.child("object").child("properties").child("property").attribute("value").as_int() != 0)
+        //{
+        //    int test = objectGroupNode.child("object").child("properties").child("property").attribute("value").as_int();
+        //
+        //    LOG("the number xalinda is: %i", test);
+        //}
+
         objectGroupNode = objectGroupNode.next_sibling("objectgroup");
     }
 

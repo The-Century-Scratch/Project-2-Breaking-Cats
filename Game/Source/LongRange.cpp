@@ -10,22 +10,27 @@
 #include "Audio.h"
 #include "Hud.h"
 
-LongRange::LongRange() = default;
-
-LongRange::~LongRange() = default;
-
-void LongRange::Create(iPoint pos)
+LongRange::LongRange()
 {
-	texturePath = parameters.attribute("texturepath").as_string();
-	texture = app->tex->Load(texturePath);
+	name.Create("unit");
 
+	texturePath = "Assets/Textures/LargeRangeEnemy.png";
 	healthPoints = 15;
 	damage = 7;
-	position = pos;
-	size = { 16, 16 };
 	type = UnitType::LONGRANGE;
 
+	idleLeftAnim.AnimateCat32x32(5, 0);
+	idleLeftAnim.speed = 0.2f;
+
+	idleRightAnim.AnimateCat32x32(5, 1);
+	idleRightAnim.speed = 0.2f;
+
+	currentAnim = &idleLeftAnim;
+	state = ActionState::IDLE;
+	facing = FACING_LEFT;
 }
+
+LongRange::~LongRange() = default;
 
 
 void LongRange::DebugDraw() const
@@ -52,14 +57,6 @@ void LongRange::DebugDraw() const
 	//app->render->DrawShape(debugPosition, true, SDL_Color(255 - intensity, intensity, 0, 255));
 	app->render->DrawRectangle(debugPosition, 255 - intensity, intensity, 0, 255, true);
 	
-}
-
-void LongRange::Draw() const
-{
-	iPoint Displacement = { 8,24 };
-	DebugDraw();
-	//app->render->DrawTexture(DrawParameters(/*GetTextureID()*/texture, position - Displacement)/*.Section(&currentSpriteSlice)*/);
-	app->render->DrawTexture(texture, position.x - Displacement.x, position.y - Displacement.y);
 }
 
 LongRange::PlayerAction LongRange::HandleInput() const
@@ -153,6 +150,11 @@ void LongRange::StartAction(PlayerAction playerAction)
 		{
 			moveVector.x = 1;
 		}
-		StartMovement();
 	}
+
+
+	if (moveVector.x > 0)
+		facing = FACING_RIGHT;
+	else if (moveVector.x < 0)
+		facing = FACING_LEFT;
 }

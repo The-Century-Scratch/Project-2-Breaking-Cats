@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __PARTICLE_H__
+#define __PARTICLE_H__
 #include "Point.h"
 
 // SDL has a SDL_Color, but because of linking problems I create our own
@@ -80,3 +81,5 @@ private:
 
 	Particle* next;
 };
+
+#endif

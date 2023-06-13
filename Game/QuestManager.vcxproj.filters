@@ -72,6 +72,8 @@
     <ClCompile Include="Source\GridSystem.cpp" />
     <ClCompile Include="Source\CollectibleObject.cpp" />
     <ClCompile Include="Source\InventoryShop.cpp" />
+    <ClCompile Include="Source\Serpicat.cpp" />
+    <ClCompile Include="Source\SceneCredits.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -158,6 +160,8 @@
     <ClInclude Include="Source\GridSystem.h" />
     <ClInclude Include="Source\CollectibleObject.h" />
     <ClInclude Include="Source\InventoryShop.h" />
+    <ClInclude Include="Source\Serpicat.h" />
+    <ClInclude Include="Source\SceneCredits.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BreakingCats.rc" />
