@@ -148,6 +148,8 @@ public:
 
 	Easing* easing;
 
+	int coins;
+
 private:
 	SDL_Texture* itemTexture;
 	SDL_Texture* invShopTexture;
@@ -244,8 +246,6 @@ private:
 	bool usingItem;
 	bool displayEquipmentMenu;
 	int currentEquipmentId;
-
-	int coin;
 
 	bool buyItem_;
 

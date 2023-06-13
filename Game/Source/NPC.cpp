@@ -10,6 +10,7 @@
 #include "SceneManager.h"
 #include "QuestManager.h"
 #include "Input.h"
+#include "InventoryShop.h"
 
 
 NPC::NPC() : Entity(EntityType::NPC)
@@ -115,6 +116,7 @@ bool NPC::Start() {
 		}
 		NPCIdleAction.loop = false;
 		NPCIdleAction.speed = 0.2f;
+
 		break;
 	case NPCTYPE::CONTRABANDIST:
 		//collider
@@ -158,6 +160,7 @@ bool NPC::Update()
 		}
 		break;
 	case NPCTYPE::SHOP:
+		//careful
 		break;
 	case NPCTYPE::CONTRABANDIST:
 		if (app->questManager->changeDialogueIdAfterCollecting) {

@@ -48,7 +48,7 @@ bool InventoryShop::Start()
 	isActivated = false;
 	isItemMenu_Active = false;
 	buyItem_ = false;
-	coin = 0;
+	coins = 0;
 
 	showStatsId = 1;
 
@@ -148,12 +148,12 @@ bool InventoryShop::Update(float dt)
 
 		if (app->input->GetKey(SDL_SCANCODE_UP) == KeyState::KEY_DOWN)
 		{
-			++coin;
+			++coins;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_DOWN) == KeyState::KEY_DOWN)
 		{
-			--coin;
+			--coins;
 		}
 
 	}
@@ -187,8 +187,12 @@ void InventoryShop::BuyItem(int curSlot_)
 
 	if (IsMouseInside(buyButtonPos) && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN)
 	{
-		app->inventory->AddItem(slotList[curSlot_].item);
-		DeleteItem(curSlot_);
+		if (coins >= 1)
+		{
+			app->inventory->AddItem(slotList[curSlot_].item);
+			DeleteItem(curSlot_);
+			coins--;
+		}
 		buyItem_ = false;
 	}
 }
@@ -400,7 +404,7 @@ void InventoryShop::Draw()
 			app->render->DrawTexture(invShopTexture, invPos.x + 136, invPos.y + 203, &buyButton);
 		}
 
-		app->render->DrawText(std::to_string(coin).c_str(), invPosText.x + 286 * scale, invPosText.y + 37 * scale, 21 * scale, 18 * scale, white);
+		app->render->DrawText(std::to_string(coins).c_str(), invPosText.x + 286 * scale, invPosText.y + 37 * scale, 21 * scale, 18 * scale, white);
 
 		app->render->DrawText("       BUY       ", invPosText.x + 143 * scale, invPosText.y + 206 * scale, 86 * scale, 19 * scale, black);
 
