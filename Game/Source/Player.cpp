@@ -231,6 +231,46 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::ENEMY:
 			//FUNCION TO START BATTLE
+			if (app->sceneManager->currentScene == 8)
+			{
+
+				app->map->CleanUp();
+				app->map->ClearMaps();
+				app->sceneManager->currentScene = 10; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+
+				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
+				app->render->camera.x = 0;
+				app->render->camera.y = 0;
+
+			}
+			else if (app->sceneManager->currentScene == 0)
+			{
+
+				app->map->CleanUp();
+				app->map->ClearMaps();
+				app->sceneManager->currentScene = 11; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+
+				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
+				app->render->camera.x = 0;
+				app->render->camera.y = 0;
+
+			}
+			else if (app->sceneManager->currentScene == 9)
+			{
+
+				app->map->CleanUp();
+				app->map->ClearMaps();
+				app->sceneManager->currentScene = 12; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+
+
+				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
+				app->render->camera.x = 0;
+				app->render->camera.y = 0;
+
+			}
+			c2->pendingToDelete = true;
 			break;
 		case Collider::Type::NPC:
 			//FUNCTION TO NOT TRASPASS

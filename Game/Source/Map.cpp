@@ -790,6 +790,23 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                 objectNode = objectNode.next_sibling("object");
             }
         }
+        else if (objectGroupNode.attribute("id").as_int() == 6  /*!strcmp(objectGroupNode.attribute("name").as_string(), "Wall")*/)
+        {
+            //LOG("jskdflgjwkesrhgjljskn\n   safjsulfaui ljfnusdnfaiernfjuewidnjiaunjcdmisadlmfeiajunfaumediamfie\n\n\n\nafdisufjaudnfuiearjifmvjksnjisjugrismfirdfmreiujgnsilngfmgdsinbgjiusfgnhiusojgriusgjdfngiljngri\n\n\n\n");
+
+            while (objectNode != NULL)
+            {
+                rect = { objectNode.attribute("x").as_int(),
+                            objectNode.attribute("y").as_int(),
+                            objectNode.attribute("width").as_int(),
+                            objectNode.attribute("height").as_int() };
+
+                if(!app->sceneManager->cityCombatDone && app->sceneManager->currentScene == 0)
+                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::ENEMY, nullptr, true);
+
+                objectNode = objectNode.next_sibling("object");
+            }
+        }
 
         if (objectGroupNode.child("properties").child("property").attribute("value").as_bool())
         {

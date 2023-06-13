@@ -55,6 +55,9 @@ public:
 	bool prelab = false; // ALSO LAB CAN USE downCity VARIABLE TO RETURN DIRECTLY TO CITY
 
 
+	bool cityCombatDone = false;
+
+
 	//variable to see what puzzles has ben solved
 	bool puzzle1solved = false, puzzle2solved = false, puzzle3solved = false, puzzle4solved = false;
 

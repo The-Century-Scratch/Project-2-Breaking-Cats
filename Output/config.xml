@@ -114,6 +114,9 @@
 			<mapfile path="Assets/Maps/PreLab.tmx"/>				<!--this is 7 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Tutorial.tmx"/>	<!--this is 8 in the list of strings of maps-->
 			<mapfile path="Assets/Maps/Lab.tmx"/>					<!--this is 9 in the list of strings of maps-->
+      <mapfile path="Assets/Maps/combatVillage.tmx"/> <!--this is 10 in the list of strings of maps-->
+      <mapfile path="Assets/Maps/combatBuilding.tmx"/> <!--this is 11 in the list of strings of maps-->
+      <mapfile path="Assets/Maps/combatCity.tmx"/>    <!--this is 12 in the list of strings of maps-->
 		</map>
 	</scenegameplay>
 
@@ -148,18 +151,6 @@
 		<guardian x="64" y="96" velocity="4" texturepath="Assets/Textures/TankEnemy.png"/>
 		<longrange x="96" y="112" velocity="4" texturepath="Assets/Textures/LargeRangeEnemy.png"/>
 		<straw x="112" y="112" velocity="4" texturepath="Assets/Textures/StrawDall.png"/>
-		<map>
-			<mapfolder path="Assets/Maps/"/>
-
-			<mapfile path="Assets/Maps/combatVillage.tmx"/>
-			<!--this is 0 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/combatBuilding.tmx"/>
-			<!--this is 1 in the list of strings of maps-->
-			<mapfile path="Assets/Maps/combatCity.tmx"/>
-			<!--this is 2 in the list of strings of maps-->
-
-		</map>
-    
 		<music path="Assets/Audio/Music/Combat.ogg"/>
 	</scenebattle>
 	

@@ -554,13 +554,12 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 2:
 		LOG("Button 2 click");
-		//app->fade->FadeToBlack((Module*)app->sceneIntro, (Module*)app->scene);
-		app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
 		app->hud->prevstate = app->hud->hudstate;
-		//app->hud->hudstate = hudSTATE::CLOSED;
-		//app->scene->checkpointReached = true;
-		app->sceneManager->currentScene = 0;
+		app->sceneManager->currentScene = 6;
+		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 		app->hud->hudstate = hudSTATE::CLOSED;
+		app->audio->PlayMusic(forestTheme.GetString());
+		app->sceneManager->LoadRequestOutScene = true;
 		break;
 	case 3:
 		LOG("Button 3 click");
