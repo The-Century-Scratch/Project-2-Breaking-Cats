@@ -37,6 +37,17 @@ bool SceneBattle::Load()
 	LOG("Loading Scene Battle");
 	bool ret = true;
 
+	GuiCombat = app->tex->Load("Assets/Textures/GUI/CombatGUI.png");
+	GuiKeyboard = app->tex->Load("Assets/Textures/GUI/keyboard.png");
+
+	basicAttack = {0,0,32,32};
+	dashGats = { 0,32,32,32 };
+	grenadeCatska = { 0,64,32,32 };
+	portalSerpicat = { 0,96,32,32 };
+	sillymagicSerpicat = { 0,128,32,32 };
+	eKey = { 4 * 16, 2 * 16, 16,16 };
+	qKey = { 0, 4 * 16, 16,16 };
+
 	switch (app->sceneManager->currentScene)
 	{
 	case 0:
@@ -1216,6 +1227,31 @@ void SceneBattle::Draw()
 		}
 
 	}
+
+	switch (actualTurnUnit)
+	{
+	case UnitType::GATS:
+		app->render->DrawTexture(GuiCombat, 350, 50, &basicAttack);
+		app->render->DrawTexture(GuiKeyboard, 360, 74, &eKey);
+		app->render->DrawTexture(GuiCombat, 350, 100, &dashGats);
+		app->render->DrawTexture(GuiKeyboard, 360, 124, &qKey);
+		break;
+	case UnitType::CATSKA:
+		app->render->DrawTexture(GuiCombat, 350, 50, &basicAttack);
+		app->render->DrawTexture(GuiKeyboard, 360, 74, &eKey);
+		app->render->DrawTexture(GuiCombat, 350, 100, &grenadeCatska);
+		app->render->DrawTexture(GuiKeyboard, 360, 124, &qKey);
+		break;
+	case UnitType::SERPICAT:
+		app->render->DrawTexture(GuiCombat, 350, 50, &sillymagicSerpicat);
+		app->render->DrawTexture(GuiKeyboard, 360, 74, &eKey);
+		app->render->DrawTexture(GuiCombat, 350, 100, &portalSerpicat);
+		app->render->DrawTexture(GuiKeyboard, 360, 124, &qKey);
+		break;
+	default:
+		break;
+	}
+
 
 	//LOG("Scene battle is drawing");
 

@@ -55,6 +55,17 @@ private:
 	int turn = 0;
 	int turnTimer;
 
+	SDL_Texture* GuiCombat;
+	SDL_Rect basicAttack;
+	SDL_Rect dashGats;
+	SDL_Rect grenadeCatska;
+	SDL_Rect portalSerpicat;
+	SDL_Rect sillymagicSerpicat;
+	SDL_Texture* GuiKeyboard;
+	SDL_Rect eKey;
+	SDL_Rect qKey;
+
+
 	UnitType actualTurnUnit;
 
 
