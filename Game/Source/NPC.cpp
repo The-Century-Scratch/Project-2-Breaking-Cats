@@ -70,9 +70,11 @@ bool NPC::Start() {
 		//dialogue id
 		dialogueid = 1;
 		//anim
-		NPCIdle.PushBack({ 0,0,32,32 });
-		NPCIdle.loop = false;
-		NPCIdle.speed = 0.0f;
+		for (int i = 0; i < 5; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
 		//anim2
 		NPCIdleAction.speed = -1;
 		break;
@@ -138,6 +140,92 @@ bool NPC::Start() {
 		NPCIdleAction.loop = false;
 		NPCIdleAction.speed = 0.1f;
 		break;
+
+	case NPCTYPE::TABERN:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = -1;
+		//anim
+		for (int i = 0; i < 15; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		NPCIdleAction.speed = -1;
+		break;
+	case NPCTYPE::BARMAN:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = -1;
+		//anim1
+		for (int i = 0; i < 9; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 9; i < 18; ++i) {
+			NPCIdleAction.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.1f;
+		break;
+	case NPCTYPE::FRAME5:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = -1;
+		//anim1
+		for (int i = 0; i < 5; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		NPCIdleAction.speed = -1;
+		break;
+	case NPCTYPE::VILLAGE2:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = -1;
+		//anim1
+		for (int i = 0; i < 9; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		NPCIdleAction.speed = -1;
+		break;
+	case NPCTYPE::WORKER:
+		//collider
+		boundaries = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPCINTERACTION, (Entity*)this);
+		cRect = { position.x + 8,position.y + 16,16,16 };
+		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
+		//dialogue id
+		dialogueid = -1;
+		//anim1
+		for (int i = 0; i < 5; ++i) {
+			NPCIdle.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdle.loop = true;
+		NPCIdle.speed = 0.1f;
+		//anim2
+		for (int i = 5; i < 14; ++i) {
+			NPCIdleAction.PushBack({ 32 * i,0,32,32 });
+		}
+		NPCIdleAction.loop = false;
+		NPCIdleAction.speed = 0.1f;
+		break;
 	
 	default:
 		break;
@@ -172,29 +260,6 @@ bool NPC::Update()
 		break;
 	default:
 		break;
-	}	
-	//anim things basically trigger the action for the anim if the npc has it check if speed is -1 to know if the action for the idle animation exists or no
-	if (this->NPCIdleAction.speed == -1) {
-		SDL_Rect rect = NPCIdle.GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
-		NPCIdle.Update();
-	}
-	else {
-		++actionanimcounter;
-		if (actionanimcounter >= 400) {
-			SDL_Rect rect = NPCIdleAction.GetCurrentFrame();
-			app->render->DrawTexture(texture, position.x, position.y, &rect);
-			NPCIdleAction.Update();
-			if (NPCIdleAction.HasFinished() == true) {
-				actionanimcounter = 0;
-				NPCIdleAction.Reset();
-			}
-		}
-		else {
-			SDL_Rect rect = NPCIdle.GetCurrentFrame();
-			app->render->DrawTexture(texture, position.x, position.y, &rect);
-			NPCIdle.Update();
-		}
 	}
 	
 	return true;

@@ -164,6 +164,9 @@ bool DialogueManager::Update(float dt)
 				/*current->currentNode=current->currentNode.*/
 				//uncomment when quests done
 				if (current->currentNode->currentOption->missionId != -1) {
+					if (current->currentNode->currentOption->missionId != -2) {
+
+					}
 					app->questManager->GiveItem = true;
 					app->questManager->ActivateQuest(current->currentNode->currentOption->missionId);
 				}

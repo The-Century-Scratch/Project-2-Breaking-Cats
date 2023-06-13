@@ -63,11 +63,25 @@
 		<textures victory_defeat="Assets/Textures/victory_death.png"/>
 		<texturepaths font="Assets/Fonts/fontx2.png"/>
 		<npc scene="8" x="80" y="780" texturepath="Assets/Textures/Sign.png" id="0" type="0"/>			<!-- this is a sign the type 0 SIGN-->
-		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/Npc3.png" id="1" type="1"/>				<!-- this is a regular npc in the village the type 1 VILLAGE-->
-		<npc scene="1" x="50" y="50" texturepath="Assets/Textures/TheGuardian.png" id="2" type="2"/>		<!-- this is the guardian the type 2 GUARDIAN-->
-		<npc scene="3" x="50" y="50" texturepath="Assets/Textures/Contrabandist.png" id="3" type="3"/>		<!-- this is the contrabandist the type 3 CONTRABANDIST-->
+		<npc scene="6" x="365" y="155" texturepath="Assets/Textures/NPCVillage2.png" id="1" type="1"/>				<!-- this is a regular npc in the village the type 1 VILLAGE-->
+		<npc scene="1" x="70" y="100" texturepath="Assets/Textures/TheGuardian.png" id="2" type="2"/>		<!-- this is the guardian the type 2 GUARDIAN-->
 		<npc scene="2" x="73" y="59" texturepath="Assets/Textures/Maicey.png" id="4" type="4"/>				<!-- this is Micey the type 4 SHOP-->
+		<npc scene="3" x="8" y="155" texturepath="Assets/Textures/Contrabandist.png" id="3" type="3"/>		<!-- this is the contrabandist the type 3 CONTRABANDIST-->
+		<npc scene="3" x="100" y="120" texturepath="Assets/Textures/NpcTabernTalking.png" id="5" type="5"/> 			<!-- this are the npcs in the tabern the only have animation type 5 TABERN-->
+		<npc scene="3" x="150" y="120" texturepath="Assets/Textures/NpcTabernTalking2.png" id="6" type="5"/>
+		<npc scene="3" x="235" y="120" texturepath="Assets/Textures/NpcTabernDrinkin.png" id="7" type="5"/>
+		<npc scene="3" x="173" y="50" texturepath="Assets/Textures/NPCBarman.png" id="8" type="6"/>					<!-- this is the barman type 6 BARMAN-->
+		<npc scene="6" x="150" y="280" texturepath="Assets/Textures/NPCVillage3.png" id="10" type="8"/>				<!-- this is the village npc type 8 VILLAGE2-->
+		<npc scene="6" x="530" y="200" texturepath="Assets/Textures/NPCVillage1.png" id="9" type="7"/>				<!-- this is the village and city npc type 7 FRAME5 one in the village 4 on the city-->
 		
+		<npc scene="0" x="280" y="130" texturepath="Assets/Textures/NPCCity1.png" id="11" type="7"/>
+		<npc scene="0" x="160" y="414" texturepath="Assets/Textures/NPCCity2.png" id="12" type="7"/>
+		<npc scene="0" x="90" y="414" texturepath="Assets/Textures/NPCCity3.png" id="13" type="7"/>
+		<npc scene="0" x="310" y="710" texturepath="Assets/Textures/NPCCity4.png" id="14" type="7"/>
+
+		<npc scene="0" x="719" y="386" texturepath="Assets/Textures/Worker.png" id="15" type="9"/>				<!-- this is the worker in the city type 9 WORKER-->
+		
+
 		<movableObject scene="4" x="276" y="137" sx="276" sy="95" texturepath="Assets/Textures/rock.png" id="1"/>
 		<triggerableObject scene="5" x="416" y="192" texturepath="Assets/Textures/lever.png" id="1"/>
 		<triggerableObject scene="9" x="64" y="352" texturepath="Assets/Textures/lever.png" id="2"/>
