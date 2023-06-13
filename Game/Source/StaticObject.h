@@ -27,9 +27,9 @@ public:
 	SDL_Rect cRect;
 
 	//if it has been triggered
-	bool triggered;
+	bool triggered = 0;
 
-	int id;
+	int id = 0;
 
 private:
 

@@ -120,7 +120,7 @@ public:
 
 private:
 
-	int argc;
+	int argc = 0;
 	char** args;
 	SString title;
 	SString organization;
@@ -135,11 +135,11 @@ private:
 	pugi::xml_document saveLoadFile;
 	pugi::xml_node saveState;
 
-	mutable bool saveGameRequested;
-	bool loadGameRequested;
+	mutable bool saveGameRequested = false;
+	bool loadGameRequested = false;
 
-	uint frames;
-	float dt;
+	uint frames = 0;
+	float dt = 0;
 
 	Timer timer;
 	PerfTimer ptimer;

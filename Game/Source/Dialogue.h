@@ -60,16 +60,16 @@ public:
 	void DisableDialog(int id);
 
 public:
-	int id;
+	int id = 0;
 	bool isDialogueActive;
 	eastl::string textToPrint;
 
 	NpcNode* currentNode;
 	eastl::list<NpcNode*> nodes;
 
-	int talkingFx4;
-	uint audioCount;
-	bool firstTime;
+	int talkingFx4 = 0;
+	uint audioCount = 0;
+	bool firstTime = 0;
 
-	int channel;
+	int channel = 0;
 };

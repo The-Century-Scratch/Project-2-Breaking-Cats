@@ -59,16 +59,16 @@ private:
 	eastl::deque<Mix_Chunk*> fx;
 	List<int> channels;
 
-	float musicVolume;
-	int fxVolume;
+	float musicVolume = 0;
+	int fxVolume = 0;
 
 	const char* nextMusic;
-	float auxMusic;
-	bool transition;
-	bool fadeOut;
+	float auxMusic = 0;
+	bool transition = 0;
+	bool fadeOut = 0;
 
-	int maxChannels;
-	int numChannels;
+	int maxChannels = 0;
+	int numChannels = 0;
 
 };
 

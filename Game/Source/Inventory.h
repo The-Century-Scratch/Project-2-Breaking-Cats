@@ -137,7 +137,7 @@ public:
 	GuiButton* btnEquipment; // Armors
 	GuiButton* btnItems;     // Potions etc
 
-	bool isActivated;
+	bool isActivated = 0;
 	iPoint invPos;
 	iPoint mouseClickPos;
 
@@ -155,7 +155,7 @@ private:
 	SDL_Texture* catskaText;
 	SDL_Texture* itemMenuTexture;
 
-	int easingPos;
+	int easingPos = 0;
 
 	SDL_Rect gatsRect;
 	SDL_Rect catskaRect;
@@ -180,7 +180,7 @@ private:
 	GuiButton* leftArrow;
 	GuiButton* rightArrow;
 
-	int showStatsId;
+	int showStatsId = 0;
 
 	SceneGameplay* scene;
 
@@ -188,16 +188,16 @@ private:
 
 	// Armor and weapons equiped slots
 	InventorySlot equipment[MAX_EQUIPMENT_SLOTS];
-	bool inEquipment;
+	bool inEquipment = 0;
 
 	// There will be 32 slots for items
 	//InventorySlot slots[MAX_INVENTORY_SLOTS];
-	int currentSlotId;
+	int currentSlotId = 0;
 	InventorySlot* originSlot;
 
 	// There will be 32 slots for Armor
 	InventorySlot armorSlots[MAX_INVENTORY_SLOTS];
-	int currentArmorSlotId;
+	int currentArmorSlotId = 0;
 	InventorySlot* originArmorSlot;
 
 	Player* currentPlayer;
@@ -229,20 +229,20 @@ private:
 	SDL_Rect tmpEquipMenuBounds;
 
 	Easing* easing2;
-	int counter;
+	int counter = 0;
 
 	//iPoint invPos;
 	iPoint invPosText;
 
-	bool grabbed;
-	float toGrabCount;
-	bool isTextDisplayed;
-	bool usingItem;
-	bool displayEquipmentMenu;
-	int currentEquipmentId;
+	bool grabbed = 0;
+	float toGrabCount = 0;
+	bool isTextDisplayed = 0;
+	bool usingItem = 0;
+	bool displayEquipmentMenu = 0;
+	int currentEquipmentId = 0;
 
 	//Item Menu
 	SString itName;
-	bool isItemMenu_Active;
-	int currentSlot_;
+	bool isItemMenu_Active = 0;
+	int currentSlot_ = 0;
 };

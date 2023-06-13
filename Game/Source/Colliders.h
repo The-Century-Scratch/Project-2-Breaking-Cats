@@ -50,7 +50,7 @@ struct Collider
 	bool pendingToDelete = false;
 	Type type;
 	Entity* listener = nullptr;
-	int scene;
+	int scene = 0;
 
 	bool mapCollider = false;
 

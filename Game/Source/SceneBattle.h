@@ -53,7 +53,7 @@ private:
 	//eastl::vector<pugi::xml_node> nodes;
 
 	int turn = 0;
-	int turnTimer;
+	int turnTimer = 0;
 
 	SDL_Texture* GuiCombat;
 	SDL_Rect basicAttack;

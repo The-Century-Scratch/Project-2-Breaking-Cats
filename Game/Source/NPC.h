@@ -50,8 +50,8 @@ public:
 
 	Collider* boundaries;
 
-	int npcid;
-	int dialogueid;
+	int npcid = 0;
+	int dialogueid = 0;
 
 	NPCTYPE npctype;
 
@@ -63,7 +63,7 @@ private:
 
 	Animation NPCIdle;
 	Animation NPCIdleAction;
-	int actionanimcounter;
+	int actionanimcounter = 0;
 };
 
 #endif // __NPC_H__

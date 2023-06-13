@@ -202,35 +202,35 @@ private:
 
 	iPoint tmpPosPlayer;
 
-	float alpha;
-	bool transition;
-	bool fadeOut;
-	bool loadObjects;
-	bool deleteDoor;
-	bool addItems_;
+	float alpha = 0;
+	bool transition = 0;
+	bool fadeOut = 0;
+	bool loadObjects = 0;
+	bool deleteDoor = 0;
+	bool addItems_ = 0;
 
 	//Fx
-	int doorOpenedFx;
-	int doorClosedFx;
+	int doorOpenedFx = 0;
+	int doorClosedFx = 0;
 
-	int puzzleCompletedFx;
-	bool canSound1;
-	bool canSound2;
-	bool canSound3;
-	bool canSound4;
+	int puzzleCompletedFx = 0;
+	bool canSound1 = 0;
+	bool canSound2 = 0;
+	bool canSound3 = 0;
+	bool canSound4 = 0;
 	
-	int whereMove;
-	int cameraCounter;
+	int whereMove = 0;
+	int cameraCounter = 0;
 
 	eastl::list<Enemy*> enemyList;
 	Enemy* tmp;
 
 	SDL_Rect iceBlockRect;
 
-	float firstQuest;
-	bool firstQuestAdded;
+	float firstQuest = 0;
+	bool firstQuestAdded = 0;
 
-	int lastUserInput;
+	int lastUserInput = 0;
 
 	//Music
 	SString cityTheme;

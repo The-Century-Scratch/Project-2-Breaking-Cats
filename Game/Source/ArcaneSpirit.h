@@ -22,5 +22,5 @@ public:
 
 	//Collider* boundaries;
 
-	int healAmount;
+	int healAmount = 0;
 };

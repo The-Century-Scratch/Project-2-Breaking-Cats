@@ -41,7 +41,7 @@ struct Tile
 	SDL_Rect bounds;
 	TileWalkability walkability;
 	TileState state;
-	bool isFocused;
+	bool isFocused = 0;
 };
 
 struct UnitData
@@ -94,7 +94,7 @@ public:
 
 	Unit::PlayerAction currentAction;
 
-	bool showArea;
+	bool showArea = 0;
 
 	iPoint lastPortal, firstPortal;
 private:

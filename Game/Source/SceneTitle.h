@@ -41,8 +41,8 @@ private:
 	SDL_Texture* bg;
 	SDL_Texture* bgText;
 	
-	int enterFx;
-	int titleFx;
+	int enterFx = 0;
+	int titleFx = 0;
 
 	TitleState state;
 
@@ -50,29 +50,29 @@ private:
 
 	Font* font;
 
-	float titleAlpha;
+	float titleAlpha = 0;
 	
 	//TITLE EASING
-	float the_x;
-	float hunter_x;
-	float odyssey_y;
-	float currIt;
-	float totalIt;
-	bool titleEasingActivated;
+	float the_x = 0;
+	float hunter_x = 0;
+	float odyssey_y = 0;
+	float currIt = 0;
+	float totalIt = 0;
+	bool titleEasingActivated = 0;
 	
 	//ENTER EASING
-	bool enterEasingActivatedY;
-	bool enterEasingActivated2Y;
-	bool enterEasingActivatedX;
-	bool enterEasingActivated2X;
-	bool enterEasingActivated3X;
-	bool enterEasingActivated4X;
-	float text_x;
-	float text_y;
-	float currItEnterY;
-	float totalItEnterY;	
-	float currItEnterX;
-	float totalItEnterX;
+	bool enterEasingActivatedY = 0;
+	bool enterEasingActivated2Y = 0;
+	bool enterEasingActivatedX = 0;
+	bool enterEasingActivated2X = 0;
+	bool enterEasingActivated3X = 0;
+	bool enterEasingActivated4X = 0;
+	float text_x = 0;
+	float text_y = 0;
+	float currItEnterY = 0;
+	float totalItEnterY = 0;
+	float currItEnterX = 0;
+	float totalItEnterX = 0;
 
 	SDL_Rect section;
 	SDL_Rect section2;

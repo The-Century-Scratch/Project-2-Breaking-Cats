@@ -44,9 +44,9 @@ public:
 	SDL_Rect itemTextSection;
 	const char* texturePath;
 
-	bool equiped;
+	bool equiped = 0;
 
-	int itemid;
+	int itemid = 0;
 
 	eastl::string mapName;
 };

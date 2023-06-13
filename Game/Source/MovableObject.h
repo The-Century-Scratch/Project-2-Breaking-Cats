@@ -28,7 +28,7 @@ public:
 
 	SDL_Rect cRect;
 
-	int id;
+	int id = 0;
 
 	bool solved = false;
 	iPoint solvedPosition;

@@ -70,7 +70,7 @@ public:
 
 public:
 	float currentIteration, initialPos, deltaPos, totalIterations;
-	bool easingsActivated;
+	bool easingsActivated = 0;
 };
 
 #endif // EASINGS_H

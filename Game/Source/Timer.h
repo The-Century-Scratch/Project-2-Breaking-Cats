@@ -15,7 +15,7 @@ public:
 	float ReadMSec() const;
 
 private:
-	uint32 startTime;
+	uint32 startTime = 0;
 };
 
 #endif //__TIMER_H__

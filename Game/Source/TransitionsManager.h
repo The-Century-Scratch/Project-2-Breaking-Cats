@@ -67,11 +67,11 @@ public:
 	SDL_Rect rectLower;
 
 	// Fade to Black
-	float transitionAlpha;
+	float transitionAlpha = 0;
 
 	// Half Width Rectangles
 	SDL_Rect rectUpper2;
 	SDL_Rect rectLower2;
-	float halfWidthCount;
+	float halfWidthCount = 0;
 
 };

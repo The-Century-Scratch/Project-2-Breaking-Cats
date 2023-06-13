@@ -141,15 +141,15 @@ protected:
 
 	eastl::unique_ptr<Easing> atkEasingIn;
 	eastl::unique_ptr<Easing> atkEasingOut;
-	float sillyAtk;
+	float sillyAtk = 0;
 	eastl::unique_ptr<Easing> dmgEasingIn;
 	eastl::unique_ptr<Easing> dmgEasingOut;
-	float sillyDmg;
+	float sillyDmg = 0;
 	eastl::unique_ptr<Easing> sillyEasingJump;
 	eastl::unique_ptr<Easing> sillyEasingFall;
-	float sillyJump;
+	float sillyJump = 0;
 	ActionState state;
-	bool facing;
+	bool facing = 0;
 	Animation* currentAnim = nullptr;
 	Animation idleLeftAnim;
 	Animation idleRightAnim;
@@ -163,9 +163,9 @@ protected:
 	bool isMyTurn = false;
 	bool hasFinishedTurn = false;
 	int healthPoints = 1;
-	int damage;
-	int magic;
-	int maxHealth;
+	int damage = 0;
+	int magic = 0;
+	int maxHealth = 0;
 };
 
 #endif //__PLAYER_H__

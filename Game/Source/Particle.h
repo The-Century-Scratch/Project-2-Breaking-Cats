@@ -63,7 +63,7 @@ public:
 protected:
 private:
 
-	float timeLeft;
+	float timeLeft = 0;
 
 	fPoint position;
 	fPoint velocity;
@@ -73,11 +73,11 @@ private:
 	Color color;
 	Color objectiveColor;
 
-	float initialScale;
-	float scale;
-	float objectiveScale;
+	float initialScale = 0;
+	float scale = 0;
+	float objectiveScale = 0;
 
-	float lifespan;
+	float lifespan = 0;
 
 	Particle* next;
 };

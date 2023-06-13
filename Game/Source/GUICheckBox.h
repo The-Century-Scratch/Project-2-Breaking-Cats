@@ -19,15 +19,15 @@ public:
 	bool Update(float dt);
 	bool Draw(Render* render);
 
-	int mouseX, mouseY;
-	unsigned int click;
+	int mouseX, mouseY = 0;
+	unsigned int click = 0;
 
 	bool canClick = true;
 	bool drawBasic = false;
 
 private:
 
-	bool checked;
+	bool checked = 0;
 	bool fxDone = false;
 
 };

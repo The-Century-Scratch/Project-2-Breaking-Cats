@@ -24,11 +24,11 @@ private:
 	//SDL_Texture* guiTexture;
 
 	SDL_Texture* bg;
-	bool hasWin;
+	bool hasWin = 0;
 
 	Easing* easingUp;
 	Easing* easingDown;
-	float easingPosition;
+	float easingPosition = 0;
 };
 
 #endif //__SCENEENDING_H__

@@ -29,12 +29,12 @@ public:
 	List<Player*> playerList;
 	
 	SString gats_n;
-	int gats_hp;
-	int gats_dmg;
+	int gats_hp = 0;
+	int gats_dmg = 0;
 
 	SString catska_n;
-	int catska_hp;
-	int catska_dmg;
+	int catska_hp = 0;
+	int catska_dmg = 0;
 
 private:
 	

@@ -23,7 +23,7 @@ public:
 
 public:
 	//flags
-	bool debug;
+	bool debug = 0;
 	bool godMode = false;
 	bool drawColliders = false;
 	bool drawHugBounds = false;
@@ -37,14 +37,14 @@ public:
 	bool colourblind = false;
 
 	SDL_Color debugColor;
-	int debugX;
-	int debugY;
+	int debugX = 0;
+	int debugY = 0;
 
 	// FPS
 	microseconds timePerCycle;
 	microseconds elapsedFrame;
-	int desiredFPSmic;
-	int desiredFPS;
+	int desiredFPSmic = 0;
+	int desiredFPS = 0;
   
 private:
 	Font* font;

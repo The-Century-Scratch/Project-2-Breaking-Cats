@@ -36,9 +36,9 @@ public:
 	bool inRange = false;
 
 	//if it has been triggered
-	bool triggered;
+	bool triggered = 0;
 
-	int id;
+	int id = 0;
 
 private:
 

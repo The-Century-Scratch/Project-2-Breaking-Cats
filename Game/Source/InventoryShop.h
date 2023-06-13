@@ -43,10 +43,10 @@ struct InventoryShopSlot
 	SDL_Rect bounds;
 	SDL_Rect itemTextureBounds;
 	Item* item;
-	int itemsAmount;
-	bool isfull;
-	int currentSlot;
-	int itemId; //if zero empty
+	int itemsAmount = 0;
+	bool isfull = 0;
+	int currentSlot = 0;
+	int itemId = 0; //if zero empty
 	SlotStateShop state;
 
 	/*bool operator==(InventorySlot& i) const
@@ -148,7 +148,7 @@ public:
 
 	Easing* easing;
 
-	int coins;
+	int coins = 0;
 
 private:
 	SDL_Texture* itemTexture;
@@ -186,7 +186,7 @@ private:
 	GuiButton* leftArrow;
 	GuiButton* rightArrow;
 
-	int showStatsId;
+	int showStatsId = 0;
 
 	SceneGameplay* scene;
 
@@ -198,7 +198,7 @@ private:
 
 	// There will be 32 slots for items
 	//InventorySlot slots[MAX_INVENTORY_SLOTS];
-	int currentSlotId;
+	int currentSlotId = 0;
 	InventoryShopSlot* originSlot;
 
 	// There will be 32 slots for Armor
@@ -240,17 +240,17 @@ private:
 	//iPoint invPos;
 	iPoint invPosText;
 
-	bool grabbed;
-	float toGrabCount;
-	bool isTextDisplayed;
-	bool usingItem;
-	bool displayEquipmentMenu;
-	int currentEquipmentId;
+	bool grabbed = 0;
+	float toGrabCount = 0;
+	bool isTextDisplayed = 0;
+	bool usingItem = 0;
+	bool displayEquipmentMenu = 0;
+	int currentEquipmentId = 0;
 
-	bool buyItem_;
+	bool buyItem_ = 0;
 
 	//Item Menu
 	SString itName;
-	bool isItemMenu_Active;
-	int currentSlot_;
+	bool isItemMenu_Active = 0;
+	int currentSlot_ = 0;
 };

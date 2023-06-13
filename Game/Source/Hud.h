@@ -142,7 +142,7 @@ private:
 	Easing* easingTitleOut;
 	Easing* easingTitleBtns;
 
-	float titlePos;
+	float titlePos = 0;
 
 	SString forestTheme;
 

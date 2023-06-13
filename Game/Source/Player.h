@@ -67,9 +67,9 @@ private:
 	// Declare player parameters
 	SDL_Texture* texture;
 	const char* texturePath;
-	uint walkinggrassfx;
-	uint walkingcityfx;
-	int walkingTimer;
+	uint walkinggrassfx = 0;
+	uint walkingcityfx = 0;
+	int walkingTimer = 0;
 
 };
 

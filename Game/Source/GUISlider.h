@@ -29,11 +29,11 @@ public:
 
 private:
 
-	bool one, two, three, four;
+	bool one = 0, two = 0, three = 0, four = 0;
 
 	SDL_Rect sliderbounds;
 
-	float boundsX, boundsY;
+	float boundsX = 0, boundsY = 0;
 	bool fxDone = false;
 };
 

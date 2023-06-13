@@ -27,8 +27,8 @@ public:
 
 public:
 	Dialogue* current;
-	bool printText;
-	bool isDialogueActive;
+	bool printText = 0;
+	bool isDialogueActive = 0;
 private:
 	SDL_Texture* texture;
 	SDL_Texture* arrowTex;
@@ -44,12 +44,12 @@ private:
 
 	Easing* easingArrow;
 	Easing* easingArrow2;
-	float arrowPosition;
+	float arrowPosition = 0;
 
-	int lastUserInput;
-	int letterCount;
+	int lastUserInput = 0;
+	int letterCount = 0;
 
-	int alpha;
+	int alpha = 0;
 
-	bool currentPressed;
+	bool currentPressed = 0;
 };

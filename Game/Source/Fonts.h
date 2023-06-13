@@ -24,11 +24,11 @@ public:
 
 private:
 
-	bool fontLoaded;
+	bool fontLoaded = 0;
 
 	SDL_Texture* texture;
-	int baseSize;
-	int charsCount;
+	int baseSize = 0;
+	int charsCount = 0;
 	SDL_Rect charsRecs[128];
 };
 

@@ -77,7 +77,7 @@ public:
 
 public:
 	bool enabled = false;
-	uint32 id;
+	uint32 id = 0;
 	GuiControlType type;
 	GuiControlState state;
 

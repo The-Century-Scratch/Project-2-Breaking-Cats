@@ -105,7 +105,7 @@ public:
 protected:
 private:
 
-	float timeFromLastSpawn;
+	float timeFromLastSpawn = 0;
 
 	SDL_Texture* texture;
 	List<Particle*> particles;

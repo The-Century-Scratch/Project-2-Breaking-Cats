@@ -96,10 +96,10 @@ struct MapLayer
 
 struct Object
 {
-	int id;
-	int x, y;
-	int* chainPoints;
-	int size;
+	int id = 0;
+	int x = 0, y = 0;
+	int* chainPoints = 0;
+	int size = 0;
 
 	inline int Get(int x) const
 	{
@@ -124,10 +124,10 @@ struct ObjectGroup
 // Create a struct needed to hold the information to Map node
 struct MapData
 {
-	int width;
-	int	height;
-	int	tileWidth;
-	int	tileHeight;
+	int width = 0;
+	int	height = 0;
+	int	tileWidth = 0;
+	int	tileHeight = 0;
 	List<TileSet*> tilesets;
 	MapTypes type;
 
@@ -210,7 +210,7 @@ private:
 
 	List<SString> mapFileName;
 	SString mapFolder;
-    bool mapLoaded;
+    bool mapLoaded = 0;
 };
 
 #endif // __MAP_H__

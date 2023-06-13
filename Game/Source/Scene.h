@@ -59,18 +59,18 @@ public:
 
 public:
 	SString name;
-	bool active;
+	bool active = 0;
 	
-	bool canMoveCam;
+	bool canMoveCam = 1;
 
-	bool transitionRequired;
+	bool transitionRequired = 0;
 	SceneType nextScene;
-	bool isTown;
-	bool isDungeon;
-	bool showColliders;
+	bool isTown = 0;
+	bool isDungeon = 0;
+	bool showColliders = 0;
 
-	int channel;
-	bool win;
+	int channel = 0;
+	bool win = 0;
 };
 
 #endif // __SCENE_H__
