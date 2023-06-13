@@ -105,7 +105,7 @@ bool NPC::Start() {
 		cRect = { position.x + 8,position.y + 16,16,16 };
 		eCollider = app->moduleCollisions->AddCollider(cRect, Collider::Type::NPC, (Entity*)this);
 		//dialogue id
-		dialogueid = 1;
+		dialogueid = 6;
 		//anim1
 		for (int i = 0; i < 7; ++i) {
 			NPCIdle.PushBack({ 32 * i,0,32,32 });

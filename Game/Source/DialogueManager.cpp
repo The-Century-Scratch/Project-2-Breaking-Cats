@@ -9,6 +9,7 @@
 #include "DialogueManager.h"
 #include "Easings.h"
 #include "Window.h"
+#include "InventoryShop.h"
 
 #include "Log.h"
 
@@ -164,8 +165,8 @@ bool DialogueManager::Update(float dt)
 				/*current->currentNode=current->currentNode.*/
 				//uncomment when quests done
 				if (current->currentNode->currentOption->missionId != -1) {
-					if (current->currentNode->currentOption->missionId != -2) {
-
+					if (current->currentNode->currentOption->missionId == -2) {
+						app->inventoryShop->isActivated = true;
 					}
 					app->questManager->GiveItem = true;
 					app->questManager->ActivateQuest(current->currentNode->currentOption->missionId);
@@ -235,6 +236,7 @@ void DialogueManager::Draw()
 bool DialogueManager::UnLoad()
 {
 	app->tex->Unload(texture);
+	app->tex->Unload(arrowTex);
 
 	font->UnLoad(app->tex);
 	RELEASE(font);

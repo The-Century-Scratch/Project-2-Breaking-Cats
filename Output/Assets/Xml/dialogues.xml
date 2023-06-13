@@ -66,8 +66,19 @@
 	<npc id ="2">
 		<!-- this is the Guardian that gives you the labyrinth quest -->
 		<node id ="0">
-			<npc_text text ="do the labyrinth"/>
+			<npc_text text ="Our laboratory is blocked by a purryfith magic trick"/>
+			<option id="0" nextNodeId="1" text="What a mess" missionId="-1" sideMissionId="-1"/>
+		</node>
+		
+		<node id ="1">
+			<npc_text text ="We need the strength of a new foreigner to enter and turn back the energy"/>
+			<option id="0" nextNodeId="2" text="hm hm tell me more" missionId="-1" sideMissionId="-1"/>
+		</node>
+		
+		<node id ="2">
+			<npc_text text ="Would you mind to help us for the common welth?"/>
 			<option id="0" nextNodeId="-1" text="No problem" missionId="3" sideMissionId="-1"/>
+			<option id="0" nextNodeId="-1" text="No time" missionId="-1" sideMissionId="-1"/>
 		</node>
 
 		<node id ="-1">
@@ -134,6 +145,22 @@
 		<node id ="0">
 			<npc_text text ="Thanks for moving the rocks out of the way now we can travel to the city easily"/>
 			<option id="0" nextNodeId="-1" text="No problem" missionId="-1" sideMissionId="-1"/>
+		</node>
+
+		<node id ="-1">
+			<!-- Keep this here to avoid crashes -->
+			<npc_text text ="Press enter to back"/>
+		</node>
+	</npc>
+
+	<!-- Next NPC -->
+
+	<npc id ="6">
+		<!-- this is maicey he open the shop -->
+		<node id ="0">
+			<npc_text text ="Dou you want to see my stuff?"/>
+			<option id="0" nextNodeId="-1" text="Yes please" missionId="-2" sideMissionId="-1"/>
+			<option id="0" nextNodeId="-1" text="No thanks" missionId="-1" sideMissionId="-1"/>
 		</node>
 
 		<node id ="-1">

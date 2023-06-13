@@ -174,6 +174,13 @@ bool InventoryShop:: PostUpdate()
 		app->inventory->isActivated = false;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KeyState::KEY_DOWN && app->hud->hudstate == hudSTATE::CLOSED && !app->questManager->printQuestMenu)
+	{
+		isActivated = false;
+		app->sceneManager->Pause = isActivated;
+		app->audio->PlayFx(app->hud->swapscenesfx);
+	}
+
 	if (isActivated)
 	{
 		Draw();
