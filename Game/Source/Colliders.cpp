@@ -24,3 +24,35 @@ bool Collider::Intersects(const SDL_Rect& r) const
 		rect.y < r.y + r.h &&
 		rect.h + rect.y > r.y);
 }
+
+void Collider::ParseMapProperties(pugi::xml_node const& node)
+{
+	using CT = Collider::Type;
+	pugi::xml_node propertiesNode = node.child("properties");
+
+	if(type != NULL)
+	switch (type)
+	{
+	case CT::CHANGESCENE:
+
+		for (auto const& child : propertiesNode.children("property"))
+		{
+			auto attributeName = child.attribute("name").as_string();
+			if (SDL_strcmp("DestinationMap", attributeName) == 0)
+			{
+				properties.destinationMap = static_cast<MapType>(child.attribute("value").as_int());
+			}
+			else if (SDL_strcmp("Destination X", attributeName) == 0)
+			{
+				properties.destination.x = child.attribute("value").as_int();
+			}
+			else if (SDL_strcmp("Destination Y", attributeName) == 0)
+			{
+				properties.destination.y = child.attribute("value").as_int();
+			}
+		}
+		break;
+	default:
+		break;
+	}
+}

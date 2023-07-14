@@ -67,7 +67,7 @@ bool Player::Start() {
 	currentAnim = &idleAnim;
 
 
-	switch (app->sceneManager->currentScene)
+	switch (app->sceneManager->currentMap)
 	{
 	case 0:
 		break;
@@ -231,12 +231,12 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 			break;
 		case Collider::Type::ENEMY:
 			//FUNCION TO START BATTLE
-			if (app->sceneManager->currentScene == 8)
+			if (app->sceneManager->currentMap == 8)
 			{
 
 				app->map->CleanUp();
 				app->map->ClearMaps();
-				app->sceneManager->currentScene = 10; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+				app->sceneManager->currentMap = static_cast<MapType>(1); //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
 
 				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
@@ -244,12 +244,12 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				app->render->camera.y = 0;
 
 			}
-			else if (app->sceneManager->currentScene == 0)
+			else if (app->sceneManager->currentMap == 0)
 			{
 
 				app->map->CleanUp();
 				app->map->ClearMaps();
-				app->sceneManager->currentScene = 11; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+				app->sceneManager->currentMap = static_cast<MapType>(2); //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
 
 				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
@@ -257,12 +257,12 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 				app->render->camera.y = 0;
 
 			}
-			else if (app->sceneManager->currentScene == 9)
+			else if (app->sceneManager->currentMap == 9)
 			{
 
 				app->map->CleanUp();
 				app->map->ClearMaps();
-				app->sceneManager->currentScene = 12; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+				app->sceneManager->currentMap = static_cast<MapType>(3); //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
 
 				app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
@@ -300,89 +300,91 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 		case Collider::Type::CHANGESCENE:
 			//FUNCTION TO CHANGE SCENE LOL
 			app->sceneManager->changeMap = true;
-			if (app->sceneManager->currentScene == 0) {
-				switch (c2->scene)
-				{
-				case 0:
-					break;
-				case 1:
-					app->sceneManager->resistance_base = true;
-					break;
-				case 2:
-					app->sceneManager->store = true;
-					break;
-				case 3:
-					app->sceneManager->tabern = true;
-					break;
-				default:
-				case 5:
-					app->sceneManager->downAfterLabrinth = true;
-					break;
-				case 7:
-					app->sceneManager->topPreLab = true;
-				}
-			}
-			if (app->sceneManager->currentScene == 4)
-			{
-				switch (c2->scene)
-				{
-				case 5:
-					app->sceneManager->leftAfterLabrinth = true;
-					app->sceneManager->puzzle1solved = true;
-					break;
-				case 6:
-					app->sceneManager->village = true;
-					break;
-				default:
-					break;
-				}
-			}
-			if (app->sceneManager->currentScene == 5)
-			{
-				switch (c2->scene)
-				{
-				case 0:
-					app->sceneManager->nordCity = true;
-					app->sceneManager->puzzle2solved = true;
-					break;
-				case 4:
-					app->sceneManager->rightLabrinth = true;
-					break;
-				default:
-					break;
-				}
-			}
-			if (app->sceneManager->currentScene == 7)
-			{
-				switch (c2->scene)
-				{
-				case 0:
-					app->sceneManager->downCity = true;
-					break;
-				case 9:
-					app->sceneManager->lab = true;
+			app->sceneManager->current->nextMap = c2->properties.destinationMap;
+			position = c2->properties.destination;
+			//if (app->sceneManager->currentMap == 0) {
+			//	switch (c2->scene)
+			//	{
+			//	case 0:
+			//		break;
+			//	case 1:
+			//		app->sceneManager->resistance_base = true;
+			//		break;
+			//	case 2:
+			//		app->sceneManager->store = true;
+			//		break;
+			//	case 3:
+			//		app->sceneManager->tabern = true;
+			//		break;
+			//	default:
+			//	case 5:
+			//		app->sceneManager->downAfterLabrinth = true;
+			//		break;
+			//	case 7:
+			//		app->sceneManager->topPreLab = true;
+			//	}
+			//}
+			//if (app->sceneManager->currentMap == 4)
+			//{
+			//	switch (c2->scene)
+			//	{
+			//	case 5:
+			//		app->sceneManager->leftAfterLabrinth = true;
+			//		app->sceneManager->puzzle1solved = true;
+			//		break;
+			//	case 6:
+			//		app->sceneManager->village = true;
+			//		break;
+			//	default:
+			//		break;
+			//	}
+			//}
+			//if (app->sceneManager->currentMap == 5)
+			//{
+			//	switch (c2->scene)
+			//	{
+			//	case 0:
+			//		app->sceneManager->nordCity = true;
+			//		app->sceneManager->puzzle2solved = true;
+			//		break;
+			//	case 4:
+			//		app->sceneManager->rightLabrinth = true;
+			//		break;
+			//	default:
+			//		break;
+			//	}
+			//}
+			//if (app->sceneManager->currentMap == 7)
+			//{
+			//	switch (c2->scene)
+			//	{
+			//	case 0:
+			//		app->sceneManager->downCity = true;
+			//		break;
+			//	case 9:
+			//		app->sceneManager->lab = true;
 
-					app->sceneManager->puzzle3solved = true;//if you reach lab, it means you solved the 3rd puzzle, that is the invisible labrinth
-					break;
-				default:
-					break;
-				}
-			}
-			if (app->sceneManager->currentScene == 9)
-			{
-				switch (c2->scene)
-				{
-				case 0:
-					app->sceneManager->downCity = true;
-					app->sceneManager->puzzle4solved = true;
-					break;
-				case 7:
-					app->sceneManager->prelab = true;
-					break;
-				default:
-					break;
-				}
-			}
+			//		app->sceneManager->puzzle3solved = true;//if you reach lab, it means you solved the 3rd puzzle, that is the invisible labrinth
+			//		break;
+			//	default:
+			//		break;
+			//	}
+			//}
+			//if (app->sceneManager->currentMap == 9)
+			//{
+			//	switch (c2->scene)
+			//	{
+			//	case 0:
+			//		app->sceneManager->downCity = true;
+			//		app->sceneManager->puzzle4solved = true;
+			//		break;
+			//	case 7:
+			//		app->sceneManager->prelab = true;
+			//		break;
+			//	default:
+			//		break;
+			//	}
+			//}
 			break;
 		case Collider::Type::MOVABLEOBJECT:
 			break;
@@ -439,7 +441,7 @@ void Player::AnimationState()
 		currentAnim = &walkUpAnim;
 
 		walkingTimer++;
-		if (app->sceneManager->currentScene == 0)
+		if (app->sceneManager->currentMap == 0)
 		{
 			if (walkingTimer > 10)
 			{
@@ -447,7 +449,7 @@ void Player::AnimationState()
 				app->audio->PlayFx(walkingcityfx);
 			}
 		}
-		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		else if (app->sceneManager->currentMap == 4 || app->sceneManager->currentMap == 5 || app->sceneManager->currentMap == 6)
 		{
 			if (walkingTimer > 10)
 			{
@@ -460,7 +462,7 @@ void Player::AnimationState()
 		currentAnim = &walkLeftAnim; 
 		
 		walkingTimer++;
-		if (app->sceneManager->currentScene == 0)
+		if (app->sceneManager->currentMap == 0)
 		{
 			if (walkingTimer > 10)
 			{
@@ -468,7 +470,7 @@ void Player::AnimationState()
 				app->audio->PlayFx(walkingcityfx);
 			}
 		}
-		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		else if (app->sceneManager->currentMap == 4 || app->sceneManager->currentMap == 5 || app->sceneManager->currentMap == 6)
 		{
 			if (walkingTimer > 10)
 			{
@@ -481,7 +483,7 @@ void Player::AnimationState()
 		currentAnim = &walkRightAnim;
 
 		walkingTimer++;
-		if (app->sceneManager->currentScene == 0)
+		if (app->sceneManager->currentMap == 0)
 		{
 			if (walkingTimer > 10)
 			{
@@ -489,7 +491,7 @@ void Player::AnimationState()
 				app->audio->PlayFx(walkingcityfx);
 			}
 		}
-		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		else if (app->sceneManager->currentMap == 4 || app->sceneManager->currentMap == 5 || app->sceneManager->currentMap == 6)
 		{
 			if (walkingTimer > 10)
 			{
@@ -502,7 +504,7 @@ void Player::AnimationState()
 		currentAnim = &walkDownAnim;
 
 		walkingTimer++;
-		if (app->sceneManager->currentScene == 0)
+		if (app->sceneManager->currentMap == 0)
 		{
 			if (walkingTimer > 10)
 			{
@@ -510,7 +512,7 @@ void Player::AnimationState()
 				app->audio->PlayFx(walkingcityfx);
 			}
 		}
-		else if (app->sceneManager->currentScene == 4 || app->sceneManager->currentScene == 5 || app->sceneManager->currentScene == 6)
+		else if (app->sceneManager->currentMap == 4 || app->sceneManager->currentMap == 5 || app->sceneManager->currentMap == 6)
 		{
 			if (walkingTimer > 10)
 			{

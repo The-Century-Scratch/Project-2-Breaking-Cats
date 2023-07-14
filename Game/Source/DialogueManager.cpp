@@ -174,7 +174,7 @@ bool DialogueManager::Update(float dt)
 				if (current->currentNode->currentOption->sideMissionId != -1) {
 					app->questManager->ActivateSideQuest(current->currentNode->currentOption->sideMissionId);
 				}
-				if (current->currentNode->currentOption->menu != -1) scene->ChangeState(GameplayMenuState::SHOP);
+				if (current->currentNode->currentOption->menu != -1);
 
 				RELEASE(current->currentNode);
 				current->currentNode = aux;

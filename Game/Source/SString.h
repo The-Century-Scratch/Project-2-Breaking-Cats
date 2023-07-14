@@ -223,6 +223,7 @@ public:
 
 	const char* GetString() const
 	{
+		if (str == nullptr) return nullptr;
 		return str;
 	}
 

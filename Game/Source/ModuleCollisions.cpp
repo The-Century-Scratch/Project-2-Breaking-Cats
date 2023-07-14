@@ -405,19 +405,18 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Enti
 
 		if (colliders[i] == nullptr)
 		{
-			ret = colliders[i] = new Collider(rect, type, listener);
+			ret = new Collider(rect, type, listener);
+			colliders[i] = ret;
+			ret->mapCollider = mapCollider;
 			LOG("Collider number %d created", i);
-			ret->scene = newscene;
-			if (mapCollider)
-			{
-				ret->mapCollider = true;
-			}
 
 			break;
 		}
 		else if (i == MAX_COLLIDERS - 1)
 		{
 			LOG("Max Colliders, coultn't be possible to create more *INCREASE MAX_COLLIDERS VALUE TO AVOID THIS ERROR*");
+
+			break;
 		}
 
 	}

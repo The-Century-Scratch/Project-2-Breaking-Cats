@@ -17,19 +17,10 @@
 
 class Player;
 class Enemy;
-class CharacterManager;
 class SceneBattle;
-class EntityManager;
 class Map;
-class PauseMenu;
 class Render;
 class Item;
-class Inventory;
-class QuestManager;
-class QuestMenu;
-class Shop;
-
-class Font;
 
 
 //TO CITY
@@ -74,28 +65,6 @@ class Font;
 #define INIT_POS_BASE iPoint(113,366)
 #define INIT_POS_STORE iPoint(71,173)
 
-
-enum class PlayerType;
-enum class EntityType;
-
-enum class GameplayMenuState
-{
-	NONE = 0,
-	CHARACTER_SWAP,
-	INVENTORY,
-	PAUSE,
-	QUESTS,
-	SHOP
-};
-
-enum class GameplayState
-{
-	NONE = 0,
-	ROAMING,
-	BATTLE,
-	DIALOG,
-};
-
 class SceneGameplay : public Scene
 {
 public:
@@ -115,13 +84,11 @@ public:
 
 	bool SaveState(pugi::xml_node&) const override;
 
-	void ChangeState(GameplayMenuState type);
-
-	void CharacterSwap(PlayerType pType);
+	//void CharacterSwap(PlayerType pType);
 	
 	bool CollisionMapEntity(SDL_Rect rect, EntityType type);
 
-	void ChangeMap(iPoint newPos, int newScene = 1);
+	void ChangeMap(MapType newMap) override;
 private:
 	void HandleInput(Input* input, float dt);
 	
@@ -154,38 +121,11 @@ private:
 	SDL_Texture* goldTexture;
 	eastl::list<Player*> playerList;
 
-	// Menus
-	CharacterManager* charManager;
-	PauseMenu* pause;
-	GameplayMenuState menuState;
-	GameplayState gameState;
-
-	EntityManager* entityManager;
-
-	//ParticlesManager* particles;
-
-	QuestManager* questManager;
-
 	// Scenes
 	SceneBattle* sceneBattle;
 	float temp;
 
 	Map* map;
-
-	// Font
-	Font* font;
-
-	// Inventory
-	Inventory* inventory;
-
-	// Quest Menu
-	QuestMenu* quests;
-
-	// Shop Menu
-	Shop* shop;
-
-	// Interruptor block
-	Item* interruptorBlock;
 
 	SDL_Texture* itemText;
 	SDL_Texture* guiTex;

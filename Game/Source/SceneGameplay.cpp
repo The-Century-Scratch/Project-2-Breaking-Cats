@@ -61,113 +61,12 @@ SceneGameplay::SceneGameplay()
 {
 	name.Create("scenegameplay");
 
-	//// Startup
-	//menuState = GameplayMenuState::NONE;
-	//gameState = GameplayState::ROAMING;
-
-	//questManager = new QuestManager();
-	//entityManager = new EntityManager(questManager);
-	//particles = new ParticlesManager();
-
-	//iPoint position = { 260,290 };
-
-	//pugi::xml_document animations;
-	//pugi::xml_node anims;
-	//int size = app->assetsManager->MakeLoad("Xml/animations.xml");
-	//pugi::xml_parse_result result = animations.load_buffer(app->assetsManager->GetLastBuffer(), size);
-	//app->assetsManager->DeleteBuffer();
-
-	//if (result == NULL) 
-	//	LOG("Could not load xml file: %s. pugi error: %s", "animations.xml", result.description());
-	//else 
-	//	anims = animations.child("animations");
-
-	//Player* player = nullptr;
-	//player = new Hunter(position, anims, particles);
-	//currentPlayer = player;
-	//playerList.push_back(player);
-	//position = { 18,90 };
-	//player = new Wizard(position, anims, particles);
-	//playerList.push_back(player);
-
-	//position = { 12,45 };
-	//player = new Thief(position, anims, particles);
-	//playerList.push_back(player);
-
-	//position = { 13,56 };
-	//player = new Warrior(position, anims, particles);
-	//playerList.push_back(player);
-
-	//tmpPosPlayer = { 0,0 };
-
-	//Enemy* en;
-	//en = new Skull({ 608, 352 }, anims, "graveyard.tmx");
-	//en->SetCurrentState(EnemyState::ROAMING);
-	//enemyList.push_back(en);
-
-	//en = new Bat({ 1408, 2680 }, anims, "dungeon_map.tmx");
-	//en->SetCurrentState(EnemyState::ROAMING);
-	//enemyList.push_back(en);
-
-	//en = new Golem({ 1408, 224 }, anims, "dungeon_map.tmx");
-	//en->SetCurrentState(EnemyState::ROAMING);
-	//enemyList.push_back(en);
-
-	//atlas = app->tex->Load("Textures/Items/items_atlas.png");
-
-	//inventory = new Inventory(playerList, atlas, this);
-
-	//Item *item = new UltraPotion(iPoint(128,1248), atlas, "town_map.tmx");
-	//items.push_back(item);
-	//
-	//item = new OmniPotion(iPoint(768,1248), atlas, "town_map.tmx");
-	//items.push_back(item);
-
-	//item = new Potion(iPoint(1280, 80), atlas, "town_map.tmx");
-	//items.push_back(item);
-
-	//item = new FairyTear(iPoint(512, 800), atlas, "town_map.tmx");
-	//items.push_back(item);
-
-	//item = new KnightHelmet({ 1376, 1056, 32, 32 }, iPoint(1376, 1056), atlas, "town_map.tmx");
-	//items.push_back(item);
-
-	//item = new KnightChest({1408, 1056, 32, 32}, iPoint(1408, 1056), atlas, "town_map.tmx");
-	//items.push_back(item);
-
-	//pause = new PauseMenu(this);
-
-	//font = new Font(app, "Font/font3.xml", app->tex);
-	//quests = new QuestMenu(this, questManager, font);
-
-	//showColliders = false;
-	//transition = false;
-	//fadeOut = false;
-	//alpha = 0.0f;
-	//isDungeon = false;
-	//loadObjects = true;
-	//deleteDoor = true;
-	//cameraCounter = 120;
-
-	//canSound1 = true;
-	//canSound2 = true;
-	//canSound3 = true;
-	//canSound4 = true;
-
-	//firstQuest = 0.0f;
-	//firstQuestAdded = false;
-	//tmp = nullptr;
-	//sceneBattle = nullptr;
-
-	//lastUserInput = 0;
+	
 	pugi::xml_node configNode = app->LoadConfigFileToVar();
 	pugi::xml_node config = configNode.child(name.GetString());
 
 	pugi::xml_node itemNode = config.child("item");
 	itemText = app->tex->Load(itemNode.child("texturepath").attribute("texturepath").as_string());
-
-	//inventory = new Inventory(playerList, atlas, this);
-
 }
 
 bool SceneGameplay::Load()
@@ -193,7 +92,7 @@ bool SceneGameplay::Load()
 
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
-		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
 			npc->parameters = npcNode;
@@ -233,7 +132,7 @@ bool SceneGameplay::Load()
 
 	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
 	{
-		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT);
 			movableObject->parameters = movableObjectNode;
@@ -248,7 +147,7 @@ bool SceneGameplay::Load()
 
 	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
 	{
-		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT);
 			triggerableObject->parameters = triggerableObjectNode;
@@ -259,7 +158,7 @@ bool SceneGameplay::Load()
 
 	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
 	{
-		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
 			collectibleObject->parameters = collectibleObjectNode;
@@ -286,7 +185,7 @@ bool SceneGameplay::Load()
 
 
 
-	switch (app->sceneManager->currentScene)
+	switch (app->sceneManager->currentMap)
 	{
 	case -1:
 		app->render->camera.x = 0;
@@ -422,13 +321,13 @@ bool SceneGameplay::Update(float dt)
 
 	if (canMoveCam)
 	{
-		if (app->sceneManager->currentScene == 1 || app->sceneManager->currentScene == IDLAB)
+		if (app->map->mapProperties.fixedCameraX)
 		{
-			if (app->sceneManager->currentScene == 1)
+			if (app->sceneManager->currentMap == RESISTANCE)
 			{
 				app->render->camera.x = 283;
 			}
-			if (app->sceneManager->currentScene ==  IDLAB)
+			if (app->sceneManager->currentMap ==  LAB)
 			{
 				app->render->camera.x = 150;
 			}
@@ -523,7 +422,7 @@ bool SceneGameplay::Update(float dt)
 		app->map->CleanUp();
 		app->map->ClearMaps();
 
-		app->sceneManager->currentScene = rand() % 3; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+		app->sceneManager->currentMap = static_cast<MapType>(rand() % 3); //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
@@ -540,7 +439,7 @@ bool SceneGameplay::Update(float dt)
 		app->map->CleanUp();
 		app->map->ClearMaps();
 
-		app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+		app->sceneManager->currentMap = NONE; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
@@ -564,122 +463,7 @@ bool SceneGameplay::Update(float dt)
 	// check in which door is entering
 	if (app->sceneManager->changeMap)
 	{
-
-		if (app->sceneManager->currentScene == IDSCENEBASE) {
-			ChangeMap(LEAVEBASE, IDSCENEMAP);
-		}
-		else if (app->sceneManager->currentScene == IDSCENESTORE) {
-			ChangeMap(LEAVESTORE, IDSCENEMAP);
-		}
-		else if (app->sceneManager->currentScene == IDSCENETABERN) {
-			ChangeMap(LEAVETABERN, IDSCENEMAP);
-		}
-
-
-		//leaving village map
-		if (app->sceneManager->currentScene == IDVILLAGE)
-		{
-			ChangeMap(LEAVEVILLAGE, IDLABRINTH);
-		}
-
-		//leaving tutorial map
-		if (app->sceneManager->currentScene == IDTUTORIAL)
-		{
-			/*ChangeMap(LEAVETUTORIAL, IDVILLAGE);*/
-		}
-
-		//leaving labrinth map
-		if (app->sceneManager->currentScene == IDLABRINTH)
-		{
-			if (app->sceneManager->village)
-			{
-				ChangeMap(LEAVELABRINTHLEFT, IDVILLAGE);
-				app->sceneManager->village = false;
-			}
-			if (app->sceneManager->leftAfterLabrinth)
-			{
-				ChangeMap(LEAVELABRINTHRIGHT, IDAFTERLABRINTH);
-				app->sceneManager->leftAfterLabrinth = false;
-			}
-		}
-		//leaving afterlabrinth map
-		if (app->sceneManager->currentScene == IDAFTERLABRINTH)
-		{
-			if (app->sceneManager->rightLabrinth)
-			{
-				ChangeMap(LEAVEAFTERLABRINTHLEFT, IDLABRINTH);
-				app->sceneManager->rightLabrinth = false;
-			}
-			if (app->sceneManager->nordCity)
-			{
-				ChangeMap(LEAVEAFTERLABRINTHDOWN, IDSCENEMAP);
-				app->sceneManager->nordCity = false;
-			}
-		}
-
-		//leaving prelab map
-		if (app->sceneManager->currentScene == IDPRELAB)
-		{
-			if (app->sceneManager->downCity)
-			{
-				//app->map->CleanUp();
-				//app->map->ClearMaps();
-				//app->sceneManager->currentScene = 0; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
-				//app->render->camera.x = 0;
-				//app->render->camera.y = 0;
-				////app->sceneManager->current->TransitionToScene(SceneType::BATTLE, TransitionType::ALTERNATING_BARS);
-
-				ChangeMap(LEAVEPRELABTOP, IDSCENEMAP);
-				app->sceneManager->downCity = false;
-			}
-			if (app->sceneManager->lab)
-			{
-				ChangeMap(LEAVEPRELAB, IDLAB);
-				app->sceneManager->lab = false;
-			}
-		}
-
-		//leaving lab map
-		if (app->sceneManager->currentScene == IDLAB)
-		{
-			if (app->sceneManager->downCity)
-			{
-				ChangeMap(LEAVELABTOP, IDSCENEMAP);
-				app->sceneManager->downCity = false;
-			}
-			if (app->sceneManager->prelab)
-			{
-				ChangeMap(LEAVELAB, IDPRELAB);
-				app->sceneManager->prelab = false;
-			}
-		}
-
-		if (app->sceneManager->currentScene == IDSCENEMAP)
-		{
-			//LEAVING CITY MAP
-			if (app->sceneManager->store) {
-				ChangeMap(INIT_POS_STORE, IDSCENESTORE);
-				app->sceneManager->store = false;
-			}
-			else if (app->sceneManager->tabern) {
-				ChangeMap(INIT_POS_TABERN, IDSCENETABERN);
-				app->sceneManager->tabern = false;
-			}
-			else if (app->sceneManager->resistance_base) {
-				ChangeMap(INIT_POS_BASE, IDSCENEBASE);
-				app->sceneManager->resistance_base = false;
-			}
-			else if (app->sceneManager->downAfterLabrinth)
-			{
-				ChangeMap(LEAVECITYTOP, IDAFTERLABRINTH);
-				app->sceneManager->downAfterLabrinth = false;
-			}
-			else if (app->sceneManager->topPreLab )
-			{
-				ChangeMap(LEAVECITYDOWN, IDPRELAB);
-				app->sceneManager->topPreLab = false;
-			}
-		}
+		ChangeMap(nextMap);
 	}
 	
 	//load request out from a bool triggerable out of scene
@@ -788,15 +572,15 @@ bool SceneGameplay::UnLoad()
 	return ret;
 }
 
-void SceneGameplay::CharacterSwap(PlayerType player)
-{
-	
-}
+//void SceneGameplay::CharacterSwap(PlayerType player)
+//{
+//	
+//}
 
 bool SceneGameplay::LoadState(pugi::xml_node& load)
 {
 	//info of gameplay data
-	app->sceneManager->currentScene = load.child("SceneGameplayInfo").attribute("CurrentMap").as_int();
+	app->sceneManager->currentMap = static_cast<MapType>(load.child("SceneGameplayInfo").attribute("CurrentMap").as_int());
 	app->sceneManager->puzzle1solved = load.child("SceneGameplayInfo").attribute("Puzzle1Solved").as_bool();
 	app->sceneManager->puzzle2solved = load.child("SceneGameplayInfo").attribute("Puzzle2Solved").as_bool();
 	app->sceneManager->puzzle3solved = load.child("SceneGameplayInfo").attribute("Puzzle3Solved").as_bool();
@@ -808,7 +592,7 @@ bool SceneGameplay::LoadState(pugi::xml_node& load)
 
 
 	//finally, after loading everything, lets apply automatically everything else
-	ChangeMap(currentPlayer->position, app->sceneManager->currentScene);
+	ChangeMap(app->sceneManager->currentMap);
 
 	return true;
 }
@@ -817,7 +601,7 @@ bool SceneGameplay::SaveState(pugi::xml_node& save) const
 {
 	//info of gameplay data
 	pugi::xml_node sceneGameplayInfoNode = save.append_child("SceneGameplayInfo");
-	sceneGameplayInfoNode.append_attribute("CurrentMap") = app->sceneManager->currentScene;
+	sceneGameplayInfoNode.append_attribute("CurrentMap") = app->sceneManager->currentMap;
 	sceneGameplayInfoNode.append_attribute("Puzzle1Solved") = app->sceneManager->puzzle1solved;
 	sceneGameplayInfoNode.append_attribute("Puzzle2Solved") = app->sceneManager->puzzle2solved;
 	sceneGameplayInfoNode.append_attribute("Puzzle3Solved") = app->sceneManager->puzzle3solved;
@@ -829,11 +613,6 @@ bool SceneGameplay::SaveState(pugi::xml_node& save) const
 	playerNode.append_attribute("y") = currentPlayer->position.y;
 
 	return true;
-}
-
-void SceneGameplay::ChangeState(GameplayMenuState type)
-{
-	//menuState = type;
 }
 
 void SceneGameplay::HandleInput(Input* input, float dt)
@@ -891,10 +670,10 @@ void SceneGameplay::LoadStaticObject()
 
 	for (pugi::xml_node staticObjectNode = config.child("staticObject"); staticObjectNode; staticObjectNode = staticObjectNode.next_sibling("staticObject"))
 	{
-		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
-			if ((app->sceneManager->currentScene == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved) ||	//if current scene is after labrinth and puzzle 2 is NOT solved it will spawn
-				(app->sceneManager->currentScene == IDLAB && !app->sceneManager->puzzle4solved))		//if current scene is lab and puzzle 4 is NOT solved it will spawn
+			if ((app->sceneManager->currentMap == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved) ||	//if current scene is after labrinth and puzzle 2 is NOT solved it will spawn
+				(app->sceneManager->currentMap == IDLAB && !app->sceneManager->puzzle4solved))		//if current scene is lab and puzzle 4 is NOT solved it will spawn
 			{
 				StaticObject* staticObject = (StaticObject*)app->entityManager->CreateEntity(EntityType::STATICOBJECT);
 				staticObject->parameters = staticObjectNode;
@@ -920,7 +699,7 @@ void SceneGameplay::LoadMovableObjects()
 
 	for (pugi::xml_node movableObjectNode = config.child("movableObject"); movableObjectNode; movableObjectNode = movableObjectNode.next_sibling("movableObject"))
 	{
-		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (movableObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			MovableObject* movableObject = (MovableObject*)app->entityManager->CreateEntity(EntityType::MOVABLEOBJECT, app->sceneManager->puzzle1solved);
 			movableObject->parameters = movableObjectNode;
@@ -945,7 +724,7 @@ void SceneGameplay::LoadTriggerableObjects()
 
 	for (pugi::xml_node triggerableObjectNode = config.child("triggerableObject"); triggerableObjectNode; triggerableObjectNode = triggerableObjectNode.next_sibling("triggerableObject"))
 	{
-		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (triggerableObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			TriggerableObject* triggerableObject = (TriggerableObject*)app->entityManager->CreateEntity(EntityType::TRIGGERABLEOBJECT, app->sceneManager->puzzle2solved);
 			triggerableObject->parameters = triggerableObjectNode;
@@ -970,7 +749,7 @@ void SceneGameplay::LoadCollectibleObjects()
 
 	for (pugi::xml_node collectibleObjectNode = config.child("collectibleObject"); collectibleObjectNode; collectibleObjectNode = collectibleObjectNode.next_sibling("collectibleObject"))
 	{
-		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (collectibleObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			CollectibleObject* collectibleObject = (CollectibleObject*)app->entityManager->CreateEntity(EntityType::COLLECTIBLEOBJECT);
 			collectibleObject->parameters = collectibleObjectNode;
@@ -995,7 +774,7 @@ void SceneGameplay::LoadNpc()
 
 	for (pugi::xml_node npcNode = config.child("npc"); npcNode; npcNode = npcNode.next_sibling("npc"))
 	{
-		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentScene)
+		if (npcNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
 			NPC* npc = (NPC*)app->entityManager->CreateEntity(EntityType::NPC);
 			npc->parameters = npcNode;
@@ -1018,14 +797,12 @@ void SceneGameplay::SetCameraMovement(int target_x, int target_y, float dt)
 	if (app->render->camera.y < target_y) app->render->camera.y += 700 * dt;
 }
 
-void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
+void SceneGameplay::ChangeMap(MapType newMap)
 {
 	app->map->CleanUp();
+	app->map->ClearMaps();
 	//CORE VARIABLE TO CHANGE SCENE
-	app->sceneManager->currentScene = newScene;
-
-	//set new position to player
-	currentPlayer->position = newPos;
+	app->sceneManager->currentMap = newMap;
 
 	//load again new npcs
 	LoadNpc();
@@ -1037,9 +814,9 @@ void SceneGameplay::ChangeMap(iPoint newPos, int newScene)
 	LoadCollectibleObjects();
 	//load again new staticobjects
 	LoadStaticObject();
-
+	// TODO: averiguar si esto funciona para algo o no (a parte del canmovecam) y borrar canmovecam pq con el fixedx y fixedy ya basta
 	//set camera according new scene
-	switch (app->sceneManager->currentScene)
+	switch (app->sceneManager->currentMap)
 	{
 	case -1:
 		app->render->camera.x = 0;

@@ -314,7 +314,7 @@ bool Map::Load(const char* scene)
     }
 
     pugi::xml_document mapFileXML;
-    pugi::xml_parse_result result = mapFileXML.load_file(mapFileName[app->sceneManager->currentScene].GetString());
+    pugi::xml_parse_result result = mapFileXML.load_file(mapFileName[app->sceneManager->currentMap].GetString());
 
 
     if(result == NULL)
@@ -342,6 +342,10 @@ bool Map::Load(const char* scene)
     {
         ret = LoadAllObjectGroups(mapFileXML.child("map"));
     }
+    if (ret)
+    {
+        ret = LoadMapProperties(mapFileXML.child("map"));
+    }
     
     // Create colliders
     CreateColliders(mapFileXML);
@@ -350,7 +354,7 @@ bool Map::Load(const char* scene)
     {
         // LOG all the data loaded iterate all tilesets and LOG everything
        
-        LOG("Successfully parsed map XML file :%s", mapFileName[app->sceneManager->currentScene].GetString());
+        LOG("Successfully parsed map XML file :%s", mapFileName[app->sceneManager->currentMap].GetString());
         LOG("width : %d height : %d",mapData.width,mapData.height);
         LOG("tile_width : %d tile_height : %d",mapData.tileWidth, mapData.tileHeight);
         
@@ -655,6 +659,23 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     return ret;
 }
 
+bool Map::LoadMapProperties(pugi::xml_node& node)
+{
+    bool ret = true;
+    for (pugi::xml_node propertyNode = node.child("properties").child("property"); propertyNode; propertyNode = propertyNode.next_sibling("property"))
+    {
+        if (propertyNode.name() == "fixedCameraX")
+        {
+            mapProperties.fixedCameraX = propertyNode.attribute("value").as_bool();
+        }
+        else if (propertyNode.name() == "fixedCameraY")
+        {
+            mapProperties.fixedCameraY = propertyNode.attribute("value").as_bool();
+        }
+    }
+    return ret;
+}
+
 bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions lol omg xd
 {
     bool ret = true;
@@ -694,98 +715,9 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                             objectNode.attribute("width").as_int(),
                             objectNode.attribute("height").as_int() };
 
-                id = objectNode.attribute("id").as_int();
-                if (app->sceneManager->currentScene == 0)
-                {
-                    switch (id)
-                    {
-                    case 54:
-                        newscene = 5;
-                        break;
-                    case 55:
-                        newscene = 7;
-                        break;
-                    case 56:
-                        newscene = 3;
-                        break;
-                    case 57:
-                        newscene = 2;
-                        break;
-                    case 58:
-                        newscene = 1;
-                        break;
-                    default:
-                        break;
-                    }
-                }
-                if (app->sceneManager->currentScene == 4)
-                {
-                    switch (id)
-                    {
-                    case 18:
-                        newscene = 6;
-                        break;
-                    case 19:
-                        newscene = 5;
-                        break;
-                    default:
-                        break;
-                    }
-                }
-                if (app->sceneManager->currentScene == 5)
-                {
-                    switch (id)
-                    {
-                    case 21:
-                        newscene = 4;
-                        break;
-                    case 22:
-                        newscene = 0;
-                        break;
-                    default:
-                        break;
-                    }
-                }
-                if (app->sceneManager->currentScene == 7)
-                {
-                    switch (id)
-                    {
-                    case 59:
-                        newscene = 0;
-                        break;
-                    case 60:
-                        newscene = 9;
-                    default:
-                        break;
-                    }
-                }
-                if (app->sceneManager->currentScene == 9)
-                {
-                    switch (id)
-                    {
-                    case 54:
-                        newscene = 7;
-                        break;
-                    case 55:
-                        newscene = 0;
-                        break;
-                    default:
-                        break;
-                    }
-                }
-                if (app->sceneManager->currentScene == 8)
-                {
-                    switch (id)
-                    {
-                    case 16:
-                        newscene = 6;
-                        break;
-                    default:
-                        break;
-                    }
-                }
-
-                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE, nullptr, true, newscene);
+                
+                Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::CHANGESCENE, nullptr, true);
+                c1->ParseMapProperties(objectNode);
 
                 objectNode = objectNode.next_sibling("object");
             }
@@ -801,7 +733,7 @@ bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions l
                             objectNode.attribute("width").as_int(),
                             objectNode.attribute("height").as_int() };
 
-                if(!app->sceneManager->cityCombatDone && app->sceneManager->currentScene == 0)
+                if(!app->sceneManager->cityCombatDone && app->sceneManager->currentMap == 0)
                 Collider* c1 = app->moduleCollisions->AddCollider(rect, Collider::Type::ENEMY, nullptr, true);
 
                 objectNode = objectNode.next_sibling("object");

@@ -15,7 +15,6 @@ class Enemy;
 class BattleMenu;
 class SceneGameplay;
 class Map;
-class Inventory;
 class ParticlesManager;
 
 struct LoadedUnit

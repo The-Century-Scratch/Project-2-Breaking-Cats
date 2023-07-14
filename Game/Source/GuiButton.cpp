@@ -195,7 +195,7 @@ bool GuiButton::Draw(Render* render)
 			}
 			break;
 		}
-		app->render->DrawText(text.GetString(), (bounds.x + 6), (bounds.y + 2), (bounds.w - 10), (bounds.h - 2), { 255,255,255 });
+		app->render->DrawText(text.GetString(),/* TODO: poner que el texto no vaya por el size de los bounds sino por el tamaño de la string*/(bounds.x + 6), (bounds.y + 2), (bounds.w - 10), (bounds.h - 2), { 255,255,255 });
 	}
 	else if (app->hud->hudstate == hudSTATE::CONFIGSCREEN)
 	{

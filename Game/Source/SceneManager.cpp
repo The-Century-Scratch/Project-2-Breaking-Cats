@@ -49,7 +49,7 @@ bool SceneManager::Start()
 	LOG("Scene Manager Start");
 	bool ret = true;
 
-	currentScene = -1;
+	//currentMap = -1;
 
 	current = new SceneLogo();
 	//current = new SceneTitle();
@@ -83,7 +83,31 @@ bool SceneManager::Update(float dt)
 	{
 		if (!Pause)
 		{
-			ret = current->Update(dt);
+			switch (static_cast<MapType>(current->Update(dt)))
+			{
+			case NONE:
+				break;
+			case TUTORIAL:
+				break;
+			case VILLAGE:
+				break;
+			case MOVROCK:
+				break;
+			case LEVERDOOR:
+				break;
+			case CITY:
+				break;
+			case LAB:
+				break;
+			case SHOP:
+				break;
+			case TAVERN:
+				break;
+			case RESISTANCE:
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	else

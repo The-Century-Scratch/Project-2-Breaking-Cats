@@ -75,3 +75,4 @@ ipch/
 *.db
 *.opendb
 packages/
+/Output/Assets/Maps/breakingcats.tiled-project

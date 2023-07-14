@@ -142,7 +142,7 @@ bool Hud::Update(float dt)
 		{
 			return false;
 		}
-		app->sceneManager->currentScene = -1;
+		app->sceneManager->currentMap = NONE;
 		app->render->camera = { 0,0 };
 
 		ListItem<GuiControl*>* control = app->guiManager->guiControlsList.start;
@@ -548,14 +548,14 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button 1 click");
 		app->hud->prevstate = app->hud->hudstate;
 		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
-		app->sceneManager->currentScene = 8;
+		app->sceneManager->currentMap = TUTORIAL;
 		app->hud->hudstate = hudSTATE::CLOSED;
 		app->audio->PlayMusic(forestTheme.GetString());
 		break;
 	case 2:
 		LOG("Button 2 click");
 		app->hud->prevstate = app->hud->hudstate;
-		app->sceneManager->currentScene = 6;
+		app->sceneManager->currentMap = VILLAGE;
 		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 		app->hud->hudstate = hudSTATE::CLOSED;
 		app->audio->PlayMusic(forestTheme.GetString());
@@ -641,7 +641,7 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 	case 18:
 		LOG("Button 18 click");
 		app->hud->prevstate = app->hud->hudstate;
-		app->sceneManager->currentScene = 6;
+		app->sceneManager->currentMap = VILLAGE;
 		app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 		app->hud->hudstate = hudSTATE::CLOSED;
 		app->audio->PlayMusic(forestTheme.GetString());

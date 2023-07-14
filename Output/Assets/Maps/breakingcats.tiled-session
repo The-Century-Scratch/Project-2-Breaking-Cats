@@ -1,0 +1,330 @@
+{
+    "activeFile": "Tutorial.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "AfterMoveRock.tmx": {
+            "scale": 1.674375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 194.1022769690183,
+                "y": 160.3583426651736
+            }
+        },
+        "AfterMoveRock.tmx#Environment": {
+            "scaleInDock": 1
+        },
+        "AfterMoveRock.tmx#Ground Tileset": {
+            "scaleInDock": 1
+        },
+        "AfterMoveRock.tmx#Stone Path Tileset": {
+            "scaleInDock": 1
+        },
+        "AfterMoveRock.tmx#Trees": {
+            "scaleInDock": 1
+        },
+        "Lab.tmx": {
+            "scale": 1.7060416666666667,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 200.757113200635,
+                "y": 259.6654048113323
+            }
+        },
+        "Lab.tmx#CP_V1.0.4": {
+            "scaleInDock": 1
+        },
+        "Lab.tmx#Environment": {
+            "scaleInDock": 1
+        },
+        "Lab.tmx#TilesetLabs": {
+            "scaleInDock": 1
+        },
+        "MoveRock.tmx": {
+            "scale": 1.674375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 193.80365808137367,
+                "y": 180.963045912654
+            }
+        },
+        "MoveRock.tmx#Environment": {
+            "scaleInDock": 1
+        },
+        "MoveRock.tmx#Ground Tileset": {
+            "scaleInDock": 1
+        },
+        "MoveRock.tmx#Stone Path Tileset": {
+            "scaleInDock": 1
+        },
+        "MoveRock.tmx#Trees": {
+            "scaleInDock": 1
+        },
+        "PreLab.tmx": {
+            "scale": 1.674375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.79096677864877,
+                "y": 180.963045912654
+            }
+        },
+        "PreLab.tmx#CP_V1.0.4": {
+            "scaleInDock": 1
+        },
+        "Resistance.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 2.132552083333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 119.80950054951767,
+                "y": 127.54670899987791
+            }
+        },
+        "Resistance.tmx#Props": {
+            "scaleInDock": 1
+        },
+        "Resistance.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx": {
+            "scale": 4.265104166666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 107.96922701184518,
+                "y": 95.66003174990841
+            }
+        },
+        "Shop.tmx#Props": {
+            "scaleInDock": 1
+        },
+        "Shop.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "Taverna.tmx": {
+            "scale": 2.2832386363636363,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 207.81883787482892,
+                "y": 103.36195097673263
+            }
+        },
+        "Taverna.tmx#Props": {
+            "scaleInDock": 1
+        },
+        "Taverna.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "Transicion.tmx": {
+            "scale": 1.674375,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 186.63680477790223,
+                "y": 180.963045912654
+            }
+        },
+        "Transicion.tmx#CP_V1.0.4": {
+            "scaleInDock": 1
+        },
+        "Transicion.tmx#Environment": {
+            "scaleInDock": 1
+        },
+        "Transicion.tmx#Ground Tileset": {
+            "scaleInDock": 1
+        },
+        "Transicion.tmx#Stone Path Tileset": {
+            "scaleInDock": 1
+        },
+        "Transicion.tmx#Trees": {
+            "scaleInDock": 1
+        },
+        "Tutorial.tmx": {
+            "expandedObjectLayers": [
+                5,
+                6
+            ],
+            "scale": 0.8530208333333333,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 239.7362315301014,
+                "y": 519.3308096226646
+            }
+        },
+        "Tutorial.tmx#Environment": {
+            "scaleInDock": 1
+        },
+        "Tutorial.tmx#Ground Tileset": {
+            "scaleInDock": 1
+        },
+        "Tutorial.tmx#Stone Path Tileset": {
+            "scaleInDock": 1
+        },
+        "Tutorial.tmx#Trees": {
+            "scaleInDock": 1
+        },
+        "TutorialPlaceholder.tmx": {
+            "scale": 0.8530208333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 262.0100134326535,
+                "y": 479.4724630602027
+            }
+        },
+        "TutorialPlaceholder.tmx#Ground Tileset": {
+            "scaleInDock": 1
+        },
+        "TutorialPlaceholder.tmx#MapMetadata": {
+            "scaleInDock": 1
+        },
+        "Village.tmx": {
+            "scale": 1.2557812499999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 343.6108000497698,
+                "y": 158.46708971009087
+            }
+        },
+        "Village.tmx#Village": {
+            "scaleInDock": 1
+        },
+        "Woods.tmx": {
+            "scale": 1.2557812499999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 258.8030359586911,
+                "y": 240.08958566629343
+            }
+        },
+        "Woods.tmx#Environment": {
+            "scaleInDock": 1
+        },
+        "Woods.tmx#Ground Tileset": {
+            "scaleInDock": 1
+        },
+        "Woods.tmx#Stone Path Tileset": {
+            "scaleInDock": 1
+        },
+        "Woods.tmx#Trees": {
+            "scaleInDock": 1
+        },
+        "city_square.tmx": {
+            "scale": 1.046484375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 382.70996640537516,
+                "y": 384.1433370660694
+            }
+        },
+        "city_square.tmx#Plaza": {
+            "scaleInDock": 1
+        },
+        "city_square.tmx#Props": {
+            "scaleInDock": 1
+        },
+        "combatBuilding.tmx": {
+            "scale": 1.6565625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 207.35710243350314,
+                "y": 251.72608941709115
+            }
+        },
+        "combatBuilding.tmx#CP_V1.0.4": {
+            "scaleInDock": 1
+        },
+        "combatBuilding.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "combatBuilding.tmx#galletcity": {
+            "scaleInDock": 1
+        },
+        "combatCity.tmx": {
+            "scale": 1.6565625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 110.77155253725712,
+                "y": 180.4942463686097
+            }
+        },
+        "combatCity.tmx#CP_V1.0.4": {
+            "scaleInDock": 1
+        },
+        "combatCity.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "combatCity.tmx#galletcity": {
+            "scaleInDock": 1
+        },
+        "combatCity.tmx#galletcity_tiles": {
+            "scaleInDock": 1
+        },
+        "combatVillage.tmx": {
+            "scale": 2.5115624999999997,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 159.46248600223967,
+                "y": 113.07701878810501
+            }
+        },
+        "combatVillage.tmx#MasterSimple": {
+            "scaleInDock": 1
+        },
+        "combatVillage.tmx#Tiles": {
+            "scaleInDock": 1
+        },
+        "dogma.tmx": {
+            "scale": 1.046484375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 388.44344904815233,
+                "y": 417.58865248226954
+            }
+        },
+        "dogma.tmx#CP_V1.0.4": {
+            "scaleInDock": 1
+        },
+        "dogma.tmx#Plaza": {
+            "scaleInDock": 1
+        },
+        "dogma.tmx#Props": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+        "Village.tmx",
+        "TutorialPlaceholder.tmx",
+        "Transicion.tmx",
+        "Shop.tmx",
+        "Woods.tmx",
+        "Taverna.tmx",
+        "Resistance.tmx",
+        "PreLab.tmx",
+        "MoveRock.tmx",
+        "Lab.tmx",
+        "dogma.tmx",
+        "combatVillage.tmx",
+        "combatCity.tmx",
+        "combatBuilding.tmx",
+        "city_square.tmx",
+        "AfterMoveRock.tmx",
+        "Tutorial.tmx"
+    ],
+    "project": "breakingcats.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "Resistance.tmx",
+        "Village.tmx",
+        "TutorialPlaceholder.tmx",
+        "Transicion.tmx",
+        "Shop.tmx",
+        "Woods.tmx",
+        "Taverna.tmx",
+        "PreLab.tmx",
+        "MoveRock.tmx",
+        "Lab.tmx",
+        "dogma.tmx",
+        "combatVillage.tmx"
+    ]
+}

@@ -40,7 +40,7 @@ public:
 
 	//int important to know what MAP TO LOAD FROM TILED
 	//can also used to know in what scene you are
-	int currentScene;
+	MapType currentMap;
 	
 	bool Pause = false;
 	//variable in city

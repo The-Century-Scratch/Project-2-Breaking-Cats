@@ -2,10 +2,22 @@
 #define __COLLIDER_H__
 
 #include "List.h"
+#include "Scene.h"
 #include "SDL/include/SDL_Rect.h"
+#include <PugiXml/src/pugixml.hpp>
+#include "Point.h"
 
 class Module;
 class Entity;
+
+struct ColliderProperties
+{
+	// TELEPORT
+	MapType destinationMap;
+	iPoint destination;
+
+	//
+};
 
 struct Collider
 {
@@ -45,14 +57,17 @@ struct Collider
 
 	bool Intersects(const SDL_Rect& r) const;
 
+	void ParseMapProperties(pugi::xml_node const& node);
+
 	//Variables
 	SDL_Rect rect;
 	bool pendingToDelete = false;
 	Type type;
 	Entity* listener = nullptr;
-	int scene = 0;
 
 	bool mapCollider = false;
+
+	ColliderProperties properties;
 
 	List<Collider*> onCollision;
 };

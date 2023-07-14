@@ -56,7 +56,7 @@ bool SceneBattle::Load()
 	eKey = { 4 * 16, 2 * 16, 16,16 };
 	qKey = { 0, 4 * 16, 16,16 };
 
-	switch (app->sceneManager->currentScene)
+	switch (app->sceneManager->currentMap)
 	{
 	case 10:
 	{
@@ -1176,17 +1176,16 @@ bool SceneBattle::Update(float dt)
     
 			//app->hud->prevstate = app->hud->hudstate;
 			//app->hud->hudstate = hudSTATE::ENDSCREEN;
-		switch (app->sceneManager->currentScene) 
+		switch (app->sceneManager->currentMap)
 		{
 		case 10:
-			app->sceneManager->currentScene = 6;
+			app->sceneManager->currentMap = VILLAGE;
 			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 			break;
 		case 11:
-			app->sceneManager->currentScene = 1;
+			app->sceneManager->currentMap = CITY;
 			app->sceneManager->current->TransitionToScene(SceneType::GAMEPLAY, TransitionType::ALTERNATING_BARS);
 			app->sceneManager->cityCombatDone = true;
-			app->sceneManager->changeMap = true;
 			app->sceneManager->nordCity = true;
 			break;
 		case 12:
@@ -1202,7 +1201,7 @@ bool SceneBattle::Update(float dt)
 		app->map->CleanUp();
 		app->map->ClearMaps();
 
-		app->sceneManager->currentScene = 6;
+		app->sceneManager->currentMap = VILLAGE;
 		//app->hud->prevstate = app->hud->hudstate;
 		//app->hud->hudstate = hudSTATE::ENDSCREEN;
 
@@ -1218,7 +1217,7 @@ bool SceneBattle::Update(float dt)
 		app->map->CleanUp();
 		app->map->ClearMaps();
 
-		app->sceneManager->currentScene = rand() % 3; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
+		app->sceneManager->currentMap = static_cast<MapType>(rand() % 3); //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;

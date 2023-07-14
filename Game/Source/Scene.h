@@ -4,6 +4,23 @@
 #include "TransitionsManager.h"
 
 #include "Log.h"
+#include "PugiXml/src/pugixml.hpp"
+#include "SString.h"
+
+enum MapType
+{
+	NONE = 0,
+	TUTORIAL,
+	VILLAGE,
+	MOVROCK,
+	LEVERDOOR,
+	CITY,
+	LABYRINTH,
+	LAB,
+	SHOP,
+	TAVERN,
+	RESISTANCE
+};
 
 enum class SceneType
 {
@@ -46,6 +63,8 @@ public:
 
 	virtual bool SaveState(pugi::xml_node&) const { return true; }
 
+	virtual void ChangeMap(MapType newMap) {}
+
 
 	void TransitionToScene(SceneType scene, TransitionType type, bool w = false)
 	{
@@ -71,6 +90,8 @@ public:
 
 	int channel = 0;
 	bool win = 0;
+
+	MapType nextMap;
 };
 
 #endif // __SCENE_H__

@@ -138,6 +138,14 @@ struct MapData
 	
 };
 
+struct MapProperties
+{
+	bool fixedCameraX = 0;
+	bool fixedCameraY = 0;
+
+	iPoint initialCamera;
+};
+
 
 class Map : public Module
 {
@@ -195,12 +203,17 @@ private:
 
 	// Load a group of properties 
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+
+	// Load Map Custom properties 
+	bool LoadMapProperties(pugi::xml_node& node);
 	
 
 public: 
 
 	// Declare a variable data of the struct MapData
 	MapData mapData;
+	// Custom map properties loaded from tiled
+	MapProperties mapProperties;
 
 	eastl::vector<pugi::xml_node> propertyNodes;
 
