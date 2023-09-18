@@ -47,67 +47,58 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 {
 	frames = 0;
 
-	win = new Window(true);
-	input = new Input(true);
-	render = new Render(true);
-	tex = new Textures(true);
-	audio = new Audio(true);
-	sceneManager = new SceneManager(true);
-	moduleCollisions = new ModuleCollisions(true);
-	map = new Map(true);
-	assetsManager = new AssetsManager(true);
-	entityManager = new EntityManager(true);
-	particleManager = new ParticleSystemManager(true);
-	questManager = new QuestManager(true);
-	guiManager = new GuiManager(true);
-	statsManager = new StatsManager(true);
-	hud = new Hud(true);
-	inventory = new Inventory(true);
-	inventoryShop = new InventoryShop(true);
-	debug = new Debug(true);
+	win = eastl::make_unique<Window>(true);
+	input = eastl::make_unique<Input>(true);
+	render = eastl::make_unique<Render>(true);
+	tex = eastl::make_unique<Textures>(true);
+	audio = eastl::make_unique<Audio>(true);
+	sceneManager = eastl::make_unique<SceneManager>(true);
+	moduleCollisions = eastl::make_unique<ModuleCollisions>(true);
+	map = eastl::make_unique<Map>(true);
+	assetsManager = eastl::make_unique<AssetsManager>(true);
+	entityManager = eastl::make_unique<EntityManager>(true);
+	particleManager = eastl::make_unique<ParticleSystemManager>(true);
+	questManager = eastl::make_unique<QuestManager>(true);
+	guiManager = eastl::make_unique<GuiManager>(true);
+	statsManager = eastl::make_unique<StatsManager>(true);
+	hud = eastl::make_unique<Hud>(true);
+	inventory = eastl::make_unique<Inventory>(true);
+	inventoryShop = eastl::make_unique<InventoryShop>(true);
+	debug = eastl::make_unique<Debug>(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
-	AddModule(win);
-	AddModule(input);
-	AddModule(assetsManager);
-	AddModule(tex);
-	AddModule(audio);
-	AddModule(sceneManager);
-	AddModule(moduleCollisions);
-	AddModule(guiManager);
-	AddModule(entityManager);
-	AddModule(particleManager);
-	AddModule(questManager);
-	AddModule(statsManager);
-	AddModule(map);
-	AddModule(hud);
-	AddModule(inventory);
-	AddModule(inventoryShop);
-	AddModule(debug);
+	AddModule(win.get());
+	AddModule(input.get());
+	AddModule(assetsManager.get());
+	AddModule(tex.get());
+	AddModule(audio.get());
+	AddModule(sceneManager.get());
+	AddModule(moduleCollisions.get());
+	AddModule(guiManager.get());
+	AddModule(entityManager.get());
+	AddModule(particleManager.get());
+	AddModule(questManager.get());
+	AddModule(statsManager.get());
+	AddModule(map.get());
+	AddModule(hud.get());
+	AddModule(inventory.get());
+	AddModule(inventoryShop.get());
+	AddModule(debug.get());
 	// Render last to swap buffer
-	AddModule(render);
+	AddModule(render.get());
 }
 
 // Destructor
 App::~App()
 {
-	// Release modules
-	ListItem<Module*>* item = modules.end;
-
-	while(item != NULL)
-	{
-		RELEASE(item->data);
-		item = item->prev;
-	}
-
-	modules.Clear();
+	modules.clear();
 }
 
 void App::AddModule(Module* module)
 {
 	module->Init();
-	modules.Add(module);
+	modules.push_back(module);
 }
 
 // Called before render is available
@@ -115,31 +106,24 @@ bool App::Awake()
 {
 	timer = Timer();
 	//Load config from XML
-	bool ret = LoadConfig();
+	if (LoadConfig()) 
+		return false;
 
-	if(ret == true)
+	//Read the title from the config file
+	title = configNode.child("app").child("title").child_value();
+	maxFrameDuration = configNode.child("app").child("frcap").attribute("value").as_int();
+
+	for (auto const& item : modules)
 	{
-		//Read the title from the config file
-		title = configNode.child("app").child("title").child_value();
-		maxFrameDuration = configNode.child("app").child("frcap").attribute("value").as_int();
-
-		ListItem<Module*>* item;
-		item = modules.start;
-
-		while(item != NULL && ret == true)
+		if (pugi::xml_node node = configNode.child(item->name.GetString());
+			!item->Awake(node))
 		{
-			// Add a new argument to the Awake method to receive a pointer to an xml node.
-			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
-			// that can be used to read all variables for that module.
-			// Send nullptr if the node does not exist in config.xml
-			pugi::xml_node node = configNode.child(item->data->name.GetString());
-			ret = item->data->Awake(node);
-			item = item->next;
+			return false;
 		}
 	}
 	LOG("---------------- Time Awake: %f/n", timer.ReadMSec());
 
-	return ret;
+	return true;
 }
 
 // Called before the first frame
@@ -149,18 +133,15 @@ bool App::Start()
 	startupTime.Start();
 	lastSecFrameTime.Start();
 
-	bool ret = true;
-	ListItem<Module*>* item;
-	item = modules.start;
-
-	while(item != NULL && ret == true)
+	for (auto const& item : modules)
 	{
-		if (item->data->IsEnabled()) { ret = item->data->Start(); }
-		item = item->next;
+		if(item->IsEnabled())
+		if (!item->Start()) 
+			return false;
 	}
 	LOG("----------------- Time Start(): %f", timer.ReadMSec());
 
-	return ret;
+	return true;
 }
 
 // Called each loop iteration
@@ -468,8 +449,8 @@ bool App::SaveGame() const
 	pugi::xml_document* saveDoc = new pugi::xml_document();
 	pugi::xml_node saveStateNode = saveDoc->append_child("save_state");
 
-	ListItem<Module*>* item;
-	item = modules.start;
+	eastl::ListIterator<Module*>* item;
+	item = modules.begin();
 
 	while (item != NULL)
 	{

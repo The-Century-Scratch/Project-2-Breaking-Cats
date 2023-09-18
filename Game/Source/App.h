@@ -7,6 +7,8 @@
 #include "Timer.h"
 
 #include "PugiXml/src/pugixml.hpp"
+#include "EASTL/unique_ptr.h"
+#include "EASTL/list.h"
 
 #define CONFIG_FILENAME		"config.xml"
 #define SAVE_STATE_FILENAME "save_game.xml"
@@ -97,24 +99,24 @@ private:
 public:
 
 	// Modules
-	Window* win;
-	Input* input;
-	Render* render;
-	Textures* tex;
-	Audio* audio;
-	SceneManager* sceneManager;
-	AssetsManager* assetsManager;
-	ModuleCollisions* moduleCollisions;
-	Map* map;
-	EntityManager* entityManager;
-	ParticleSystemManager* particleManager;
-	QuestManager* questManager;
-	GuiManager* guiManager;
-	StatsManager* statsManager;
-	Hud* hud;
-	Inventory* inventory;
-	InventoryShop* inventoryShop;
-	Debug* debug;
+	eastl::unique_ptr<Window> win;
+	eastl::unique_ptr<Input> input;
+	eastl::unique_ptr<Render> render;
+	eastl::unique_ptr<Textures> tex;
+	eastl::unique_ptr<Audio> audio;
+	eastl::unique_ptr<SceneManager> sceneManager;
+	eastl::unique_ptr<AssetsManager> assetsManager;
+	eastl::unique_ptr<ModuleCollisions> moduleCollisions;
+	eastl::unique_ptr<Map> map;
+	eastl::unique_ptr<EntityManager> entityManager;
+	eastl::unique_ptr<ParticleSystemManager> particleManager;
+	eastl::unique_ptr<QuestManager> questManager;
+	eastl::unique_ptr<GuiManager> guiManager;
+	eastl::unique_ptr<StatsManager> statsManager;
+	eastl::unique_ptr<Hud> hud;
+	eastl::unique_ptr<Inventory> inventory;
+	eastl::unique_ptr<InventoryShop> inventoryShop;
+	eastl::unique_ptr<Debug> debug;
 
 	bool frcap = true;
 
@@ -125,7 +127,7 @@ private:
 	SString title;
 	SString organization;
 
-	List<Module *> modules;
+	eastl::list<Module *> modules;
 
 	// xml_document to store the config file and xml_node(s) to read specific branches of the xml
 	pugi::xml_document configFile;

@@ -70,10 +70,3 @@ SDL_Rect Font::GetCharRec(int value)
 
 	return rec;
 }
-
-bool Font::UnLoad(Textures* tex)
-{   
-	tex->Unload(texture);
-
-	return true;
-}

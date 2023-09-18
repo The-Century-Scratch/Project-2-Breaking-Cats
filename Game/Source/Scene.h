@@ -84,11 +84,7 @@ public:
 
 	bool transitionRequired = 0;
 	SceneType nextScene;
-	bool isTown = 0;
-	bool isDungeon = 0;
 	bool showColliders = 0;
-
-	int channel = 0;
 	bool win = 0;
 
 	MapType nextMap;

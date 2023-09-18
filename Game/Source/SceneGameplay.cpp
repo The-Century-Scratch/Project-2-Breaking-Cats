@@ -79,12 +79,12 @@ bool SceneGameplay::Load()
 
 	if (app->entityManager->state == false) { app->entityManager->Enable(); }
 
+	app->map->LoadSceneMaps(name.GetString());
+	app->map->Load();
+
 	currentPlayer = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	currentPlayer->parameters = config.child("player");
 	currentPlayer->Start();
-	//map = new Map(true);
-	//app->map->Load("city_square.tmx");
-	isTown = app->map->Load(name.GetString());
 
 	cityTheme = config.child("citytheme").attribute("path").as_string();
 	shopTheme = config.child("shoptheme").attribute("path").as_string();
@@ -185,56 +185,7 @@ bool SceneGameplay::Load()
 
 
 
-	switch (app->sceneManager->currentMap)
-	{
-	case -1:
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		canMoveCam = false;
-		break;
-	case 0:
-		app->render->camera.x = -597;
-		app->render->camera.y = 0;
-		canMoveCam = true;
-		break;
-	case 1:
-		app->render->camera.x = 283;
-		app->render->camera.y = -433;
-		canMoveCam = true;
-		break;
-	case 2:
-		app->render->camera.x = 375;
-		app->render->camera.y = 43;
-		canMoveCam = false;
-		break;
-	case 3:
-		app->render->camera.x = 102;
-		app->render->camera.y = 18;
-		canMoveCam = false;
-		break;
-	case 4:
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		canMoveCam = true;
-	case 5:
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		canMoveCam = true;
-	case 6:
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		canMoveCam = true;
-	case 7:
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		canMoveCam = true;
-	case 8:
-		app->render->camera.x = 0;
-		app->render->camera.y = -2000;
-		canMoveCam = true;
-	default:
-		break;
-	}
+	SetCamMovability();
 
 	addItems_ = true;
 
@@ -323,14 +274,6 @@ bool SceneGameplay::Update(float dt)
 	{
 		if (app->map->mapProperties.fixedCameraX)
 		{
-			if (app->sceneManager->currentMap == RESISTANCE)
-			{
-				app->render->camera.x = 283;
-			}
-			if (app->sceneManager->currentMap ==  LAB)
-			{
-				app->render->camera.x = 150;
-			}
 			//camera fix to player in y axis
 			if (currentPlayer->position.y > 300 / app->win->scale && currentPlayer->position.y < (app->map->mapData.tileHeight * app->map->mapData.height) - 420 / app->win->scale)
 			{
@@ -420,12 +363,11 @@ bool SceneGameplay::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_C) == KeyState::KEY_DOWN)
 	{
 		app->map->CleanUp();
-		app->map->ClearMaps();
 
 		app->sceneManager->currentMap = static_cast<MapType>(rand() % 3); //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
+		/*app->render->camera.x = 0;
+		app->render->camera.y = 0;*/
 
 		
 
@@ -437,7 +379,6 @@ bool SceneGameplay::Update(float dt)
 	{
 
 		app->map->CleanUp();
-		app->map->ClearMaps();
 
 		app->sceneManager->currentMap = NONE; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 
@@ -460,7 +401,7 @@ bool SceneGameplay::Update(float dt)
 		}
 	}
 
-	// check in which door is entering
+	// Check if map changes
 	if (app->sceneManager->changeMap)
 	{
 		ChangeMap(nextMap);
@@ -615,46 +556,6 @@ bool SceneGameplay::SaveState(pugi::xml_node& save) const
 	return true;
 }
 
-void SceneGameplay::HandleInput(Input* input, float dt)
-{
-	
-}
-
-bool SceneGameplay::CollisionMapEntity(SDL_Rect rect, EntityType type)
-{
-	
-
-	return false;
-}
-
-bool SceneGameplay::CheckCollision(SDL_Rect rec1, SDL_Rect rec2)
-{
-	if ((rec1.x < (rec2.x + rec2.w) && (rec1.x + rec1.w) > rec2.x) &&
-		(rec1.y < (rec2.y + rec2.h) && (rec1.y + rec1.h) > rec2.y)) return true;
-
-	else return false;
-}
-
-void SceneGameplay::GenerateBattle()
-{
-
-}
-
-void SceneGameplay::CameraFollow(Render* render)
-{
-	
-}
-
-void SceneGameplay::Transitioning(float dt)
-{
-	
-}
-
-void SceneGameplay::ChangeBlockBounds(int bounds_x, int bounds_y)
-{
-
-}
-
 void SceneGameplay::LoadStaticObject()
 {
 	ListItem<StaticObject*>* staticObjectItem = staticObjectList.start;
@@ -672,8 +573,8 @@ void SceneGameplay::LoadStaticObject()
 	{
 		if (staticObjectNode.attribute("scene").as_int() == app->sceneManager->currentMap)
 		{
-			if ((app->sceneManager->currentMap == IDAFTERLABRINTH && !app->sceneManager->puzzle2solved) ||	//if current scene is after labrinth and puzzle 2 is NOT solved it will spawn
-				(app->sceneManager->currentMap == IDLAB && !app->sceneManager->puzzle4solved))		//if current scene is lab and puzzle 4 is NOT solved it will spawn
+			if ((app->sceneManager->currentMap == LEVERDOOR && !app->sceneManager->puzzle2solved) ||	//if current scene is after labrinth and puzzle 2 is NOT solved it will spawn
+				(app->sceneManager->currentMap == LAB && !app->sceneManager->puzzle4solved))		//if current scene is lab and puzzle 4 is NOT solved it will spawn
 			{
 				StaticObject* staticObject = (StaticObject*)app->entityManager->CreateEntity(EntityType::STATICOBJECT);
 				staticObject->parameters = staticObjectNode;
@@ -789,18 +690,24 @@ void SceneGameplay::LoadItems(pugi::xml_node& n)
 
 }
 
-void SceneGameplay::SetCameraMovement(int target_x, int target_y, float dt)
+void SceneGameplay::SetCamMovability()
 {
-	if (app->render->camera.x < target_x) app->render->camera.x += 700 * dt;
-	if (app->render->camera.x > target_x) app->render->camera.x -= 700 * dt;
-	if (app->render->camera.y > target_y) app->render->camera.y -= 700 * dt;
-	if (app->render->camera.y < target_y) app->render->camera.y += 700 * dt;
+	if (app->map->mapProperties.fixedCameraX && app->map->mapProperties.fixedCameraY)
+	{
+		canMoveCam = false;
+	}
+	else
+	{
+		canMoveCam = true;
+	}
+
+	app->render->camera.x = app->map->mapProperties.initialCamera.x;
+	app->render->camera.y = app->map->mapProperties.initialCamera.y;
 }
 
 void SceneGameplay::ChangeMap(MapType newMap)
 {
 	app->map->CleanUp();
-	app->map->ClearMaps();
 	//CORE VARIABLE TO CHANGE SCENE
 	app->sceneManager->currentMap = newMap;
 
@@ -814,58 +721,19 @@ void SceneGameplay::ChangeMap(MapType newMap)
 	LoadCollectibleObjects();
 	//load again new staticobjects
 	LoadStaticObject();
-	// TODO: averiguar si esto funciona para algo o no (a parte del canmovecam) y borrar canmovecam pq con el fixedx y fixedy ya basta
-	//set camera according new scene
-	switch (app->sceneManager->currentMap)
-	{
-	case -1:
-		app->render->camera.x = 0;
-		app->render->camera.y = 0;
-		canMoveCam = false;
-		break;
-	case 0:
-		app->render->camera.x = -597;
-		app->render->camera.y = 0;
-		canMoveCam = true;
-		app->audio->PlayMusic(cityTheme.GetString());
-		break;
-	case 1:
-		app->render->camera.x = 283;
-		app->render->camera.y = -433;
-		canMoveCam = true;
-		break;
-	case 2:
-		app->render->camera.x = 375;
-		app->render->camera.y = 43;
-		canMoveCam = false;
-		app->audio->PlayMusic(shopTheme.GetString());
-		break;
-	case 3:
-		app->render->camera.x = 102;
-		app->render->camera.y = 18;
-		canMoveCam = false;
-		break;
-	case 4:
-		break;
-	case 5:
-		break;
-	case 6:
-		app->audio->PlayMusic(forestTheme.GetString());
-		break;
-	default:
-		break;
-	}
+	
 
-	app->map->Load(name.GetString());
+	app->map->Load();
 	app->sceneManager->changeMap = false;
+
+	//set camera according new scene
+	SetCamMovability();
 
 	//entityManager->DeleteAllNpcActive();
 	//app->audio->PlayFx(channel, doorFx);
 
 	//currentPlayer->bounds.x = newPos.x;
 	//currentPlayer->bounds.y = newPos.y;
-	//map->CleanUp();
-	//map->Load(mapName, app->tex);
 
 	//questManager->CheckQuests(map->name);
 	//particles->SetAllParticlesDesactivated();

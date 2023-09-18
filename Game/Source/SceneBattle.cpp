@@ -40,10 +40,11 @@ bool SceneBattle::Load()
 	pugi::xml_node config = configNode.child(name.GetString());
 
 
-	app->render->camera.x = 0;
-	app->render->camera.y = 0;
+	/*app->render->camera.x = 0;
+	app->render->camera.y = 0;*/
 
-	app->map->Load("scenegameplay");
+	app->map->LoadSceneMaps(name.GetString());
+	app->map->Load();
 
 	GuiCombat = app->tex->Load("Assets/Textures/GUI/CombatGUI.png");
 	GuiKeyboard = app->tex->Load("Assets/Textures/GUI/keyboard.png");
@@ -1172,7 +1173,6 @@ bool SceneBattle::Update(float dt)
 	if (!enemiesAlive || app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		app->map->CleanUp();
-		app->map->ClearMaps();
     
 			//app->hud->prevstate = app->hud->hudstate;
 			//app->hud->hudstate = hudSTATE::ENDSCREEN;
@@ -1199,7 +1199,6 @@ bool SceneBattle::Update(float dt)
 	if (!alliesAlive || app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
 	{
 		app->map->CleanUp();
-		app->map->ClearMaps();
 
 		app->sceneManager->currentMap = VILLAGE;
 		//app->hud->prevstate = app->hud->hudstate;
@@ -1215,7 +1214,6 @@ bool SceneBattle::Update(float dt)
 	{
 
 		app->map->CleanUp();
-		app->map->ClearMaps();
 
 		app->sceneManager->currentMap = static_cast<MapType>(rand() % 3); //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 

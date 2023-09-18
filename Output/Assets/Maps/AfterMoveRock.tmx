@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="23">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="23">
  <tileset firstgid="1" name="Environment" tilewidth="16" tileheight="16" tilecount="36" columns="6">
   <image source="BasicTopDown/Environment.png" width="96" height="96"/>
  </tileset>
@@ -1856,7 +1856,19 @@
   <object id="20" x="112" y="224" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="ChangeScene">
-  <object id="21" x="0" y="144" width="1" height="48"/>
-  <object id="22" x="224" y="319" width="48" height="1"/>
+  <object id="21" type="Teleport" x="0" y="144" width="1" height="48">
+   <properties>
+    <property name="Destination X" type="int" value="462"/>
+    <property name="Destination Y" type="int" value="150"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="3"/>
+   </properties>
+  </object>
+  <object id="22" type="Teleport" x="224" y="319" width="48" height="1">
+   <properties>
+    <property name="Destination X" type="int" value="389"/>
+    <property name="Destination Y" type="int" value="8"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="5"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

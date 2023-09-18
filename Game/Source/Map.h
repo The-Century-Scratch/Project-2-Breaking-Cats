@@ -143,7 +143,8 @@ struct MapProperties
 	bool fixedCameraX = 0;
 	bool fixedCameraY = 0;
 
-	iPoint initialCamera;
+	iPoint initialCamera = iPoint(0,0);
+	iPoint initialPos = iPoint(0, 0);
 };
 
 
@@ -170,7 +171,9 @@ public:
     bool CleanUp();
 
     // Load new map
-    bool Load(const char* scene);
+    bool Load();
+	// Load scene maps
+	bool LoadSceneMaps(const char* scene);
 
 	// Create a method that translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
@@ -206,6 +209,8 @@ private:
 
 	// Load Map Custom properties 
 	bool LoadMapProperties(pugi::xml_node& node);
+
+	void ResetMapProperties();
 	
 
 public: 

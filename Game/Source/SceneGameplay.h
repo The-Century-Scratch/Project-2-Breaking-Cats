@@ -22,49 +22,6 @@ class Map;
 class Render;
 class Item;
 
-
-//TO CITY
-#define LEAVETABERN iPoint(298,104)
-#define LEAVESTORE iPoint(568,714)
-#define LEAVEBASE iPoint(136,440)
-#define LEAVEAFTERLABRINTHDOWN iPoint(389, 8)
-#define LEAVEPRELABTOP iPoint(384, 748)
-#define LEAVELABTOP iPoint(384, 748)
-
-//TO LABRINTH
-#define LEAVEVILLAGE iPoint(6, 150)
-#define LEAVEAFTERLABRINTHLEFT iPoint(462, 150)
-
-//TO VILLAGE
-#define LEAVELABRINTHLEFT iPoint(620, 125)
-#define LEAVETUTORIAL iPoint(136,23)
-
-//TO AFTERLABRINTH
-#define LEAVELABRINTHRIGHT iPoint(5, 159)
-#define LEAVECITYTOP iPoint(243, 297)
-
-//TO PRELAB
-#define LEAVECITYDOWN iPoint(208, 6)
-#define LEAVELAB iPoint(381, 293)
-
-//TO LAB
-#define LEAVEPRELAB iPoint(178, 461)
-
-#define IDSCENEMAP 0
-#define IDSCENEBASE 1
-#define IDSCENESTORE 2
-#define IDSCENETABERN 3
-#define IDLABRINTH 4
-#define IDAFTERLABRINTH 5
-#define IDVILLAGE 6
-#define IDPRELAB 7
-#define IDTUTORIAL 8
-#define IDLAB 9
-
-#define INIT_POS_TABERN iPoint(334,106)
-#define INIT_POS_BASE iPoint(113,366)
-#define INIT_POS_STORE iPoint(71,173)
-
 class SceneGameplay : public Scene
 {
 public:
@@ -84,20 +41,8 @@ public:
 
 	bool SaveState(pugi::xml_node&) const override;
 
-	//void CharacterSwap(PlayerType pType);
-	
-	bool CollisionMapEntity(SDL_Rect rect, EntityType type);
-
 	void ChangeMap(MapType newMap) override;
 private:
-	void HandleInput(Input* input, float dt);
-	
-	bool CheckCollision(SDL_Rect rec1, SDL_Rect rec2);
-	void GenerateBattle();
-	void CameraFollow(Render* render);
-	void Transitioning(float dt);
-	void ChangeBlockBounds(int bounds_x, int bounds_y);
-	void SetCameraMovement(int target_x, int target_y, float dt);
 	void DrawDebugVariable();
 
 	void LoadMovableObjects();
@@ -106,6 +51,8 @@ private:
 	void LoadCollectibleObjects();
 	void LoadNpc();
 	void LoadItems(pugi::xml_node& n);
+
+	void SetCamMovability();
 
 	void UpdatingButtons(Input* input);
 
@@ -116,16 +63,6 @@ private:
 	List<TriggerableObject*> triggerableObjectList;
 	List<StaticObject*> staticObjectList;
 	List<CollectibleObject*> collectibleObjectList;
-
-
-	SDL_Texture* goldTexture;
-	eastl::list<Player*> playerList;
-
-	// Scenes
-	SceneBattle* sceneBattle;
-	float temp;
-
-	Map* map;
 
 	SDL_Texture* itemText;
 	SDL_Texture* guiTex;
@@ -142,33 +79,10 @@ private:
 
 	iPoint tmpPosPlayer;
 
-	float alpha = 0;
-	bool transition = 0;
-	bool fadeOut = 0;
-	bool loadObjects = 0;
-	bool deleteDoor = 0;
 	bool addItems_ = 0;
-
-	//Fx
-	int doorOpenedFx = 0;
-	int doorClosedFx = 0;
-
-	int puzzleCompletedFx = 0;
-	bool canSound1 = 0;
-	bool canSound2 = 0;
-	bool canSound3 = 0;
-	bool canSound4 = 0;
-	
-	int whereMove = 0;
-	int cameraCounter = 0;
 
 	eastl::list<Enemy*> enemyList;
 	Enemy* tmp;
-
-	SDL_Rect iceBlockRect;
-
-	float firstQuest = 0;
-	bool firstQuestAdded = 0;
 
 	int lastUserInput = 0;
 
@@ -176,10 +90,6 @@ private:
 	SString cityTheme;
 	SString shopTheme;
 	SString forestTheme;
-
-
-
-
 };
 
 #endif //__SCENEGAMEPLAY_H__

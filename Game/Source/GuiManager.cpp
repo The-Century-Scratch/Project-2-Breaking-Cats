@@ -102,7 +102,7 @@ bool GuiManager::Draw() {
 	{
 		if (control->data->enabled)
 		{
-			control->data->Draw(app->render);
+			control->data->Draw(app->render.get());
 		}
 		control = control->next;
 	}

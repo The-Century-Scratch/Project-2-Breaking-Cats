@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+<map version="1.10" tiledversion="1.10.1" class="Map" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+ <properties>
+  <property name="initialPlayerPosX" type="int" value="300"/>
+  <property name="initialPlayerPosY" type="int" value="900"/>
+ </properties>
  <tileset firstgid="1" name="Environment" tilewidth="16" tileheight="16" tilecount="36" columns="6">
   <image source="BasicTopDown/Environment.png" width="96" height="96"/>
  </tileset>

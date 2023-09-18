@@ -374,7 +374,6 @@ bool QuestManager::CleanUp() {
 
 
 	app->tex->Unload(QuestMenuBox);
-	font->UnLoad(app->tex);
 	RELEASE(font);
 
 	firePaw->CleanUp();

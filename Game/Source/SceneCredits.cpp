@@ -64,7 +64,6 @@ bool SceneCredits::Update(float dt)
 	{
 
 		app->map->CleanUp();
-		app->map->ClearMaps();
 
 		app->sceneManager->currentMap = NONE; //TODO: after finishing the loading of enemies from maps, make this the way to randomly select which map to go to
 

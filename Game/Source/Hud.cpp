@@ -594,7 +594,6 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 		//app->fade->FadeToBlack((Module*)app->scene, (Module*)app->sceneIntro);
 		//app->sceneManager.
 		app->map->CleanUp();
-		app->map->ClearMaps();
 
 		app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
 		app->hud->prevstate = app->hud->hudstate;
@@ -650,7 +649,6 @@ bool Hud::OnGuiMouseClickEvent(GuiControl* control)
 	case 19:
 		LOG("Button 19 click");
 		app->map->CleanUp();
-		app->map->ClearMaps();
 
 		app->sceneManager->current->TransitionToScene(SceneType::TITLE, TransitionType::ALTERNATING_BARS);
 		app->hud->prevstate = app->hud->hudstate;

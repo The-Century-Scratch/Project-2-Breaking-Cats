@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="10" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="11">
+<map version="1.10" tiledversion="1.10.1" class="Map" orientation="orthogonal" renderorder="right-down" width="10" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="11">
+ <properties>
+  <property name="fixedCameraX" type="bool" value="true"/>
+  <property name="fixedCameraY" type="bool" value="true"/>
+  <property name="initialCameraX" type="int" value="375"/>
+  <property name="initialCameraY" type="int" value="43"/>
+  <property name="initialPlayerPosX" type="int" value="71"/>
+  <property name="initialPlayerPosY" type="int" value="173"/>
+ </properties>
  <tileset firstgid="1" name="Tiles" tilewidth="16" tileheight="16" tilecount="625" columns="25">
   <image source="BasicTopDown/Tiles.png" width="400" height="400"/>
  </tileset>
@@ -396,6 +404,12 @@
   <object id="9" x="16" y="96" width="128" height="13"/>
  </objectgroup>
  <objectgroup id="5" name="ChangeScene">
-  <object id="10" x="64" y="191" width="32" height="1"/>
+  <object id="10" type="Teleport" x="64" y="191" width="32" height="1">
+   <properties>
+    <property name="Destination X" type="int" value="568"/>
+    <property name="Destination Y" type="int" value="706"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="5"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

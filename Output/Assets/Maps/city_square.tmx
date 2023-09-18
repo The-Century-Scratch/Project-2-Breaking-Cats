@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="85">
+<map version="1.10" tiledversion="1.10.1" class="Map" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="85">
+ <properties>
+  <property name="initialCameraX" type="int" value="-597"/>
+ </properties>
  <tileset firstgid="1" name="Plaza" tilewidth="16" tileheight="16" tilecount="1944" columns="54">
   <image source="BasicTopDown/Plaza.png" width="864" height="576"/>
  </tileset>
@@ -7000,11 +7003,41 @@
   <object id="80" x="306" y="103" width="4" height="1"/>
  </objectgroup>
  <objectgroup id="5" name="ChangeScene">
-  <object id="54" x="352" y="0" width="96" height="1"/>
-  <object id="55" x="352" y="767" width="96" height="1"/>
-  <object id="56" x="288" y="96" width="5" height="31"/>
-  <object id="57" x="569" y="703" width="14" height="3"/>
-  <object id="58" x="134" y="431" width="22" height="3"/>
+  <object id="54" type="Teleport" x="352" y="0" width="96" height="1">
+   <properties>
+    <property name="Destination X" type="int" value="243"/>
+    <property name="Destination Y" type="int" value="297"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="4"/>
+   </properties>
+  </object>
+  <object id="55" type="Teleport" x="352" y="767" width="96" height="1">
+   <properties>
+    <property name="Destination X" type="int" value="208"/>
+    <property name="Destination Y" type="int" value="6"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="6"/>
+   </properties>
+  </object>
+  <object id="56" type="Teleport" x="288" y="96" width="5" height="31">
+   <properties>
+    <property name="Destination X" type="int" value="334"/>
+    <property name="Destination Y" type="int" value="106"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="9"/>
+   </properties>
+  </object>
+  <object id="57" type="Teleport" x="569" y="703" width="14" height="3">
+   <properties>
+    <property name="Destination X" type="int" value="71"/>
+    <property name="Destination Y" type="int" value="173"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="8"/>
+   </properties>
+  </object>
+  <object id="58" type="Teleport" x="134" y="431" width="22" height="3">
+   <properties>
+    <property name="Destination X" type="int" value="113"/>
+    <property name="Destination Y" type="int" value="336"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="10"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="6" name="Enemy">
   <object id="84" x="352" y="256" width="112" height="64"/>

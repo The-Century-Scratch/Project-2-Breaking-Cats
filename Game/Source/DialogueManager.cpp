@@ -237,8 +237,6 @@ bool DialogueManager::UnLoad()
 {
 	app->tex->Unload(texture);
 	app->tex->Unload(arrowTex);
-
-	font->UnLoad(app->tex);
 	RELEASE(font);
 
 	if (current != nullptr)

@@ -3,6 +3,10 @@
  <properties>
   <property name="fixedCameraX" type="bool" value="true"/>
   <property name="fixedCameraY" type="bool" value="false"/>
+  <property name="initialCameraX" type="int" value="283"/>
+  <property name="initialCameraY" type="int" value="-433"/>
+  <property name="initialPlayerPosX" type="int" value="113"/>
+  <property name="initialPlayerPosY" type="int" value="336"/>
  </properties>
  <tileset firstgid="1" name="Tiles" tilewidth="16" tileheight="16" tilecount="625" columns="25">
   <image source="BasicTopDown/Tiles.png" width="400" height="400"/>
@@ -1139,6 +1143,12 @@
   <object id="26" x="144" y="368" width="80" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="ChangeScene">
-  <object id="25" type="Teleport" x="96" y="383" width="48" height="1"/>
+  <object id="25" type="Teleport" x="96" y="383" width="48" height="1">
+   <properties>
+    <property name="Destination X" type="int" value="136"/>
+    <property name="Destination Y" type="int" value="440"/>
+    <property name="DestinationMap" type="int" propertytype="MapType" value="5"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

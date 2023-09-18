@@ -1,15 +1,15 @@
 {
-    "activeFile": "Tutorial.tmx",
+    "activeFile": "city_square.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "AfterMoveRock.tmx": {
             "scale": 1.674375,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 194.1022769690183,
-                "y": 160.3583426651736
+                "x": 220.97797685703625,
+                "y": 160.35834266517358
             }
         },
         "AfterMoveRock.tmx#Environment": {
@@ -26,10 +26,10 @@
         },
         "Lab.tmx": {
             "scale": 1.7060416666666667,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 200.757113200635,
-                "y": 259.6654048113323
+                "x": 176.7248748320918,
+                "y": 238.5639272194407
             }
         },
         "Lab.tmx#CP_V1.0.4": {
@@ -43,10 +43,10 @@
         },
         "MoveRock.tmx": {
             "scale": 1.674375,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 193.80365808137367,
-                "y": 180.963045912654
+                "x": 220.0821201941023,
+                "y": 160.05972377752897
             }
         },
         "MoveRock.tmx#Environment": {
@@ -63,10 +63,10 @@
         },
         "PreLab.tmx": {
             "scale": 1.674375,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.79096677864877,
-                "y": 180.963045912654
+                "x": 238.5964912280702,
+                "y": 160.05972377752897
             }
         },
         "PreLab.tmx#CP_V1.0.4": {
@@ -77,10 +77,10 @@
                 5
             ],
             "scale": 2.132552083333333,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 119.80950054951767,
-                "y": 127.54670899987791
+                "x": 134.1116131395775,
+                "y": 191.55452436194898
             }
         },
         "Resistance.tmx#Props": {
@@ -90,11 +90,14 @@
             "scaleInDock": 1
         },
         "Shop.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
             "scale": 4.265104166666666,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 107.96922701184518,
-                "y": 95.66003174990841
+                "x": 79.83392355598976,
+                "y": 191.0856026376847
             }
         },
         "Shop.tmx#Props": {
@@ -107,8 +110,8 @@
             "scale": 2.2832386363636363,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 207.81883787482892,
-                "y": 103.36195097673263
+                "x": 189.20492721164612,
+                "y": 104.01891252955082
             }
         },
         "Taverna.tmx#Props": {
@@ -121,8 +124,8 @@
             "scale": 1.674375,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 186.63680477790223,
-                "y": 180.963045912654
+                "x": 198.58156028368796,
+                "y": 160.35834266517358
             }
         },
         "Transicion.tmx#CP_V1.0.4": {
@@ -142,14 +145,14 @@
         },
         "Tutorial.tmx": {
             "expandedObjectLayers": [
-                5,
-                6
+                6,
+                5
             ],
             "scale": 0.8530208333333333,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.7362315301014,
-                "y": 519.3308096226646
+                "x": 237.39162290878008,
+                "y": 477.1278544388814
             }
         },
         "Tutorial.tmx#Environment": {
@@ -168,8 +171,8 @@
             "scale": 0.8530208333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 262.0100134326535,
-                "y": 479.4724630602027
+                "x": 223.91012333618272,
+                "y": 478.8863109048724
             }
         },
         "TutorialPlaceholder.tmx#Ground Tileset": {
@@ -180,10 +183,10 @@
         },
         "Village.tmx": {
             "scale": 1.2557812499999998,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 343.6108000497698,
-                "y": 158.46708971009087
+                "x": 319.32313052133884,
+                "y": 159.66156526066942
             }
         },
         "Village.tmx#Village": {
@@ -193,7 +196,7 @@
             "scale": 1.2557812499999998,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 258.8030359586911,
+                "x": 294.6373024760483,
                 "y": 240.08958566629343
             }
         },
@@ -211,10 +214,10 @@
         },
         "city_square.tmx": {
             "scale": 1.046484375,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 382.70996640537516,
-                "y": 384.1433370660694
+                "x": 381.75438596491233,
+                "y": 381.27659574468095
             }
         },
         "city_square.tmx#Plaza": {
@@ -227,8 +230,8 @@
             "scale": 1.6565625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 207.35710243350314,
-                "y": 251.72608941709115
+                "x": 179.89058668175818,
+                "y": 159.9698170156574
             }
         },
         "combatBuilding.tmx#CP_V1.0.4": {
@@ -244,8 +247,8 @@
             "scale": 1.6565625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 110.77155253725712,
-                "y": 180.4942463686097
+                "x": 139.74721750613094,
+                "y": 72.4391624221845
             }
         },
         "combatCity.tmx#CP_V1.0.4": {
@@ -264,8 +267,8 @@
             "scale": 2.5115624999999997,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 159.46248600223967,
-                "y": 113.07701878810501
+                "x": 159.06432748538015,
+                "y": 101.13226328231927
             }
         },
         "combatVillage.tmx#MasterSimple": {
@@ -278,8 +281,8 @@
             "scale": 1.046484375,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 388.44344904815233,
-                "y": 417.58865248226954
+                "x": 382.70996640537516,
+                "y": 383.1877566256066
             }
         },
         "dogma.tmx#CP_V1.0.4": {
@@ -299,7 +302,6 @@
         "Shop.tmx",
         "Woods.tmx",
         "Taverna.tmx",
-        "Resistance.tmx",
         "PreLab.tmx",
         "MoveRock.tmx",
         "Lab.tmx",
@@ -309,12 +311,12 @@
         "combatBuilding.tmx",
         "city_square.tmx",
         "AfterMoveRock.tmx",
-        "Tutorial.tmx"
+        "Tutorial.tmx",
+        "Resistance.tmx"
     ],
     "project": "breakingcats.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "Resistance.tmx",
         "Village.tmx",
         "TutorialPlaceholder.tmx",
         "Transicion.tmx",
@@ -325,6 +327,7 @@
         "MoveRock.tmx",
         "Lab.tmx",
         "dogma.tmx",
-        "combatVillage.tmx"
+        "combatVillage.tmx",
+        "combatCity.tmx"
     ]
 }

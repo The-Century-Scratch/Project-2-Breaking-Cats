@@ -291,27 +291,10 @@ bool Map::CleanUp()
 }
 
 // Load new map
-bool Map::Load(const char* scene)
+bool Map::Load()
 {
-
     LOG("Loading Map ");
     bool ret = true;
-
-    pugi::xml_node configNode = app->LoadConfigFileToVar();
-    pugi::xml_node config = configNode.child(scene).child(name.GetString());
-
-    //mapFileName = config.child("mapfile").attribute("path").as_string();
-    mapFolder = config.child("mapfolder").attribute("path").as_string();
-
-    for (pugi::xml_node nodeMapPath = config.child("mapfile");
-        nodeMapPath; nodeMapPath = nodeMapPath.next_sibling("mapfile"))
-    {
-        mapFileName.Add(nodeMapPath.attribute("path").as_string());
-    }
-    for (size_t i = 0; i < mapFileName.Count(); i++)
-    {
-        LOG("String of Path saved: %s", mapFileName[i].GetString());
-    }
 
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName[app->sceneManager->currentMap].GetString());
@@ -344,6 +327,7 @@ bool Map::Load(const char* scene)
     }
     if (ret)
     {
+        ResetMapProperties();
         ret = LoadMapProperties(mapFileXML.child("map"));
     }
     
@@ -384,6 +368,32 @@ bool Map::Load(const char* scene)
     if(mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
+
+    return ret;
+}
+
+bool Map::LoadSceneMaps(const char* scene)
+{
+    bool ret = true;
+
+    pugi::xml_node configNode = app->LoadConfigFileToVar();
+    pugi::xml_node config = configNode.child(scene).child(name.GetString());
+
+    //mapFileName = config.child("mapfile").attribute("path").as_string();
+    mapFolder = config.child("mapfolder").attribute("path").as_string();
+
+    if(mapFileName.Count() != 0)
+        ClearMaps();
+
+    for (pugi::xml_node nodeMapPath = config.child("mapfile");
+        nodeMapPath; nodeMapPath = nodeMapPath.next_sibling("mapfile"))
+    {
+        mapFileName.Add(nodeMapPath.attribute("path").as_string());
+    }
+    for (size_t i = 0; i < mapFileName.Count(); i++)
+    {
+        LOG("String of Path saved: %s", mapFileName[i].GetString());
+    }
 
     return ret;
 }
@@ -664,16 +674,38 @@ bool Map::LoadMapProperties(pugi::xml_node& node)
     bool ret = true;
     for (pugi::xml_node propertyNode = node.child("properties").child("property"); propertyNode; propertyNode = propertyNode.next_sibling("property"))
     {
-        if (propertyNode.name() == "fixedCameraX")
+        const pugi::char_t* attributeName = propertyNode.attribute("name").as_string();
+        if (SDL_strcmp(attributeName, "fixedCameraX") == 0)
         {
             mapProperties.fixedCameraX = propertyNode.attribute("value").as_bool();
         }
-        else if (propertyNode.name() == "fixedCameraY")
+        else if (SDL_strcmp(attributeName, "fixedCameraY") == 0)
         {
             mapProperties.fixedCameraY = propertyNode.attribute("value").as_bool();
         }
+        else if (SDL_strcmp(attributeName, "initialCameraX") == 0)
+        {
+            mapProperties.initialCamera.x = propertyNode.attribute("value").as_int();
+        }
+        else if (SDL_strcmp(attributeName, "initialCameraY") == 0)
+        {
+            mapProperties.initialCamera.y = propertyNode.attribute("value").as_int();
+        }
+        else if (SDL_strcmp(attributeName, "initialPlayerPosX") == 0)
+        {
+            mapProperties.initialPos.x = propertyNode.attribute("value").as_int();
+        }
+        else if (SDL_strcmp(attributeName, "initialPlayerPosY") == 0)
+        {
+            mapProperties.initialPos.y = propertyNode.attribute("value").as_int();
+        }
     }
     return ret;
+}
+
+void Map::ResetMapProperties()
+{
+    mapProperties = MapProperties();
 }
 
 bool Map::CreateColliders(pugi::xml_node mapFile) // it creates the collisions lol omg xd
